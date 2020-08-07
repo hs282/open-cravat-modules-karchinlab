@@ -61,6 +61,8 @@ async def get_data (queries):
     samples = [v[0] for v in await cursor.fetchall() if v[0]]
     if len(samples) == 1:
         response = {'data': None}
+        await cursor.close()
+        await conn.close()
         return response
     samples.sort()
     
