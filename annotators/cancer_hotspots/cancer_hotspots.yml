@@ -22,6 +22,6 @@ requires:
 title: Cancer Hotspots
 version: 1.0.0
 type: annotator
-private: true
+
 
 
