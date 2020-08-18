@@ -33,10 +33,12 @@ tags:
 - interactions
 title: BioGRID
 type: annotator
-version: 3.5.173
+version: 3.6.0
 requires:
 - wgbiogrid
-requires_opencravat: '>=1.5.2'
+release-note:
+  3.6.0: updated gene names according to https://www.genenames.org/download/custom/
+requires_opencravat: '>=2.0.2'
 smartfilters:
 - name: searchPartners
   title: BioGRID Partner

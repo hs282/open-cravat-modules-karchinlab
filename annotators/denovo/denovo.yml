@@ -34,9 +34,6 @@ output_columns:
   hidden: true
 tags:
 - variants
-- noncoding
-- germline
-- denovo
 - clinical relevance
 title: Denovo-DB
 type: annotator
