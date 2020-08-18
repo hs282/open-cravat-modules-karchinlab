@@ -1,0 +1,28 @@
+#CRAVAT Report
+#Created at Monday 08/03/2020 11:32:22
+#Report level: variant
+#
+Variant Annotation																NDEx						NDEx					
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Number of Networks	Network ID	Network Name	Number of Networks	Network ID	Network Name
+1	chr2	111123784	C	T		Yes	BCL2L11	ENST00000393256.8	synonymous_variant	c.39C>T	p.Asp13=	ENST00000308659.12:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000337565.9:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000357757.6:BCL2L11::synonymous_variant:p.Asp13=:c.39C>T; ENST00000361493.10:BCL2L11::NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000393256.8:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000405953.5:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000415458.5:BCL2L11:O43521:NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000431217.1:BCL2L11:O43521:NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000433098.5:BCL2L11:O43521:NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000436733.5:BCL2L11:O43521:NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000437029.5:BCL2L11:O43521:NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000439718.1:BCL2L11:O43521:NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000452231.5:BCL2L11:O43521:NMD_transcript_variant,synonymous_variant:p.Asp13=:c.39C>T; ENST00000610735.4:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000615946.4:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000619294.4:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000620862.4:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000621302.4:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000622509.4:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000622612.4:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000639340.1:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000640419.1:BCL2L11:O43521:synonymous_variant:p.Asp13=:c.39C>T; ENST00000645030.2:MIR4435-2HG::intron_variant,lnc_RNA::	0			4	7f189a50-5521-11e7-8f50-0ac135e8bacf,812903c2-5521-11e7-8f50-0ac135e8bacf,bd570d7c-5521-11e7-8f50-0ac135e8bacf,fd2c9b80-5521-11e7-8f50-0ac135e8bacf	p75(NTR)-mediated signaling,p73 transcription factor network,FoxO family signaling,AP-1 transcription factor network	4	7f189a50-5521-11e7-8f50-0ac135e8bacf,812903c2-5521-11e7-8f50-0ac135e8bacf,bd570d7c-5521-11e7-8f50-0ac135e8bacf,fd2c9b80-5521-11e7-8f50-0ac135e8bacf	p75(NTR)-mediated signaling,p73 transcription factor network,FoxO family signaling,AP-1 transcription factor network
+#CRAVAT Report
+#Created at Monday 08/03/2020 11:32:22
+#Report level: gene
+#
+Variant Annotation						NDEx			NDEx		
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies	Number of Networks	Network ID	Network Name	Number of Networks	Network ID	Network Name
+BCL2L11		1	0	synonymous_variant	NMD_transcript_variant(0),synonymous_variant(0)	4	7f189a50-5521-11e7-8f50-0ac135e8bacf,812903c2-5521-11e7-8f50-0ac135e8bacf,bd570d7c-5521-11e7-8f50-0ac135e8bacf,fd2c9b80-5521-11e7-8f50-0ac135e8bacf	p75(NTR)-mediated signaling,p73 transcription factor network,FoxO family signaling,AP-1 transcription factor network	4	7f189a50-5521-11e7-8f50-0ac135e8bacf,812903c2-5521-11e7-8f50-0ac135e8bacf,bd570d7c-5521-11e7-8f50-0ac135e8bacf,fd2c9b80-5521-11e7-8f50-0ac135e8bacf	p75(NTR)-mediated signaling,p73 transcription factor network,FoxO family signaling,AP-1 transcription factor network
+#CRAVAT Report
+#Created at Monday 08/03/2020 11:32:22
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	
+#CRAVAT Report
+#Created at Monday 08/03/2020 11:32:22
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
