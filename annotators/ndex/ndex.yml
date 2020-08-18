@@ -41,5 +41,8 @@ requires:
 - wgndexchasmplussummary
 - wgndexvestsummary
 - wgndex
+- ndex_group
+groups:
+- ndex_group
 release_note:
   4.0.9: removed categorical column definition for better UI in webresult

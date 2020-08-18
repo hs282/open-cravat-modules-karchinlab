@@ -39,5 +39,8 @@ type: annotator
 version: 1.0.0
 requires:
 - wgndex_signor
+- ndex_group
+groups:
+- ndex_group
 release_note:
   1.0.0: initial version
