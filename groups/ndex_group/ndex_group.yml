@@ -13,4 +13,3 @@ title: NDEx
 type: group
 version: 1.0.0
 requires_opencravat: '>=2.0.2'
-private: false
