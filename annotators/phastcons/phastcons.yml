@@ -56,6 +56,7 @@ output_columns:
   width: 56
   hidden: false
 tags:
+- variants
 - evolution
 title: Phast Cons
 type: annotator

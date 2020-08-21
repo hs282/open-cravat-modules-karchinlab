@@ -96,6 +96,4 @@ smartfilters:
     test: greaterThanEq
     value: ${value}
 tags:
-- variants
-- germline
 - variant effect prediction

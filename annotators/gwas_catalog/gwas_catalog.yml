@@ -3,51 +3,60 @@ version: 1.0.0
 description: GWAS Catalog Annotator
 level: variant
 type: annotator
-developer: 
+developer:
   name: NHGRI-EBI
   organization: NHGRI-EBI
   email: gwas-info@ebi.ac.uk.
   website: https://www.ebi.ac.uk/gwas/home
-  citation: 'Buniello A, MacArthur JAL, Cerezo M, Harris LW, Hayhurst J, Malangone C, McMahon A, Morales J, Mountjoy E, Sollis E, Suveges D, Vrousgou O, Whetzel PL, Amode R, Guillen JA, Riat HS, Trevanion SJ, Hall P, Junkins H, Flicek P, Burdett T, Hindorff LA, Cunningham F and Parkinson H. The NHGRI-EBI GWAS Catalog of published genome-wide association studies, targeted arrays and summary statistics 2019. Nucleic Acids Research, 2019, Vol. 47 (Database issue): D1005-D1012.'
-
+  citation: 'Buniello A, MacArthur JAL, Cerezo M, Harris LW, Hayhurst J, Malangone
+    C, McMahon A, Morales J, Mountjoy E, Sollis E, Suveges D, Vrousgou O, Whetzel
+    PL, Amode R, Guillen JA, Riat HS, Trevanion SJ, Hall P, Junkins H, Flicek P, Burdett
+    T, Hindorff LA, Cunningham F and Parkinson H. The NHGRI-EBI GWAS Catalog of published
+    genome-wide association studies, targeted arrays and summary statistics 2019.
+    Nucleic Acids Research, 2019, Vol. 47 (Database issue): D1005-D1012.'
 output_columns:
-  - name: disease
-    title: Disease/Trait
-    type: string
-    width: 120
-  - name: or_beta
-    title: Odds Ratio/Beta Coeff
-    type: float
-    hidden: true
-    width: 75
-  - name: pval
-    title: P-value
-    type: float
-    hidden: true
-  - name: pmid
-    title: PMID
-    type: string
-    link_format: https://www.ncbi.nlm.nih.gov/pubmed/${.*}
-    hidden: true
-    width: 65
-  - name: init_samp
-    title: Initial Sample
-    type: string
-    hidden: true
-    width: 70
-  - name: rep_samp
-    title: Replication Sample
-    type: string
-    hidden: true
-    width: 70
-  - name: risk_allele
-    title: Risk Allele
-    type: string
-    hidden: true
-  - name: ci
-    title: Confidence Interval
-    type: string
-    hidden: true
-    width: 75
+- name: disease
+  title: Disease/Trait
+  type: string
+  width: 120
+- name: or_beta
+  title: Odds Ratio/Beta Coeff
+  type: float
+  hidden: true
+  width: 75
+- name: pval
+  title: P-value
+  type: float
+  hidden: true
+- name: pmid
+  title: PMID
+  type: string
+  link_format: https://www.ncbi.nlm.nih.gov/pubmed/${.*}
+  hidden: true
+  width: 65
+- name: init_samp
+  title: Initial Sample
+  type: string
+  hidden: true
+  width: 70
+- name: rep_samp
+  title: Replication Sample
+  type: string
+  hidden: true
+  width: 70
+- name: risk_allele
+  title: Risk Allele
+  type: string
+  hidden: true
+- name: ci
+  title: Confidence Interval
+  type: string
+  hidden: true
+  width: 75
 requires:
-  - wggwas_catalog
+- wggwas_catalog
+tags:
+- variants
+- non coding
+- clinical relevance
+- literature

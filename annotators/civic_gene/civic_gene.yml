@@ -24,7 +24,6 @@ tags:
 - genes
 - clinical relevance
 - cancer
-- literature
 title: CIViC Gene
 type: annotator
 version: 1.0.10

@@ -11,8 +11,7 @@ output_columns:
   width: 68
   desc: Population allele frequency
 tags:
-- variants
-- populations
+- allele frequency
 description: Exomic allele frequencies of an elderly cohort of Brazilians in the ABraOM
   database
 developer:

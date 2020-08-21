@@ -17,8 +17,6 @@ output_columns:
   type: float
   desc: Pathogenicity score
 tags:
-- variants
-- germline
 - variant effect prediction
 title: REVEL
 type: annotator

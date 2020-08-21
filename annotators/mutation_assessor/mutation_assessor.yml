@@ -37,9 +37,6 @@ output_columns:
   desc: 'Functional impact: high (H), medium (M), low (L) or neutral (N)'
   hidden: false
 tags:
-- variants
-- germline
-- cancer
 - variant effect prediction
 title: Mutation Assessor
 type: annotator

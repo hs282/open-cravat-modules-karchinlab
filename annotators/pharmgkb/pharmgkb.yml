@@ -51,7 +51,7 @@ requires:
 - wgpharmgkb
 tags:
 - variants
-- germline
 - clinical relevance
 - cancer
+- cardiovascular
 - literature

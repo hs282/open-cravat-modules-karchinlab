@@ -35,8 +35,6 @@ output_columns:
   width: 90
   filterable: false
 tags:
-- variants
-- germline
 - variant effect prediction
 title: MutPred
 type: annotator

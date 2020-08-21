@@ -9,10 +9,7 @@ developer:
   website: http://www.internationalgenome.org/home
 level: variant
 tags:
-- variants
-- noncoding
-- germline
-- populations
+- allele frequency
 title: 1000 Genomes
 type: group
 version: 3.1.1

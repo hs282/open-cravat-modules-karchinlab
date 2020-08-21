@@ -1,29 +1,29 @@
 datasource: v4.1
-description: Online Mendelian Inheritance in Man. Catalog of human genes and genetic disorders and traits.
+description: Online Mendelian Inheritance in Man. Catalog of human genes and genetic
+  disorders and traits.
 developer:
-  name: 'Johns Hopkins University'
-  organization: 'Johns Hopkins University'
-  email: 'support@cravat.us'
-  website: 'https://omim.org/'
-  citation: 'Amberger JS, Bocchini CA, Scott AF, Hamosh A. OMIM.org: leveraging knowledge across phenotype-gene relationships. Nucleic Acids Res. 2019 Jan 8;47(D1):D1038-D1043. doi:10.1093/nar/gky1151. PMID: 30445645.'
-
-
+  name: Johns Hopkins University
+  organization: Johns Hopkins University
+  email: support@cravat.us
+  website: https://omim.org/
+  citation: 'Amberger JS, Bocchini CA, Scott AF, Hamosh A. OMIM.org: leveraging knowledge
+    across phenotype-gene relationships. Nucleic Acids Res. 2019 Jan 8;47(D1):D1038-D1043.
+    doi:10.1093/nar/gky1151. PMID: 30445645.'
 level: variant
-
 output_columns:
 - name: omim_id
   title: Entry ID
   type: string
   width: 70
-  link_format: 'https://omim.org/entry/${[^;]+}'
-
+  link_format: https://omim.org/entry/${[^;]+}
   tags:
-  - clinical relevance 
+  - clinical relevance
   - literature
-  requires: 
+  requires:
   - wgomim
-
 title: OMIM
 version: 1.0.0
 type: annotator
-private: true
+tags:
+- variants
+- clinical relevance

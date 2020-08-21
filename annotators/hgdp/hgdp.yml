@@ -39,8 +39,7 @@ output_columns:
   type: float
   width: 68
 tags:
-- variants
-- populations
+- allele frequency
 description: Human Genome Diversity Panel (HGDP) DNA from individuals among 51 different
   populations.
 developer:

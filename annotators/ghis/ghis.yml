@@ -13,10 +13,13 @@ output_columns:
   title: Score
   type: float
   desc: Score predicting gene haploinsufficiency
+requires_opencravat: '>=2.0.0'
 tags:
 - genes
-title: GHIS
+title: GHIS 
 type: annotator
-version: 3.5.5
+version: 3.6.0
 requires:
 - wgghis
+release-note:
+  3.6.0: updated gene names according to https://www.genenames.org/download/custom/

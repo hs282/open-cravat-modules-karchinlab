@@ -15,7 +15,6 @@ developer:
   website: http://chasmplus.readthedocs.io/en/latest/
 level: variant
 tags:
-- variants
 - cancer
 - variant effect prediction
 title: CHASMplus

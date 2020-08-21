@@ -31,7 +31,7 @@ output_columns:
   width: 110
   hidden: true
 tags:
-- genomic features
+- non coding
 title: Repeat Sequences
 type: annotator
 version: 2019.08.22

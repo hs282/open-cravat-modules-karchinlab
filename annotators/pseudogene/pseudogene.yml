@@ -26,7 +26,7 @@ release_note:
   27.0.3: corrected test key
   28.0.0: intervaltree and pickle
 tags:
-- genomic features
+- non coding
 title: Pseudogene
 type: annotator
 version: 28.0.1

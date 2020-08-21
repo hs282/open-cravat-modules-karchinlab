@@ -1,14 +1,16 @@
 datasource: 26 February 2020
 description: Trinity assembles transcript sequences from Illumina RNA-Seq data.
 developer:
-  name: 'Broad Institute'
-  organization: 'Broad Institute'
-  email: 'support@cravat.us'
-  website: 'https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/MUTATION_LIB_SUPPLEMENT/rna_editing/'
-  citation: 'Grabherr MG, Haas BJ, Yassour M, Levin JZ, Thompson DA, Amit I, Adiconis X, Fan L, Raychowdhury R, Zeng Q, Chen Z, Mauceli E, Hacohen N, Gnirke A, Rhind N, di Palma F, Birren BW, Nusbaum C, Lindblad-Toh K, Friedman N, Regev A. Full-length transcriptome assembly from RNA-seq data without a reference genome. Nat Biotechnol. 2011 May 15;29(7):644-52. doi: 10.1038/nbt.1883. PubMed PMID: 21572440.'
-
+  name: Broad Institute
+  organization: Broad Institute
+  email: support@cravat.us
+  website: https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/MUTATION_LIB_SUPPLEMENT/rna_editing/
+  citation: 'Grabherr MG, Haas BJ, Yassour M, Levin JZ, Thompson DA, Amit I, Adiconis
+    X, Fan L, Raychowdhury R, Zeng Q, Chen Z, Mauceli E, Hacohen N, Gnirke A, Rhind
+    N, di Palma F, Birren BW, Nusbaum C, Lindblad-Toh K, Friedman N, Regev A. Full-length
+    transcriptome assembly from RNA-seq data without a reference genome. Nat Biotechnol.
+    2011 May 15;29(7):644-52. doi: 10.1038/nbt.1883. PubMed PMID: 21572440.'
 level: variant
-
 output_columns:
 - name: Rnaedit
   title: RNA Editing Database
@@ -19,11 +21,9 @@ output_columns:
   - RADAR
   - ATLAS
   - DARNED
-  desc: Database(s) for identifying likely RNA-editing events. 
-
+  desc: Database(s) for identifying likely RNA-editing events.
 tags:
-- variants
-  
+- non coding
 title: Trinity CTAT
 version: 1.0.0
 type: annotator

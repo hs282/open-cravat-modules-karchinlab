@@ -1,5 +1,7 @@
 datasource: 27 March 2019
-description: Produces an effect weight for the variant in which disease it is found. Weights are assigned according to the strength of their association with disease risk.
+description: Produces an effect weight for the variant in which disease it is found.
+  Weights are assigned according to the strength of their association with disease
+  risk.
 developer:
   name: Broad Institute
   organization: Broad Institute
@@ -33,10 +35,10 @@ output_columns:
   type: float
   hidden: false
   width: 100
-  
 tags:
 - variants
+- clinical relevance
+- cardiovascular
 title: Cardiovascular Disease Knowledge Portal
 version: 1.0.0
 type: annotator
-

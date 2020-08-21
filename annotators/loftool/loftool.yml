@@ -17,8 +17,11 @@ output_columns:
   desc: A percentile score for gene intolerance to functional change
 tags:
 - genes
+requires_opencravat: '>=2.0.0'
+release-note:
+  3.6.0: updated gene names according to https://www.genenames.org/download/custom/
 title: LoFtool
 type: annotator
-version: 3.5.5
+version: 3.6.0
 requires:
 - wgloftool

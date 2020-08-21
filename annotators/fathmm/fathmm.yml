@@ -43,7 +43,6 @@ output_columns:
   filterable: false
   width: 68
 tags:
-- variants
 - variant effect prediction
 title: FATHMM
 type: annotator

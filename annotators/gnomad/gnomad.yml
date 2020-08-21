@@ -68,10 +68,7 @@ output_columns:
   width: 70
   hidden: true
 tags:
-- variants
-- noncoding
-- germline
-- populations
+- allele frequency
 title: gnomAD
 type: annotator
 version: 3.0.0

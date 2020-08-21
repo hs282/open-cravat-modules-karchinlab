@@ -28,9 +28,6 @@ output_columns:
   filterable: false
   desc: False discovery rate
 tags:
-- variants
-- noncoding
-- germline
 - variant effect prediction
 title: PhD-SNPg
 type: annotator

@@ -55,8 +55,6 @@ developer:
     for genomes. Nat Protocols 11: 1-9.'
 datasource: SIFT4G 2016-02-22
 tags:
-- variants
-- germline
 - variant effect prediction
 smartfilters:
 - name: prediction

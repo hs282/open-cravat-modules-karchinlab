@@ -19,9 +19,9 @@ output_columns:
   filterable: true
   desc: Interacting regions
 tags:
-- variants
-- noncoding
-- genomic features
+- genes
+- non coding
+- functional studies
 title: Promoter IR
 type: annotator
 version: 2019.05.20

@@ -24,12 +24,13 @@ output_columns:
   hidden: true
 tags:
 - genes
-- clinical relevance
 - cancer
+requires_opencravat: '>=2.0.0'
 title: TARGET
 type: annotator
-version: 3.0.17
+version: 3.1.0
 requires:
 - wgtarget
 release_note:
   3.0.16: removed categorical column for better UI in webresult
+  3.1.0: updated gene names according to https://www.genenames.org/download/custom/

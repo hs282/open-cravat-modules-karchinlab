@@ -18,9 +18,6 @@ output_columns:
   link_format: https://www.ncbi.nlm.nih.gov/snp/${.*}
 tags:
 - variants
-- noncoding
-- germline
-- populations
 - literature
 title: dbSNP
 type: annotator

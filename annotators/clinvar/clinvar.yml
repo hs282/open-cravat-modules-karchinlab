@@ -54,9 +54,7 @@ release_note:
   2019.01.023: changed id column format for web linking
 tags:
 - variants
-- germline
 - clinical relevance
-- cancer
 - literature
 title: ClinVar
 type: annotator

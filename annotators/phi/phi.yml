@@ -16,8 +16,11 @@ output_columns:
   width: 127
 tags:
 - genes
+requires_opencravat: '>=2.0.0'
 title: p(HI)
 type: annotator
-version: 3.5.4
+version: 3.6.0
+release-note:
+  3.6.0: updated gene names according to https://www.genenames.org/download/custom/
 requires:
 - wgphi
