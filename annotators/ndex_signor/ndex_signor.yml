@@ -43,8 +43,7 @@ requires:
 - ndex_group
 groups:
 - ndex_group
-private: false
-uselocalonstore: true
+private: true
 release_note:
   1.0.1: included in ndex_group
   1.0.0: initial version
