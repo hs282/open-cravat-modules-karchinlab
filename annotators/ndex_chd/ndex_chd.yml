@@ -1,6 +1,6 @@
 add_to_variant_level: true
 datasource: v2
-description: Network Data Exchange
+description: Network Data Exchange Congenital Heart Disease Pathways
 developer:
   citation: Pratt, D., Chen, J., Welker, D., et al. (2015). NDEx, the network data
     exchange. Cell systems, 1(4), 302-305.
@@ -30,19 +30,19 @@ output_columns:
   width: 185
   hidden: false
 tags:
+- variants
 - genes
+- cancer
 - interactions
-- visualization
-title: NDEx NCI Cancer Pathways
+title: NDEx Congenital Heart Disease
 type: annotator
-version: 4.0.11
+version: 1.0.0
+requires_opencravat: '>=2.1.0'
 requires:
-- wgndexchasmplussummary
-- wgndexvestsummary
-- wgndex
+- wgndex_chd
 - ndex_group
 groups:
 - ndex_group
+private: true
 release_note:
-  4.0.11: included in ndex_group
-  4.0.9: removed categorical column definition for better UI in webresult
+  1.0.0: initial version

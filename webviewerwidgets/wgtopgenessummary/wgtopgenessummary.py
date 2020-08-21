@@ -26,6 +26,8 @@ async def get_data (queries):
     num_total_sample = (await cursor.fetchone())[0]
     if num_total_sample == 1:
         response = {'data': None}
+        await cursor.close()
+        await conn.close()
         return response
 
     gene_var_perc = {}

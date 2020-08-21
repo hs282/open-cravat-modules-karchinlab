@@ -1,8 +1,8 @@
-title: NDEx SIGNOR
+title: NDEx CHD
 version: 1.0.0
 type: webviewerwidget
-required_annotator: ndex_signor
-description: NDEx Webviewer Widget SIGNOR Pathways
+required_annotator: ndex_chd
+description: NDEx Webviewer Widget Congenital Heart Disease Pathways
 developer:
   name: Rick Kim
   organization: In Silico Solutions
@@ -13,6 +13,6 @@ tags:
 - visualization widgets
 hidden: true
 private: true
-requires_opencravat: '>=2.0.2'
+requires_opencravat: '>=2.1.0'
 release_note:
   1.0.0: Initial release

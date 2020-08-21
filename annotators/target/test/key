@@ -6,7 +6,7 @@ Variant Annotation								Tag Sampler			VCF Info
 UID	Chrom	Position	Ref Base	Alt Base	Hugo	Transcript	All Mappings	Number of Samples	Samples	Tags	Phred	VCF filter	Zygosity	Alternate reads	Total reads	Variant allele frequency
 1	chr13	32316461	A	T	BRCA2	ENST00000544455.5	{"BRCA2":[[null,"M1L","MIS","ENST00000380152.7","A1T"],[null,"M1L","MIS","ENST00000544455.5","A1T"]],"ZAR1L":[["A6NP61",null,"2KU","ENST00000533490.6",null]]}	1		BRCA2						
 2	chrX	71120077	A	T	MED12	ENST00000374080.7	{"MED12":[["Q7Z3Z5","M1L","MIS","ENST00000333646.10","A1T"],[null,"M154L","MIS","ENST00000374102.5","A460T"],["Q93074","M154L","MIS","ENST00000374080.7","A460T"]]}	1		MED12						
-3	chr22	40463227	T	A	MKL1	ENST00000407029.5	{"MKL1":[["B0QY84","M1L","MIS","ENST00000402630.5","A1T"],["Q969V6","M1L","MIS","ENST00000355630.7","A1T"],["E7ER32","M1L","MIS","ENST00000396617.7","A1T"],["W0Z7M9","M36L","MIS","ENST00000618196.4","A106T"],["B0QY83","M1L","MIS","ENST00000402042.5","A1T"],["Q969V6","M1L","MIS","ENST00000407029.5","A1T"],["Q29R68",null,"INT","ENST00000618417.1",null]]}	1		MKL1						
+3	chr22	40463227	T	A	MRTFA	ENST00000407029.5	{"MRTFA":[["B0QY84","M1L","MIS","ENST00000402630.5","A1T"],["Q969V6","M1L","MIS","ENST00000355630.7","A1T"],["E7ER32","M1L","MIS","ENST00000396617.7","A1T"],["W0Z7M9","M36L","MIS","ENST00000618196.4","A106T"],["B0QY83","M1L","MIS","ENST00000402042.5","A1T"],["Q969V6","M1L","MIS","ENST00000407029.5","A1T"],["Q29R68",null,"INT","ENST00000618417.1",null]]}	1		MRTFA						
 4	chr2	47403192	A	T	MSH2	ENST00000621359.2	{"MSH2":[["P43246","M1L","MIS","ENST00000233146.6","A1T"],["E9PHA6","M1L","MIS","ENST00000406134.5","A1T"],["A0A087X078","M1L","MIS","ENST00000610696.4","A1T"],["A0A087X1E7","M1L","MIS","ENST00000613514.4","A1T"],["V9H0B2","M1L","MIS","ENST00000617333.3","A1T"],["V9H015","M1L","MIS","ENST00000617938.4","A1T"],["V9H019","M1L","MIS","ENST00000621359.2","A1T"],[null,null,"INT","ENST00000543555.5",null]]}	1		MSH2						
 #CRAVAT Report
 #Created at Tuesday 04/10/2018 10:25:29
@@ -16,7 +16,7 @@ Variant Annotation				TARGET
 Hugo	Variants in Gene	Sequence Ontology	All Sequence Ontologies	Recommended Therapy	Rationale
 BRCA2	1	MIS	MIS(1)	PARP Inhibitor	Biallelic inactivation predict sensitivity to PARP inhibitors. May signal the presence of a germline mutation.
 MED12	1	MIS	MIS(1)		May predict resistance to targeted therapies
-MKL1	1	MIS	MIS(1)		
+MRTFA	1	MIS	MIS(1)		
 MSH2	1	MIS	MIS(1)		Prognostic / Diagnostic in colon cancer
 #CRAVAT Report
 #Created at Tuesday 04/10/2018 10:25:29
@@ -36,5 +36,5 @@ Variant Annotation
 Original Line	User Tags	UID
 2	BRCA2	1
 3	MED12	2
-4	MKL1	3
+4	MRTFA	3
 5	MSH2	4

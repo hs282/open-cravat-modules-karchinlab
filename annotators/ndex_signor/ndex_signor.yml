@@ -1,6 +1,6 @@
 add_to_variant_level: true
 datasource: v2
-description: Network Data Exchange SIGNOR Pathways
+description: Network Data Exchange Signor Pathways
 developer:
   citation: Pratt, D., Chen, J., Welker, D., et al. (2015). NDEx, the network data
     exchange. Cell systems, 1(4), 302-305.
@@ -36,8 +36,14 @@ tags:
 - interactions
 title: NDEx SIGNOR
 type: annotator
-version: 1.0.0
+version: 1.0.1
+requires_opencravat: '>=2.1.0'
 requires:
 - wgndex_signor
+- ndex_group
+groups:
+- ndex_group
+private: true
 release_note:
+  1.0.1: included in ndex_group
   1.0.0: initial version

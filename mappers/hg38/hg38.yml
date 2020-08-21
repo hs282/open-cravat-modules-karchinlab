@@ -1,6 +1,6 @@
 name: hg38
 title: UCSC hg38 Gene Mapper
-version: 1.9.5
+version: 1.9.6
 type: mapper
 description: Gene mapper using UCSC Gencode
 developer:
@@ -234,6 +234,7 @@ requires_opencravat: '>=1.8.1'
 requires:
 - hg38wgs
 release_note:
+  1.9.6: more fix on utr and coding
   1.7.5: added some fixes.
   1.7.4: correct gene level summarization
   1.7.3: UniProt SwissProt only
