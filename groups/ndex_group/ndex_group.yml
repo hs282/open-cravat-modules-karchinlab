@@ -1,0 +1,15 @@
+datasource: 2020.08
+description: NDEx Annotation Modules
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: https://insilico.us.com
+level: variant
+tags:
+- variants
+- interactions
+title: NDEx
+type: group
+version: 1.0.0
+requires_opencravat: '>=2.0.2'

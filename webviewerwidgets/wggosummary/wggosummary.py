@@ -47,6 +47,8 @@ async def get_data (queries):
     '''
 
     if hugos == []:
+        await cursor.close()
+        await conn.close()
         return response
 
     conn = await aiosqlite.connect(os.path.join(os.path.dirname(__file__), 

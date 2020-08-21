@@ -1,0 +1,28 @@
+#CRAVAT Report
+#Created at Monday 08/17/2020 20:24:22
+#Report level: variant
+#
+Variant Annotation																NDEx CHD		
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Number of Networks	Network ID	Network Name
+1	chr11	27658565	A	T			BDNF	ENST00000356660.9	5_prime_UTR_variant	c.-1T>A		ENST00000314915.6:BDNF:P23560:synonymous_variant:p.Val8=:c.24T>A; ENST00000356660.9:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000395978.7:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000395980.6:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000395981.7:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000395983.7:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000395986.6:BDNF:P23560:synonymous_variant:p.Val15=:c.45T>A; ENST00000418212.5:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000420794.2:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000438929.5:BDNF:P23560:synonymous_variant:p.Val82=:c.246T>A; ENST00000439476.6:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000499008.8:BDNF-AS::intron_variant,lnc_RNA::; ENST00000499568.3:BDNF-AS::intron_variant,lnc_RNA::; ENST00000500662.7:BDNF-AS::intron_variant,lnc_RNA::; ENST00000501176.7:BDNF-AS::intron_variant,lnc_RNA::; ENST00000501663.3:BDNF-AS::intron_variant,lnc_RNA::; ENST00000502161.7:BDNF-AS::intron_variant,lnc_RNA::; ENST00000525528.1:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000525950.5:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000530313.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000530686.6:BDNF-AS::intron_variant,lnc_RNA::; ENST00000530786.5:BDNF::NMD_transcript_variant,3_prime_UTR_variant::c.*129T>A; ENST00000530861.5:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000532965.5:BDNF-AS::2kb_downstream_variant,lnc_RNA::; ENST00000532997.5:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000533131.5:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000533246.5:BDNF:P23560:5_prime_UTR_variant::c.-1T>A; ENST00000584049.5:BDNF::processed_transcript::; ENST00000650703.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000650815.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000650855.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000650862.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000650864.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000650880.1:BDNF-AS::lnc_RNA::; ENST00000650954.2:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651026.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651103.1:BDNF-AS::lnc_RNA::; ENST00000651123.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651152.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651193.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651218.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651238.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651252.2:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651264.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651437.1:BDNF-AS::lnc_RNA::; ENST00000651592.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651635.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651707.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651742.1:BDNF-AS::lnc_RNA::; ENST00000651756.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651796.1:BDNF-AS::lnc_RNA::; ENST00000651905.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651926.2:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651944.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651990.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000651997.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652063.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652133.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652138.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652212.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652244.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652325.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652516.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652574.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652594.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652663.1:BDNF-AS::intron_variant,lnc_RNA::; ENST00000652754.1:BDNF-AS::lnc_RNA::; ENST00000660080.1:BDNF-AS::intron_variant,lnc_RNA::	0			2	eb7e9dd0-d27d-11ea-8772-0ac135e8bacf,f08b7e74-d27d-11ea-8772-0ac135e8bacf	AbnAtrioventricularValveMorphology.sif,AbnSemilunarValveMorphology.sif
+#CRAVAT Report
+#Created at Monday 08/17/2020 20:24:22
+#Report level: gene
+#
+Variant Annotation						NDEx CHD		
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies	Number of Networks	Network ID	Network Name
+BDNF		0	1	5_prime_UTR_variant	NMD_transcript_variant(0),processed_transcript(0),synonymous_variant(0),3_prime_UTR_variant(0),5_prime_UTR_variant(0)	2	eb7e9dd0-d27d-11ea-8772-0ac135e8bacf,f08b7e74-d27d-11ea-8772-0ac135e8bacf	AbnAtrioventricularValveMorphology.sif,AbnSemilunarValveMorphology.sif
+#CRAVAT Report
+#Created at Monday 08/17/2020 20:24:22
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	
+#CRAVAT Report
+#Created at Monday 08/17/2020 20:24:22
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0

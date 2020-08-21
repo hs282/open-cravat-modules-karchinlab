@@ -1192,7 +1192,6 @@ class Mapper (cravat.BaseMapper):
                 coding = CODING
             elif gposend_kind == FRAG_UTR3:
                 so = (SO_UT3,)
-                coding = CODING
             elif gposend_kind == FRAG_CDS:
                 so = (SO_UT3, SO_STL)
                 achange = '' # TODO: temporary
@@ -1203,6 +1202,7 @@ class Mapper (cravat.BaseMapper):
                 so = (SO_UT3, SO_NSO)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_MLO, SO_UT5, SO_UT3)
+                coding = CODING
             elif gposend_kind == FRAG_UTR3INTRON:
                 so = (SO_UT3,)
             elif gposend_kind == FRAG_CDSINTRON:
@@ -1298,6 +1298,7 @@ class Mapper (cravat.BaseMapper):
                 so = (SO_UT5,)
             elif gposend_kind == FRAG_UTR3INTRON:
                 so = (SO_MLO,)
+                coding = CODING
             elif gposend_kind == FRAG_CDSINTRON:
                 so = (SO_MLO, SO_INT)
                 achange = ''
@@ -1324,19 +1325,20 @@ class Mapper (cravat.BaseMapper):
                 so = (SO_MLO,)
                 coding = CODING
             elif gposend_kind == FRAG_UTR5:
-                so = (SO_UT5,)
-            elif gposend_kind == FRAG_UTR3:
                 so = (SO_MLO, SO_UT5, SO_UT3)
                 coding = CODING
+            elif gposend_kind == FRAG_UTR3:
+                so = (SO_UT3,)
             elif gposend_kind == FRAG_CDS:
                 so = (SO_MLO, SO_UT5)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
                 so = (SO_NSO,)
             elif gposend_kind == FRAG_UTR5INTRON:
-                so = (SO_UT5,)
+                so = (SO_MLO, SO_UT5, SO_UT3)
+                coding = CODING
             elif gposend_kind == FRAG_UTR3INTRON:
-                so = (SO_MLO,)
+                so = (SO_UT3,)
             elif gposend_kind == FRAG_CDSINTRON:
                 so = (SO_STL, SO_INT)
                 achange = ''
@@ -1763,7 +1765,7 @@ class Mapper (cravat.BaseMapper):
                 so, achange = self._get_com_cds_cds_data(tid, tpos, cpos, apos, lenref, lenalt, bytearray(tr_alt_base, 'ascii'), tposcposoffset, alen)
             elif gposend_kind == FRAG_NCRNA: so += (SO_UNK,); coding = NONCODING
             elif gposend_kind == FRAG_UTR5INTRON: so += (SO_MLO, SO_UTR5)
-            elif gposend_kind == FRAG_UTR3INTRON: so += (SO_STL,)
+            elif gposend_kind == FRAG_UTR3INTRON: so += (SO_STL, SO_UT3)
             elif gposend_kind == FRAG_CDSINTRON:
                 if self._check_splice_site(chrom, tid, exonno, kind, gpos, var_type, strand) == TRUE:
                     so += (SO_SPL,)
