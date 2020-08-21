@@ -1,0 +1,18 @@
+title: NDEx CHD
+version: 1.0.0
+type: webviewerwidget
+required_annotator: ndex_chd
+description: NDEx Webviewer Widget Congenital Heart Disease Pathways
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization widgets
+hidden: true
+private: false
+requires_opencravat: '>=2.1.0'
+release_note:
+  1.0.0: Initial release
