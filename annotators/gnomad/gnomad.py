@@ -12,15 +12,15 @@ class CravatAnnotator(BaseAnnotator):
         out = {x:'' for x in af_col_names}
 
         chrom = input_data['chrom']
+        if chrom == 'chrY':
+            return out
         pos = input_data['pos']
         ref = input_data['ref_base']
         alt = input_data['alt_base']
         
-        q = 'select {} from {} where pos=? and ref=? and alt=?'.format(
-            ', '.join(af_col_names),
-            chrom
-        )
-        self.cursor.execute(q, (pos, ref, alt))
+        q = 'select %s from %s where pos=%s and ref="%s" and alt="%s";' \
+            %(', '.join(af_col_names), chrom, pos, ref, alt)
+        self.cursor.execute(q)
         qr = self.cursor.fetchone()
         if qr:
             for i, k in enumerate(af_col_names):
