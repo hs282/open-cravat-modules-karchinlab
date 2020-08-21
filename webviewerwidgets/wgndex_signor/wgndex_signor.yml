@@ -12,6 +12,7 @@ developer:
 tags:
 - visualization widgets
 hidden: true
+private: true
 requires_opencravat: '>=2.0.2'
 release_note:
   1.0.0: Initial release

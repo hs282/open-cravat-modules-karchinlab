@@ -286,7 +286,7 @@ widgetGenerators['ndex_signor'] = {
                 
                 var attributeNameMap = {};
                 
-                var cyElements = CxCyUtils.cyElementsFromNiceCX(
+                cyElements = CxCyUtils.cyElementsFromNiceCX(
                         niceCX, attributeNameMap);
                 
                 var layoutName = 'cose';
@@ -449,6 +449,7 @@ widgetGenerators['ndex_signor'] = {
                         "reacts-with": {'color': 'rgb(216, 199, 229)'},
                         "interacts-with": {'color': 'rgb(216, 199, 229)'},
                         "interacts with": {'color': 'rgb(216, 199, 229)'},
+                        "unknown": {'color': 'rgb(216, 199, 229)'},
 
                         "controls-transport-of": {'color': 'rgb(168, 224, 223)'},
                         "controls-transport-of-chemical": {'color': 'rgb(206, 206, 194)'},
@@ -462,18 +463,22 @@ widgetGenerators['ndex_signor'] = {
 
                         "in-complex-with": {'color': 'rgb(168, 244, 184)'},
                         "form-complex": {'color': 'rgb(168, 244, 184)'},
+                        "form complex": {'color': 'rgb(168, 244, 184)'},
                         "neighbor-of": {'color': 'rgb(212, 244, 219)'},
                         
                         'selected': {'color': 'rgb(239, 62, 192)'},
                         
                         'up-regulates': {'color': 'rgb(255, 0, 0)'},
-                        'up-regulates activity': {'color': 'rgb(255, 0, 0)'},
-                        'up-regulates quantity by expression': {'color': 'rgb(255, 0, 0)'},
-                        'up-regulates quantity by stabilization': {'color': 'rgb(255, 0, 0)'},
+                        'up-regulates activity': {'color': 'rgb(209, 77, 33)'},
+                        'up-regulates quantity by expression': {'color': 'rgb(240, 135, 24)'},
+                        'up-regulates quantity': {'color': 'rgb(240, 175, 24)'},
+                        'up-regulates quantity by stabilization': {'color': 'rgb(240, 182, 24)'},
 
                         'down-regulates': {'color': 'rgb(0, 0, 255)'},
-                        'down-regulates activity': {'color': 'rgb(0, 0, 255)'},
-                        'down-regulates quantity by destabilization': {'color': 'rgb(0, 0, 255)'},
+                        'down-regulates activity': {'color': 'rgb(24, 189, 240)'},
+                        'down-regulates quantity by destabilization': {'color': 'rgb(24, 92, 240)'},
+                        'down-regulates quantity by repression': {'color': 'rgb(24, 143, 240)'},
+                        'down-regulates quantity': {'color': 'rgb(24, 171, 240)'},
                     };
 					var css = {};
 					var color = ndexEdgeInteractionColorScheme['default']['color'];
@@ -649,19 +654,28 @@ widgetGenerators['ndex_signor'] = {
 						}
 
 						// handle edge aspect
+                        var sti = {};
 						if (niceCX.edges){
 							niceCX.edges.elements.forEach(function(element){
-								var cxEdgeId = 'e' + element['@id'];
-								var edgeData = {
-										id : cxEdgeId,
-										source: element.s,
-										target: element.t};
-
-								if (element.i){
-									edgeData.interaction = element.i;
-								}
-
-								edgeMap[cxEdgeId] = {data: edgeData};
+                                var source = element.s;
+                                var target = element.t;
+                                if (!(source in sti)) {
+                                    sti[source] = {}
+                                }
+                                if (!(target in sti[source])) {
+                                    var cxEdgeId = 'e' + element['@id'];
+                                    var edgeData = {
+                                            id : cxEdgeId,
+                                            source: element.s,
+                                            target: element.t};
+                                    if (element.i){
+                                        edgeData.interaction = element.i;
+                                    }
+                                    edgeMap[cxEdgeId] = {data: edgeData};
+                                    sti[source][target] = cxEdgeId;
+                                } else {
+                                    false;
+                                }
 							});
 						}
 
@@ -670,10 +684,12 @@ widgetGenerators['ndex_signor'] = {
 						if (niceCX.edgeAttributes){
 							niceCX.edgeAttributes.elements.forEach(function(element){
 								var edgeId = 'e' + element.po;
-								var edge = edgeMap[edgeId];
-								var cyAttributeName = getCyAttributeName(element.n, attributeNameMap);
-								// todo: parse value according to datatype
-								edge.data[cyAttributeName] = element.v;
+                                if (edgeId in edgeMap) {
+                                    var edge = edgeMap[edgeId];
+                                    var cyAttributeName = getCyAttributeName(element.n, attributeNameMap);
+                                    // todo: parse value according to datatype
+                                    edge.data[cyAttributeName] = element.v;
+                                }
 							});
 						}
 
@@ -1175,42 +1191,46 @@ widgetGenerators['ndex_signor'] = {
 						}
 					}
 					];
-				var ndexEdgeInteractionColorScheme = {
-					'default': {'color': 'rgb(240,240,240)'},
+                var ndexEdgeInteractionColorScheme = {
+                    'default': {'color': 'rgb(240,240,240)'},
 
-					'controls-expression-of': {'color': 'rgb(255,182,0)'},
-					"controls-phosphorylation-of": {'color': 'rgb(152, 0, 255)'},
-					"controls-state-change-of": {'color': 'rgb(195, 159, 224)'},
-					"reacts-with": {'color': 'rgb(216, 199, 229)'},
-					"interacts-with": {'color': 'rgb(216, 199, 229)'},
-					"interacts with": {'color': 'rgb(216, 199, 229)'},
+                    'controls-expression-of': {'color': 'rgb(255,182,0)'},
+                    "controls-phosphorylation-of": {'color': 'rgb(152, 0, 255)'},
+                    "controls-state-change-of": {'color': 'rgb(195, 159, 224)'},
+                    "reacts-with": {'color': 'rgb(216, 199, 229)'},
+                    "interacts-with": {'color': 'rgb(216, 199, 229)'},
+                    "interacts with": {'color': 'rgb(216, 199, 229)'},
+                    "unknown": {'color': 'rgb(216, 199, 229)'},
 
-					"controls-transport-of": {'color': 'rgb(168, 224, 223)'},
-					"controls-transport-of-chemical": {'color': 'rgb(206, 206, 194)'},
+                    "controls-transport-of": {'color': 'rgb(168, 224, 223)'},
+                    "controls-transport-of-chemical": {'color': 'rgb(206, 206, 194)'},
 
-					"consumption-controled-by": {'color': 'rgb(168, 224, 223)'},
+                    "consumption-controled-by": {'color': 'rgb(168, 224, 223)'},
 
-					"chemical-affects": {'color': 'rgb(206, 206, 194)'},
-					"catalysis-precedes": {'color': 'rgb(206, 206, 194)'},
-					"used-to-produce": {'color': 'rgb(206, 206, 194)'},
-					"controls-production-of": {'color': 'rgb(156, 183, 181)'},
+                    "chemical-affects": {'color': 'rgb(206, 206, 194)'},
+                    "catalysis-precedes": {'color': 'rgb(206, 206, 194)'},
+                    "used-to-produce": {'color': 'rgb(206, 206, 194)'},
+                    "controls-production-of": {'color': 'rgb(156, 183, 181)'},
 
-					"in-complex-with": {'color': 'rgb(168, 244, 184)'},
-					"form-complex": {'color': 'rgb(168, 244, 184)'},
-					"neighbor-of": {'color': 'rgb(212, 244, 219)'},
-					
-					'selected': {'color': 'rgb(239, 62, 192)'},
+                    "in-complex-with": {'color': 'rgb(168, 244, 184)'},
+                    "form-complex": {'color': 'rgb(168, 244, 184)'},
+                    "form complex": {'color': 'rgb(168, 244, 184)'},
+                    "neighbor-of": {'color': 'rgb(212, 244, 219)'},
+                    
+                    'selected': {'color': 'rgb(239, 62, 192)'},
                     
                     'up-regulates': {'color': 'rgb(255, 0, 0)'},
-                    'up-regulates activity': {'color': 'rgb(255, 0, 0)'},
-                    'up-regulates quantity': {'color': 'rgb(255, 0, 0)'},
-                    'up-regulates quantity by expression': {'color': 'rgb(255, 0, 0)'},
-                    'up-regulates quantity by stabilization': {'color': 'rgb(255, 0, 0)'},
+                    'up-regulates activity': {'color': 'rgb(209, 77, 33)'},
+                    'up-regulates quantity by expression': {'color': 'rgb(240, 135, 24)'},
+                    'up-regulates quantity': {'color': 'rgb(240, 175, 24)'},
+                    'up-regulates quantity by stabilization': {'color': 'rgb(240, 182, 24)'},
 
                     'down-regulates': {'color': 'rgb(0, 0, 255)'},
-                    'down-regulates activity': {'color': 'rgb(0, 0, 255)'},
-                    'down-regulates quantity by destabilization': {'color': 'rgb(0, 0, 255)'},
-				};
+                    'down-regulates activity': {'color': 'rgb(24, 189, 240)'},
+                    'down-regulates quantity by destabilization': {'color': 'rgb(24, 92, 240)'},
+                    'down-regulates quantity by repression': {'color': 'rgb(24, 143, 240)'},
+                    'down-regulates quantity': {'color': 'rgb(24, 171, 240)'},
+                };
 				var css = {};
 				var color = ndexEdgeInteractionColorScheme['default']['color'];
 				css['line-color'] = color;
@@ -1385,33 +1405,44 @@ widgetGenerators['ndex_signor'] = {
 					}
 
 					// handle edge aspect
-					if (niceCX.edges){
-						niceCX.edges.elements.forEach(function(element){
-							var cxEdgeId = 'e' + element['@id'];
-							var edgeData = {
-									id : cxEdgeId,
-									source: element.s,
-									target: element.t};
+                    var sti = {};
+                    if (niceCX.edges){
+                        niceCX.edges.elements.forEach(function(element){
+                            var source = element.s;
+                            var target = element.t;
+                            if (!(source in sti)) {
+                                sti[source] = {}
+                            }
+                            if (!(target in sti[source])) {
+                                var cxEdgeId = 'e' + element['@id'];
+                                var edgeData = {
+                                        id : cxEdgeId,
+                                        source: element.s,
+                                        target: element.t};
+                                if (element.i){
+                                    edgeData.interaction = element.i;
+                                }
+                                edgeMap[cxEdgeId] = {data: edgeData};
+                                sti[source][target] = cxEdgeId;
+                            } else {
+                                false;
+                            }
+                        });
+                    }
 
-							if (element.i){
-								edgeData.interaction = element.i;
-							}
-
-							edgeMap[cxEdgeId] = {data: edgeData};
-						});
-					}
-
-					// handle edgeAttributes aspect
-					// Note that edgeAttributes elements are just in a list in niceCX for the moment!!
-					if (niceCX.edgeAttributes){
-						niceCX.edgeAttributes.elements.forEach(function(element){
-							var edgeId = 'e' + element.po;
-							var edge = edgeMap[edgeId];
-							var cyAttributeName = getCyAttributeName(element.n, attributeNameMap);
-							// todo: parse value according to datatype
-							edge.data[cyAttributeName] = element.v;
-						});
-					}
+                    // handle edgeAttributes aspect
+                    // Note that edgeAttributes elements are just in a list in niceCX for the moment!!
+                    if (niceCX.edgeAttributes){
+                        niceCX.edgeAttributes.elements.forEach(function(element){
+                            var edgeId = 'e' + element.po;
+                            if (edgeId in edgeMap) {
+                                var edge = edgeMap[edgeId];
+                                var cyAttributeName = getCyAttributeName(element.n, attributeNameMap);
+                                // todo: parse value according to datatype
+                                edge.data[cyAttributeName] = element.v;
+                            }
+                        });
+                    }
 
 					var nodeIds = Object.keys(nodeMap);
 					for (var i = 0; i < nodeIds.length; i++) {
