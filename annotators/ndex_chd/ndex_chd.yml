@@ -34,13 +34,16 @@ tags:
 - genes
 - cancer
 - interactions
-title: NDEx CHD
+title: NDEx Congenital Heart Disease
 type: annotator
 version: 1.0.0
+requires_opencravat: '>=2.1.0'
 requires:
 - wgndex_chd
 - ndex_group
 groups:
 - ndex_group
+private: false
+uselocalonstore: true
 release_note:
   1.0.0: initial version
