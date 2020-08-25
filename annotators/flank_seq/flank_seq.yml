@@ -3,7 +3,7 @@ version: 0.0.3
 type: annotator
 level: variant
 output_columns:
-- name: ref_seq 
+- name: ref_seq
   title: Ref Sequence
   type: string
 - name: alt_seq
@@ -11,10 +11,13 @@ output_columns:
   type: string
 description: Reference and alternate bases with flanking sequence
 developer:
-  name: 'Mary Wood'
-  organization: 'Oregon Health and Science University'
-  email: 'support@cravat.us'
-  website: 'https://github.com/pdxgx/neoepiscope'
-  citation: 'Wood, M. A., et al. (2018). neoepiscope Improves Neoepitope Prediction with Multi-variant Phasing. BioRxiv, 418129.'
+  name: Mary Wood
+  organization: Oregon Health and Science University
+  email: support@cravat.us
+  website: https://github.com/pdxgx/neoepiscope
+  citation: Wood, M. A., et al. (2018). neoepiscope Improves Neoepitope Prediction
+    with Multi-variant Phasing. BioRxiv, 418129.
 options:
   flanking_bases: 60
+tags:
+- variants

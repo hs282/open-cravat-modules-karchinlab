@@ -10,7 +10,7 @@ output_columns:
 - name: mondo
   title: ID
   type: string
-  link_format: 'https://monarchinitiative.org/disease/${[^;]+}'
+  link_format: https://monarchinitiative.org/disease/${[^;]+}
   width: 110
   hidden: true
 - name: classification
@@ -22,16 +22,23 @@ output_columns:
   title: Link
   type: string
   hidden: true
-
-
-description: ClinGen is a National Institutes of Health (NIH)-funded resource dedicated to building a central resource that defines the clinical relevance of genes and variants for use in precision medicine and research.
-
+description: ClinGen is a National Institutes of Health (NIH)-funded resource dedicated
+  to building a central resource that defines the clinical relevance of genes and
+  variants for use in precision medicine and research.
 developer:
-  name: 'Katrina Goddard'
-  organization: 'National Institutes of Health'
-  email: 'clingen@clinicalgenome.org'
-  website: 'https://clinicalgenome.org'
-  citation: 'Strande NT, Riggs ER, Buchanan AH, Ceyhan-Birsoy O, DiStefano M, Dwight SS, Goldstein J, Ghosh R, Seifert BA, Sneddon TP, Wright MW, Milko LV, Cherry JM, Giovanni MA, Murray MF, O''Daniel JM, Ramos EM, Santani AB, Scott AF, Plon SE, Rehm HL, Martin CL, Berg JS. Evaluating the Clinical Validity of Gene-Disease Associations: An Evidence-Based Framework Developed by the Clinical Genome Resource. Am J Hum Genet. 2017 Jun 1;100(6):895-906. doi: 10.1016/j.ajhg.2017.04.015. Epub 2017 May 25. PubMed PMID: 28552198; PubMed Central PMCID: PMC5473734.'
-
+  name: Katrina Goddard
+  organization: National Institutes of Health
+  email: clingen@clinicalgenome.org
+  website: https://clinicalgenome.org
+  citation: 'Strande NT, Riggs ER, Buchanan AH, Ceyhan-Birsoy O, DiStefano M, Dwight
+    SS, Goldstein J, Ghosh R, Seifert BA, Sneddon TP, Wright MW, Milko LV, Cherry
+    JM, Giovanni MA, Murray MF, O''Daniel JM, Ramos EM, Santani AB, Scott AF, Plon
+    SE, Rehm HL, Martin CL, Berg JS. Evaluating the Clinical Validity of Gene-Disease
+    Associations: An Evidence-Based Framework Developed by the Clinical Genome Resource.
+    Am J Hum Genet. 2017 Jun 1;100(6):895-906. doi: 10.1016/j.ajhg.2017.04.015. Epub
+    2017 May 25. PubMed PMID: 28552198; PubMed Central PMCID: PMC5473734.'
 requires:
-  - wgclingen
+- wgclingen
+tags:
+- genes
+- clinical relevance

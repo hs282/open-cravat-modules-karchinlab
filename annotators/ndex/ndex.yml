@@ -30,16 +30,19 @@ output_columns:
   width: 185
   hidden: false
 tags:
-- variants
 - genes
-- cancer
 - interactions
-title: NDEx
+- visualization
+title: NDEx NCI Cancer Pathways
 type: annotator
-version: 4.0.10
+version: 4.0.11
 requires:
 - wgndexchasmplussummary
 - wgndexvestsummary
 - wgndex
+- ndex_group
+groups:
+- ndex_group
 release_note:
+  4.0.11: included in ndex_group
   4.0.9: removed categorical column definition for better UI in webresult

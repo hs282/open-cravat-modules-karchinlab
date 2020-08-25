@@ -1,4 +1,4 @@
-import aiosqlite3
+import aiosqlite
 import os
 import math
 
@@ -99,7 +99,7 @@ async def get_data_for_sos (sos, name_prefix, cursor):
 async def get_data (queries):
     response = {}
     dbpath = queries['dbpath']
-    conn = await aiosqlite3.connect(dbpath)
+    conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
     data = {}
     sos = ['MIS', 'CSS', 'IIV', 'IDV', 'STL', 'SPL', 'STG', 'FSI', 'FI1', 'FI2', 'FSD', 'FD1', 'FD2']
@@ -127,4 +127,6 @@ async def get_data (queries):
     '''
     data[prefix] = data_sos
     response['data'] = data
+    await cursor.close()
+    await conn.close()
     return response

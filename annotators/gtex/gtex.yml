@@ -20,9 +20,6 @@ output_columns:
   type: string
 tags:
 - variants
-- noncoding
-- germline
-- dbnsfp
 title: GTEx eQTLs
 type: annotator
 version: 7.0.4

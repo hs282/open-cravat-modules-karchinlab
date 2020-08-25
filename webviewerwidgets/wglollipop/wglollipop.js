@@ -977,7 +977,7 @@ widgetGenerators['lollipop'] = {
 			'domainLineMinWidth': 7,
 			'variantMinWidth': 2,
 			'variantRadius': 5,
-			'xStart': 280,
+			'xStart': 320,
 			'xEndPad': 14,
 			'varHeightMax': 22,
 			'varHeightMin': 12,
@@ -1464,20 +1464,21 @@ widgetGenerators['lollipop'] = {
                 addEl(contentDiv, div);
                 var table = getEl('table');
                 table.className = 'lollipop_gene_varianttable';
-                table.style.width = '240px';
+                table.style.width = '300px';
                 table.style.fontSize = '10px';
                 addEl(div, table);
                 var thead = getEl('thead');
                 var tr = getEl('tr');
                 var th = getEl('th');
-                th.style.width = '60px';
+                th.style.width = '100px';
                 addEl(th, getTn('Change'));
                 addEl(tr, th);
                 var th = getEl('th');
+                th.style.width = '100px';
                 addEl(th, getTn('Seq Ont'));
                 addEl(tr, th);
                 var th = getEl('th');
-                th.style.width = '52px';
+                //th.style.width = '52px';
                 addEl(th, getTn('# Samples'));
                 addEl(tr, th);
                 addEl(thead, tr);

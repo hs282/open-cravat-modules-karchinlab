@@ -28,11 +28,7 @@ output_columns:
   filterable: false
   desc: False discovery rate
 tags:
-- variants
-- noncoding
-- germline
 - variant effect prediction
-- dbnsfp
 title: PhD-SNPg
 type: annotator
 version: 0.0.8

@@ -8,60 +8,62 @@ output_columns:
   type: string
   desc: Tolerated if Score > 0.05. Damaging if Score <= 0.05
   width: 70
-  category: 'single'
+  category: single
   categories:
-    - Tolerated
-    - Damaging
+  - Tolerated
+  - Damaging
 - name: confidence
   title: Confidence
   type: string
   desc: Low if Median Info > 3.25
   width: 75
-  category: 'single'
+  category: single
   categories:
-    - High
-    - Low
+  - High
+  - Low
   hidden: true
 - name: score
   title: Score
   type: float
-  desc: Ranges from 0 to 1. The amino acid substitution is predicted damaging is the score is <= 0.05, and tolerated if the score is > 0.05. 
+  desc: Ranges from 0 to 1. The amino acid substitution is predicted damaging is the
+    score is <= 0.05, and tolerated if the score is > 0.05.
   hidden: true
 - name: med
   title: Median Info
   type: float
-  desc: Ranges from 0 to 4.32, ideally the number would be between 2.75 and 3.5. This is used to measure the diversity of the sequences used for prediction. A value over 3.25 indicates that the prediction was based on closely related sequences.
+  desc: Ranges from 0 to 4.32, ideally the number would be between 2.75 and 3.5. This
+    is used to measure the diversity of the sequences used for prediction. A value
+    over 3.25 indicates that the prediction was based on closely related sequences.
   hidden: true
 - name: seqs
   title: Seqs at Position
   type: int
-  desc: This is the number of sequences that have an amino acid at the position of prediction. SIFT automatically chooses the sequence for you, but if the substitution is located at the beginning or end of the protein, there may be only a few sequences represented at that position, and this column indicates this. 
+  desc: This is the number of sequences that have an amino acid at the position of
+    prediction. SIFT automatically chooses the sequence for you, but if the substitution
+    is located at the beginning or end of the protein, there may be only a few sequences
+    represented at that position, and this column indicates this.
   width: 60
   hidden: true
-
 description: SIFT predicts whether an amino acid substitution affects protein function
-
 developer:
-  name: 'Pauline Ng'
-  organization: 'Bioinformatics Institute, Agency for Science, Technology and Research, Singapore'
-  email: 'ngpc4@gis.a-star.edu.sg'
-  website: 'sift.bii.a-star.edu.sg'
-  citation: 'Vaser R, Adusumalli S, Leng SN, Sikic M, Ng PC (2016) SIFT missense predictions for genomes. Nat Protocols 11: 1-9.'
-
-datasource: 'SIFT4G 2016-02-22'
-
+  name: Pauline Ng
+  organization: Bioinformatics Institute, Agency for Science, Technology and Research,
+    Singapore
+  email: ngpc4@gis.a-star.edu.sg
+  website: sift.bii.a-star.edu.sg
+  citation: 'Vaser R, Adusumalli S, Leng SN, Sikic M, Ng PC (2016) SIFT missense predictions
+    for genomes. Nat Protocols 11: 1-9.'
+datasource: SIFT4G 2016-02-22
 tags:
-- variants
 - variant effect prediction
-
 smartfilters:
-  - name: prediction
-    title: SIFT Prediction
-    selector:
-      type: select
-      optionsColumn: sift__prediction
-      defaultValue: Damaging
-    filter:
-      column: sift__prediction
-      test: equals
-      value: ${value}
+- name: prediction
+  title: SIFT Prediction
+  selector:
+    type: select
+    optionsColumn: sift__prediction
+    defaultValue: Damaging
+  filter:
+    column: sift__prediction
+    test: equals
+    value: ${value}

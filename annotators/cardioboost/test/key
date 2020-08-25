@@ -1,0 +1,47 @@
+#CRAVAT Report
+#Created at Wednesday 07/15/2020 15:08:38
+#Report level: variant
+#
+Variant Annotation																CardioBoost			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Cardiomyopathy Score	Cardiomyopathy Class	Arrhythmia Score	Arrhythmia Class
+3	chr3	38550625	A	G		Yes	SCN5A	ENST00000413689.6	missense_variant	c.5747T>C	p.Leu1916Pro	ENST00000333535.9:SCN5A:Q14524:missense_variant:p.Leu1916Pro:c.5747T>C; ENST00000413689.6:SCN5A::missense_variant:p.Leu1916Pro:c.5747T>C; ENST00000414099.6:SCN5A::missense_variant:p.Leu1898Pro:c.5693T>C; ENST00000423572.6:SCN5A:Q14524:missense_variant:p.Leu1915Pro:c.5744T>C; ENST00000425664.5:SCN5A::missense_variant:p.Leu1898Pro:c.5693T>C; ENST00000449557.6:SCN5A::missense_variant:p.Leu1862Pro:c.5585T>C; ENST00000450102.6:SCN5A::missense_variant:p.Leu1862Pro:c.5585T>C; ENST00000451551.6:SCN5A::missense_variant:p.Leu1862Pro:c.5585T>C; ENST00000455624.6:SCN5A::missense_variant:p.Leu1883Pro:c.5648T>C	1	s2		0.22109111450023106	VUS	0.99769786520185	Pathogenic/Likely Pathogenic
+6	chr1	817186	G	A			FAM87B	ENST00000326734.2	lnc_RNA			ENST00000326734.2:FAM87B::2kb_upstream_variant,lnc_RNA::	1	s5					
+5	chr15	63062236	T	G		Yes	TPM1	ENST00000357980.9	missense_variant	c.787T>G	p.Tyr263Asp	ENST00000267996.11:TPM1:P09493:missense_variant:p.Tyr221Asp:c.661T>G; ENST00000288398.10:TPM1:P09493:missense_variant:p.Tyr221Asp:c.661T>G; ENST00000317516.12:TPM1::missense_variant:p.Tyr185Asp:c.553T>G; ENST00000334895.10:TPM1:P09493:missense_variant:p.Tyr185Asp:c.553T>G; ENST00000357980.9:TPM1::missense_variant:p.Tyr263Asp:c.787T>G; ENST00000358278.7:TPM1:P09493:missense_variant:p.Tyr221Asp:c.661T>G; ENST00000403994.8:TPM1:P09493:missense_variant:p.Tyr221Asp:c.661T>G; ENST00000404484.9:TPM1::missense_variant:p.Tyr185Asp:c.553T>G; ENST00000558347.5:TPM1::NMD_transcript_variant,3_prime_UTR_variant::c.*69T>G; ENST00000558544.5:TPM1::NMD_transcript_variant,3_prime_UTR_variant::c.*269T>G; ENST00000558910.3:TPM1::missense_variant:p.Tyr185Asp:c.553T>G; ENST00000559281.6:TPM1::missense_variant:p.Tyr185Asp:c.553T>G; ENST00000559397.6:TPM1:P09493:missense_variant:p.Tyr221Asp:c.661T>G; ENST00000559556.5:TPM1:P09493:missense_variant:p.Tyr221Asp:c.661T>G; ENST00000560959.5:TPM1::missense_variant:p.Tyr185Asp:c.553T>G; ENST00000560970.6:TPM1::missense_variant:p.Tyr221Asp:c.661T>G; ENST00000561266.6:TPM1:P09493:missense_variant:p.Tyr221Asp:c.661T>G; ENST00000651577.1:TPM1::missense_variant:p.Tyr95Asp:c.283T>G; ENST00000651590.1:TPM1::missense_variant,NMD_transcript_variant:p.Tyr185Asp:c.553T>G; ENST00000651704.1:TPM1::missense_variant:p.Tyr95Asp:c.283T>G	1	s4		0.966348808169632	Pathogenic/Likely Pathogenic		
+4	chr19	46609149	A	C		Yes	CALM3	ENST00000291295.14	missense_variant	c.446A>C	p.Lys149Thr	ENST00000291295.14:CALM3:P0DP25:missense_variant:p.Lys149Thr:c.446A>C; ENST00000391918.6:CALM3::missense_variant:p.Lys113Thr:c.338A>C; ENST00000477244.5:CALM3::processed_transcript::; ENST00000482455.5:CALM3::processed_transcript::; ENST00000594523.5:CALM3::missense_variant:p.Lys113Thr:c.338A>C; ENST00000596362.1:CALM3:P0DP25:missense_variant:p.Lys149Thr:c.446A>C; ENST00000597609.1:AC093503.2::2kb_downstream_variant,lnc_RNA::; ENST00000597743.5:CALM3::missense_variant:p.Lys83Thr:c.248A>C; ENST00000598871.5:CALM3::missense_variant:p.Lys113Thr:c.338A>C; ENST00000599839.5:CALM3::missense_variant:p.Lys113Thr:c.338A>C; ENST00000602169.2:CALM3::NMD_transcript_variant,3_prime_UTR_variant::c.*482A>C	1	s3				0.993575362804596	Pathogenic/Likely Pathogenic
+2	chr3	38550344	T	A		Yes	SCN5A	ENST00000333535.9	missense_variant	c.6028A>T	p.Arg2010Trp	ENST00000333535.9:SCN5A:Q14524:missense_variant:p.Arg2010Trp:c.6028A>T; ENST00000413689.6:SCN5A::missense_variant:p.Arg2010Trp:c.6028A>T; ENST00000414099.6:SCN5A::missense_variant:p.Arg1992Trp:c.5974A>T; ENST00000423572.6:SCN5A:Q14524:missense_variant:p.Arg2009Trp:c.6025A>T; ENST00000425664.5:SCN5A::missense_variant:p.Arg1992Trp:c.5974A>T; ENST00000449557.6:SCN5A::missense_variant:p.Arg1956Trp:c.5866A>T; ENST00000450102.6:SCN5A::missense_variant:p.Arg1956Trp:c.5866A>T; ENST00000451551.6:SCN5A::missense_variant:p.Arg1956Trp:c.5866A>T; ENST00000455624.6:SCN5A::missense_variant:p.Arg1977Trp:c.5929A>T	1	s1		0.0361166941475073	Benign/Likely Benign	0.000747339984600687	Benign/Likely Benign
+1	chr1	156114922	G	A		Yes	LMNA	ENST00000368300.9	missense_variant	c.4G>A	p.Glu2Lys	ENST00000347559.6:LMNA:P02545:missense_variant:p.Glu2Lys:c.4G>A; ENST00000361308.8:LMNA::missense_variant:p.Glu2Lys:c.4G>A; ENST00000368299.7:LMNA:P02545:missense_variant:p.Glu2Lys:c.4G>A; ENST00000368300.9:LMNA:P02545:missense_variant:p.Glu2Lys:c.4G>A; ENST00000368301.6:LMNA:P02545:missense_variant:p.Glu2Lys:c.4G>A; ENST00000469565.6:LMNA::intron_variant,processed_transcript::; ENST00000470199.2:LMNA::processed_transcript::; ENST00000478063.2:LMNA::intron_variant,processed_transcript::; ENST00000502751.5:LMNA::intron_variant,processed_transcript::; ENST00000515711.1:LMNA::2kb_downstream_variant,processed_transcript::	1	s0		0.18151109204443305	VUS		
+#CRAVAT Report
+#Created at Wednesday 07/15/2020 15:08:38
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+SCN5A		2	0	missense_variant	missense_variant(2)
+FAM87B		0	1	lnc_RNA	lnc_RNA(1)
+TPM1		1	0	missense_variant	missense_variant(1),NMD_transcript_variant(1),3_prime_UTR_variant(1)
+CALM3		1	0	missense_variant	missense_variant(1),NMD_transcript_variant(1),processed_transcript(1),3_prime_UTR_variant(1)
+LMNA		1	0	missense_variant	intron_variant(1),missense_variant(1),processed_transcript(1)
+#CRAVAT Report
+#Created at Wednesday 07/15/2020 15:08:38
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+6	s5
+#CRAVAT Report
+#Created at Wednesday 07/15/2020 15:08:38
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+2		1	0
+3		2	0
+4		3	0
+5		4	0
+6		5	0
+7		6	0

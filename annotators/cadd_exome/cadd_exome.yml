@@ -6,23 +6,24 @@ level: variant
 output_columns:
 - name: score
   title: Score
-  type: float 
+  type: float
 - name: phred
   title: Phred
   type: float
-
-description: CADD is a tool for scoring the deleteriousness of single nucleotide variants in the human genome.
-
+description: CADD is a tool for scoring the deleteriousness of single nucleotide variants
+  in the human genome.
 developer:
   name: Martin Kircher
   organization: Shendure Lab, University of Washington
   email: support@cravat.us
   website: https://cadd.gs.washington.edu/
-  citation: 'Rentzsch P, Witten D, Cooper GM, Shendure J, Kircher M. CADD: predicting the deleteriousness of variants throughout the human genome. Nucleic Acids Res. 2018 Oct 29. doi: 10.1093/nar/gky1016. PubMed PMID: 30371827.'
-
-commercial_warning: CADD scores are freely available for all non-commercial applications. If you are planning on using them in a commercial application, please obtain a license.
-
-
+  citation: 'Rentzsch P, Witten D, Cooper GM, Shendure J, Kircher M. CADD: predicting
+    the deleteriousness of variants throughout the human genome. Nucleic Acids Res.
+    2018 Oct 29. doi: 10.1093/nar/gky1016. PubMed PMID: 30371827.'
+commercial_warning: CADD scores are freely available for all non-commercial applications.
+  If you are planning on using them in a commercial application, please obtain a license.
 release_note:
   1.6.1: Bugfix for indel handling
   1.4.7: Initial release
+tags:
+- variant effect prediction

@@ -1,23 +1,27 @@
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:06
+#Created at Tuesday 07/14/2020 14:56:49
 #Report level: variant
 #
-Variant Annotation															Variant Metadata
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	Sample Count	Samples	Tags	Zygosity
-1	chr1	565508	G	A								0		rs9283150	hom
-2	chr1	752721	A	G								0		rs3131972	hom
-3	chr1	919501	G	T								0		rs4970414	het
-4	chr1	881627	G	A								0		rs2272757	het
-5	chr1	917640	G	A								0		rs41285816	het
-6	chr1	3805098	C	T								0		rs7530189	het
+Variant Annotation																Hg19		Variant Metadata
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Chrom	Position	Zygosity
+1	chr1	630128	G	A									0		rs9283150	chr1	565508	hom
+2	chr1	817341	A	G			FAM87B	ENST00000326734.2	lnc_RNA			ENST00000326734.2:FAM87B::2kb_upstream_variant,lnc_RNA::	0		rs3131972	chr1	752721	hom
+3	chr1	984121	G	T									0		rs4970414	chr1	919501	het
+4	chr1	946247	G	A		Yes	NOC2L	ENST00000327044.7	synonymous_variant	c.1843C>T	p.Leu615=	ENST00000327044.7:NOC2L:Q9Y3T9:synonymous_variant:p.Leu615=:c.1843C>T; ENST00000342066.8:SAMD11:Q96NU1:2kb_downstream_variant::c.*2094G>A; ENST00000496938.1:NOC2L::2kb_upstream_variant,processed_transcript::; ENST00000616016.4:SAMD11::2kb_downstream_variant::c.*2939G>A; ENST00000616125.4:SAMD11::2kb_downstream_variant::c.*2094G>A; ENST00000617307.4:SAMD11::2kb_downstream_variant::c.*2094G>A; ENST00000618181.4:SAMD11::2kb_downstream_variant::c.*2094G>A; ENST00000618323.4:SAMD11::2kb_downstream_variant::c.*2779G>A; ENST00000618779.4:SAMD11::2kb_downstream_variant::c.*2094G>A; ENST00000620200.4:SAMD11::2kb_downstream_variant::c.*2779G>A; ENST00000622503.4:SAMD11::2kb_downstream_variant::c.*2094G>A	0		rs2272757	chr1	881627	het
+5	chr1	982260	G	A			PERM1	ENST00000433179.3	2kb_upstream_variant	c.-1231C>T		ENST00000341290.6:PERM1:Q5SV97:2kb_upstream_variant::c.-203C>T; ENST00000433179.3:PERM1:Q5SV97:2kb_upstream_variant::c.-1231C>T	0		rs41285816	chr1	917640	het
+6	chr1	3888534	C	T			C1orf174	ENST00000361605.4	2kb_downstream_variant	c.*1426G>A		ENST00000361605.4:C1orf174:Q8IYL3:2kb_downstream_variant::c.*1426G>A; ENST00000486765.5:C1orf174::2kb_downstream_variant,processed_transcript::	0		rs7530189	chr1	3805098	het
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:06
+#Created at Tuesday 07/14/2020 14:56:49
 #Report level: gene
 #
 Variant Annotation					
-Hugo	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+FAM87B		0	1	lnc_RNA	lnc_RNA(0)
+NOC2L		1	0	synonymous_variant	processed_transcript(0),synonymous_variant(0)
+PERM1		0	1	2kb_upstream_variant	
+C1orf174		0	1	2kb_downstream_variant	processed_transcript(0)
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:06
+#Created at Tuesday 07/14/2020 14:56:49
 #Report level: sample
 #
 Variant Annotation		
@@ -29,7 +33,7 @@ UID	Sample	Zygosity
 5		het
 6		het
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:06
+#Created at Tuesday 07/14/2020 14:56:49
 #Report level: mapping
 #
 Variant Annotation			

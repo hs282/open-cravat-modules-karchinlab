@@ -21,6 +21,7 @@ output_columns:
   hidden: true
 tags:
 - genes
+- literature
 title: NCBI Gene
 type: annotator
 version: 2019.08.02

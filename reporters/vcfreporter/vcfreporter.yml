@@ -1,8 +1,8 @@
 title: VCF Reporter
-version: 1.0.19
+version: 2.1.0
 type: reporter
 description: VCF format text file reporter
-requires_opencravat: '>=1.8.1'
+requires_opencravat: '>=2.1.0'
 output_filename_schema:
 - '{run_name}.vcf'
 developer:
@@ -14,6 +14,8 @@ developer:
 private: false
 hidden: false
 release_note:
+  2.0.2: uses aiosqlite instead of aiosqlite3
+  2.0.0: returns output file path.
   1.0.19: oc 1.8.1 and hg38 2nd
   1.0.17: release for star alleles and hidden true
   1.0.16: release candidate for star alleles

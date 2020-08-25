@@ -65,14 +65,15 @@ def _compare_mapping (m2, m1):
     m2so = max(m2sos)
     minm1so = min(m1sos)
     minm2so = min(m2sos)
-    if minm1so > 0 and minm2so < 0:
+    if minm2so < 0 and minm1so > 0:
         return -1
+    elif minm1so < 0 and minm2so > 0:
+        return 1
     m1aalen = m1[MAPPING_AALEN_I]
     m2aalen = m2[MAPPING_AALEN_I]
     higher_so = m1so > m2so
     same_so = m1so == m2so
     longer_aa = m1aalen > m2aalen
-    same_aalen = m1aalen == m2aalen
     self_is_better = higher_so or (same_so and longer_aa)
     if self_is_better:
         return -1
@@ -503,7 +504,7 @@ class Mapper (cravat.BaseMapper):
 
     def map (self, crv_data):
         tr_info = self.tr_info
-        uid = crv_data['uid']
+        uid = crv_data.get('uid', None)
         chrom = crv_data['chrom']
         gpos = crv_data['pos']
         ref_base_str = crv_data['ref_base']
@@ -1191,7 +1192,6 @@ class Mapper (cravat.BaseMapper):
                 coding = CODING
             elif gposend_kind == FRAG_UTR3:
                 so = (SO_UT3,)
-                coding = CODING
             elif gposend_kind == FRAG_CDS:
                 so = (SO_UT3, SO_STL)
                 achange = '' # TODO: temporary
@@ -1202,6 +1202,7 @@ class Mapper (cravat.BaseMapper):
                 so = (SO_UT3, SO_NSO)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_MLO, SO_UT5, SO_UT3)
+                coding = CODING
             elif gposend_kind == FRAG_UTR3INTRON:
                 so = (SO_UT3,)
             elif gposend_kind == FRAG_CDSINTRON:
@@ -1297,6 +1298,7 @@ class Mapper (cravat.BaseMapper):
                 so = (SO_UT5,)
             elif gposend_kind == FRAG_UTR3INTRON:
                 so = (SO_MLO,)
+                coding = CODING
             elif gposend_kind == FRAG_CDSINTRON:
                 so = (SO_MLO, SO_INT)
                 achange = ''
@@ -1323,19 +1325,20 @@ class Mapper (cravat.BaseMapper):
                 so = (SO_MLO,)
                 coding = CODING
             elif gposend_kind == FRAG_UTR5:
-                so = (SO_UT5,)
-            elif gposend_kind == FRAG_UTR3:
                 so = (SO_MLO, SO_UT5, SO_UT3)
                 coding = CODING
+            elif gposend_kind == FRAG_UTR3:
+                so = (SO_UT3,)
             elif gposend_kind == FRAG_CDS:
                 so = (SO_MLO, SO_UT5)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
                 so = (SO_NSO,)
             elif gposend_kind == FRAG_UTR5INTRON:
-                so = (SO_UT5,)
+                so = (SO_MLO, SO_UT5, SO_UT3)
+                coding = CODING
             elif gposend_kind == FRAG_UTR3INTRON:
-                so = (SO_MLO,)
+                so = (SO_UT3,)
             elif gposend_kind == FRAG_CDSINTRON:
                 so = (SO_STL, SO_INT)
                 achange = ''
@@ -1385,7 +1388,8 @@ class Mapper (cravat.BaseMapper):
                     tid, cpos, cstart, tpos, tstart, tr_alt_base, chrom, strand, lenalt, apos, gpos, lenref, alen, 
                     gposend_kind, gposend_fragno, gposend_cstart, gposend_tstart, gposend, cpos_end, tpos_end, tlen, fragno, 
                     apos_end, gstart, gend, gposend_gstart, gposend_gend, exonno, gposend_exonno)
-                coding = CODING
+                if (SO_EXL in so) or (SO_SPL in so) or (SO_IND in so) or (SO_FSD in so) or (SO_MLO in so):
+                    coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
                 so = (SO_NSO,)
             elif gposend_kind == FRAG_FLAG_IG:
@@ -1761,7 +1765,7 @@ class Mapper (cravat.BaseMapper):
                 so, achange = self._get_com_cds_cds_data(tid, tpos, cpos, apos, lenref, lenalt, bytearray(tr_alt_base, 'ascii'), tposcposoffset, alen)
             elif gposend_kind == FRAG_NCRNA: so += (SO_UNK,); coding = NONCODING
             elif gposend_kind == FRAG_UTR5INTRON: so += (SO_MLO, SO_UTR5)
-            elif gposend_kind == FRAG_UTR3INTRON: so += (SO_STL,)
+            elif gposend_kind == FRAG_UTR3INTRON: so += (SO_STL, SO_UT3)
             elif gposend_kind == FRAG_CDSINTRON:
                 if self._check_splice_site(chrom, tid, exonno, kind, gpos, var_type, strand) == TRUE:
                     so += (SO_SPL,)
@@ -2981,7 +2985,6 @@ class Mapper (cravat.BaseMapper):
         self.db = self._get_db(db_path)
         self.c = self.db.cursor()
         self.c2 = self.db.cursor()
-        self.c.execute('pragma synchronous=0;')
         q = 'select v from info where k="binsize"'
         self.c.execute(q)
         self.binsize = int(self.c.fetchone()[0])
@@ -2999,7 +3002,6 @@ class Mapper (cravat.BaseMapper):
         self._make_primary_transcripts()
 
     def end (self):
-        self.c.execute('pragma synchronous=2;')
         self.c.close()
         self.c2.close()
         self.db.close()
@@ -3745,8 +3747,10 @@ class Mapper (cravat.BaseMapper):
             ref_codonpos = cpos % 3
             if ref_codonpos == 0:
                 ref_cpos = cpos - 2
-            else:
-                ref_cpos = cpos - ref_codonpos + 1
+            elif ref_codonpos == 1:
+                ref_cpos = cpos
+            elif ref_codonpos == 2:
+                ref_cpos = cpos - 1
             ref_tpos = tstart + ref_cpos - cstart
             ref_gpos = gpos + ref_cpos - cpos
             ref_codonnum = self._get_codonnum(tid, ref_tpos)
@@ -3849,17 +3853,22 @@ class Mapper (cravat.BaseMapper):
                     so = (SO_FSI, SO_MLO)
                     achange = f'p.{aanum_to_aa[MET]}1?'
                 else:
-                    if ref_aa_found == TER:
-                        so = (SO_FSI, SO_STL)
+                    if stp_found:
+                        if i_found is not None:
+                            if ref_aa_found == TER:
+                                so = (SO_FSI, SO_STL)
+                            else:
+                                so = (SO_FSI,)
+                            ter_dist = len(alt_aas) - i_found
+                            if ter_dist == 1:
+                                achange = f'p.{aanum_to_aa[ref_aa_found]}{ref_apos_found}{aanum_to_aa[alt_aas[i_found]]}'
+                            else:
+                                achange = f'p.{aanum_to_aa[ref_aa_found]}{ref_apos_found}{aanum_to_aa[alt_aas[i_found]]}fs{aanum_to_aa[TER]}{len(alt_aas) - i_found}'
+                        else:
+                            so = (SO_SYN,)
+                            achange = f'p.{aanum_to_aa[pseq[apos]]}{apos}='
                     else:
                         so = (SO_FSI,)
-                    if stp_found:
-                        ter_dist = len(alt_aas) - i_found
-                        if ter_dist == 1:
-                            achange = f'p.{aanum_to_aa[ref_aa_found]}{ref_apos_found}{aanum_to_aa[alt_aas[i_found]]}'
-                        else:
-                            achange = f'p.{aanum_to_aa[ref_aa_found]}{ref_apos_found}{aanum_to_aa[alt_aas[i_found]]}fs{aanum_to_aa[TER]}{len(alt_aas) - i_found}'
-                    else:
                         achange = f'p.{aanum_to_aa[ref_aa_found]}{ref_apos_found}{aanum_to_aa[alt_aas[i_found]]}fs{aanum_to_aa[TER]}?'
         return so, achange
 
@@ -3941,8 +3950,9 @@ class Mapper (cravat.BaseMapper):
                 primary_mappings[hugo] = ('', '', (SO_NSO,), '', '', -1, '', '')
             for mapping in mappings:
                 tr = mapping[MAPPING_TR_I]
-                if hugo in self.primary_transcript and tr == self.primary_transcript[hugo]: # defined in primary transcript file
+                if hugo in self.primary_transcript and tr.split('.')[0] == self.primary_transcript[hugo]: # defined in primary transcript file
                     primary_mappings[hugo] = mapping
+                    break
                 else:
                     if SO_NSO in primary_mappings[hugo][MAPPING_SO_I]:
                         primary_mappings[hugo] = mapping

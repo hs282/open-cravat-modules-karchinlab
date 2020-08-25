@@ -54,7 +54,6 @@ output_columns:
   desc: Gene ID
 tags:
 - variants
-- genes
 - variant effect prediction
 title: VEST4
 type: annotator

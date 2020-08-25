@@ -1,28 +1,28 @@
 #CRAVAT Report
-#Created at Wednesday 01/09/2019 10:50:24
+#Created at Monday 08/24/2020 13:16:20
 #Report level: variant
 #
-Variant Annotation											MuPIT		Tag Sampler		
-UID	Chrom	Position	Ref Base	Alt Base	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	Link	Hugo	Number of Samples	Samples	Tags
-1	chr1	1719358	A	G	Y	CDK11A	ENST00000378633.5	missense	W109R	ENST00000356200.7:CDK11A:Q5QPR4:missense:C75R:T223C; ENST00000357760.6:CDK11A:Q5QPR3:missense:W109R:T325C; ENST00000358779.9:CDK11A:(na):missense:W109R:T325C; ENST00000378633.5:CDK11A:Q9UQ88:missense:W109R:T325C; ENST00000378638.6:CDK11A:Q5QPR4:missense:C75R:T223C; ENST00000404249.7:CDK11A:(na):missense:C109R:T325C	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719358	CDK11A	1	S1	CDK11A
-2	chr1	1719393	A	G	Y	CDK11A	ENST00000378633.5	missense	V97A	ENST00000356200.7:CDK11A:Q5QPR4:missense:V63A:T188C; ENST00000357760.6:CDK11A:Q5QPR3:missense:V97A:T290C; ENST00000358779.9:CDK11A:(na):missense:V97A:T290C; ENST00000378633.5:CDK11A:Q9UQ88:missense:V97A:T290C; ENST00000378638.6:CDK11A:Q5QPR4:missense:V63A:T188C; ENST00000404249.7:CDK11A:(na):missense:V97A:T290C	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719393	CDK11A	1	S2	CDK11A
-3	chr1	1719406	G	A	Y	CDK11A	ENST00000378633.5	missense	R93W	ENST00000356200.7:CDK11A:Q5QPR4:missense:R59W:C175T; ENST00000357760.6:CDK11A:Q5QPR3:missense:R93W:C277T; ENST00000358779.9:CDK11A:(na):missense:R93W:C277T; ENST00000378633.5:CDK11A:Q9UQ88:missense:R93W:C277T; ENST00000378638.6:CDK11A:Q5QPR4:missense:R59W:C175T; ENST00000404249.7:CDK11A:(na):missense:R93W:C277T	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719406	CDK11A	1	S3	CDK11A
-4	chr7	27199497	C	G	Y	HOXA13	ENST00000222753.5	missense	C194S	ENST00000222753.5:HOXA13:P31271:missense:C194S:G581C			1	S1	SBS_HOXA13
-5	chr12	8845496	A	T	Y	A2ML1	ENST00000299698.11	stop gained	K511*	ENST00000299698.11:A2ML1:A8K2U0:stop gained:K511*:A1531T; ENST00000539547.5:A2ML1:(na):stop gained:K20*:A58T			1	S1	SBS1_A2ML1
-6	chr12	8852253	C	T	Y	A2ML1	ENST00000299698.11	missense	S836L	ENST00000299698.11:A2ML1:A8K2U0:missense:S836L:C2507T; ENST00000539547.5:A2ML1:(na):missense:S345L:C1034T	http://www.cravat.us/MuPIT_Interactive?gm=chr12:8852253	A2ML1	1	S1	SBS2_A2ML1
-7	chr1	3860425	C	T	Y	DFFB	ENST00000625756.2	missense	R83C	ENST00000338895.7:DFFB:B4DZS0:intron:(na):(na); ENST00000341385.4:DFFB:A0A0B4J1S5:intron:(na):(na); ENST00000378209.7:DFFB:O76075:intron:(na):(na); ENST00000625756.2:DFFB:G3XAD0:missense:R83C:C247T	http://www.cravat.us/MuPIT_Interactive?gm=chr1:3860425	DFFB	1	S1	DFFB
+Variant Annotation																MuPIT	
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Link	Hugo
+1	chr1	1719358	A	G		Yes	CDK11A	ENST00000404249.8	missense_variant	c.325T>C	p.Cys109Arg	ENST00000356200.7:CDK11A::missense_variant:p.Cys75Arg:c.223T>C; ENST00000357760.6:CDK11A::missense_variant:p.Trp109Arg:c.325T>C; ENST00000358779.9:CDK11A:Q9UQ88:missense_variant:p.Trp109Arg:c.325T>C; ENST00000378633.5:CDK11A:Q9UQ88:missense_variant:p.Trp109Arg:c.325T>C; ENST00000378638.6:CDK11A::missense_variant:p.Cys75Arg:c.223T>C; ENST00000404249.8:CDK11A:Q9UQ88:missense_variant:p.Cys109Arg:c.325T>C; ENST00000460465.5:CDK11A::missense_variant,NMD_transcript_variant:p.Cys109Arg:c.325T>C; ENST00000509982.5:CDK11A::missense_variant,NMD_transcript_variant:p.Cys109Arg:c.325T>C; ENST00000598846.1:AL031282.2::lnc_RNA::	1	S1	CDK11A	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719358	CDK11A
+2	chr1	1719393	A	G		Yes	CDK11A	ENST00000404249.8	missense_variant	c.290T>C	p.Val97Ala	ENST00000356200.7:CDK11A::missense_variant:p.Val63Ala:c.188T>C; ENST00000357760.6:CDK11A::missense_variant:p.Val97Ala:c.290T>C; ENST00000358779.9:CDK11A:Q9UQ88:missense_variant:p.Val97Ala:c.290T>C; ENST00000378633.5:CDK11A:Q9UQ88:missense_variant:p.Val97Ala:c.290T>C; ENST00000378638.6:CDK11A::missense_variant:p.Val63Ala:c.188T>C; ENST00000404249.8:CDK11A:Q9UQ88:missense_variant:p.Val97Ala:c.290T>C; ENST00000460465.5:CDK11A::missense_variant,NMD_transcript_variant:p.Val97Ala:c.290T>C; ENST00000509982.5:CDK11A::missense_variant,NMD_transcript_variant:p.Val97Ala:c.290T>C; ENST00000598846.1:AL031282.2::lnc_RNA::	1	S2	CDK11A	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719393	CDK11A
+3	chr1	1719406	G	A		Yes	CDK11A	ENST00000404249.8	missense_variant	c.277C>T	p.Arg93Trp	ENST00000356200.7:CDK11A::missense_variant:p.Arg59Trp:c.175C>T; ENST00000357760.6:CDK11A::missense_variant:p.Arg93Trp:c.277C>T; ENST00000358779.9:CDK11A:Q9UQ88:missense_variant:p.Arg93Trp:c.277C>T; ENST00000378633.5:CDK11A:Q9UQ88:missense_variant:p.Arg93Trp:c.277C>T; ENST00000378638.6:CDK11A::missense_variant:p.Arg59Trp:c.175C>T; ENST00000404249.8:CDK11A:Q9UQ88:missense_variant:p.Arg93Trp:c.277C>T; ENST00000460465.5:CDK11A::missense_variant,NMD_transcript_variant:p.Arg93Trp:c.277C>T; ENST00000509982.5:CDK11A::missense_variant,NMD_transcript_variant:p.Arg93Trp:c.277C>T; ENST00000598846.1:AL031282.2::lnc_RNA::	1	S3	CDK11A	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719406	CDK11A
+4	chr7	27199497	C	G		Yes	HOXA13	ENST00000649031.1	missense_variant	c.581G>C	p.Cys194Ser	ENST00000421733.1:HOTTIP::intron_variant,lnc_RNA::; ENST00000472494.1:HOTTIP::2kb_upstream_variant,lnc_RNA::; ENST00000605136.6:HOTTIP::intron_variant,lnc_RNA::; ENST00000620415.1:AC004080.9::2kb_upstream_variant,misc_RNA::; ENST00000649031.1:HOXA13:P31271:missense_variant:p.Cys194Ser:c.581G>C	1	S1	SBS_HOXA13		
+5	chr12	8845496	A	T		Yes	A2ML1	ENST00000299698.12	stop_gained	c.1531A>T	p.Lys511Ter	ENST00000299698.12:A2ML1:A8K2U0:stop_gained:p.Lys511Ter:c.1531A>T; ENST00000539547.5:A2ML1:A8K2U0:stop_gained:p.Lys20Ter:c.58A>T; ENST00000540049.1:A2ML1::processed_transcript::	1	S1	SBS1_A2ML1	http://www.cravat.us/MuPIT_Interactive?gm=chr12:8845496	A2ML1
+6	chr12	8852253	C	T		Yes	A2ML1	ENST00000299698.12	missense_variant	c.2507C>T	p.Ser836Leu	ENST00000299698.12:A2ML1:A8K2U0:missense_variant:p.Ser836Leu:c.2507C>T; ENST00000539547.5:A2ML1:A8K2U0:missense_variant:p.Ser345Leu:c.1034C>T	1	S1	SBS2_A2ML1	http://www.cravat.us/MuPIT_Interactive?gm=chr12:8852253	A2ML1
+7	chr1	3860425	C	T			DFFB	ENST00000378209.7	intron_variant	c.241+1581C>T		ENST00000338895.7:DFFB::intron_variant::c.263+1559C>T; ENST00000339350.7:DFFB:O76075:intron_variant,NMD_transcript_variant::c.241+1581C>T; ENST00000341385.4:DFFB::intron_variant::c.248+1574C>T; ENST00000378206.5:DFFB::intron_variant,NMD_transcript_variant::c.241+1581C>T; ENST00000378209.7:DFFB:O76075:intron_variant::c.241+1581C>T; ENST00000468793.5:DFFB::intron_variant,NMD_transcript_variant::c.263+1559C>T; ENST00000475969.5:DFFB::intron_variant,NMD_transcript_variant::c.263+1559C>T; ENST00000477548.5:DFFB::missense_variant,NMD_transcript_variant:p.Arg83Cys:c.247C>T; ENST00000491998.5:DFFB:O76075:intron_variant,NMD_transcript_variant::c.241+1581C>T; ENST00000625756.2:DFFB::missense_variant:p.Arg83Cys:c.247C>T	1	S1	DFFB	http://www.cravat.us/MuPIT_Interactive?gm=chr1:3860425	DFFB
 #CRAVAT Report
-#Created at Wednesday 01/09/2019 10:50:24
+#Created at Monday 08/24/2020 13:16:20
 #Report level: gene
 #
-Variant Annotation				MuPIT
-Hugo	Variants in Gene	Sequence Ontology	All Sequence Ontologies	Link
-CDK11A	3	missense	missense(3)	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719358,chr1:1719393,chr1:1719406
-HOXA13	1	missense	missense(1)	
-A2ML1	2	stop gained	stop gained(1),missense(1)	http://www.cravat.us/MuPIT_Interactive?gm=chr12:8852253
-DFFB	1	missense	missense(1)	http://www.cravat.us/MuPIT_Interactive?gm=chr1:3860425
+Variant Annotation						MuPIT
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies	Link
+CDK11A		3	0	missense_variant	missense_variant(3),NMD_transcript_variant(3)	http://www.cravat.us/MuPIT_Interactive?gm=chr1:1719358,chr1:1719393,chr1:1719406
+HOXA13		1	0	missense_variant	missense_variant(1)	
+A2ML1		2	0	stop_gained	missense_variant(1),processed_transcript(1),stop_gained(1)	http://www.cravat.us/MuPIT_Interactive?gm=chr12:8845496,chr12:8852253
+DFFB		0	1	intron_variant	intron_variant(1),missense_variant(1),NMD_transcript_variant(1)	http://www.cravat.us/MuPIT_Interactive?gm=chr1:3860425
 #CRAVAT Report
-#Created at Wednesday 01/09/2019 10:50:24
+#Created at Monday 08/24/2020 13:16:20
 #Report level: sample
 #
 Variant Annotation	
@@ -35,15 +35,15 @@ UID	Sample
 6	S1
 7	S1
 #CRAVAT Report
-#Created at Wednesday 01/09/2019 10:50:24
+#Created at Monday 08/24/2020 13:16:20
 #Report level: mapping
 #
-Variant Annotation		
-Original Line	User Tags	UID
-2	CDK11A	1
-3	CDK11A	2
-4	CDK11A	3
-5	SBS_HOXA13	4
-6	SBS1_A2ML1	5
-7	SBS2_A2ML1	6
-8	DFFB	7
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+2	CDK11A	1	0
+3	CDK11A	2	0
+4	CDK11A	3	0
+5	SBS_HOXA13	4	0
+6	SBS1_A2ML1	5	0
+7	SBS2_A2ML1	6	0
+8	DFFB	7	0

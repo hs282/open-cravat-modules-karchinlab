@@ -25,9 +25,10 @@ output_columns:
   type: string
   width: 160
 tags:
+- variants
 - cancer
-- multiplex assays
-title: BRCA1 Multiplex Assay
+- functional studies
+title: BRCA1 Saturation Genome Editing Scores
 type: annotator
 version: 2019.05.13
 requires:

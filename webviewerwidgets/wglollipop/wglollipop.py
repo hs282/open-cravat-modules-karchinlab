@@ -1,9 +1,9 @@
-import aiosqlite3
+import aiosqlite
 import os
 
 async def make_db ():
     dbpath = 'wglollipop.sqlite'
-    conn = await aiosqlite3.connect(dbpath)
+    conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
     table_name = 'variant'
     sql = 'drop table if exists ' + table_name
@@ -22,6 +22,8 @@ async def make_db ():
     await cursor.execute(sql)
     sql = 'create index ' + table_name + '_idx0 on ' + table_name + ' (hugo)'
     await cursor.execute(sql)
+    await cursor.close()
+    await conn.close()
     
     # Next steps.
     # .separator "\t"
@@ -36,7 +38,7 @@ async def get_data (queries):
     hugo = queries['hugo']
     dbpath = os.path.join(os.path.dirname(__file__), 'data',
                           'wglollipop.sqlite')
-    conn = await aiosqlite3.connect(dbpath)
+    conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
     
     ret = {}
@@ -101,4 +103,6 @@ async def get_data (queries):
             sorted(domains[data_source], key=lambda x: x['start'])
     ret['domains'] = domains
     ret['hugo'] = hugo
+    await cursor.close()
+    await conn.close()
     return ret

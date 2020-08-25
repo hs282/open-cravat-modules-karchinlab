@@ -1,4 +1,4 @@
-import aiosqlite3
+import aiosqlite
 
 async def get_data (queries):
     ret = {}
@@ -7,7 +7,7 @@ async def get_data (queries):
         tab = queries['tab']
         rowkey = queries['rowkey']
         note = queries['note'].replace('"', "'")
-        conn = await aiosqlite3.connect(dbpath)
+        conn = await aiosqlite.connect(dbpath)
         c = await conn.cursor()
         if tab == 'variant':
             q = 'update {} set base__note="{}" where base__uid={}'.format(

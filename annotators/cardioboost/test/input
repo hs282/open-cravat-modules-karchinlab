@@ -1,0 +1,7 @@
+#Chrom	Position	Strand	Ref Base	Alt Base	Sample Id	Tag
+chr1	156114922	+	G	A	s0
+chr3	38550344	+	T	A	s1
+chr3	38550625	+	A	G	s2
+chr19	46609149	+	A	C	s3
+chr15	63062236	+	T	G	s4
+chr1	817186	+	G	A	s5

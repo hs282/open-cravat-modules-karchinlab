@@ -1,29 +1,31 @@
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:18
+#Created at Tuesday 07/14/2020 15:46:29
 #Report level: variant
 #
-Variant Annotation															Variant Metadata
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	Sample Count	Samples	Tags	Zygosity
-1	chr1	752566	G	A								0		rs3094315	hom
-2	chr1	752721	A	T								0		rs3131972	het
-3	chr1	752721	A	G								0		rs3131972	het
-4	chr1	776546	A	G								0		rs12124819	het
-5	chr1	800007	T	C								0		rs6681049	het
-6	chr1	800007	T	A								0		rs6681049	het
-7	chr17	838555	C	G			NXN	ENST00000336868.7	intron		ENST00000336868.7:NXN:Q6DKJ4:intron:(na):(na); ENST00000537628.6:NXN:A0A0C4DGI2:intron:(na):(na); ENST00000575801.5:NXN:(na):intron:(na):(na)	0		rs1234	hom
-8	chr10	846808	G	C			LARP4B	ENST00000316157.7	intron		ENST00000316157.7:LARP4B:Q92615:intron:(na):(na); ENST00000612396.4:LARP4B:Q92615:intron:(na):(na)	0		rs1234	het
-9	chrX	854250	G	A								0		rs1234	hom
-10	chrY	854250	A	T								0		rs1234	het
+Variant Annotation																Hg19		Variant Metadata
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Chrom	Position	Zygosity
+1	chr1	817186	G	A			FAM87B	ENST00000326734.2	lnc_RNA			ENST00000326734.2:FAM87B::2kb_upstream_variant,lnc_RNA::	0		rs3094315	chr1	752566	hom
+2	chr1	817341	A	T			FAM87B	ENST00000326734.2	lnc_RNA			ENST00000326734.2:FAM87B::2kb_upstream_variant,lnc_RNA::	0		rs3131972	chr1	752721	het
+3	chr1	817341	A	G			FAM87B	ENST00000326734.2	lnc_RNA			ENST00000326734.2:FAM87B::2kb_upstream_variant,lnc_RNA::	0		rs3131972	chr1	752721	het
+4	chr1	841166	A	G			LINC01128	ENST00000415295.1	lnc_RNA			ENST00000415295.1:LINC01128::intron_variant,lnc_RNA::; ENST00000416570.5:LINC01128::intron_variant,lnc_RNA::; ENST00000441765.6:LINC01128::intron_variant,lnc_RNA::; ENST00000445118.7:LINC01128::intron_variant,lnc_RNA::; ENST00000448975.6:LINC01128::intron_variant,lnc_RNA::; ENST00000449005.6:LINC01128::intron_variant,lnc_RNA::; ENST00000608189.5:LINC01128::intron_variant,lnc_RNA::; ENST00000609009.6:LINC01128::intron_variant,lnc_RNA::; ENST00000609139.6:LINC01128::intron_variant,lnc_RNA::; ENST00000610067.6:LINC01128::intron_variant,lnc_RNA::; ENST00000622921.1:LINC01128::intron_variant,lnc_RNA::; ENST00000623070.4:LINC01128::intron_variant,lnc_RNA::; ENST00000623808.3:LINC01128::intron_variant,lnc_RNA::; ENST00000624927.3:LINC01128::intron_variant,lnc_RNA::; ENST00000657175.1:LINC01128::intron_variant,lnc_RNA::; ENST00000657837.1:LINC01128::intron_variant,lnc_RNA::; ENST00000658846.1:LINC01128::intron_variant,lnc_RNA::; ENST00000659124.1:LINC01128::intron_variant,lnc_RNA::; ENST00000660797.1:LINC01128::intron_variant,lnc_RNA::; ENST00000661237.1:LINC01128::intron_variant,lnc_RNA::; ENST00000666741.1:LINC01128::intron_variant,lnc_RNA::; ENST00000667414.1:LINC01128::intron_variant,lnc_RNA::; ENST00000668541.1:LINC01128::intron_variant,lnc_RNA::; ENST00000669922.1:LINC01128::intron_variant,lnc_RNA::; ENST00000670780.1:LINC01128::intron_variant,lnc_RNA::; ENST00000670824.1:LINC01128::intron_variant,lnc_RNA::	0		rs12124819	chr1	776546	het
+5	chr1	864627	T	C			AL669831.7	ENST00000661463.1	lnc_RNA			ENST00000661463.1:AL669831.7::intron_variant,lnc_RNA::; ENST00000671208.1:AL669831.7::intron_variant,lnc_RNA::	0		rs6681049	chr1	800007	het
+6	chr1	864627	T	A			AL669831.7	ENST00000661463.1	lnc_RNA			ENST00000661463.1:AL669831.7::intron_variant,lnc_RNA::; ENST00000671208.1:AL669831.7::intron_variant,lnc_RNA::	0		rs6681049	chr1	800007	het
+7	chr17	935315	C	G			NXN	ENST00000336868.8	intron_variant	c.360+44004G>C		ENST00000336868.8:NXN:Q6DKJ4:intron_variant::c.360+44004G>C; ENST00000576991.1:NXN::2kb_upstream_variant,processed_transcript::	0		rs1234	chr17	838555	hom
+8	chr10	800868	G	C									0		rs1234	chr10	846808	het
+9	chrX	893515	G	A									0		rs1234	chrX	854250	hom
+10	chrY	943515	A	T									0		rs1234	chrY	854250	het
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:18
+#Created at Tuesday 07/14/2020 15:46:29
 #Report level: gene
 #
 Variant Annotation					
-Hugo	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
-NXN		0	1	intron	intron(0)
-LARP4B		0	1	intron	intron(0)
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+FAM87B		0	3	lnc_RNA	lnc_RNA(0)
+LINC01128		0	1	lnc_RNA	intron_variant(0),lnc_RNA(0)
+AL669831.7		0	2	lnc_RNA	intron_variant(0),lnc_RNA(0)
+NXN		0	1	intron_variant	intron_variant(0),processed_transcript(0)
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:18
+#Created at Tuesday 07/14/2020 15:46:29
 #Report level: sample
 #
 Variant Annotation		
@@ -39,7 +41,7 @@ UID	Sample	Zygosity
 9		hom
 10		het
 #CRAVAT Report
-#Created at Friday 04/24/2020 18:34:18
+#Created at Tuesday 07/14/2020 15:46:29
 #Report level: mapping
 #
 Variant Annotation			

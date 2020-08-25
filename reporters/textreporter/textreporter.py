@@ -15,6 +15,7 @@ class Reporter(CravatReport):
     
     def end (self):
         self.wf.close()
+        return self.savepath
         
     def write_preface (self, level): 
         lines = ['CRAVAT Report', 

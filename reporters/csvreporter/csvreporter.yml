@@ -1,8 +1,8 @@
 title: CSV Reporter
-version: 1.0.9
+version: 2.0.0
 type: reporter
 description: CSV format text file reporter
-requires_opencravat: '>=1.8.1'
+requires_opencravat: '>=2.0.2'
 output_filename_schema:
 - '{run_name}.csv.zip'
 developer:
@@ -13,6 +13,7 @@ developer:
   citation: ''
 hidden: false
 release_note:
+  2.0.0: returns zip file path.
   1.0.9: for oc 1.8.1 and new hg38 2nd
   1.0.8: hidden true
   1.0.7: added column description header.

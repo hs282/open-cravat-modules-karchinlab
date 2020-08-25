@@ -22,10 +22,12 @@ class Reporter(CravatReport):
     def end (self):
         if self.wf is not None:
             self.wf.close()
-        zf = zipfile.ZipFile(self.filename_prefix + '.tsv.zip', mode='w', compression=zipfile.ZIP_DEFLATED)
+        zipfile_path = self.filename_prefix + '.tsv.zip'
+        zf = zipfile.ZipFile(zipfile_path, mode='w', compression=zipfile.ZIP_DEFLATED)
         for filename in self.filenames:
             zf.write(filename, os.path.relpath(filename, start=os.path.dirname(filename)))
         zf.close()
+        return zipfile_path
         
     def write_preface (self, level): 
         if self.wf is not None:

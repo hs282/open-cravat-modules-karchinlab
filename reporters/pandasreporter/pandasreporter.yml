@@ -1,0 +1,15 @@
+title: pandas Reporter
+version: 1.0.1
+type: reporter
+description: Python pandas DataFrame reporter
+requires_opencravat: '>=1.8.1'
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+release_note:
+  1.0.0: Initial release
+tags:
+- reporters

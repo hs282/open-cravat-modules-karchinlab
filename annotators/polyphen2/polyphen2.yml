@@ -1,10 +1,8 @@
 title: PolyPhen-2
 version: 1.0.0
 datasource: '2'
-
 type: annotator
 level: variant
-
 output_columns:
 - name: uniprot
   title: Uniprot
@@ -13,70 +11,89 @@ output_columns:
 - name: hdiv_score
   title: HDIV Raw Score
   type: string
-  desc: PolyPhen-2 score based on HumDiv. The score ranges from 0 to 1. Multiple entries separated by ";", corresponding to Uniprot ID.
+  desc: PolyPhen-2 score based on HumDiv. The score ranges from 0 to 1. Multiple entries
+    separated by ";", corresponding to Uniprot ID.
   width: 72
   hidden: true
 - name: hdiv_rank
   title: HDIV Rank Score
   type: float
-  desc: PolyPhen-2 HDIV scores were first ranked among all HDIV scores in dbNSFP. The rankscore is the ratio of the rank the score over the total number of the scores in dbNSFP. If there are multiple scores, only the most damaging rankscore is presented.
+  desc: PolyPhen-2 HDIV scores were first ranked among all HDIV scores in dbNSFP.
+    The rankscore is the ratio of the rank the score over the total number of the
+    scores in dbNSFP. If there are multiple scores, only the most damaging rankscore
+    is presented.
   width: 72
   hidden: false
 - name: hdiv_pred
   title: HDIV Prediction
   type: string
-  desc: PolyPhen-2 prediction based on HumDiv, "D" ("probably damaging", HDIV Raw score in [0.957,1] or rankscore in [0.55859,0.91137]), "P" ("possibly damaging", HDIV Raw score in [0.454,0.956] or rankscore in [0.37043,0.55681]) and "B" ("benign", HDIV Raw score in [0,0.452] or rankscore in [0.03061,0.36974]). Score cutoff for binary classification is 0.5 for HDIV score or 0.38028 for rankscore, i.e. the prediction is "neutral" if the HDIV score is smaller than 0.5, and "deleterious" if the HDIV score is larger than 0.5. Multiple entries are separated by ";", corresponding to Uniprot ID.
+  desc: PolyPhen-2 prediction based on HumDiv, "D" ("probably damaging", HDIV Raw
+    score in [0.957,1] or rankscore in [0.55859,0.91137]), "P" ("possibly damaging",
+    HDIV Raw score in [0.454,0.956] or rankscore in [0.37043,0.55681]) and "B" ("benign",
+    HDIV Raw score in [0,0.452] or rankscore in [0.03061,0.36974]). Score cutoff for
+    binary classification is 0.5 for HDIV score or 0.38028 for rankscore, i.e. the
+    prediction is "neutral" if the HDIV score is smaller than 0.5, and "deleterious"
+    if the HDIV score is larger than 0.5. Multiple entries are separated by ";", corresponding
+    to Uniprot ID.
   width: 65
   hidden: true
 - name: hvar_score
   title: HVAR Raw Score
   type: string
-  desc: PolyPhen-2 score based on HumVar. The score ranges from 0 to 1. Multiple entries separated by ";", corresponding to Uniprot ID.
+  desc: PolyPhen-2 score based on HumVar. The score ranges from 0 to 1. Multiple entries
+    separated by ";", corresponding to Uniprot ID.
   width: 72
   hidden: true
 - name: hvar_rank
   title: HVAR Rank Score
   type: float
-  desc: PolyPhen-2 HVAR scores were first ranked among all HVAR scores in dbNSFP. The rankscore is the ratio of the rank the score over the total number of the scores in dbNSFP. If there are multiple scores, only the most damaging (largest) rankscore is presented.
+  desc: PolyPhen-2 HVAR scores were first ranked among all HVAR scores in dbNSFP.
+    The rankscore is the ratio of the rank the score over the total number of the
+    scores in dbNSFP. If there are multiple scores, only the most damaging (largest)
+    rankscore is presented.
   width: 72
   hidden: false
 - name: hvar_pred
   title: HVAR Prediction
   type: string
-  desc: PolyPhen-2 prediction based on HumVar, "D" ("probably damaging", HVAR Raw score in [0.909,1] or rankscore in [0.65694,0.97581]), "P" ("possibly damaging", HVAR Raw score in [0.447,0.908] or rankscore in [0.47121,0.65622]) and "B" ("benign", HVAR Raw score in [0,0.446] or rankscore in [0.01493,0.47076]). Score cutoff for binary classification is 0.5 for HVAR score or 0.48762 for rankscore, i.e. the prediction is "neutral" if the HVAR score is smaller than 0.5, and "deleterious" if the HVAR score is larger than 0.5. Multiple entries are separated by ";", corresponding to Uniprot ID.
+  desc: PolyPhen-2 prediction based on HumVar, "D" ("probably damaging", HVAR Raw
+    score in [0.909,1] or rankscore in [0.65694,0.97581]), "P" ("possibly damaging",
+    HVAR Raw score in [0.447,0.908] or rankscore in [0.47121,0.65622]) and "B" ("benign",
+    HVAR Raw score in [0,0.446] or rankscore in [0.01493,0.47076]). Score cutoff for
+    binary classification is 0.5 for HVAR score or 0.48762 for rankscore, i.e. the
+    prediction is "neutral" if the HVAR score is smaller than 0.5, and "deleterious"
+    if the HVAR score is larger than 0.5. Multiple entries are separated by ";", corresponding
+    to Uniprot ID.
   width: 65
   hidden: true
-
-description: PolyPhen-2 (Polymorphism Phenotyping v2) is a tool which predicts possible impact of an amino acid substitution on the structure and function of a human protein using straightforward physical and comparative considerations
-
+description: PolyPhen-2 (Polymorphism Phenotyping v2) is a tool which predicts possible
+  impact of an amino acid substitution on the structure and function of a human protein
+  using straightforward physical and comparative considerations
 developer:
   name: Ivan A Adzhubei
   organization: Brigham and Women's Hospital
   email: iadzhubey@rics.bwh.harvard.edu
   website: http://genetics.bwh.harvard.edu/pph2/
-  citation: Adzhubei IA, Schmidt S, Peshkin L, Ramensky VE, Gerasimova A, Bork P, Kondrashov AS, Sunyaev SR. Nat Methods 7(4):248-249 (2010).
-
+  citation: Adzhubei IA, Schmidt S, Peshkin L, Ramensky VE, Gerasimova A, Bork P,
+    Kondrashov AS, Sunyaev SR. Nat Methods 7(4):248-249 (2010).
 smartfilters:
-  - name: hdiv_rank
-    title: PolyPhen-2 HumDiv Rank Score
-    selector:
-      type: inputFloat
-      defaultValue: 0.95
-    filter:
-      column: polyphen2__hdiv_rank
-      test: greaterThanEq
-      value: ${value}
-  - name: hvar_rank
-    title: PolyPhen-2 HumVar Rank Score
-    selector:
-      type: inputFloat
-      defaultValue: 0.95
-    filter:
-      column: polyphen2__hvar_rank
-      test: greaterThanEq
-      value: ${value}
-    
+- name: hdiv_rank
+  title: PolyPhen-2 HumDiv Rank Score
+  selector:
+    type: inputFloat
+    defaultValue: 0.95
+  filter:
+    column: polyphen2__hdiv_rank
+    test: greaterThanEq
+    value: ${value}
+- name: hvar_rank
+  title: PolyPhen-2 HumVar Rank Score
+  selector:
+    type: inputFloat
+    defaultValue: 0.95
+  filter:
+    column: polyphen2__hvar_rank
+    test: greaterThanEq
+    value: ${value}
 tags:
-- variants
 - variant effect prediction
-- germline

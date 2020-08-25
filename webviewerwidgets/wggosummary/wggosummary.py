@@ -1,4 +1,4 @@
-import aiosqlite3
+import aiosqlite
 import os
 
 async def get_data (queries):
@@ -9,7 +9,7 @@ async def get_data (queries):
     else:
         num_go = 10
 
-    conn = await aiosqlite3.connect(dbpath)
+    conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
 
     hugos = []
@@ -33,7 +33,8 @@ async def get_data (queries):
             query = 'select distinct base__hugo from ' + table
             await cursor.execute(query)
             hugos = [v[0] for v in await cursor.fetchall() if len(v[0].strip()) > 0]
-
+    await cursor.close()
+    await conn.close()
     '''
     query = 'select name from sqlite_master where type="table" and ' +\
         'name="variant"'
@@ -46,9 +47,11 @@ async def get_data (queries):
     '''
 
     if hugos == []:
+        await cursor.close()
+        await conn.close()
         return response
 
-    conn = await aiosqlite3.connect(os.path.join(os.path.dirname(__file__), 
+    conn = await aiosqlite.connect(os.path.join(os.path.dirname(__file__), 
                                         'data', 
                                         'wggosummary.sqlite'))
     cursor = await conn.cursor()
@@ -95,4 +98,6 @@ async def get_data (queries):
 
     response['data'] = data
 
+    await cursor.close()
+    await conn.close()
     return response

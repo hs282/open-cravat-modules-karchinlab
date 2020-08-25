@@ -3,9 +3,9 @@ description: Genome Aggregation Database (gnomAD) is a resource developed by an 
   coalition of investigators, with the goal of aggregating and harmonizing both exome
   and genome sequencing data from a wide variety of large-scale sequencing projects
 developer:
-  citation: Karczewski, Konrad J., et al. 
-    "The Mutational Constraint Spectrum Quantified from Variation in 141,456 Humans." 
-    BioRxiv, Apr. 2020, p. 531210. www.biorxiv.org, doi:10.1101/531210.
+  citation: Karczewski, Konrad J., et al. "The Mutational Constraint Spectrum Quantified
+    from Variation in 141,456 Humans." BioRxiv, Apr. 2020, p. 531210. www.biorxiv.org,
+    doi:10.1101/531210.
   email: ''
   name: Broad Institute
   organization: Broad Institute
@@ -69,12 +69,9 @@ output_columns:
   width: 70
   hidden: true
 tags:
-- variants
-- noncoding
-- germline
-- populations
+- allele frequency
 title: gnomAD3
 type: annotator
 requires:
-  - wggnomad3
+- wggnomad3
 version: 1.0.0

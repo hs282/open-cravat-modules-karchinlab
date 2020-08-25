@@ -18,7 +18,6 @@ output_columns:
   filterable: false
   hidden: false
 tags:
-- genes
 - literature
 title: PubMed
 type: annotator

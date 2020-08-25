@@ -33,7 +33,6 @@ output_columns:
   width: 62
 tags:
 - genes
-- dbnsfp
 title: InterPro
 type: annotator
 version: 71.0.6

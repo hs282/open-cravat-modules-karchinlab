@@ -10,8 +10,7 @@ developer:
     Biology 20.1 (2019): 1-14.'
 level: variant
 tags:
-- variants
-- noncoding
+- non coding
 title: Segway
 type: group
 version: 1.0.0

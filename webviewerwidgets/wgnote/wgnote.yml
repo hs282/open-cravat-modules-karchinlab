@@ -12,5 +12,7 @@ tags:
 - notes
 title: Note
 type: webviewerwidget
-requires_opencravat: '>=1.6.0'
-version: 1.0.4
+requires_opencravat: '>=2.0.2'
+version: 2.0.2
+release_note:
+  2.0.2: aiosqlite instead of aiosqlite3

@@ -1,0 +1,17 @@
+title: OMIM
+version: 1.0.0
+type: webviewerwidget
+required_annotator: omim
+description: OMIM webviewer widget
+hidden: true
+requires_opencravat: '>=1.7.0'
+developer:
+  name: Kyle Moad
+  organization: In Silico Solutions
+  email: kmoad@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization widgets
+release_note:
+  1.0.0: Initial release

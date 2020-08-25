@@ -11,12 +11,12 @@ output_columns:
   title: Chemical ID
   type: string
   width: 85
-  link_format: 'https://www.pharmgkb.org/chemical/${PA\d+}'
+  link_format: https://www.pharmgkb.org/chemical/${PA\d+}
   hidden: true
 - name: pmid
   title: Study
   type: string
-  link_format: 'https://www.ncbi.nlm.nih.gov/pubmed/${.*}'
+  link_format: https://www.ncbi.nlm.nih.gov/pubmed/${.*}
   hidden: true
   width: 65
 - name: pheno_cat
@@ -38,19 +38,20 @@ output_columns:
   type: string
   hidden: true
   width: 120
-
 description: Clinically actionable gene-drug associations and genotype-phenotype relationships
-
 developer:
-  name: 'Teri E. Klein'
-  organization: 'Shriram Center for Bioengineering and Chemical Engineering'
-  email: 'feedback@pharmgkb.org'
-  website: 'https://www.pharmgkb.org/'
-  citation: 'M. Whirl-Carrillo, E.M. McDonagh, J. M. Hebert, L. Gong, K. Sangkuhl, C.F. Thorn, R.B. Altman and T.E. Klein. "Pharmacogenomics Knowledge for Personalized Medicine" Clinical Pharmacology & Therapeutics (2012) 92(4): 414-417'
-
+  name: Teri E. Klein
+  organization: Shriram Center for Bioengineering and Chemical Engineering
+  email: feedback@pharmgkb.org
+  website: https://www.pharmgkb.org/
+  citation: 'M. Whirl-Carrillo, E.M. McDonagh, J. M. Hebert, L. Gong, K. Sangkuhl,
+    C.F. Thorn, R.B. Altman and T.E. Klein. "Pharmacogenomics Knowledge for Personalized
+    Medicine" Clinical Pharmacology & Therapeutics (2012) 92(4): 414-417'
 requires:
-  - wgpharmgkb
-
+- wgpharmgkb
 tags:
-  - clinical relevance
-  - variants
+- variants
+- clinical relevance
+- cancer
+- cardiovascular
+- literature

@@ -51,7 +51,6 @@ output_columns:
   hidden: true
 tags:
 - genes
-- dbnsfp
 title: Essential Genes
 type: annotator
 version: 3.5.7

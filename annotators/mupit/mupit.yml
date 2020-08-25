@@ -35,12 +35,8 @@ release_note:
   4.3.0: new gene summary architecture
   4.2.2: data in sync with production MuPIT
 tags:
-- variants
 - genes
-- denovo
-- cancer
-- variant effect prediction
-- protein visualization
+- visualization
 title: MuPIT
 type: annotator
 version: 4.3.1

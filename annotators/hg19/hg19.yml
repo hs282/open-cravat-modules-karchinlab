@@ -3,23 +3,24 @@ version: 1.0.5
 type: annotator
 level: variant
 output_columns:
-  - name: chrom
-    title: Chrom
-    type: string
-  - name: pos
-    title: Position
-    type: int
-    width: 80
+- name: chrom
+  title: Chrom
+  type: string
+- name: pos
+  title: Position
+  type: int
+  width: 80
 description: Input coordinates are mapped to hg19 through liftOver.
 requires_opencravat: '>=1.6.1'
 developer:
-  name: 'Rick Kim'
-  organization: 'In Silico Solutions'
-  email: 'rkim@insilico.us.com'
-  website: 'https://github.com/KarchinLab/open-cravat-modules-karchinlab'
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: https://github.com/KarchinLab/open-cravat-modules-karchinlab
   citation: ''
 release_note:
   1.0.2: fixed test key.
   1.0.1: fix added regarding 0-based mapping.
   1.0.5: documentation update
-
+tags:
+- variants

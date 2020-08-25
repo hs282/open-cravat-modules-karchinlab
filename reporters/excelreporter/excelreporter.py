@@ -33,6 +33,7 @@ class Reporter(CravatReport):
         
     def end (self):
         self.wb.close()
+        return self.savepath
     
     def write_info_sheet (self):
         self.rowno = 0

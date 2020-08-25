@@ -1,24 +1,24 @@
 datasource: v2.0
-description: Discovers new tumor genes in aggregated sequencing data. 
+description: Discovers new tumor genes in aggregated sequencing data.
 developer:
-  citation: 'Detlein, Felix, et al. "Identification of cancer driver genes based on nucleotide context." Nature Genetics 52.2 (2020): 208-218.'
+  citation: 'Detlein, Felix, et al. "Identification of cancer driver genes based on
+    nucleotide context." Nature Genetics 52.2 (2020): 208-218.'
   email: support@cravat.us
-  name: Broad Institute 
-  organization: Broad Institute 
+  name: Broad Institute
+  organization: Broad Institute
   website: http://www.cancer-genes.org
-
 input_format: crg
 level: gene
-
 output_columns:
 - name: No_Cancer_Types
   title: No. of Cancer Types
   type: float
   hidden: false
   width: 120
-  desc: The number of cancer types, in which the genes were found to be significantly mutated. 
+  desc: The number of cancer types, in which the genes were found to be significantly
+    mutated.
 - name: Max_Frequency
-  title: Mutation Frequency 
+  title: Mutation Frequency
   type: float
   hidden: false
   desc: The maximal mutation frequency across the significantly mutated cancer types.
@@ -26,57 +26,50 @@ output_columns:
   title: Best Q Value
   type: float
   hidden: true
-  desc: The best (minimal) q-value returned, or the false discovery rate. 
+  desc: The best (minimal) q-value returned, or the false discovery rate.
 - name: Supporting_Literature
   title: Supporting Literature
   type: string
   hidden: true
   width: 76
-  desc: If this gene was implicated in cancer literature or was identified as significantly mutated for any tumor type in previous computational studies.
+  desc: If this gene was implicated in cancer literature or was identified as significantly
+    mutated for any tumor type in previous computational studies.
 - name: TCGA_Marker_Papers
   title: TCGA Marker Papers
-  link_format: 'https://pubmed.ncbi.nlm.nih.gov/${[^;]+}'
+  link_format: https://pubmed.ncbi.nlm.nih.gov/${[^;]+}
   type: string
   hidden: true
   desc: If the gene reported as significantly mutated in the TCGA marker papers.
 - name: dNdS_Study
   title: dNdS Study
-  link_format: 'https://pubmed.ncbi.nlm.nih.gov/${[^;]+}' 
+  link_format: https://pubmed.ncbi.nlm.nih.gov/${[^;]+}
   type: string
   hidden: true
-  desc: If the gene was identified using the dNdSCV tool (Martincorena et al. Cell 2017).
+  desc: If the gene was identified using the dNdSCV tool (Martincorena et al. Cell
+    2017).
 - name: Tumorportal
   title: Tumor portal
-  link_format: 'https://pubmed.ncbi.nlm.nih.gov/${[^;]+}' 
-  type: string 
+  link_format: https://pubmed.ncbi.nlm.nih.gov/${[^;]+}
+  type: string
   hidden: true
-  desc: If the gene is reported as significantly mutated on tumorportal.org (Lawrence et al. Nature 2014)
+  desc: If the gene is reported as significantly mutated on tumorportal.org (Lawrence
+    et al. Nature 2014)
 - name: Bailey_Database
   title: Bailey Database
-  link_format: 'https://pubmed.ncbi.nlm.nih.gov/${[^;]+}'
+  link_format: https://pubmed.ncbi.nlm.nih.gov/${[^;]+}
   type: string
   hidden: true
   width: 70
-  desc: If the gene reported as significantly mutated in the Bailey study (Bailey et al. Cell 2018).
+  desc: If the gene reported as significantly mutated in the Bailey study (Bailey
+    et al. Cell 2018).
 - name: Cancer_Type
   title: Cancer Type
-  type: string 
+  type: string
   hidden: true
   desc: The specific cancer types that each gene effects.
-
 tags:
 - genes
 - cancer
-
 title: Mutpanning
 type: annotator
 version: 1.0.0
-
-
-
-
-
-
-
-
-

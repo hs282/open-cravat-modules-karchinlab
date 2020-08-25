@@ -28,5 +28,6 @@ groups:
 tags:
 - variants
 - noncoding
+- genomic features
 requires:
 - segway_group

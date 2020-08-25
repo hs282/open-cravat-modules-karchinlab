@@ -1,0 +1,40 @@
+#CRAVAT Report
+#Created at Wednesday 08/05/2020 09:50:20
+#Report level: variant
+#
+Variant Annotation																Arrhythmia Channelopathy Variants									
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Total Carriers	LQT3	BRS1	unaffected	other	BRS1 Penetrance	LQT3 Penetrance	Function	BRS1 Hotspot	Variant Summary
+1	chr3	38581155	G	A		Yes	SCN5A	ENST00000333535.9	missense_variant	c.3004C>T	p.Pro1002Ser	ENST00000333535.9:SCN5A:Q14524:missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000413689.6:SCN5A::missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000414099.6:SCN5A::missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000423572.6:SCN5A:Q14524:missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000425664.5:SCN5A::missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000449557.6:SCN5A::missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000450102.6:SCN5A::missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000451551.6:SCN5A::missense_variant:p.Pro1002Ser:c.3004C>T; ENST00000455624.6:SCN5A::missense_variant:p.Pro1002Ser:c.3004C>T	1	s0		6.0	0.0	0.0	0.0	0.0	0.0425705318737867	0.0395846852693056		Non_Hotspot	P1002S
+2	chr3	38581143	C	A		Yes	SCN5A	ENST00000413689.6	missense_variant	c.3016G>T	p.Ala1006Ser	ENST00000333535.9:SCN5A:Q14524:missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000413689.6:SCN5A::missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000414099.6:SCN5A::missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000423572.6:SCN5A:Q14524:missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000425664.5:SCN5A::missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000449557.6:SCN5A::missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000450102.6:SCN5A::missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000451551.6:SCN5A::missense_variant:p.Ala1006Ser:c.3016G>T; ENST00000455624.6:SCN5A::missense_variant:p.Ala1006Ser:c.3016G>T	1	s1		1.0	0.0	0.0	0.0	0.0	0.0682427050909102	0.0861987753179463		Non_Hotspot	A1006S
+3	chr3	38579381	A	T		Yes	SCN5A	ENST00000333535.9	missense_variant	c.3343T>A	p.Trp1115Arg	ENST00000333535.9:SCN5A:Q14524:missense_variant:p.Trp1115Arg:c.3343T>A; ENST00000413689.6:SCN5A::missense_variant:p.Trp1115Arg:c.3343T>A; ENST00000414099.6:SCN5A::missense_variant:p.Trp1115Arg:c.3343T>A; ENST00000423572.6:SCN5A:Q14524:missense_variant:p.Trp1114Arg:c.3340T>A; ENST00000425664.5:SCN5A::missense_variant:p.Trp1115Arg:c.3343T>A; ENST00000449557.6:SCN5A::intron_variant::c.3228+1550T>A; ENST00000450102.6:SCN5A::intron_variant::c.3228+1550T>A; ENST00000451551.6:SCN5A::intron_variant::c.3228+1550T>A; ENST00000455624.6:SCN5A::missense_variant:p.Trp1114Arg:c.3340T>A	1	s2		1.0	0.0	0.0	0.0	0.0	0.0354999359944192	0.0861987753179463		Non_Hotspot	W1115R
+4	chr3	38630376	G	T		Yes	SCN5A	ENST00000333535.9	missense_variant	c.327C>A	p.Asn109Lys	ENST00000333535.9:SCN5A:Q14524:missense_variant:p.Asn109Lys:c.327C>A; ENST00000413689.6:SCN5A::missense_variant:p.Asn109Lys:c.327C>A; ENST00000414099.6:SCN5A::missense_variant:p.Asn109Lys:c.327C>A; ENST00000423572.6:SCN5A:Q14524:missense_variant:p.Asn109Lys:c.327C>A; ENST00000425664.5:SCN5A::missense_variant:p.Asn109Lys:c.327C>A; ENST00000449557.6:SCN5A::missense_variant:p.Asn109Lys:c.327C>A; ENST00000450102.6:SCN5A::missense_variant:p.Asn109Lys:c.327C>A; ENST00000451551.6:SCN5A::missense_variant:p.Asn109Lys:c.327C>A; ENST00000455624.6:SCN5A::missense_variant:p.Asn109Lys:c.327C>A; ENST00000612060.1:SCN5A::missense_variant:p.Asn109Lys:c.327C>A	1	s3		4.0	0.0	3.0	0.0	0.0	0.18194825517119886	0.0505106265525807	Normal	Mild_Hotspot	N109K
+5	chr3	38575310	C	A		Yes	SCN5A	ENST00000333535.9	missense_variant	c.3653G>T	p.Ser1218Ile	ENST00000333535.9:SCN5A:Q14524:missense_variant:p.Ser1218Ile:c.3653G>T; ENST00000413689.6:SCN5A::missense_variant:p.Ser1218Ile:c.3653G>T; ENST00000414099.6:SCN5A::missense_variant:p.Ser1218Ile:c.3653G>T; ENST00000423572.6:SCN5A:Q14524:missense_variant:p.Ser1217Ile:c.3650G>T; ENST00000425664.5:SCN5A::missense_variant:p.Ser1218Ile:c.3653G>T; ENST00000449557.6:SCN5A::missense_variant:p.Ser1164Ile:c.3491G>T; ENST00000450102.6:SCN5A::missense_variant:p.Ser1164Ile:c.3491G>T; ENST00000451551.6:SCN5A::missense_variant:p.Ser1164Ile:c.3491G>T; ENST00000455624.6:SCN5A::missense_variant:p.Ser1217Ile:c.3650G>T	1	s4		3.0	0.0	3.0	0.0	0.0	0.33374973356498805	0.058597502401537	LOF	Mild_Hotspot	S1218I
+#CRAVAT Report
+#Created at Wednesday 08/05/2020 09:50:20
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+SCN5A		5	0	missense_variant	intron_variant(1),missense_variant(5)
+#CRAVAT Report
+#Created at Wednesday 08/05/2020 09:50:20
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+#CRAVAT Report
+#Created at Wednesday 08/05/2020 09:50:20
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0

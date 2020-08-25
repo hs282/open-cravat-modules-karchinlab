@@ -1,0 +1,43 @@
+#CRAVAT Report
+#Created at Tuesday 07/28/2020 13:49:45
+#Report level: variant
+#
+Variant Annotation																OMIM
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Entry ID
+1	chr6	1610512	C	T		Yes	FOXC1	ENST00000645831.2	stop_gained	c.67C>T	p.Gln23Ter	ENST00000645831.2:FOXC1:Q12948:stop_gained:p.Gln23Ter:c.67C>T	1	s0		602482
+2	chr6	5369046	A	C		Yes	FARS2	ENST00000324331.10	missense_variant	c.476A>C	p.His159Pro	ENST00000274680.8:FARS2:O95363:missense_variant:p.His159Pro:c.476A>C; ENST00000324331.10:FARS2:O95363:missense_variant:p.His159Pro:c.476A>C; ENST00000648580.1:FARS2::missense_variant,NMD_transcript_variant:p.His159Pro:c.476A>C	1	s1		614946; 617046
+3	chr2	70960986	T	G		Yes	ATP6V1B1	ENST00000234396.10	missense_variant	c.651T>G	p.His217Gln	ENST00000234396.10:ATP6V1B1:P15313:missense_variant:p.His217Gln:c.651T>G; ENST00000412314.5:ATP6V1B1::missense_variant:p.His217Gln:c.651T>G; ENST00000606025.5:AC007040.2::intron_variant::c.476-18553A>C	1	s3		267300
+4	chr16	70252755	A	G		Yes	AARS1	ENST00000261772.12	missense_variant	c.2873T>C	p.Phe958Ser	ENST00000261772.12:AARS1:P49588:missense_variant:p.Phe958Ser:c.2873T>C; ENST00000435634.3:EXOSC6:Q5RKV6:2kb_upstream_variant::c.-855T>C	1	s4		616339
+5	chr16	70255828	C	T		Yes	AARS1	ENST00000261772.12	missense_variant	c.2186G>A	p.Arg729Gln	ENST00000261772.12:AARS1:P49588:missense_variant:p.Arg729Gln:c.2186G>A; ENST00000564359.5:AARS1::processed_transcript::	1	s5		613287; 616339
+#CRAVAT Report
+#Created at Tuesday 07/28/2020 13:49:45
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+FOXC1		1	0	stop_gained	stop_gained(1)
+FARS2		1	0	missense_variant	missense_variant(1),NMD_transcript_variant(1)
+ATP6V1B1		1	0	missense_variant	missense_variant(1)
+AARS1		2	0	missense_variant	missense_variant(2),processed_transcript(1)
+#CRAVAT Report
+#Created at Tuesday 07/28/2020 13:49:45
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s3
+4	s4
+5	s5
+#CRAVAT Report
+#Created at Tuesday 07/28/2020 13:49:45
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0

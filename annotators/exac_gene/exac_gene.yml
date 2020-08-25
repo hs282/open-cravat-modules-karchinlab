@@ -19,7 +19,7 @@ output_columns:
 - desc: Probability LoF Intolerance (hom)
   name: exac_prec
   title: pLI (Hom)
-  type: float
+  type: float 
   hidden: true
 - desc: Probability LoF Tolerance (hom & het)
   name: exac_pnull
@@ -91,10 +91,11 @@ output_columns:
   type: string
   width: 70
   hidden: true
+requires_opencravat: '>=2.0.0'
+release-note:
+  0.4.0: updated gene names according to https://www.genenames.org/download/custom/
 tags:
 - genes
-- germline
-- populations
 title: ExAC Gene and CNV
 type: annotator
-version: 0.3.21
+version: 0.4.0

@@ -35,10 +35,7 @@ output_columns:
   width: 90
   filterable: false
 tags:
-- variants
-- germline
 - variant effect prediction
-- dbnsfp
 title: MutPred
 type: annotator
 version: 1.2.6

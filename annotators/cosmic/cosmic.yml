@@ -46,7 +46,7 @@ output_columns:
   width: 100
 tags:
 - variants
-- cancer
+- genes
 title: COSMIC
 type: annotator
 version: 91.0.0

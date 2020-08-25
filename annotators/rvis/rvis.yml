@@ -45,7 +45,6 @@ output_columns:
   desc: Genome-Wide percentile for the ExAC-based RVIS
 tags:
 - genes
-- evolution
 title: RVIS
 type: annotator
 version: 3.0.8

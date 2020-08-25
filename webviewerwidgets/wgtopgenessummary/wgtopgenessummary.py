@@ -1,4 +1,4 @@
-import aiosqlite3
+import aiosqlite
 import os
 
 async def get_data (queries):
@@ -6,16 +6,17 @@ async def get_data (queries):
     dbpath = os.path.join(os.path.dirname(__file__), 
                           'data',
                           'wgtopgenessummary.sqlite')
-    conn = await aiosqlite3.connect(dbpath)
+    conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
     q = 'select hugo, aalen from genelen'
     await cursor.execute(q)
     genelen = {}
     for row in await cursor.fetchall():
         genelen[row[0]] = row[1]
-    
+    await cursor.close()
+    await conn.close()
     dbpath = queries['dbpath']
-    conn = await aiosqlite3.connect(dbpath)
+    conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
 
     # 1 sample?
@@ -25,6 +26,8 @@ async def get_data (queries):
     num_total_sample = (await cursor.fetchone())[0]
     if num_total_sample == 1:
         response = {'data': None}
+        await cursor.close()
+        await conn.close()
         return response
 
     gene_var_perc = {}
@@ -55,5 +58,6 @@ async def get_data (queries):
     response = {'data': []}
     for hugo in sorted_hugos:
         response['data'].append([hugo, genesampleperc[hugo]])
-
+    await cursor.close()
+    await conn.close()
     return response

@@ -27,7 +27,6 @@ output_columns:
   hidden: true
 tags:
 - genes
-- dbnsfp
 title: P(rec)
 type: annotator
 version: 3.5.7

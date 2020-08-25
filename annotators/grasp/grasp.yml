@@ -32,8 +32,7 @@ release_note:
   2.0.3: test key encoded in UTF-8
 tags:
 - variants
-- noncoding
-- germline
+- non coding
 - clinical relevance
 - literature
 title: GRASP
