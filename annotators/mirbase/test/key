@@ -1,0 +1,44 @@
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:30:54
+#Report level: variant
+#
+Variant Annotation																miRBase			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Transcript	Accession ID	Name	Derives From
+1	chr1	17419	G	T			MIR6859-1	ENST00000619216.1	miRNA			ENST00000619216.1:MIR6859-1::miRNA::	1	s0		miRNA	MIMAT0027618	hsa-miR-6859-5p	MI0022705
+2	chr11	57641218	T	G			AP000662.1	ENST00000530595.1	lnc_RNA			ENST00000385274.1:MIR130A::miRNA::; ENST00000528466.1:AP000662.1::intron_variant,lnc_RNA::; ENST00000530595.1:AP000662.1::intron_variant,lnc_RNA::	1	s1		miRNA_primary_transcript	MI0000448	hsa-mir-130a	
+3	chr19	3961444	C	T			DAPK3	ENST00000545797.7	intron_variant	c.630-283G>A		ENST00000301264.7:DAPK3:O43293:intron_variant::c.630-283G>A; ENST00000385000.1:MIR637::miRNA::; ENST00000545797.7:DAPK3:O43293:intron_variant::c.630-283G>A	1	s2		miRNA_primary_transcript	MI0003652	hsa-mir-637	
+4	chr10	101601417	A	C			DPCD	ENST00000370151.9	intron_variant	c.404+81A>C		ENST00000370147.5:DPCD::intron_variant::c.404+81A>C; ENST00000370151.9:DPCD:Q9BVM2:intron_variant::c.404+81A>C; ENST00000475443.1:DPCD::intron_variant,processed_transcript::; ENST00000583596.1:MIR3158-1::miRNA::; ENST00000626968.2:DPCD::intron_variant::c.404+81A>C; ENST00000637571.1:MIR3158-2::miRNA::	1	s3		miRNA_primary_transcript	MI0014186	hsa-mir-3158-1	
+5	chr18	47380505	G	T			MIR4527HG	ENST00000586905.3	lnc_RNA			ENST00000584505.1:MIR4527::miRNA::; ENST00000586905.3:MIR4527HG::intron_variant,lnc_RNA::; ENST00000598649.1:MIR4527HG::intron_variant,lnc_RNA::	1	s4		miRNA_primary_transcript	MI0016894	hsa-mir-4527	
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:30:54
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+MIR6859-1		0	1	miRNA	miRNA(1)
+AP000662.1		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+DAPK3		0	1	intron_variant	intron_variant(1)
+DPCD		0	1	intron_variant	intron_variant(1),processed_transcript(1)
+MIR4527HG		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:30:54
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:30:54
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0

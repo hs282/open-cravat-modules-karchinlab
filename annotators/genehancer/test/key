@@ -1,0 +1,44 @@
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:26:39
+#Report level: variant
+#
+Variant Annotation																GeneHancer			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	GeneHancer Type	Score	GeneHancer ID	Gene Targets
+1	chr13	51630578	T	G			WDFY2	ENST00000298125.7	intron_variant	c.138-30018T>G		ENST00000298125.7:WDFY2:Q96P53:intron_variant::c.138-30018T>G	1	s0		Enhancer	1.0	GH13I051630	WDFY2: 10.39, DHRS12: 5.36, ATP5PBP1: 0.29, PIR45932: 0.13
+2	chr17	63664934	A	C			MAP3K3	ENST00000361357.7	intron_variant	c.475-2006A>C		ENST00000361357.7:MAP3K3:Q99759:intron_variant::c.475-2006A>C; ENST00000361733.7:MAP3K3:Q99759:intron_variant::c.382-2006A>C; ENST00000577395.5:MAP3K3::intron_variant::c.382-2006A>C; ENST00000577597.5:MAP3K3::intron_variant,NMD_transcript_variant::c.*207-2006A>C; ENST00000579585.5:MAP3K3:Q99759:intron_variant::c.475-2006A>C; ENST00000584573.5:MAP3K3::intron_variant::c.475-2006A>C	1	s1		Enhancer	0.94	GH17I063664	LIMD2: 12.48, TACO1: 11.06, STRADA: 10.77, ENSG00000125695: 10.75, SMARCD2: 10.55, PSMC5: 4.09, LOC101927898: 0.31, EEF1DP7: 0.31, MAP3K3: 0.26
+3	chr2	23052445	G	T			AC018467.1	ENST00000669447.1	lnc_RNA			ENST00000421581.1:AC018467.1::intron_variant,lnc_RNA::; ENST00000440785.1:AC018467.1::intron_variant,lnc_RNA::; ENST00000669447.1:AC018467.1::intron_variant,lnc_RNA::	1	s2		Enhancer	0.22	GH02I023052	GC02P023058: 0.44, GC02M022971: 0.19, LOC101929251: 0.11
+4	chr7	117827451	T	C			CTTNBP2	ENST00000160373.8	intron_variant	c.190-16462A>G		ENST00000160373.8:CTTNBP2:Q8WZ74:intron_variant::c.190-16462A>G; ENST00000441556.5:CTTNBP2::intron_variant,NMD_transcript_variant::c.190-16462A>G	1	s3		Enhancer	0.97	GH07I117827	CTTNBP2: 22.59, LOC101929527: 0.25, LOC105375469: 0.14
+5	chr13	50411401	G	A			DLEU1	ENST00000475913.5	lnc_RNA			ENST00000461527.6:DLEU1::intron_variant,lnc_RNA::; ENST00000463474.6:DLEU1::intron_variant,lnc_RNA::; ENST00000467721.5:DLEU1::intron_variant,lnc_RNA::; ENST00000468168.5:DLEU1::intron_variant,lnc_RNA::; ENST00000468522.5:DLEU1::intron_variant,lnc_RNA::; ENST00000469095.5:DLEU1::intron_variant,lnc_RNA::; ENST00000469127.5:DLEU1::intron_variant,lnc_RNA::; ENST00000470726.6:DLEU1::intron_variant,lnc_RNA::; ENST00000474630.5:DLEU1::intron_variant,lnc_RNA::; ENST00000475913.5:DLEU1::intron_variant,lnc_RNA::; ENST00000476738.5:DLEU1::intron_variant,lnc_RNA::; ENST00000479420.5:DLEU1::intron_variant,lnc_RNA::; ENST00000480262.2:DLEU1::intron_variant,lnc_RNA::; ENST00000484869.6:DLEU1::intron_variant,lnc_RNA::; ENST00000485007.5:DLEU1::intron_variant,lnc_RNA::; ENST00000490577.5:DLEU1::intron_variant,lnc_RNA::; ENST00000491341.5:DLEU1::intron_variant,lnc_RNA::; ENST00000491482.5:DLEU1::intron_variant,lnc_RNA::; ENST00000491615.5:DLEU1::intron_variant,lnc_RNA::; ENST00000647700.1:DLEU1::intron_variant,lnc_RNA::	1	s4		Enhancer	1.28	GH13I050410	GC13P050412: 550.77, RPL34P26: 11.23, GC13P050408: 0.77, DLEU1: 0.05
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:26:39
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+WDFY2		0	1	intron_variant	intron_variant(1)
+MAP3K3		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1)
+AC018467.1		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+CTTNBP2		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1)
+DLEU1		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:26:39
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+#CRAVAT Report
+#Created at Tuesday 08/25/2020 14:26:39
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
