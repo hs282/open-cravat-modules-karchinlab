@@ -12,6 +12,7 @@ import traceback
 import vcf
 from io import StringIO
 import copy
+from pathlib import Path
 
 class CravatConverter(BaseConverter):
 
@@ -31,6 +32,8 @@ class CravatConverter(BaseConverter):
             {'name':'hap_block','title':'Haplotype block ID','type':'int'},
             {'name':'hap_strand','title':'Haplotype strand ID','type':'int'},
         ]
+        self.ex_info_writer = None
+        self.curvar = None
 
     def check_format(self, f): 
         if f.name.endswith('.vcf'):
@@ -42,8 +45,29 @@ class CravatConverter(BaseConverter):
             return True
 
     def setup(self, f):
-        self.logger = logging.getLogger('cravat.converter')
-        self.input_path = f.name
+        reader = vcf.Reader(f)
+        self.open_extra_info(reader)
+    
+    def open_extra_info(self, reader):
+        if not reader.infos:
+            return
+        self.has_extra_info = True
+        writer_path = Path(self.output_dir)/(self.run_name+'.extra_vcf_info.var')
+        self.ex_info_writer = CravatWriter(str(writer_path))
+        info_cols = [{'name':'uid','title':'UID','type':'int'}]
+        typemap = {'Integer':'int','Float':'float'}
+        for info in reader.infos.values():
+            info_cols.append({
+                'name': info.id,
+                'title': info.id,
+                'desc': info.desc,
+                'type': typemap.get(info.type,'str')
+            })
+        self.ex_info_writer.add_columns(info_cols)
+        self.ex_info_writer.write_definition()
+        self.ex_info_writer.write_meta_line('name', 'extra_vcf_info')
+        self.ex_info_writer.write_meta_line('displayname', 'Extra VCF INFO Annotations')
+
 
     def convert_line(self, l):
         if l.startswith('#'):
@@ -60,7 +84,6 @@ class CravatConverter(BaseConverter):
         self._buffer.write(l)
         self._buffer.seek(0)
         variant = next(self._reader)
-        self.logger.info(str(variant))
         wdict_blanks = {}
         for gtn,alt in enumerate(variant.ALT):
             new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt.sequence)
@@ -73,11 +96,10 @@ class CravatConverter(BaseConverter):
                 'phred': variant.QUAL,
                 'filter': None, #FIXME
             }
-        self.logger.info(wdict_blanks)
         wdicts = []
         for call in variant.samples:
             for gt in call.gt_alleles:
-                if gt == '0':
+                if gt == '0' or gt is None:
                     continue
                 wdict = copy.copy(wdict_blanks[gt])
                 wdict['sample_id'] = call.sample
@@ -88,6 +110,7 @@ class CravatConverter(BaseConverter):
                 wdict['hap_block'] = None #FIXME
                 wdict['hap_strand'] = None #FIXME
                 wdicts.append(wdict)
+        self.curvar = variant
         return wdicts
 
     def trim_variant(self, pos, ref, alt):
@@ -106,3 +129,15 @@ class CravatConverter(BaseConverter):
         ref = ''.join(ref) if ref else '-'
         alt = ''.join(alt) if alt else '-'
         return pos+adj, ref, alt
+
+    def addl_operation_for_unique_variant (self, wdict, wdict_no):
+        if self.ex_info_writer is None:
+            return
+        row_data = {'uid':wdict['uid']}
+        for info_name, info_val in self.curvar.INFO.items():
+            if type(info_val) is list:
+                info_val = info_val[wdict_no]
+            if self._reader.infos[info_name].type not in ('Integer','Float'):
+                info_val = str(info_val)
+            row_data[info_name] = info_val
+        self.ex_info_writer.write_data(row_data)
