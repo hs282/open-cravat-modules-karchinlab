@@ -61,7 +61,7 @@ class CravatConverter(BaseConverter):
                 'name': info.id,
                 'title': info.id,
                 'desc': info.desc,
-                'type': typemap.get(info.type,'str')
+                'type': typemap.get(info.type,'string')
             })
         self.ex_info_writer.add_columns(info_cols)
         self.ex_info_writer.write_definition()
