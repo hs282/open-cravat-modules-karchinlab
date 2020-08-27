@@ -1,20 +1,20 @@
 #CRAVAT Report
-#Created at Friday 08/30/2019 11:51:00
+#Created at Thursday 08/27/2020 02:49:13
 #Report level: variant
 #
-Variant Annotation														
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	Sample Count	Samples	Tags
-1	chr7	117587778	G	A		Yes	CFTR	ENST00000003084.10	missense	G542R	ENST00000003084.10:CFTR:P13569:missense:G542R:G1624A	1	s01	cystic_fibrosis
-2	chr7	117587778	G	T		Yes	CFTR	ENST00000003084.10	stop gained	G542*	ENST00000003084.10:CFTR:P13569:stop gained:G542*:G1624T	1	s01	cystic_fibrosis
+Variant Annotation															
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags
+1	chr7	117587778	G	A		Yes	CFTR	ENST00000003084.11	missense_variant	c.1624G>A	p.Gly542Arg	ENST00000003084.11:CFTR:P13569:missense_variant:p.Gly542Arg:c.1624G>A; ENST00000472848.1:CFTR::2kb_downstream_variant,processed_transcript::; ENST00000647978.1:CFTR::NMD_transcript_variant,3_prime_UTR_variant::c.*1338G>A; ENST00000648260.1:CFTR::intron_variant::c.1402-15048G>A; ENST00000649406.1:CFTR::missense_variant:p.Gly481Arg:c.1441G>A; ENST00000649781.1:CFTR:P13569:missense_variant:p.Gly481Arg:c.1441G>A	1	s01	cystic_fibrosis
+2	chr7	117587778	G	T		Yes	CFTR	ENST00000003084.11	stop_gained	c.1624G>T	p.Gly542Ter	ENST00000003084.11:CFTR:P13569:stop_gained:p.Gly542Ter:c.1624G>T; ENST00000472848.1:CFTR::2kb_downstream_variant,processed_transcript::; ENST00000647978.1:CFTR::NMD_transcript_variant,3_prime_UTR_variant::c.*1338G>T; ENST00000648260.1:CFTR::intron_variant::c.1402-15048G>T; ENST00000649406.1:CFTR::stop_gained:p.Gly481Ter:c.1441G>T; ENST00000649781.1:CFTR:P13569:stop_gained:p.Gly481Ter:c.1441G>T	1	s01	cystic_fibrosis
 #CRAVAT Report
-#Created at Friday 08/30/2019 11:51:00
+#Created at Thursday 08/27/2020 02:49:13
 #Report level: gene
 #
 Variant Annotation					
-Hugo	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
-CFTR		2	0	stop gained	missense(1),stop gained(1)
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+CFTR		2	0	stop_gained	intron_variant(2),missense_variant(1),NMD_transcript_variant(2),processed_transcript(2),stop_gained(1),3_prime_UTR_variant(2)
 #CRAVAT Report
-#Created at Friday 08/30/2019 11:51:00
+#Created at Thursday 08/27/2020 02:49:13
 #Report level: sample
 #
 Variant Annotation	
@@ -22,7 +22,7 @@ UID	Sample
 1	s01
 2	s01
 #CRAVAT Report
-#Created at Friday 08/30/2019 11:51:00
+#Created at Thursday 08/27/2020 02:49:13
 #Report level: mapping
 #
 Variant Annotation			
