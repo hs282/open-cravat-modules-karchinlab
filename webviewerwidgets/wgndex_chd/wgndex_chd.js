@@ -470,6 +470,7 @@ widgetGenerators['ndex_chd'] = {
                         "interacts-with": {'color': 'rgb(216, 199, 229)'},
                         "interacts with": {'color': 'rgb(216, 199, 229)'},
                         "pp": {'color': 'rgb(216, 199, 229)'},
+                        "ppi": {'color': 'rgb(216, 199, 229)'},
 
                         "controls-transport-of": {'color': 'rgb(168, 224, 223)'},
                         "controls-transport-of-chemical": {'color': 'rgb(206, 206, 194)'},
@@ -773,7 +774,11 @@ widgetGenerators['ndex_chd'] = {
 							spacerDiv.style.width = '6px';
 							spacerDiv.textContent = ' ';
 							addEl(div, spacerDiv);
-							addEl(div, getTn(interaction.replace(/-/g, ' ')));
+                            var interactionText = interaction.replace(/-/g, ' ');
+                            if (interactionText == 'pp') {
+                                interactionText = 'ppi';
+                            }
+							addEl(div, getTn(interactionText));
 							addEl(div, getEl('br'));
 							addedInteractions[interaction] = true;
 						}
@@ -1229,6 +1234,7 @@ widgetGenerators['ndex_chd'] = {
 					"interacts-with": {'color': 'rgb(216, 199, 229)'},
 					"interacts with": {'color': 'rgb(216, 199, 229)'},
 					"pp": {'color': 'rgb(216, 199, 229)'},
+					"ppi": {'color': 'rgb(216, 199, 229)'},
 
 					"controls-transport-of": {'color': 'rgb(168, 224, 223)'},
 					"controls-transport-of-chemical": {'color': 'rgb(206, 206, 194)'},
@@ -1533,7 +1539,11 @@ widgetGenerators['ndex_chd'] = {
 						spacerDiv.style.width = '6px';
 						spacerDiv.textContent = ' ';
 						addEl(div, spacerDiv);
-						addEl(div, getTn(interaction.replace(/-/g, ' ')));
+                        var interactionText = interaction.replace(/-/g, ' ');
+                        if (interactionText == 'pp') {
+                            interactionText = 'ppi';
+                        }
+                        addEl(div, getTn(interactionText));
 						addEl(div, getEl('br'));
 						addedInteractions[interaction] = true;
 					}
