@@ -18,7 +18,7 @@ gene_summary_output_columns:
   type: string
   width: 160
 output_columns:
-- desc: Domain or conserved site on which the variant is located
+- desc: Domain or conserved site on which the variant is located. Multiple entries separated by ";"
   filterable: true
   name: domain
   title: Domain
