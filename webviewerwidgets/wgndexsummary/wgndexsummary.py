@@ -314,8 +314,13 @@ e_data.load()
 
 def run_query (hugos):
     query_ids = hugos
+    print(f'@ {query_ids}')
     if len(query_ids) > max_num_hugos:
-        result = {'scores': None, 'coverage': None}
+        result = {
+            'scores': None, 
+            'coverage': None, 
+            'msg': f'Too many genes. Use the Filter tab to reduce the number of genes to below {max_num_hugos}.'
+        }
         return result
     matched_genes = {}
     for term in query_ids:

@@ -49,13 +49,20 @@ widgetGenerators['ndexsummary'] = {
 			if (parentDiv != null) {
 				$(parentDiv).empty();
 			}
-            if (data == undefined || data == null || data['scores'] == null) {
+            if (data == undefined || 
+                    data == null || 
+                    (data['scores'] == null && data['msg'] == undefined)) {
                 var div = getEl('div');
                 div.textContent = 'No enriched pathway';
                 addEl(parentDiv, div);
                 return;
             }
-            
+            if (data['msg'] != undefined || data['msg'] != null) {
+                var div = getEl('div');
+                div.textContent = data['msg'];
+                addEl(parentDiv, div);
+                return;
+            }
             var func = this;
             var btn = getEl('button');
             btn.textContent = '+';
