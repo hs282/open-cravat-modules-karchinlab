@@ -1,5 +1,5 @@
 title: Cancer Pathways Enriched for CHASMplus Drivers (NDEx)
-version: 1.1.0
+version: 1.1.1
 type: webviewerwidget
 required_annotator: chasmplus
 requires_opencravat: '>=1.7.0'
