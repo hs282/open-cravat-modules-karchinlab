@@ -1,0 +1,19 @@
+title: NDEx Signor Pathway Enrichment Summary
+version: 1.0.0
+type: webviewerwidget
+required_annotator: ndex_signor
+description: NDEx Signor pathway enrichment summary webviewer widget
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization widgets
+hidden: true
+private: true
+requires_opencravat: '>=2.1.0'
+max_num_hugos: 500
+release_note:
+  1.0.0: Initial release
