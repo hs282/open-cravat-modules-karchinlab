@@ -3,7 +3,6 @@ __author__ = 'dexter'
 from os import listdir, makedirs
 from os.path import isfile, isdir, join, abspath, dirname, exists, basename, splitext
 import csv
-import data_model as dm
 import json
 from os import remove
 import os
