@@ -10,6 +10,7 @@ release_note: {1.0.9: aiosqlite3 version, 1.0.3: improved resize and redraw, 1.0
     effective digits}
 hidden: true
 tags: [visualization widgets]
+max_num_hugos: 500
 release_note:
   1.1.0: works with single variant page in oc 1.7.0.
   1.0.15: data is obtained by post request.
