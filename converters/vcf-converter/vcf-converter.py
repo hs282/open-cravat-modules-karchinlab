@@ -459,33 +459,6 @@ class CravatConverter(BaseConverter):
                 newalts_by_gtno[gt].append(newalt)
                 if alt not in used_alts:
                     used_alts.append(alt)
-        for altno in range(len(alts)):
-            alt = alts[altno]
-            if alt not in used_alts:
-                newpos, newref, newalt = self.extract_vcf_variant('+', pos, ref, alt)
-                zyg = ''
-                depth = None
-                alt_reads = None
-                af = None
-                wdict = {'tags':tag,
-                    'chrom':chrom,
-                    'pos':newpos,
-                    'ref_base':newref,
-                    'alt_base':newalt,
-                    'sample_id':'',
-                    'phred': qual,
-                    'filter': filter,
-                    'zygosity': zyg,
-                    'tot_reads': depth,
-                    'alt_reads': alt_reads,
-                    'af': af, 
-                    'hap_block': None,
-                    'hap_strand': None,                               
-                    }
-                gt = altno + 1
-                wdicts_by_gtno[gt].append(wdict)
-                newalts_by_gtno[gt].append(newalt)
-                used_alts.insert(altno, alt)
         if gt_all_zero:
             raise BadFormatError('All sample GT are zero')
         for i in range(len(alts)):
