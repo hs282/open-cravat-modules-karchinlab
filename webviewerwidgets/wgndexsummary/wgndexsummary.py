@@ -314,7 +314,6 @@ e_data.load()
 
 def run_query (hugos):
     query_ids = hugos
-    print(f'@ {query_ids}')
     if len(query_ids) > max_num_hugos:
         result = {
             'scores': None, 

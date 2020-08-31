@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import yaml
 import importlib.util
 script_dir = os.path.dirname(os.path.abspath(__file__))
 spec = importlib.util.spec_from_file_location('data_model', os.path.join(script_dir, 'data_model.py'))
@@ -8,6 +9,10 @@ data_model = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(data_model)
 e_data = data_model.EnrichmentData(os.path.join(script_dir, "data"))
 e_data.load()
+ymlpath = '.'.join(os.path.abspath(__file__).split('.')[:-1]) + '.yml'
+with open(ymlpath) as f:
+    conf = yaml.load(f)
+max_num_hugos = conf['max_num_hugos']
 
 def run_query (hugos):
     query_ids = hugos
