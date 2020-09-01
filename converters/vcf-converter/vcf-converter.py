@@ -55,13 +55,35 @@ class CravatConverter(BaseConverter):
         writer_path = Path(self.output_dir)/(self.run_name+'.extra_vcf_info.var')
         self.ex_info_writer = CravatWriter(str(writer_path))
         info_cols = [{'name':'uid','title':'UID','type':'int'}]
+        info_cols.append({
+            'name': 'pos',
+            'title': 'VCF Position',
+            'desc': '',
+            'type': 'int',
+            'width': 60,
+        })
+        info_cols.append({
+            'name': 'ref',
+            'title': 'VCF Ref Allele',
+            'desc': '',
+            'type': 'string',
+            'width': 60,
+        })
+        info_cols.append({
+            'name': 'alt',
+            'title': 'VCF Alt Allele',
+            'desc': '',
+            'type': 'string',
+            'width': 60,
+        })
         typemap = {'Integer':'int','Float':'float'}
         for info in reader.infos.values():
             info_cols.append({
                 'name': info.id,
                 'title': info.id,
                 'desc': info.desc,
-                'type': typemap.get(info.type,'string')
+                'type': typemap.get(info.type,'string'),
+                'hidden': True,
             })
         self.ex_info_writer.add_columns(info_cols)
         self.ex_info_writer.write_definition()
@@ -97,6 +119,7 @@ class CravatConverter(BaseConverter):
                 'filter': None, #FIXME
             }
         wdicts = []
+        self.gt_occur = []
         for call in variant.samples:
             for gt in call.gt_alleles:
                 if gt == '0' or gt is None:
@@ -110,6 +133,7 @@ class CravatConverter(BaseConverter):
                 wdict['hap_block'] = None #FIXME
                 wdict['hap_strand'] = None #FIXME
                 wdicts.append(wdict)
+                self.gt_occur.append(gt)
         self.curvar = variant
         return wdicts
 
@@ -133,6 +157,7 @@ class CravatConverter(BaseConverter):
     def addl_operation_for_unique_variant (self, wdict, wdict_no):
         if self.ex_info_writer is None:
             return
+        gt_index = int(self.gt_occur[wdict_no])-1
         row_data = {'uid':wdict['uid']}
         for info_name, info_val in self.curvar.INFO.items():
             if type(info_val) is list:
@@ -140,4 +165,7 @@ class CravatConverter(BaseConverter):
             if self._reader.infos[info_name].type not in ('Integer','Float'):
                 info_val = str(info_val)
             row_data[info_name] = info_val
+        row_data['pos'] = self.curvar.POS
+        row_data['ref'] = self.curvar.REF
+        row_data['alt'] = self.curvar.ALT[gt_index].sequence
         self.ex_info_writer.write_data(row_data)
