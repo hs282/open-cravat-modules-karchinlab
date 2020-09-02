@@ -65,6 +65,5 @@ release_note:
   4.1.2: change title to VEST4
 requires_opencravat: '>=1.8.1'
 requires:
-- wgndexvestsummary
 - wgvest
 commercial_warning: null
