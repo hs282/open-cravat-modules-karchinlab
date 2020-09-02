@@ -641,6 +641,7 @@ widgetGenerators['ndex_signorsummary'] = {
                     }
 
                     // handle edge aspect
+                    /*
                     if (niceCX.edges){
                         niceCX.edges.elements.forEach(function(element){
                             var cxEdgeId = 'e' + element['@id'];
@@ -656,9 +657,35 @@ widgetGenerators['ndex_signorsummary'] = {
                             edgeMap[cxEdgeId] = {data: edgeData};
                         });
                     }
+                    */
+                    var sti = {};
+                    if (niceCX.edges){
+                        niceCX.edges.elements.forEach(function(element){
+                            var source = element.s;
+                            var target = element.t;
+                            if (!(source in sti)) {
+                                sti[source] = {}
+                            }
+                            if (!(target in sti[source])) {
+                                var cxEdgeId = 'e' + element['@id'];
+                                var edgeData = {
+                                        id : cxEdgeId,
+                                        source: element.s,
+                                        target: element.t};
+                                if (element.i){
+                                    edgeData.interaction = element.i;
+                                }
+                                edgeMap[cxEdgeId] = {data: edgeData};
+                                sti[source][target] = cxEdgeId;
+                            } else {
+                                false;
+                            }
+                        });
+                    }
 
                     // handle edgeAttributes aspect
                     // Note that edgeAttributes elements are just in a list in niceCX for the moment!!
+                    /*
                     if (niceCX.edgeAttributes){
                         niceCX.edgeAttributes.elements.forEach(function(element){
                             var edgeId = 'e' + element.po;
@@ -666,6 +693,29 @@ widgetGenerators['ndex_signorsummary'] = {
                             var cyAttributeName = getCyAttributeName(element.n, attributeNameMap);
                             // todo: parse value according to datatype
                             edge.data[cyAttributeName] = element.v;
+                        });
+                    }
+
+                    var nodeIds = Object.keys(nodeMap);
+                    for (var i = 0; i < nodeIds.length; i++) {
+                        nodeList.push(nodeMap[nodeIds[i]]);
+                    }
+
+                    var edgeIds = Object.keys(edgeMap);
+                    for (var i = 0; i < edgeIds.length; i++) {
+                        edgeList.push(edgeMap[edgeIds[i]]);
+                    }
+                    return elements;
+                    */
+                    if (niceCX.edgeAttributes){
+                        niceCX.edgeAttributes.elements.forEach(function(element){
+                            var edgeId = 'e' + element.po;
+                            if (edgeId in edgeMap) {
+                                var edge = edgeMap[edgeId];
+                                var cyAttributeName = getCyAttributeName(element.n, attributeNameMap);
+                                // todo: parse value according to datatype
+                                edge.data[cyAttributeName] = element.v;
+                            }
                         });
                     }
 
