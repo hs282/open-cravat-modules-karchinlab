@@ -1,0 +1,69 @@
+#CRAVAT Report
+#Created at Wednesday 09/02/2020 14:39:30
+#Report level: variant
+#
+Variant Annotation																LitVar	dbSNP
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	rsID	rsID
+1	chr1	22586480	C	A		Yes	EPHA8	ENST00000166244.8	missense_variant	c.824C>A	p.Ala275Asp	ENST00000166244.8:EPHA8:P29322:missense_variant:p.Ala275Asp:c.824C>A; ENST00000374644.8:EPHA8:P29322:missense_variant:p.Ala275Asp:c.824C>A	0		plus_SBS_EPHA8	rs754009354	rs754009354
+2	chr17	31327741	-	C		Yes	NF1	ENST00000358273.9	frameshift_elongation	c.5511dup	p.Ser1838LeufsTer24	ENST00000356175.7:NF1:P21359:frameshift_elongation:p.Ser1817LeufsTer24:c.5448dup; ENST00000358273.9:NF1:P21359:frameshift_elongation:p.Ser1838LeufsTer24:c.5511dup	0		plus_ins_NF1	rs267606596	rs267606596
+3	chr7	55181320	-	GGGTTG		Yes	EGFR	ENST00000275493.7	inframe_insertion	c.2310_2311insGGGTTG	p.Asp770_Asn771insGlyLeu	ENST00000275493.7:EGFR:P00533:inframe_insertion:p.Asp770_Asn771insGlyLeu:c.2310_2311insGGGTTG; ENST00000442411.1:EGFR-AS1::lnc_RNA::; ENST00000454757.6:EGFR::inframe_insertion:p.Asp725_Asn726insGlyLeu:c.2175_2176insGGGTTG; ENST00000455089.5:EGFR::inframe_insertion:p.Asp725_Asn726insGlyLeu:c.2175_2176insGGGTTG; ENST00000638463.1:EGFR::3_prime_UTR_variant::c.*300_*301insGGGTTG	0		plus_ins_EGFR	rs397517111	rs397517111
+4	chr4	1801942	C	-		Yes	FGFR3	ENST00000340107.8	frameshift_truncation	c.850del	p.His284ThrfsTer10	ENST00000260795.7:FGFR3::frameshift_truncation,NMD_transcript_variant:p.His284ThrfsTer10:c.850del; ENST00000340107.8:FGFR3:P22607:frameshift_truncation:p.His284ThrfsTer10:c.850del; ENST00000352904.6:FGFR3:P22607:frameshift_truncation:p.His284ThrfsTer10:c.850del; ENST00000412135.6:FGFR3:P22607:frameshift_truncation:p.His284ThrfsTer10:c.850del; ENST00000440486.7:FGFR3:P22607:frameshift_truncation:p.His284ThrfsTer10:c.850del; ENST00000481110.6:FGFR3::frameshift_truncation:p.His284ThrfsTer10:c.850del; ENST00000613647.4:FGFR3::frameshift_truncation:p.His284ThrfsTer10:c.850del; ENST00000643463.1:FGFR3::processed_transcript::	0		plus_del_FGFR3	rs587776836	rs587776836
+5	chr10	87864485	AA	-		Yes	PTEN	ENST00000371953.8	frameshift_truncation	c.17_18del	p.Lys6ArgfsTer4	ENST00000371953.8:PTEN:P60484:frameshift_truncation:p.Lys6ArgfsTer4:c.17_18del; ENST00000445946.4:KLLN:B2CW77:2kb_upstream_variant::c.-1999_-1998del; ENST00000487939.1:PTEN::processed_transcript::; ENST00000618586.1:PTEN::2kb_upstream_variant,processed_transcript::	0		plus_del_PTEN	rs121913290	rs121913290
+6	chr7	140753351	A	G		Yes	BRAF	ENST00000644969.1	missense_variant	c.1904T>C	p.Phe635Ser	ENST00000288602.11:BRAF::missense_variant:p.Phe635Ser:c.1904T>C; ENST00000496384.7:BRAF::missense_variant:p.Phe595Ser:c.1784T>C; ENST00000497784.2:BRAF::NMD_transcript_variant,3_prime_UTR_variant::c.*1234T>C; ENST00000642228.1:BRAF::NMD_transcript_variant,3_prime_UTR_variant::c.*862T>C; ENST00000644120.1:BRAF::processed_transcript::; ENST00000644969.1:BRAF::missense_variant:p.Phe635Ser:c.1904T>C; ENST00000646730.1:BRAF::NMD_transcript_variant,3_prime_UTR_variant::c.*360T>C; ENST00000646891.1:BRAF:P15056:missense_variant:p.Phe595Ser:c.1784T>C	0		minus_SBS_BRAF	rs121913225	rs121913225
+7	chr15	45363948	-	T		Yes	GATM	ENST00000396659.8	frameshift_elongation	c.1111dup	p.Met371AsnfsTer6	ENST00000396659.8:GATM:P50440:frameshift_elongation:p.Met371AsnfsTer6:c.1111dup; ENST00000558336.5:GATM:P50440:frameshift_elongation:p.Met371AsnfsTer6:c.1111dup	0		minus_ins_GATM	rs397515542	rs397515542
+8	chr17	7675097	-	ACCTC		Yes	TP53	ENST00000445888.6	frameshift_elongation	c.511_515dup	p.Val173ArgfsTer3	ENST00000269305.8:TP53:P04637:frameshift_elongation:p.Val173ArgfsTer3:c.511_515dup; ENST00000359597.8:TP53::frameshift_elongation:p.Val173ArgfsTer3:c.511_515dup; ENST00000413465.6:TP53::frameshift_elongation:p.Val173ArgfsTer3:c.511_515dup; ENST00000420246.6:TP53:P04637:frameshift_elongation:p.Val173ArgfsTer3:c.511_515dup; ENST00000445888.6:TP53:P04637:frameshift_elongation:p.Val173ArgfsTer3:c.511_515dup; ENST00000455263.6:TP53:P04637:frameshift_elongation:p.Val173ArgfsTer3:c.511_515dup; ENST00000504290.5:TP53:P04637:frameshift_elongation:p.Val41ArgfsTer3:c.115_119dup; ENST00000504937.5:TP53:P04637:frameshift_elongation:p.Val41ArgfsTer3:c.115_119dup; ENST00000510385.5:TP53:P04637:frameshift_elongation:p.Val41ArgfsTer3:c.115_119dup; ENST00000574684.1:TP53::processed_transcript::; ENST00000610292.4:TP53:P04637:frameshift_elongation:p.Val134ArgfsTer3:c.394_398dup; ENST00000610538.4:TP53:P04637:frameshift_elongation:p.Val134ArgfsTer3:c.394_398dup; ENST00000610623.4:TP53::frameshift_elongation:p.Val14ArgfsTer3:c.34_38dup; ENST00000615910.4:TP53::frameshift_elongation:p.Val162ArgfsTer3:c.478_482dup; ENST00000617185.4:TP53:P04637:frameshift_elongation:p.Val173ArgfsTer3:c.511_515dup; ENST00000618944.4:TP53::frameshift_elongation:p.Val14ArgfsTer3:c.34_38dup; ENST00000619186.4:TP53::frameshift_elongation:p.Val14ArgfsTer3:c.34_38dup; ENST00000619485.4:TP53:P04637:frameshift_elongation:p.Val134ArgfsTer3:c.394_398dup; ENST00000620739.4:TP53:P04637:frameshift_elongation:p.Val134ArgfsTer3:c.394_398dup; ENST00000622645.4:TP53:P04637:frameshift_elongation:p.Val134ArgfsTer3:c.394_398dup; ENST00000635293.1:TP53::frameshift_elongation,NMD_transcript_variant:p.Val134ArgfsTer3:c.394_398dup	0		minus_ins_TP53	rs786202514	rs786202514
+9	chr12	25227263	A	-		Yes	KRAS	ENST00000256078.9	frameshift_truncation	c.261del	p.Lys88AsnfsTer26	ENST00000256078.9:KRAS:P01116:frameshift_truncation:p.Lys88AsnfsTer26:c.261del; ENST00000311936.8:KRAS:P01116:frameshift_truncation:p.Lys88AsnfsTer26:c.261del; ENST00000557334.5:KRAS::intron_variant::c.112-17352del; ENST00000620933.1:AC092794.2::2kb_downstream_variant,lnc_RNA::	0		minus_del_KRAS	rs397517038	rs397517038
+10	chr17	7675153	GGGCGGGGGT	-		Yes	TP53	ENST00000610292.4	frameshift_truncation	c.333_342del	p.Pro112AlafsTer16	ENST00000269305.8:TP53:P04637:frameshift_truncation:p.Pro151AlafsTer16:c.450_459del; ENST00000359597.8:TP53::frameshift_truncation:p.Pro151AlafsTer16:c.450_459del; ENST00000413465.6:TP53::frameshift_truncation:p.Pro151AlafsTer16:c.450_459del; ENST00000420246.6:TP53:P04637:frameshift_truncation:p.Pro151AlafsTer16:c.450_459del; ENST00000445888.6:TP53:P04637:frameshift_truncation:p.Pro151AlafsTer16:c.450_459del; ENST00000455263.6:TP53:P04637:frameshift_truncation:p.Pro151AlafsTer16:c.450_459del; ENST00000504290.5:TP53:P04637:frameshift_truncation:p.Pro19AlafsTer16:c.54_63del; ENST00000504937.5:TP53:P04637:frameshift_truncation:p.Pro19AlafsTer16:c.54_63del; ENST00000510385.5:TP53:P04637:frameshift_truncation:p.Pro19AlafsTer16:c.54_63del; ENST00000574684.1:TP53::2kb_upstream_variant,processed_transcript::; ENST00000610292.4:TP53:P04637:frameshift_truncation:p.Pro112AlafsTer16:c.333_342del; ENST00000610538.4:TP53:P04637:frameshift_truncation:p.Pro112AlafsTer16:c.333_342del; ENST00000610623.4:TP53::5_prime_UTR_variant::c.-28_-19del; ENST00000615910.4:TP53::frameshift_truncation:p.Pro140AlafsTer16:c.417_426del; ENST00000617185.4:TP53:P04637:frameshift_truncation:p.Pro151AlafsTer16:c.450_459del; ENST00000618944.4:TP53::5_prime_UTR_variant::c.-28_-19del; ENST00000619186.4:TP53::5_prime_UTR_variant::c.-28_-19del; ENST00000619485.4:TP53:P04637:frameshift_truncation:p.Pro112AlafsTer16:c.333_342del; ENST00000620739.4:TP53:P04637:frameshift_truncation:p.Pro112AlafsTer16:c.333_342del; ENST00000622645.4:TP53:P04637:frameshift_truncation:p.Pro112AlafsTer16:c.333_342del; ENST00000635293.1:TP53::frameshift_truncation,NMD_transcript_variant:p.Pro112AlafsTer16:c.333_342del	0		minus_del_TP53	rs137852791	rs137852791
+11	chr17	31327741	-	T		Yes	NF1	ENST00000358273.9	frameshift_elongation	c.5510_5511insT	p.Ser1838LeufsTer24	ENST00000356175.7:NF1:P21359:frameshift_elongation:p.Ser1817LeufsTer24:c.5447_5448insT; ENST00000358273.9:NF1:P21359:frameshift_elongation:p.Ser1838LeufsTer24:c.5510_5511insT	0		fuzzy_ins_NF1		
+12	chr10	87864486	A	-		Yes	PTEN	ENST00000371953.8	frameshift_truncation	c.18del	p.Glu7ArgfsTer17	ENST00000371953.8:PTEN:P60484:frameshift_truncation:p.Glu7ArgfsTer17:c.18del; ENST00000445946.4:KLLN:B2CW77:2kb_upstream_variant::c.-1998del; ENST00000487939.1:PTEN::processed_transcript::; ENST00000618586.1:PTEN::2kb_upstream_variant,processed_transcript::	0		fuzzy_del_PTEN		
+#CRAVAT Report
+#Created at Wednesday 09/02/2020 14:39:30
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+EPHA8		1	0	missense_variant	missense_variant(0)
+NF1		2	0	frameshift_elongation	frameshift_elongation(0)
+EGFR		1	0	inframe_insertion	inframe_insertion(0),3_prime_UTR_variant(0)
+FGFR3		1	0	frameshift_truncation	frameshift_truncation(0),NMD_transcript_variant(0),processed_transcript(0)
+PTEN		2	0	frameshift_truncation	frameshift_truncation(0),processed_transcript(0)
+BRAF		1	0	missense_variant	missense_variant(0),NMD_transcript_variant(0),processed_transcript(0),3_prime_UTR_variant(0)
+GATM		1	0	frameshift_elongation	frameshift_elongation(0)
+TP53		2	0	frameshift_elongation	frameshift_truncation(0),frameshift_elongation(0),NMD_transcript_variant(0),processed_transcript(0),5_prime_UTR_variant(0)
+KRAS		1	0	frameshift_truncation	frameshift_truncation(0),intron_variant(0)
+#CRAVAT Report
+#Created at Wednesday 09/02/2020 14:39:30
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	
+2	
+3	
+4	
+5	
+6	
+7	
+8	
+9	
+10	
+11	
+12	
+#CRAVAT Report
+#Created at Wednesday 09/02/2020 14:39:30
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+2	plus_SBS_EPHA8	1	0
+3	plus_ins_NF1	2	0
+4	plus_ins_EGFR	3	0
+5	plus_del_FGFR3	4	0
+6	plus_del_PTEN	5	0
+7	minus_SBS_BRAF	6	0
+8	minus_ins_GATM	7	0
+9	minus_ins_TP53	8	0
+10	minus_del_KRAS	9	0
+11	minus_del_TP53	10	0
+12	fuzzy_ins_NF1	11	0
+13	fuzzy_del_PTEN	12	0

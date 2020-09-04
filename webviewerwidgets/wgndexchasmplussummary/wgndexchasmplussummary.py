@@ -11,7 +11,7 @@ e_data = data_model.EnrichmentData(os.path.join(script_dir, "data"))
 e_data.load()
 ymlpath = '.'.join(os.path.abspath(__file__).split('.')[:-1]) + '.yml'
 with open(ymlpath) as f:
-    conf = yaml.load(f)
+    conf = yaml.safe_load(f)
 max_num_hugos = conf['max_num_hugos']
 
 def run_query (hugos):

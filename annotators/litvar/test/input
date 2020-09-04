@@ -1,0 +1,13 @@
+#Chrom	Position	Strand	Ref Base	Alt Base	Sample Id	Tags
+chr1	22586480	+	C	A		plus_SBS_EPHA8
+chr17	31327741	+	-	C		plus_ins_NF1
+chr7	55181320	+	-	GGGTTG		plus_ins_EGFR
+chr4	1801942	+	C	-		plus_del_FGFR3
+chr10	87864485	+	AA	-		plus_del_PTEN
+chr7	140753351	+	A	G		minus_SBS_BRAF
+chr15	45363948	+	-	T		minus_ins_GATM
+chr17	7675097	+	-	ACCTC		minus_ins_TP53
+chr12	25227263	+	A	-		minus_del_KRAS
+chr17	7675153	+	GGGCGGGGGT	-		minus_del_TP53
+chr17	31327741	+	-	T		fuzzy_ins_NF1
+chr10	87864486	+	A	-		fuzzy_del_PTEN

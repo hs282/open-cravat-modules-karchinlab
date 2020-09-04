@@ -68,9 +68,13 @@ class CravatConverter(BaseConverter):
         self.input_path = f.name
         self.info_field_cols = OrderedDict()
         # TODO: make this a generic one in cravat_convert.py. This is just a first aid measure due to request from the CF group.
-        self.info_field_cols['oripos'] = {'name': 'oripos', 'type': 'string', 'title': 'Input position', 'desc': 'Position in input', 'oritype': 'string', 'number': '1', 'separate': False}
-        self.info_field_cols['oriref'] = {'name': 'oriref', 'type': 'string', 'title': 'Input Ref', 'desc': 'Reference bases in input', 'oritype': 'string', 'number': '1', 'separate': False}
-        self.info_field_cols['orialt'] = {'name': 'orialt', 'type': 'string', 'title': 'Input Alt', 'desc': 'Alternate bases in input', 'oritype': 'string', 'number': '1', 'separate': False}
+        self.info_field_cols['oripos'] = {'name': 'oripos', 'type': 'string', 'title': 'Input position', 'desc': 'Position in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 95}
+        self.info_field_cols['oriref'] = {'name': 'oriref', 'type': 'string', 'title': 'Input Ref', 'desc': 'Reference bases in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 60}
+        self.info_field_cols['orialt'] = {'name': 'orialt', 'type': 'string', 'title': 'Input Alt', 'desc': 'Alternate bases in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 60}
+        if 'include_info' in self.conf:
+            self.conf['include_info'] = self.conf['include_info'].split(',')
+        else:
+            self.conf['include_info'] = []
         self.sepcols = {}
         for n, l in enumerate(f):
             if n==2 and l.startswith('##source=VarScan'):
@@ -81,6 +85,8 @@ class CravatConverter(BaseConverter):
                 continue
             if l.startswith('##INFO='):
                 coldefs = self.parse_header_info_field(l)
+                if coldefs is None:
+                    continue
                 for coldef in coldefs:
                     if coldef['type'] is None or coldef['number'] not in self.allowed_info_colnumbers:
                         continue
@@ -137,6 +143,8 @@ class CravatConverter(BaseConverter):
             colname = self.clean_colname(l2[:idx2])
         else:
             colname = None
+        if colname not in self.conf['include_info']:
+            return None
         if 'Number=' in l:
             idx = l.index('Number=')
             l2 = l[idx + 7:]
@@ -198,19 +206,20 @@ class CravatConverter(BaseConverter):
 
     def parse_data_info_field (self, infoline, pos, ref, alts, l, all_wdicts):
         len_alts = len(alts)
-        toks = infoline.split(';')
         info_dict = {}
         lenref = len(ref)
         self.alts = []
         if self.vep_present == False:
-            for wdict in all_wdicts:
-                ref = wdict['ref_base']
-                alt = wdict['alt_base']
-                sample = wdict['sample_id']
+            #for wdict in all_wdicts:
+                #ref = wdict['ref_base']
+                #alt = wdict['alt_base']
+                #sample = wdict['sample_id']
+            for alt in alts:
                 refalt = f'{ref}:{alt}'
                 if refalt not in info_dict:
                     info_dict[refalt] = {}
                     self.alts.append(refalt)
+                info_dict[refalt] = {'oripos': str(pos), 'oriref': ref, 'orialt': alt}
         else:
             alt_1st_same = len(set([alt[0] for alt in alts])) == 1
             for alt in alts:
@@ -255,10 +264,10 @@ class CravatConverter(BaseConverter):
                 else:
                     refalt = f'{ref}:{vepalt}'
                 self.alts.append(refalt)
-                info_dict[refalt] = {}
-                info_dict[refalt]['oripos'] = str(pos)
-                info_dict[refalt]['oriref'] = ref
-                info_dict[refalt]['orialt'] = alt
+                info_dict[refalt] = {'oripos': str(pos), 'oriref': ref, 'orialt': alt}
+        if infoline is None:
+            return info_dict
+        toks = infoline.split(';')
         for tok in toks:
             data = None
             if '=' in tok:
@@ -322,6 +331,8 @@ class CravatConverter(BaseConverter):
                                 info_dict[refalt][colname] = colvals[0]
             else:
                 colname = self.clean_colname(tok)
+                if colname not in self.info_field_cols:
+                    continue
                 col = self.info_field_cols[colname]
                 if col['oritype'] == 'flag':
                     data = True
@@ -469,17 +480,13 @@ class CravatConverter(BaseConverter):
                 all_wdicts.append(wdict)
             for newalt in newalts_by_gtno[gtno]:
                 newalts.append(newalt)
-        if info is not None:
-            try:
-                self.info_field_data = self.parse_data_info_field(info, pos, ref, alts, l, all_wdicts)
-            except Exception as e:
-                # print(l)
-                # traceback.print_exc()
-                self._log_conversion_error(l, e)
-                self.info_field_data = {}
-        else:
+        try:
+            self.info_field_data = self.parse_data_info_field(info, pos, ref, alts, l, all_wdicts)
+        except Exception as e:
+            print(l)
+            traceback.print_exc()
+            self._log_conversion_error(l, e)
             self.info_field_data = {}
-            self.alts = newalts
         return all_wdicts
 
     def addl_operation_for_unique_variant (self, wdict, wdict_no):

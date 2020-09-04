@@ -1,5 +1,5 @@
 title: VCF Converter
-version: 1.5.2
+version: 1.5.3
 type: converter
 description: Converter for VCF format input
 developer:
@@ -10,6 +10,7 @@ developer:
   citation: ''
 requires_opencravat: '>=1.8.0'
 release_note:
+  1.5.3: handles module option include_info.
   1.5.2: fixed no-sample.
   1.5.0: correctly handles INFO field with multiple VCF input files.
   1.4.9: handles no FORMAT/SAMPLE columns.
