@@ -410,6 +410,8 @@ class CravatConverter(BaseConverter):
                     continue
                 gt_all_zero = False
                 alt = alts[gt - 1]
+                if alt == '*':
+                    continue
                 newpos, newref, newalt = self.extract_vcf_variant('+', pos, ref, alt)
                 zyg = self.homo_hetro(sample_data[gt_field_no])
                 depth, alt_reads, af = self.extract_read_info(sample_data, gt, gts, gtf_nos)
