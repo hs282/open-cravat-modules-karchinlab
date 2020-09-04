@@ -163,6 +163,7 @@ widgetGenerators['ndex_signorsummary'] = {
             div.style.cursor = 'pointer';
             div.style.padding = '2px';
             div.style.border = '2px outset #dddddd';
+            div.style.width = 'calc(100% - 20px)';
             div.onclick = function (evt) {
                 var selectDiv = evt.target;
                 var optionsDiv = document.getElementById(
