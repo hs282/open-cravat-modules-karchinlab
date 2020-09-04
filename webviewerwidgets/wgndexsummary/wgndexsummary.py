@@ -307,7 +307,7 @@ class Coverage():
 
 ymlpath = '.'.join(os.path.abspath(__file__).split('.')[:-1]) + '.yml'
 with open(ymlpath) as f:
-    conf = yaml.load(f)
+    conf = yaml.safe_load(f)
 max_num_hugos = conf['max_num_hugos']
 e_data = EnrichmentData()
 e_data.load()
