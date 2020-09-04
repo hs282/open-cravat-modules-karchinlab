@@ -15,35 +15,35 @@ output_columns:
   width: 80
   hidden: true
   desc: miRNA_primary_transcript are hairpin precursor sequences, and miRNA are mature sequences
+  category: single
 
 - name: id 
   title: Accession ID
   type: string
-  link_format: 'http://www.mirbase.org/cgi-bin/mirna_entry.pl?acc=${[^;]+}'
-  width: 80
+  link_format: 'http://www.mirbase.org/cgi-bin/mirna_entry.pl?acc=${.*}'
+  width: 95
   hidden: false
 
 - name: name
   title: Name
   type: string
-  width: 65
+  width: 100
   hidden: true
   desc: Stem-loop sequence name.
 
 - name: derives_from 
   title: Derives From
   type: string
-  width: 65
-  link_format: 'http://www.mirbase.org/cgi-bin/mirna_entry.pl?acc=${[^;]+}'
+  width: 80
+  link_format: 'http://www.mirbase.org/cgi-bin/mirna_entry.pl?acc=${.*}'
   hidden: true
   desc: The hairpin precursor sequence to which the mature sequence derives from.
 
 tags:
-- noncoding
+- non coding
 
 title: miRBase
 version: 1.0.0
 type: annotator
-private: true
 
 

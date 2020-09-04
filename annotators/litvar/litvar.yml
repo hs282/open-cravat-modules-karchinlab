@@ -1,0 +1,29 @@
+datasource: Live
+description: LitVar allows the search and retrieval of variant relevant information from biomedical literature.
+developer:
+  name: 'NCBI'
+  organization: 'NCBI'
+  email: 'support@cravat.us'
+  website: 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query='
+  citation: 'Allot, Alexis, et al. "LitVar: a semantic search engine for linking genomic variant data in PubMed and PMC." Nucleic acids research 46.W1 (2018): W530-W536.'
+
+level: variant
+output_columns:
+- name: rsid
+  title: rsID
+  type: string
+  link_format: 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=${.*}'
+  width: 80
+
+secondary_inputs:
+  dbsnp: {}
+
+tags:
+- literature
+title: LitVar
+version: 1.0.0
+type: annotator
+private: true
+
+
+
