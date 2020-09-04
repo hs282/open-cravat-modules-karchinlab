@@ -14,21 +14,20 @@ output_columns:
 - name: feature_name
   title: GeneHancer Type
   type: string
-  hidden: true
+  hidden: false
   width: 79 
   desc: Enhancer, promoter, or both. 
 
 - name: score
   title: Score
   type: float
-  desc: Enhancer confidence score
-  hidden: false
+  desc: Enhancer confidence score. Higher scores possess more evidence for enhancer-gene association. 
+  hidden: true
   width: 55
 
 - name: ident
   title: GeneHancer ID
   type: string 
-  link format: 'https://oates.app.vumc.org/vancart/SCN5A/variant.php?q=${[^;]+}'
   hidden: false
   width: 85
 
@@ -39,11 +38,13 @@ output_columns:
   hidden: true
   width: 65
 
+requires:
+- wggenehancer
+
 tags:
-- noncoding
+- non coding
 
 
 title: GeneHancer
 version: 1.0.0
 type: annotator
-private: true
