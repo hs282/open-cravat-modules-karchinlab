@@ -68,13 +68,19 @@ class CravatConverter(BaseConverter):
         self.input_path = f.name
         self.info_field_cols = OrderedDict()
         # TODO: make this a generic one in cravat_convert.py. This is just a first aid measure due to request from the CF group.
-        self.info_field_cols['oripos'] = {'name': 'oripos', 'type': 'string', 'title': 'Input position', 'desc': 'Position in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 95}
-        self.info_field_cols['oriref'] = {'name': 'oriref', 'type': 'string', 'title': 'Input Ref', 'desc': 'Reference bases in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 60}
-        self.info_field_cols['orialt'] = {'name': 'orialt', 'type': 'string', 'title': 'Input Alt', 'desc': 'Alternate bases in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 60}
+        self.info_field_cols['oripos'] = {'name': 'oripos', 'type': 'string', 'title': 'Input position', 'desc': 'Position in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 95, 
+            'hidden': False}
+        self.info_field_cols['oriref'] = {'name': 'oriref', 'type': 'string', 'title': 'Input Ref', 'desc': 'Reference bases in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 60, 
+            'hidden': False}
+        self.info_field_cols['orialt'] = {'name': 'orialt', 'type': 'string', 'title': 'Input Alt', 'desc': 'Alternate bases in input', 'oritype': 'string', 'number': '1', 'separate': False, 'width': 60, 
+            'hidden': False}
+        if hasattr(self, 'conf') == False:
+            self.conf = {}
         if 'include_info' in self.conf:
             self.conf['include_info'] = self.conf['include_info'].split(',')
         else:
             self.conf['include_info'] = []
+        print(f'@ {self.conf}')
         self.sepcols = {}
         for n, l in enumerate(f):
             if n==2 and l.startswith('##source=VarScan'):
@@ -143,7 +149,7 @@ class CravatConverter(BaseConverter):
             colname = self.clean_colname(l2[:idx2])
         else:
             colname = None
-        if colname not in self.conf['include_info']:
+        if len(self.conf['include_info']) > 0 and colname not in self.conf['include_info']:
             return None
         if 'Number=' in l:
             idx = l.index('Number=')
@@ -195,13 +201,23 @@ class CravatConverter(BaseConverter):
                 newcoltitle = colname + ' ' + colname2
                 newdesc = f'VEP annotation: {colname2}'
                 coldef = {'name': newcolname, 'type': coltype, 'title': newcoltitle, 'desc': newdesc, 'oritype': coloritype, 'number': colnumber, 'separate': colsep}
+                if len(self.conf['include_info']) > 0 and colname in self.conf['include_info']:
+                    coldef['hidden'] = False
+                else:
+                    coldef['hidden'] = True
                 coldefs.append(coldef)
                 self.sepcols[colname].append(coldef)
                 colname2_idx += 1
         else:
             colsep = False
             self.vep_present = False
-            coldefs = [{'name': colname, 'type': coltype, 'title': coltitle, 'desc': coldesc, 'oritype': coloritype, 'number': colnumber, 'separate': colsep}]
+            coldef = {'name': colname, 'type': coltype, 'title': coltitle, 'desc': coldesc, 'oritype': coloritype, 'number': colnumber, 'separate': colsep}
+            if len(self.conf['include_info']) > 0 and colname in self.conf['include_info']:
+                coldef['hidden'] = False
+            else:
+                coldef['hidden'] = True
+            coldefs = [coldef]
+        print(f'@ coldefs={coldefs}')
         return coldefs
 
     def parse_data_info_field (self, infoline, pos, ref, alts, l, all_wdicts):
