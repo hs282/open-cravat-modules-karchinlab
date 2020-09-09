@@ -36,6 +36,11 @@ output_columns:
   filterable: false
   desc: 'Functional impact: high (H), medium (M), low (L) or neutral (N)'
   hidden: false
+  category: single
+  categories:
+  - High
+  - Neutral 
+  - Low
 tags:
 - variant effect prediction
 title: Mutation Assessor
@@ -43,3 +48,15 @@ type: annotator
 version: 3.0.6
 requires:
 - wgmutation_assessor
+smartfilters:
+- name: function
+  title: Mutation Assessor
+  description: Include variants based on selected functional impact.
+  selector: 
+    type: select
+    optionsColumn: mutation_assessor__mut_pred
+    multiple: True
+  filter:
+    column: mutation_assessor__mut_pred
+    test: equals
+    value: ${value}

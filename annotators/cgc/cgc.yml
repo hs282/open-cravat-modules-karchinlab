@@ -16,6 +16,12 @@ output_columns:
   width: 130
   desc: Driver class
   hidden: false
+  filterable: true
+  category: single
+  categories:
+  - Oncogene
+  - fusion
+  - TSG
 - name: inheritance
   title: Inheritance
   type: string
@@ -49,3 +55,15 @@ version: 85.0.12
 requires:
 - wgcgc
 commercial_warning: For commercial use, contact cosmic@sanger.ac.uk
+smartfilters:
+- name: class
+  title: Cancer Gene Census
+  description: Include variants based on selected driver class.
+  selector: 
+    type: select
+    optionsColumn: cgc__class
+    multiple: True
+  filter:
+    column: cgc__class
+    test: stringContains
+    value: ${value}

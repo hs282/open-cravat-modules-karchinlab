@@ -16,6 +16,10 @@ output_columns:
   width: 68
   filterable: false
   desc: Pathogenic or Benign
+  category: single
+  categories:
+  - Pathogenic
+  - Benign
 - filterable: true
   name: score
   title: Score
@@ -34,3 +38,14 @@ type: annotator
 version: 0.0.8
 requires:
 - wgphdsnpg
+smartfilters:
+- name: prediction
+  title: PhD-SNPg Prediction
+  description: Include variants based on selected predicton.
+  selector: 
+    type: select
+    optionsColumn: phdsnpg__prediction
+  filter:
+    column: phdsnpg__prediction
+    test: equals
+    value: ${value}
