@@ -80,7 +80,6 @@ class CravatConverter(BaseConverter):
             self.conf['include_info'] = self.conf['include_info'].split(',')
         else:
             self.conf['include_info'] = []
-        print(f'@ {self.conf}')
         self.sepcols = {}
         for n, l in enumerate(f):
             if n==2 and l.startswith('##source=VarScan'):
@@ -217,7 +216,6 @@ class CravatConverter(BaseConverter):
             else:
                 coldef['hidden'] = True
             coldefs = [coldef]
-        print(f'@ coldefs={coldefs}')
         return coldefs
 
     def parse_data_info_field (self, infoline, pos, ref, alts, l, all_wdicts):
