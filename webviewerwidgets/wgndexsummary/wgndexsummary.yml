@@ -1,5 +1,5 @@
 title: NDEx NCI Cancer Pathway Enrichment Summary
-version: 1.0.0
+version: 1.0.1
 type: webviewerwidget
 required_annotator: ndex
 description: NDEx enrichment summary webviewer widget

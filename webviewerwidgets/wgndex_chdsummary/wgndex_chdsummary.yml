@@ -1,5 +1,5 @@
 title: NDEx Congenital Heart Disease Pathway Enrichment Summary
-version: 1.0.0
+version: 1.0.1
 type: webviewerwidget
 required_annotator: ndex_chd
 description: NDEx Congenital Heart Disease pathway enrichment summary webviewer widget
