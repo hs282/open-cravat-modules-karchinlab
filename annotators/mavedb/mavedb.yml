@@ -1,0 +1,44 @@
+datasource: v1.7.1
+description: MaveDB is a public repository for datasets from Multiplexed Assays of Variant Effect (MAVEs).
+developer:
+  name: 'Fowler Lab'
+  organization: 'University of Washington, Department of Genome Sciences'
+  email: 'support@cravat.us'
+  website: 'https://www.mavedb.org/'
+  citation: 'Esposito, Daniel, et al. "MaveDB: an open-source platform to distribute and interpret data from multiplexed assays of variant effect." Genome biology 20.1 (2019): 1-11.'
+
+input_format: crx
+level: variant
+output_columns:
+- name: score
+  title: Score
+  type: float
+  desc: Scores close to zero are considered deleterious. Scores close to 1 are equivalent to the reference allele. Scores greater than 1 represent a stronger phenotype than the reference residue.
+  width: 60
+  hidden: false
+
+- name: vis
+  title: MaveVis
+  type: string
+  link_format: http://varianteffect.com/?ssid=${.*}
+  width: 80
+  desc: A webtool for visualizing variant effect maps.
+  hidden: false
+
+- name: accession
+  title: Score Set
+  type: string
+  link_format: https://www.mavedb.org/scoreset/${.*}
+  width: 80
+  hidden: true
+  desc: Information from the study specific to each gene.
+
+tags:
+- functional studies
+
+title: MaveDB
+version: 1.0.0
+type: annotator
+private: true
+
+
