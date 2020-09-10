@@ -25,7 +25,7 @@ type: annotator
 version: 1.1.0
 smartfilters:
 - name: class
-  title: Cancer Gene Landscape
+  title: Cancer Gene Landscape Class
   description: Include variants based on selected class.
   selector:
     type: select

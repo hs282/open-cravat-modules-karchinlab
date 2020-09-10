@@ -50,7 +50,7 @@ requires:
 - wgmutation_assessor
 smartfilters:
 - name: function
-  title: Mutation Assessor
+  title: Mutation Assessor Functional Impact
   description: Include variants based on selected functional impact.
   selector: 
     type: select

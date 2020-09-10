@@ -57,7 +57,7 @@ requires:
 commercial_warning: For commercial use, contact cosmic@sanger.ac.uk
 smartfilters:
 - name: class
-  title: Cancer Gene Census
+  title: Cancer Gene Census Class
   description: Include variants based on selected driver class.
   selector: 
     type: select
