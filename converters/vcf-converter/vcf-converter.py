@@ -77,7 +77,8 @@ class CravatConverter(BaseConverter):
         if hasattr(self, 'conf') == False:
             self.conf = {}
         if 'include_info' in self.conf:
-            self.conf['include_info'] = self.conf['include_info'].split(',')
+            if type(self.conf['include_info']) == str:
+                self.conf['include_info'] = self.conf['include_info'].split(',')
         else:
             self.conf['include_info'] = []
         self.sepcols = {}
