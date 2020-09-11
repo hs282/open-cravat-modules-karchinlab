@@ -2810,10 +2810,10 @@ class Mapper (cravat.BaseMapper):
                             so = (SO_MLO, SO_IND,)
                             ref_aanums_start = pseq[max_apos_del_start - 1]
                             if num_aas_del == 1:
-                                achange = f'p.{aanum_to_aa[ref_aanums_start]}{max_apos_start}del'
+                                achange = f'p.{aanum_to_aa[ref_aanums_start]}{max_apos_del_start}del'
                             else:
                                 ref_aanums_end = pseq[max_apos_del_end - 1]
-                                achange = f'p.{aanum_to_aa[ref_aanums_end]}{max_apos_start}_{aanum_to_aa[ref_aanums_end]}{max_apos_end}del'
+                                achange = f'p.{aanum_to_aa[ref_aanums_end]}{max_apos_del_start}_{aanum_to_aa[ref_aanums_end]}{max_apos_del_end}del'
                         elif max_apos_del_start <= alen + 1 and max_apos_del_end >= alen + 1: # TER deletion
                             so = (SO_STL, SO_IND)
                             ref_aanums_start = pseq[max_apos_del_start - 1]
@@ -3619,7 +3619,12 @@ class Mapper (cravat.BaseMapper):
                                     diff_apos = apos_q
                                     diff_i = i
                                     break
-                            achange = f'p.{aanum_to_aa[pseq[diff_apos - 1]]}{diff_apos}{aanum_to_aa[TER]}'
+                                if apos_q == len(pseq) - 1:
+                                    break
+                            if diff_apos is None:
+                                achange = f'p.{aanum_to_aa[pseq[apos - 1]]}{apos}='
+                            else:
+                                achange = f'p.{aanum_to_aa[pseq[diff_apos - 1]]}{diff_apos}{aanum_to_aa[TER]}'
                     else: # multi-aa insertion in the middle
                         so = (SO_INI,)
                         alt_aa_first = alt_aas[0]
