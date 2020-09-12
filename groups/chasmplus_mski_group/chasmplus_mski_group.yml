@@ -1,0 +1,24 @@
+datasource: v1.0.0
+description: CHASMplus is a machine learning algorithm that discriminates somatic
+  missense mutations as either cancer drivers or passengers. Predictions can be done
+  in either a cancer type-specific manner or by a model considering multiple cancer
+  types together (a useful default). Along with scoring each mutation, CHASMplus has
+  a rigorous statistical model to evaluate the statistical significance of predictions.
+  This OpenCRAVAT module represents the v1.0 precompute of CHASMplus (source code
+  v1.0).
+developer:
+  citation: 'Tokheim C, Karchin R. CHASMplus Reveals the Scope of Somatic Missense
+    Mutations Driving Human Cancers. Cell Syst. 2019. doi: 10.1016/j.cels.2019.05.005.
+    PubMed PMID: 31202631.'
+  email: ctokhei1@alumni.jh.edu
+  name: Collin Tokheim
+  organization: Johns Hopkins University - Karchin Lab
+  website: http://chasmplus.readthedocs.io/en/latest/
+level: variant
+tags:
+- cancer
+- variant effect prediction
+title: CHASMplus MSK-IMPACT
+type: group
+version: 1.0.10
+requires_opencravat: '>=1.4.4'

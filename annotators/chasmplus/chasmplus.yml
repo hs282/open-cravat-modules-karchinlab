@@ -8,8 +8,9 @@ description: CHASMplus is a machine learning algorithm that discriminates somati
   This OpenCRAVAT module represents the v1.0 precompute of CHASMplus (source code
   v1.0).
 developer:
-  citation: Tokheim, C., Karchin, R. (2018). CHASMplus reveals the scope of somatic
-    missense mutations driving human cancers. bioRxiv, 313296.
+  citation: 'Tokheim C, Karchin R. CHASMplus Reveals the Scope of Somatic Missense
+    Mutations Driving Human Cancers. Cell Syst. 2019. doi: 10.1016/j.cels.2019.05.005.
+    PubMed PMID: 31202631.'
   email: ctokhei1@alumni.jh.edu
   name: Collin Tokheim
   organization: Johns Hopkins University - Karchin Lab
@@ -57,13 +58,13 @@ release_note:
   1.0.4: updated email,
   1.1.0: new gene summary architecture for open-cravat 1.5.0
 tags:
-- variants
 - cancer
 - variant effect prediction
 title: CHASMplus
 type: annotator
-version: 1.1.3
+version: 1.1.4
 requires:
+- wgndexchasmplussummary
 - wgchasmplus
 - chasmplus_group
 requires_opencravat: '>=1.5.0'
