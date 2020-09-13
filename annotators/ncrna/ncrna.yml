@@ -30,3 +30,12 @@ release_note:
 requires:
 - wgncrna
 requires_opencravat: '>=1.4.4'
+smartfilters:
+- name: hasdata
+  title: ncRNA
+  description: Variants with annotation from ncRNA
+  selector:
+    type: empty
+  filter:
+    column: ncrna__ncrnaname
+    test: hasData

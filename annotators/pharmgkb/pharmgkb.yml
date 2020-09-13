@@ -55,3 +55,12 @@ tags:
 - cancer
 - cardiovascular
 - literature
+smartfilters:
+- name: hasdata
+  title: PharmGKB
+  description: Variants with annotation from PharmGKB
+  selector:
+    type: empty
+  filter:
+    column: pharmgkb__pmid
+    test: hasData

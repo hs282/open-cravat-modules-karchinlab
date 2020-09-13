@@ -60,3 +60,12 @@ tags:
 - non coding
 - clinical relevance
 - literature
+smartfilters:
+- name: hasdata
+  title: GWAS Catalog
+  description: Variants with annotation from GWAS Catalog
+  selector:
+    type: empty
+  filter:
+    column: gwas_catalog__pmid
+    test: hasData

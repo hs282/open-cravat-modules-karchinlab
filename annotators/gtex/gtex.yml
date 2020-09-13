@@ -25,3 +25,12 @@ type: annotator
 version: 7.0.4
 requires:
 - wggtex
+smartfilters:
+- name: hasdata
+  title: GTEx eQTLs
+  description: Variants with annotation from GTEx eQTLs
+  selector:
+    type: empty
+  filter:
+    column: gtex__gtex_gene
+    test: hasData

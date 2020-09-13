@@ -34,3 +34,12 @@ requires:
 release_note:
   3.0.16: removed categorical column for better UI in webresult
   3.1.0: updated gene names according to https://www.genenames.org/download/custom/
+smartfilters:
+- name: hasdata
+  title: TARGET
+  description: Variants with annotation from TARGET
+  selector:
+    type: empty
+  filter:
+    column: target__therapy
+    test: hasData

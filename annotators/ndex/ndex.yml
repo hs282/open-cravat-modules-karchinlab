@@ -46,3 +46,12 @@ groups:
 release_note:
   4.0.11: included in ndex_group
   4.0.9: removed categorical column definition for better UI in webresult
+smartfilters:
+- name: hasdata
+  title: NDEx NCI Cancer Pathways
+  description: Variants with annotation from NDEx NCI Cancer Pathways
+  selector:
+    type: empty
+  filter:
+    column: ndex__networkid
+    test: hasData

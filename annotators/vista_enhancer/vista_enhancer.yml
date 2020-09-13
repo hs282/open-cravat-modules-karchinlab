@@ -31,3 +31,12 @@ title: VISTA Enhancer Browser
 type: annotator
 version: 2019.08.02
 commercial_warning: For commercial use, contact vtdelapuente@lbl.gov
+smartfilters:
+- name: hasdata
+  title: VISTA Enhancer Browser
+  description: Variants with annotation from VISTA Enhancer Browser
+  selector:
+    type: empty
+  filter:
+    column: vista_enhancer__element
+    test: hasData

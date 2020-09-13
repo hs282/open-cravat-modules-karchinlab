@@ -17,3 +17,12 @@ developer:
     functional variation in humans." Nature 501.7468 (2013): 506-511.'
 tags:
 - variants
+smartfilters:
+- name: hasdata
+  title: Geuvadis eQTLs
+  description: Variants with annotation from Geuvadis eQTLs
+  selector:
+    type: empty
+  filter:
+    column: geuvadis__gene
+    test: hasData

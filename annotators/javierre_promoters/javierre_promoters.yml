@@ -26,3 +26,12 @@ title: Promoter IR
 type: annotator
 version: 2019.05.20
 requires_opencravat: '>=1.4.4'
+smartfilters:
+- name: hasdata
+  title: Promoter IR
+  description: Variants with annotation from Promoter IR
+  selector:
+    type: empty
+  filter:
+    column: javierre_promoters__regions
+    test: hasData

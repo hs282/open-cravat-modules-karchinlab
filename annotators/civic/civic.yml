@@ -45,3 +45,12 @@ requires:
 - wgcivic
 release_note:
   1.0.14: Fail more gracefully when data can't be loaded
+smartfilters:
+- name: hasdata
+  title: CIViC
+  description: Variants with annotation from CIViC
+  selector:
+    type: empty
+  filter:
+    column: civic__id
+    test: hasData

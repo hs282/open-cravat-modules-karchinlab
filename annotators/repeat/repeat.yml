@@ -35,3 +35,12 @@ tags:
 title: Repeat Sequences
 type: annotator
 version: 2019.08.22
+smartfilters:
+- name: hasdata
+  title: Repeat Sequences
+  description: Variants with annotation from Repeat Sequences
+  selector:
+    type: empty
+  filter:
+    column: repeat__repeatname
+    test: hasData

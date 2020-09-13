@@ -33,3 +33,12 @@ version: 28.0.1
 requires:
 - wgpseudogene
 requires_opencravat: '>=1.4.4'
+smartfilters:
+- name: hasdata
+  title: Pseudogene
+  description: Variants with annotation from Pseudogene
+  selector:
+    type: empty
+  filter:
+    column: pseudogene__hugo
+    test: hasData
