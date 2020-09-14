@@ -18,7 +18,7 @@ output_columns:
   width: 60
   
 - name: metalr_rankscore
-  title: Rankscore
+  title: Rank score
   type: float
   desc: Ratio of the rank of the score over the total number of MetaLR scores.
   hidden: false

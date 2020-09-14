@@ -18,9 +18,9 @@ output_columns:
   width: 60
   
 - name: metasvm_rankscore
-  title: Rankscore
+  title: Rank score
   type: float
-  desc: Ratio of the rank of the score over the total number of MetaLR scores.
+  desc: Ratio of the rank of the score over the total number of MetaSVM scores.
   hidden: false
   width: 70
 

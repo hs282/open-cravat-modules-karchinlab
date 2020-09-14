@@ -1,20 +1,20 @@
 #CRAVAT Report
-#Created at Monday 12/17/2018 16:33:33
+#Created at Monday 09/14/2020 10:31:00
 #Report level: variant
 #
-Variant Annotation											Mutation Assessor				Tag Sampler		
-UID	Chrom	Position	Ref Base	Alt Base	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	Variant	Score	Ranked Score	Functional Impact	Number of Samples	Samples	Tags
-1	chr1	69094	G	A	Y	OR4F5	ENST00000335137.3	missense	V2M	ENST00000335137.3:OR4F5:Q8NH21:missense:V2M:G4A	V2M	2.86	0.83291	Medium	1		
-2	chr1	69105	C	A	Y	OR4F5	ENST00000335137.3	missense	F5L	ENST00000335137.3:OR4F5:Q8NH21:missense:F5L:C15A	F5L	2.615	0.76725	Medium	1		
+Variant Annotation																Mutation Assessor			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Variant	Score	Rank score	Functional Impact
+1	chr1	69094	G	A		Yes	OR4F5	ENST00000641515.2	missense_variant	c.67G>A	p.Val23Met	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Val2Met:c.4G>A; ENST00000641515.2:OR4F5::missense_variant:p.Val23Met:c.67G>A	0			V2M	2.86	0.83291	Medium
+2	chr1	69105	C	A		Yes	OR4F5	ENST00000641515.2	missense_variant	c.78C>A	p.Phe26Leu	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Phe5Leu:c.15C>A; ENST00000641515.2:OR4F5::missense_variant:p.Phe26Leu:c.78C>A	0			F5L	2.615	0.76725	Medium
 #CRAVAT Report
-#Created at Monday 12/17/2018 16:33:33
+#Created at Monday 09/14/2020 10:31:00
 #Report level: gene
 #
-Variant Annotation			
-Hugo	Variants in Gene	Sequence Ontology	All Sequence Ontologies
-OR4F5	2	missense	missense(2)
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+OR4F5		2	0	missense_variant	missense_variant(0)
 #CRAVAT Report
-#Created at Monday 12/17/2018 16:33:33
+#Created at Monday 09/14/2020 10:31:00
 #Report level: sample
 #
 Variant Annotation	
@@ -22,10 +22,10 @@ UID	Sample
 1	
 2	
 #CRAVAT Report
-#Created at Monday 12/17/2018 16:33:33
+#Created at Monday 09/14/2020 10:31:00
 #Report level: mapping
 #
-Variant Annotation		
-Original Line	User Tags	UID
-2		1
-3		2
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+2		1	0
+3		2	0
