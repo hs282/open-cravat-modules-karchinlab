@@ -4,16 +4,19 @@ type: webviewerwidget
 required_annotator: chasmplus
 requires_opencravat: '>=1.7.0'
 description: NDEX Enriched Cancer Pathways widget
-developer: {name: Rick Kim, organization: In Silico Solutions, email: rkim@insilico.us.com,
-  website: 'http://www.insilico.us.com', citation: ''}
-release_note: {1.0.9: aiosqlite3 version, 1.0.3: improved resize and redraw, 1.0.7: three
-    effective digits}
-hidden: true
-tags: [visualization widgets]
-max_num_hugos: 500
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
 release_note:
   1.1.0: works with single variant page in oc 1.7.0.
   1.0.15: data is obtained by post request.
   1.0.14: uses https.
   1.0.13: title change
   1.0.12: fix for TP53 due to NDEx data change
+hidden: true
+tags:
+- visualization
+max_num_hugos: 500

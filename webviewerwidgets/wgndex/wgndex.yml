@@ -10,13 +10,8 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 release_note:
-  1.0.5: fix for TP53 due to NDEx data change
-  1.0.1: improved resize and redraw
-tags:
-- visualization widgets
-hidden: true
-release_note:
-  1.0.6: uses https.
-requires_opencravat: '>=1.7.0'
-release_note:
   1.1.0: works with single variant page in oc 1.7.0.
+tags:
+- visualization
+hidden: true
+requires_opencravat: '>=1.7.0'

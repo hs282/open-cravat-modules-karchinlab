@@ -4,8 +4,12 @@ requires_opencravat: '>=2.0.2'
 required_annotator: base
 type: webviewerwidget
 description: Circos Summary result viewer widget
-developer: {name: Rick Kim, organization: In Silico Solutions, email: rkim@insilico.us.com,
-  website: 'http://www.insilico.us.com', citation: ''}
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
 release_note:
   2.0.2: aiosqlite instead of aiosqlite3
   1.1.8: works with open-cravat 1.6.1.
@@ -14,4 +18,5 @@ release_note:
   1.1.5: improved resize and redraw
   1.1.2: uses library circos.js.
   1.1.1: prevents an error with one histogram bar for a SO class.
-tags: [visualization widgets]
+tags:
+- visualization

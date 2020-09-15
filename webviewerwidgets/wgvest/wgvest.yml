@@ -10,11 +10,8 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 release_note:
-  1.0.1: fixed bar component color direction
-  1.0.2: hide by default
+  1.1.0: works with single variant page in oc 1.7.0.
 tags:
-- visualization widgets
+- visualization
 hidden: true
 requires_opencravat: '>=1.7.0'
-release_note:
-  1.1.0: works with single variant page in oc 1.7.0.
