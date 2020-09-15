@@ -10,7 +10,7 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 tags:
-- visualization widgets
+- visualization
 hidden: true
 private: true
 requires_opencravat: '>=2.1.0'

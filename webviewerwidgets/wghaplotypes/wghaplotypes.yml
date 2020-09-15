@@ -11,7 +11,7 @@ developer:
   website: ''
   citation: ''
 tags:
-- visualization widgets
+- visualization
 hidden: true
 release_note:
   1.1.0: works with single variant page in oc 1.7.0.

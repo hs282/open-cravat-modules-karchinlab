@@ -12,7 +12,7 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 tags:
-- visualization widgets
+- visualization
 release_note:
   1.1.0: works with single variant page in oc 1.7.0.
   1.0.5: works with single variant page.
