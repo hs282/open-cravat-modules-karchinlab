@@ -66,6 +66,8 @@ class CravatConverter(BaseConverter):
                     'zygosity':zygosity,
                 }
                 ret.append(wdict)
-        if ret and zygosity == 'hom':
+        if not ret:
+            return self.IGNORE
+        if zygosity == 'hom':
             ret = ret[:1]
         return ret
