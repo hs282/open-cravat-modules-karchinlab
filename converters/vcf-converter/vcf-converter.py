@@ -3,7 +3,7 @@ from cravat import BadFormatError
 from cravat import ExpectedException
 from cravat import InvalidData
 import re
-from collections import OrderedDict
+from collections import defaultdict
 from cravat.inout import CravatWriter
 from cravat import constants
 import os
@@ -34,6 +34,7 @@ class CravatConverter(BaseConverter):
         ]
         self.ex_info_writer = None
         self.curvar = None
+        self.csq_fields = None
 
     def check_format(self, f): 
         if f.name.endswith('.vcf'):
@@ -85,11 +86,22 @@ class CravatConverter(BaseConverter):
                 'type': typemap.get(info.type,'string'),
                 'hidden': True,
             })
+        if 'CSQ' in reader.infos:
+            csq_info = reader.infos['CSQ']
+            fields_match = re.search('Format: ([^\s]+)', csq_info.desc)
+            if fields_match:
+                self.csq_fields = ['CSQ_'+x for x in fields_match.group(1).split('|')]
+                for cname in self.csq_fields:
+                    info_cols.append({
+                        'name': cname,
+                        'title': cname.replace('_',' '),
+                        'type': 'string',
+                        'hidden': True,
+                    })
         self.ex_info_writer.add_columns(info_cols)
         self.ex_info_writer.write_definition()
         self.ex_info_writer.write_meta_line('name', 'extra_vcf_info')
         self.ex_info_writer.write_meta_line('displayname', 'Extra VCF INFO Annotations')
-
 
     def convert_line(self, l):
         if l.startswith('#'):
@@ -135,7 +147,24 @@ class CravatConverter(BaseConverter):
                 wdicts.append(wdict)
                 self.gt_occur.append(gt)
         self.curvar = variant
+        self.cur_csq = {}
+        if self.csq_fields and 'CSQ' in variant.INFO:
+            csq_entries = defaultdict(list)
+            for gt_csq in variant.INFO['CSQ']:
+                l = gt_csq.split('|')
+                csq_entries[l[0]].append(l)
+            for allele, entries in csq_entries.items():
+                transpose = zip(*entries)
+                alleled = {}
+                self.cur_csq[allele] = dict([(cname, self.csq_format(value)) for cname, value in zip(self.csq_fields, transpose)])
         return wdicts
+    
+    @staticmethod
+    def csq_format(l):
+        if all([x=='' for x in l]):
+            return None
+        else:
+            return ','.join(l)
 
     def trim_variant(self, pos, ref, alt):
         if len(ref) == 1 and len(alt) == 1:
@@ -165,7 +194,10 @@ class CravatConverter(BaseConverter):
             if self._reader.infos[info_name].type not in ('Integer','Float'):
                 info_val = str(info_val)
             row_data[info_name] = info_val
+        alt = self.curvar.ALT[gt_index].sequence
         row_data['pos'] = self.curvar.POS
         row_data['ref'] = self.curvar.REF
-        row_data['alt'] = self.curvar.ALT[gt_index].sequence
+        row_data['alt'] = alt
+        if self.cur_csq:
+            row_data.update(self.cur_csq.get(alt,{}))
         self.ex_info_writer.write_data(row_data)
