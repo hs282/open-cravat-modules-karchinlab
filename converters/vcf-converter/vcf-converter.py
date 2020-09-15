@@ -161,6 +161,8 @@ class CravatConverter(BaseConverter):
     
     @staticmethod
     def csq_format(l):
+        # Format a list of CSQ values into it's representation in OC
+        # Each value comes from a VEP transcript mapping
         if all([x=='' for x in l]):
             return None
         else:
