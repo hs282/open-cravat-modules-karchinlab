@@ -35,20 +35,8 @@ async def get_data (queries):
             hugos = [v[0] for v in await cursor.fetchall() if len(v[0].strip()) > 0]
     await cursor.close()
     await conn.close()
-    '''
-    query = 'select name from sqlite_master where type="table" and ' +\
-        'name="variant"'
-    cursor.execute(query)
-    r = cursor.fetchone()
-    if r is not None:
-        query = 'select distinct base__hugo from variant'
-        cursor.execute(query)
-        hugos = [v[0] for v in cursor.fetchall() if len(v[0].strip()) > 0]
-    '''
 
     if hugos == []:
-        await cursor.close()
-        await conn.close()
         return response
 
     conn = await aiosqlite.connect(os.path.join(os.path.dirname(__file__), 
