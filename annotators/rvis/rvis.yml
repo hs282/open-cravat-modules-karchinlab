@@ -47,6 +47,9 @@ tags:
 - genes
 title: RVIS
 type: annotator
-version: 3.0.8
+version: 3.1.0
+requires_opencravat: '>=2.0.0'
 requires:
 - wgrvis
+release-note:
+  3.1.0: updated gene names according to https://www.genenames.org/download/custom/

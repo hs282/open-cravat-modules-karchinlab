@@ -18,6 +18,12 @@ gene_summary_output_columns:
   type: string
   width: 160
 output_columns:
+- desc: Domain or conserved site on which the variant is located. Multiple entries separated by ";"
+  filterable: true
+  name: domain
+  title: Domain
+  type: string
+  width: 62
 - desc: Associated UniProt accession number. Multiple entries separated by ";"
   hidden: true
   name: uniprot_acc
@@ -25,18 +31,20 @@ output_columns:
   type: string
   width: 70
   filterable: false
-- desc: Domain or conserved site on which the variant is located
+- desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"
   filterable: true
-  name: domain
-  title: Domain
+  name: ensembl_transcriptid
+  title: Ensembl Transcript ID
   type: string
-  width: 62
+  width: 80
+  hidden: true
 tags:
 - genes
 title: InterPro
 type: annotator
-version: 71.0.6
+version: 71.1.0
 requires:
 - wginterpro
 release_note:
   71.0.6: gene level aggregation for 1.5.0
+  71.1.0: ensembl transcript ids added

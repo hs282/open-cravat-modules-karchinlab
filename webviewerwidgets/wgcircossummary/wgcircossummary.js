@@ -58,6 +58,8 @@ widgetGenerators['circossummary'] = {
             } else if (v['data'] != undefined) {
                 data = v['data'];
             }
+            div.style.margin = 0;
+            div.style.padding = 0;
             var width = null;
             var height = null;
             width = div.offsetWidth;
@@ -88,11 +90,6 @@ widgetGenerators['circossummary'] = {
             btn.style.zIndex = '2';
             btn.setAttribute('widgetname', widgetName);
             btn.addEventListener('click', function (evt) {
-                /*
-                var div = this.parentElement;
-                div.style.width = (v['width'] * 1.2) + 'px';
-                div.style.height = (v['height'] * 1.2) + 'px';
-                */
                 v['zoom'] *= 1.2;
                 widgetGenerators[v['widgetname']][currentTab]['function']();
             });

@@ -23,12 +23,12 @@ output_columns:
   desc: Functional impact combined score
   hidden: true
 - name: mut_rscore
-  title: Ranked Score
+  title: Rank score
   type: float
   width: 54
   filterable: false
   desc: Rank of the score in dbNSFP divided by the total number of scores in dbNSFP
-  hidden: true
+  hidden: false
 - name: mut_pred
   title: Functional Impact
   type: string

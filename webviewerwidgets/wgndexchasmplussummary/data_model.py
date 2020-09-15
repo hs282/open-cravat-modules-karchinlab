@@ -3,14 +3,15 @@ __author__ = 'dexter'
 from operator import itemgetter, attrgetter
 from os.path import join, isdir
 from os import listdir
-import fake_persistence as storage
 import sys
 import os
 from math import log, exp
-script_dir = os.path.dirname(__file__)
-sys.path = [script_dir] + sys.path
 from mpmath import loggamma
-del sys.path[0]
+import importlib.util
+script_dir = os.path.dirname(os.path.abspath(__file__))
+spec = importlib.util.spec_from_file_location('fake_persistence', os.path.join(script_dir, 'fake_persistence.py'))
+storage = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(storage)
 
 def logchoose(ni, ki):
     try:
@@ -310,11 +311,3 @@ class Coverage():
 
     def to_dict(self):
         return self.get_sorted_ids()
-
-
-
-
-
-
-
-

@@ -1,16 +1,28 @@
 import os
 import sys
-script_dir = os.path.dirname(__file__)
-sys.path = [script_dir] + sys.path
-import data_model as dm
-del sys.path[0]
 import json
-
-e_data = dm.EnrichmentData(os.path.join(script_dir, "data"))
+import yaml
+import importlib.util
+script_dir = os.path.dirname(os.path.abspath(__file__))
+spec = importlib.util.spec_from_file_location('data_model', os.path.join(script_dir, 'data_model.py'))
+data_model = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(data_model)
+e_data = data_model.EnrichmentData(os.path.join(script_dir, "data"))
 e_data.load()
+ymlpath = '.'.join(os.path.abspath(__file__).split('.')[:-1]) + '.yml'
+with open(ymlpath) as f:
+    conf = yaml.safe_load(f)
+max_num_hugos = conf['max_num_hugos']
 
 def run_query (hugos):
     query_ids = hugos
+    if len(query_ids) > max_num_hugos:
+        result = {
+            'scores': None, 
+            'coverage': None, 
+            'msg': f'Too many genes. Use the Filter tab to reduce the number of genes to below {max_num_hugos}.'
+        }
+        return result
     matched_genes = {}
     for term in query_ids:
         matched_genes[term] = [term]

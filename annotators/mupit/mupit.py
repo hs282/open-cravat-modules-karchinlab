@@ -43,6 +43,8 @@ class CravatAnnotator(BaseAnnotator):
                     gms.append(gm)
         if len(gms) > 0:
             link = 'http://www.cravat.us/MuPIT_Interactive?gm=' + ','.join(gms)
+            if len(link) > 2000:
+                link = 'URL too long';
             out = {'link': link}
         return out
 

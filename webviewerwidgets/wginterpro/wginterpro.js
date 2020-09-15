@@ -1,6 +1,6 @@
 widgetGenerators['interpro'] = {
 	'variant': {
-		'width': 480, 
+		'width': 520, 
 		'height': 140, 
 		'word-break': 'normal',
 		'function': function (div, row, tabName) {
@@ -8,24 +8,19 @@ widgetGenerators['interpro'] = {
 			var accls = acc != null ? acc.split(';') : [];
 			var dom = getWidgetData(tabName, 'interpro', row, 'domain');
 			var domls = dom != null ? dom.split(';') : [];
+			var enst = getWidgetData(tabName, 'interpro', row, 'ensembl_transcriptid')
+			var enstls = enst != null ? enst.split(';') : [];
 			var table = getWidgetTableFrame();
 			addEl(div, table);
-			var thead = getWidgetTableHead(['UniProt', 'Domain', 'Link'],['20%','70%','10%']);
+			var thead = getWidgetTableHead(['Domain', 'UniProt', 'Ensembl', 'Link'],['55%','13%','22%','10%']);
 			addEl(table, thead);
 			var tbody = getEl('tbody');
 			addEl(table, tbody);
-			var dups = [];
-			for (var j=0;j<accls.length;j++){
-				if(accls[j] !== '.' && domls[j] !== '.'){
-					if(!dups.includes(accls[j]+domls[j])){
-						var link = 'https://www.ebi.ac.uk/interpro/protein/'+accls[j];
-						var tr = getWidgetTableTr([accls[j], domls[j], link]);
-						addEl(tbody, tr);
-						dups.push(accls[j]+domls[j]);
-					}
-				}
+			for (let i=0; i<accls.length; i++){
+					var link = 'https://www.ebi.ac.uk/interpro/protein/'+accls[i];
+					var tr = getWidgetTableTr([domls[i], accls[i], enstls[i], link]);
+					addEl(tbody, tr);
 			}
-			addEl(div, addEl(table, tbody));
 		}
 	}
 }

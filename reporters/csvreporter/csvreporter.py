@@ -54,18 +54,16 @@ class Reporter(CravatReport):
                 line = 'Column description. Column {} {}:{}={}'.format(colno, module_name, col_name, col['col_title'])
                 self.write_preface_line(line)
                 colno += 1
-        line = '#'
+        row = []
         colno = 0
         for colgroup in self.colinfo[level]['colgroups']:
             count = colgroup['count']
             if count == 0:
                 continue
             for col in self.colinfo[level]['columns'][colno:colno+count]:
-                line += ':'.join(col['col_name'].split('__')) + ','
+                row.append(col['col_name'].replace('__', ':'))
                 colno += 1
-        if line[-1] == ',':
-            line = line[:-1]
-        self.write_preface_line(line)
+        self.write_body_line(row)
     
     def write_table_row (self, row):
         self.write_body_line([
