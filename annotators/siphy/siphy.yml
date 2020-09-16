@@ -37,3 +37,14 @@ type: annotator
 version: 3.5.5
 requires:
 - wgsiphy
+smartfilters:
+- name: rankscore
+  title: SiPhy Rank Score >=
+  description: Include variants which have a rank score greater than or equal to 0.90.
+  selector:
+    type: inputFloat
+    defaultValue: 0.90
+  filter:
+    column: siphy__logodds_rank
+    test: greaterThanEq
+    value: ${value}

@@ -49,3 +49,14 @@ type: annotator
 version: 2.3.5
 requires:
 - wgfathmm
+smartfilters:
+- name: rankscore
+  title: FATHMM Rank Score >=
+  description: Include variants which have a rank score greater than or equal to 0.90.
+  selector:
+    type: inputFloat
+    defaultValue: 0.90
+  filter:
+    column: fathmm__fathmm_rscore
+    test: greaterThanEq
+    value: ${value}
