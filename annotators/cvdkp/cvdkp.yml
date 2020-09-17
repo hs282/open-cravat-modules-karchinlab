@@ -36,7 +36,7 @@ output_columns:
   hidden: false
   width: 100
 tags:
-- variants
+- variant effect prediction
 - clinical relevance
 - cardiovascular
 title: Cardiovascular Disease Knowledge Portal
