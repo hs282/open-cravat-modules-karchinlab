@@ -42,7 +42,7 @@ class CravatAnnotator(BaseAnnotator):
         query = f'select score, nseq from sift where chrom="{chrom}" and pos={pos} and ref="{ref_base}" and alt="{alt_base}";'
         self.cursor.execute(query)
         result = self.cursor.fetchone()
-        if result:
+        if result is not None:
             score = result[0]
             num_seq = result[1]
             if score <= 0.05:
@@ -54,7 +54,9 @@ class CravatAnnotator(BaseAnnotator):
                 'seq_count': num_seq,
                 'prediction': prediction,
             }
-    
+        else:
+            return None
+
     def cleanup(self):
         """
         cleanup is called after every input line has been processed. Use it to
