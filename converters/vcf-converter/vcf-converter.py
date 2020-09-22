@@ -137,6 +137,8 @@ class CravatConverter(BaseConverter):
                 if gt == '0' or gt is None:
                     continue
                 wdict = copy.copy(wdict_blanks[gt])
+                if wdict['alt_base'] == '*':
+                    continue
                 wdict['sample_id'] = call.sample
                 wdict['zygosity'] = 'het' if call.is_het else 'hom'
                 wdict['alt_reads'] = None #FIXME
