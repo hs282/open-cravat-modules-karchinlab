@@ -121,7 +121,7 @@ class CravatConverter(BaseConverter):
         wdict_blanks = {}
         for gtn,alt in enumerate(variant.ALT):
             if alt is None:
-                alt_base = ''
+                alt_base = variant.REF
             else:
                 alt_base = alt.sequence
             new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt_base)
@@ -136,10 +136,12 @@ class CravatConverter(BaseConverter):
             }
         wdicts = []
         self.gt_occur = []
+        all_gt_zero = True
         for call in variant.samples:
             for gt in call.gt_alleles:
                 if gt == '0' or gt is None:
                     continue
+                all_gt_zero = False
                 wdict = copy.copy(wdict_blanks[gt])
                 if wdict['alt_base'] == '*':
                     continue
@@ -152,6 +154,8 @@ class CravatConverter(BaseConverter):
                 wdict['hap_strand'] = None #FIXME
                 wdicts.append(wdict)
                 self.gt_occur.append(gt)
+        if all_gt_zero:
+            raise BadFormatError('All sample GT are zero')
         self.curvar = variant
         self.cur_csq = {}
         if self.csq_fields and 'CSQ' in variant.INFO:
