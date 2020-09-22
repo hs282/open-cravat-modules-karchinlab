@@ -12,7 +12,6 @@ developer:
 tags:
 - visualization
 hidden: true
-private: true
 requires_opencravat: '>=2.1.0'
 max_num_hugos: 500
 release_note:

@@ -41,9 +41,9 @@ requires_opencravat: '>=2.1.0'
 requires:
 - wgndex_signor
 - ndex_group
+- wgndex_signorsummary
 groups:
 - ndex_group
-private: true
 release_note:
   1.0.1: included in ndex_group
   1.0.0: initial version
