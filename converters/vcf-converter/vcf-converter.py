@@ -120,7 +120,11 @@ class CravatConverter(BaseConverter):
         variant = next(self._reader)
         wdict_blanks = {}
         for gtn,alt in enumerate(variant.ALT):
-            new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt.sequence)
+            if alt is None:
+                alt_base = ''
+            else:
+                alt_base = alt.sequence
+            new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt_base)
             wdict_blanks[str(gtn+1)] = {
                 'chrom': variant.CHROM,
                 'pos': new_pos,
