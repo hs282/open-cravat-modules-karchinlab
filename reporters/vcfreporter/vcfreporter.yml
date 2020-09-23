@@ -1,5 +1,5 @@
 title: VCF Reporter
-version: 2.1.0
+version: 2.1.1
 type: reporter
 description: VCF format text file reporter
 requires_opencravat: '>=2.1.0'
