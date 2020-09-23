@@ -136,26 +136,34 @@ class CravatConverter(BaseConverter):
             }
         wdicts = []
         self.gt_occur = []
-        all_gt_zero = True
-        for call in variant.samples:
-            for gt in call.gt_alleles:
-                if gt == '0' or gt is None:
-                    continue
-                all_gt_zero = False
+        if len(variant.samples) > 0:
+            all_gt_zero = True
+            for call in variant.samples:
+                for gt in call.gt_alleles:
+                    if gt == '0' or gt is None:
+                        continue
+                    all_gt_zero = False
+                    wdict = copy.copy(wdict_blanks[gt])
+                    if wdict['alt_base'] == '*':
+                        continue
+                    wdict['sample_id'] = call.sample
+                    wdict['zygosity'] = 'het' if call.is_het else 'hom'
+                    wdict['alt_reads'] = None #FIXME
+                    wdict['tot_reads'] = None #FIXME
+                    wdict['af'] = None #FIXME
+                    wdict['hap_block'] = None #FIXME
+                    wdict['hap_strand'] = None #FIXME
+                    wdicts.append(wdict)
+                    self.gt_occur.append(gt)
+            if all_gt_zero:
+                raise BadFormatError('All sample GT are zero')
+        else:
+            for gt in wdict_blanks:
                 wdict = copy.copy(wdict_blanks[gt])
                 if wdict['alt_base'] == '*':
-                    continue
-                wdict['sample_id'] = call.sample
-                wdict['zygosity'] = 'het' if call.is_het else 'hom'
-                wdict['alt_reads'] = None #FIXME
-                wdict['tot_reads'] = None #FIXME
-                wdict['af'] = None #FIXME
-                wdict['hap_block'] = None #FIXME
-                wdict['hap_strand'] = None #FIXME
+                        continue
                 wdicts.append(wdict)
                 self.gt_occur.append(gt)
-        if all_gt_zero:
-            raise BadFormatError('All sample GT are zero')
         self.curvar = variant
         self.cur_csq = {}
         if self.csq_fields and 'CSQ' in variant.INFO:
