@@ -1,0 +1,7 @@
+##fileformat=VCFv4.1
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO 
+1	107324410	.	G	C	.	.	.
+17	43045715	.	G	T	.	.	.
+17	43106485	.	A	G,C	.	.	.
+17	43106487	.	A	C	.	.	.
+17	43097269	.	T	C	.	.	.
