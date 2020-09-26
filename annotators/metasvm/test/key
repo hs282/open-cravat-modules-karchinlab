@@ -1,10 +1,10 @@
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:28:33
+#Created at Saturday 09/26/2020 13:27:08
 #Report level: variant
 #
 Variant Annotation																MetaSVM		
 UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Score	Rank score	Prediction
-1	chr10	121593817	T	A		Yes	FGFR2	ENST00000457416.6	start_lost	c.1A>T	p.Met1?	ENST00000346997.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000351936.10:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000356226.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000357555.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000358487.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000359354.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000360144.7:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369056.5:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369059.5:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369060.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369061.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000457416.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000490349.5:FGFR2::processed_transcript::; ENST00000491111.1:FGFR2::processed_transcript::; ENST00000604236.5:FGFR2::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000611527.1:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000613048.4:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000636922.1:FGFR2::NSD_transcript::	1	s0		0.4701	0.90122	Damaging
+1	chr10	121593817	T	A		Yes	FGFR2	ENST00000358487.9	start_lost	c.1A>T	p.Met1?	ENST00000346997.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000351936.10:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000356226.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000357555.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000358487.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000359354.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000360144.7:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369056.5:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369059.5:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369060.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369061.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000457416.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000490349.5:FGFR2::processed_transcript::; ENST00000491111.1:FGFR2::processed_transcript::; ENST00000604236.5:FGFR2::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000611527.1:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000613048.4:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000636922.1:FGFR2::NSD_transcript::	1	s0		0.4701	0.90122	Damaging
 2	chr1	69037	G	A		Yes	OR4F5	ENST00000641515.2	missense_variant	c.10G>A	p.Val4Ile	ENST00000335137.4:OR4F5:Q8NH21:2kb_upstream_variant::c.-54G>A; ENST00000641515.2:OR4F5::missense_variant:p.Val4Ile:c.10G>A	1	s1		-0.8394	0.52686	Tolerated
 3	chr11	168961	T	A		Yes	BET1L	ENST00000410108.5	missense_variant	c.456A>T	p.Lys152Asn	ENST00000410108.5:BET1L::missense_variant:p.Lys152Asn:c.456A>T; ENST00000527297.1:AC069287.3::intron_variant,lnc_RNA::	1	s2		-0.9711	0.36967	Tolerated
 4	chr15	20534262	G	C		Yes	GOLGA6L6	ENST00000619213.1	missense_variant	c.2172C>G	p.His724Gln	ENST00000619213.1:GOLGA6L6:A8MZA4:missense_variant:p.His724Gln:c.2172C>G	1	s3		-0.9686	0.37489	Tolerated
@@ -13,7 +13,7 @@ UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontolo
 7	chr5	140308	A	C		Yes	PLEKHG4B	ENST00000283426.11	start_lost	c.1A>C	p.Met1?	ENST00000283426.11:PLEKHG4B:Q96PX9:missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000637938.1:PLEKHG4B::missense_variant:p.Met357Leu:c.1069A>C	1	s6		-1.0227	0.22834000000000002	Tolerated
 8	chr1	69193	A	C		Yes	OR4F5	ENST00000641515.2	missense_variant	c.166A>C	p.Asn56His	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Asn35His:c.103A>C; ENST00000641515.2:OR4F5::missense_variant:p.Asn56His:c.166A>C	1	s7		0.417	0.8935299999999999	Damaging
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:28:33
+#Created at Saturday 09/26/2020 13:27:08
 #Report level: gene
 #
 Variant Annotation					
@@ -26,7 +26,7 @@ TUBB8B		1	0	missense_variant	missense_variant(1),processed_transcript(1)
 CHL1		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),processed_transcript(1),3_prime_UTR_variant(1)
 PLEKHG4B		1	0	start_lost	missense_variant(1),start_lost(1)
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:28:33
+#Created at Saturday 09/26/2020 13:27:08
 #Report level: sample
 #
 Variant Annotation	
@@ -40,7 +40,7 @@ UID	Sample
 7	s6
 8	s7
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:28:33
+#Created at Saturday 09/26/2020 13:27:08
 #Report level: mapping
 #
 Variant Annotation			
