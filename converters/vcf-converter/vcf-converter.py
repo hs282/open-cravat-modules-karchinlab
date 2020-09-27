@@ -46,7 +46,7 @@ class CravatConverter(BaseConverter):
             return True
 
     def setup(self, f):
-        reader = vcf.Reader(f)
+        reader = vcf.Reader(f, compressed=False)
         self.open_extra_info(reader)
     
     def open_extra_info(self, reader):
