@@ -1,0 +1,103 @@
+title: Variant Report
+version: 0.0.1
+type: webapp
+requires:
+- hg38
+- chasmplus
+- civic
+- cosmic
+- cgc
+- cgl
+- target
+- gnomad
+- thousandgenomes
+- hgdp
+- esp6500
+- abraom
+- uk10k_cohort
+- pharmgkb
+- clinvar
+- clingen
+- denovo
+- gwas_catalog
+- ess_gene
+- gnomad_gene
+- prec
+- phi
+- ghis
+- loftool
+- interpro
+- gtex
+- rvis
+- ncbigene
+- vest
+- mutpred1
+- mutation_assessor
+- fathmm
+- phdsnpg
+- phastcons
+- phylop
+- linsight
+- ncrna
+- pseudogene
+- biogrid
+- intact
+- ndex
+- mupit
+- wgbase
+- wglollipop
+- wgchasmplus
+- wgcivic
+- wgcosmic
+- wgcgc
+- wgcgl
+- wgtarget
+- wggnomad
+- wgthousandgenomes
+- wghdgp
+- wgesp6500
+- wgabraom
+- wguk10k_cohort
+- wgpharmgkb
+- wgclinvar
+- wgcligen
+- wgdenovo
+- wggwas_catalog
+- wgess_gene
+- wggnomad_gene
+- wgprec
+- wgphi
+- wgghis
+- wgloftool
+- wginterpro
+- wggtex
+- wgrvis
+- wgncbigene
+- wgvest
+- wgmutpred1
+- wgmutation_assessor
+- wgfathmm
+- wgphdsnpg
+- wgphastcons
+- wgphylop
+- wglinsight
+- wgncrna
+- wgpseudogene
+- wgbiogrid
+- wgintact
+- wgndex
+- wgmupit
+description: Variant Report Webapp
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+release_note:
+  0.0.1: initial release
+tags:
+- webapp
+hidden: false
+requires_opencravat: '>=1.7.0'
+uselocalonstore: true
