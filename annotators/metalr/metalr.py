@@ -10,11 +10,15 @@ class CravatAnnotator(BaseAnnotator):
             chr=input_data["chrom"], pos=int(input_data["pos"]), ref = input_data["ref_base"], alt = input_data["alt_base"])
         self.cursor.execute(q)
         row = self.cursor.fetchone()
-        metalr_pred = str(row[2]).replace('T', 'Tolerated')
-        metalr_pred = metalr_pred.replace('D', 'Damaging')
         if row:
-            out = {'metalr_score': row[0], 'metalr_rankscore': row[1], 'metalr_pred': metalr_pred}
-        return out
+            if row[2] == 'T':
+                pred = 'Tolerated'
+            elif row[2] == 'D':
+                pred = 'Damaging'
+            else:
+                pred = None
+            out = {'score': row[0], 'rankscore': row[1], 'pred': metalr_pred}
+            return out
 
     def cleanup(self):
         pass
