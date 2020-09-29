@@ -3,11 +3,11 @@
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src='js/util.js'></script>
 	<script src='js/widgethelper.js'></script>
-	<script src='js/singlevariantpage.js'></script>
+	<script src='js/variantreport.js'></script>
 	<script src='js/graphics.js'></script>
 	<script src='js/raphael-min.js'></script>
 	<link rel='stylesheet' href='css/widget.css' />
-	<link rel='stylesheet' href='css/singlevariantpage.css' />
+	<link rel='stylesheet' href='css/variantreport.css' />
     <title></title>
 </head>
 <body>
@@ -24,7 +24,7 @@
     <div id='inputdiv' style='display: none; position: absolute; top: 44px; right: 22px; font-size: 12px; z-index: 3; background-color: white; padding: 20px; width: 250px; box-shadow: 4px 4px 4px gray; border: 1px dashed gray;'>
         <span>Type a variant and enter or click the Update annotation button. The syntax of a variant is chromosome, position, reference allele, and alternate allele, concatenated with a colon. Strand is assumed to be plus. For example, chr17:39724004:C:G</span>
         <br />
-        <input id="input_variant" name="inputVariant" size="40" style='margin-top: 8px;' />
+        <input id="input_variant" name="inputVariant" style='margin-top: 8px;' />
         <button id="input_submit" onclick="submitForm();" style='margin-top: 8px;' >Update annotation</button>
     </div>
 </div>

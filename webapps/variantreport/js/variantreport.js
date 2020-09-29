@@ -1,6 +1,5 @@
 var CLOSURE_NO_DEPS = true;
 var annotData = null;
-//var widgetContainerDiv = null;
 var sectionWidth = 1200;
 
 function getInputDataFromUrl () {
@@ -45,12 +44,14 @@ function submitForm () {
     var alt = toks[3];
     var inputData = cleanInputData(chrom, pos, ref, alt);
     if (inputData != null) {
+        showContentDiv();
         submitAnnotate(inputData['chrom'], inputData['pos'], inputData['ref'], inputData['alt']);
+        hideSearch();
     }
 }
 
 function submitAnnotate (inputChrom, inputPos, inputRef, inputAlt) {
-    var url = '/submit/annotate';
+    var url = 'annotate';
     var params = {'chrom':inputChrom, 'pos':parseInt(inputPos), 'ref_base':inputRef, 'alt_base':inputAlt};
     $.ajax({
         type: 'POST',
@@ -166,7 +167,9 @@ function getWidgets (callback, callbackArgs) {
             $.getScript('/result/widgetfile/' + widgetName + '/' + widgetName + '.js', function () {
                 widgetLoadCount += 1;
                 if (widgetLoadCount == tmpWidgets.length) {
-                    callback(callbackArgs);
+                    if (callback != null) {
+                        callback(callbackArgs);
+                    }
                 }
             });
         }
@@ -887,6 +890,14 @@ function hideSearch () {
     document.querySelector('#inputdiv').style.display = 'none';
 }
 
+function showContentDiv () {
+    document.querySelector('#detaildiv_variant').style.display = 'block';
+}
+
+function hideContentDiv () {
+    document.querySelector('#detaildiv_variant').style.display = 'none';
+}
+
 function toggleSearch () {
     var display = document.querySelector('#inputdiv').style.display;
     if (display == 'none') {
@@ -901,9 +912,19 @@ function onClickSearch () {
 }
 
 function run () {
-    showSpinner();
-    setupEvents();
-    getWidgets(processUrl, null);
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('chrom') != null && params.get('pos') != null && params.get('ref_base') != null && params.get('alt_base') != null) {
+        showSpinner();
+        hideSearch();
+        setupEvents();
+        getWidgets(processUrl, null);
+    } else {
+        hideSpinner();
+        hideContentDiv();
+        showSearch();
+        setupEvents();
+        getWidgets(null, null);
+    }
 }
 
 window.onload = function () {
