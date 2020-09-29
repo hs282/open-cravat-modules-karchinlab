@@ -139,7 +139,7 @@ class CravatConverter(BaseConverter):
         if len(variant.samples) > 0:
             all_gt_zero = True
             for call in variant.samples:
-                for gt in call.gt_alleles:
+                for gt in set(call.gt_alleles):
                     if gt == '0' or gt is None:
                         continue
                     all_gt_zero = False
