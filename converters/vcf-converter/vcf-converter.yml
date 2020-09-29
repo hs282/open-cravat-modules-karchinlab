@@ -1,5 +1,6 @@
+private: true
 title: VCF Converter
-version: 1.5.4
+version: 2.0.0
 type: converter
 description: Converter for VCF format input
 developer:
@@ -10,6 +11,7 @@ developer:
   citation: ''
 requires_opencravat: '>=1.8.0'
 release_note:
+  2.0.0: use pyvcf library
   1.5.4: bugfix for multiple input files
   1.5.3: handles module option include_info.
   1.5.2: fixed no-sample.
