@@ -46,13 +46,18 @@ class CravatConverter(BaseConverter):
             return True
 
     def setup(self, f):
+        if hasattr(self, 'conf') == False:
+            self.conf = {}
+        if type(self.conf.get('include_info')) == str:
+            self.include_info  = set(self.conf['include_info'].split(','))
+        else:
+            self.include_info = set()
         reader = vcf.Reader(f, compressed=False)
         self.open_extra_info(reader)
     
     def open_extra_info(self, reader):
         if not reader.infos:
             return
-        self.has_extra_info = True
         writer_path = Path(self.output_dir)/(self.run_name+'.extra_vcf_info.var')
         self.ex_info_writer = CravatWriter(str(writer_path))
         info_cols = [{'name':'uid','title':'UID','type':'int'}]
@@ -98,6 +103,15 @@ class CravatConverter(BaseConverter):
                         'type': 'string',
                         'hidden': True,
                     })
+        if self.include_info:
+            self.include_info.update([c['name'] for c in info_cols[:3]])
+            temp = info_cols
+            info_cols = []
+            for col in temp:
+                if col['name'] in self.include_info:
+                    col['hidden'] = False
+                    info_cols.append(col)
+            del temp
         self.ex_info_writer.add_columns(info_cols)
         self.ex_info_writer.write_definition()
         self.ex_info_writer.write_meta_line('name', 'extra_vcf_info')
