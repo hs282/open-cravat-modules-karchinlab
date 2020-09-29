@@ -88,7 +88,7 @@ class CravatConverter(BaseConverter):
             })
         if 'CSQ' in reader.infos:
             csq_info = reader.infos['CSQ']
-            fields_match = re.search('Format: ([^\s]+)', csq_info.desc)
+            fields_match = re.search(r'Format: ([^\s]+)', csq_info.desc)
             if fields_match:
                 self.csq_fields = ['CSQ_'+x for x in fields_match.group(1).split('|')]
                 for cname in self.csq_fields:
@@ -148,9 +148,7 @@ class CravatConverter(BaseConverter):
                         continue
                     wdict['sample_id'] = call.sample
                     wdict['zygosity'] = 'het' if call.is_het else 'hom'
-                    wdict['alt_reads'] = None #FIXME
-                    wdict['tot_reads'] = None #FIXME
-                    wdict['af'] = None #FIXME
+                    wdict['tot_reads'], wdict['alt_reads'], wdict['af'] = self.extract_read_info(call, gt)
                     wdict['hap_block'] = None #FIXME
                     wdict['hap_strand'] = None #FIXME
                     wdicts.append(wdict)
@@ -173,9 +171,29 @@ class CravatConverter(BaseConverter):
                 csq_entries[l[0]].append(l)
             for allele, entries in csq_entries.items():
                 transpose = zip(*entries)
-                alleled = {}
                 self.cur_csq[allele] = dict([(cname, self.csq_format(value)) for cname, value in zip(self.csq_fields, transpose)])
         return wdicts
+
+    @staticmethod
+    def extract_read_info(call, gt):
+        if hasattr(call.data,'AD'):
+            tot_reads = sum(call.data.AD)
+            alt_reads = call.data.AD[int(gt)]
+        elif hasattr(call.data,'DP'):
+            tot_reads = call.data.DP
+            alt_reads = None
+        else:
+            tot_reads = None
+            alt_reads = None
+        if tot_reads is not None and alt_reads is not None:
+            try:
+                alt_freq = alt_reads/tot_reads
+            except ZeroDivisionError:
+                alt_freq = None
+        else:
+            alt_freq = None
+        return tot_reads, alt_reads, alt_freq
+
     
     @staticmethod
     def csq_format(l):
