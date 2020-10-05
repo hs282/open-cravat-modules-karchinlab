@@ -133,8 +133,8 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_vannot');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '460px';
-    showWidget('basepanel', ['base', 'lollipop', 'hgvs'], 'variant', parentDiv);
+    parentDiv.style.height = '560px';
+    showWidget('basepanel', ['base','lollipop', 'hgvs'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_cancer');
     showWidget('cancerpanel', ['base', 'chasmplus', 'civic', 'cosmic', 'cgc', 'cgl', 'target'], 'variant', parentDiv, undefined, undefined, false);
     var parentDiv = document.querySelector('#contdiv_af');
@@ -186,23 +186,133 @@ function getNodataSpan () {
 var widgetInfo = {};
 var widgetGenerators = {};
 
+widgetInfo['base2'] = {'title': ''};
+widgetGenerators['base2'] = {
+	'variant': {
+		'width': 580, 
+		'height': 200, 
+		'function': function (div, row, tabName) {
+            var hugo = getWidgetData(tabName, 'base', row, 'hugo');
+            var transcript = getWidgetData(tabName, 'base', row, 'transcript');
+            var nref = getWidgetData(tabName, 'base', row, 'ref_base').length;
+            var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
+            var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
+            var nalt = getWidgetData(tabName, 'base', row, 'alt_base').length;
+            var chrom = getWidgetData(tabName, 'base', row, 'chrom');
+            var chrom = chrom.substring(3)
+            var thous_af = getWidgetData(tabName, 'thousandgenomes', row, 'af');
+            var gnomad_af = getWidgetData(tabName, 'gnomad', row, 'af')
+            addInfoLine(div, transcript + '(' + hugo + ')', getWidgetData(tabName, 'base', row, 'cchange') + ' ' + '(' + getWidgetData(tabName, 'base', row, 'achange') + ')', tabName);
+            if (nref==1 && nalt==1 && ref_base != '-' && alt_base != '-'){
+                var variant_type = 'single nucleotide variant';
+            }
+            if (nref > 1 && nalt == 1 && alt_base == '-'){
+                var variant_type = 'deletion';
+            }
+            if (nref == 1 && nalt > 1 && ref_base == '-'){
+                var variant_type = 'insertion';
+            }
+            if (nref > 1 && nalt > 1){
+                var variant_type = 'complex substitution';
+            }
+            addEl(div, getEl('br'));
+            addInfoLine(div, 'Variant type', variant_type);
+            if (variant_type == 'single nucleotide variant'){
+                var variant_length = '1';
+            }
+            if (variant_type == 'deletion'){
+                var variant_length = nref;
+            }
+            if (variant_type == 'insertion' && 'complex substitution'){
+                var variant_length = nalt;
+            }
+            addInfoLine(div, 'Variant Length', variant_length);
+            addInfoLine(div, 'Cytogenetic Location')
+            addInfoLine(div, 'Genomic Location',  chrom + ':' + ' '+ getWidgetData(tabName, 'base', row, 'pos') + ' '+ '(GRCh38)', tabName);
+            addInfoLine(div, 'Sequence ontology', getWidgetData(tabName, 'base', row, 'so'), tabName);
+            if (thous_af > gnomad_af){
+                var max_af = thous_af;
+            }
+            if (gnomad_af > thous_af){
+                var max_af = gnomad_af;
+            }
+                addInfoLine(div, '1000g/gnomAD max AF', max_af);
+            addInfoLine(div, 'dbSNP', getWidgetData(tabName, 'dbsnp', row, 'snp'));
+        }
+    }
+}
+
+widgetInfo['base3'] = {'title': 'All mappings'};
+widgetGenerators['base3'] = {
+	'variant': {
+		'width': 580, 
+		'height': 200, 
+		'function': function (div, row, tabName) {
+        transcript = getWidgetData(tabName, 'base', row, 'transcript') + ':' + getWidgetData(tabName, 'base', row, 'achange');
+        var table = getWidgetTableFrame();
+        table.style.tableLayout = 'auto';
+        table.style.width = '100%';
+        var thead = getWidgetTableHead(['Gene', 'HGVS'])
+        addEl(table, thead);
+        var tbody = getEl('tbody');
+        var tr = getWidgetTableTr([getWidgetData(tabName, 'base', row, 'hugo'), transcript]);
+        addEl(tbody, tr);
+        addEl(div, addEl(table, tbody));
+			}
+		}
+	}
+
+widgetInfo['litvar'] = {'title': ''};
+widgetGenerators['litvar'] = {
+	'variant': {
+		'width': 580, 
+		'height': 200, 
+		'function': function (div, row, tabName) {
+        let snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
+        addInfoLine(div, 'Litvar', snp)
+			}
+		}
+    }
+
+widgetInfo['ncbi'] = {'title': ''};
+widgetGenerators['ncbi'] = {
+	'gene': {
+		'width': '100%', 
+		'height': 200, 
+		'function': function (div, row, tabName) {
+            addInfoLine(
+                div, 
+                'NCBI Gene', 
+                getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc'), 
+                tabName
+            );
+        }
+    }
+}
+
 widgetInfo['basepanel'] = {'title': ''};
 widgetGenerators['basepanel'] = {
     'variant': {
         'width': sectionWidth,
         'height': undefined,
         'function': function (div, row, tabName) {
-            var generator = widgetGenerators['base']['variant'];
+            var generator = widgetGenerators['base2']['variant'];
             generator['width'] = 450;
-            var divs = showWidget('base', ['base', 'dbsnp'], 'variant', div, null, 220);
+            var divs = showWidget('base2', ['base', 'dbsnp', 'thousandgenomes', 'gnomad'], 'variant', div, null, 220);
             divs[0].style.position = 'absolute';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            var generator = widgetGenerators['hgvs']['variant'];
+            var generator = widgetGenerators['base3']['variant'];
             generator['width'] = 400;
-            var divs = showWidget('hgvs', ['base', 'hgvs'], 'variant', div, null, 220);
+            var divs = showWidget('base3', ['base'], 'variant', div, null, 220);
             divs[0].style.position = 'absolute';
             divs[0].style.top = '0px';
+            divs[0].style.left = '470px';
+            var generator = widgetGenerators['litvar']['variant'];
+            generator['width'] = 400;
+            var divs = showWidget('litvar', ['base', 'litvar', 'dbsnp'], 'variant', div, null, 220);
+            divs[0].style.position = 'absolute';
+            divs[0].style.top = '150px';
             divs[0].style.left = '470px';
             var generator = widgetGenerators['lollipop']['variant'];
             generator['width'] = sectionWidth;
@@ -212,6 +322,13 @@ widgetGenerators['basepanel'] = {
             var divs = showWidget('lollipop', ['base'], 'variant', div);
             divs[0].style.position = 'absolute';
             divs[0].style.top = '250px';
+            divs[0].style.left = '0px';
+            var generator = widgetGenerators['ncbi']['gene'];
+            generator['width'] = 400;
+            //var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, 220);
+            var divs = showWidget('ncbigene', ['base', 'ncbigene'], 'gene', div, 1175, 300);
+            divs[0].style.position = 'absolute';
+            divs[0].style.top = '440px';
             divs[0].style.left = '0px';
         }
     }
