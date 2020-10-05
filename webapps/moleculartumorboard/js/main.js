@@ -133,7 +133,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_vannot');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '460px';
+    parentDiv.style.height = '560px';
     showWidget('basepanel', ['base','lollipop', 'hgvs'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_cancer');
     showWidget('cancerpanel', ['base', 'chasmplus', 'civic', 'cosmic', 'cgc', 'cgl', 'target'], 'variant', parentDiv, undefined, undefined, false);
@@ -215,7 +215,8 @@ widgetGenerators['base2'] = {
             if (nref > 1 && nalt > 1){
                 var variant_type = 'complex substitution';
             }
-                addInfoLine(div, 'Variant type', variant_type);
+            addEl(div, getEl('br'));
+            addInfoLine(div, 'Variant type', variant_type);
             if (variant_type == 'single nucleotide variant'){
                 var variant_length = '1';
             }
@@ -225,7 +226,7 @@ widgetGenerators['base2'] = {
             if (variant_type == 'insertion' && 'complex substitution'){
                 var variant_length = nalt;
             }
-                addInfoLine(div, 'Variant Length', variant_length);
+            addInfoLine(div, 'Variant Length', variant_length);
             addInfoLine(div, 'Cytogenetic Location')
             addInfoLine(div, 'Genomic Location',  chrom + ':' + ' '+ getWidgetData(tabName, 'base', row, 'pos') + ' '+ '(GRCh38)', tabName);
             addInfoLine(div, 'Sequence ontology', getWidgetData(tabName, 'base', row, 'so'), tabName);
@@ -241,7 +242,7 @@ widgetGenerators['base2'] = {
     }
 }
 
-widgetInfo['base3'] = {'title': ''};
+widgetInfo['base3'] = {'title': 'All mappings'};
 widgetGenerators['base3'] = {
 	'variant': {
 		'width': 580, 
@@ -251,10 +252,10 @@ widgetGenerators['base3'] = {
         var table = getWidgetTableFrame();
         table.style.tableLayout = 'auto';
         table.style.width = '100%';
-        var thead = getWidgetTableHead(['HGVS'])
+        var thead = getWidgetTableHead(['Gene', 'HGVS'])
         addEl(table, thead);
         var tbody = getEl('tbody');
-        var tr = getWidgetTableTr([transcript]);
+        var tr = getWidgetTableTr([getWidgetData(tabName, 'base', row, 'hugo'), transcript]);
         addEl(tbody, tr);
         addEl(div, addEl(table, tbody));
 			}
@@ -276,13 +277,18 @@ widgetGenerators['litvar'] = {
 widgetInfo['ncbi'] = {'title': ''};
 widgetGenerators['ncbi'] = {
 	'gene': {
-		'width': 580, 
+		'width': '100%', 
 		'height': 200, 
 		'function': function (div, row, tabName) {
-        addInfoLine(div, 'NCBI Gene', getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc'), tabName);
-			}
-		}
-	}
+            addInfoLine(
+                div, 
+                'NCBI Gene', 
+                getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc'), 
+                tabName
+            );
+        }
+    }
+}
 
 widgetInfo['basepanel'] = {'title': ''};
 widgetGenerators['basepanel'] = {
@@ -319,9 +325,10 @@ widgetGenerators['basepanel'] = {
             divs[0].style.left = '0px';
             var generator = widgetGenerators['ncbi']['gene'];
             generator['width'] = 400;
-            var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, 220);
+            //var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, 220);
+            var divs = showWidget('ncbigene', ['base', 'ncbigene'], 'gene', div, 1175, 300);
             divs[0].style.position = 'absolute';
-            divs[0].style.top = '370px';
+            divs[0].style.top = '440px';
             divs[0].style.left = '0px';
         }
     }
