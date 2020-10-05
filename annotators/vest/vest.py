@@ -23,17 +23,6 @@ class CravatAnnotator(BaseAnnotator):
         self.cannonical_chrom_re = re.compile('(?i)chr(\d{1,2}|x|y|un)')
     
     def annotate(self, input_data):
-        out = {'transcript':'',
-               'score':'',
-               'pval':'',
-               'score_mis':'',
-               'score_fsv':'',
-               'score_inv':'',
-               'score_stg':'',
-               'score_stl':'',
-               'score_spl':'',
-               'all_results':'',
-               'hugo':''}
         chrom = input_data['chrom']
         if len(chrom) > 5:
             chrom_main = self.cannonical_chrom_re.match(chrom).group(0)
@@ -80,22 +69,22 @@ class CravatAnnotator(BaseAnnotator):
                                      'transcript':transc,
                                      'pval':pval,
                                      'full_result':transc_vest_result})
-            scores = [x['score'] for x in precomp_data]
-            all_results_list = [x['full_result'] for x in precomp_data]
-            max_score = max(scores)
-            max_index = scores.index(max_score)
-            worst_mapping = precomp_data[max_index]
-            worst_transcript = worst_mapping['transcript']
-            worst_pval = worst_mapping['pval']
-            all_results_list[max_index] = '*'+all_results_list[max_index]
-            
-            out['transcript'] = worst_transcript
-            out['score'] = max_score
-            out['pval'] = worst_pval
-            out['all_results'] = ','.join(all_results_list)
-            out['hugo'] = input_data['hugo']
-            
-        return out
+            if precomp_data:
+                scores = [x['score'] for x in precomp_data]
+                all_results_list = [x['full_result'] for x in precomp_data]
+                max_score = max(scores)
+                max_index = scores.index(max_score)
+                worst_mapping = precomp_data[max_index]
+                worst_transcript = worst_mapping['transcript']
+                worst_pval = worst_mapping['pval']
+                all_results_list[max_index] = '*'+all_results_list[max_index]
+                return {
+                    'transcript': worst_transcript,
+                    'score': max_score,
+                    'pval': worst_pval,
+                    'all_results': ','.join(all_results_list),
+                    'hugo': input_data['hugo'],
+                }
     
     def get_pval_table(self, pfile):
         pval_tab=dict()
