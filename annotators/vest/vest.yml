@@ -57,8 +57,9 @@ tags:
 - variant effect prediction
 title: VEST4
 type: annotator
-version: 4.3.0
+version: 4.3.1
 release_note:
+  4.3.1: bugfix for non-SNV variants at a position with VEST annotation
   4.3.0: handles multiple sequence ontologies by new hg38
   4.2.0: works with oc 1.8.1 and new hg38
   4.1.0: new gene summary architecture for open-cravat 1.5.0
