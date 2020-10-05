@@ -248,20 +248,35 @@ widgetGenerators['base3'] = {
 		'width': 580, 
 		'height': 200, 
 		'function': function (div, row, tabName) {
-        transcript = getWidgetData(tabName, 'base', row, 'transcript') + ':' + getWidgetData(tabName, 'base', row, 'achange');
+        var allMappings = null;
+        allMappings = getWidgetData(tabName, 'base', row, 'all_mappings');
+        allMappings = JSON.parse(allMappings);
         var table = getWidgetTableFrame();
         table.style.tableLayout = 'auto';
         table.style.width = '100%';
         var thead = getWidgetTableHead(['Gene', 'HGVS'])
         addEl(table, thead);
         var tbody = getEl('tbody');
-        var tr = getWidgetTableTr([getWidgetData(tabName, 'base', row, 'hugo'), transcript]);
-        addEl(tbody, tr);
-        addEl(div, addEl(table, tbody));
-			}
-		}
-	}
-
+        var hugos = Object.keys(allMappings);
+        for (var i = 0; i < hugos.length; i++) {
+            var hugo = hugos[i];
+            var uniprot_ds = allMappings[hugo];
+            for (var j = 0; j < uniprot_ds.length; j++) {
+                var uniprot_d = uniprot_ds[j];
+                var aachange = uniprot_d[1];
+                var transcript = uniprot_d[3];
+                var hgvs = transcript + ':' + aachange
+                if (aachange == ""){
+                    continue;
+                }
+                    var tr = getWidgetTableTr([getWidgetData(tabName, 'base', row, 'hugo'), hgvs]);
+                    addEl(tbody, tr);
+                    addEl(div, addEl(table, tbody));
+                }
+            }
+        }
+    }
+}
 widgetInfo['litvar'] = {'title': ''};
 widgetGenerators['litvar'] = {
 	'variant': {
