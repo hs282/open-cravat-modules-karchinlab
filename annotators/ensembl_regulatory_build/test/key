@@ -1,0 +1,53 @@
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 11:42:49
+#Report level: variant
+#
+Variant Annotation																Ensembl Regulatory Build	
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Regulatory Features	Ensembl ID
+1	chrX	105220856	C	T			IL1RAPL2	ENST00000372582.6	intron_variant	c.357-12962C>T		ENST00000372582.6:IL1RAPL2:Q9NP60:intron_variant::c.357-12962C>T; ENST00000600991.5:TEX13A:Q9BXU3:2kb_upstream_variant::c.-294G>A; ENST00000609007.3:TEX13A:Q9BXU3:2kb_upstream_variant::c.-268G>A	1	s1		CTCF_binding_site	ENSR00000911965
+2	chr10	121593817	T	A		Yes	FGFR2	ENST00000358487.9	start_lost	c.1A>T	p.Met1?	ENST00000346997.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000351936.10:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000356226.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000357555.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000358487.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000359354.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000360144.7:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369056.5:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369059.5:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369060.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369061.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000457416.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000490349.5:FGFR2::processed_transcript::; ENST00000491111.1:FGFR2::processed_transcript::; ENST00000604236.5:FGFR2::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000611527.1:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000613048.4:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000636922.1:FGFR2::NSD_transcript::	1	s0			
+3	chrX	9033289	T	G			FAM9B	ENST00000327220.10	intron_variant	c.-89-214A>C		ENST00000327220.10:FAM9B:Q8IZU0:intron_variant::c.-89-214A>C; ENST00000362066.7:FAM9B:Q8IZU0:5_prime_UTR_variant::c.-168A>C; ENST00000428477.1:FAM9B:Q8IZU0:2kb_upstream_variant::c.-303A>C; ENST00000472522.6:FAM9B:Q8IZU0:intron_variant::c.-89-214A>C; ENST00000651278.1:FAM9B:Q8IZU0:intron_variant::c.-89-214A>C	1	s2		CTCF_binding_site	ENSR00000900892
+4	chr1	199780500	T	C									1	s4		enhancer	ENSR00000935229
+5	chr6	33924078	A	G			AL138889.1	ENST00000451317.2	lnc_RNA			ENST00000451317.2:AL138889.1::intron_variant,lnc_RNA::	1	s5		promoter_flanking_region	ENSR00000788332
+6	chr9	6643408	A	C			GLDC	ENST00000321612.7	intron_variant	c.334+1206T>G		ENST00000321612.7:GLDC:P23378:intron_variant::c.334+1206T>G; ENST00000639364.1:GLDC::intron_variant,processed_transcript::	1	s6		promoter	ENSR00000232958
+7	chrUn_GL000214v1	33517	G	A									1	s8		TF_binding_site	ENSR00000898862
+8	chr14_GL000225v1_random	8715	C	A									1	s9		TF_binding_site	ENSR00001156916
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 11:42:49
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+IL1RAPL2		0	1	intron_variant	intron_variant(1)
+FGFR2		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),NSD_transcript(1),processed_transcript(1)
+FAM9B		0	1	intron_variant	intron_variant(1),5_prime_UTR_variant(1)
+AL138889.1		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+GLDC		0	1	intron_variant	intron_variant(1),processed_transcript(1)
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 11:42:49
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s1
+2	s0
+3	s2
+4	s4
+5	s5
+6	s6
+7	s8
+8	s9
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 11:42:49
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
+7		7	0
+8		8	0
