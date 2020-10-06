@@ -82,6 +82,7 @@ requires:
 - phastcons
 - phylop
 - linsight
+- litvar
 - ncrna
 - pseudogene
 - biogrid

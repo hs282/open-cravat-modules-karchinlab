@@ -21,6 +21,8 @@ from cravat.config_loader import ConfigLoader
 
 live_modules = {}
 live_mapper = None
+module_confs = {}
+modules_to_run_ordered = []
 
 async def test (request):
     return web.json_response({'result': 'success'})
@@ -81,25 +83,38 @@ async def live_annotate (input_data, annotators):
     from cravat.inout import AllMappingsParser
     global live_modules
     global live_mapper
+    global module_confs
+    global modules_to_run_ordered
     response = {}
     crx_data = live_mapper.map(input_data)
     crx_data = live_mapper.live_report_substitute(crx_data)
     crx_data[mapping_parser_name] = AllMappingsParser(crx_data[all_mappings_col_name])
-    for k, v in live_modules.items():
-        if annotators is not None and k not in annotators:
+    for module_name in modules_to_run_ordered:
+        module = live_modules[module_name]
+        if annotators is not None and module_name not in annotators:
             continue
         try:
-            annot_data = v.annotate(input_data=crx_data)
-            annot_data = v.live_report_substitute(annot_data)
+            conf = module_confs[module_name]
+            if 'secondary_inputs' in conf:
+                sec_mods = conf['secondary_inputs']
+                secondary_data = {}
+                for sec_mod in sec_mods:
+                    secondary_data[sec_mod] = [response[sec_mod]]
+                annot_data = module.annotate(
+                        input_data=crx_data, 
+                        secondary_data=secondary_data)
+            else:
+                annot_data = module.annotate(input_data=crx_data)
+            annot_data = module.live_report_substitute(annot_data)
             if annot_data == '' or annot_data == {}:
                 annot_data = None
             elif type(annot_data) is dict:
                 annot_data = clean_annot_dict(annot_data)
-            response[k] = annot_data
+            response[module_name] = annot_data
         except Exception as e:
             import traceback
             traceback.print_exc()
-            response[k] = None
+            response[module_name] = None
     del crx_data[mapping_parser_name]
     response['crx'] = crx_data
     return response
@@ -107,8 +122,10 @@ async def live_annotate (input_data, annotators):
 async def load_live_modules ():
     global live_modules
     global live_mapper
+    global module_confs
+    global modules_to_run_ordered
     confloader = ConfigLoader()
-    conf = confloader.get_module_conf('variantreport')
+    conf = confloader.get_module_conf('moleculartumorboard')
     module_names_to_load = conf['live_modules']
     if live_mapper is None:
         cravat_conf = au.get_cravat_conf()
@@ -117,11 +134,36 @@ async def load_live_modules ():
         else:
             default_mapper = 'hg38'
         live_mapper = get_live_mapper(default_mapper)
+        module_confs[default_mapper] = confloader.get_module_conf(default_mapper)
     for module_name in module_names_to_load:
         if module_name in live_modules:
             continue
         annotator = get_live_annotator(module_name)
         live_modules[module_name] = annotator
+        module_confs[module_name] = confloader.get_module_conf(module_name)
+    modules_to_run_ordered = []
+    module_names = list(module_confs.keys())
+    num_module_names = len(module_names)
+    while True:
+        for module_name in module_names:
+            if module_name in modules_to_run_ordered:
+                continue
+            if module_name == default_mapper:
+                continue
+            conf = module_confs[module_name]
+            if 'secondary_inputs' not in conf:
+                modules_to_run_ordered.append(module_name)
+            else:
+                sec_mods = conf['secondary_inputs']
+                all_sec_mods_already = True
+                for sec_mod in sec_mods:
+                    if sec_mod not in modules_to_run_ordered:
+                        all_sec_mods_alreay = False
+                        break
+                if all_sec_mods_already:
+                    modules_to_run_ordered.append(module_name)
+        if len(modules_to_run_ordered) == num_module_names - 1:
+            break
 
 routes = [
    ['GET', 'test', test],
