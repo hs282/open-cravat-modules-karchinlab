@@ -12,21 +12,25 @@ class CravatAnnotator(BaseAnnotator):
     
     def annotate(self, input_data, secondary_data=None):
         out = {'ps1_id':None,'pm5_id':None}
-        for level in ('ps1','pm5'):
-            for hit in input_data['mapping_parser'].get_all_mappings():
-                pdot_match = re.match(r'p\.(\w{3})(\d+)(\w{3})$', hit.achange)
+        for hit in input_data['mapping_parser'].get_all_mappings():
+            if not hit.achange:
+                continue
+            if not out['ps1_id']:
+                q_base = f'select c.clinvar_id from variant as v join clinvar as c on v.alleleid=c.alleleid where v.transcript="{hit.transcript}"'
+                q_ps1 = q_base + f' and v.hgvsp="{hit.achange}"'
+                self.cursor.execute(q_ps1)
+                r = self.cursor.fetchone()
+                if r:
+                    out['ps1_id'] = r[0]
+            if not out['pm5_id']:
+                pdot_match = re.match(r'p\.([A-Za-z]{3})(\d+)([A-Za-z]{3})$', hit.achange)
                 if pdot_match:
                     aref, apos, aalt = pdot_match.groups()
-                    q = f'select c.clinvar_id, t.aalt from variant as v join clinvar as c on v.alleleid=c.alleleid where v.transcript="{hit.transcript}" and v.pos={apos} and v.ref="{aref}"'
-                    if level == 'ps1':
-                        q += f' and v.alt="{aalt}"'
-                    else:
-                        q += f' and v.alt!="{aalt}"'
-                    self.cursor.execute(q)
+                    q_pm5 = q_base + f' and v.pos={apos} and v.ref="{aref}" and v.alt!="{aalt}"'
+                    self.cursor.execute(q_pm5)
                     r = self.cursor.fetchone()
                     if r:
-                        out[level+'_id'] = r[0]
-                        break
+                        out['pm5_id'] = r[0]
         if any(out.values()):
             return out
     
