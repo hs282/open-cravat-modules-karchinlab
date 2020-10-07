@@ -4,11 +4,16 @@ type: webviewerwidget
 requires_opencravat: '>=1.7.0'
 required_annotator: vest
 description: NDEX Enriched Pathogentic Pathways widget
-developer: {name: Rick Kim, organization: In Silico Solutions, email: rkim@insilico.us.com,
-  website: 'http://www.insilico.us.com', citation: ''}
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
 hidden: true
 max_num_hugos: 500
-tags: [visualization widgets]
+tags:
+- visualization
 release_note:
   1.1.0: works with single variant page in oc 1.7.0.
   1.0.14: data is obtained by post request.

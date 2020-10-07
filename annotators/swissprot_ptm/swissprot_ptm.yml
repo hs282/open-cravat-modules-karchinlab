@@ -1,0 +1,61 @@
+datasource: 2018.04.10
+description: A high quality manually annotated protein sequence database, specifying in post-translational modifications (PTMs).
+developer:
+  name: The UniProt Consortium
+  organization: The UniProt Consortium
+  email: support@cravat.us
+  website:  https://www.uniprot.org/help/mod_res
+  citation: 'Khoury, George A., Richard C. Baliban, and Christodoulos A. Floudas. "Proteome-wide post-translational modification statistics: frequency analysis and curation of the swiss-prot database." Scientific reports 1 (2011): 90.' 
+
+level: variant
+output_columns:
+
+- name: uniprotkb
+  title: UniProtKB Accession Number
+  type: string
+  link_format: 'https://www.uniprot.org/uniprot/${.*}'
+  width: 80
+  hidden: true
+
+- name: desc
+  title: Modification
+  type: string
+  desc: The chemical compound involved in resulting in a post-translational modification.
+  hidden: false
+  width: 105
+
+- name: disease_name
+  title: Additional Information
+  type: string
+  hidden: true
+  width: 80
+  desc: Enzyme, frequency, and/or relationship information
+
+- name: pubmed
+  title: Pubmed
+  type: string
+  link_format: 'https://pubmed.ncbi.nlm.nih.gov/${.*}'
+  width: 75
+  hidden: true
+  desc: Link to literature.
+
+tags:
+- functional studies
+
+title: Swiss-Prot PTM
+version: 1.0.0
+type: annotator
+requires:
+- wgswissprot_ptm
+smartfilters:
+- name: hasdata
+  title: Swiss-Prot PTM
+  description: Only include variants with data from Swiss-Prot PTM.
+  selector:
+    type: empty
+  filter:
+    column: swissprot__uniprotkb
+    test: hasData
+
+
+

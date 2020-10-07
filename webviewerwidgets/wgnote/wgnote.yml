@@ -9,10 +9,11 @@ developer:
   website: http://www.insilico.us.com
 required_annotator: base
 tags:
-- notes
+- visualization
 title: Note
 type: webviewerwidget
 requires_opencravat: '>=2.0.2'
 version: 2.0.2
 release_note:
   2.0.2: aiosqlite instead of aiosqlite3
+hidden: true

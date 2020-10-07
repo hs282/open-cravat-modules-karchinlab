@@ -4,9 +4,14 @@ required_annotator: base
 requires_opencravat: '>=1.8.1'
 type: webviewerwidget
 description: Sequence Ontology Summary result viewer widget
-developer: {name: Rick Kim, organization: In Silico Solutions, email: rkim@insilico.us.com,
-  website: 'http://www.insilico.us.com', citation: ''}
-tags: [visualization widgets]
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization
 release_note:
   1.3.0: improved to work with oc 1.8.1.
   1.2.1: works with oc 1.8.1 and 2nd phase new hg38.

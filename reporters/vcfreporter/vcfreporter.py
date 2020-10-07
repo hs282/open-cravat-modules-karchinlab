@@ -63,8 +63,11 @@ class Reporter(CravatReport):
         self.cursor2 = self.conn2.cursor()
 
     async def close_db (self):
+        self.cursor2.close()
+        self.conn2.close()
         await self.cursor.close()
         await self.conn.close()
+        await self.cf.close_db()
 
     def write_preface (self, level): 
         self.level = level

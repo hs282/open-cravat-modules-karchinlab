@@ -86,7 +86,7 @@ title: Arrhythmia Channelopathy Variants
 version: 1.0.0
 type: annotator
 
-
-
-
-
+tags:
+- variant effect prediction
+- clinical relevance
+- cardiovascular

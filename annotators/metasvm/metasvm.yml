@@ -1,42 +1,40 @@
 datasource: v4.1
-description: MetaSVM creates an ensemble-based prediction score by using a support vector machine model.
+description: MetaSVM creates an ensemble-based prediction score by using a support
+  vector machine model.
 developer:
-  name: 'Chengliang Dong'
-  organization: 'University of Southern California, Biostatistics Department'
-  email: 'support@cravat.us'
-  website: 'https://academic.oup.com/hmg/article/24/8/2125/651446'
-  citation: 'Dong C, Wei P, Jian X, Gibbs R, Boerwinkle E, Wang K* and Liu X*. (2015) Comparison and integration of deleteriousness prediction methods for nonsynonymous SNVs in whole exome sequencing studies. Human Molecular Genetics 24(8):2125-2137.'
-
+  name: Chengliang Dong
+  organization: University of Southern California, Biostatistics Department
+  email: support@cravat.us
+  website: https://academic.oup.com/hmg/article/24/8/2125/651446
+  citation: Dong C, Wei P, Jian X, Gibbs R, Boerwinkle E, Wang K* and Liu X*. (2015)
+    Comparison and integration of deleteriousness prediction methods for nonsynonymous
+    SNVs in whole exome sequencing studies. Human Molecular Genetics 24(8):2125-2137.
 level: variant
-
 output_columns:
-- name: metasvm_score
+- name: score
   title: Score
   type: float
   desc: Prediction score.
   hidden: true
   width: 60
-  
-- name: metasvm_rankscore
+- name: rankscore
   title: Rank score
   type: float
   desc: Ratio of the rank of the score over the total number of MetaSVM scores.
   hidden: false
   width: 70
-
-- name: metasvm_pred
+- name: pred
   title: Prediction
   type: string
   hidden: false
   width: 70
   category: single
-  desc: The cutoff between "Damaging" and "Tolerated" is a score of 0.5 and a rankscore of 0.82257.
-
+  desc: The cutoff between "Damaging" and "Tolerated" is a score of 0.5 and a rankscore
+    of 0.82257.
 tags:
 - variant effect prediction
-
 title: MetaSVM
-version: 1.0.0
+version: 1.0.1
 type: annotator
-private: true
-
+release_note:
+  1.0.1: bugfix for variants without annotation

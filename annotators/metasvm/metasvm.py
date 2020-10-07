@@ -11,11 +11,16 @@ class CravatAnnotator(BaseAnnotator):
             chr = input_data["chrom"] ,pos=int(input_data["pos"]), alt = input_data["alt_base"], ref = input_data["ref_base"])
         self.cursor.execute(q)
         row = self.cursor.fetchone()
-        metasvm_pred = str(row[2]).replace('T', 'Tolerated')
-        metasvm_pred = metasvm_pred.replace('D', 'Damaging')
         if row:
-            out = {'metasvm_score': row[0], 'metasvm_rankscore': row[1], 'metasvm_pred': metasvm_pred}
-        return out
+            if row[2] == 'T':
+                pred = 'Tolerated'
+            elif row[2] == 'D':
+                pred = 'Damaging'
+            else:
+                pred = None
+            out = {'score': row[0], 'rankscore': row[1], 'pred': pred}
+            return out
+    
     def cleanup(self):
         pass
 
