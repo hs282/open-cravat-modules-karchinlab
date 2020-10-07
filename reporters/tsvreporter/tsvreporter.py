@@ -18,7 +18,16 @@ class Reporter(CravatReport):
             self.filename_prefix = 'cravat_result'
         else:
             self.filename_prefix = self.savepath
-    
+        self.levels_to_write = self.confs.get('pages', 'variant').split(',')
+
+    def should_write_level (self, level):
+        if self.levels_to_write is None:
+            return True
+        elif level in self.levels_to_write:
+            return True
+        else:
+            return False
+
     def end (self):
         if self.wf is not None:
             self.wf.close()
@@ -28,7 +37,7 @@ class Reporter(CravatReport):
             zf.write(filename, os.path.relpath(filename, start=os.path.dirname(filename)))
         zf.close()
         return zipfile_path
-        
+
     def write_preface (self, level): 
         if self.wf is not None:
             self.wf.close()
