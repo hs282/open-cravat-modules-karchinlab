@@ -277,17 +277,76 @@ widgetGenerators['base3'] = {
         }
     }
 }
+
+/*
 widgetInfo['litvar'] = {'title': ''};
 widgetGenerators['litvar'] = {
 	'variant': {
 		'width': 580, 
 		'height': 200, 
 		'function': function (div, row, tabName) {
-        let snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
-        addInfoLine(div, 'Litvar', snp)
-			}
-		}
+            let snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
+            addInfoLine(div, 'Litvar', snp)
+        }
     }
+}
+*/
+
+widgetInfo['litvar'] = {'title': 'LitVar'};
+widgetGenerators['litvar'] = {
+	'variant': {
+		'width': 580, 
+		'height': 200, 
+        'variables': {
+            'rsids2pmids': {},
+        },
+		'function': function (div, row, tabName) {
+            var widgetName = 'litvar';
+			var v = widgetGenerators[widgetName][tabName]['variables'];
+            var rsid = getWidgetData(tabName, 'dbsnp', row, 'snp');
+            if (rsid == null) {
+                return;
+            }
+            var n = v['rsids2pmids'][rsid];
+            var link = 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=' + rsid;
+            if (n != undefined) {
+                addInfoLineLink(
+                    div, 
+                    '# publications for the variant (' + rsid + ')', 
+                    n, 
+                    link,
+                    tabName
+                );
+            } else {
+                var url = 'https://www.ncbi.nlm.nih.gov/research/bionlp/litvar/api/v1/public/rsids2pmids?rsids=' + rsid;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        if (xhr.status == 200) {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.length == 0) {
+                                n = 0;
+                            } else {
+                                n = response[0]['pmids'].length;
+                            }
+                            v['rsids2pmids'][rsid] = n;
+                            addInfoLineLink(
+                                div, 
+                                '# publications for the variant (' + rsid + ')', 
+                                n, 
+                                link,
+                                tabName
+                            );
+                        }
+                    }
+                };
+                xhr.send();
+            }
+            return;
+		}
+	},
+}
 
 widgetInfo['ncbi'] = {'title': ''};
 widgetGenerators['ncbi'] = {
@@ -319,7 +378,7 @@ widgetGenerators['basepanel'] = {
             divs[0].style.left = '0px';
             var generator = widgetGenerators['base3']['variant'];
             generator['width'] = 400;
-            var divs = showWidget('base3', ['base'], 'variant', div, null, 220);
+            var divs = showWidget('base3', ['base'], 'variant', div, null, 125);
             divs[0].style.position = 'absolute';
             divs[0].style.top = '0px';
             divs[0].style.left = '470px';
