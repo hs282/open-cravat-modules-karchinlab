@@ -13,6 +13,7 @@ import vcf
 from io import StringIO
 import copy
 from pathlib import Path
+from math import isnan
 
 class CravatConverter(BaseConverter):
 
@@ -245,6 +246,8 @@ class CravatConverter(BaseConverter):
                 info_val = info_val[wdict_no]
             if self._reader.infos[info_name].type not in ('Integer','Float'):
                 info_val = str(info_val)
+            elif isnan(info_val):
+                info_val = None
             row_data[info_name] = info_val
         alt = self.curvar.ALT[gt_index].sequence
         row_data['pos'] = self.curvar.POS
