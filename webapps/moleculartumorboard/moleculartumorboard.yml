@@ -33,6 +33,7 @@ live_modules:
 - vest
 - mutpred1
 - mutation_assessor
+- mutpanning
 - fathmm
 - phdsnpg
 - phastcons

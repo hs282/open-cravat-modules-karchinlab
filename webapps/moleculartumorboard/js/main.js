@@ -135,6 +135,18 @@ function showAnnotation (response) {
     parentDiv.style.width = sectionWidth + 'px';
     parentDiv.style.height = '560px';
     showWidget('basepanel', ['base','lollipop', 'hgvs'], 'variant', parentDiv);
+    var parentDiv = document.querySelector('#contdiv_action');
+    parentDiv.style.position = 'relative';
+    parentDiv.style.width = sectionWidth + 'px';
+    parentDiv.style.height = '200px';
+    parentDiv.style.overflow="auto";
+    showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb'], 'variant', parentDiv, null, null, false);
+    var parentDiv = document.querySelector('#contdiv_driver');
+    parentDiv.style.position = 'relative';
+    parentDiv.style.width = sectionWidth + 'px';
+    parentDiv.style.height = '400px';
+    parentDiv.style.overflow="auto";
+    showWidget('driverpanel', ['base','cgc', 'cgl', 'mutpanning', 'chasmplus'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_cancer');
     showWidget('cancerpanel', ['base', 'chasmplus', 'civic', 'cosmic', 'cgc', 'cgl', 'target'], 'variant', parentDiv, undefined, undefined, false);
     var parentDiv = document.querySelector('#contdiv_af');
@@ -153,6 +165,8 @@ function showAnnotation (response) {
     showWidget('intpanel', ['base', 'biogrid', 'intact'], 'gene', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_visu');
     showWidget('visupanel', ['base', 'ndex', 'mupit'], 'variant', parentDiv, null, 'unset', false);
+    var parentDiv = document.querySelector('#contdiv_germline');
+    showWidget('germlinepanel', ['base', 'clinvar'], 'variant', parentDiv, null, null, false);
 }
 
 function getWidgets (callback, callbackArgs) {
@@ -364,6 +378,117 @@ widgetGenerators['ncbi'] = {
     }
 }
 
+widgetInfo['cgc2'] = {'title': ''};
+widgetGenerators['cgc2'] = {
+	'gene': {
+		'width': '700', 
+		'height': 200, 
+		'function': function (div, row, tabName) {
+            var cgc_class = getWidgetData(tabName, 'cgc', row, 'class');
+            var inheritance = getWidgetData(tabName, 'cgc', row, 'inheritance');
+            var tts = getWidgetData(tabName, 'cgc', row, 'tts');
+            var ttg = getWidgetData(tabName, 'cgc', row, 'ttg');
+            addInfoLine(div, 'Cancer Gene Consensus', cgc_class + ' with inheritance ' + inheritance + '. Somatic types are ' + tts + '. Germline types are ' + ttg + '.');
+        }
+    }
+}
+
+widgetInfo['cgl2'] = {'title': ''};
+widgetGenerators['cgl2'] = {
+	'gene': {
+		'width': '100%', 
+		'height': 200, 
+		'function': function (div, row, tabName) {
+        addInfoLine(div, 'Cancer Gene Landscape', 'Identified as '+  getWidgetData(tabName, 'cgl', row, 'class') + '.', tabName);
+        }
+    }
+}
+
+widgetInfo['chasmplus2'] = {'title': 'Chasmplus'};
+widgetGenerators['chasmplus2'] = {
+    'variant': {
+		'width': '540', 
+		'height': 500, 
+		'function': function (div, row, tabName) {
+        addInfoLine(div, 'score', getWidgetData(tabName, 'chasmplus', row, 'score'), tabName);
+        addInfoLine(div, 'p-value', getWidgetData(tabName, 'chasmplus', row, 'pval'), tabName);
+        }
+    }
+}
+
+widgetInfo['mutpanning'] = {'title': 'MutPanning'};
+widgetGenerators['mutpanning'] = {
+    'gene': {
+		'width': '540', 
+		'height': 'unset', 
+		'function': function (div, row, tabName) {
+        addInfoLine(div, 'Number of Cancer Types', getWidgetData(tabName, 'mutpanning', row, 'No_Cancer_Types'), tabName);
+        addInfoLine(div, 'Mutation Frequency', getWidgetData(tabName, 'mutpanning', row, 'Max_Frequency'), tabName);
+        var literature = getWidgetData(tabName, 'mutpanning', row, 'Supporting_Literature');
+        if (literature == "Yes"){
+            var ids= getWidgetData(tabName, 'mutpanning', row, 'Tumorportal') +  '; ' + getWidgetData(tabName, 'mutpanning', row, 'TCGA_Marker_Papers') + '; ' + getWidgetData(tabName, 'mutpanning', row, 'Bailey_Database') + '; ' + getWidgetData(tabName, 'mutpanning', row, 'dNdS_Study');
+            var ids = ids;
+            ids = ids !== null ? ids.split('; ') : [];
+            const table = getWidgetTableFrame();
+            addEl(div, table);
+            const thead = getWidgetTableHead(['Supporting Literature', 'Link']);
+            addEl(table, thead);
+            const tbody = getEl('tbody');
+            addEl(table, tbody);
+            for (let i=0; i<ids.length; i++){
+                var mut= ids[i];
+                var link = `https://pubmed.ncbi.nlm.nih.gov/${mut}`;
+                var titles = "Tumorportal, TCGA_Marker_Papers, Bailey_Database, dNdS_Study";
+                titles = titles !== null ? titles.split(', ') : []; 
+            for (let i=0; i<ids.length; i++);{
+                var name = titles[i];
+                let tr = getWidgetTableTr([name, link],[mut]);
+                addEl(tbody, tr);
+                addEl(div, addEl(table, tbody)); 
+                 }
+            }
+        }  
+    }
+} 
+}
+
+widgetInfo['civic2'] = {'title': 'CIVIC'};
+widgetGenerators['civic2'] = {
+    'variant': {
+		'width': '100%', 
+		'height': 'unset', 
+		'function': function (div, row, tabName) {
+            var score = getWidgetData(tabName, 'civic', row, 'clinical_a_score');
+            var description = getWidgetData(tabName, 'civic', row, 'description');
+            addInfoLine(div, 'Clinical Actionability Score', score, tabName);
+            addInfoLine(div, 'Description', description, tabName);
+        }
+    }
+}
+
+widgetInfo['pharmgkb2'] = {'title': 'PharmGKB'};
+widgetGenerators['pharmgkb2'] = {
+    'variant': {
+		'width': '100%', 
+		'height': 'unset', 
+		'function': function (div, row, tabName) {
+            addInfoLine(div, 'PharmGKB', getWidgetData(tabName, 'pharmgkb', row, 'notes'))
+        }
+    }
+}
+widgetInfo['clinvar2'] = {'title': 'ClinVar'};
+widgetGenerators['clinvar2'] = {
+    'variant': {
+		'width': '100%', 
+		'height': 'unset', 
+		'function': function (div, row, tabName) {
+            addInfoLine(div, 'Significance', getWidgetData(tabName, 'clinvar', row, 'sig'), tabName);
+            addInfoLine(div, 'Disease');
+            addInfoLine(div, 'ClinVar ID', getWidgetData(tabName, 'clinvar', row, 'id'), tabName);
+        }
+    }
+}
+
 widgetInfo['basepanel'] = {'title': ''};
 widgetGenerators['basepanel'] = {
     'variant': {
@@ -407,6 +532,91 @@ widgetGenerators['basepanel'] = {
         }
     }
 }
+
+widgetInfo['actionpanel'] = {'title': ''};
+widgetGenerators['actionpanel'] = {
+    'variant': {
+        'width': '100%',
+        'height': undefined,
+        'function': function (div, row, tabName) {
+            var table = getEl('table');
+            var tr = getEl('tr');
+            var td = getEl('td');
+            td.style.position = 'relative';
+            var therapy = getWidgetData(tabName, 'target', row, 'therapy');
+            var rationale = getWidgetData(tabName, 'target', row, 'rationale');
+            addInfoLine(div, 'TARGET', "Identifies this gene associated with " + therapy + '. The rationale is ' + rationale)
+            addEl(tr, td);
+            addEl(table, tr);
+            var tr = getEl('tr');
+            addEl(table, tr);
+            var td = getEl('td');
+            td.style.position = 'relative';
+            addEl(tr, td);
+            var table2 = getEl('table');
+            var tr2 = getEl('tr');
+            var td2 = getEl('td');
+            addEl(tr2, td2);
+            showWidget('civic2', ['civic'], 'variant', td2, 1300, 300);
+            td2 = getEl('td');
+            td2.style.position = 'relative';
+            addEl(tr2, td2);
+            addEl(table2, tr2);
+            addEl(td, table2);
+            var table2 = getEl('table');
+            var tr2 = getEl('tr');
+            var td2 = getEl('td');
+            addEl(tr2, td2);
+            var td2 = getEl('td');
+            addEl(table2, addEl(tr2, td2));
+            addEl(td, table2);
+            addEl(tr, td);
+            var tr = getEl('tr');
+            var td = getEl('td');
+            showWidget('pharmgkb2', ['pharmgkb'], 'variant', td);
+            addEl(table, addEl(tr, td));
+            addEl(div, table);
+        }
+    }
+}
+
+
+
+widgetInfo['driverpanel'] = {'title': ''};
+widgetGenerators['driverpanel'] = {
+    'variant': {
+        'width': '100%',
+        'height': undefined,
+        'function': function (div, row, tabName) {
+            var generator = widgetGenerators['cgc2']['gene'];
+            generator['width'] = '100%'
+            var divs = showWidget('cgc2', ['base', 'cgc'], 'gene', div, null, 220);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
+            var generator = widgetGenerators['cgl2']['gene'];
+            generator['width'] = '100%'
+            var divs = showWidget('cgl2', ['base', 'cgl'], 'gene', div, null, 220);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
+            var generator = widgetGenerators['chasmplus2']['variant'];
+            generator['width'] = '100%'
+            var divs = showWidget('chasmplus2', ['base', 'chasmplus'], 'variant', div, null, 220);
+            divs[0].style.position = 'absolute';
+            divs[0].style.top = '110px';
+            divs[0].style.left = '8px';
+            var generator = widgetGenerators['mutpanning']['gene'];
+            generator['width'] = '100%'
+            var divs = showWidget('mutpanning', ['base', 'mutpanning'], 'gene', div, 500, 500);
+            divs[0].style.position = 'absolute';
+            divs[0].style.top = '200px';
+            divs[0].style.left = '8px';
+        }
+    }
+}
+
+
 
 widgetInfo['poppanel'] = {'title': ''};
 widgetGenerators['poppanel'] = {
@@ -1008,6 +1218,27 @@ widgetGenerators['visupanel'] = {
         }
     }
 }
+
+widgetInfo['germlinepanel'] = {'title': ''};
+widgetGenerators['germlinepanel'] = {
+    'variant': {
+        'width': sectionWidth,
+        'height': 'unset',
+        'function': function (div, row, tabName) {
+            div.style.overflow = 'unset';
+            var table = getEl('table');
+            var tr = getEl('tr');
+            var td = getEl('td');
+            td.style.width = sectionWidth + 'px';
+            showWidget('clinvar2', ['clinvar'], 'variant', td, null, 250);
+            addEl(tr, td);
+            addEl(table, tr);
+            addEl(div, table);
+        }
+    }
+}
+
+
 
 widgetInfo['mupit2'] = {'title': 'MuPIT'};
 widgetGenerators['mupit2'] = {
