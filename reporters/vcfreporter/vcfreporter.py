@@ -150,14 +150,17 @@ class Reporter(CravatReport):
                     col_desc = ''
                 if col_type == 'Int':
                     col_type = 'Integer'
-                line = '#INFO=<ID={},Number=A,Type={},Description="{}">'.format(col_name, col_type, col_desc)
+                line = '#INFO=<ID={},Number=.,Type={},Description="{}">'.format(col_name, col_type, col_desc)
                 self.write_preface_line(line)
                 self.col_names.append(col_name)
-            line = 'CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t'
-            line += '\t'.join(self.samples)
+            if len(self.samples) == 0:
+                line = 'CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO'
+            else:
+                line = 'CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t'
+                line += '\t'.join(self.samples)
             self.write_preface_line(line)
         elif self.info_type == 'combined':
-            line = '#INFO=<ID={},Number=A,Type=String,Description="OpenCRAVAT annotation. Format: '.format(self.info_fieldname_prefix)
+            line = '#INFO=<ID={},Number=.,Type=String,Description="OpenCRAVAT annotation. Format: '.format(self.info_fieldname_prefix)
             columns_to_add = []
             desc = []
             for column in self.colinfo[self.level]['columns']:
@@ -173,8 +176,11 @@ class Reporter(CravatReport):
             line += ' Explanation: {}'.format('|'.join(desc))
             line += '">'
             self.write_preface_line(line)
-            line = 'CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t'
-            line += '\t'.join(self.samples)
+            if len(self.samples) == 0:
+                line = 'CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO'
+            else:
+                line = 'CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\t'
+                line += '\t'.join(self.samples)
             self.write_preface_line(line)
 
     def write_table_row (self, row):

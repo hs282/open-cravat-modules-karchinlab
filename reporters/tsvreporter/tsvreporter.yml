@@ -1,5 +1,5 @@
 title: TSV Reporter
-version: 2.0.1
+version: 2.0.2
 type: reporter
 description: Tab-delimited format text file reporter
 requires_opencravat: '>=2.1.0'
@@ -14,6 +14,7 @@ developer:
 hidden: false
 private: true
 release_note:
+  2.0.2: default variant level only, more can be made with module-option pages
   2.0.1: optimized for pandas.
   2.0.0: returns zip file path.
   1.0.10: for oc 1.8.1 and hg38ng 2nd
