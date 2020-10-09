@@ -2,6 +2,7 @@ title: Molecular Tumor Board Variant Report
 version: 0.0.1
 type: webapp
 live_modules:
+- cancer_hotspots
 - chasmplus
 - civic
 - cosmic

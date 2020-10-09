@@ -147,6 +147,9 @@ function showAnnotation (response) {
     parentDiv.style.height = '400px';
     parentDiv.style.overflow="auto";
     showWidget('driverpanel', ['base','cgc', 'cgl', 'mutpanning', 'chasmplus'], 'variant', parentDiv, null, null, false);
+    var parentDiv = document.querySelector('#contdiv_hotspots');
+    parentDiv.style.overflow="auto";
+    showWidget('hotspotspanel', ['base', 'cancer_hotspots', 'mutpanning'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_cancer');
     showWidget('cancerpanel', ['base', 'chasmplus', 'civic', 'cosmic', 'cgc', 'cgl', 'target'], 'variant', parentDiv, undefined, undefined, false);
     var parentDiv = document.querySelector('#contdiv_af');
@@ -615,6 +618,24 @@ widgetGenerators['driverpanel'] = {
         }
     }
 }
+
+widgetInfo['hotspotspanel'] = {'title': ''};
+widgetGenerators['hotspotspanel'] = {
+    'variant': {
+        'width': '100%',
+        'height': undefined,
+        'function': function (div, row, tabName) {
+            var generator = widgetGenerators['cancer_hotspots']['variant'];
+            generator['width'] = '100%'
+            var divs = showWidget('cancer_hotspots', ['base', 'cancer_hotspots'], 'variant', div, null, 220);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
+        }
+    }
+}
+
+
 
 
 
