@@ -367,6 +367,44 @@ widgetGenerators['litvar'] = {
 	},
 }
 
+widgetInfo['brca'] = {'title': ''};
+widgetGenerators['brca'] = {
+	'variant': {
+		'width': 580, 
+        'height': 200, 
+		'function': function (div, row, tabName) {
+            var widgetName = 'brca';
+			var v = widgetGenerators[widgetName][tabName]['variables'];
+            var chrom = getWidgetData(tabName, 'base', row, 'chrom');
+            var pos = getWidgetData(tabName, 'base', row, 'pos')
+            var change = getWidgetData(tabName, 'base', row, 'cchange')
+            var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
+            var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
+            var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
+            var url = 'https://brcaexchange.org/backend/data/?format=json&search_term=' + search_term + '&include=Variant_in_ENIGMA';
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        id = response.data[0]['id']
+                        link = 'https://brcaexchange.org/variant/' + id
+                        sig = response.data[0]["Clinical_significance_ENIGMA"]
+                        addInfoLineLink(div,sig, 'BRCA Exchange', link);
+                        
+                        
+                        }
+                };
+             }
+             xhr.send();
+         return;
+		}
+	},
+}
+
+
+
 widgetInfo['ncbi'] = {'title': ''};
 widgetGenerators['ncbi'] = {
 	'gene': {
@@ -544,6 +582,12 @@ widgetGenerators['actionpanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var generator = widgetGenerators['brca']['variant'];
+            generator['width'] = 400;
+            var divs = showWidget('brca', ['base'], 'variant', div, null, 220)
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
