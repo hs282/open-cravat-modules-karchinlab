@@ -149,7 +149,7 @@ function showAnnotation (response) {
     showWidget('driverpanel', ['base','cgc', 'cgl', 'mutpanning', 'chasmplus'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_hotspots');
     parentDiv.style.overflow="auto";
-    showWidget('hotspotspanel', ['base', 'cancer_hotspots', 'mutpanning'], 'variant', parentDiv, null, null, false);
+    showWidget('hotspotspanel', ['base', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_cancer');
     showWidget('cancerpanel', ['base', 'chasmplus', 'civic', 'cosmic', 'cgc', 'cgl', 'target'], 'variant', parentDiv, undefined, undefined, false);
     var parentDiv = document.querySelector('#contdiv_af');
@@ -532,6 +532,77 @@ widgetGenerators['clinvar2'] = {
     }
 }
 
+widgetInfo['cosmic2'] = {'title': 'COSMIC'};
+widgetGenerators['cosmic2'] = {
+	'variant': {
+		'width': 280, 
+		'height': 220, 
+		'word-break': 'normal',
+		'function': function (div, row, tabName) {
+			var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
+			if (vcTissue != undefined && vcTissue !== null) {
+				var table = getWidgetTableFrame();
+				var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
+				addEl(table, thead);
+				var tbody = getEl('tbody');
+				var toks = vcTissue.split(';');
+				var re = /(.*)\((.*)\)/
+				for (var i = 0; i < toks.length; i++) {
+					var tok = toks[i];
+					var match = re.exec(tok);
+					if (match !== null) {
+						var tissue = match[1].replace(/_/g, " ");
+						var count = match[2];
+						var tr = getWidgetTableTr([tissue, count]);
+						addEl(tbody, tr);
+					}
+				}
+				addEl(div, addEl(table, tbody));
+                
+            div.style.width = 'calc(100% - 37px)';
+            var chartDiv = getEl('canvas');
+            chartDiv.style.width = 'calc(100% - 20px)';
+			chartDiv.style.height = 'calc(100% - 20px)';
+            addEl(div, chartDiv);
+                var chart = new Chart(chartDiv, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [
+                                countf
+                            ],
+                            backgroundColor: [
+                                '#69a3ef',
+                                '#008080',
+                                '#ffd700',
+                                '#00ff00',
+                                '#ff0000'
+                                ],
+                        }],
+                        labels: [
+                            tissue,
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        responsiveAnimationDuration: 500,
+                        maintainAspectRatio: false,
+                    }
+                    
+                }
+                
+            )}
+        }
+    }
+    }
+
+
+
+
+
+
+
+
 widgetInfo['basepanel'] = {'title': ''};
 widgetGenerators['basepanel'] = {
     'variant': {
@@ -668,9 +739,15 @@ widgetGenerators['driverpanel'] = {
 widgetInfo['hotspotspanel'] = {'title': ''};
 widgetGenerators['hotspotspanel'] = {
     'variant': {
-        'width': '100%',
+        'width': '350',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var generator = widgetGenerators['cosmic2']['variant'];
+            generator['width'] = '100%'
+            var divs = showWidget('cosmic2', ['base', 'cosmic'], 'variant', div, null, 220);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
             var generator = widgetGenerators['cancer_hotspots']['variant'];
             generator['width'] = '100%'
             var divs = showWidget('cancer_hotspots', ['base', 'cancer_hotspots'], 'variant', div, null, 220);
@@ -1410,4 +1487,3 @@ function run () {
 window.onload = function () {
     run();
 }
-
