@@ -134,7 +134,7 @@ function showAnnotation (response) {
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
     parentDiv.style.height = '560px';
-    showWidget('basepanel', ['base','lollipop', 'hgvs'], 'variant', parentDiv);
+    showWidget('basepanel', ['base','lollipop2', 'hgvs'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_action');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
@@ -166,8 +166,10 @@ function showAnnotation (response) {
     showWidget('noncodingpanel', ['base', 'linsight', 'ncrna', 'pseudogene'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_interact');
     showWidget('intpanel', ['base', 'biogrid', 'intact'], 'gene', parentDiv, null, null, false);
-    var parentDiv = document.querySelector('#contdiv_visu');
-    showWidget('visupanel', ['base', 'ndex', 'mupit'], 'variant', parentDiv, null, 'unset', false);
+    var parentDiv = document.querySelector('#contdiv_pathways');
+    showWidget('pathwayspanel', ['base', 'ndex'], 'variant', parentDiv, null, 'unset', false);
+    var parentDiv = document.querySelector('#contdiv_structure');
+    showWidget('structurepanel', ['base', 'mupit'], 'variant', parentDiv, null, 'unset', false);
     var parentDiv = document.querySelector('#contdiv_germline');
     showWidget('germlinepanel', ['base', 'clinvar'], 'variant', parentDiv, null, null, false);
 }
@@ -365,6 +367,44 @@ widgetGenerators['litvar'] = {
 	},
 }
 
+widgetInfo['brca'] = {'title': ''};
+widgetGenerators['brca'] = {
+	'variant': {
+		'width': 580, 
+        'height': 200, 
+		'function': function (div, row, tabName) {
+            var widgetName = 'brca';
+			var v = widgetGenerators[widgetName][tabName]['variables'];
+            var chrom = getWidgetData(tabName, 'base', row, 'chrom');
+            var pos = getWidgetData(tabName, 'base', row, 'pos')
+            var change = getWidgetData(tabName, 'base', row, 'cchange')
+            var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
+            var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
+            var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
+            var url = 'https://brcaexchange.org/backend/data/?format=json&search_term=' + search_term + '&include=Variant_in_ENIGMA';
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        id = response.data[0]['id']
+                        link = 'https://brcaexchange.org/variant/' + id
+                        sig = response.data[0]["Clinical_significance_ENIGMA"]
+                        addInfoLineLink(div,sig, 'BRCA Exchange', link);
+                        
+                        
+                        }
+                };
+             }
+             xhr.send();
+         return;
+		}
+	},
+}
+
+
+
 widgetInfo['ncbi'] = {'title': ''};
 widgetGenerators['ncbi'] = {
 	'gene': {
@@ -516,12 +556,12 @@ widgetGenerators['basepanel'] = {
             divs[0].style.position = 'absolute';
             divs[0].style.top = '150px';
             divs[0].style.left = '470px';
-            var generator = widgetGenerators['lollipop']['variant'];
+            var generator = widgetGenerators['lollipop2']['variant'];
             generator['width'] = sectionWidth;
             generator['height'] = 200;
             generator['variables']['hugo'] = '';
             annotData['base']['numsample'] = 1;
-            var divs = showWidget('lollipop', ['base'], 'variant', div);
+            var divs = showWidget('lollipop2', ['base'], 'variant', div);
             divs[0].style.position = 'absolute';
             divs[0].style.top = '250px';
             divs[0].style.left = '0px';
@@ -542,6 +582,12 @@ widgetGenerators['actionpanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var generator = widgetGenerators['brca']['variant'];
+            generator['width'] = 400;
+            var divs = showWidget('brca', ['base'], 'variant', div, null, 220)
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
@@ -636,9 +682,6 @@ widgetGenerators['hotspotspanel'] = {
 }
 
 
-
-
-
 widgetInfo['poppanel'] = {'title': ''};
 widgetGenerators['poppanel'] = {
     'variant': {
@@ -649,7 +692,7 @@ widgetGenerators['poppanel'] = {
             var tr = getEl('tr');
             var td = getEl('th');
             td.style.width = '100px';
-            td.textContent = 'gnomAD';
+            td.textContent = 'gnomADv2';
             addEl(tr, td);
             var td = getEl('td');
             addBarComponent(td, row, 'Total', 'gnomad__af', tabName);
@@ -665,6 +708,23 @@ widgetGenerators['poppanel'] = {
             addEl(table, tr);
             var tr = getEl('tr');
             var td = getEl('th');
+            td.style.width = '100px';
+            td.textContent = 'gnomADv3';
+            addEl(tr, td);
+            var td = getEl('td');
+            addBarComponent(td, row, 'Total', 'gnomad3__af', tabName);
+            addBarComponent(td, row, 'African', 'gnomad3__af_afr', tabName);
+            addBarComponent(td, row, 'American', 'gnomad3__af_amr', tabName);
+            addBarComponent(td, row, 'Ashkenazi', 'gnomad3__af_asj', tabName);
+            addBarComponent(td, row, 'East Asn', 'gnomad3__af_eas', tabName);
+            addBarComponent(td, row, 'Finn', 'gnomad3__af_fin', tabName);
+            addBarComponent(td, row, 'Non-Finn Eur', 'gnomad3__af_nfe', tabName);
+            addBarComponent(td, row, 'Other', 'gnomad3__af_oth', tabName);
+            addBarComponent(td, row, 'South Asn', 'gnomad3__af_sas', tabName);
+            addEl(tr, td);
+            addEl(table, tr);
+            var tr = getEl('tr');
+            var td = getEl('th');
             td.textContent = '1000 Genomes';
             addEl(tr, td);
             var td = getEl('td');
@@ -674,44 +734,6 @@ widgetGenerators['poppanel'] = {
             addBarComponent(td, row, 'East Asn', 'thousandgenomes__eas_af', tabName);
             addBarComponent(td, row, 'European', 'thousandgenomes__eur_af', tabName);
             addBarComponent(td, row, 'South Asn', 'thousandgenomes__sas_af', tabName);
-            addEl(table, addEl(tr, td));
-            var tr = getEl('tr');
-            var td = getEl('th');
-            td.textContent = 'HGDP';
-            addEl(tr, td);
-            var td = getEl('td');
-            addBarComponent(td, row, 'European', 'hgdp__european_allele_freq', tabName);
-            addBarComponent(td, row, 'African', 'hgdp__african_allele_freq', tabName);
-            addBarComponent(td, row, 'Mid. Eastern', 'hgdp__middle_eastern_allele_freq', tabName);
-            addBarComponent(td, row, 'East Asn', 'hgdp__east_asian_allele_freq', tabName);
-            addBarComponent(td, row, 'CS Asn', 'hgdp__cs_asian_allele_freq', tabName);
-            addBarComponent(td, row, 'Oceanian', 'hgdp__oceanian_allele_freq', tabName);
-            addBarComponent(td, row, 'Native Amr', 'hgdp__native_american_allele_freq', tabName);
-            addEl(table, addEl(tr, td));
-            var tr = getEl('tr');
-            var td = getEl('th');
-            td.textContent = 'ESP6500';
-            addEl(tr, td);
-            var td = getEl('td');
-            addBarComponent(td, row, 'Eur. Amr.', 'esp6500__ea_pop_af', tabName);
-            addBarComponent(td, row, 'Afr. Amr.', 'esp6500__aa_pop_af', tabName);
-            addEl(table, addEl(tr, td));
-            var tr = getEl('tr');
-            var td = getEl('th');
-            td.textContent = 'ABRaOM';
-            addEl(tr, td);
-            var td = getEl('td');
-            addBarComponent(td, row, 'Allele Freq.', 'abraom__allele_freq', tabName);
-            addEl(table, addEl(tr, td));
-            var tr = getEl('tr');
-            var td = getEl('th');
-            td.textContent = 'UK10k Cohorts';
-            addEl(tr, td);
-            var td = getEl('td');
-            addInfoLine(td, 'Twins Alternative Allele Count', getWidgetData(tabName, 'uk10k_cohort', row, 'uk10k_twins_ac'), tabName);
-            addBarComponent(td, row, 'Twins Alternative Allele Frequency', 'uk10k_cohort__uk10k_twins_af', tabName);
-            addInfoLine(td, 'ALSPAC Alternative Allele Count', getWidgetData(tabName, 'uk10k_cohort', row, 'uk10k_alspac_ac'), tabName);
-            addBarComponent(td, row, 'ALSPAC Alternative Allele Frequency', 'uk10k_cohort__uk10k_alspac_af', tabName);
             addEl(table, addEl(tr, td));
             addEl(div, table);
         }
@@ -1194,8 +1216,8 @@ widgetGenerators['intpanel'] = {
     }
 }
 
-widgetInfo['visupanel'] = {'title': ''};
-widgetGenerators['visupanel'] = {
+widgetInfo['pathwayspanel'] = {'title': ''};
+widgetGenerators['pathwayspanel'] = {
     'variant': {
         'width': sectionWidth,
         'height': 'unset',
@@ -1215,9 +1237,22 @@ widgetGenerators['visupanel'] = {
             }
             generator['height'] = setHeight;
             generator['width'] = sectionWidth - 7;
-            showWidget('ndex', ['ndex'], 'gene', td, null, height);
+            showWidget('ndex', ['ndex'], 'gene', td, null);
             addEl(tr, td);
             addEl(table, tr);
+            addEl(div, table);
+        }
+    }
+}
+
+widgetInfo['structurepanel'] = {'title': ''};
+widgetGenerators['structurepanel'] = {
+    'variant': {
+        'width': sectionWidth,
+        'height': 'unset',
+        'function': function (div, row, tabName) {
+            div.style.overflow = 'unset';
+            var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
             td.style.width = sectionWidth + 'px';
@@ -1239,6 +1274,8 @@ widgetGenerators['visupanel'] = {
         }
     }
 }
+
+
 
 widgetInfo['germlinepanel'] = {'title': ''};
 widgetGenerators['germlinepanel'] = {
