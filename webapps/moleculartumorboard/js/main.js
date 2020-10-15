@@ -148,7 +148,7 @@ function showAnnotation (response) {
     parentDiv.style.overflow="auto";
     showWidget('driverpanel', ['base','cgc', 'cgl', 'mutpanning', 'chasmplus'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_hotspots');
-    parentDiv.style.overflow="auto";
+    parentDiv.style.position = 'relative';
     showWidget('hotspotspanel', ['base', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_cancer');
     showWidget('cancerpanel', ['base', 'chasmplus', 'civic', 'cosmic', 'cgc', 'cgl', 'target'], 'variant', parentDiv, undefined, undefined, false);
@@ -377,7 +377,6 @@ widgetGenerators['brca'] = {
 			var v = widgetGenerators[widgetName][tabName]['variables'];
             var chrom = getWidgetData(tabName, 'base', row, 'chrom');
             var pos = getWidgetData(tabName, 'base', row, 'pos')
-            var change = getWidgetData(tabName, 'base', row, 'cchange')
             var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
             var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
             var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
@@ -402,6 +401,46 @@ widgetGenerators['brca'] = {
 		}
 	},
 }
+
+widgetInfo['oncokb'] = {'title': ''};
+widgetGenerators['oncokb'] = {
+	'variant': {
+		'width': 580, 
+        'height': 200, 
+		'function': function (div, row, tabName) {
+            var widgetName = 'brca';
+			var v = widgetGenerators[widgetName][tabName]['variables'];
+            var chrom = getWidgetData(tabName, 'base', row, 'chrom');
+            var pos = getWidgetData(tabName, 'base', row, 'pos')
+            var ref = getWidgetData(tabName, 'base', row, 'ref_base')
+            var alt = getWidgetData(tabName, 'base', row, 'alt_base')
+            var search_term = chrom + '%2C'+pos + '2%C' + pos+'2%C' +ref+'2%C' +alt
+            var genome = '&referenceGenome=GRCh37'
+            var url = 'oncokb?chrom=' + chrom +'&start=' + pos + '&end=' + pos + '&ref_base=' + ref + '&alt_base=' + alt;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        effect = response.mutationEffect[0]['knownEffect']
+                        oncogenic = response.mutationEffect[0]['oncogenic']
+                        hugo = response.query[0]['hugoSymbol']
+                        link = 'https://www.oncokb.org/gene/' + hugo
+                        addInfoLineLink(div, oncogenic, effect, 'oncoKB', link)
+                        }
+                };
+             }
+             xhr.send();
+         return;
+		}
+	},
+}
+
+
+
+
+
 
 
 
@@ -535,8 +574,8 @@ widgetGenerators['clinvar2'] = {
 widgetInfo['cosmic2'] = {'title': 'COSMIC'};
 widgetGenerators['cosmic2'] = {
 	'variant': {
-		'width': 280, 
-		'height': 220, 
+		'width': '100%', 
+		'height': 'unset', 
 		'word-break': 'normal',
 		'function': function (div, row, tabName) {
 			var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
@@ -557,12 +596,30 @@ widgetGenerators['cosmic2'] = {
 						var count = match[2];
 						var tr = getWidgetTableTr([tissue, count]);
 						addEl(tbody, tr);
-                        tissues.push(tissue);
+                        tissues.push(tissue)
                         counts.push(parseInt(count));
 					}
 				}
 				addEl(div, addEl(table, tbody));
-                
+                var colors = [
+                    '#008080', // teal
+                    '#ffd700', // gold
+                    '#00ff00', // lime
+                    '#ff0000', // red
+                    '#dc143c', // crimson
+                    '#d2691e', // chocolate
+                    '#8b4513', // saddle brown
+                    '#0000ff', // blue
+                    '#ff4500', // orange red
+                    '#ffa500', // orange
+                    '#adff2f', // green yellow
+                    '#7fffd4', // aqua marine
+                    '#00ced1', // dark turquoise
+                    '#00bfff', // deep sky blue
+                    '#ffff00', // yellow
+                    '#00ffff', // aqua
+                    '#000080', // navy
+                ];
             div.style.width = 'calc(100% - 37px)';
             var chartDiv = getEl('canvas');
             chartDiv.style.width = 'calc(100% - 20px)';
@@ -570,32 +627,24 @@ widgetGenerators['cosmic2'] = {
             addEl(div, chartDiv);
                 var chart = new Chart(chartDiv, {
                     type: 'doughnut',
-                    data: {
-                        datasets: [{
-                            data: counts,
-                            backgroundColor: [
-                                '#69a3ef',
-                                '#008080',
-                                '#ffd700',
-                                '#00ff00',
-                                '#ff0000'
-                                ],
-                        }],
-                        labels: [
-                            tissues,
-                        ]
-                    },
+				data: {
+					datasets: [{
+						data: counts,
+						backgroundColor: colors
+					}],
+					labels: tissues
+				},
                     options: {
                         responsive: true,
                         responsiveAnimationDuration: 500,
                         maintainAspectRatio: false,
+                        }
                     }
                     
-                }
+                )}
                 
-            )}
+            }
         }
-    }
     }
 
 
@@ -658,6 +707,15 @@ widgetGenerators['actionpanel'] = {
             var generator = widgetGenerators['brca']['variant'];
             generator['width'] = 400;
             var divs = showWidget('brca', ['base'], 'variant', div, null, 220)
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
+            var table = getEl('table');
+            var tr = getEl('tr');
+            var td = getEl('td');
+            var generator = widgetGenerators['oncokb']['variant'];
+            generator['width'] = 400;
+            var divs = showWidget('oncokb', ['base'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
@@ -741,7 +799,7 @@ widgetGenerators['driverpanel'] = {
 widgetInfo['hotspotspanel'] = {'title': ''};
 widgetGenerators['hotspotspanel'] = {
     'variant': {
-        'width': '350',
+        'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
             var generator = widgetGenerators['cosmic2']['variant'];
