@@ -149,7 +149,7 @@ function showAnnotation (response) {
     showWidget('driverpanel', ['base','cgc', 'cgl', 'mutpanning', 'chasmplus'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_hotspots');
     parentDiv.style.overflow="auto";
-    showWidget('hotspotspanel', ['base', 'cancer_hotspots', 'mutpanning'], 'variant', parentDiv, null, null, false);
+    showWidget('hotspotspanel', ['base', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_cancer');
     showWidget('cancerpanel', ['base', 'chasmplus', 'civic', 'cosmic', 'cgc', 'cgl', 'target'], 'variant', parentDiv, undefined, undefined, false);
     var parentDiv = document.querySelector('#contdiv_af');
@@ -367,6 +367,44 @@ widgetGenerators['litvar'] = {
 	},
 }
 
+widgetInfo['brca'] = {'title': ''};
+widgetGenerators['brca'] = {
+	'variant': {
+		'width': 580, 
+        'height': 200, 
+		'function': function (div, row, tabName) {
+            var widgetName = 'brca';
+			var v = widgetGenerators[widgetName][tabName]['variables'];
+            var chrom = getWidgetData(tabName, 'base', row, 'chrom');
+            var pos = getWidgetData(tabName, 'base', row, 'pos')
+            var change = getWidgetData(tabName, 'base', row, 'cchange')
+            var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
+            var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
+            var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
+            var url = 'https://brcaexchange.org/backend/data/?format=json&search_term=' + search_term + '&include=Variant_in_ENIGMA';
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        id = response.data[0]['id']
+                        link = 'https://brcaexchange.org/variant/' + id
+                        sig = response.data[0]["Clinical_significance_ENIGMA"]
+                        addInfoLineLink(div,sig, 'BRCA Exchange', link);
+                        
+                        
+                        }
+                };
+             }
+             xhr.send();
+         return;
+		}
+	},
+}
+
+
+
 widgetInfo['ncbi'] = {'title': ''};
 widgetGenerators['ncbi'] = {
 	'gene': {
@@ -494,6 +532,77 @@ widgetGenerators['clinvar2'] = {
     }
 }
 
+widgetInfo['cosmic2'] = {'title': 'COSMIC'};
+widgetGenerators['cosmic2'] = {
+	'variant': {
+		'width': 280, 
+		'height': 220, 
+		'word-break': 'normal',
+		'function': function (div, row, tabName) {
+			var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
+			if (vcTissue != undefined && vcTissue !== null) {
+				var table = getWidgetTableFrame();
+				var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
+				addEl(table, thead);
+				var tbody = getEl('tbody');
+				var toks = vcTissue.split(';');
+				var re = /(.*)\((.*)\)/
+				for (var i = 0; i < toks.length; i++) {
+					var tok = toks[i];
+					var match = re.exec(tok);
+					if (match !== null) {
+						var tissue = match[1].replace(/_/g, " ");
+						var count = match[2];
+						var tr = getWidgetTableTr([tissue, count]);
+						addEl(tbody, tr);
+					}
+				}
+				addEl(div, addEl(table, tbody));
+                
+            div.style.width = 'calc(100% - 37px)';
+            var chartDiv = getEl('canvas');
+            chartDiv.style.width = 'calc(100% - 20px)';
+			chartDiv.style.height = 'calc(100% - 20px)';
+            addEl(div, chartDiv);
+                var chart = new Chart(chartDiv, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [
+                                countf
+                            ],
+                            backgroundColor: [
+                                '#69a3ef',
+                                '#008080',
+                                '#ffd700',
+                                '#00ff00',
+                                '#ff0000'
+                                ],
+                        }],
+                        labels: [
+                            tissue,
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        responsiveAnimationDuration: 500,
+                        maintainAspectRatio: false,
+                    }
+                    
+                }
+                
+            )}
+        }
+    }
+    }
+
+
+
+
+
+
+
+
 widgetInfo['basepanel'] = {'title': ''};
 widgetGenerators['basepanel'] = {
     'variant': {
@@ -544,6 +653,12 @@ widgetGenerators['actionpanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var generator = widgetGenerators['brca']['variant'];
+            generator['width'] = 400;
+            var divs = showWidget('brca', ['base'], 'variant', div, null, 220)
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
@@ -624,9 +739,15 @@ widgetGenerators['driverpanel'] = {
 widgetInfo['hotspotspanel'] = {'title': ''};
 widgetGenerators['hotspotspanel'] = {
     'variant': {
-        'width': '100%',
+        'width': '350',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var generator = widgetGenerators['cosmic2']['variant'];
+            generator['width'] = '100%'
+            var divs = showWidget('cosmic2', ['base', 'cosmic'], 'variant', div, null, 220);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
             var generator = widgetGenerators['cancer_hotspots']['variant'];
             generator['width'] = '100%'
             var divs = showWidget('cancer_hotspots', ['base', 'cancer_hotspots'], 'variant', div, null, 220);
@@ -1366,4 +1487,3 @@ function run () {
 window.onload = function () {
     run();
 }
-
