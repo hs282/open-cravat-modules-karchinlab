@@ -134,7 +134,7 @@ function showAnnotation (response) {
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
     parentDiv.style.height = '560px';
-    showWidget('basepanel', ['base','lollipop2', 'hgvs'], 'variant', parentDiv);
+    showWidget('basepanel', ['base','lollipop', 'hgvs'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_action');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
@@ -518,12 +518,12 @@ widgetGenerators['basepanel'] = {
             divs[0].style.position = 'absolute';
             divs[0].style.top = '150px';
             divs[0].style.left = '470px';
-            var generator = widgetGenerators['lollipop2']['variant'];
+            var generator = widgetGenerators['lollipop']['variant'];
             generator['width'] = sectionWidth;
             generator['height'] = 200;
             generator['variables']['hugo'] = '';
             annotData['base']['numsample'] = 1;
-            var divs = showWidget('lollipop2', ['base'], 'variant', div);
+            var divs = showWidget('lollipop', ['base'], 'variant', div);
             divs[0].style.position = 'absolute';
             divs[0].style.top = '250px';
             divs[0].style.left = '0px';
