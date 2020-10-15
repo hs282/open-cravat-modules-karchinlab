@@ -547,6 +547,8 @@ widgetGenerators['cosmic2'] = {
 				var tbody = getEl('tbody');
 				var toks = vcTissue.split(';');
 				var re = /(.*)\((.*)\)/
+                var tissues = [];
+                var counts = [];
 				for (var i = 0; i < toks.length; i++) {
 					var tok = toks[i];
 					var match = re.exec(tok);
@@ -555,6 +557,8 @@ widgetGenerators['cosmic2'] = {
 						var count = match[2];
 						var tr = getWidgetTableTr([tissue, count]);
 						addEl(tbody, tr);
+                        tissues.push(tissue);
+                        counts.push(parseInt(count));
 					}
 				}
 				addEl(div, addEl(table, tbody));
@@ -568,9 +572,7 @@ widgetGenerators['cosmic2'] = {
                     type: 'doughnut',
                     data: {
                         datasets: [{
-                            data: [
-                                countf
-                            ],
+                            data: counts,
                             backgroundColor: [
                                 '#69a3ef',
                                 '#008080',
@@ -580,7 +582,7 @@ widgetGenerators['cosmic2'] = {
                                 ],
                         }],
                         labels: [
-                            tissue,
+                            tissues,
                         ]
                     },
                     options: {
