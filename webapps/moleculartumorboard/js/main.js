@@ -387,9 +387,9 @@ widgetGenerators['brca'] = {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
                         var response = JSON.parse(xhr.responseText);
-                        id = response.data[0]['id']
+                        id = response.data.id
                         link = 'https://brcaexchange.org/variant/' + id
-                        sig = response.data[0]["Clinical_significance_ENIGMA"]
+                        sig = response.data.Clinical_significance_ENIGMA
                         addInfoLineLink(div,sig, 'BRCA Exchange', link);
                         
                         
@@ -423,11 +423,11 @@ widgetGenerators['oncokb'] = {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
                         var response = JSON.parse(xhr.responseText);
-                        effect = response.mutationEffect[0]['knownEffect']
-                        oncogenic = response.mutationEffect[0]['oncogenic']
-                        hugo = response.query[0]['hugoSymbol']
+                        effect = response.mutationEffect.knownEffect
+                        oncogenic = response.oncogenic
+                        hugo = response.query.hugoSymbol
                         link = 'https://www.oncokb.org/gene/' + hugo
-                        addInfoLineLink(div, oncogenic, effect, 'oncoKB', link)
+                        addInfoLineLink(div, effect  +', ' + oncogenic, 'oncoKB', link)
                         }
                 };
              }
