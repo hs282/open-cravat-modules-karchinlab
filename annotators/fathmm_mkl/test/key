@@ -1,0 +1,59 @@
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:46:04
+#Report level: variant
+#
+Variant Annotation															
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags
+1	chr1 	69091	A	C		Yes	OR4F5	ENST00000335137.4	start_lost	c.1A>C	p.Met1?	ENST00000335137.4:OR4F5:Q8NH21:missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000641515.2:OR4F5::missense_variant:p.Met22Leu:c.64A>C	1	s0	
+2	chr14	18601117	A	C		Yes	OR11H12	ENST00000550708.1	start_lost	c.1A>C	p.Met1?	ENST00000550708.1:OR11H12:B2RN74:missense_variant,start_lost:p.Met1?:c.1A>C	1	s1	
+3	chr18	47394	G	A		Yes	TUBB8B	ENST00000308911.8	missense_variant	c.1331C>T	p.Ala444Val	ENST00000308911.8:TUBB8B:A6NNZ2:missense_variant:p.Ala444Val:c.1331C>T; ENST00000594555.1:TUBB8B::2kb_downstream_variant,processed_transcript::	1	s2	
+4	chr1	69233	T	C		Yes	OR4F5	ENST00000641515.2	missense_variant	c.206T>C	p.Leu69Pro	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Leu48Pro:c.143T>C; ENST00000641515.2:OR4F5::missense_variant:p.Leu69Pro:c.206T>C	1	s5	
+5	chr6	292540	A	C		Yes	DUSP22	ENST00000419235.6	start_lost	c.1A>C	p.Met1?	ENST00000344450.9:DUSP22:Q9NRW4:missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000419235.6:DUSP22:Q9NRW4:missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000603005.5:DUSP22::processed_transcript::; ENST00000603453.5:DUSP22::5_prime_UTR_variant::c.-226A>C; ENST00000603726.5:DUSP22::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>C; ENST00000603795.5:DUSP22::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>C; ENST00000605035.5:DUSP22::5_prime_UTR_variant::c.-259A>C; ENST00000605315.5:DUSP22::5_prime_UTR_variant::c.-142A>C; ENST00000605863.5:DUSP22::5_prime_UTR_variant::c.-142A>C; ENST00000665870.1:AL365272.1::2kb_upstream_variant,lnc_RNA::	1	s3	
+6	chr19	110698	T	A		Yes	OR4F17	ENST00000618231.3	missense_variant	c.83T>A	p.Phe28Tyr	ENST00000318050.4:OR4F17:Q8NGA8:missense_variant:p.Phe7Tyr:c.20T>A; ENST00000585993.3:OR4F17:Q8NGA8:missense_variant:p.Phe7Tyr:c.20T>A; ENST00000618231.3:OR4F17::missense_variant:p.Phe28Tyr:c.83T>A; ENST00000641591.1:OR4F17::intron_variant,processed_transcript::	1	s3	
+7	chr21	10538725	T	G		Yes	TPTE	ENST00000618007.4	start_lost	c.2T>G	p.Met1?	ENST00000427445.6:TPTE:P56180:missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000612267.1:AF254983.1::lnc_RNA::; ENST00000612746.1:TPTE:P56180:intron_variant::c.-182+11313T>G; ENST00000618007.4:TPTE:P56180:missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000622113.4:TPTE:P56180:missense_variant,start_lost:p.Met1?:c.2T>G	1	s4	
+8	chr7	193200	A	T		Yes	FAM20C	ENST00000313766.6	start_lost	c.1A>T	p.Met1?	ENST00000313766.6:FAM20C:Q8IXL6:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000467050.1:AC093627.3::intron_variant,lnc_RNA::	1	s5	
+9	chr3	319817	T	C		Yes	CHL1	ENST00000256509.7	missense_variant	c.41T>C	p.Leu14Pro	ENST00000256509.7:CHL1:O00533:missense_variant:p.Leu14Pro:c.41T>C; ENST00000397491.6:CHL1:O00533:missense_variant:p.Leu14Pro:c.41T>C; ENST00000453040.5:CHL1::NMD_transcript_variant,3_prime_UTR_variant::c.*379T>C; ENST00000461289.2:CHL1::processed_transcript::; ENST00000620033.4:CHL1::missense_variant:p.Leu14Pro:c.41T>C	1	s6	
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:46:04
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+OR4F5		2	0	start_lost	missense_variant(2),start_lost(1)
+OR11H12		1	0	start_lost	missense_variant(1),start_lost(1)
+TUBB8B		1	0	missense_variant	missense_variant(1),processed_transcript(1)
+DUSP22		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),processed_transcript(1),5_prime_UTR_variant(1)
+OR4F17		1	0	missense_variant	intron_variant(1),missense_variant(1),processed_transcript(1)
+TPTE		1	0	start_lost	intron_variant(1),missense_variant(1),start_lost(1)
+FAM20C		1	0	start_lost	missense_variant(1),start_lost(1)
+CHL1		1	0	missense_variant	missense_variant(1),NMD_transcript_variant(1),processed_transcript(1),3_prime_UTR_variant(1)
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:46:04
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s5
+5	s3
+6	s3
+7	s4
+8	s5
+9	s6
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:46:04
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
+7		7	0
+8		8	0
+9		9	0

@@ -1,0 +1,62 @@
+#CRAVAT Report
+#Created at Tuesday 10/13/2020 13:06:31
+#Report level: variant
+#
+Variant Annotation																Candidate cis-Regulatory Elements by ENCODE (SCREEN)			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	ENCODE Accession ID	cCRE Accession ID	Classification	CTCF Bound
+1	chr1	181300	A	C									1	s0		EH38D2115304	EH38E1310153	pELS	Yes
+2	chr16	3158630	T	G			AC108134.2	ENST00000570843.1	lnc_RNA			ENST00000570843.1:AC108134.2::2kb_upstream_variant,lnc_RNA::	1	s1		EH38D2838054	EH38E1797356	pELS	Yes
+3	chr6	324897	A	G			DUSP22	ENST00000419235.6	intron_variant	c.139-10217A>G		ENST00000344450.9:DUSP22:Q9NRW4:intron_variant::c.139-10217A>G; ENST00000419235.6:DUSP22:Q9NRW4:intron_variant::c.139-10217A>G; ENST00000603005.5:DUSP22::intron_variant,processed_transcript::; ENST00000603290.1:DUSP22::intron_variant,processed_transcript::; ENST00000603453.5:DUSP22::intron_variant::c.-171-10217A>G; ENST00000603726.5:DUSP22::intron_variant,NMD_transcript_variant::c.138+12935A>G; ENST00000603795.5:DUSP22::intron_variant,NMD_transcript_variant::c.138+12935A>G; ENST00000604971.5:DUSP22::2kb_upstream_variant::c.-1383A>G; ENST00000605035.5:DUSP22::intron_variant::c.-122+12935A>G; ENST00000605315.5:DUSP22::intron_variant::c.-121-20957A>G; ENST00000605391.5:DUSP22::intron_variant,processed_transcript::; ENST00000605863.5:DUSP22::intron_variant::c.-121-20957A>G	1	s2		EH38D3802460	EH38E2438309	pELS	
+4	chr5	59360728	G	T			PDE4D	ENST00000340635.11	intron_variant	c.456-144760C>A		ENST00000309641.10:PDE4D:Q08499:intron_variant,NMD_transcript_variant::c.264-144760C>A; ENST00000340635.11:PDE4D:Q08499:intron_variant::c.456-144760C>A; ENST00000360047.9:PDE4D:Q08499:intron_variant::c.48-144760C>A; ENST00000405053.7:PDE4D::intron_variant,processed_transcript::; ENST00000502484.6:PDE4D:Q08499:intron_variant::c.273-144760C>A; ENST00000502575.1:PDE4D:Q08499:intron_variant::c.264-144760C>A; ENST00000507116.5:PDE4D:Q08499:intron_variant::c.264-144760C>A; ENST00000636120.1:PDE4D::intron_variant::c.125+69566C>A	1	s3		EH38D3707346	EH38E2375398	dELS	
+5	chr22	45452679	C	A									1	s4		EH38D3378849	EH38E2169532	dELS	
+6	chr22	43884530	A	T			PNPLA5	ENST00000216177.8	intron_variant	c.950-185T>A		ENST00000216177.8:PNPLA5:Q7Z6Z6:intron_variant::c.950-185T>A; ENST00000381198.6:PNPLA5:Q7Z6Z6:intron_variant::c.608-185T>A; ENST00000593866.5:PNPLA5:Q7Z6Z6:intron_variant::c.608-185T>A; ENST00000597664.6:PNPLA5:Q7Z6Z6:intron_variant::c.950-185T>A	1	s5		EH38D3377099	EH38E2168322	DNase-H3K4me3	Yes
+7	chr1 	1512429	A	G		Yes	ATAD3A	ENST00000378756.8	synonymous_variant	c.161A>G	p.Gly54=	ENST00000378755.9:ATAD3A:Q9NVI7:synonymous_variant:p.Gly54=:c.161A>G; ENST00000378756.8:ATAD3A:Q9NVI7:synonymous_variant:p.Gly54=:c.161A>G; ENST00000536055.6:ATAD3A:Q9NVI7:2kb_upstream_variant::c.-294A>G	1	s6					
+8	chr1	778587	T	A			LINC01409	ENST00000412115.2	lnc_RNA			ENST00000412115.2:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000429505.6:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000434264.6:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000443772.2:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000457084.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000589899.5:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000609830.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000651411.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000655765.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000656571.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000657896.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000658648.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000665719.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000665867.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000666217.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000669749.1:LINC01409::2kb_upstream_variant,lnc_RNA::; ENST00000670700.1:LINC01409::2kb_upstream_variant,lnc_RNA::	1	s7		EH38D2115324	EH38E1310158	PLS	Yes
+9	chr2	136810389	C	A			THSD7B	ENST00000409968.6	intron_variant	c.-36+44702C>A		ENST00000409968.6:THSD7B::intron_variant::c.-36+44702C>A; ENST00000472720.5:THSD7B::intron_variant,NMD_transcript_variant::c.-36+44702C>A	1	s8		EH38D3183050	EH38E2035778	DNase-H3K4me3	Yes
+10	chr1	850419	T	C			LINC01128	ENST00000416570.5	lnc_RNA			ENST00000416570.5:LINC01128::intron_variant,lnc_RNA::; ENST00000445118.7:LINC01128::intron_variant,lnc_RNA::; ENST00000448975.6:LINC01128::intron_variant,lnc_RNA::; ENST00000449005.6:LINC01128::intron_variant,lnc_RNA::; ENST00000608189.5:LINC01128::intron_variant,lnc_RNA::; ENST00000609009.6:LINC01128::intron_variant,lnc_RNA::; ENST00000609139.6:LINC01128::intron_variant,lnc_RNA::; ENST00000610067.6:LINC01128::2kb_downstream_variant,lnc_RNA::; ENST00000622921.1:LINC01128::intron_variant,lnc_RNA::; ENST00000623070.4:LINC01128::intron_variant,lnc_RNA::; ENST00000623808.3:LINC01128::intron_variant,lnc_RNA::; ENST00000624927.3:LINC01128::2kb_downstream_variant,lnc_RNA::; ENST00000657175.1:LINC01128::intron_variant,lnc_RNA::; ENST00000657837.1:LINC01128::intron_variant,lnc_RNA::; ENST00000658846.1:LINC01128::intron_variant,lnc_RNA::; ENST00000659124.1:LINC01128::intron_variant,lnc_RNA::; ENST00000661237.1:LINC01128::intron_variant,lnc_RNA::; ENST00000666741.1:LINC01128::intron_variant,lnc_RNA::; ENST00000667414.1:LINC01128::2kb_downstream_variant,lnc_RNA::; ENST00000670780.1:LINC01128::intron_variant,lnc_RNA::	1	s9		EH38D2115361	EH38E1310186	CTCF-only	Yes
+#CRAVAT Report
+#Created at Tuesday 10/13/2020 13:06:31
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+AC108134.2		0	1	lnc_RNA	lnc_RNA(1)
+DUSP22		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1),processed_transcript(1)
+PDE4D		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1),processed_transcript(1)
+PNPLA5		0	1	intron_variant	intron_variant(1)
+ATAD3A		1	0	synonymous_variant	synonymous_variant(1)
+LINC01409		0	1	lnc_RNA	lnc_RNA(1)
+THSD7B		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1)
+LINC01128		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+#CRAVAT Report
+#Created at Tuesday 10/13/2020 13:06:31
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+6	s5
+7	s6
+8	s7
+9	s8
+10	s9
+#CRAVAT Report
+#Created at Tuesday 10/13/2020 13:06:31
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
+7		7	0
+8		8	0
+9		9	0
+10		10	0
