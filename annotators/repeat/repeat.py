@@ -48,11 +48,10 @@ class CravatAnnotator (BaseAnnotator):
                 out['repeatfamily'].append(repeat_family)
                 out['repeatname'].append(repeat_name)
         
-        out['repeatclass'] = ','.join(out['repeatclass'])
-        out['repeatfamily'] = ','.join(out['repeatfamily'])
-        out['repeatname'] = ','.join(out['repeatname'])
-        
-        return out
+                out['repeatclass'] = ','.join(out['repeatclass'])
+                out['repeatfamily'] = ','.join(out['repeatfamily'])
+                out['repeatname'] = ','.join(out['repeatname'])
+                return out
 
 if __name__ == '__main__':
     module = CravatAnnotator(sys.argv)
