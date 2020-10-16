@@ -218,11 +218,13 @@ class Reporter(CravatReport):
                         if lineno not in self.output_candidate[pathno]:
                             alts = vcfline.split('\t')[4].split(',')
                             noalts = len(alts)
-                            self.output_candidate[pathno][lineno] = {'noalts': noalts, 'line': vcfline, 'annots': []}
+                            noalts_starless = len([alt for alt in alts if alt!='*'])
+                            self.output_candidate[pathno][lineno] = {'noalts': noalts, 'noalts_starless':noalts_starless, 'alts':alts, 'line': vcfline, 'annots': []}
                 continue
             elif col_name == 'base__all_mappings':
                 cell = cell.replace('; ', '&')
                 cell = cell.replace(' ', '-')
+                cell = cell.replace(',','/')
                 info.append(cell)
                 continue
             if self.input_format == 'vcf' and col_name in self.col_names_to_skip:
@@ -233,6 +235,7 @@ class Reporter(CravatReport):
                 cell = cell.replace('; ', '&')
                 cell = cell.replace(';', '&')
                 cell = cell.replace(' ', '-')
+                cell = cell.replace(',','/')
                 infocell = '"' + cell + '"'
             else:
                 infocell = str(cell)
@@ -263,17 +266,24 @@ class Reporter(CravatReport):
         if self.input_format == 'vcf':
             out = self.output_candidate[pathno][lineno]
             noalts = out['noalts']
+            noalts_starless = out['noalts_starless']
             annots = out['annots']
+            alts = out['alts']
         else:
-            noalts = 1
+            noalts = noalts_starless = 1
             annots = []
+            alts = [alt]
         annots.append(info)
-        if len(annots) == noalts:
+        if len(annots) == noalts_starless:
             numfields = len(annots[0])
             combined_annots = [['.' for j in range(noalts)] for i in range(numfields)]
             for fieldno in range(len(annots[0])):
+                star_offset = 0
                 for altno in range(noalts):
-                    combined_annots[fieldno][altno] = annots[altno][fieldno]
+                    if alts[altno] == '*':
+                        star_offset += 1
+                    else:
+                        combined_annots[fieldno][altno] = annots[altno-star_offset][fieldno]
             if self.info_type == 'separate':
                 info_add_list = []
                 for colno in range(len(self.col_names)):

@@ -1,5 +1,5 @@
 title: VCF Reporter
-version: 2.1.2
+version: 2.1.3
 type: reporter
 description: VCF format text file reporter
 requires_opencravat: '>=2.1.0'
@@ -14,6 +14,7 @@ developer:
 private: false
 hidden: false
 release_note:
+  2.1.3: Pass through * alleles
   2.1.2: FORMAT is omitted if there is no sample.
   2.0.2: uses aiosqlite instead of aiosqlite3
   2.0.0: returns output file path.

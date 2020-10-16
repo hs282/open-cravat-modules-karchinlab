@@ -28,7 +28,7 @@ class CravatAnnotator(BaseAnnotator):
             # Patch in latino for american
             out['af_lat'] = out['af_amr']
             del out['af_amr']
-        return out
+            return out
     
     def cleanup(self):
         pass

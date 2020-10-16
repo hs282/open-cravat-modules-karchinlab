@@ -1,0 +1,17 @@
+title: COSMIC widget for Molecular Tumor Board Report
+version: 0.0.1
+requires_opencravat: '>=2.1.2'
+required_annotator: base
+type: webviewerwidget
+description: COSMIC webviewer widget for Molecular Tumor Board Report
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization
+release_note:
+  0.0.1: Initial release
+hidden: true
