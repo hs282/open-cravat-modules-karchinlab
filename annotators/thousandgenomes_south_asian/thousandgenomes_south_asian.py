@@ -7,24 +7,24 @@ import os
 class CravatAnnotator(BaseAnnotator):
 
     def annotate(self, input_data):
-        out = {}
         chrom = input_data['chrom']
         pos = input_data['pos']
         ref = input_data['ref_base']
         alt = input_data['alt_base']
-        
         q = 'select BEB, GIH, ITU, PJL, STU from '\
             +'%s where pos=%s and ref="%s" and alt="%s";' \
             %(chrom, pos, ref, alt)
         self.cursor.execute(q)
         result = self.cursor.fetchone()
         if result:
-            out['beb_af'] = result[0] 
-            out['gih_af'] = result[1]
-            out['itu_af'] = result[2] 
-            out['pjl_af'] = result[3] 
-            out['stu_af'] = result[4] 
-        return out
+            return {
+                'beb_af': result[0], 
+                'gih_af': result[1],
+                'itu_af': result[2], 
+                'pjl_af': result[3], 
+                'stu_af': result[4], 
+            }
+
     def cleanup(self):
         pass
 

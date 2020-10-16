@@ -51,10 +51,11 @@ tags:
 - populations
 title: 1000 Genomes-African
 type: annotator
-version: 3.1.4
+version: 4.1.0
 requires:
 - thousandgenomes_group
 groups:
 - thousandgenomes_group
 release_note:
+  4.1.0: return None if no annotation
   3.1.2: added requires.
