@@ -29,6 +29,7 @@ class CravatAnnotator (BaseAnnotator):
                'repeatfamily': [],
                'repeatname': []}
         
+        has_annotation = False
         bins = get_ucsc_bins(start, end)
         for bin in bins:
             query = 'select class, family, name ' +\
@@ -43,15 +44,16 @@ class CravatAnnotator (BaseAnnotator):
                 continue
             
             for result in results:
+                has_annotation = True
                 (repeat_class, repeat_family, repeat_name) = result
                 out['repeatclass'].append(repeat_class)
                 out['repeatfamily'].append(repeat_family)
                 out['repeatname'].append(repeat_name)
-        
-                out['repeatclass'] = ','.join(out['repeatclass'])
-                out['repeatfamily'] = ','.join(out['repeatfamily'])
-                out['repeatname'] = ','.join(out['repeatname'])
-                return out
+        if has_annotation:
+            out['repeatclass'] = ','.join(out['repeatclass'])
+            out['repeatfamily'] = ','.join(out['repeatfamily'])
+            out['repeatname'] = ','.join(out['repeatname'])
+            return out
 
 if __name__ == '__main__':
     module = CravatAnnotator(sys.argv)
