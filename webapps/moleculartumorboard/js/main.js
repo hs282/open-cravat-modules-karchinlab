@@ -138,7 +138,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_action');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '300px';
+    parentDiv.style.height = '400px';
     parentDiv.style.overflow="auto";
     showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb', 'cancer_genome_interpreter'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_driver');
@@ -188,6 +188,72 @@ function getNodataSpan () {
     return span;
 }
 
+function addInfoLine2 (div, row, col, tabName, headerMinWidth, highlightIfValue) {
+    var text = null;
+    if (typeof(row) != 'object') {
+        text = header;
+        header = row;
+        headerMinWidth = tabName;
+        tabName = col;
+    } else {
+        text = infomgr.getRowValue(tabName, row, col);
+    }
+    var color = 'black';
+    if (text == undefined || text == '') {
+        color = '#cccccc';
+    }
+    var table = getEl('table');
+    table.style.fontSize = '12px';
+    table.style.borderCollapse = 'collapse';
+    var tr = getEl('tr');
+    var td = getEl('td');
+    td.className = 'detail-info-line-header';
+    if (headerMinWidth != undefined) {
+        td.style.minWidth = headerMinWidth;
+    }
+    var h = getLineHeader(header);
+    h.style.color = color;
+    addEl(td, h);
+    addEl(tr, td);
+    td = getEl('td');
+    td.className = 'detail-info-line-content';
+    var t = getEl('span');
+    t.textContent = text;
+    t.style.color = color;
+    addEl(td, t);
+    addEl(tr, td);
+    if (highlightIfValue != undefined && highlightIfValue) {
+        tr.style.color = '#ff0000';
+    }
+    addEl(table, tr);
+	addEl(div, table);
+}
+
+function addInfoLineLink2 (div, header, text, link, trimlen) {
+    var span = getEl("span")
+    span.textContent = header
+	addEl(div, span);
+	var spanText = null;
+	if (link == undefined || link == null) {
+		text = ''; 
+		spanText = document.createElement('span');
+	} else {
+		spanText = document.createElement('a');
+		spanText.href = link;
+		spanText.target = '_blank';
+		if (trimlen > 0) {
+			if (text.length > trimlen) {
+				spanText.title = text;
+				text = text.substring(0, trimlen) + '...';
+			}
+		}
+	}
+	addEl(spanText, getTn(text));
+	addEl(div, spanText);
+	addEl(div, getEl('br'));
+}
+
+
 var widgetInfo = {};
 var widgetGenerators = {};
 
@@ -201,7 +267,7 @@ widgetGenerators['base2'] = {
             var transcript = getWidgetData(tabName, 'base', row, 'transcript');
             var nref = getWidgetData(tabName, 'base', row, 'ref_base').length;
             var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
-                var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
+            var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
                 var nalt = getWidgetData(tabName, 'base', row, 'alt_base').length;
             var chrom = getWidgetData(tabName, 'base', row, 'chrom');
             var chrom = chrom.substring(3)
@@ -232,7 +298,7 @@ widgetGenerators['base2'] = {
                 var variant_length = nalt;
             }
             addInfoLine(div, 'Variant Length', variant_length);
-            addInfoLine(div, 'Cytogenetic Location')
+            //addInfoLine(div, 'Cytogenetic Location')
                 addInfoLine(div, 'Genomic Location',  chrom + ':' + ' '+ getWidgetData(tabName, 'base', row, 'pos') + ' '+ '(GRCh38)', tabName);
             addInfoLine(div, 'Sequence ontology', getWidgetData(tabName, 'base', row, 'so'), tabName);
             if (thous_af > gnomad_af){
@@ -242,7 +308,12 @@ widgetGenerators['base2'] = {
                 var max_af = gnomad_af;
             }
             addInfoLine(div, '1000g/gnomAD max AF', max_af);
-            addInfoLine(div, 'dbSNP', getWidgetData(tabName, 'dbsnp', row, 'snp'));
+            var snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
+            if (snp == null) {
+                addInfoLine(div, 'dbSNP');
+            }
+            link = 'https://www.ncbi.nlm.nih.gov/snp/' + snp
+            addInfoLineLink(div, 'dbSNP', snp, link);
         }
     }
 }
@@ -325,8 +396,8 @@ widgetGenerators['litvar'] = {
                         v['rsids2pmids'][rsid] = n;
                         addInfoLineLink(
                                 div, 
-                                '# publications for the variant (' + rsid + ')', 
-                                    n, 
+                                n,
+                                ' publications for the variant (' + rsid + ')',  
                                     link,
                                     tabName
                                     );
@@ -340,40 +411,40 @@ widgetGenerators['litvar'] = {
                                 },
                                 }
 
-                                widgetInfo['brca'] = {'title': ''};
-                                widgetGenerators['brca'] = {
-                                'variant': {
-                                'width': 580, 
-                                'height': 200, 
-                                'function': function (div, row, tabName) {
-                                    var widgetName = 'brca';
-                                    var v = widgetGenerators[widgetName][tabName]['variables'];
-                                    var chrom = getWidgetData(tabName, 'base', row, 'chrom');
-                                    var pos = getWidgetData(tabName, 'base', row, 'pos')
-                                        var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
-                                        var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
-                                        var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
-                                        var url = 'https://brcaexchange.org/backend/data/?format=json&search_term=' + search_term + '&include=Variant_in_ENIGMA';
-                                    var xhr = new XMLHttpRequest();
-                                    xhr.open('GET', url, true);
-                                    xhr.onreadystatechange = function () {
-                                        if (xhr.readyState == XMLHttpRequest.DONE) {
-                                            if (xhr.status == 200) {
-                                                var response = JSON.parse(xhr.responseText);
-                                                id = response.data.id
-                                                    link = 'https://brcaexchange.org/variant/' + id
-                                                    sig = response.data.Clinical_significance_ENIGMA
-                                                    addInfoLineLink(div,sig, 'BRCA Exchange', link);
+widgetInfo['brca'] = {'title': ''};
+widgetGenerators['brca'] = {
+'variant': {
+'width': 580, 
+'height': 200, 
+'function': function (div, row, tabName) {
+    var widgetName = 'brca';
+    var v = widgetGenerators[widgetName][tabName]['variables'];
+    var chrom = getWidgetData(tabName, 'base', row, 'chrom');
+    var pos = getWidgetData(tabName, 'base', row, 'pos')
+        var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
+        var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
+        var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
+        var url = 'https://brcaexchange.org/backend/data/?format=json&search_term=' + search_term + '&include=Variant_in_ENIGMA';
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            if (xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                id = response.data.id
+                    link = 'https://brcaexchange.org/variant/' + id
+                    sig = response.data.Clinical_significance_ENIGMA
+                    addInfoLineLink2(div, sig, 'BRCA Exchange', link);
 
 
-                                            }
-                                        };
-                                    }
-                                    xhr.send();
-                                    return;
-                                }
-                                },
-                                }
+            }
+        };
+    }
+    xhr.send();
+    return;
+}
+},
+}
 
 widgetInfo['oncokb'] = {'title': ''};
 widgetGenerators['oncokb'] = {
@@ -385,11 +456,11 @@ widgetGenerators['oncokb'] = {
             var v = widgetGenerators[widgetName][tabName]['variables'];
             var chrom = getWidgetData(tabName, 'base', row, 'chrom');
             var pos = getWidgetData(tabName, 'base', row, 'pos')
-                var ref = getWidgetData(tabName, 'base', row, 'ref_base')
-                var alt = getWidgetData(tabName, 'base', row, 'alt_base')
-                var search_term = chrom + '%2C'+pos + '2%C' + pos+'2%C' +ref+'2%C' +alt
-                var genome = '&referenceGenome=GRCh37'
-                var url = 'oncokb?chrom=' + chrom +'&start=' + pos + '&end=' + pos + '&ref_base=' + ref + '&alt_base=' + alt;
+            var ref = getWidgetData(tabName, 'base', row, 'ref_base')
+            var alt = getWidgetData(tabName, 'base', row, 'alt_base')
+            var search_term = chrom + '%2C'+pos + '2%C' + pos+'2%C' +ref+'2%C' +alt
+            var genome = '&referenceGenome=GRCh37'
+            var url = 'oncokb?chrom=' + chrom +'&start=' + pos + '&end=' + pos + '&ref_base=' + ref + '&alt_base=' + alt;
             var xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
             xhr.onreadystatechange = function () {
@@ -400,7 +471,10 @@ widgetGenerators['oncokb'] = {
                             oncogenic = response.oncogenic
                             hugo = response.query.hugoSymbol
                             link = 'https://www.oncokb.org/gene/' + hugo
-                            addInfoLineLink(div, effect  +', ' + oncogenic, 'oncoKB', link)
+                            if (effect == 'Unknown'){
+                                addInfoLine(div, 'No annotation for OncoKB available')
+                            }
+                            addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'oncoKB', link)
                     }
                 };
             }
@@ -718,13 +792,13 @@ widgetGenerators['target2'] = {
     'variant': {
         'width': '100%', 
         'height': 'unset', 
-        'function': function (div, row, tabName) {
+        'function': function (div, row,  tabName) {
             var therapy = getWidgetData(tabName, 'target', row, 'therapy');
             var rationale = getWidgetData(tabName, 'target', row, 'rationale');
             addInfoLine(div, 'TARGET', "Identifies this gene associated with " + therapy + '. The rationale is ' + rationale)
+            }
         }
     }
-}
 
 
 widgetInfo['basepanel'] = {'title': ''};
@@ -776,23 +850,25 @@ widgetInfo['actionpanel'] = {'title': ''};
 widgetGenerators['actionpanel'] = {
     'variant': {
         'width': '100%',
-        'height': undefined,
+        'height': '100%',
         'function': function (div, row, tabName) {
             var generator = widgetGenerators['brca']['variant'];
             generator['width'] = 400;
             var divs = showWidget('brca', ['base'], 'variant', div, null, 220)
-                divs[0].style.position = 'relative';
+            divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            divs[1].style.paddingLeft = '1px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
             var generator = widgetGenerators['oncokb']['variant'];
             generator['width'] = 400;
             var divs = showWidget('oncokb', ['base'], 'variant', div, null, 220)
-                divs[0].style.position = 'relative';
+            divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            divs[1].style.paddingLeft = '1px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
@@ -801,28 +877,30 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            divs[1].style.paddingLeft = '1px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
-            var generator = widgetGenerators['brca']['variant'];
-            generator['width'] = 400;
+            var generator = widgetGenerators['target2']['variant'];
+            generator['width'] = '100%';
             var divs = showWidget('target2', ['target'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            divs[1].style.paddingLeft = '1px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
             var divs = showWidget('civic2', ['civic'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
+            divs[0].style.top = '20px';
             divs[0].style.left = '0px';
             var table = getEl('table');
             var tr = getEl('tr');
             var td = getEl('td');
             var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
+            divs[0].style.top = '40px';
             divs[0].style.left = '0px';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -846,12 +924,14 @@ widgetGenerators['driverpanel'] = {
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            divs[1].style.paddingLeft = '1px';
             var generator = widgetGenerators['cgl2']['gene'];
             generator['width'] = '100%'
             var divs = showWidget('cgl2', ['base', 'cgl'], 'gene', div, null, 220);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            divs[1].style.paddingLeft = '1px';
             var generator = widgetGenerators['chasmplus2']['variant'];
             generator['width'] = '100%'
             var divs = showWidget('chasmplus2', ['base', 'chasmplus'], 'variant', div, null, 220);
