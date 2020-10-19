@@ -11,6 +11,7 @@ live_modules:
 - dbsnp
 - target
 - gnomad
+- gnomad3
 - thousandgenomes
 - hgdp
 - esp6500
@@ -47,6 +48,7 @@ live_modules:
 - ndex
 - mupit
 - litvar
+- cancer_genome_interpreter
 requires:
 - hg38
 - chasmplus
