@@ -138,7 +138,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_action');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '400px';
+    parentDiv.style.maxHeight = '600px';
     parentDiv.style.overflow="auto";
     showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb', 'cancer_genome_interpreter'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_driver');
@@ -706,6 +706,11 @@ widgetGenerators['cosmic2'] = {
         'function': function (div, row, tabName) {
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
+                var outTable = getEl('table');
+                var outTr = getEl('tr');
+                var outTd = getEl('td');
+                outTd.style.width = '300px';
+                addEl(div, addEl(outTable, addEl(outTr, outTd)));
                 var table = getWidgetTableFrame();
                 var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
                 addEl(table, thead);
@@ -726,7 +731,10 @@ widgetGenerators['cosmic2'] = {
                             counts.push(parseInt(count));
                     }
                 }
-                addEl(div, addEl(table, tbody));
+                addEl(outTd, addEl(table, tbody));
+                var outTd = getEl('td');
+                outTd.style.width = '900px';
+                addEl(outTr, outTd);
                 var colors = [
                     '#008080', // teal
                     '#ffd700', // gold
@@ -746,31 +754,29 @@ widgetGenerators['cosmic2'] = {
                     '#00ffff', // aqua
                     '#000080', // navy
                 ];
-                div.style.width = 'calc(100% - 37px)';
+                div.style.width = 'calc(100% - 20px)';
                 var chartDiv = getEl('canvas');
-                chartDiv.style.width = 'calc(100% - 20px)';
-                chartDiv.style.height = 'calc(100% - 20px)';
-                addEl(div, chartDiv);
+                chartDiv.style.width = 'calc(100% - 40px)';
+                chartDiv.style.height = 'calc(100% - 40px)';
+                addEl(outTd, chartDiv);
                 var chart = new Chart(chartDiv, {
-type: 'doughnut',
-data: {
-datasets: [{
-data: counts,
-backgroundColor: colors
-}],
-labels: tissues
-},
-options: {
-responsive: true,
-responsiveAnimationDuration: 500,
-maintainAspectRatio: false,
-}
-}
-
-)}
-
-                }
-}
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: counts,
+                            backgroundColor: colors
+                        }],
+                        labels: tissues
+                    },
+                    options: {
+                        responsive: true,
+                        responsiveAnimationDuration: 500,
+                        maintainAspectRatio: false,
+                    }
+                });
+            }
+        }
+    }
 }
 
 widgetInfo['cgi'] = {'title': ''};
@@ -961,7 +967,7 @@ widgetGenerators['hotspotspanel'] = {
         'function': function (div, row, tabName) {
             var generator = widgetGenerators['cosmic2']['variant'];
             generator['width'] = '100%'
-            var divs = showWidget('cosmic2', ['base', 'cosmic'], 'variant', div, null, 220);
+            var divs = showWidget('cosmic2', ['base', 'cosmic'], 'variant', div, null, 600);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
@@ -1108,7 +1114,7 @@ widgetGenerators['germlinepanel'] = {
             var tr = getEl('tr');
             var td = getEl('td');
             td.style.width = sectionWidth + 'px';
-            showWidget('clinvar2', ['clinvar'], 'variant', td, null, 250);
+            showWidget('clinvar2', ['clinvar'], 'variant', td, null, 300);
             addEl(tr, td);
             addEl(table, tr);
             addEl(div, table);
