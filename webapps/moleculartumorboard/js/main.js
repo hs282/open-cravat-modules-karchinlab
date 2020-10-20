@@ -310,10 +310,13 @@ widgetGenerators['base2'] = {
             addInfoLine(div, '1000g/gnomAD max AF', max_af);
             var snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
             if (snp == null) {
+                //return
                 addInfoLine(div, 'dbSNP');
             }
-            link = 'https://www.ncbi.nlm.nih.gov/snp/' + snp
-            addInfoLineLink(div, 'dbSNP', snp, link);
+            else {
+                link = 'https://www.ncbi.nlm.nih.gov/snp/' + snp
+                addInfoLineLink(div, 'dbSNP', snp, link);
+            }
         }
     }
 }
@@ -373,13 +376,7 @@ widgetGenerators['litvar'] = {
             var n = v['rsids2pmids'][rsid];
             var link = 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=' + rsid;
             if (n != undefined) {
-                addInfoLineLink(
-                        div, 
-                        '# publications for the variant (' + rsid + ')', 
-                            n, 
-                            link,
-                            tabName
-                            );
+                    addInfoLineLink(div, n , '# publications for the variant (' + rsid + ')', link);
                         } else {
                         var url = 'https://www.ncbi.nlm.nih.gov/research/bionlp/litvar/api/v1/public/rsids2pmids?rsids=' + rsid;
                         var xhr = new XMLHttpRequest();
@@ -394,13 +391,7 @@ widgetGenerators['litvar'] = {
                         n = response[0]['pmids'].length;
                         }
                         v['rsids2pmids'][rsid] = n;
-                        addInfoLineLink(
-                                div, 
-                                n,
-                                ' publications for the variant (' + rsid + ')',  
-                                    link,
-                                    tabName
-                                    );
+                        addInfoLineLink2(div,'',  n + ' publications for the variant (' + rsid + ')', link);
                                 }
                                 }
                                 };
@@ -421,22 +412,25 @@ widgetGenerators['brca'] = {
     var v = widgetGenerators[widgetName][tabName]['variables'];
     var chrom = getWidgetData(tabName, 'base', row, 'chrom');
     var pos = getWidgetData(tabName, 'base', row, 'pos')
-        var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
-        var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
-        var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
-        var url = 'https://brcaexchange.org/backend/data/?format=json&search_term=' + search_term + '&include=Variant_in_ENIGMA';
+    var ref_base = getWidgetData(tabName, 'base', row, 'ref_base')
+    var alt_base = getWidgetData(tabName, 'base', row, 'alt_base')
+    var search_term = chrom + ':g.' + pos + ':' + ref_base + '>' + alt_base
+    var url = 'https://brcaexchange.org/backend/data/?format=json&search_term=' + search_term + '&include=Variant_in_ENIGMA';
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            if (xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                id = response.data.id
-                    link = 'https://brcaexchange.org/variant/' + id
-                    sig = response.data.Clinical_significance_ENIGMA
-                    addInfoLineLink2(div, sig, 'BRCA Exchange', link);
-
-
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        if (xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            id = response.data[0]["id"]
+            link = 'https://brcaexchange.org/variant/' + id
+            sig = response.data[0]["Clinical_significance_ENIGMA"]
+            if (id == null){
+                addInfoLineLink2(div, "No Annotation Available for BRCA")
+            }
+            else {
+                addInfoLineLink2(div, sig + ', ', 'BRCA Exchange', link);
+            }
             }
         };
     }
@@ -468,13 +462,16 @@ widgetGenerators['oncokb'] = {
                     if (xhr.status == 200) {
                         var response = JSON.parse(xhr.responseText);
                         effect = response.mutationEffect.knownEffect
-                            oncogenic = response.oncogenic
-                            hugo = response.query.hugoSymbol
-                            link = 'https://www.oncokb.org/gene/' + hugo
-                            if (effect == 'Unknown'){
-                                addInfoLine(div, 'No annotation for OncoKB available')
+                        oncogenic = response.oncogenic
+                        hugo = response.query.hugoSymbol
+                        link = 'https://www.oncokb.org/gene/' + hugo
+                        if (effect == 'Unknown'){
+                            addInfoLineLink2(div, 'No annotation for OncoKB available');
                             }
+                        else {
                             addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'oncoKB', link)
+                        }
+                        
                     }
                 };
             }
@@ -782,7 +779,15 @@ widgetGenerators['cgi'] = {
         'width': '100%', 
         'height': 'unset', 
         'function': function (div, row, tabName) {
-            addInfoLine(div, 'Association', 'Drug ' + getWidgetData(tabName, 'cancer_genome_interpreter', row, 'association') + ', CGI')
+            var assoc = getWidgetData(tabName, 'cancer_genome_interpreter', row, 'association');
+            console.log(assoc)
+            if (assoc == null){
+                addInfoLineLink2(div, "No Annotation Available for CGI");
+            }
+            else {
+                addInfoLineLink2(div, 'Drug ' + assoc + ', CGI');
+            }
+            
         }
     }
 }
