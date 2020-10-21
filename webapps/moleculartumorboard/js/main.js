@@ -99,7 +99,7 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         maxHeightParent = maxHeight + 30;
     }
     if (level != undefined) {
-        if (widgetName == 'cgi') {
+        if (widgetName == 'cgi' || widgetName == 'target2') {
             divs = getDetailWidgetDivs(level, widgetName, '', maxWidthParent, maxHeightParent, showTitle);
         } else {
             divs = getDetailWidgetDivs(level, widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
@@ -803,7 +803,7 @@ widgetGenerators['cgi'] = {
     }
 }
 
-widgetInfo['target2'] = {'title': ''};
+widgetInfo['target2'] = {'title': 'TARGET'};
 widgetGenerators['target2'] = {
     'variant': {
         'width': '100%', 
@@ -844,9 +844,9 @@ widgetGenerators['basepanel'] = {
             divs[0].style.left = '470px';
             var generator = widgetGenerators['litvar']['variant'];
             generator['width'] = 400;
-            var divs = showWidget('litvar', ['base', 'litvar', 'dbsnp'], 'variant', div, null, 220);
+            var divs = showWidget('litvar', ['litvar', 'dbsnp'], 'variant', div, null, 220);
             divs[0].style.position = 'absolute';
-            divs[0].style.top = '150px';
+            divs[0].style.top = '250px';
             divs[0].style.left = '470px';
             var generator = widgetGenerators['lollipop']['variant'];
             generator['width'] = sectionWidth;
@@ -900,14 +900,20 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
+            var br = getEl("br");
+            addEl(div, br);
             var divs = showWidget('civic2', ['civic'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
-            divs[0].style.top = '20px';
+            divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
             var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
-            divs[0].style.top = '40px';
+            divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -954,18 +960,24 @@ widgetGenerators['hotspotspanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['cosmic2']['variant'];
             generator['width'] = '100%'
-            var divs = showWidget('cosmic2', ['base', 'cosmic'], 'variant', div, null, 600);
+            var divs = showWidget('cosmic2', ['cosmic'], 'variant', div, null, 600);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['cancer_hotspots']['variant'];
             generator['width'] = '100%'
-            var divs = showWidget('cancer_hotspots', ['base', 'cancer_hotspots'], 'variant', div, null, 220);
+            var divs = showWidget('cancer_hotspots', ['cancer_hotspots'], 'variant', div, null, 220);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1025,6 +1037,8 @@ widgetGenerators['poppanel'] = {
             addBarComponent(td, row, 'South Asn', 'thousandgenomes__sas_af', tabName);
             addEl(table, addEl(tr, td));
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1037,6 +1051,8 @@ widgetGenerators['pathwayspanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -1056,6 +1072,8 @@ widgetGenerators['pathwayspanel'] = {
             addEl(tr, td);
             addEl(table, tr);
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1066,6 +1084,8 @@ widgetGenerators['structurepanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -1082,10 +1102,12 @@ widgetGenerators['structurepanel'] = {
             }
             generator['height'] = height;
             generator['width'] = sectionWidth - 7;
-            showWidget('mupit2', ['base', 'mupit'], 'variant', td);
+            showWidget('mupit2', ['base','mupit'], 'variant', td);
             addEl(tr, td);
             addEl(table, tr);
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1098,6 +1120,8 @@ widgetGenerators['germlinepanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -1107,6 +1131,8 @@ widgetGenerators['germlinepanel'] = {
             addEl(tr, td);
             addEl(table, tr);
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1136,9 +1162,7 @@ widgetGenerators['mupit2'] = {
                 } else {
                     iframe.parentElement.removeChild(iframe);
                     var sdiv = getEl('div');
-                    sdiv.textContent = 'No annotation available';
-                    sdiv.style.paddingLeft = '7px';
-                    sdiv.style.color = '#cccccc';
+                    sdiv.textContent = 'No annotation available for MuPIT';
                     addEl(div, sdiv);
                     div.parentElement.style.height = '50px';
                 }
