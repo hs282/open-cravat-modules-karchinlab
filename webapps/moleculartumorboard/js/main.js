@@ -99,7 +99,11 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         maxHeightParent = maxHeight + 30;
     }
     if (level != undefined) {
-        divs = getDetailWidgetDivs(level, widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
+        if (widgetName == 'cgi') {
+            divs = getDetailWidgetDivs(level, widgetName, '', maxWidthParent, maxHeightParent, showTitle);
+        } else {
+            divs = getDetailWidgetDivs(level, widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
+        }
     } else {
         if ('variant' in generator) {
             divs = getDetailWidgetDivs('variant', widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
