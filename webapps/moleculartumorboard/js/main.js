@@ -99,7 +99,7 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         maxHeightParent = maxHeight + 30;
     }
     if (level != undefined) {
-        if (widgetName == 'cgi') {
+        if (widgetName == 'cgi' || widgetName == 'target2') {
             divs = getDetailWidgetDivs(level, widgetName, '', maxWidthParent, maxHeightParent, showTitle);
         } else {
             divs = getDetailWidgetDivs(level, widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
@@ -115,8 +115,8 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
     }
     var data = getModulesData(moduleNames);
     if (Object.keys(data).length == 0) {
-        var span = getNodataSpan();
-        span.style.paddingLeft = '7px';
+        var span = getEl('span');
+        span.textContent = 'No annotation available for ' + widgetInfo[widgetName]['title'];
         addEl(divs[1], span);
         //var ret = widgetGenerators[widgetName][level]['function'](divs[1], data, 'variant', true); // last true is to highlight if value exists.
     } else {
@@ -185,10 +185,10 @@ function getWidgets (callback, callbackArgs) {
             });
 }
 
-function getNodataSpan () {
+function getNodataSpan (annotator_name) {
     var span = getEl('span');
-    span.classList.add('nodata');
-    span.textContent = 'No annotation available';
+    //span.classList.add('nodata');
+    span.textContent = 'No annotation for'+ annotator_name + 'available';
     return span;
 }
 
@@ -314,7 +314,6 @@ widgetGenerators['base2'] = {
             addInfoLine(div, '1000g/gnomAD max AF', max_af);
             var snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
             if (snp == null) {
-                //return
                 addInfoLine(div, 'dbSNP');
             }
             else {
@@ -426,9 +425,9 @@ widgetGenerators['brca'] = {
     if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
             var response = JSON.parse(xhr.responseText);
-            id = response.data[0]["id"]
+            id = response.data.id
             link = 'https://brcaexchange.org/variant/' + id
-            sig = response.data[0]["Clinical_significance_ENIGMA"]
+            sig = response.data.Clinical_significance_ENIGMA
             if (id == null){
                 addInfoLineLink2(div, "No Annotation Available for BRCA")
             }
@@ -473,7 +472,7 @@ widgetGenerators['oncokb'] = {
                             addInfoLineLink2(div, 'No annotation for OncoKB available');
                             }
                         else {
-                            addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'oncoKB', link)
+                            addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'OncoKB', link)
                         }
                         
                     }
@@ -586,9 +585,10 @@ widgetGenerators['civic2'] = {
             var description = getWidgetData(tabName, 'civic', row, 'description');
             addInfoLine(div, 'Clinical Actionability Score', score, tabName);
             addInfoLine(div, 'Description', description, tabName);
+            }
+
         }
     }
-}
 
 widgetInfo['pharmgkb2'] = {'title': 'PharmGKB'};
 widgetGenerators['pharmgkb2'] = {
@@ -600,6 +600,8 @@ widgetGenerators['pharmgkb2'] = {
         }
     }
 }
+
+
 
 
 widgetInfo['clinvar2'] = {'title': 'ClinVar'};
@@ -783,16 +785,15 @@ widgetGenerators['cosmic2'] = {
     }
 }
 
-widgetInfo['cgi'] = {'title': ''};
+widgetInfo['cgi'] = {'title': 'Cancer Genome Interpreter'};
 widgetGenerators['cgi'] = {
     'variant': {
         'width': '100%', 
         'height': 'unset', 
         'function': function (div, row, tabName) {
             var assoc = getWidgetData(tabName, 'cancer_genome_interpreter', row, 'association');
-            console.log(assoc)
-            if (assoc == null){
-                addInfoLineLink2(div, "No Annotation Available for CGI");
+            if (assoc == undefined) {
+                addInfoLine(div, 'No information in Cancer Genome Interpreter');
             }
             else {
                 addInfoLineLink2(div, 'Drug ' + assoc + ', CGI');
@@ -802,7 +803,7 @@ widgetGenerators['cgi'] = {
     }
 }
 
-widgetInfo['target2'] = {'title': ''};
+widgetInfo['target2'] = {'title': 'TARGET'};
 widgetGenerators['target2'] = {
     'variant': {
         'width': '100%', 
@@ -810,7 +811,13 @@ widgetGenerators['target2'] = {
         'function': function (div, row,  tabName) {
             var therapy = getWidgetData(tabName, 'target', row, 'therapy');
             var rationale = getWidgetData(tabName, 'target', row, 'rationale');
-            addInfoLine(div, 'TARGET', "Identifies this gene associated with " + therapy + '. The rationale is ' + rationale)
+            if (rationale == null) {
+                addInfoLine(div, 'No annotation available for Target');
+            }
+            else {
+                addInfoLine(div, 'TARGET', "Identifies this gene associated with " + therapy + '. The rationale is ' + rationale)
+            }
+            
             }
         }
     }
@@ -837,9 +844,9 @@ widgetGenerators['basepanel'] = {
             divs[0].style.left = '470px';
             var generator = widgetGenerators['litvar']['variant'];
             generator['width'] = 400;
-            var divs = showWidget('litvar', ['base', 'litvar', 'dbsnp'], 'variant', div, null, 220);
+            var divs = showWidget('litvar', ['litvar', 'dbsnp'], 'variant', div, null, 220);
             divs[0].style.position = 'absolute';
-            divs[0].style.top = '150px';
+            divs[0].style.top = '250px';
             divs[0].style.left = '470px';
             var generator = widgetGenerators['lollipop']['variant'];
             generator['width'] = sectionWidth;
@@ -874,9 +881,6 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('td');
             var generator = widgetGenerators['oncokb']['variant'];
             generator['width'] = 400;
             var divs = showWidget('oncokb', ['base'], 'variant', div, null, 220)
@@ -884,18 +888,11 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('td');
-            td.style.position = 'relative';
             var divs = showWidget('cgi', ['cancer_genome_interpreter'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('td');
             var generator = widgetGenerators['target2']['variant'];
             generator['width'] = '100%';
             var divs = showWidget('target2', ['target'], 'variant', div, null, 220)
@@ -903,29 +900,23 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('td');
+            var br = getEl("br");
+            addEl(div, br);
             var divs = showWidget('civic2', ['civic'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
-            divs[0].style.top = '20px';
+            divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('td');
+            var br = getEl("br");
+            addEl(div, br);
             var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
-            divs[0].style.top = '40px';
+            divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('td');
-            addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
-
-
 
 widgetInfo['driverpanel'] = {'title': ''};
 widgetGenerators['driverpanel'] = {
@@ -969,18 +960,24 @@ widgetGenerators['hotspotspanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['cosmic2']['variant'];
             generator['width'] = '100%'
-            var divs = showWidget('cosmic2', ['base', 'cosmic'], 'variant', div, null, 600);
+            var divs = showWidget('cosmic2', ['cosmic'], 'variant', div, null, 600);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['cancer_hotspots']['variant'];
             generator['width'] = '100%'
-            var divs = showWidget('cancer_hotspots', ['base', 'cancer_hotspots'], 'variant', div, null, 220);
+            var divs = showWidget('cancer_hotspots', ['cancer_hotspots'], 'variant', div, null, 220);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1040,6 +1037,8 @@ widgetGenerators['poppanel'] = {
             addBarComponent(td, row, 'South Asn', 'thousandgenomes__sas_af', tabName);
             addEl(table, addEl(tr, td));
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1052,6 +1051,8 @@ widgetGenerators['pathwayspanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -1071,6 +1072,8 @@ widgetGenerators['pathwayspanel'] = {
             addEl(tr, td);
             addEl(table, tr);
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1081,6 +1084,8 @@ widgetGenerators['structurepanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -1097,10 +1102,12 @@ widgetGenerators['structurepanel'] = {
             }
             generator['height'] = height;
             generator['width'] = sectionWidth - 7;
-            showWidget('mupit2', ['base', 'mupit'], 'variant', td);
+            showWidget('mupit2', ['base','mupit'], 'variant', td);
             addEl(tr, td);
             addEl(table, tr);
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1113,6 +1120,8 @@ widgetGenerators['germlinepanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -1122,6 +1131,8 @@ widgetGenerators['germlinepanel'] = {
             addEl(tr, td);
             addEl(table, tr);
             addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
         }
     }
 }
@@ -1151,9 +1162,7 @@ widgetGenerators['mupit2'] = {
                 } else {
                     iframe.parentElement.removeChild(iframe);
                     var sdiv = getEl('div');
-                    sdiv.textContent = 'No annotation available';
-                    sdiv.style.paddingLeft = '7px';
-                    sdiv.style.color = '#cccccc';
+                    sdiv.textContent = 'No annotation available for MuPIT';
                     addEl(div, sdiv);
                     div.parentElement.style.height = '50px';
                 }
