@@ -24,6 +24,14 @@ output_columns:
   width: 120
   filterable: false
   desc: Occurences in COSMIC per tissue
+  table: true
+  table_headers:
+  - name: tissue
+    title: Tissue
+    type: string
+  - name: occurrences
+    title: Occurrences
+    type: int
 release_note:
   91.0.0: data update to COSMIC v91
   85.0.2: added index to data for speed

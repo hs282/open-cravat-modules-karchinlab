@@ -12,56 +12,101 @@ output_columns:
   filterable: false
 - name: oe_lof
   title: Obv/Exp LoF
-  type: string
+  type: float
   width: 70
   desc: Observed/Expected for loss of function variants
   hidden: true
 - name: oe_mis
   title: Obv/Exp Mis
-  type: string
+  type: float
   width: 70
   desc: Observed/Expected for missense variants
   hidden: true
 - name: oe_syn
   title: Obv/Exp Syn
-  type: string
+  type: float
   width: 70
   hidden: true
   filterable: false
   desc: Observed/Expected for synonymous variants
 - name: lof_z
   title: LoF Z-Score
-  type: string
+  type: float
   desc: Z-score for loss of function variants
   hidden: true
 - name: mis_z
   title: Mis Z-Score
-  type: string
+  type: float
   desc: Z-score for missense variants
   hidden: true
 - name: syn_z
   title: Syn Z-Score
-  type: string
+  type: float
   hidden: true
   filterable: false
   desc: Z-score for synonymous variants
 - name: pLI
   title: pLI
-  type: string
+  type: float
   desc: Probability of being loss-of-function intolerant
   hidden: false
   width: 60
 - name: pRec
   title: pRec
-  type: string
+  type: float
   desc: Probability of being tolerant of homozygous LOF variants
   hidden: true
 - name: pNull
   title: pNull
-  type: string
+  type: float
   hidden: true
   filterable: false
   desc: Probability of being tolerant of heterozygous and homozygous LOF variants
+- name: all_results
+  title: All Results
+  type: string
+  hidden: true
+  filterable: false
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: oe_lof
+    title: Obv/Exp Lof
+    type: float
+  - name: oe_mis
+    title: Obv/Exp Mis
+    type: float
+    desc: Observed/Expected for missense variants
+  - name: oe_syn
+    title: Obv/Exp Syn
+    type: float
+    desc: Observed/Expected for synonymous variants
+  - name: lof_z
+    title: LoF Z-Score
+    type: float
+    desc: Z-score for loss of function variants
+  - name: mis_z
+    title: Mis Z-Score
+    type: float
+    desc: Z-score for missense variants
+  - name: syn_z
+    title: Syn Z-Score
+    type: float
+    desc: Z-score for synonymous variants
+  - name: pLI
+    title: pLI
+    type: float
+    desc: Probability of being loss-of-function intolerant
+  - name: pRec
+    title: pRec
+    type: float
+    desc: Probability of being tolerant of homozygous LOF variants
+  - name: pNull
+    title: pNull
+    type: float
+    desc: Probability of being tolerant of heterozygous and homozygous LOF variants
 developer:
   name: Broad Institute
   organization: Broad Institute
