@@ -25,13 +25,21 @@ output_columns:
   title: Variant Count (Tissue)
   type: string
   width: 110
-  hidden: false
+  hidden: true
+  table: true
+  table_headers:
+  - name: tissue
+    title: Tissue
+    type: string
+  - name: count
+    title: Count
+    type: int
 - name: variant_count
   title: Variant Count
   type: int
   width: 80
   desc: Occurences in COSMIC
-  hidden: true
+  hidden: false
 - filterable: false
   hidden: true
   name: transcript

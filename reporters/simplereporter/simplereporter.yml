@@ -1,0 +1,20 @@
+title: Simple Reporter
+version: 0.0.1
+type: reporter
+description: Comma-delimited text file reporter with simple default columns
+requires_opencravat: '>=2.1.0'
+output_filename_schema:
+- '{run_name}.variant.csv'
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+hidden: false
+private: true
+uselocalonstore: true
+release_note:
+  0.0.1: initial release
+tags:
+- reporters

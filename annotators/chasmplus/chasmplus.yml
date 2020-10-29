@@ -15,6 +15,7 @@ developer:
   name: Collin Tokheim
   organization: Johns Hopkins University - Karchin Lab
   website: http://chasmplus.readthedocs.io/en/latest/
+input_format: crx
 gene_summary_output_columns:
 - name: max_score
   title: Max Score
@@ -52,6 +53,17 @@ output_columns:
   title: All results
   type: string
   filterable: false
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: score
+    title: Score
+    type: float
+  - name: pval
+    title: p-value
+    type: float
 pval_file: pvals.txt
 release_note:
   1.0.3: added gene level summary
