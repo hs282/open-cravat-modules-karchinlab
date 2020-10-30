@@ -2359,14 +2359,20 @@ class Mapper(cravat.BaseMapper):
             tpos_diff_start = None
             exon_tend = gend - gstart + tstart
             dup_found = FALSE
-            for tpos_q in range(tpos_end + 1, exon_tend + 2 - 2 * lenref):
-                early_base = _get_bases_tpos(tid, tpos_q - lenref).upper()
-                late_base = _get_bases_tpos(tid, tpos_q).upper()
-                if early_base != late_base:
-                    tpos_diff_start = tpos_q
-                    dup_found = TRUE
-                    break
-            if dup_found == FALSE:
+            tpos_q = tpos_end + 1
+            tpos_q_start = tpos_end + 1
+            tpos_q_until = exon_tend + 2 - 2 * lenref
+            if tpos_q_start < tpos_q_until:
+                for tpos_q in range(tpos_end + 1, exon_tend + 2 - 2 * lenref):
+                    early_base = _get_bases_tpos(tid, tpos_q - lenref).upper()
+                    late_base = _get_bases_tpos(tid, tpos_q).upper()
+                    if early_base != late_base:
+                        tpos_diff_start = tpos_q
+                        dup_found = TRUE
+                        break
+                if dup_found == FALSE:
+                    tpos_diff_start = exon_tend - lenref + 1
+            else:
                 tpos_diff_start = tpos_end + 1
             cpos_diff_start = tpos_diff_start - tposcposoffset - lenref
             if gpos == gposend:
@@ -4230,12 +4236,17 @@ class Mapper(cravat.BaseMapper):
                     ref_aanums_end = pseq[max_apos_end - 1]
                 else:
                     max_apos_start = apos
+                    diff_found = False
                     for postdel_apos_q in range(postdel_apos_start, alen + 1):
                         predel_apos_q = postdel_apos_q - ref_aanums_len
                         if pseq[predel_apos_q - 1] != pseq[postdel_apos_q - 1]:
                             max_apos_start = predel_apos_q
                             ref_aanums_start = pseq[max_apos_start - 1]
+                            diff_found = True
                             break
+                    if not diff_found:
+                        max_apos_start = alen - ref_aanums_len + 1
+                        ref_aanums_start = pseq[max_apos_start - 1]
                     max_apos_end = max_apos_start + ref_aanums_len - 1
                     ref_aanums_end = pseq[max_apos_end - 1]
                 if max_apos_start <= 1 and max_apos_end >= 1:  # MET deletion

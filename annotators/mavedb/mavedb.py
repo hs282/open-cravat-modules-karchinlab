@@ -15,6 +15,8 @@ class CravatAnnotator(BaseAnnotator):
         accession = row[1]
         if row:
             out = {'score': row[0], 'accession': accession, 'vis': accession}
+        else:
+            out = {}
         return out
 
     def cleanup(self):
