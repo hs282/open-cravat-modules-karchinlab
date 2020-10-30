@@ -1,5 +1,10 @@
-chr3	38581155	+	G	A	s0
-chr3	38581143	+	C	A	s1
-chr3	38579381	+	A	T	s2
-chr3	38630376	+	G	T	s3
-chr3	38575310	+	C	A	s4
+chr3	38591900	+	A	C	s0
+chr3	38591926	+	A	T	s1
+chr7	150958059	+	C	A	s2
+chr7	150952699	+	G	A	s3
+chr3	38655270	+	C	G
+chr3	38560254	+	AAC	-	s4
+chr3	38591816	+	A	T	s5
+chr3	38613782	+	C	T
+chr7	150952718	+	C	T	s6
+chr3	38592315	+	A	T	s7
