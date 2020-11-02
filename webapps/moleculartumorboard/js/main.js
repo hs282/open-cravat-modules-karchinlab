@@ -585,7 +585,9 @@ widgetGenerators['cosmic2'] = {
                     var tr = getWidgetTableTr([tissue, count]);
                     addEl(tbody, tr);
                     tissues.push(tissue)
+                    labels = tissues.slice(0,10)
                     counts.push(parseInt(count));
+                    var data = counts.slice(0, 10);
                 }
                 addEl(outTd, addEl(table, tbody));
                 var outTd = getEl('td');
@@ -619,15 +621,18 @@ widgetGenerators['cosmic2'] = {
                     type: 'doughnut',
                     data: {
                         datasets: [{
-                            data: counts,
+                            data: data,
                             backgroundColor: colors
                         }],
-                        labels: tissues
+                        labels: labels
                     },
                     options: {
                         responsive: true,
                         responsiveAnimationDuration: 500,
                         maintainAspectRatio: false,
+                        legend: {
+                            position: 'left'
+                        }
                     }
                 });
             }
