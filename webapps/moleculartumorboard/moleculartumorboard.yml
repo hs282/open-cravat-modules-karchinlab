@@ -150,3 +150,4 @@ tags:
 hidden: false
 requires_opencravat: '>=2.1.1'
 uselocalonstore: true
+private: true

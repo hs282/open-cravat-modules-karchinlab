@@ -566,6 +566,7 @@ widgetGenerators['cosmic2'] = {
         'function': function (div, row, tabName) {
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
+                vcTissue = JSON.parse(vcTissue);
                 var outTable = getEl('table');
                 var outTr = getEl('tr');
                 var outTd = getEl('td');
@@ -575,21 +576,15 @@ widgetGenerators['cosmic2'] = {
                 var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
-                var toks = vcTissue.split(';');
-                var re = /(.*)\((.*)\)/
-                    var tissues = [];
+                var tissues = [];
                 var counts = [];
-                for (var i = 0; i < toks.length; i++) {
-                    var tok = toks[i];
-                    var match = re.exec(tok);
-                    if (match !== null) {
-                        var tissue = match[1].replace(/_/g, " ");
-                        var count = match[2];
-                        var tr = getWidgetTableTr([tissue, count]);
-                        addEl(tbody, tr);
-                        tissues.push(tissue)
-                            counts.push(parseInt(count));
-                    }
+                for (var i = 0; i < vcTissue.length; i++) {
+                    var tissue = vcTissue[i][0].replace(/_/g, ' ');
+                    var count = vcTissue[i][1];
+                    var tr = getWidgetTableTr([tissue, count]);
+                    addEl(tbody, tr);
+                    tissues.push(tissue)
+                    counts.push(parseInt(count));
                 }
                 addEl(outTd, addEl(table, tbody));
                 var outTd = getEl('td');
