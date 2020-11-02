@@ -99,7 +99,7 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         maxHeightParent = maxHeight + 30;
     }
     if (level != undefined) {
-        if (widgetName == 'cgi' || widgetName == 'target2') {
+        if (widgetName == 'cgi' || widgetName == 'target2' || widgetName == 'ncbi') {
             divs = getDetailWidgetDivs(level, widgetName, '', maxWidthParent, maxHeightParent, showTitle);
         } else {
             divs = getDetailWidgetDivs(level, widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
@@ -268,7 +268,7 @@ widgetGenerators['base2'] = {
             var chrom = chrom.substring(3)
                 var thous_af = getWidgetData(tabName, 'thousandgenomes', row, 'af');
             var gnomad_af = getWidgetData(tabName, 'gnomad', row, 'af')
-                addInfoLineLink2(div, hugo + '(' + getWidgetData(tabName, 'base', row, 'achange') + ')', tabName)
+                addInfoLineLink2(div, hugo + ' (' + getWidgetData(tabName, 'base', row, 'achange') + ')', tabName)
                 //addInfoLine(div, transcript + '(' + hugo + ')', getWidgetData(tabName, 'base', row, 'cchange') + ' ' + '(' + getWidgetData(tabName, 'base', row, 'achange') + ')', tabName);
             if (nref==1 && nalt==1 && ref_base != '-' && alt_base != '-'){
                 var variant_type = 'single nucleotide variant';
@@ -304,14 +304,14 @@ widgetGenerators['base2'] = {
                 var max_af = gnomad_af;
             }
             if (max_af == null) {
-                addInfoLine(div, '1000g/gnomAD max AF','There is no annotation available for Max AF')
+                addInfoLine(div, '1000g/gnomAD max AF','There is no annotation available')
             }
             else {
                 addInfoLine(div, '1000g/gnomAD max AF', max_af);
             }
             var snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
             if (snp == null) {
-                addInfoLine(div, 'dbSNP','There is no annotation available for dbSNP');
+                addInfoLine(div, 'dbSNP','There is no annotation available');
             }
             else {
                 link = 'https://www.ncbi.nlm.nih.gov/snp/' + snp
@@ -453,12 +453,13 @@ widgetGenerators['ncbi'] = {
         'width': '100%', 
         'height': 200, 
         'function': function (div, row, tabName) {
-            addInfoLine(
-                    div, 
-                    'NCBI Gene', 
-                    getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc'), 
-                    tabName
-                    );
+            var desc = getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc')
+            if (desc == null){
+                addInfoLineLink2(div, 'There is no annotation available for NCBI Gene')
+            }
+            else {
+                addInfoLineLink2(div, desc, tabName)
+            }
         }
     }
 }
@@ -589,6 +590,7 @@ widgetGenerators['cosmic2'] = {
                         addEl(tbody, tr);
                         tissues.push(tissue)
                             counts.push(parseInt(count));
+                        
                     }
                 }
                 addEl(outTd, addEl(table, tbody));
@@ -689,11 +691,11 @@ widgetGenerators['basepanel'] = {
             divs[0].style.position = 'absolute';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            divs[1].style.paddingLeft = '1px';
+            divs[1].style.paddingLeft = '0px';
             var generator = widgetGenerators['ncbi']['gene'];
             generator['width'] = 400;
             //var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, 220);
-            var divs = showWidget('ncbigene', ['base', 'ncbigene'], 'gene', div, 1175, 300);
+            var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, 1175, 300);
             divs[0].style.position = 'absolute';
             divs[0].style.top = '220px';
             divs[0].style.left = '0px';
