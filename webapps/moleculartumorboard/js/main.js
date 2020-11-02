@@ -137,7 +137,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_vannot');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '370px';
+    parentDiv.style.height = '350px';
     var retDivs = showWidget('basepanel', ['base','hgvs'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_action');
     parentDiv.style.position = 'relative';
@@ -532,7 +532,7 @@ widgetGenerators['pharmgkb2'] = {
 
 
 
-widgetInfo['clinvar2'] = {'title': 'ClinVar'};
+widgetInfo['clinvar2'] = {'title': ''};
 widgetGenerators['clinvar2'] = {
     'variant': {
         'width': 480, 
@@ -540,15 +540,32 @@ widgetGenerators['clinvar2'] = {
         'function': function (div, row, tabName) {
             var id = getWidgetData(tabName, 'clinvar', row, 'id');
             var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
-            addInfoLine(div, 'Significance', sig, tabName);
-            var link = '';
+            var sdiv = getEl('div');
+            var span = getEl('span');
+            span.classList.add('detail-info-line-header');
+            span.textContent = 'ClinVar significance: ';
+            addEl(sdiv, span);
+            var span = getEl('span');
+            span.classList.add('detail-info-line-content');
+            span.textContent = sig;
+            addEl(sdiv, span);
+            addEl(sdiv, getTn('\xa0'));
+            //addInfoLine(div, 'Significance by ClinVar', sig, tabName);
+            //var link = '';
             if(id != null){
                 link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
+                var a = getEl('a');
+                a.href = link;
+                a.textContent = id;
+                sdiv.style.position = 'relative';
+                addEl(sdiv, getTn('(ID: '));
+                addEl(sdiv, a);
+                addEl(sdiv, getTn(')'));
+                addEl(div, sdiv);
+            } else {
+                //id = '';
             }
-            else{
-                id = '';
-            }
-            addInfoLineLink(div, 'ClinVar ID', id, link, 10);
+            //addInfoLineLink(div, 'ClinVar ID', id, link, 10);
         }
     }
 }
@@ -691,7 +708,7 @@ widgetGenerators['basepanel'] = {
             //var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, 220);
             var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, 1175, 300);
             divs[0].style.position = 'absolute';
-            divs[0].style.top = '220px';
+            divs[0].style.top = '180px';
             divs[0].style.left = '0px';
         }
     }
@@ -870,8 +887,6 @@ widgetGenerators['germlinepanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
-            var br = getEl("br");
-            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -888,6 +903,7 @@ widgetGenerators['germlinepanel'] = {
             var td = getEl('th');
             td.style.width = '100px';
             td.textContent = 'gnomADv3';
+            td.style.textAlign = 'left';
             addEl(tr, td);
             var td = getEl('td');
             addBarComponent(td, row, 'Total', 'gnomad3__af', tabName);
@@ -904,6 +920,7 @@ widgetGenerators['germlinepanel'] = {
             var tr = getEl('tr');
             var td = getEl('th');
             td.textContent = '1000 Genomes';
+            td.style.textAlign = 'left';
             addEl(tr, td);
             var td = getEl('td');
             addBarComponent(td, row, 'Total', 'thousandgenomes__af', tabName);
