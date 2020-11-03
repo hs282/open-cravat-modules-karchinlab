@@ -588,9 +588,13 @@ widgetGenerators['cosmic2'] = {
                 var outTable = getEl('table');
                 var outTr = getEl('tr');
                 var outTd = getEl('td');
-                outTd.style.width = '300px';
+                outTd.style.width = '400px';
                 addEl(div, addEl(outTable, addEl(outTr, outTd)));
+                var sdiv = getEl('div');
+                sdiv.style.maxHeight = '300px';
+                sdiv.style.overflow = 'auto';
                 var table = getWidgetTableFrame();
+                table.style.width = 'calc(100% - 1px)';
                 var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
@@ -606,7 +610,7 @@ widgetGenerators['cosmic2'] = {
                     counts.push(parseInt(count));
                     var data = counts.slice(0, 10);
                 }
-                addEl(outTd, addEl(table, tbody));
+                addEl(outTd, addEl(sdiv, addEl(table, tbody)));
                 var outTd = getEl('td');
                 outTd.style.width = '900px';
                 addEl(outTr, outTd);
@@ -635,7 +639,7 @@ widgetGenerators['cosmic2'] = {
                 chartDiv.style.height = 'calc(100% - 40px)';
                 addEl(outTd, chartDiv);
                 var chart = new Chart(chartDiv, {
-                    type: 'doughnut',
+                    type: 'pie',
                     data: {
                         datasets: [{
                             data: data,
@@ -648,9 +652,17 @@ widgetGenerators['cosmic2'] = {
                         responsiveAnimationDuration: 500,
                         maintainAspectRatio: false,
                         legend: {
-                            position: 'left'
-                        }
-                    }
+                            position: 'right',
+                        },
+                        plugins: {
+                            labels: {
+                                render: 'label',
+                                fontColor: '#000000',
+                                overlap: false,
+                                outsidePadding: 4,
+                            }
+                        },
+                    },
                 });
             }
         }
