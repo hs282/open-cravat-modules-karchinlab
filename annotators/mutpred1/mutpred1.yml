@@ -34,6 +34,14 @@ output_columns:
   type: string
   width: 90
   filterable: false
+  table: true
+  table_headers:
+  - name: mechanism
+    title: Mechanism
+    type: string
+  - name: pvalue
+    title: p-value
+    type: float
 tags:
 - variant effect prediction
 title: MutPred

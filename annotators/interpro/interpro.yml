@@ -24,20 +24,22 @@ output_columns:
   title: Domain
   type: string
   width: 62
-- desc: Associated UniProt accession number. Multiple entries separated by ";"
-  hidden: true
-  name: uniprot_acc
-  title: UniProt Accession Number
+- name: hits
+  title: Hits
   type: string
-  width: 70
-  filterable: false
-- desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"
-  filterable: true
-  name: ensembl_transcriptid
-  title: Ensembl Transcript ID
-  type: string
-  width: 80
-  hidden: true
+  table: true
+  table_headers:
+  - name: domain
+    title: Domain
+    type: string
+  - desc: Associated UniProt accession number. Multiple entries separated by ";"
+    name: uniprot_acc
+    title: UniProt Accession Number
+    type: string
+  - desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"
+    name: ensembl_transcriptid
+    title: Ensembl Transcript ID
+    type: string
 tags:
 - genes
 title: InterPro

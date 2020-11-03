@@ -14,23 +14,33 @@ output_columns:
   title: Factor
   type: string
   width: 100
-- name: cell
-  title: Cell
+  table: true
+  table_headers:
+  - name: factor
+    title: Factor
+    type: string
+- name: studies
+  title: Studies
   type: string
   hidden: true
-- name: quality
-  title: Quality
-  type: string
-  hidden: true
-- name: antibody
-  title: Antibody
-  type: string
-  hidden: true
-  width: 70
-- name: study
-  title: Study
-  type: string
-  hidden: true
+  table: true
+  table_headers:
+  - name: factor
+    title: Factor
+    type: string
+  - name: cell
+    title: Cell
+    type: string
+  - name: quality
+    title: Quality
+    type: string
+  - name: antibody
+    title: Antibody
+    type: string
+    width: 70
+  - name: study
+    title: Study
+    type: string
 developer:
   name: ENCODE Project Consortium
   organization: ENCODE Project Consortium
