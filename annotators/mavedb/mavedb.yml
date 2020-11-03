@@ -37,8 +37,5 @@ tags:
 - functional studies
 
 title: MaveDB
-version: 1.0.0
+version: 1.0.1
 type: annotator
-private: true
-
-

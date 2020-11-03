@@ -99,7 +99,7 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         maxHeightParent = maxHeight + 30;
     }
     if (level != undefined) {
-        if (widgetName == 'cgi' || widgetName == 'target2') {
+        if (widgetName == 'cgi' || widgetName == 'target2' || widgetName == 'ncbi') {
             divs = getDetailWidgetDivs(level, widgetName, '', maxWidthParent, maxHeightParent, showTitle);
         } else {
             divs = getDetailWidgetDivs(level, widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
@@ -137,8 +137,8 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_vannot');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '560px';
-    var retDivs = showWidget('basepanel', ['base','lollipop', 'hgvs'], 'variant', parentDiv);
+    parentDiv.style.height = '350px';
+    var retDivs = showWidget('basepanel', ['base','hgvs'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_action');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
@@ -146,22 +146,13 @@ function showAnnotation (response) {
     parentDiv.style.overflow="auto";
     showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb', 'cancer_genome_interpreter'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_driver');
-    parentDiv.style.position = 'relative';
-    parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '400px';
-    parentDiv.style.overflow="auto";
-    showWidget('driverpanel', ['base','cgc', 'cgl', 'mutpanning', 'chasmplus'], 'variant', parentDiv, null, null, false);
-    var parentDiv = document.querySelector('#contdiv_hotspots');
-    parentDiv.style.position = 'relative';
-    showWidget('hotspotspanel', ['base', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
-    var parentDiv = document.querySelector('#contdiv_af');
-    showWidget('poppanel', ['base', 'gnomad', 'thousandgenomes', 'gnomad3'], 'variant', parentDiv);
-    var parentDiv = document.querySelector('#contdiv_pathways');
-    showWidget('pathwayspanel', ['base', 'ndex'], 'variant', parentDiv, null, 'unset', false);
+    showWidget('driverpanel', ['base','cgc', 'cgl', 'chasmplus', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
+    var parentDiv = document.querySelector('#contdiv_protein');
+    showWidget('proteinpanel', ['base', 'lollipop'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_structure');
     showWidget('structurepanel', ['base', 'mupit'], 'variant', parentDiv, null, 'unset', false);
     var parentDiv = document.querySelector('#contdiv_germline');
-    showWidget('germlinepanel', ['base', 'clinvar'], 'variant', parentDiv, null, null, false);
+    showWidget('germlinepanel', ['base', 'clinvar', 'gnomad3', 'thousandgenomes'], 'variant', parentDiv, null, null, false);
 }
 
 function getWidgets (callback, callbackArgs) {
@@ -277,7 +268,8 @@ widgetGenerators['base2'] = {
             var chrom = chrom.substring(3)
                 var thous_af = getWidgetData(tabName, 'thousandgenomes', row, 'af');
             var gnomad_af = getWidgetData(tabName, 'gnomad', row, 'af')
-                addInfoLine(div, transcript + '(' + hugo + ')', getWidgetData(tabName, 'base', row, 'cchange') + ' ' + '(' + getWidgetData(tabName, 'base', row, 'achange') + ')', tabName);
+                addInfoLineLink2(div, hugo + ' (' + getWidgetData(tabName, 'base', row, 'achange') + ')', tabName)
+                //addInfoLine(div, transcript + '(' + hugo + ')', getWidgetData(tabName, 'base', row, 'cchange') + ' ' + '(' + getWidgetData(tabName, 'base', row, 'achange') + ')', tabName);
             if (nref==1 && nalt==1 && ref_base != '-' && alt_base != '-'){
                 var variant_type = 'single nucleotide variant';
             }
@@ -311,10 +303,15 @@ widgetGenerators['base2'] = {
             if (gnomad_af > thous_af){
                 var max_af = gnomad_af;
             }
-            addInfoLine(div, '1000g/gnomAD max AF', max_af);
+            if (max_af == null) {
+                addInfoLine(div, '1000g/gnomAD max AF','There is no annotation available')
+            }
+            else {
+                addInfoLine(div, '1000g/gnomAD max AF', max_af);
+            }
             var snp = getWidgetData(tabName, 'dbsnp', row, 'snp');
             if (snp == null) {
-                addInfoLine(div, 'dbSNP');
+                addInfoLine(div, 'dbSNP','There is no annotation available');
             }
             else {
                 link = 'https://www.ncbi.nlm.nih.gov/snp/' + snp
@@ -324,41 +321,6 @@ widgetGenerators['base2'] = {
     }
 }
 
-widgetInfo['base3'] = {'title': 'All mappings'};
-widgetGenerators['base3'] = {
-    'variant': {
-        'width': 580, 
-        'height': 200, 
-        'function': function (div, row, tabName) {
-            var allMappings = null;
-            allMappings = getWidgetData(tabName, 'base', row, 'all_mappings');
-            allMappings = JSON.parse(allMappings);
-            var table = getWidgetTableFrame();
-            table.style.tableLayout = 'auto';
-            table.style.width = '100%';
-            var thead = getWidgetTableHead(['Gene', 'HGVS'])
-                addEl(table, thead);
-            var tbody = getEl('tbody');
-            var hugos = Object.keys(allMappings);
-            for (var i = 0; i < hugos.length; i++) {
-                var hugo = hugos[i];
-                var uniprot_ds = allMappings[hugo];
-                for (var j = 0; j < uniprot_ds.length; j++) {
-                    var uniprot_d = uniprot_ds[j];
-                    var aachange = uniprot_d[1];
-                    var transcript = uniprot_d[3];
-                    var hgvs = transcript + ':' + aachange
-                        if (aachange == ""){
-                            continue;
-                        }
-                    var tr = getWidgetTableTr([getWidgetData(tabName, 'base', row, 'hugo'), hgvs]);
-                    addEl(tbody, tr);
-                    addEl(div, addEl(table, tbody));
-                }
-            }
-        }
-    }
-}
 
 
 widgetInfo['litvar'] = {'title': 'LitVar'};
@@ -491,12 +453,13 @@ widgetGenerators['ncbi'] = {
         'width': '100%', 
         'height': 200, 
         'function': function (div, row, tabName) {
-            addInfoLine(
-                    div, 
-                    'NCBI Gene', 
-                    getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc'), 
-                    tabName
-                    );
+            var desc = getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc')
+            if (desc == null){
+                addInfoLineLink2(div, 'There is no annotation available for NCBI Gene')
+            }
+            else {
+                addInfoLineLink2(div, desc, tabName)
+            }
         }
     }
 }
@@ -511,7 +474,7 @@ widgetGenerators['cgc2'] = {
             var inheritance = getWidgetData(tabName, 'cgc', row, 'inheritance');
             var tts = getWidgetData(tabName, 'cgc', row, 'tts');
             var ttg = getWidgetData(tabName, 'cgc', row, 'ttg');
-            addInfoLine(div, 'Cancer Gene Consensus', cgc_class + ' with inheritance ' + inheritance + '. Somatic types are ' + tts + '. Germline types are ' + ttg + '.');
+            addInfoLine(div, 'Cancer Gene Census', cgc_class + ' with inheritance ' + inheritance + '. Somatic types are ' + tts + '. Germline types are ' + ttg + '.');
         }
     }
 }
@@ -539,41 +502,6 @@ widgetGenerators['chasmplus2'] = {
     }
 }
 
-widgetInfo['mutpanning'] = {'title': 'MutPanning'};
-widgetGenerators['mutpanning'] = {
-    'gene': {
-        'width': '540', 
-        'height': 'unset', 
-        'function': function (div, row, tabName) {
-            addInfoLine(div, 'Number of Cancer Types', getWidgetData(tabName, 'mutpanning', row, 'No_Cancer_Types'), tabName);
-            addInfoLine(div, 'Mutation Frequency', getWidgetData(tabName, 'mutpanning', row, 'Max_Frequency'), tabName);
-            var literature = getWidgetData(tabName, 'mutpanning', row, 'Supporting_Literature');
-            if (literature == "Yes"){
-                var ids= getWidgetData(tabName, 'mutpanning', row, 'Tumorportal') +  '; ' + getWidgetData(tabName, 'mutpanning', row, 'TCGA_Marker_Papers') + '; ' + getWidgetData(tabName, 'mutpanning', row, 'Bailey_Database') + '; ' + getWidgetData(tabName, 'mutpanning', row, 'dNdS_Study');
-                var ids = ids;
-                ids = ids !== null ? ids.split('; ') : [];
-                const table = getWidgetTableFrame();
-                addEl(div, table);
-                const thead = getWidgetTableHead(['Supporting Literature', 'Link']);
-                addEl(table, thead);
-                const tbody = getEl('tbody');
-                addEl(table, tbody);
-                for (let i=0; i<ids.length; i++){
-                    var mut= ids[i];
-                    var link = `https://pubmed.ncbi.nlm.nih.gov/${mut}`;
-                    var titles = "Tumorportal, TCGA_Marker_Papers, Bailey_Database, dNdS_Study";
-                    titles = titles !== null ? titles.split(', ') : []; 
-                    for (let i=0; i<ids.length; i++);{
-                        var name = titles[i];
-                        let tr = getWidgetTableTr([name, link],[mut]);
-                        addEl(tbody, tr);
-                        addEl(div, addEl(table, tbody)); 
-                    }
-                }
-            }  
-        }
-    } 
-}
 
 widgetInfo['civic2'] = {'title': 'CIVIC'};
 widgetGenerators['civic2'] = {
@@ -604,7 +532,7 @@ widgetGenerators['pharmgkb2'] = {
 
 
 
-widgetInfo['clinvar2'] = {'title': 'ClinVar'};
+widgetInfo['clinvar2'] = {'title': ''};
 widgetGenerators['clinvar2'] = {
     'variant': {
         'width': 480, 
@@ -612,88 +540,32 @@ widgetGenerators['clinvar2'] = {
         'function': function (div, row, tabName) {
             var id = getWidgetData(tabName, 'clinvar', row, 'id');
             var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
-            addInfoLine(div, 'Significance', sig, tabName);
-            var link = '';
+            var sdiv = getEl('div');
+            var span = getEl('span');
+            span.classList.add('detail-info-line-header');
+            span.textContent = 'ClinVar significance: ';
+            addEl(sdiv, span);
+            var span = getEl('span');
+            span.classList.add('detail-info-line-content');
+            span.textContent = sig;
+            addEl(sdiv, span);
+            addEl(sdiv, getTn('\xa0'));
+            //addInfoLine(div, 'Significance by ClinVar', sig, tabName);
+            //var link = '';
             if(id != null){
                 link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
+                var a = getEl('a');
+                a.href = link;
+                a.textContent = id;
+                sdiv.style.position = 'relative';
+                addEl(sdiv, getTn('(ID: '));
+                addEl(sdiv, a);
+                addEl(sdiv, getTn(')'));
+                addEl(div, sdiv);
+            } else {
+                //id = '';
             }
-            else{
-                id = '';
-            }
-            addInfoLineLink(div, 'ClinVar ID', id, link, 10);
-            var diseases = getWidgetData(tabName, 'clinvar', row, 'disease_names');
-            var refs = getWidgetData(tabName, 'clinvar', row, 'disease_refs');
-            var diseasels = diseases != null ? diseases.split('|') : [];
-            var refsls = refs != null ? refs.split('|') : [];
-            disease_objls = []
-                for (var i=0;i<refsls.length;i++){
-                    if (refsls[i] == '.'){
-                        refsls[i] = null;
-                    }
-                    else{
-                        disease_objls.push(linkify(diseasels[i], refsls[i]))
-                    }
-                }
-            var table = getWidgetTableFrame();
-            addEl(div, table);
-            var thead = getWidgetTableHead(['Disease', 'Database', 'Link'],
-                    ['70%','20%','10%']);
-            addEl(table, thead);
-            var tbody = getEl('tbody');
-            addEl(table, tbody);
-            for (var j=0;j<disease_objls.length;j++){
-                for (var ref in disease_objls[j].refs){
-                    var link = disease_objls[j].refs[ref];
-                    var tr = getWidgetTableTr([disease_objls[j].name, ref, link]);
-                    addEl(tbody, tr);
-                }
-                addEl(div, addEl(table, tbody));
-            }
-
-            //Returns a disease object with dictionary of db references
-            function linkify(disease, db_id){
-                var idls = db_id.split(',');
-                var links = {};
-                for (var i=0;i<idls.length;i++){
-                    var link = ''
-                        if(idls[i].startsWith('MedGen')){
-                            link = 'https://www.ncbi.nlm.nih.gov/medgen/'+idls[i].slice(idls[i].indexOf(':')+1);
-                            links.MedGen = link;
-                        }
-                        else if(idls[i].startsWith('OMIM')){
-                            link = 'https://www.omim.org/entry/'+idls[i].slice(idls[i].indexOf(':')+1);
-                            links.OMIM = link;
-                        }
-                        else if(idls[i].startsWith('EFO')){
-                            link = 'https://www.ebi.ac.uk/ols/ontologies/efo/terms?short_form='+idls[i].slice(idls[i].indexOf(':')+1).replace(' ','_');
-                            links.EFO = link;
-                        }
-                        else if(idls[i].startsWith('Human')){
-                            link = 'https://www.human-phenotype-ontology.org/hpoweb/showterm?id='+idls[i].slice(idls[i].indexOf(':')+1);
-                            links.HPO = link;
-                        }
-                        else if(idls[i].startsWith('Gene')){
-                            link = 'https://www.ncbi.nlm.nih.gov/gene/'+idls[i].slice(idls[i].indexOf(':')+1);
-                            links.Gene = link;
-                        }
-                        else if(idls[i].startsWith('Orphanet')){
-                            link = 'https://www.orpha.net/consor/cgi-bin/OC_Exp.php?lng=EN&Expert='+idls[i].slice(idls[i].indexOf(':')+6);
-                            links.Orphanet = link;
-                        }
-                        else if(idls[i].startsWith('MeSH')){
-                            link = 'https://meshb.nlm.nih.gov/record/ui?ui='+idls[i].slice(idls[i].indexOf(':')+1);
-                            links.MeSH = link;
-                        }
-                        else if(idls[i].startsWith('SNOMED')){
-                            link = 'https://browser.ihtsdotools.org/?perspective=full&conceptId1='+idls[i].slice(idls[i].indexOf(':')+1)+'&edition=en-edition&release=v20180731&server=https://browser.ihtsdotools.org/api/v1/snomed&langRefset=900000000000509007';
-                            links.SNOMED_CT = link;
-                        }
-                }
-                return disease_obj = {
-name: disease,
-      refs: links
-                };
-            }
+            //addInfoLineLink(div, 'ClinVar ID', id, link, 10);
         }
     }
 }
@@ -712,32 +584,33 @@ widgetGenerators['cosmic2'] = {
         'function': function (div, row, tabName) {
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
+                vcTissue = JSON.parse(vcTissue);
                 var outTable = getEl('table');
                 var outTr = getEl('tr');
                 var outTd = getEl('td');
-                outTd.style.width = '300px';
+                outTd.style.width = '400px';
                 addEl(div, addEl(outTable, addEl(outTr, outTd)));
+                var sdiv = getEl('div');
+                sdiv.style.maxHeight = '300px';
+                sdiv.style.overflow = 'auto';
                 var table = getWidgetTableFrame();
+                table.style.width = 'calc(100% - 1px)';
                 var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
-                var toks = vcTissue.split(';');
-                var re = /(.*)\((.*)\)/
-                    var tissues = [];
+                var tissues = [];
                 var counts = [];
-                for (var i = 0; i < toks.length; i++) {
-                    var tok = toks[i];
-                    var match = re.exec(tok);
-                    if (match !== null) {
-                        var tissue = match[1].replace(/_/g, " ");
-                        var count = match[2];
-                        var tr = getWidgetTableTr([tissue, count]);
-                        addEl(tbody, tr);
-                        tissues.push(tissue)
-                            counts.push(parseInt(count));
-                    }
+                for (var i = 0; i < vcTissue.length; i++) {
+                    var tissue = vcTissue[i][0].replace(/_/g, ' ');
+                    var count = vcTissue[i][1];
+                    var tr = getWidgetTableTr([tissue, count]);
+                    addEl(tbody, tr);
+                    tissues.push(tissue)
+                    labels = tissues.slice(0,10)
+                    counts.push(parseInt(count));
+                    var data = counts.slice(0, 10);
                 }
-                addEl(outTd, addEl(table, tbody));
+                addEl(outTd, addEl(sdiv, addEl(table, tbody)));
                 var outTd = getEl('td');
                 outTd.style.width = '900px';
                 addEl(outTr, outTd);
@@ -766,19 +639,30 @@ widgetGenerators['cosmic2'] = {
                 chartDiv.style.height = 'calc(100% - 40px)';
                 addEl(outTd, chartDiv);
                 var chart = new Chart(chartDiv, {
-                    type: 'doughnut',
+                    type: 'pie',
                     data: {
                         datasets: [{
-                            data: counts,
+                            data: data,
                             backgroundColor: colors
                         }],
-                        labels: tissues
+                        labels: labels
                     },
                     options: {
                         responsive: true,
                         responsiveAnimationDuration: 500,
                         maintainAspectRatio: false,
-                    }
+                        legend: {
+                            position: 'right',
+                        },
+                        plugins: {
+                            labels: {
+                                render: 'label',
+                                fontColor: '#000000',
+                                overlap: false,
+                                outsidePadding: 4,
+                            }
+                        },
+                    },
                 });
             }
         }
@@ -835,34 +719,13 @@ widgetGenerators['basepanel'] = {
             divs[0].style.position = 'absolute';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            divs[1].style.paddingLeft = '1px';
-            var generator = widgetGenerators['base3']['variant'];
-            generator['width'] = 400;
-            var divs = showWidget('base3', ['base'], 'variant', div, null, 125);
-            divs[0].style.position = 'absolute';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '470px';
-            var generator = widgetGenerators['litvar']['variant'];
-            generator['width'] = 400;
-            var divs = showWidget('litvar', ['litvar', 'dbsnp'], 'variant', div, null, 220);
-            divs[0].style.position = 'absolute';
-            divs[0].style.top = '250px';
-            divs[0].style.left = '470px';
-            var generator = widgetGenerators['lollipop']['variant'];
-            generator['width'] = sectionWidth;
-            generator['height'] = 200;
-            generator['variables']['hugo'] = '';
-            annotData['base']['numsample'] = 1;
-            var divs = showWidget('lollipop', ['base'], 'variant', div);
-            divs[0].style.position = 'absolute';
-            divs[0].style.top = '250px';
-            divs[0].style.left = '0px';
+            divs[1].style.paddingLeft = '0px';
             var generator = widgetGenerators['ncbi']['gene'];
             generator['width'] = 400;
             //var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, 220);
-            var divs = showWidget('ncbigene', ['base', 'ncbigene'], 'gene', div, 1175, 300);
+            var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, 1175, 300);
             divs[0].style.position = 'absolute';
-            divs[0].style.top = '440px';
+            divs[0].style.top = '180px';
             divs[0].style.left = '0px';
         }
     }
@@ -902,6 +765,14 @@ widgetGenerators['actionpanel'] = {
             divs[1].style.paddingLeft = '1px';
             var br = getEl("br");
             addEl(div, br);
+            var generator = widgetGenerators['litvar']['variant'];
+            generator['width'] = 400;
+            var divs = showWidget('litvar', ['litvar', 'dbsnp'], 'variant', div, null, 220);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
             var divs = showWidget('civic2', ['civic'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
@@ -924,6 +795,22 @@ widgetGenerators['driverpanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
+            var generator = widgetGenerators['cosmic2']['variant'];
+            generator['width'] = '100%'
+            var divs = showWidget('cosmic2', ['cosmic'], 'variant', div, null, 600);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
+            var generator = widgetGenerators['chasmplus2']['variant'];
+            generator['width'] = '100%'
+            var divs = showWidget('chasmplus2', ['base', 'chasmplus'], 'variant', div, null, 220);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
             var generator = widgetGenerators['cgc2']['gene'];
             generator['width'] = '100%'
             var divs = showWidget('cgc2', ['base', 'cgc'], 'gene', div, null, 220);
@@ -938,36 +825,6 @@ widgetGenerators['driverpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
-            var generator = widgetGenerators['chasmplus2']['variant'];
-            generator['width'] = '100%'
-            var divs = showWidget('chasmplus2', ['base', 'chasmplus'], 'variant', div, null, 220);
-            divs[0].style.position = 'absolute';
-            divs[0].style.top = '110px';
-            divs[0].style.left = '8px';
-            var generator = widgetGenerators['mutpanning']['gene'];
-            generator['width'] = '100%'
-            var divs = showWidget('mutpanning', ['base', 'mutpanning'], 'gene', div, 500, 500);
-            divs[0].style.position = 'absolute';
-            divs[0].style.top = '200px';
-            divs[0].style.left = '8px';
-        }
-    }
-}
-
-widgetInfo['hotspotspanel'] = {'title': ''};
-widgetGenerators['hotspotspanel'] = {
-    'variant': {
-        'width': '100%',
-        'height': undefined,
-        'function': function (div, row, tabName) {
-            var br = getEl("br");
-            addEl(div, br);
-            var generator = widgetGenerators['cosmic2']['variant'];
-            generator['width'] = '100%'
-            var divs = showWidget('cosmic2', ['cosmic'], 'variant', div, null, 600);
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
             var br = getEl("br");
             addEl(div, br);
             var generator = widgetGenerators['cancer_hotspots']['variant'];
@@ -978,105 +835,32 @@ widgetGenerators['hotspotspanel'] = {
             divs[0].style.left = '0px';
             var br = getEl("br");
             addEl(div, br);
+
         }
     }
 }
 
 
-widgetInfo['poppanel'] = {'title': ''};
-widgetGenerators['poppanel'] = {
+widgetInfo['proteinpanel'] = {'title': ''};
+widgetGenerators['proteinpanel'] = {
     'variant': {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('th');
-            td.style.width = '100px';
-            td.textContent = 'gnomADv2';
-            addEl(tr, td);
-            var td = getEl('td');
-            addBarComponent(td, row, 'Total', 'gnomad__af', tabName);
-            addBarComponent(td, row, 'African', 'gnomad__af_afr', tabName);
-            addBarComponent(td, row, 'American', 'gnomad__af_amr', tabName);
-            addBarComponent(td, row, 'Ashkenazi', 'gnomad__af_asj', tabName);
-            addBarComponent(td, row, 'East Asn', 'gnomad__af_eas', tabName);
-            addBarComponent(td, row, 'Finn', 'gnomad__af_fin', tabName);
-            addBarComponent(td, row, 'Non-Finn Eur', 'gnomad__af_nfe', tabName);
-            addBarComponent(td, row, 'Other', 'gnomad__af_oth', tabName);
-            addBarComponent(td, row, 'South Asn', 'gnomad__af_sas', tabName);
-            addEl(tr, td);
-            addEl(table, tr);
-            var tr = getEl('tr');
-            var td = getEl('th');
-            td.style.width = '100px';
-            td.textContent = 'gnomADv3';
-            addEl(tr, td);
-            var td = getEl('td');
-            addBarComponent(td, row, 'Total', 'gnomad3__af', tabName);
-            addBarComponent(td, row, 'African', 'gnomad3__af_afr', tabName);
-            addBarComponent(td, row, 'American', 'gnomad3__af_amr', tabName);
-            addBarComponent(td, row, 'Ashkenazi', 'gnomad3__af_asj', tabName);
-            addBarComponent(td, row, 'East Asn', 'gnomad3__af_eas', tabName);
-            addBarComponent(td, row, 'Finn', 'gnomad3__af_fin', tabName);
-            addBarComponent(td, row, 'Non-Finn Eur', 'gnomad3__af_nfe', tabName);
-            addBarComponent(td, row, 'Other', 'gnomad3__af_oth', tabName);
-            addBarComponent(td, row, 'South Asn', 'gnomad3__af_sas', tabName);
-            addEl(tr, td);
-            addEl(table, tr);
-            var tr = getEl('tr');
-            var td = getEl('th');
-            td.textContent = '1000 Genomes';
-            addEl(tr, td);
-            var td = getEl('td');
-            addBarComponent(td, row, 'Total', 'thousandgenomes__af', tabName);
-            addBarComponent(td, row, 'African', 'thousandgenomes__afr_af', tabName);
-            addBarComponent(td, row, 'American', 'thousandgenomes__amr_af', tabName);
-            addBarComponent(td, row, 'East Asn', 'thousandgenomes__eas_af', tabName);
-            addBarComponent(td, row, 'European', 'thousandgenomes__eur_af', tabName);
-            addBarComponent(td, row, 'South Asn', 'thousandgenomes__sas_af', tabName);
-            addEl(table, addEl(tr, td));
-            addEl(div, table);
-            var br = getEl("br");
-            addEl(div, br);
+            var generator = widgetGenerators['lollipop']['variant'];
+            generator['width'] = sectionWidth;
+            generator['height'] = 200;
+            generator['variables']['hugo'] = '';
+            annotData['base']['numsample'] = 1;
+            var divs = showWidget('lollipop', ['base'], 'variant', div);
+            divs[0].style.position = 'relative';
+            divs[0].style.top = '0px';
+            divs[0].style.left = '0px';
         }
     }
 }
 
 
-
-widgetInfo['pathwayspanel'] = {'title': ''};
-widgetGenerators['pathwayspanel'] = {
-    'variant': {
-        'width': sectionWidth,
-        'height': 'unset',
-        'function': function (div, row, tabName) {
-            var br = getEl("br");
-            addEl(div, br);
-            div.style.overflow = 'unset';
-            var table = getEl('table');
-            var tr = getEl('tr');
-            var td = getEl('td');
-            td.style.width = sectionWidth + 'px';
-            var generator = widgetGenerators['ndex']['gene'];
-            var setHeight = null;
-            if (row['ndex__networkid'] != undefined) {
-                td.style.height = '605px';
-                setHeight = 560;
-            } else {
-                setHeight = 50;
-            }
-            generator['height'] = setHeight;
-            generator['width'] = sectionWidth - 7;
-            showWidget('ndex', ['ndex'], 'gene', td, null);
-            addEl(tr, td);
-            addEl(table, tr);
-            addEl(div, table);
-            var br = getEl("br");
-            addEl(div, br);
-        }
-    }
-}
 
 widgetInfo['structurepanel'] = {'title': ''};
 widgetGenerators['structurepanel'] = {
@@ -1120,8 +904,6 @@ widgetGenerators['germlinepanel'] = {
         'width': sectionWidth,
         'height': 'unset',
         'function': function (div, row, tabName) {
-            var br = getEl("br");
-            addEl(div, br);
             div.style.overflow = 'unset';
             var table = getEl('table');
             var tr = getEl('tr');
@@ -1130,6 +912,41 @@ widgetGenerators['germlinepanel'] = {
             showWidget('clinvar2', ['clinvar'], 'variant', td, null, 300);
             addEl(tr, td);
             addEl(table, tr);
+            addEl(div, table);
+            var br = getEl("br");
+            addEl(div, br);
+            var table = getEl('table');
+            var tr = getEl('tr');
+            var td = getEl('th');
+            td.style.width = '100px';
+            td.textContent = 'gnomADv3';
+            td.style.textAlign = 'left';
+            addEl(tr, td);
+            var td = getEl('td');
+            addBarComponent(td, row, 'Total', 'gnomad3__af', tabName);
+            addBarComponent(td, row, 'African', 'gnomad3__af_afr', tabName);
+            addBarComponent(td, row, 'American', 'gnomad3__af_amr', tabName);
+            addBarComponent(td, row, 'Ashkenazi', 'gnomad3__af_asj', tabName);
+            addBarComponent(td, row, 'East Asn', 'gnomad3__af_eas', tabName);
+            addBarComponent(td, row, 'Finn', 'gnomad3__af_fin', tabName);
+            addBarComponent(td, row, 'Non-Finn Eur', 'gnomad3__af_nfe', tabName);
+            addBarComponent(td, row, 'Other', 'gnomad3__af_oth', tabName);
+            addBarComponent(td, row, 'South Asn', 'gnomad3__af_sas', tabName);
+            addEl(tr, td);
+            addEl(table, tr);
+            var tr = getEl('tr');
+            var td = getEl('th');
+            td.textContent = '1000 Genomes';
+            td.style.textAlign = 'left';
+            addEl(tr, td);
+            var td = getEl('td');
+            addBarComponent(td, row, 'Total', 'thousandgenomes__af', tabName);
+            addBarComponent(td, row, 'African', 'thousandgenomes__afr_af', tabName);
+            addBarComponent(td, row, 'American', 'thousandgenomes__amr_af', tabName);
+            addBarComponent(td, row, 'East Asn', 'thousandgenomes__eas_af', tabName);
+            addBarComponent(td, row, 'European', 'thousandgenomes__eur_af', tabName);
+            addBarComponent(td, row, 'South Asn', 'thousandgenomes__sas_af', tabName);
+            addEl(table, addEl(tr, td));
             addEl(div, table);
             var br = getEl("br");
             addEl(div, br);

@@ -18,6 +18,8 @@ class CravatAnnotator(BaseAnnotator):
         row = self.cursor.fetchone()
         if row:
             out = {'uniprotkb': row[0], 'desc': row[1], 'disease_name': row[2], 'pubmed': row[3]}
+        else:
+            out = {}
         return out
     
     def cleanup(self):

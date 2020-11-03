@@ -7,6 +7,7 @@
 	<script src='js/graphics.js'></script>
     <script src='js/raphael-min.js'></script>
     <script src='js/Chart.js'></script>
+    <script src='js/chartjs-plugin-labels.js'></script>
     <script src='widgets/wglollipop2/wglollipop2.js'></script>
 	<link rel='stylesheet' href='css/widget.css' />
 	<link rel='stylesheet' href='css/variantreport.css' />
@@ -18,7 +19,7 @@
     <a href='/' target='_blank' style='position: relative;'>
         <img src='/submit/logo.png' style='width: 60px;'>
     </a>
-    <span style="font-size: 36px; position: fixed; top: 0px; left: calc(50% - 300px); width: 700px;"> Open Cravat Molecular Tumor Board Report</span>
+    <span style="font-size: 44px; position: fixed; top: 0px; left: calc(50% - 400px); width: 950px;"> Open Cravat Molecular Tumor Board Report</span>
     <img src='/result/images/search.png' style='width: 30px; position: absolute; top: 20px; right: 0px;' onclick='onClickSearch();' />
     <a href='https://github.com/KarchinLab/open-cravat/wiki' target='_blank' style='position: absolute; top: 26px; right: 45px;'>
         <img src='/result/images/question.png' style='width: 11px;' />
@@ -40,21 +41,17 @@
     <div id='wrapdiv_vannot' class='detailcontainerwrapdiv' >
         <div id='contdiv_vannot' class='detailcontainerdiv' ></div>
     </div>
-    <div class='container_titlediv'>Actionability</div>
-    <div id='wrapdiv_action' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_action' class='detailcontainerdiv' ></div>
+    <div class='container_titlediv'>Germline</div>
+    <div id='wrapdiv_germline' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_germline' class='detailcontainerdiv' ></div>
     </div>
-    <div class='container_titlediv'>Driver</div>
+    <div class='container_titlediv'>Driver and Hotspots</div>
     <div id='wrapdiv_driver' class='detailcontainerwrapdiv singlevariantpage' >
         <div id='contdiv_driver' class='detailcontainerdiv' ></div>
     </div>
-    <div class='container_titlediv'>Hotspots</div>
-    <div id='wrapdiv_hotspots' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_hotspots' class='detailcontainerdiv' ></div>
-    </div>
-    <div class='container_titlediv'>Allele Frequency</div>
-    <div id='wrapdiv_af' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_af' class='detailcontainerdiv' ></div>
+    <div class='container_titlediv'>Protein Diagram</div>
+    <div id='wrapdiv_protein' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_protein' class='detailcontainerdiv' ></div>
     </div>
     <!--
     <div class='container_titlediv'>Haplotypes</div>
@@ -62,18 +59,15 @@
         <div id='contdiv_haplo' class='detailcontainerdiv' ></div>
     </div>
     -->
-    <div class='container_titlediv'>NCI Cancer Pathways</div>
-    <div id='wrapdiv_pathways' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_pathways' class='detailcontainerdiv' ></div>
-    </div>
     <div class='container_titlediv'>3D Protein Structure</div>
     <div id='wrapdiv_structure' class='detailcontainerwrapdiv singlevariantpage' >
         <div id='contdiv_structure' class='detailcontainerdiv' ></div>
     </div>
-    <div class='container_titlediv'>Germline</div>
-    <div id='wrapdiv_germline' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_germline' class='detailcontainerdiv' ></div>
+    <div class='container_titlediv'>Actionability</div>
+    <div id='wrapdiv_action' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_action' class='detailcontainerdiv' ></div>
     </div>
+
 </div>
 
 </body>
