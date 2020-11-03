@@ -1,4 +1,4 @@
-datasource: v1.2
+datasource: v4.1
 description: MutPred is a random forest model for the prediction of pathogenic missense
   variants and automated inference of molecular mechanisms of disease.
 developer:
@@ -28,16 +28,36 @@ output_columns:
   name: mutpred_general_score
   type: float
   width: 85
+  hidden: true
 - hidden: true
   name: mutpred_top5_mechanisms
   title: Top 5 molecular mechanisms
   type: string
   width: 90
   filterable: false
+- hidden: false
+  name: mutpred_rankscore
+  title: Rank Score
+  type: float
+  width: 70
+  desc: The ratio of the rank of the score over the total number of MutPred scores in dbNSFP.
 tags:
 - variant effect prediction
+release-note:
+  1.3.0: updated to include rank score.
 title: MutPred
 type: annotator
-version: 1.2.6
+version: 1.3.0
 requires:
 - wgmutpred1
+smartfilters:
+- name: rankscore
+  title: Mutpred Rank Score >=
+  description: Include variants which have a rank score greater than or equal to 0.90.
+  selector:
+    type: inputFloat
+    defaultValue: 0.90
+  filter:
+    column: mutpred1__mutpred_rankscore
+    test: greaterThanEq
+    value: ${value}
