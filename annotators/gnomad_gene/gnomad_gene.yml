@@ -1,5 +1,5 @@
 title: gnomAD Gene
-version: 2.2.1
+version: 2.2.1s
 type: annotator
 level: gene
 description: Gene level population statistics from gnomAD

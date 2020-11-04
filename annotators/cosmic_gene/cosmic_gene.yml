@@ -42,7 +42,7 @@ tags:
 - cancer
 title: COSMIC Gene
 type: annotator
-version: 91.0.1
+version: 91.0.1s
 requires:
 - wgcosmic_gene
 commercial_warning: 'For commercial use, contact cosmic@sanger.ac.uk '

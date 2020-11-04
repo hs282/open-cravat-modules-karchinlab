@@ -43,7 +43,7 @@ tags:
 - literature
 title: GRASP
 type: annotator
-version: 2.0.7
+version: 2.0.7s
 requires:
 - wggrasp
 smartfilters:
@@ -56,3 +56,4 @@ smartfilters:
     column: grasp__phenotype
     test: hasData
 commercial_warning: 'For commercial use, contact johnsonad2@nhlbi.nih.gov. '
+private: true

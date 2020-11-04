@@ -46,6 +46,7 @@ tags:
 - variant effect prediction
 title: MutPred
 type: annotator
-version: 1.2.6
+version: 1.2.6s
 requires:
 - wgmutpred1
+private: true

@@ -1,5 +1,5 @@
 title: PharmGKB
-version: 1.0.0
+version: 1.0.0s
 type: annotator
 level: variant
 output_columns:
@@ -55,3 +55,4 @@ tags:
 - cancer
 - cardiovascular
 - literature
+private: true

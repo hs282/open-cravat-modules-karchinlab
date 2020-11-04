@@ -51,6 +51,7 @@ tags:
 - genes
 title: Gene Ontology
 type: annotator
-version: 2019.08.16
+version: 2019.08.16s
 requires:
 - wggo
+private: true

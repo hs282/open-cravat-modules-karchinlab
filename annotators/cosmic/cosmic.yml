@@ -57,7 +57,7 @@ tags:
 - genes
 title: COSMIC
 type: annotator
-version: 91.0.1
+version: 91.0.1s
 requires_opencravat: '>=2.1.3'
 requires:
 - wgcosmic

@@ -1,5 +1,5 @@
 title: PolyPhen-2
-version: 1.0.0
+version: 1.0.0s
 datasource: '2'
 type: annotator
 level: variant
@@ -122,3 +122,4 @@ smartfilters:
     value: ${value}
 tags:
 - variant effect prediction
+private: true

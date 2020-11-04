@@ -28,6 +28,6 @@ requires:
 - wgcancer_hotspots
 
 title: Cancer Hotspots
-version: 1.0.0
+version: 1.0.0s
 type: annotator
 private: true
