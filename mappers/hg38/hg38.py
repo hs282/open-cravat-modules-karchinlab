@@ -2361,9 +2361,9 @@ class Mapper(cravat.BaseMapper):
             dup_found = FALSE
             tpos_q = tpos_end + 1
             tpos_q_start = tpos_end + 1
-            tpos_q_until = exon_tend + 2 - 2 * lenref
+            tpos_q_until = exon_tend
             if tpos_q_start < tpos_q_until:
-                for tpos_q in range(tpos_end + 1, exon_tend + 2 - 2 * lenref):
+                for tpos_q in range(tpos_q_start, tpos_q_until):
                     early_base = _get_bases_tpos(tid, tpos_q - lenref).upper()
                     late_base = _get_bases_tpos(tid, tpos_q).upper()
                     if early_base != late_base:
@@ -3664,6 +3664,7 @@ class Mapper(cravat.BaseMapper):
                     cpos = cstart + 1
                     gpos = gstart - 1
                 kind = FRAG_CDS
+                gposend = gposend - 1
                 gposend_tpos = gposend_gend - gposend + gposend_tstart
                 lenref = tpos - gposend_tpos + 2 + 1
                 lenalt = 0
@@ -3707,6 +3708,7 @@ class Mapper(cravat.BaseMapper):
                     cpos = cstart + 1
                     gpos = gstart - 1
                 kind = FRAG_CDS
+                gposend = gposend - 1
                 gposend_tpos = gposend_gend - gposend + gposend_tstart
                 lenref = tpos - gposend_tpos + 1 + 1
                 lenalt = 0

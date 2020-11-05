@@ -33,14 +33,17 @@ output_columns:
     title: Occurrences
     type: int
 release_note:
+  91.0.1: table data enabled
   91.0.0: data update to COSMIC v91
   85.0.2: added index to data for speed
+requires_opencravat: '>=2.1.3'
 tags:
 - genes
 - cancer
 title: COSMIC Gene
 type: annotator
-version: 91.0.0
+version: 91.0.1s
 requires:
 - wgcosmic_gene
 commercial_warning: 'For commercial use, contact cosmic@sanger.ac.uk '
+private: true

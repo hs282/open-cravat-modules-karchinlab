@@ -35,6 +35,14 @@ output_columns:
   type: string
   width: 90
   filterable: false
+  table: true
+  table_headers:
+  - name: mechanism
+    title: Mechanism
+    type: string
+  - name: pvalue
+    title: p-value
+    type: float
 - hidden: false
   name: mutpred_rankscore
   title: Rank Score
@@ -47,7 +55,7 @@ release-note:
   1.3.0: updated to include rank score.
 title: MutPred
 type: annotator
-version: 1.3.0
+version: 1.3.0s
 requires:
 - wgmutpred1
 smartfilters:
@@ -61,3 +69,4 @@ smartfilters:
     column: mutpred1__mutpred_rankscore
     test: greaterThanEq
     value: ${value}
+private: true

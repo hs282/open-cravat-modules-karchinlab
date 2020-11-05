@@ -46,7 +46,7 @@ class CravatAnnotator(BaseAnnotator):
             site_list = zip(primary_rd['primarysites'].split(';'),
                             primary_rd['primarysitenos'].split(';'))
             #site_toks = ['%s(%s)' %(site,n) for site,n in site_list]
-            site_toks = [[site, n] for site, n in site_list]
+            site_toks = [[site, int(n)] for site, n in site_list]
             #out['variant_count_tissue'] = ';'.join(site_toks)
             out['variant_count_tissue'] = json.dumps(site_toks)
         return out
