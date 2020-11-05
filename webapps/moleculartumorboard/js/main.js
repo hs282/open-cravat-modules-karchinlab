@@ -99,7 +99,7 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         maxHeightParent = maxHeight + 30;
     }
     if (level != undefined) {
-        if (widgetName == 'cgi' || widgetName == 'target2' || widgetName == 'ncbi') {
+        if (widgetName == 'ncbi') {
             divs = getDetailWidgetDivs(level, widgetName, '', maxWidthParent, maxHeightParent, showTitle);
         } else {
             divs = getDetailWidgetDivs(level, widgetName, widgetInfo[widgetName].title, maxWidthParent, maxHeightParent, showTitle);
@@ -144,7 +144,7 @@ function showAnnotation (response) {
     parentDiv.style.width = sectionWidth + 'px';
     parentDiv.style.maxHeight = '600px';
     parentDiv.style.overflow="auto";
-    showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb', 'cancer_genome_interpreter'], 'variant', parentDiv, null, null, false);
+    showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb', 'cancer_genome_interpreter', 'litvar'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_driver');
     showWidget('driverpanel', ['base','cgc', 'cgl', 'chasmplus', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_protein');
@@ -184,6 +184,9 @@ function getNodataSpan (annotator_name) {
 }
 
 function addInfoLine2 (div, row, col, tabName, headerMinWidth, highlightIfValue) {
+    var span = getEl("span")
+    span.textContent = header
+	addEl(div, span);
     var text = null;
     if (typeof(row) != 'object') {
         text = header;
@@ -367,7 +370,7 @@ widgetGenerators['litvar'] = {
                                 },
                                 }
 
-widgetInfo['brca'] = {'title': ''};
+widgetInfo['brca'] = {'title': 'BRCA'};
 widgetGenerators['brca'] = {
 'variant': {
 'width': 580, 
@@ -405,7 +408,7 @@ widgetGenerators['brca'] = {
 },
 }
 
-widgetInfo['oncokb'] = {'title': ''};
+widgetInfo['oncokb'] = {'title': 'OncoKB'};
 widgetGenerators['oncokb'] = {
     'variant': {
         'width': 580, 
@@ -464,7 +467,7 @@ widgetGenerators['ncbi'] = {
     }
 }
 
-widgetInfo['cgc2'] = {'title': ''};
+widgetInfo['cgc2'] = {'title': 'Cancer Gene Census'};
 widgetGenerators['cgc2'] = {
     'gene': {
         'width': '700', 
@@ -474,18 +477,18 @@ widgetGenerators['cgc2'] = {
             var inheritance = getWidgetData(tabName, 'cgc', row, 'inheritance');
             var tts = getWidgetData(tabName, 'cgc', row, 'tts');
             var ttg = getWidgetData(tabName, 'cgc', row, 'ttg');
-            addInfoLine(div, 'Cancer Gene Census', cgc_class + ' with inheritance ' + inheritance + '. Somatic types are ' + tts + '. Germline types are ' + ttg + '.');
+            addInfoLineLink2(div, cgc_class + ' with inheritance ' + inheritance + '. Somatic types are ' + tts + '. Germline types are ' + ttg + '.');
         }
     }
 }
 
-widgetInfo['cgl2'] = {'title': ''};
+widgetInfo['cgl2'] = {'title': 'Cancer Gene Landscape'};
 widgetGenerators['cgl2'] = {
     'gene': {
         'width': '100%', 
         'height': 200, 
         'function': function (div, row, tabName) {
-            addInfoLine(div, 'Cancer Gene Landscape', 'Identified as '+  getWidgetData(tabName, 'cgl', row, 'class') + '.', tabName);
+            addInfoLineLink2(div, 'Identified as '+  getWidgetData(tabName, 'cgl', row, 'class') + '.', tabName);
         }
     }
 }
@@ -699,7 +702,7 @@ widgetGenerators['target2'] = {
                 addInfoLine(div, 'No annotation available for Target');
             }
             else {
-                addInfoLine(div, 'TARGET', "Identifies this gene associated with " + therapy + '. The rationale is ' + rationale)
+                addInfoLineLink2(div, "Identifies this gene associated with " + therapy + '. The rationale is ' + rationale)
             }
             
             }
@@ -737,6 +740,8 @@ widgetGenerators['actionpanel'] = {
         'width': '100%',
         'height': '100%',
         'function': function (div, row, tabName) {
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['brca']['variant'];
             generator['width'] = 400;
             var divs = showWidget('brca', ['base'], 'variant', div, null, 220)
@@ -744,6 +749,8 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['oncokb']['variant'];
             generator['width'] = 400;
             var divs = showWidget('oncokb', ['base'], 'variant', div, null, 220)
@@ -751,11 +758,15 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
+            var br = getEl("br");
+            addEl(div, br);
             var divs = showWidget('cgi', ['cancer_genome_interpreter'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['target2']['variant'];
             generator['width'] = '100%';
             var divs = showWidget('target2', ['target'], 'variant', div, null, 220)
@@ -811,6 +822,8 @@ widgetGenerators['driverpanel'] = {
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['cgc2']['gene'];
             generator['width'] = '100%'
             var divs = showWidget('cgc2', ['base', 'cgc'], 'gene', div, null, 220);
@@ -818,6 +831,8 @@ widgetGenerators['driverpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
+            var br = getEl("br");
+            addEl(div, br);
             var generator = widgetGenerators['cgl2']['gene'];
             generator['width'] = '100%'
             var divs = showWidget('cgl2', ['base', 'cgl'], 'gene', div, null, 220);
