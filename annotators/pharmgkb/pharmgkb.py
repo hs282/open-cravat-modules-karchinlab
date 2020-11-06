@@ -13,7 +13,7 @@ class CravatAnnotator(BaseAnnotator):
 
     
     def annotate(self, input_data, secondary_data=None):
-        key = '-'.join(map(str, [
+        key = ':'.join(map(str, [
             input_data['chrom'],
             input_data['pos'],
             input_data['ref_base'],
