@@ -1,5 +1,5 @@
 title: PharmGKB
-version: 1.0.0s
+version: 1.1.0
 type: annotator
 level: variant
 output_columns:
@@ -49,10 +49,11 @@ developer:
     Medicine" Clinical Pharmacology & Therapeutics (2012) 92(4): 414-417'
 requires:
 - wgpharmgkb
+release-note: 
+  1.1.0: Data update
 tags:
 - variants
 - clinical relevance
 - cancer
 - cardiovascular
 - literature
-private: true
