@@ -46,6 +46,7 @@ output_columns:
   width: 55
   link_format: https://www.ncbi.nlm.nih.gov/clinvar/variation/${.*}/
 release_note:
+  2020.11.02: data updated 
   2020.02.11.1: strict ref/alt indels, not fuzzy
   2020.02.11: data update
   2019.03.261: added requires.
@@ -58,7 +59,7 @@ tags:
 - literature
 title: ClinVar
 type: annotator
-version: 2020.02.11.1
+version: 2020.11.02
 requires_opencravat: '>=1.4.0'
 requires:
 - wgclinvar
