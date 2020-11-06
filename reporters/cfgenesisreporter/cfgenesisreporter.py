@@ -50,10 +50,6 @@ class Reporter(CravatReport):
         self.colno_to_display_pos = self.cols_to_display.index('base__pos')
         self.colno_to_display_ref = self.cols_to_display.index('base__ref_base')
         self.colno_to_display_alt = self.cols_to_display.index('base__alt_base')
-        if 'genehancer__target_genes' in self.cols_to_display:
-            self.colno_to_display_genehancergene = self.cols_to_display.index('genehancer__target_genes')
-        else:
-            self.colno_to_display_genehancergene = None
         self.colname_display_dict = {
             'base__hugo': 'group_id',
             'base__chrom': 'chr',
@@ -144,6 +140,14 @@ class Reporter(CravatReport):
                 self.dataframe_colnos[self.level].append(colno)
             if colname == 'genehancer__target_genes':
                 self.colno_genehancertargetgenes = colno
+            elif colname == 'base__so':
+                self.colno_so = colno
+            elif colname == 'base__coding':
+                self.colno_coding = colno
+            elif colname == 'extra_vcf_info__CSQ_Consequence':
+                self.colno_csqconsequence = colno
+            elif colname == 'extra_vcf_info__CSQ_SYMBOL':
+                self.colno_csqsymbol = colno
             colno += 1
         colno = 0
         self.colnos_to_display[level] = []
@@ -164,11 +168,11 @@ class Reporter(CravatReport):
             filtered_row = row
         ref = filtered_row[self.colno_to_display_ref]
         alt = filtered_row[self.colno_to_display_alt]
-        if ref != '-' or alt != '-': # deletion or insertion
+        if ref == '-' or alt == '-': # deletion or insertion
             chrom = filtered_row[self.colno_to_display_chrom]
             pos = int(filtered_row[self.colno_to_display_pos])
             pos = pos - 1
-            prev_base = self.wgs_reader.get_bases(chrom, pos)
+            prev_base = self.wgs_reader.get_bases(chrom, pos).upper()
             if ref != '-' and alt == '-': # deletion
                 ref = prev_base + ref
                 alt = prev_base
@@ -178,15 +182,23 @@ class Reporter(CravatReport):
             filtered_row[self.colno_to_display_pos] = pos
             filtered_row[self.colno_to_display_ref] = ref
             filtered_row[self.colno_to_display_alt] = alt
-        group_id = filtered_row[self.colno_to_display_hugo]
-        if group_id is None:
+        hugo = filtered_row[self.colno_to_display_hugo]
+        so = row[self.colno_so]
+        coding = row[self.colno_coding]
+        if coding == 'Yes':
+            group_id = hugo
+        else:
             genehancertargetgenes = row[self.colno_genehancertargetgenes]
             if genehancertargetgenes is not None:
                 toks = genehancertargetgenes.split(',')
-                target_gene = toks[0].split(':')[0]
+                group_id = toks[0].split(':')[0]
             else:
-                target_gene = ''
-            filtered_row[self.colno_to_display_hugo] = target_gene
+                csq_consequence = row[self.colno_csqconsequence]
+                if 'upstream_gene_variant' in csq_consequence:
+                    group_id = row[self.colno_csqsymbol].split(',')[0].split(';')[0]
+                else:
+                    group_id = ''
+        filtered_row[self.colno_to_display_hugo] = group_id
         self.data[self.level].append([v for v in list(filtered_row)])
         for colno in self.dataframe_colnos[self.level]:
             dfhdata = self.data[self.level][-1][colno]
