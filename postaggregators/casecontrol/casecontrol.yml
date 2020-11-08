@@ -1,0 +1,21 @@
+title: Case-Control
+version: 1.0.0
+type: postaggregator
+level: variant
+output_columns:
+- name: dom_pvalue
+  title: Dom. p-value
+  type: float
+  desc: Dominant model p-value
+  width: 60
+
+description: Performs case-control analysis on cohorts
+developer:
+  name: 'Kyle Moad'
+  organization: 'In Silico Solutions'
+  email: 'support@cravat.us'
+  website: 'http://www.insilico.us.com'
+  citation: ''
+release_note:
+  1.0.0: initial release
+private: true
