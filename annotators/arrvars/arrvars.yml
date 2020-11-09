@@ -55,21 +55,21 @@ output_columns:
   title: Function
   type: string
   hidden: false
-  desc: Functional Impact
+  desc: Functional Impact. LOF = loss of function and GOF = gain of function.
   width: 65
 
 - name: brs_structure
   title: BrS Hotspot
   type: string
   hidden: false
-  desc: Related to BrS Penetrance.
+  desc: Regions in protein structure with higher BrS penetrance.
   width: 85
 
 - name: lqt_structure
   title: LQT Hotspot
   type: string
   hidden: false
-  desc: Related to LQT Penetrance.
+  desc: Regions in protein structure with higher LQT penetrance.
   width: 85
 
 - name: link
