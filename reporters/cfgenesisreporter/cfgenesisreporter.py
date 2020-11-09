@@ -106,8 +106,12 @@ class Reporter(CravatReport):
 
     def write_preface (self, level):
         self.level = level
+        if self.should_write_level(level) == False:
+            return
 
     def write_header (self, level):
+        if self.should_write_level(level) == False:
+            return
         self.headers[self.level] = []
         self.dataframe_colnos[self.level] = []
         self.dataframe_cols[self.level] = []
@@ -162,6 +166,8 @@ class Reporter(CravatReport):
         self.data[self.level] = []
 
     def write_table_row (self, row):
+        if self.should_write_level(self.level) == False:
+            return
         if len(self.colnos_to_display[self.level]) > 0:
             filtered_row = [row[colno] for colno in self.colnos_to_display[self.level]]
         else:
