@@ -18,7 +18,7 @@ class Reporter(CravatReport):
         else:
             self.filename_prefix = self.savepath
         self.levels_to_write = self.get_standardized_module_option(
-            self.confs.get("pages", "variant")
+            self.confs.get("pages", ["variant"])
         )
         self.separate_header_file = (
             self.get_standardized_module_option(
@@ -194,10 +194,13 @@ class Reporter(CravatReport):
                 group_id = toks[0].split(':')[0]
             else:
                 csq_consequence = row[self.colno_csqconsequence]
-                if 'upstream_gene_variant' in csq_consequence:
-                    group_id = row[self.colno_csqsymbol].split(',')[0].split(';')[0]
-                else:
+                if csq_consequence is None:
                     group_id = ''
+                else:
+                    if 'upstream_gene_variant' in csq_consequence:
+                        group_id = row[self.colno_csqsymbol].split(',')[0].split(';')[0]
+                    else:
+                        group_id = ''
         filtered_row[self.colno_to_display_hugo] = group_id
         self.data[self.level].append([v for v in list(filtered_row)])
         for colno in self.dataframe_colnos[self.level]:
