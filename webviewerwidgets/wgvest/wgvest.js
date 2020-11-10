@@ -16,18 +16,16 @@ widgetGenerators['vest'] = {
                 else{
                     addBarComponent(div, row, 'VEST p-value', 'vest__pval', tabName);
                 }
-				allMappings = allMappings.split(',');
+                var results = JSON.parse(allMappings);
 				var table = getWidgetTableFrame();
 				var thead = getWidgetTableHead(['Transcript', 'Score', 'P-value']);
 				addEl(table, thead);
 				var tbody = getEl('tbody');
-				for (var i = 0; i < allMappings.length; i++) {
-					var mapping = allMappings[i];
-					var toks = mapping.split('(');
-					var transcript = toks[0];
-					var toks2 = toks[1].split(':');
-					var score = parseFloat(toks2[0]).toFixed(3);
-					var pvalue = parseFloat(toks2[1].split(')')[0]).toFixed(4);
+                for (var i = 0; i < results.length; i++) {
+					var row = results[i];
+					var transcript = row[0];
+					var score = row[1].toFixed(3);
+					var pvalue = row[2].toFixed(4);
 					var tr = getWidgetTableTr([transcript, score, pvalue]);
 					addEl(tbody, tr);
 				}

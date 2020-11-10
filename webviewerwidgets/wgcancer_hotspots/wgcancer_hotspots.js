@@ -15,23 +15,15 @@ widgetGenerators['cancer_hotspots'] = {
 			if (!samples) {
 				return;
 			}
-			let occurs = {};
-			for (let stok of samples.split('; ')) {
-				[cancer,occur] = stok.split(':');
-				occurs[cancer] = occur;
-			}
+            samples = JSON.parse(samples);
 			const table = getWidgetTableFrame();
 			addEl(div, table);
 			const thead = getWidgetTableHead(['Cancer Type','Count']);
 			addEl(table, thead);
 			const tbody = getEl('tbody');
 			addEl(table, tbody);
-			for (let cancer of this.cancerTypes) {
-				let occur = occurs[cancer];
-				if (!occur) {
-					continue;
-				}
-                let tr = getWidgetTableTr([cancer,occur]);
+			for (var i = 0; i < samples.length; i++) {
+                let tr = getWidgetTableTr(samples[i]);
                 addEl(tbody, tr);
 			}
 		}
