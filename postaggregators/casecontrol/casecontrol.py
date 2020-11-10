@@ -20,25 +20,67 @@ class CravatPostAggregator (BasePostAggregator):
         self.case_samples = self.cohorts['case']
         self.cont_samples = self.cohorts['control']
         self.cursor_samples = self.dbconn.cursor()
-        self.qt_samples = 'select base__sample_id from sample where base__uid=?'
         q = 'select distinct base__sample_id from sample'
         self.cursor_samples.execute(q)
         self.all_samples = {r[0] for r in self.cursor_samples}
         self.cohort_samples = self.all_samples & (self.case_samples | self.cont_samples)
+        q = 'pragma table_info(sample);'
+        self.cursor_samples.execute(q)
+        samp_cols = {r[1] for r in self.cursor_samples}
+        self.has_zygosity = 'base__zygosity' in samp_cols
+        self.qt_samples_plain = 'select base__sample_id from sample where base__uid=?'
+        self.qt_samples_zyg = 'select base__sample_id, base__zygosity from sample where base__uid=?'
+        
     
     def cleanup (self):
         pass
         
     def annotate (self, input_data):
-        self.cursor_samples.execute(self.qt_samples,(input_data['base__uid'],))
-        samples = {r[0] for r in self.cursor_samples}
-        table = [
-            [len(self.case_samples&samples), len(self.case_samples-samples)],
-            [len(self.cont_samples&samples), len(self.cont_samples-samples)]
+        uid = input_data['base__uid']
+        if self.has_zygosity:
+            hom_samples = set()
+            het_samples = set()
+            self.cursor_samples.execute(self.qt_samples_zyg,(uid,))
+            for sid, zyg in self.cursor_samples:
+                if zyg=='hom':
+                    hom_samples.add(sid)
+                elif zyg=='het':
+                    het_samples.add(sid)                
+        else:
+            self.cursor_samples.execute(self.qt_samples_plain,(uid,))
+            hom_samples = {r[0] for r in self.cursor_samples}
+            het_samples = set()
+        hom_case = len(self.case_samples & hom_samples)
+        het_case = len(self.case_samples & het_samples)
+        ref_case = len(self.case_samples) - hom_case - het_case
+        hom_cont = len(self.cont_samples & hom_samples)
+        het_cont = len(self.cont_samples & het_samples)
+        ref_cont = len(self.cont_samples) - hom_case - het_case
+        dom_table = [
+            [hom_case + het_case, ref_case],
+            [hom_cont + het_cont, ref_cont]
         ]
-        pvalue = fisher_exact(table,'greater')[1]
+        dom_pvalue = fisher_exact(dom_table,'less')[1]
+        rec_table = [
+            [hom_case, ref_case + het_case],
+            [hom_cont, ref_cont + het_case]
+        ]
+        rec_pvalue = fisher_exact(rec_table,'less')[1]
+        all_table = [
+            [2*hom_case + het_case, 2*ref_case + het_case],
+            [2*hom_cont + het_cont, 2*ref_cont + het_cont]
+        ]
+        all_pvalue = fisher_exact(all_table,'less')[1]
         return {
-            'dom_pvalue': pvalue
+            'dom_pvalue': dom_pvalue,
+            'rec_pvalue': rec_pvalue,
+            'all_pvalue': all_pvalue,
+            'hom_case': hom_case,
+            'het_case': het_case,
+            'ref_case': ref_case,
+            'hom_cont': hom_cont,
+            'het_cont': het_cont,
+            'ref_cont': ref_cont,
         }
 
 if __name__ == '__main__':
