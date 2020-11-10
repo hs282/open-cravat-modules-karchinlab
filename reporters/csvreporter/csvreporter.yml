@@ -12,7 +12,6 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 hidden: false
-private: true
 release_note:
   2.0.2: default variant level only, more can be made with module-option pages
   2.0.1: optimized for pandas.
