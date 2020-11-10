@@ -34,11 +34,6 @@ output_columns:
     type: string
     desc: Full list of annotated apects (molecular function(F), biological product (P),
       cellular component (C))
-  - desc: List of annotated apects (molecular function(F), biological product (P), cellular
-      component (C))
-    name: set_asp
-    title: Aspects
-    type: string
   - name: go_ref
     title: Reference
     type: string
