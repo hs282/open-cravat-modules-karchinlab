@@ -8,6 +8,7 @@ developer:
   website: 'insilico.us.com'
   citation: ''
 description: 'Base OpenCRAVAT modules. Needed for each install.'
+private: true
 requires:
   - hg38
   - cravat-converter
