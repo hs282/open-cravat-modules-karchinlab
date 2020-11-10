@@ -24,31 +24,28 @@ output_columns:
   title: Domain
   type: string
   width: 62
-- name: hits
-  title: Hits
+- desc: Associated UniProt accession number. Multiple entries separated by ";"
+  hidden: true
+  name: uniprot_acc
+  title: UniProt Accession Number
   type: string
-  table: true
-  table_headers:
-  - name: domain
-    title: Domain
-    type: string
-  - desc: Associated UniProt accession number. Multiple entries separated by ";"
-    name: uniprot_acc
-    title: UniProt Accession Number
-    type: string
-  - desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"
-    name: ensembl_transcriptid
-    title: Ensembl Transcript ID
-    type: string
+  width: 70
+  filterable: false
+- desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"
+  filterable: true
+  name: ensembl_transcriptid
+  title: Ensembl Transcript ID
+  type: string
+  width: 80
+  hidden: true
 tags:
 - genes
 title: InterPro
 type: annotator
-version: 71.2.0s
+version: 71.2.0
 requires:
 - wginterpro
 release_note:
   71.0.6: gene level aggregation for 1.5.0
   71.1.0: ensembl transcript ids added
   71.2.0: return None if no annotation
-private: true

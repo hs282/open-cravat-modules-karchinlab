@@ -6,7 +6,6 @@ import sqlite3
 import re
 from cravat.inout import AllMappingsParser
 import stouffer
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -65,7 +64,7 @@ class CravatAnnotator(BaseAnnotator):
                     pval = self.pvalue_table[transc_so][score]
                 else:
                     pval = 0.0
-                transc_vest_result = [transc, score, pval]
+                transc_vest_result = '%s(%s:%s)' %(transc, score, pval)
                 precomp_data.append({'score':score,
                                      'transcript':transc,
                                      'pval':pval,
@@ -78,16 +77,15 @@ class CravatAnnotator(BaseAnnotator):
                 worst_mapping = precomp_data[max_index]
                 worst_transcript = worst_mapping['transcript']
                 worst_pval = worst_mapping['pval']
-                #all_results_list[max_index] = '*'+all_results_list[max_index]
-                ret = {
+                all_results_list[max_index] = '*'+all_results_list[max_index]
+                return {
                     'transcript': worst_transcript,
                     'score': max_score,
                     'pval': worst_pval,
-                    'all_results': json.dumps(all_results_list),
+                    'all_results': ','.join(all_results_list),
                     'hugo': input_data['hugo'],
                 }
-                return ret
-
+    
     def get_pval_table(self, pfile):
         pval_tab=dict()
         

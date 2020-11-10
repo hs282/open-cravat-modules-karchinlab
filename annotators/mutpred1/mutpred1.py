@@ -4,7 +4,7 @@ from cravat import InvalidData
 import sqlite3
 import os
 import re
-import json
+
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -41,7 +41,7 @@ class CravatAnnotator(BaseAnnotator):
         external_protein_id = None
         amino_acid_substitution = None
         mutpred_general_score = None
-        mutpred_top5_mechanisms = []
+        mutpred_top5_mechanisms = None
         mutpred_rankscore = None
         if result is not None:
             # Absent values are returned as None from the db
@@ -49,20 +49,14 @@ class CravatAnnotator(BaseAnnotator):
             amino_acid_substitution = result[1]
             mutpred_general_score = result[2]
             # Top 5 mechanisms stored in compact form, must be expanded
-            mutpred_top5_mechanisms = []
-            top5tmp = self.expand_mechanisms(result[3])
-            for r in [v.strip() for v in top5tmp.split(';')]:
-                [v1, v2] = r.split('(')
-                mechanism = v1.strip()
-                pvalue = float(v2.split('=')[1].split(')')[0])
-                mutpred_top5_mechanisms.append([mechanism, pvalue])
+            mutpred_top5_mechanisms = self.expand_mechanisms(result[3])
             mutpred_rankscore = result[4]
         
         out = {}
         out['external_protein_id'] = external_protein_id
         out['amino_acid_substitution'] = amino_acid_substitution
         out['mutpred_general_score'] = mutpred_general_score
-        out['mutpred_top5_mechanisms'] = json.dumps(mutpred_top5_mechanisms)
+        out['mutpred_top5_mechanisms'] = mutpred_top5_mechanisms
         out['mutpred_rankscore'] = mutpred_rankscore
         return out
     

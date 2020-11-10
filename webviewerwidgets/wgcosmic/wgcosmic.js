@@ -10,15 +10,21 @@ widgetGenerators['cosmic'] = {
 			addInfoLine(div, 'Protein Change', getWidgetData(tabName, 'cosmic', row, 'protein_change'), tabName);
 			var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
 			if (vcTissue != undefined && vcTissue !== null) {
-                var results = JSON.parse(vcTissue);
 				var table = getWidgetTableFrame();
 				var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
 				addEl(table, thead);
 				var tbody = getEl('tbody');
 				var toks = vcTissue.split(';');
-				for (var i = 0; i < results.length; i++) {
-                    var tr = getWidgetTableTr(results[i]);
-                    addEl(tbody, tr);
+				var re = /(.*)\((.*)\)/
+				for (var i = 0; i < toks.length; i++) {
+					var tok = toks[i];
+					var match = re.exec(tok);
+					if (match !== null) {
+						var tissue = match[1].replace(/_/g, " ");
+						var count = match[2];
+						var tr = getWidgetTableTr([tissue, count]);
+						addEl(tbody, tr);
+					}
 				}
 				addEl(div, addEl(table, tbody));
 			}

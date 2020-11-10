@@ -15,7 +15,6 @@ developer:
   name: Collin Tokheim
   organization: Johns Hopkins University - Karchin Lab
   website: http://chasmplus.readthedocs.io/en/latest/
-input_format: crx
 gene_summary_output_columns:
 - name: max_score
   title: Max Score
@@ -53,34 +52,23 @@ output_columns:
   title: All results
   type: string
   filterable: false
-  table: true
-  table_headers:
-  - name: transcript
-    title: Transcript
-    type: string
-  - name: score
-    title: Score
-    type: float
-  - name: pval
-    title: p-value
-    type: float
 pval_file: pvals.txt
 release_note:
-  1.2.1: table data enabled
-  1.0.3: added gene level summary
-  1.0.4: updated email,
+  1.2.0: add pvalue smartfilter
   1.1.0: new gene summary architecture for open-cravat 1.5.0
+  1.0.4: updated email,
+  1.0.3: added gene level summary
 tags:
 - cancer
 - variant effect prediction
 title: CHASMplus
 type: annotator
-version: 1.2.1s
+version: 1.2.0
 requires:
 - wgndexchasmplussummary
 - wgchasmplus
 - chasmplus_group
-requires_opencravat: '>=2.1.3'
+requires_opencravat: '>=1.5.0'
 groups:
 - chasmplus_group
 commercial_warning: null
@@ -89,9 +77,8 @@ smartfilters:
   title: CHASMplus P-value <=
   selector:
     type: inputFloat
-    defaultValue: '0.001'
+    defaultValue: 0.001
   filter:
     column: chasmplus__pval
     test: lessThanEq
     value: ${value}
-private: true

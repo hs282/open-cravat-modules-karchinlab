@@ -14,18 +14,18 @@ widgetGenerators['chasmplus'] = {
 			addInfoLine(div, 'Transcript', getWidgetData(tabName, 'chasmplus', row, 'transcript'), tabName);
             var allMappings = getWidgetData(tabName, 'chasmplus', row, 'results');
             if (allMappings != null) {
-                var results = JSON.parse(allMappings);
                 var table = getWidgetTableFrame();
                 table.style.width = '100%';
                 var thead = getWidgetTableHead(['Transcript', 'Score', 
                     'P-value'], ['60%', '20%', '20%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
-                for (var i = 0; i < results.length; i++) {
-                    var row = results[i];
-                    var transcript = row[0]
-                    var score = row[1];
-                    var pval = row[2];
+                var lines = allMappings.split(',')
+                for (var i = 0; i < lines.length; i++) {
+                    var toks = lines[i].split(':')
+                    var transcript = toks[0]
+                    var score = toks[1].replace('(', '')
+                    var pval = toks[2].replace(')', '')
                     var tr = getWidgetTableTr([transcript, score, pval]);
                     addEl(tbody, tr);
                 }

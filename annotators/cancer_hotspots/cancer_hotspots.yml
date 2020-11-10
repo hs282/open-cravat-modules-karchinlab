@@ -15,19 +15,13 @@ output_columns:
   type: string
   desc: Distinct cancer type and count associated with each variant. 
   width: 120
-  table: true
-  table_headers:
-  - name: tissue
-    title: Tissue
-    type: string
-  - name: num_cancer_types_w_variant
-    title: Number of cancer types with variant
-    type: int
 
 requires:
 - wgcancer_hotspots
 
 title: Cancer Hotspots
-version: 1.0.0s
+version: 1.0.0
 type: annotator
-private: true
+
+
+

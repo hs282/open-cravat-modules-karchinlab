@@ -16,18 +16,15 @@ widgetGenerators['mutpred1'] = {
 			if (top5Mechs == null) {
 				addEl(div, addEl(getEl('span'), getTn('N/A')));
 			} else {
-				var all_mechs = JSON.parse(top5Mechs);
-                /*
+				var all_mechs = top5Mechs.split('; ');
 				var withAtRe = /(.*) at ([A-Z]\d+).*P = (0\.\d+)/;
 				var withoutAtRe = /(.*) \(P = (0\.\d+)\)/;
-                */
 				var table = getWidgetTableFrame();
 				var thead = getWidgetTableHead(['Mechanism', 'Location', 'P-value'],['60%','20%','20%']);
 				addEl(table, thead);
 				var tbody = getEl('tbody');
 				for (var i = 0; i < all_mechs.length; i++) {
 					var mech = all_mechs[i];
-                    /*
 					var withAtMatch = withAtRe.exec(mech);
 					var mechName = '';
 					var mechLoc = '';
@@ -41,8 +38,7 @@ widgetGenerators['mutpred1'] = {
 						mechName = withoutAtMatch[1];
 						pval = withoutAtMatch[2];
 					}
-                    */
-					var tr = getWidgetTableTr(mech);
+					var tr = getWidgetTableTr([mechName, mechLoc, pval]);
 					addEl(tbody, tr);
 				}
 				addEl(div, addEl(table, tbody));
