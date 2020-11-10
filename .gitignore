@@ -30,4 +30,4 @@ annotators/haploreg*
 mappers/hg38old
 mappers/hg381st
 annotators/loftee
-*.tsv
+/*.tsv
