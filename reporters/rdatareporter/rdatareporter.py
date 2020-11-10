@@ -148,11 +148,7 @@ class Reporter(CravatReport):
         print(f'@ colnos_to_display={self.colnos_to_display[self.level]}')
         print(f'@ filtered_row={filtered_row}')
         self.data[self.level].append([v for v in list(filtered_row)])
-        print(f'@ dataframe_colnos={self.dataframe_colnos[self.level]}')
         for colno in self.dataframe_colnos[self.level]:
-            print(f'@ colno={colno}')
-            print(f'@ row={self.data[self.level][-1]}')
-            print(f'@ row len={len(self.data[self.level][-1])}')
             dfhdata = self.data[self.level][-1][colno]
             if dfhdata is not None and len(dfhdata) > 0:
                 dfhdata = json.loads(dfhdata)
@@ -164,14 +160,9 @@ class Reporter(CravatReport):
     def end (self):
         self.dfs = {}
         for level in self.headers.keys():
-            print(f'@ level={level}')
-            print(f'@ columns={self.colnames_to_display[level]}')
-            #print(f'@ data[level] = {self.data[level]}')
             level_data = pd.DataFrame(self.data[level], columns=self.colnames_to_display[level])
             self.filename = f'{self.filename_prefix}.{level}.{self.filename_postfix}'
             self.filenames.append(self.filename)
-            print(f'@ writing rdata...')
-            print(f'@ level_data={level_data}')
             pyreadr.write_rdata(self.filename, level_data, df_name=f'{self.filename_prefix}_{level}')
         return self.filenames
 
