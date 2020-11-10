@@ -42,6 +42,7 @@ requires:
 - wgndexsummary
 groups:
 - ndex_group
+commercial_warning: 'Freely available for non-commercial use.'
 release_note:
   4.0.11: included in ndex_group
   4.0.9: removed categorical column definition for better UI in webresult

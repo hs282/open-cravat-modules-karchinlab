@@ -76,6 +76,7 @@ developer:
   website: http://genetics.bwh.harvard.edu/pph2/
   citation: Adzhubei IA, Schmidt S, Peshkin L, Ramensky VE, Gerasimova A, Bork P,
     Kondrashov AS, Sunyaev SR. Nat Methods 7(4):248-249 (2010).
+commercial_warning: 'Freely available for non-commercial use.'
 smartfilters:
 - name: hdiv_rank
   title: PolyPhen-2 HumDiv Rank Score

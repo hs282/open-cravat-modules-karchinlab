@@ -71,7 +71,7 @@ requires:
 requires_opencravat: '>=1.5.0'
 groups:
 - chasmplus_group
-commercial_warning: null
+commercial_warning: 'Freely available for non-commercial use.'
 smartfilters:
 - name: pval
   title: CHASMplus P-value <=
