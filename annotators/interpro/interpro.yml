@@ -24,8 +24,8 @@ output_columns:
   title: Domain
   type: string
   width: 62
-- name: hits
-  title: Hits
+- name: results
+  title: Results
   type: string
   table: true
   table_headers:

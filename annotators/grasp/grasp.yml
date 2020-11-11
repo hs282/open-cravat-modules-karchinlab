@@ -15,8 +15,8 @@ output_columns:
   title: Phenotype
   type: string
   width: 70
-- name: hits
-  title: Hits
+- name: results
+  title: Results
   type: string
   table: true
   table_headers:

@@ -21,7 +21,7 @@ class CravatAnnotator(BaseAnnotator):
             trs = row[1].split(';')
             hits = [list(v) for v in zip(domains, accs, trs)]
             out['domain'] = json.dumps(list(set([v for v in domains if v != '.'])))
-            out['hits'] = json.dumps(hits)
+            out['results'] = json.dumps(hits)
             return out
     
     def cleanup(self):

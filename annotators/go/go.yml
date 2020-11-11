@@ -10,7 +10,7 @@ developer:
   website: http://geneontology.org/
 level: gene
 output_columns:
-- name: hits
+- name: annotation
   title: Annotation
   type: string
   hidden: true
