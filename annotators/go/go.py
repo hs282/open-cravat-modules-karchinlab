@@ -15,16 +15,12 @@ class CravatAnnotator(BaseAnnotator):
             %(hugo)
         self.cursor.execute(q)
         result = self.cursor.fetchall()
-        hits = []
         if result:
-            id_list = []
-            go_name_list = []
-            aspect_list = []
-            ref_list = []
-            evi_list = []
+            hits = []
             for res in result:
                 hits.append(res[1:6])
-            out['annotation'] = json.dumps(hits)
+            out['dname'] = res[0]
+            out['hits'] = json.dumps(hits)
         return out
     
 if __name__ == '__main__':

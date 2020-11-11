@@ -1,10 +1,7 @@
 import sys
 from cravat import BaseAnnotator
-from cravat import InvalidData
-import sqlite3
-import os
 from cravat.util import get_ucsc_bins
-import logging
+import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -25,13 +22,11 @@ class CravatAnnotator(BaseAnnotator):
         )
         rows = self.cursor.fetchall()
         if rows:
-            data = list(zip(*rows))
+            studies = [list(v) for v in rows]
+            factor = list(set(map(lambda x: x[4], rows)))
             return {
-                'cell': ';'.join(data[0]),
-                'quality': ';'.join(data[1]),
-                'antibody': ';'.join(data[2]),
-                'study': ';'.join(data[3]),
-                'factor': ';'.join(data[4])
+                'factor': json.dumps(factor),
+                'studies': json.dumps(studies),
             }
     
     def cleanup(self):
