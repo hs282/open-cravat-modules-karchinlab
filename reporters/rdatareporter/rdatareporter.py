@@ -145,8 +145,6 @@ class Reporter(CravatReport):
             filtered_row = [row[colno] for colno in self.colnos_to_display[self.level]]
         else:
             filtered_row = row
-        print(f'@ colnos_to_display={self.colnos_to_display[self.level]}')
-        print(f'@ filtered_row={filtered_row}')
         self.data[self.level].append([v for v in list(filtered_row)])
         for colno in self.dataframe_colnos[self.level]:
             dfhdata = self.data[self.level][-1][colno]
