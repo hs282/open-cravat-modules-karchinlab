@@ -10,13 +10,8 @@ developer:
   website: http://geneontology.org/
 level: gene
 output_columns:
-- name: dname
-  title: Term
-  type: string
-  hidden: false
-  width: 140
 - name: hits
-  title: Hits
+  title: Annotation
   type: string
   hidden: true
   table: true

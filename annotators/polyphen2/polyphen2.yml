@@ -27,6 +27,7 @@ output_columns:
 - name: results
   title: Results
   type: string
+  hidden: true
   table: true
   table_headers:
   - name: uniprot

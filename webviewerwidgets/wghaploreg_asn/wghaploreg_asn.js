@@ -14,7 +14,10 @@ widgetGenerators['haploreg_asn'] = {
 					addEl(table, thead);
 					var tbody = getEl('tbody');
 					for (var i=0; i<snps.length; i++) {
-						var tr = getWidgetTableTr(snps[i]);
+                        var snp = snps[i][0];
+                        var snplink = 'http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=' + snp;
+                        snps[i][0] = snplink;
+						var tr = getWidgetTableTr(snps[i], ['rs' + snp]);
 						addEl(tbody, tr);
 					}
 					addEl(div, addEl(table, tbody));

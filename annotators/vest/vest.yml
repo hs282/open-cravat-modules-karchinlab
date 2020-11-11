@@ -33,12 +33,12 @@ output_columns:
 - name: score
   title: Score
   type: float
-  hidden: false
+  hidden: true
 - name: pval
   title: P-value
   type: float
   filterable: false
-  hidden: true
+  hidden: false
 - hidden: true
   name: all_results
   title: All transcripts

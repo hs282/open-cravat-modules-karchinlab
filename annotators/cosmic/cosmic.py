@@ -47,10 +47,11 @@ class CravatAnnotator(BaseAnnotator):
                             primary_rd['primarysitenos'].split(';'))
             #site_toks = ['%s(%s)' %(site,n) for site,n in site_list]
             site_toks = [[site, int(n)] for site, n in site_list]
+            site_toks.sort(key=lambda x: x[1], reverse=True)
             #out['variant_count_tissue'] = ';'.join(site_toks)
             out['variant_count_tissue'] = json.dumps(site_toks)
         return out
-    
+
     def get_cosmic_mut_type(self, ref, alt): #THIS VERSION DOESN'T USE crx
         if ref == '-' and alt != '-':
             if len(alt)%3 == 0:

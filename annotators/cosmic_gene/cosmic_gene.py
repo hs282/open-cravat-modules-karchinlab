@@ -22,8 +22,9 @@ class CravatAnnotator(BaseAnnotator):
             psnlist = primarysitenos.split(';')
             for i, site in enumerate(pslist):
                 #list.append("%s(%s)" % (site, psnlist[i]))
-                gclist.append([site, psnlist[i]])
+                gclist.append([site, int(psnlist[i])])
             #out['gene_count'] = ';'.join(list)
+            gclist.sort(key=lambda x: x[1], reverse=True)
             out['gene_count'] = json.dumps(gclist)
             out['occurrences'] = occurences
         return out

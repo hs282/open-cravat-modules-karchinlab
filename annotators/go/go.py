@@ -19,7 +19,6 @@ class CravatAnnotator(BaseAnnotator):
             hits = []
             for res in result:
                 hits.append(res[1:6])
-            out['dname'] = res[0]
             out['hits'] = json.dumps(hits)
         return out
     
