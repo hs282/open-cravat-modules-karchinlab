@@ -3,6 +3,7 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
+import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -19,6 +20,7 @@ class CravatAnnotator(BaseAnnotator):
             list = []
             pslist = primarysites.split(';')
             psnlist = primarysitenos.split(';')
+            gclist = []
             for i, site in enumerate(pslist):
                 gclist.append([site, int(psnlist[i])])
             gclist.sort(key=lambda x: x[1], reverse=True)

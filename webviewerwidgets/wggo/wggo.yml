@@ -1,5 +1,5 @@
 title: Gene ontology
-version: 1.1.0
+version: 1.1.1
 type: webviewerwidget
 description: Gene ontology webviewer widget
 developer:
@@ -11,5 +11,7 @@ hidden: true
 required_annotator: go
 requires_opencravat: '>=1.7.0'
 release_note:
+  1.1.1: works with table data
   1.1.0: works with single variant page in oc 1.7.0.
   1.0.5: uses https.
+private: true

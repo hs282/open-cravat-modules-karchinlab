@@ -1,5 +1,5 @@
 title: Cancer Hotspots
-version: 1.0.0
+version: 1.0.1
 type: webviewerwidget
 required_annotator: cancer_hotspots
 description: Cancer Hotspots webviewer widget
@@ -14,4 +14,6 @@ developer:
 tags:
 - visualization
 release_note:
+  1.0.1: works with table data
   1.0.0: Initial release
+private: true

@@ -4,10 +4,9 @@ widgetGenerators['haploreg_asn'] = {
 		'height': 200, 
 		'function': function (div, row, tabName) {
 			if (infomgr.getColumnNo('variant', 'base__hugo')) {
-				var snps = getWidgetData(tabName, 'haploreg_asn', row, 'snps').split(',');
-				var r2s = getWidgetData(tabName, 'haploreg_asn', row, 'r2s').split(',').map(parseFloat);
-				var dprimes = getWidgetData(tabName, 'haploreg_asn', row, 'dprimes').split(',').map(parseFloat);
-				if (snps && r2s && dprimes) {
+				var snps = getWidgetData(tabName, 'haploreg_asn', row, 'snps');
+				if (snps) {
+                    snps = JSON.parse(snps);
 					var table = getWidgetTableFrame();
                     table.style.tableLayout = 'auto';
 					table.style.width = '100%';
@@ -15,10 +14,7 @@ widgetGenerators['haploreg_asn'] = {
 					addEl(table, thead);
 					var tbody = getEl('tbody');
 					for (var i=0; i<snps.length; i++) {
-                        var snp = snps[i][0];
-                        var snplink = 'http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=' + snp;
-                        snps[i][0] = snplink;
-						var tr = getWidgetTableTr(snps[i], ['rs' + snp]);
+						var tr = getWidgetTableTr(snps[i]);
 						addEl(tbody, tr);
 					}
 					addEl(div, addEl(table, tbody));

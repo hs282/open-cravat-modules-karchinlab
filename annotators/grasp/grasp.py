@@ -2,6 +2,7 @@ import sys
 import os
 import sqlite3
 from cravat import BaseAnnotator
+import json
 
 class CravatAnnotator (BaseAnnotator):
 
@@ -16,9 +17,8 @@ class CravatAnnotator (BaseAnnotator):
         self.cursor.execute(self.query_template, [chrom, pos]) 
         results = self.cursor.fetchall()
         if len(results) > 0:
-            nhlbi_list = []
-            pmid_list = []
-            pheno_list = []
+            phenotypes = []
+            hits = []
             for result in results:
                 nhlbi, pmid, pvalue, phenotype = result
                 phenotypes.add(phenotype)

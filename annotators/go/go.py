@@ -3,6 +3,7 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
+import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -14,6 +15,7 @@ class CravatAnnotator(BaseAnnotator):
             %(hugo)
         self.cursor.execute(q)
         result = self.cursor.fetchall()
+        hits = []
         if result:
             id_list = []
             go_name_list = []

@@ -17,25 +17,32 @@ widgetGenerators['mutpred1'] = {
 				addEl(div, addEl(getEl('span'), getTn('N/A')));
 			} else {
 				var all_mechs = JSON.parse(top5Mechs);
-				var withAtRe = /(.*) at ([A-Z]\d+).*/;
+                /*
+				var withAtRe = /(.*) at ([A-Z]\d+).*P = (0\.\d+)/;
+				var withoutAtRe = /(.*) \(P = (0\.\d+)\)/;
+                */
 				var table = getWidgetTableFrame();
 				var thead = getWidgetTableHead(['Mechanism', 'Location', 'P-value'],['60%','20%','20%']);
 				addEl(table, thead);
 				var tbody = getEl('tbody');
 				for (var i = 0; i < all_mechs.length; i++) {
-					var result = all_mechs[i];
-                    var mech = result[0];
-					var pval = result[1];
+					var mech = all_mechs[i];
+                    /*
 					var withAtMatch = withAtRe.exec(mech);
 					var mechName = '';
 					var mechLoc = '';
+					var pval = '';
 					if (withAtMatch != null) {
 						mechName = withAtMatch[1];
 						mechLoc = withAtMatch[2];
+						pval = withAtMatch[3];
 					} else {
-						mechName = mech;
+						var withoutAtMatch = withoutAtRe.exec(mech);
+						mechName = withoutAtMatch[1];
+						pval = withoutAtMatch[2];
 					}
-					var tr = getWidgetTableTr([mechName, mechLoc, pval]);
+                    */
+					var tr = getWidgetTableTr(mech);
 					addEl(tbody, tr);
 				}
 				addEl(div, addEl(table, tbody));
