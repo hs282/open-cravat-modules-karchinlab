@@ -1,5 +1,5 @@
 title: gnomAD Gene
-version: 1.1.1
+version: 1.1.0
 type: webviewerwidget
 required_annotator: gnomad_gene
 description: gnomAD Gene webviewer widget
@@ -14,6 +14,4 @@ tags:
 hidden: true
 requires_opencravat: '>=1.7.0'
 release_note:
-  1.1.1: works with table data
   1.1.0: works with single variant page in oc 1.7.0.
-private: true

@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -16,7 +15,11 @@ class CravatAnnotator(BaseAnnotator):
         self.cursor.execute(q)
         result = self.cursor.fetchall()
         if result:
-            hits = []
+            id_list = []
+            go_name_list = []
+            aspect_list = []
+            ref_list = []
+            evi_list = []
             for res in result:
                 hits.append(res[1:6])
             out['annotation'] = json.dumps(hits)

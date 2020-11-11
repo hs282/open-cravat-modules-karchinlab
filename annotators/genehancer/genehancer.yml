@@ -44,6 +44,7 @@ requires:
 tags:
 - non coding
 
+commercial_warning: 'Freely available for non-commercial use.'
 
 title: GeneHancer
 version: 1.0.0

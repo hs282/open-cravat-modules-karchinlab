@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -45,10 +44,8 @@ class CravatAnnotator(BaseAnnotator):
             out['variant_count'] = primary_rd['occurrences']
             site_list = zip(primary_rd['primarysites'].split(';'),
                             primary_rd['primarysitenos'].split(';'))
-            #site_toks = ['%s(%s)' %(site,n) for site,n in site_list]
             site_toks = [[site, int(n)] for site, n in site_list]
             site_toks.sort(key=lambda x: x[1], reverse=True)
-            #out['variant_count_tissue'] = ';'.join(site_toks)
             out['variant_count_tissue'] = json.dumps(site_toks)
         return out
 

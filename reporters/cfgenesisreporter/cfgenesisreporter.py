@@ -191,7 +191,7 @@ class Reporter(CravatReport):
         hugo = filtered_row[self.colno_to_display_hugo]
         so = row[self.colno_so]
         coding = row[self.colno_coding]
-        if coding == 'Yes':
+        if coding == 'Yes' or so == 'splice_site_variant':
             group_id = hugo
         else:
             genehancertargetgenes = row[self.colno_genehancertargetgenes]

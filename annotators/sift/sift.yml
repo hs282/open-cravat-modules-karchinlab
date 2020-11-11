@@ -67,3 +67,5 @@ smartfilters:
     column: sift__prediction
     test: equals
     value: ${value}
+
+commercial_warning: 'Freely available to the academic community. Commercial licensees should contact Steven Henikoff.'

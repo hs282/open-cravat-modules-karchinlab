@@ -13,35 +13,46 @@ output_columns:
 - name: annotation
   title: Annotation
   type: string
+  desc: GO Accession
+- hidden: true
+  name: name
+  title: GO Name
+  type: string
+  filterable: false
+  desc: Term name
+- hidden: true
+  name: aspect
+  title: Full Aspects
+  type: string
+  width: 60
+  filterable: false
+  desc: Full list of annotated apects (molecular function(F), biological product (P),
+    cellular component (C))
+- desc: List of annotated apects (molecular function(F), biological product (P), cellular
+    component (C))
+  name: set_asp
+  title: Aspects
+  type: string
+  width: 60
   hidden: true
-  table: true
-  table_headers:
-  - name: id
-    title: ID
-    type: string
-    desc: GO Accession
-  - name: name
-    title: GO Name
-    type: string
-    desc: Term name
-  - name: aspect
-    title: Full Aspects
-    type: string
-    desc: Full list of annotated apects (molecular function(F), biological product (P),
-      cellular component (C))
-  - name: go_ref
-    title: Reference
-    type: string
-    desc: Reference identifiers for each annotation
-  - name: evi
-    title: Evidence Code
-    type: string
-    desc: Indicates how the annotation is supported.
+- hidden: true
+  name: go_ref
+  title: Reference
+  type: string
+  width: 75
+  filterable: false
+  desc: Reference identifiers for each annotation
+- hidden: true
+  name: evi
+  title: Evidence Code
+  type: string
+  width: 60
+  filterable: false
+  desc: Indicates how the annotation is supported.
 tags:
 - genes
 title: Gene Ontology
 type: annotator
-version: 2019.08.16s
+version: 2019.08.16
 requires:
 - wggo
-private: true

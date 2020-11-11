@@ -11,7 +11,19 @@ developer:
 input_format: crv
 level: variant
 output_columns:
-- name: phenotype
+- hidden: true
+  name: nhlbi
+  title: NHLBI Key
+  type: string
+  filterable: false
+- hidden: true
+  name: pmid
+  title: PMID
+  type: string
+  filterable: false
+  desc: PubMed ID
+- filterable: true
+  name: phenotype
   title: Phenotype
   type: string
   width: 70
@@ -43,7 +55,7 @@ tags:
 - literature
 title: GRASP
 type: annotator
-version: 2.0.7s
+version: 2.0.7
 requires:
 - wggrasp
 smartfilters:
@@ -56,4 +68,3 @@ smartfilters:
     column: grasp__phenotype
     test: hasData
 commercial_warning: 'For commercial use, contact johnsonad2@nhlbi.nih.gov. '
-private: true
