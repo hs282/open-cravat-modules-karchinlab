@@ -57,6 +57,8 @@ tags:
 - cancer
 - clinical relevance
 
+commercial_warning: 'Freely available for non-commercial use.'
+
 title: Cancer Genome Interpreter
 version: 1.0.0
 type: annotator

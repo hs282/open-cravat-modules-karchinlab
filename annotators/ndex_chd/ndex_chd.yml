@@ -42,6 +42,7 @@ requires:
 - wgndex_chd
 - ndex_group
 - wgndex_chdsummary
+commercial_warning: 'For commercial users, contact the source databases and purchase an appropriate license if necessary. Screen reader support enabled.'
 groups:
 - ndex_group
 release_note:

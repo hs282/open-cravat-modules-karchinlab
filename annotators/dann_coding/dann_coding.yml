@@ -41,3 +41,5 @@ smartfilters:
     test: greaterThanEq
     value: ${value}
 
+commercial_warning: 'Freely available for non-commercial use.'
+
