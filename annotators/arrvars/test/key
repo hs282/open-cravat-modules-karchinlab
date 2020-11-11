@@ -1,21 +1,21 @@
 #CRAVAT Report
-#Created at Thursday 10/22/2020 09:53:13
+#Created at Wednesday 11/11/2020 09:28:03
 #Report level: variant
 #
 Variant Annotation																Arrhythmia Channelopathy Variants									
 UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	LQT	BrS	unaffected	other	BrS Penetrance	LQT Penetrance	Function	BrS Hotspot	LQT Hotspot	More Information
 1	chr3	38591900	A	C			SCN5A	ENST00000423572.6	intron_variant	c.2263-4327T>G		ENST00000333535.9:SCN5A:Q14524:intron_variant::c.2263-4327T>G; ENST00000413689.6:SCN5A::intron_variant::c.2263-4327T>G; ENST00000414099.6:SCN5A::intron_variant::c.2263-4327T>G; ENST00000423572.6:SCN5A:Q14524:intron_variant::c.2263-4327T>G; ENST00000425664.5:SCN5A::intron_variant::c.2263-4327T>G; ENST00000449557.6:SCN5A::intron_variant::c.2263-4327T>G; ENST00000450102.6:SCN5A::intron_variant::c.2263-4327T>G; ENST00000451551.6:SCN5A::intron_variant::c.2263-4327T>G; ENST00000455624.6:SCN5A::intron_variant::c.2263-4327T>G	1	s0						0.036056443	0.018805479		Non_Hotspot	Non_Hotspot	https://oates.app.vumc.org/vancart/SCN5A/variant.php?q=L1988R
-2	chr3	38591926	A	T			SCN5A	ENST00000423572.6	intron_variant	c.2263-4353T>A		ENST00000333535.9:SCN5A:Q14524:intron_variant::c.2263-4353T>A; ENST00000413689.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000414099.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000423572.6:SCN5A:Q14524:intron_variant::c.2263-4353T>A; ENST00000425664.5:SCN5A::intron_variant::c.2263-4353T>A; ENST00000449557.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000450102.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000451551.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000455624.6:SCN5A::intron_variant::c.2263-4353T>A	1	s1											
+2	chr3	38591926	A	T			SCN5A	ENST00000423572.6	intron_variant	c.2263-4353T>A		ENST00000333535.9:SCN5A:Q14524:intron_variant::c.2263-4353T>A; ENST00000413689.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000414099.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000423572.6:SCN5A:Q14524:intron_variant::c.2263-4353T>A; ENST00000425664.5:SCN5A::intron_variant::c.2263-4353T>A; ENST00000449557.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000450102.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000451551.6:SCN5A::intron_variant::c.2263-4353T>A; ENST00000455624.6:SCN5A::intron_variant::c.2263-4353T>A	1	s1						0.05154882400000001	0.128108317		Non_Hotspot	Mild_Hotspot	
 3	chr7	150958059	C	A		Yes	KCNH2	ENST00000262186.10	missense_variant	c.916G>T	p.Gly306Trp	ENST00000262186.10:KCNH2:Q12809:missense_variant:p.Gly306Trp:c.916G>T; ENST00000430723.4:KCNH2::missense_variant:p.Gly190Trp:c.568G>T	1	s2		1.0		0.0			0.48457499690779604			Hotspot	https://oates.app.vumc.org/vancart/KCNH2/variant.php?q=G306W
 4	chr7	150952699	G	A		Yes	KCNH2	ENST00000262186.10	missense_variant	c.1283C>T	p.Ser428Leu	ENST00000262186.10:KCNH2:Q12809:missense_variant:p.Ser428Leu:c.1283C>T; ENST00000330883.9:KCNH2:Q12809:missense_variant:p.Ser88Leu:c.263C>T; ENST00000430723.4:KCNH2::missense_variant:p.Ser312Leu:c.935C>T	1	s3		2.0		5.0			0.255440748269475			Mild_Hotspot	https://oates.app.vumc.org/vancart/KCNH2/variant.php?q=S428L
 5	chr3	38655270	C	G									1	no-sample						0.414359914	0.126552515	Partial_LOF	Hotspot	Mild_Hotspot	https://oates.app.vumc.org/vancart/SCN5A/variant.php?q=V223L
-6	chr3	38560254	AAC	-		Yes	SCN5A	ENST00000423572.6	inframe_deletion	c.4137_4139del	p.Asn1379del	ENST00000333535.9:SCN5A:Q14524:inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000413689.6:SCN5A::inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000414099.6:SCN5A::inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000423572.6:SCN5A:Q14524:inframe_deletion:p.Asn1379del:c.4137_4139del; ENST00000425664.5:SCN5A::inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000449557.6:SCN5A::inframe_deletion:p.Asn1326del:c.3978_3980del; ENST00000450102.6:SCN5A::inframe_deletion:p.Asn1326del:c.3978_3980del; ENST00000451551.6:SCN5A::inframe_deletion:p.Asn1326del:c.3978_3980del; ENST00000455624.6:SCN5A::inframe_deletion:p.Asn1379del:c.4137_4139del	1	s4											
-7	chr3	38591816	A	T			SCN5A	ENST00000423572.6	intron_variant	c.2263-4243T>A		ENST00000333535.9:SCN5A:Q14524:intron_variant::c.2263-4243T>A; ENST00000413689.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000414099.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000423572.6:SCN5A:Q14524:intron_variant::c.2263-4243T>A; ENST00000425664.5:SCN5A::intron_variant::c.2263-4243T>A; ENST00000449557.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000450102.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000451551.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000455624.6:SCN5A::intron_variant::c.2263-4243T>A	1	s5											
+6	chr3	38560254	AAC	-		Yes	SCN5A	ENST00000423572.6	inframe_deletion	c.4137_4139del	p.Asn1379del	ENST00000333535.9:SCN5A:Q14524:inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000413689.6:SCN5A::inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000414099.6:SCN5A::inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000423572.6:SCN5A:Q14524:inframe_deletion:p.Asn1379del:c.4137_4139del; ENST00000425664.5:SCN5A::inframe_deletion:p.Asn1380del:c.4140_4142del; ENST00000449557.6:SCN5A::inframe_deletion:p.Asn1326del:c.3978_3980del; ENST00000450102.6:SCN5A::inframe_deletion:p.Asn1326del:c.3978_3980del; ENST00000451551.6:SCN5A::inframe_deletion:p.Asn1326del:c.3978_3980del; ENST00000455624.6:SCN5A::inframe_deletion:p.Asn1379del:c.4137_4139del	1	s4		0.0	2.0	0.0	5.0	0.644737222	0.029705000000000002	LOF	Hotspot	Non_Hotspot	
+7	chr3	38591816	A	T			SCN5A	ENST00000423572.6	intron_variant	c.2263-4243T>A		ENST00000333535.9:SCN5A:Q14524:intron_variant::c.2263-4243T>A; ENST00000413689.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000414099.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000423572.6:SCN5A:Q14524:intron_variant::c.2263-4243T>A; ENST00000425664.5:SCN5A::intron_variant::c.2263-4243T>A; ENST00000449557.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000450102.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000451551.6:SCN5A::intron_variant::c.2263-4243T>A; ENST00000455624.6:SCN5A::intron_variant::c.2263-4243T>A	1	s5						0.067047982	0.027496844		Non_Hotspot	Non_Hotspot	
 8	chr3	38613782	C	T		Yes	SCN5A	ENST00000423572.6	synonymous_variant	c.664G>A	p.Arg222=	ENST00000333535.9:SCN5A:Q14524:synonymous_variant:p.Arg222=:c.664G>A; ENST00000413689.6:SCN5A::intron_variant::c.703+193G>A; ENST00000414099.6:SCN5A::intron_variant::c.703+193G>A; ENST00000423572.6:SCN5A:Q14524:synonymous_variant:p.Arg222=:c.664G>A; ENST00000425664.5:SCN5A::intron_variant::c.703+193G>A; ENST00000449557.6:SCN5A::synonymous_variant:p.Arg222=:c.664G>A; ENST00000450102.6:SCN5A::intron_variant::c.703+193G>A; ENST00000451551.6:SCN5A::intron_variant::c.703+193G>A; ENST00000455624.6:SCN5A::intron_variant::c.703+193G>A; ENST00000612060.1:SCN5A::2kb_downstream_variant::c.*761G>A	1	no-sample		1.0	33.0	19.0	0.0						https://oates.app.vumc.org/vancart/SCN5A/variant.php?q=R222X
 9	chr7	150952718	C	T		Yes	KCNH2	ENST00000262186.10	missense_variant	c.1264G>A	p.Ala422Thr	ENST00000262186.10:KCNH2:Q12809:missense_variant:p.Ala422Thr:c.1264G>A; ENST00000330883.9:KCNH2:Q12809:missense_variant:p.Ala82Thr:c.244G>A; ENST00000430723.4:KCNH2::missense_variant:p.Ala306Thr:c.916G>A	1	s6		3.0		0.0			0.83580869813557	Severe Dominant LOF		Hotspot	https://oates.app.vumc.org/vancart/KCNH2/variant.php?q=A422T
 10	chr3	38592315	A	T			SCN5A	ENST00000423572.6	intron_variant	c.2263-4742T>A		ENST00000333535.9:SCN5A:Q14524:intron_variant::c.2263-4742T>A; ENST00000413689.6:SCN5A::intron_variant::c.2263-4742T>A; ENST00000414099.6:SCN5A::intron_variant::c.2263-4742T>A; ENST00000423572.6:SCN5A:Q14524:intron_variant::c.2263-4742T>A; ENST00000425664.5:SCN5A::intron_variant::c.2263-4742T>A; ENST00000449557.6:SCN5A::intron_variant::c.2263-4742T>A; ENST00000450102.6:SCN5A::intron_variant::c.2263-4742T>A; ENST00000451551.6:SCN5A::intron_variant::c.2263-4742T>A; ENST00000455624.6:SCN5A::intron_variant::c.2263-4742T>A	1	s7						0.41231809399999997	0.11159188199999999	Partial_LOF	Hotspot	Non_Hotspot	https://oates.app.vumc.org/vancart/SCN5A/variant.php?q=C1850S
 #CRAVAT Report
-#Created at Thursday 10/22/2020 09:53:13
+#Created at Wednesday 11/11/2020 09:28:03
 #Report level: gene
 #
 Variant Annotation					
@@ -23,7 +23,7 @@ Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontolo
 SCN5A		2	4	inframe_deletion	inframe_deletion(1),intron_variant(5),synonymous_variant(1)
 KCNH2		3	0	missense_variant	missense_variant(3)
 #CRAVAT Report
-#Created at Thursday 10/22/2020 09:53:13
+#Created at Wednesday 11/11/2020 09:28:03
 #Report level: sample
 #
 Variant Annotation	
@@ -39,7 +39,7 @@ UID	Sample
 9	s6
 10	s7
 #CRAVAT Report
-#Created at Thursday 10/22/2020 09:53:13
+#Created at Wednesday 11/11/2020 09:28:03
 #Report level: mapping
 #
 Variant Annotation			
