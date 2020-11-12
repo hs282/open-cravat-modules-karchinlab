@@ -7,12 +7,16 @@ output_columns:
   title: Chemical
   type: string
   width: 85
-- name: chemid
-  title: Chemical ID
-  type: string
-  width: 85
-  link_format: https://www.pharmgkb.org/chemical/${PA\d+}
-  hidden: true
+  hidden: false
+  table: true
+  table_headers:
+  - name: chemical
+    title: Chemical
+    type: string
+  - name: chemid
+    title: Chemical ID
+    type: string
+    link_format: https://www.pharmgkb.org/chemical/${PA\d+}
 - name: pmid
   title: Study
   type: string

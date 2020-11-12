@@ -13,7 +13,6 @@ class CravatAnnotator(BaseAnnotator):
         pass
     
     def annotate(self, input_data, secondary_data=None):
-        print(f'@ annotate {input_data}')
         global pred_order
         q = f'select uniprot, hdiv_score, hdiv_rank, hdiv_pred, hvar_score, hvar_rank, hvar_pred from {input_data["chrom"]} where pos=? and alt=?'
         self.cursor.execute(q, (input_data['pos'], input_data['alt_base']))
@@ -28,12 +27,10 @@ class CravatAnnotator(BaseAnnotator):
             hvar_preds = r[6].split(';')
             hdiv_pred = hdiv_preds[0]
             for v in hdiv_preds[1:]:
-                print(f'@ v={v}')
                 if pred_order[v] < pred_order[hdiv_pred]:
                     hdiv_pred = v
             hvar_pred = hvar_preds[0]
             for v in hvar_preds[1:]:
-                print(f'@ v={v}')
                 if pred_order[v] < pred_order[hvar_pred]:
                     hvar_pred = v
             results = [list(v) for v in zip(uniprots, hdiv_scores, hdiv_preds, hvar_scores, hvar_preds)]

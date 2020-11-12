@@ -17,7 +17,7 @@ class CravatAnnotator (BaseAnnotator):
         self.cursor.execute(self.query_template, [chrom, pos]) 
         results = self.cursor.fetchall()
         if len(results) > 0:
-            phenotypes = []
+            phenotypes = set()
             hits = []
             for result in results:
                 nhlbi, pmid, pvalue, phenotype = result
