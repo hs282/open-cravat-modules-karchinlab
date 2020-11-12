@@ -161,19 +161,19 @@ class Reporter(CravatReport):
         self.write_body_line(row)
     
     def write_table_row (self, row):
-        if level not in self.levels_to_write:
+        if self.level not in self.levels_to_write:
             return
         self.write_body_line([
             str(v) if v != None else '' for v in list(row)])
 
     def write_body_lines (self, lines):
-        if level not in self.levels_to_write:
+        if self.level not in self.levels_to_write:
             return
         for line in lines:
             self.write_body_line(line)
 
     def write_body_line (self, row):
-        if level not in self.levels_to_write:
+        if self.level not in self.levels_to_write:
             return
         if len(self.colnos_to_display[self.level]) > 0:
             filtered_row = [row[colno] for colno in self.colnos_to_display[self.level]]
@@ -182,13 +182,13 @@ class Reporter(CravatReport):
         self.csvwriter.writerow(filtered_row)
 
     def write_preface_lines (self, lines):
-        if level not in self.levels_to_write:
+        if self.level not in self.levels_to_write:
             return
         for line in lines:
             self.write_preface_line(line)
 
     def write_preface_line (self, line):
-        if level not in self.levels_to_write:
+        if self.level not in self.levels_to_write:
             return
         self.wf.write('#' + line + '\n')
 
