@@ -1,5 +1,5 @@
 title: TSV Reporter
-version: 2.0.2
+version: 2.0.3
 type: reporter
 description: Tab-delimited format text file reporter
 requires_opencravat: '>=2.1.0'
