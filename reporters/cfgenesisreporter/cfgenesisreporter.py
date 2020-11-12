@@ -152,6 +152,8 @@ class Reporter(CravatReport):
                 self.colno_csqconsequence = colno
             elif colname == 'extra_vcf_info__CSQ_SYMBOL':
                 self.colno_csqsymbol = colno
+            elif colname == 'extra_vcf_info__CSQ_LoF':
+                self.colno_csqlof = colno
             colno += 1
         colno = 0
         self.colnos_to_display[level] = []
@@ -191,8 +193,12 @@ class Reporter(CravatReport):
         hugo = filtered_row[self.colno_to_display_hugo]
         so = row[self.colno_so]
         coding = row[self.colno_coding]
-        if coding == 'Yes' or so == 'splice_site_variant':
-            group_id = hugo
+        csqlof = row[self.colno_csqlof]
+        if coding == 'Yes' or so == 'splice_site_variant' or 'HC' in csqlof:
+            if hugo != '' and hugo is not None:
+                group_id = hugo
+            else:
+                group_id = row[self.colno_csqsymbol].split(',')[0].split(';')[0]
         else:
             genehancertargetgenes = row[self.colno_genehancertargetgenes]
             if genehancertargetgenes is not None:
