@@ -196,8 +196,12 @@ class Reporter(CravatReport):
         so = row[self.colno_so]
         coding = row[self.colno_coding]
         csqlof = row[self.colno_csqlof]
-        csqsymbol = row[self.colno_csqsymbol].split(',')[0].split(';')[0]
-        csqsymbolsource = row[self.colno_csqsymbolsource].split(',')[0].split(';')[0]
+        csqsymbol = row[self.colno_csqsymbol]
+        if csqsymbol is not None:
+            csqsymbol = csqsymbol.split(',')[0].split(';')[0]
+        csqsymbolsource = row[self.colno_csqsymbolsource]
+        if csqsymbolsource is not None:
+            csqsymbolsource = csqsymbolsource.split(',')[0].split(';')[0]
         if coding == 'Yes' or so == 'splice_site_variant' or (csqlof is not None and 'HC' in csqlof):
             if hugo != '' and hugo is not None:
                 group_id = hugo
