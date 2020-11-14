@@ -134,26 +134,26 @@ class CravatConverter(BaseConverter):
         self._buffer.seek(0)
         variant = next(self._reader)
         wdict_blanks = {}
-        for gtn,alt in enumerate(variant.ALT):
+        for alt_index, alt in enumerate(variant.ALT):
             if alt is None:
                 alt_base = variant.REF
             else:
                 alt_base = alt.sequence
             new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt_base)
             if variant.FILTER is None:
-                filter = None
+                filter_val = None
             elif len(variant.FILTER) == 0:
-                filter = 'PASS'
+                filter_val = 'PASS'
             else:
-                filter = ';'.join(variant.FILTER)
-            wdict_blanks[str(gtn+1)] = {
+                filter_val = ';'.join(variant.FILTER)
+            wdict_blanks[alt_index+1] = {
                 'chrom': variant.CHROM,
                 'pos': new_pos,
                 'ref_base': new_ref,
                 'alt_base': new_alt,
                 'tags': variant.ID,
                 'phred': variant.QUAL,
-                'filter': filter,
+                'filter': filter_val,
             }
         wdicts = []
         self.gt_occur = []
@@ -164,14 +164,15 @@ class CravatConverter(BaseConverter):
                     if gt == '0' or gt is None:
                         continue
                     all_gt_zero = False
+                    gt = int(gt)
                     wdict = copy.copy(wdict_blanks[gt])
                     if wdict['alt_base'] == '*':
                         continue
                     wdict['sample_id'] = call.sample
                     wdict['zygosity'] = 'het' if call.is_het else 'hom'
                     wdict['tot_reads'], wdict['alt_reads'], wdict['af'] = self.extract_read_info(call, gt)
-                    wdict['hap_block'] = None #FIXME
-                    wdict['hap_strand'] = None #FIXME
+                    wdict['hap_block'] = None #TODO
+                    wdict['hap_strand'] = None #TODO
                     wdicts.append(wdict)
                     self.gt_occur.append(gt)
             if all_gt_zero:
@@ -199,7 +200,7 @@ class CravatConverter(BaseConverter):
     def extract_read_info(call, gt):
         if hasattr(call.data,'AD'):
             tot_reads = sum(call.data.AD)
-            alt_reads = call.data.AD[int(gt)]
+            alt_reads = call.data.AD[gt]
         elif hasattr(call.data,'DP'):
             tot_reads = call.data.DP
             alt_reads = None
@@ -263,23 +264,20 @@ class CravatConverter(BaseConverter):
     def addl_operation_for_unique_variant (self, wdict, wdict_no):
         if self.ex_info_writer is None:
             return
-        gt_index = int(self.gt_occur[wdict_no])-1
+        gt = self.gt_occur[wdict_no]
+        alt_index = gt-1
         row_data = {'uid':wdict['uid']}
         for info_name, info_val in self.curvar.INFO.items():
             info_desc = self._reader.infos[info_name]
             if info_desc.num == 0:
                 oc_val = self.oc_info_val(info_desc.type, info_val)
             elif info_desc.num == -1: # Number=A
-                oc_val = self.oc_info_val(info_desc.type, info_val[wdict_no])
+                oc_val = self.oc_info_val(info_desc.type, info_val[alt_index])
             elif info_desc.num == -2: # Number=G
-                oc_val = None
+                oc_val = None #TODO handle Number=G
             elif info_desc.num == -3: # Number=R
-                try:
-                    val = info_val[wdict_no+1]
-                    oc_val = self.oc_info_val(info_desc.type, val)
-                except IndexError:
-                    oc_val = None
-                oc_val = self.oc_info_val(info_desc.type, info_val[wdict_no+1])
+                val = info_val[gt] #TODO find an example and make sure this is right
+                oc_val = self.oc_info_val(info_desc.type, val)
             elif info_desc.num is None: # Number=.
                 tmp = lambda val: self.oc_info_val(info_desc.type, val, force_str=True)
                 oc_val = ','.join(map(tmp, info_val))
@@ -289,13 +287,15 @@ class CravatConverter(BaseConverter):
                 tmp = lambda val: self.oc_info_val(info_desc.type, val, force_str=True)
                 oc_val = ','.join(map(tmp, info_val))
             row_data[info_name] = oc_val
-        alt = self.curvar.ALT[gt_index].sequence
+        alt = self.curvar.ALT[gt-1].sequence
         row_data['pos'] = self.curvar.POS
         row_data['ref'] = self.curvar.REF
         row_data['alt'] = alt
         if self.cur_csq:
-            if len(self.cur_csq) == 1:
-                row_data.update(next(iter(self.cur_csq.values())))
-            else: #TODO multiallelic sites and indels
+            #TODO csq alts and multiallelic sites
+            if len(self.curvar.ALT) == 1:
+                if self.cur_csq:
+                    row_data.update(next(iter(self.cur_csq.values())))
+            else:
                 row_data.update(self.cur_csq.get(alt,{}))
         self.ex_info_writer.write_data(row_data)
