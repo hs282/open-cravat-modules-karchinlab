@@ -140,6 +140,12 @@ class CravatConverter(BaseConverter):
             else:
                 alt_base = alt.sequence
             new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt_base)
+            if variant.FILTER is None:
+                filter = None
+            elif len(variant.FILTER) == 0:
+                filter = 'PASS'
+            else:
+                filter = ';'.join(variant.FILTER)
             wdict_blanks[str(gtn+1)] = {
                 'chrom': variant.CHROM,
                 'pos': new_pos,
@@ -147,7 +153,7 @@ class CravatConverter(BaseConverter):
                 'alt_base': new_alt,
                 'tags': variant.ID,
                 'phred': variant.QUAL,
-                'filter': None, #FIXME
+                'filter': filter,
             }
         wdicts = []
         self.gt_occur = []
@@ -217,7 +223,7 @@ class CravatConverter(BaseConverter):
         if all([x=='' for x in l]):
             return None
         else:
-            return ','.join(l)
+            return ';'.join(l)
 
     def trim_variant(self, pos, ref, alt):
         if len(ref) == 1 and len(alt) == 1:
@@ -236,23 +242,60 @@ class CravatConverter(BaseConverter):
         alt = ''.join(alt) if alt else '-'
         return pos+adj, ref, alt
 
+    @staticmethod
+    def oc_info_val(info_type, val, force_str=False):
+        if val is None or val=='.':
+            oc_val = None
+        if info_type in ('Integer','Float'):
+            if isnan(val):
+                oc_val = None
+            else:
+                oc_val = val
+        else:
+            oc_val = val
+        if force_str and oc_val is None:
+            return '.'
+        elif force_str:
+            return str(oc_val)
+        else:
+            return oc_val
+
     def addl_operation_for_unique_variant (self, wdict, wdict_no):
         if self.ex_info_writer is None:
             return
         gt_index = int(self.gt_occur[wdict_no])-1
         row_data = {'uid':wdict['uid']}
         for info_name, info_val in self.curvar.INFO.items():
-            if type(info_val) is list:
-                info_val = info_val[wdict_no]
-            if self._reader.infos[info_name].type not in ('Integer','Float'):
-                info_val = str(info_val)
-            elif isnan(info_val):
-                info_val = None
-            row_data[info_name] = info_val
+            info_desc = self._reader.infos[info_name]
+            if info_desc.num == 0:
+                oc_val = self.oc_info_val(info_desc.type, info_val)
+            elif info_desc.num == -1: # Number=A
+                oc_val = self.oc_info_val(info_desc.type, info_val[wdict_no])
+            elif info_desc.num == -2: # Number=G
+                oc_val = None
+            elif info_desc.num == -3: # Number=R
+                try:
+                    val = info_val[wdict_no+1]
+                    oc_val = self.oc_info_val(info_desc.type, val)
+                except IndexError:
+                    oc_val = None
+                oc_val = self.oc_info_val(info_desc.type, info_val[wdict_no+1])
+            elif info_desc.num is None: # Number=.
+                tmp = lambda val: self.oc_info_val(info_desc.type, val, force_str=True)
+                oc_val = ','.join(map(tmp, info_val))
+            elif info_desc.num == 1:
+                oc_val = self.oc_info_val(info_desc.type, info_val)
+            else: # Number>1
+                tmp = lambda val: self.oc_info_val(info_desc.type, val, force_str=True)
+                oc_val = ','.join(map(tmp, info_val))
+            row_data[info_name] = oc_val
         alt = self.curvar.ALT[gt_index].sequence
         row_data['pos'] = self.curvar.POS
         row_data['ref'] = self.curvar.REF
         row_data['alt'] = alt
         if self.cur_csq:
-            row_data.update(self.cur_csq.get(alt,{}))
+            if len(self.cur_csq) == 1:
+                row_data.update(next(iter(self.cur_csq.values())))
+            else: #TODO multiallelic sites and indels
+                row_data.update(self.cur_csq.get(alt,{}))
         self.ex_info_writer.write_data(row_data)
