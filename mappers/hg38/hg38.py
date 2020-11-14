@@ -2359,14 +2359,20 @@ class Mapper(cravat.BaseMapper):
             tpos_diff_start = None
             exon_tend = gend - gstart + tstart
             dup_found = FALSE
-            for tpos_q in range(tpos_end + 1, exon_tend + 2 - 2 * lenref):
-                early_base = _get_bases_tpos(tid, tpos_q - lenref).upper()
-                late_base = _get_bases_tpos(tid, tpos_q).upper()
-                if early_base != late_base:
-                    tpos_diff_start = tpos_q
-                    dup_found = TRUE
-                    break
-            if dup_found == FALSE:
+            tpos_q = tpos_end + 1
+            tpos_q_start = tpos_end + 1
+            tpos_q_until = exon_tend
+            if tpos_q_start < tpos_q_until:
+                for tpos_q in range(tpos_q_start, tpos_q_until):
+                    early_base = _get_bases_tpos(tid, tpos_q - lenref).upper()
+                    late_base = _get_bases_tpos(tid, tpos_q).upper()
+                    if early_base != late_base:
+                        tpos_diff_start = tpos_q
+                        dup_found = TRUE
+                        break
+                if dup_found == FALSE:
+                    tpos_diff_start = exon_tend - lenref + 1
+            else:
                 tpos_diff_start = tpos_end + 1
             cpos_diff_start = tpos_diff_start - tposcposoffset - lenref
             if gpos == gposend:
@@ -3658,7 +3664,8 @@ class Mapper(cravat.BaseMapper):
                     cpos = cstart + 1
                     gpos = gstart - 1
                 kind = FRAG_CDS
-                gposend_tpos = gposend - gposend_gstart + gposend_tstart
+                gposend = gposend - 1
+                gposend_tpos = gposend_gend - gposend + gposend_tstart
                 lenref = tpos - gposend_tpos + 2 + 1
                 lenalt = 0
                 apos = int((cpos - 1) / 3) + 1
@@ -3701,7 +3708,8 @@ class Mapper(cravat.BaseMapper):
                     cpos = cstart + 1
                     gpos = gstart - 1
                 kind = FRAG_CDS
-                gposend_tpos = gposend - gposend_gstart + gposend_tstart
+                gposend = gposend - 1
+                gposend_tpos = gposend_gend - gposend + gposend_tstart
                 lenref = tpos - gposend_tpos + 1 + 1
                 lenalt = 0
                 apos = int((cpos - 1) / 3) + 1
@@ -4230,12 +4238,17 @@ class Mapper(cravat.BaseMapper):
                     ref_aanums_end = pseq[max_apos_end - 1]
                 else:
                     max_apos_start = apos
+                    diff_found = False
                     for postdel_apos_q in range(postdel_apos_start, alen + 1):
                         predel_apos_q = postdel_apos_q - ref_aanums_len
                         if pseq[predel_apos_q - 1] != pseq[postdel_apos_q - 1]:
                             max_apos_start = predel_apos_q
                             ref_aanums_start = pseq[max_apos_start - 1]
+                            diff_found = True
                             break
+                    if not diff_found:
+                        max_apos_start = alen - ref_aanums_len + 1
+                        ref_aanums_start = pseq[max_apos_start - 1]
                     max_apos_end = max_apos_start + ref_aanums_len - 1
                     ref_aanums_end = pseq[max_apos_end - 1]
                 if max_apos_start <= 1 and max_apos_end >= 1:  # MET deletion
@@ -5319,10 +5332,10 @@ class Mapper(cravat.BaseMapper):
                         so = (SO_INI, SO_STG)
                         achange = f"p.{aanum_to_aa[ref_aa]}{apos}{aanum_to_aa[TER]}"
                     elif TER in alt_aas:  # STG in the middle with ref change
-                        so = (SO_INI, SO_STG)
                         ter_idx = alt_aas.index(TER)
                         alt_aas = alt_aas[: ter_idx + 1]
                         if alt_aas_first != ref_aa:
+                            so = (SO_INI, SO_STG)
                             alt_aas = "".join([aanum_to_aa[aanum] for aanum in alt_aas])
                             achange = f"p.{aanum_to_aa[ref_aa]}{apos}delins{alt_aas}"
                         else:
@@ -5330,15 +5343,21 @@ class Mapper(cravat.BaseMapper):
                             diff_i = None
                             for i in range(1, lenaltaas):
                                 apos_q = apos + i
-                                if alt_aas[i] != pseq[apos_q - 1]:
+                                alt_aa = alt_aas[i]
+                                pseq_aa = pseq[apos_q - 1]
+                                if alt_aa != pseq_aa:
                                     diff_apos = apos_q
                                     diff_i = i
                                     break
-                                if apos_q == len(pseq) - 1:
+                                elif apos_q == len(pseq) - 1:
+                                    break
+                                elif alt_aa == pseq_aa and alt_aa == TER:
                                     break
                             if diff_apos is None:
+                                so = (SO_SYN,)
                                 achange = f"p.{aanum_to_aa[pseq[apos - 1]]}{apos}="
                             else:
+                                so = (SO_STG,)
                                 achange = f"p.{aanum_to_aa[pseq[diff_apos - 1]]}{diff_apos}{aanum_to_aa[TER]}"
                     else:  # multi-aa insertion in the middle
                         so = (SO_INI,)
@@ -5614,6 +5633,7 @@ class Mapper(cravat.BaseMapper):
                     alt_aas += (aanum,)
                     if aanum == TER:
                         stp_found = TRUE
+                        break
                 if stp_found == FALSE:  # until the end of transcript
                     tlen = self.tr_info[tid][TR_INFO_TLEN_I]
                     for tpos_q in range(tpos_q_start, tlen - 2, 3):

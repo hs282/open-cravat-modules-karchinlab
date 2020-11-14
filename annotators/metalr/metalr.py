@@ -18,7 +18,9 @@ class CravatAnnotator(BaseAnnotator):
             else:
                 pred = None
             out = {'score': row[0], 'rankscore': row[1], 'pred': metalr_pred}
-            return out
+        else:
+            out = {}
+        return out
 
     def cleanup(self):
         pass

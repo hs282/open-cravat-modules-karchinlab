@@ -67,4 +67,4 @@ release_note:
 requires_opencravat: '>=1.8.1'
 requires:
 - wgvest
-commercial_warning: null
+commercial_warning: 'Freely available for non-commercial use.'

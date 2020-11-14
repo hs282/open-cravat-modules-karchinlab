@@ -1,0 +1,48 @@
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:42:25
+#Report level: variant
+#
+Variant Annotation																fitCons		
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Score	Rank Score	Confidence
+1	chr1	69102	A	C		Yes	OR4F5	ENST00000641515.2	missense_variant	c.75A>C	p.Glu25Asp	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Glu4Asp:c.12A>C; ENST00000641515.2:OR4F5::missense_variant:p.Glu25Asp:c.75A>C	1	s0		0.487112	0.14032999999999998	0
+2	chr13	19173863	T	A		Yes	TUBA3C	ENST00000400113.8	stop_lost	c.1353A>T	p.Ter451CysextTer24	ENST00000400113.8:TUBA3C:P0DPH7:stop_lost:p.Ter451CysextTer24:c.1353A>T; ENST00000618094.1:TUBA3C:P0DPH7:stop_lost:p.Ter419CysextTer24:c.1257A>T	1	s1		0.053690999999999996	0.0047799999999999995	0
+3	chr16	635516	A	C			METTL26	ENST00000301686.13	intron_variant	c.360+96T>G		ENST00000301686.13:METTL26:Q96S19:intron_variant::c.360+96T>G; ENST00000319070.3:WFIKKN1:Q96NZ8:2kb_downstream_variant::c.*1459A>C; ENST00000338401.8:METTL26:Q96S19:intron_variant::c.197+578T>G; ENST00000397664.8:METTL26:Q96S19:intron_variant::c.198-176T>G; ENST00000397665.6:METTL26:Q96S19:intron_variant::c.360+96T>G; ENST00000397666.6:METTL26:Q96S19:intron_variant::c.360+96T>G; ENST00000568077.5:METTL26::intron_variant,NMD_transcript_variant::c.198-176T>G; ENST00000611328.4:MCRIP2::2kb_upstream_variant,processed_transcript::; ENST00000614890.4:METTL26::intron_variant::c.360+96T>G; ENST00000619114.1:MCRIP2::2kb_upstream_variant,processed_transcript::; ENST00000619377.1:MCRIP2::2kb_upstream_variant,processed_transcript::	1	s2		0.055125	0.0067599999999999995	3
+4	chr20	290585	A	G			C20orf96	ENST00000360321.7	intron_variant	c.20+6T>C		ENST00000360321.7:C20orf96:Q9NUD7:intron_variant::c.20+6T>C; ENST00000382369.9:C20orf96::2kb_upstream_variant::c.-245T>C; ENST00000400269.4:C20orf96::intron_variant,splice_site_variant::c.17+2T>C	1	s3		0.046548	0.00263	1
+5	chr5	92234	G	C		Yes	PLEKHG4B	ENST00000637938.1	start_lost	c.3G>C	p.Met1?	ENST00000637938.1:PLEKHG4B::missense_variant,start_lost:p.Met1?:c.3G>C	1	s4		0.25596199999999997	0.04286	0
+6	chr7	195733	G	A			FAM20C	ENST00000313766.6	splice_site_variant	c.784+1G>A		ENST00000313766.6:FAM20C:Q8IXL6:intron_variant,splice_site_variant::c.784+1G>A; ENST00000467050.1:AC093627.3::2kb_upstream_variant,lnc_RNA::; ENST00000471328.1:FAM20C::intron_variant,processed_transcript::; ENST00000477004.1:FAM20C::intron_variant,processed_transcript::	1	s5		0.07938200000000001	0.02114	2
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:42:25
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+OR4F5		1	0	missense_variant	missense_variant(1)
+TUBA3C		1	0	stop_lost	stop_lost(1)
+METTL26		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1)
+C20orf96		0	1	intron_variant	intron_variant(1),splice_site_variant(1)
+PLEKHG4B		1	0	start_lost	missense_variant(1),start_lost(1)
+FAM20C		0	1	splice_site_variant	intron_variant(1),processed_transcript(1),splice_site_variant(1)
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:42:25
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+6	s5
+#CRAVAT Report
+#Created at Tuesday 09/29/2020 12:42:25
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0

@@ -52,17 +52,16 @@ output_columns:
   width: 80
   hidden: true
 tags:
-- variants
-- noncoding
-- germline
-- populations
+- non coding
+- allele frequency
 title: 1000 Genomes
 type: annotator
-version: 4.0.5
+version: 4.1.0
 requires:
 - wgthousandgenomes
 - thousandgenomes_group
 groups:
 - thousandgenomes_group
 release_note:
+  4.1.0: return None if no annotation
   4.0.3: added group to requires.

@@ -19,7 +19,7 @@ class CravatAnnotator(BaseAnnotator):
             out['uniprot_acc'] = row[0]
             out['ensembl_transcriptid'] = row[1]
             out['domain'] = row[2]
-        return out
+            return out
     
     def cleanup(self):
         self.dbconn.close()
@@ -42,7 +42,7 @@ class CravatAnnotator(BaseAnnotator):
             out = None
         else:
             out = {'domain': ';'.join(domains)}
-        return out
+            return out
 
 if __name__ == '__main__':
     annotator = CravatAnnotator(sys.argv)

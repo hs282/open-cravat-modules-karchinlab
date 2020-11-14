@@ -1,0 +1,23 @@
+title: RData Reporter
+version: 1.0.0
+type: reporter
+description: RData file is generated from a result database.
+requires_opencravat: '>=2.1.3'
+output_filename_schema:
+- '{run_name}.variant.RData'
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+hidden: false
+uselocalonstore: true
+release_note:
+  0.0.1: initial release
+tags:
+- reporters
+pypi_dependency:
+- pandas
+- pyreadr
+

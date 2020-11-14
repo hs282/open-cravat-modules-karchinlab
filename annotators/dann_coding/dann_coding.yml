@@ -1,0 +1,45 @@
+datasource: v4.1
+description: DANN is a functional prediction score retrained based on the training data of CADD using deep neural network.
+developer:
+  name: 'Center for Complex Biological Systems, University of California'
+  organization: 'Center for Complex Biological Systems, University of California'
+  email: 'support@cravat.us'
+  website: 'https://sites.google.com/site/jpopgen/dbNSFP'
+  citation: 'Quang, Daniel, Yifei Chen, and Xiaohui Xie. "DANN: a deep learning approach for annotating the pathogenicity of genetic variants." Bioinformatics 31.5 (2015): 761-763.'
+
+level: variant
+output_columns:
+
+- name: dann_coding_score
+  title: Score
+  type: float
+  desc: Scores range from 0 to 1. A larger number indicate a higher probability to be damaging.
+  width: 60
+  hidden: true
+- name: dann_rankscore
+  title: Rank score
+  type: float
+  desc: The ratio of the rank of the score over the total number of DANN scores.
+  width: 65
+  hidden: false
+
+tags: 
+- variant effect prediction
+
+title: DANN Coding
+version: 1.0.0
+type: annotator
+smartfilters:
+- name: rankscore
+  title: DANN Coding Rank Score >=
+  description: Include variants which have a rank score greater than or equal to 0.90.
+  selector:
+    type: inputFloat
+    defaultValue: 0.90
+  filter:
+    column: dann_coding__dann_rankscore
+    test: greaterThanEq
+    value: ${value}
+
+commercial_warning: 'Freely available for non-commercial use.'
+

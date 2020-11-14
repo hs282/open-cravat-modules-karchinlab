@@ -1,30 +1,30 @@
 #CRAVAT Report
-#Created at Tuesday 09/24/2019 15:40:22
+#Created at Friday 11/06/2020 10:18:50
 #Report level: variant
 #
-Variant Annotation															PharmGKB						
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	Sample Count	Samples	Tags	Chemical	Chemical ID	Study	Phenotype Category	Significance	Notes	Description
-1	chr6_GL000250v2_alt	1096643	A	G			HLA-G	ENST00000615464.4	3-prime utr		ENST00000612360.4:HLA-G:A0A0G2JNX1:3-prime utr:(na):(na); ENST00000615098.4:HLA-G:Q8MH48:3-prime utr:(na):(na); ENST00000615464.4:HLA-G:A0A0G2JPQ3:3-prime utr:(na):(na); ENST00000618812.1:HLA-G:Q8MH48:3-prime utr:(na):(na); ENST00000622601.4:HLA-G:Q29897:3-prime utr:(na):(na)	1	s0		capecitabine;fluorouracil	PA448771;PA128406956	26633805	efficacy	yes	The authors examined disease free survival (DFS) as well as overall survival (OS). The GG genotype was associated with decreased DFS and OS.	Genotype GG is associated with decreased response to capecitabine or fluorouracil in people with Colorectal Neoplasms as compared to genotypes AA + AG.
-2	chr22	19965038	G	A			COMT	ENST00000361682.10	intron		ENST00000361682.10:COMT:P21964:intron:(na):(na); ENST00000403184.5:COMT:E7EUU8:3-prime utr:(na):(na); ENST00000403710.5:COMT:P21964:intron:(na):(na); ENST00000406520.7:COMT:P21964:intron:(na):(na); ENST00000407537.5:COMT:P21964:intron:(na):(na); ENST00000449653.5:COMT:(na):intron:(na):(na)	1	s0		morphine	PA450550	26902643	dosage,efficacy	no	Haplotype of the six COMT variants studied in the paper was also not significantly associated with morphine dose requirements.	Allele G is not associated with dose of morphine in people with Pain, Postoperative as compared to allele A.
-3	chr3	49682366	G	T		Yes	APEH	ENST00000438011.5	missense	T541M	ENST00000296456.9:APEH:P13798:missense:T541M:G1622T; ENST00000438011.5:APEH:C9JIF9:missense:T541M:G1622T; ENST00000449682.2:MST1:G3XAK1:2kb downstream:(na):(na)	1	s0		valproic acid	PA451846	27406852	metabolism/PK	yes	as measured by dose adjusted plasma VPA. Note: the mean age differed between CC and CT patient groups but was not significant (0.066) No TT homozygotes were observed.	Genotype CC is associated with increased concentrations of valproic acid in people with Epilepsy as compared to genotype CT.
-4	chr3	49682366	G	A		Yes	APEH	ENST00000438011.5	missense	T541K	ENST00000296456.9:APEH:P13798:missense:T541K:G1622A; ENST00000438011.5:APEH:C9JIF9:missense:T541K:G1622A; ENST00000449682.2:MST1:G3XAK1:2kb downstream:(na):(na)	1	s0								
-5	chr10	113049143	G	A			TCF7L2	ENST00000355995.8	intron		ENST00000349937.6:TCF7L2:Q5VVR8:intron:(na):(na); ENST00000352065.9:TCF7L2:(na):intron:(na):(na); ENST00000355717.8:TCF7L2:(na):intron:(na):(na); ENST00000355995.8:TCF7L2:Q9NQB0:intron:(na):(na); ENST00000369395.5:TCF7L2:Q5VVR7:intron:(na):(na); ENST00000369397.8:TCF7L2:(na):intron:(na):(na); ENST00000534894.5:TCF7L2:A0A0A0MTL7:intron:(na):(na); ENST00000536810.5:TCF7L2:C6ZRK5:intron:(na):(na); ENST00000538897.5:TCF7L2:(na):intron:(na):(na); ENST00000542695.5:TCF7L2:C6ZRJ6:intron:(na):(na); ENST00000543371.5:TCF7L2:E2GH26:intron:(na):(na); ENST00000545257.5:TCF7L2:C6ZRJ7:intron:(na):(na); ENST00000627217.2:TCF7L2:(na):intron:(na):(na); ENST00000629706.2:TCF7L2:A0A0D9SGH8:intron:(na):(na)	1	s0		sulfonamides, urea derivatives	PA10390	17519421	efficacy	yes		Genotype TT is associated with decreased response to sulfonamides, urea derivatives in people with Diabetes Mellitus, Type 2 as compared to genotype GG.
-6	chr6_GL000251v2_alt	4385247	C	T			BRD2	ENST00000438194.6	intron		ENST00000383108.6:BRD2:P25440:intron:(na):(na); ENST00000438194.6:BRD2:P25440:intron:(na):(na); ENST00000442863.5:BRD2:(na):intron:(na):(na)	1	s0		Selective serotonin reuptake inhibitors	PA164713257	25897834	efficacy	no	The allele did not reach genome wide significance in the discovery or replication cohorts. GWA analyses were performed for two phenotypes: â€˜% change in HRSD-17 scoreâ€™ (% HRSD defined as the change in HRSD-17 score divided by the baseline score) and â€˜responseâ€™ (defined as greater than or equal to 50% reduction in HRSD-17 score from baseline to 4-week visit). Please note, alleles have been complemented to the + chromosomal strand.	Allele T is not associated with response to Selective serotonin reuptake inhibitors in people with Depressive Disorder, Major as compared to allele C.
-7	chr9	9687487	C	G			PTPRD	ENST00000381196.8	intron		ENST00000381196.8:PTPRD:P23468:intron:(na):(na); ENST00000463477.5:PTPRD:C9J8S8:intron:(na):(na)	1	s0		trandolapril;verapamil	PA451737;PA451868	26425837	efficacy	yes	This was associated with resistant hypertension in whites and Hispanics in the international verapamil SR trandolapril study (meta-analysis P=3.2Ã—10-5).	Allele T is associated with resistance to trandolapril and verapamil in people with Hypertension as compared to allele C.
+Variant Annotation																PharmGKB						
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Chemical	Chemical ID	Study	Phenotype Category	Significance	Notes	Description
+1	chr6_GL000250v2_alt	1096643	A	G			HLA-G	ENST00000615464.4	3_prime_UTR_variant	c.*292A>G		ENST00000612360.4:HLA-G::3_prime_UTR_variant::c.*292A>G; ENST00000615098.4:HLA-G::3_prime_UTR_variant::c.*292A>G; ENST00000615464.4:HLA-G::3_prime_UTR_variant::c.*292A>G; ENST00000618039.4:HLA-G::NMD_transcript_variant,3_prime_UTR_variant::c.*340A>G; ENST00000618812.1:HLA-G::3_prime_UTR_variant::c.*282A>G; ENST00000622601.4:HLA-G:P17693:3_prime_UTR_variant::c.*292A>G	1	s0								
+2	chr22	19965038	G	A			COMT	ENST00000361682.11	intron_variant	c.615+739G>A		ENST00000207636.9:COMT::intron_variant,NMD_transcript_variant::c.*73+739G>A; ENST00000361682.11:COMT:P21964:intron_variant::c.615+739G>A; ENST00000403184.5:COMT::3_prime_UTR_variant::c.*646G>A; ENST00000403710.5:COMT:P21964:intron_variant::c.615+739G>A; ENST00000406520.7:COMT:P21964:intron_variant::c.615+739G>A; ENST00000407537.5:COMT:P21964:intron_variant::c.615+739G>A; ENST00000449653.5:COMT:P21964:intron_variant::c.465+739G>A; ENST00000493893.1:COMT::2kb_downstream_variant,processed_transcript::; ENST00000585066.1:MIR4761::2kb_downstream_variant,miRNA::	1	s0		morphine	PA450550	26902643	dosage,efficacy	no	Haplotype of the six COMT variants studied in the paper was also not significantly associated with morphine dose requirements.	Allele G is not associated with dose of morphine in people with Pain, Postoperative as compared to allele A.
+3	chr3	49682366	G	T		Yes	APEH	ENST00000296456.10	missense_variant	c.1622G>T	p.Thr541Met	ENST00000296456.10:APEH:P13798:missense_variant:p.Thr541Met:c.1622G>T; ENST00000438011.5:APEH::missense_variant:p.Thr541Met:c.1622G>T; ENST00000449682.2:MST1::2kb_downstream_variant::c.*1662C>A	1	s0								
+4	chr3	49682366	G	A		Yes	APEH	ENST00000296456.10	missense_variant	c.1622G>A	p.Thr541Lys	ENST00000296456.10:APEH:P13798:missense_variant:p.Thr541Lys:c.1622G>A; ENST00000438011.5:APEH::missense_variant:p.Thr541Lys:c.1622G>A; ENST00000449682.2:MST1::2kb_downstream_variant::c.*1662C>T	1	s0								
+5	chr10	113049143	G	A			TCF7L2	ENST00000627217.3	intron_variant	c.552+9017G>A		ENST00000352065.10:TCF7L2:Q9NQB0:intron_variant::c.483+9017G>A; ENST00000355717.9:TCF7L2:Q9NQB0:intron_variant::c.483+9017G>A; ENST00000355995.8:TCF7L2:Q9NQB0:intron_variant::c.552+9017G>A; ENST00000369395.6:TCF7L2::intron_variant::c.483+9017G>A; ENST00000369397.8:TCF7L2:Q9NQB0:intron_variant::c.483+9017G>A; ENST00000534894.5:TCF7L2::intron_variant::c.382-92041G>A; ENST00000536810.5:TCF7L2::intron_variant::c.483+9017G>A; ENST00000538897.5:TCF7L2:Q9NQB0:intron_variant::c.552+9017G>A; ENST00000542695.5:TCF7L2::intron_variant::c.165+9017G>A; ENST00000543371.5:TCF7L2::intron_variant::c.552+9017G>A; ENST00000545257.6:TCF7L2::intron_variant::c.483+9017G>A; ENST00000627217.3:TCF7L2:Q9NQB0:intron_variant::c.552+9017G>A; ENST00000629706.2:TCF7L2::intron_variant::c.483+9017G>A	1	s0		sulfonamides, urea derivatives	PA10390	17519421	efficacy	yes		Genotype TT is associated with decreased response to sulfonamides, urea derivatives in people with Diabetes Mellitus, Type 2 as compared to genotype GG.
+6	chr6_GL000251v2_alt	4385247	C	T			BRD2	ENST00000442863.5	intron_variant	c.29+111C>T		ENST00000383108.6:BRD2:P25440:intron_variant::c.29+111C>T; ENST00000438194.6:BRD2:P25440:intron_variant::c.29+111C>T; ENST00000442863.5:BRD2:P25440:intron_variant::c.29+111C>T; ENST00000466744.1:BRD2::2kb_downstream_variant,processed_transcript::; ENST00000492172.5:BRD2::intron_variant,NMD_transcript_variant::c.29+111C>T; ENST00000493063.5:BRD2::intron_variant,NMD_transcript_variant::c.29+111C>T	1	s0								
+7	chr9	9687487	C	G			PTPRD	ENST00000381196.8	intron_variant	c.-287+47046G>C		ENST00000381196.8:PTPRD:P23468:intron_variant::c.-287+47046G>C; ENST00000463477.5:PTPRD::intron_variant::c.-359+47046G>C	1	s0		trandolapril;verapamil	PA451737;PA451868	26425837	efficacy	yes	This was associated with resistant hypertension in whites and Hispanics in the international verapamil SR trandolapril study (meta-analysis P=3.2Ã—10-5).	Allele T is associated with resistance to trandolapril and verapamil in people with Hypertension as compared to allele C.
 #CRAVAT Report
-#Created at Tuesday 09/24/2019 15:40:23
+#Created at Friday 11/06/2020 10:18:50
 #Report level: gene
 #
 Variant Annotation					
-Hugo	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
-HLA-G		0	1	3-prime utr	3-prime utr(1)
-COMT		0	1	intron	intron(1),3-prime utr(1)
-APEH		2	0	missense	missense(2)
-TCF7L2		0	1	intron	intron(1)
-BRD2		0	1	intron	intron(1)
-PTPRD		0	1	intron	intron(1)
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+HLA-G		0	1	3_prime_UTR_variant	NMD_transcript_variant(1),3_prime_UTR_variant(1)
+COMT		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1),processed_transcript(1),3_prime_UTR_variant(1)
+APEH		2	0	missense_variant	missense_variant(2)
+TCF7L2		0	1	intron_variant	intron_variant(1)
+BRD2		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1),processed_transcript(1)
+PTPRD		0	1	intron_variant	intron_variant(1)
 #CRAVAT Report
-#Created at Tuesday 09/24/2019 15:40:23
+#Created at Friday 11/06/2020 10:18:50
 #Report level: sample
 #
 Variant Annotation	
@@ -37,7 +37,7 @@ UID	Sample
 6	s0
 7	s0
 #CRAVAT Report
-#Created at Tuesday 09/24/2019 15:40:23
+#Created at Friday 11/06/2020 10:18:50
 #Report level: mapping
 #
 Variant Annotation			

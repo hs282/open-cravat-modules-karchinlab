@@ -5,10 +5,13 @@
 	<script src='js/widgethelper.js'></script>
 	<script src='js/main.js'></script>
 	<script src='js/graphics.js'></script>
-	<script src='js/raphael-min.js'></script>
+    <script src='js/raphael-min.js'></script>
+    <script src='js/Chart.js'></script>
+    <script src='js/chartjs-plugin-labels.js'></script>
+    <script src='widgets/wglollipop2/wglollipop2.js'></script>
 	<link rel='stylesheet' href='css/widget.css' />
 	<link rel='stylesheet' href='css/variantreport.css' />
-    <title>Molecular Tumor Board Report</title>
+    <title> Open Cravat Molecular Tumor Board Report</title>
 </head>
 <body>
 
@@ -16,7 +19,7 @@
     <a href='/' target='_blank' style='position: relative;'>
         <img src='/submit/logo.png' style='width: 60px;'>
     </a>
-    <span style="font-size: 48px; position: fixed; top: 0px; left: calc(50% - 300px); width: 700px;">Molecular Tumor Board Report</span>
+    <span style="font-size: 44px; position: fixed; top: 0px; left: calc(50% - 400px); width: 950px;"> Open Cravat Molecular Tumor Board Report</span>
     <img src='/result/images/search.png' style='width: 30px; position: absolute; top: 20px; right: 0px;' onclick='onClickSearch();' />
     <a href='https://github.com/KarchinLab/open-cravat/wiki' target='_blank' style='position: absolute; top: 26px; right: 45px;'>
         <img src='/result/images/question.png' style='width: 11px;' />
@@ -38,29 +41,17 @@
     <div id='wrapdiv_vannot' class='detailcontainerwrapdiv' >
         <div id='contdiv_vannot' class='detailcontainerdiv' ></div>
     </div>
-    <div class='container_titlediv'>Cancer</div>
-    <div id='wrapdiv_cancer' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_cancer' class='detailcontainerdiv' ></div>
+    <div class='container_titlediv'>Germline</div>
+    <div id='wrapdiv_germline' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_germline' class='detailcontainerdiv' ></div>
     </div>
-    <div class='container_titlediv'>Population Allele Frequencies</div>
-    <div id='wrapdiv_af' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_af' class='detailcontainerdiv' ></div>
+    <div class='container_titlediv'>Driver and Hotspots</div>
+    <div id='wrapdiv_driver' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_driver' class='detailcontainerdiv' ></div>
     </div>
-    <div class='container_titlediv'>Clinical Relevance</div>
-    <div id='wrapdiv_clinrel' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_clinrel' class='detailcontainerdiv' ></div>
-    </div>
-    <div class='container_titlediv'>Gene</div>
-    <div id='wrapdiv_gene' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_gene' class='detailcontainerdiv' ></div>
-    </div>
-    <div class='container_titlediv'>Pathogenicity Prediction</div>
-    <div id='wrapdiv_patho' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_patho' class='detailcontainerdiv' ></div>
-    </div>
-    <div class='container_titlediv'>Evolutionary Constraint</div>
-    <div id='wrapdiv_evol' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_evol' class='detailcontainerdiv' ></div>
+    <div class='container_titlediv'>Protein Diagram</div>
+    <div id='wrapdiv_protein' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_protein' class='detailcontainerdiv' ></div>
     </div>
     <!--
     <div class='container_titlediv'>Haplotypes</div>
@@ -68,26 +59,15 @@
         <div id='contdiv_haplo' class='detailcontainerdiv' ></div>
     </div>
     -->
-    <table style='border-collapse: collapse;' >
-        <tr>
-            <td style='width: 600px; vertical-align: top; margin-left: 0px; padding-left: 0px;'>
-                <div class='container_titlediv' style='width: 587px;'>Noncoding and Genomic Elements</div>
-                <div id='wrapdiv_noncoding' class='detailcontainerwrapdiv singlevariantpage' >
-                    <div id='contdiv_noncoding' class='detailcontainerdiv' ></div>
-                </div>
-            </td>
-            <td style='width: 600px; vertical-align: top;'>
-                <div class='container_titlediv' style='width: 587px;'>Interactions</div>
-                <div id='wrapdiv_interact' class='detailcontainerwrapdiv singlevariantpage' >
-                    <div id='contdiv_interact' class='detailcontainerdiv' ></div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <div class='container_titlediv'>Visualization</div>
-    <div id='wrapdiv_visu' class='detailcontainerwrapdiv singlevariantpage' >
-        <div id='contdiv_visu' class='detailcontainerdiv' ></div>
+    <div class='container_titlediv'>3D Protein Structure</div>
+    <div id='wrapdiv_structure' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_structure' class='detailcontainerdiv' ></div>
     </div>
+    <div class='container_titlediv'>Actionability</div>
+    <div id='wrapdiv_action' class='detailcontainerwrapdiv singlevariantpage' >
+        <div id='contdiv_action' class='detailcontainerdiv' ></div>
+    </div>
+
 </div>
 
 </body>

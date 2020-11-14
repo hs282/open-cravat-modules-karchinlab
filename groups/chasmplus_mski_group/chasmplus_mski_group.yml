@@ -21,4 +21,5 @@ tags:
 title: CHASMplus MSK-IMPACT
 type: group
 version: 1.2.0
+commercial_warning: 'Freely available for non-commercial use.'
 requires_opencravat: '>=1.4.4'

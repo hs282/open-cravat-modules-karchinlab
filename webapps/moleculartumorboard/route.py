@@ -18,6 +18,8 @@ import time
 from concurrent.futures import ProcessPoolExecutor
 from cravat import get_live_annotator, get_live_mapper
 from cravat.config_loader import ConfigLoader
+import requests
+import oyaml
 
 live_modules = {}
 live_mapper = None
@@ -165,9 +167,28 @@ async def load_live_modules ():
         if len(modules_to_run_ordered) == num_module_names - 1:
             break
 
+async def get_oncokb_annotation (request):
+    global oncokb_conf
+    queries = request.rel_url.query
+    chrom = queries['chrom']
+    start = queries['start']
+    end = queries['end']
+    ref_base = queries['ref_base']
+    alt_base = queries['alt_base']
+    url = f'https://www.oncokb.org/api/v1/annotate/mutations/byGenomicChange?genomicLocation={chrom},{start},{end},{ref_base},{alt_base}&referenceGenome=GRCh38'
+    headers = {'Authorization': 'Bearer ' + oncokb_conf['token']}
+    r = requests.get(url, headers=headers)
+    response = r.json()
+    return web.json_response(response)
+
+f = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'oncokb_conf.yml'))
+oncokb_conf = oyaml.full_load(f)
+f.close()
+
 routes = [
    ['GET', 'test', test],
    ['GET', 'annotate', get_live_annotation_get],
    ['POST', 'annotate', get_live_annotation_post],
    ['GET', 'loadlivemodules', load_live_modules],
+   ['GET', 'oncokb', get_oncokb_annotation],
 ]

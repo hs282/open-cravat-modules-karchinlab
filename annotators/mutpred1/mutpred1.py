@@ -26,15 +26,15 @@ class CravatAnnotator(BaseAnnotator):
     def annotate(self, input_data, secondary_data=None):
         # input_data['chrom'] is formatted as chr1, chr2, chrX etc. The chrom
         # column of the database omits the 'chr'. Need to convert formats.
-        chrom = input_data['chrom'].replace('chr', '')
+        #chrom = input_data['chrom'].replace('chr', '')
 
         # Construct the query as a string
         #prot_query = 'select external_protein_id from mutpred_precomputed where chr="%s" and position="%s" and ref="%s" and alt="%s"' % chrom, pos, ref_base, alt_base
         #aa_query = 'select amino_acid_substitution from mutpred_precomputed where chr="%s" and position="%s" and ref="%s" and alt="%s"' % chrom, pos, ref_base, alt_base
         #general_query = 'select mutpred_general_score from mutpred_precomputed where chr="%s" and position="%s" and ref="%s" and alt="%s"' % chrom, pos, ref_base, alt_base
         #mech_query = 'select mutpred_top5_mechanisms from mutpred_precomputed where chr="%s" and position="%s" and ref="%s" and alt="%s"' % chrom, pos, ref_base, alt_base
-        query = 'select external_protein_id, amino_acid_substitution, mutpred_general_score, mutpred_top5_mechanisms from mutpred_precomputed where chr="%s" and position="%s" and alt="%s"' % (chrom, input_data['pos'], input_data['alt_base'])
-        # Execute the query and store the result, if it exists.
+        query = 'select external_protein_id, amino_acid_substitution, mutpred_general_score, mutpred_top5_mechanisms, mutpred_rankscore from {chr} where pos = {pos} and alt = "{alt}"'.format(
+            chr = input_data["chrom"], pos = int(input_data["pos"]), alt = input_data["alt_base"])
         self.cursor.execute(query)
         result = self.cursor.fetchone()
 
@@ -42,6 +42,7 @@ class CravatAnnotator(BaseAnnotator):
         amino_acid_substitution = None
         mutpred_general_score = None
         mutpred_top5_mechanisms = None
+        mutpred_rankscore = None
         if result is not None:
             # Absent values are returned as None from the db
             external_protein_id = result[0]
@@ -49,12 +50,14 @@ class CravatAnnotator(BaseAnnotator):
             mutpred_general_score = result[2]
             # Top 5 mechanisms stored in compact form, must be expanded
             mutpred_top5_mechanisms = self.expand_mechanisms(result[3])
+            mutpred_rankscore = result[4]
         
         out = {}
         out['external_protein_id'] = external_protein_id
         out['amino_acid_substitution'] = amino_acid_substitution
         out['mutpred_general_score'] = mutpred_general_score
         out['mutpred_top5_mechanisms'] = mutpred_top5_mechanisms
+        out['mutpred_rankscore'] = mutpred_rankscore
         return out
     
     def cleanup(self):

@@ -34,4 +34,6 @@ tags:
 - non coding
 title: Repeat Sequences
 type: annotator
-version: 2019.08.22
+version: 2020.10.16
+release-note:
+  2020.10.16: return None if no annotation

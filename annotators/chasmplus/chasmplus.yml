@@ -54,9 +54,10 @@ output_columns:
   filterable: false
 pval_file: pvals.txt
 release_note:
-  1.0.3: added gene level summary
-  1.0.4: updated email,
+  1.2.0: add pvalue smartfilter
   1.1.0: new gene summary architecture for open-cravat 1.5.0
+  1.0.4: updated email,
+  1.0.3: added gene level summary
 tags:
 - cancer
 - variant effect prediction
@@ -70,13 +71,13 @@ requires:
 requires_opencravat: '>=1.5.0'
 groups:
 - chasmplus_group
-commercial_warning: null
+commercial_warning: 'Freely available for non-commercial use.'
 smartfilters:
 - name: pval
   title: CHASMplus P-value <=
   selector:
     type: inputFloat
-    defaultValue: '0.001'
+    defaultValue: 0.001
   filter:
     column: chasmplus__pval
     test: lessThanEq

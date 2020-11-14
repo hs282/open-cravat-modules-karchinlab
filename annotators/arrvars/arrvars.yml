@@ -1,31 +1,23 @@
 datasource: January 2020
-description: Examines variants associated with arrhythmia diseases such as Brugada Syndrome and Long QT Syndrome Type 3.  
+description: Examines variants associated with arrhythmia diseases such as Brugada Syndrome and Long QT Syndrome.  
 developer:
   name: 'Vanderbilt University Medical Center for Arrhythmia Research and Therapeutics'
   organization: 'Vanderbilt University Medical Center for Arrhythmia Research and Therapeutics'
   email: 'support@cravat.us'
-  website: 'https://oates.app.vumc.org/vancart/SCN5A/index.php'
+  website: 'https://oates.app.vumc.org/vancart/'
   citation: 'Kroncke, Brett M., et al. "A Bayesian method to estimate variant-induced disease penetrance." PLoS genetics 16.6 (2020): e1008862.'
+
 level: variant
-
 output_columns:
-
-- name: total_carriers
-  title: Total Carriers
+- name: lqt
+  title: LQT 
   type: float
   hidden: false
   width: 55
-  desc: Total number of heterozygotes observed. 
+  desc: Number of heterozygotes diagnosed with Long QT Syndrome.
 
-- name: lqt3
-  title: LQT3 
-  type: float
-  hidden: false
-  width: 55
-  desc: Number of heterozygotes diagnosed with Long QT Syndrome Type 3.
-
-- name: brs1
-  title: BRS1
+- name: brs
+  title: BrS
   type: float
   hidden: false
   desc: Number of heterozygotes diagnosed with Brugada Syndrome.
@@ -42,51 +34,58 @@ output_columns:
   title: other
   type: float
   hidden: true
-  desc: Number of heterozygotes diagnosed with a cardiac disease that is not LQT3 or BRS1.
+  desc: Number of heterozygotes diagnosed with a cardiac disease that is not LQT or BrS.
   width: 55
 
-- name: brs1_penetrance
-  title: BRS1 Penetrance
+- name: brs_penetrance
+  title: BrS Penetrance
   type: float
   hidden: true
   desc: Estimated percentage of individuals heterozygous for the variant who express Brugada Syndrome. 
   width: 80
 
-- name: lqt3_penetrance
-  title: LQT3 Penetrance
+- name: lqt_penetrance
+  title: LQT Penetrance
   type: float
   hidden: true
-  desc: Estimated percentage of individuals heterozygous for the variant who express Long QT Syndrome Type 3. 
+  desc: Estimated percentage of individuals heterozygous for the variant who express Long QT Syndrome. 
   width: 80 
 
-- name: Function
+- name: function
   title: Function
   type: string
   hidden: false
-  desc: Gain of Function (GOF), Loss of Function (LOF), or Normal
+  desc: Functional Impact. LOF = loss of function and GOF = gain of function.
   width: 65
 
-- name: Structure
-  title: BRS1 Hotspot
+- name: brs_structure
+  title: BrS Hotspot
   type: string
   hidden: false
-  desc: Related to BRS1 Penetrance.
+  desc: Regions in protein structure with higher BrS penetrance.
   width: 85
 
-- name: var
-  title: Variant Summary
+- name: lqt_structure
+  title: LQT Hotspot
+  type: string
+  hidden: false
+  desc: Regions in protein structure with higher LQT penetrance.
+  width: 85
+
+- name: link
+  title: More Information
   type: string
   hidden: true
   desc: Link to dataset.
-  link_format: 'https://oates.app.vumc.org/vancart/SCN5A/variant.php?q=${[^;]+}'
-  width: 75
-
+  width: 75 
 
 title: Arrhythmia Channelopathy Variants 
-version: 1.0.0
+version: 1.1.0
+release_note:
+  1.1.0: Data update
 type: annotator
 
-tags:
-- variant effect prediction
-- clinical relevance
-- cardiovascular
+
+
+
+

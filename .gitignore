@@ -29,3 +29,5 @@ annotators/haploreg*
 **/**/*.pyd
 mappers/hg38old
 mappers/hg381st
+annotators/loftee
+/*.tsv
