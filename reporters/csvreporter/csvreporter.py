@@ -20,15 +20,16 @@ class Reporter(CravatReport):
             self.filename_prefix = 'cravat_result'
         else:
             self.filename_prefix = self.savepath
-        self.levels_to_write = self.confs.get('pages', 'variant').split(',')
-        self.separate_header_file = self.confs.get('separate-header-file', 'false') == 'true'
-        self.zip = self.confs.get('zip', 'false') == 'true'
-        self.show_default_cols_only = self.confs.get('show-default-columns-only', 'false') == 'true'
-        self.cols_to_display = self.confs.get('show-only-columns', '').split(',')
+        self.levels_to_write = self.get_standardized_module_option(self.confs.get('pages', 'variant')).split(',')
+        self.separate_header_file = self.get_standardized_module_option(self.confs.get('separate-header-file', 'false')) == True
+        self.zip = self.get_standardized_module_option(self.confs.get('zip', 'false')) == True
+        self.show_default_cols_only = self.get_standardized_module_option(self.confs.get('show-default-columns-only', 'false')) == True
+        self.cols_to_display = self.get_standardized_module_option(self.confs.get('extract-columns', []))
         self.display_select_columns = len(self.cols_to_display) > 0
         self.module_col_sep = '.'
         self.cols_hidden = {}
         self.colnos_to_display = {}
+        self.filename_postfix = '.csv'
         if self.display_select_columns == False and self.show_default_cols_only:
             db = sqlite3.connect(self.dbpath)
             c = db.cursor()
@@ -45,6 +46,17 @@ class Reporter(CravatReport):
                     if 'hidden' in col_def and col_def['hidden'] == True:
                         self.cols_hidden[level].append(col_name)
 
+    def get_standardized_module_option (self, v):
+        tv = type(v)
+        if tv == str:
+            if ',' in v:
+                v = [val for val in v.split(',') if val != '']
+        if v == 'true':
+            v = True
+        elif v == 'false':
+            v = False
+        return v
+
     def should_write_level (self, level):
         if self.levels_to_write is None:
             return True
@@ -57,13 +69,13 @@ class Reporter(CravatReport):
         if self.wf is not None:
             self.wf.close()
         if self.zip:
-            zipfile_path = self.filename_prefix + '.csv.zip'
+            zipfile_path = self.filename_prefix + f'{self.filename_postfix}.zip'
             zf = zipfile.ZipFile(zipfile_path, mode='w', compression=zipfile.ZIP_DEFLATED)
             for filename in self.filenames:
                 zf.write(filename, os.path.relpath(filename, start=os.path.dirname(filename)))
             zf.close()
         else:
-            zipfile_path = None
+            zipfile_path = self.filenames
         return zipfile_path
 
     def write_preface (self, level): 
@@ -75,20 +87,25 @@ class Reporter(CravatReport):
         if self.wf is not None:
             self.wf.close()
         if self.separate_header_file:
-            self.filename = self.filename_prefix + '.' + level + '.csv.header'
+            self.filename = f'{self.filename_prefix}.{level}{self.filename_postfix}.header'
         else:
-            self.filename = self.filename_prefix + '.' + level + '.csv'
-        self.filenames.append(self.filename)
+            self.filename = f'{self.filename_prefix}.{level}{self.filename_postfix}'
+            self.filenames.append(self.filename)
         self.wf = open(self.filename, 'w', encoding='utf-8', newline='')
         self.csvwriter = csv.writer(self.wf, lineterminator='\n')
-        lines = ['CRAVAT Report']
-        if self.separate_header_file: 
-            lines.append(self.filename[:-7])
-        lines.extend([
-            'Created at ' + 
-                datetime.datetime.now().strftime('%A %m/%d/%Y %X'),
-            'Report level: ' + level,
-        ''])
+        lines = []
+        if self.separate_header_file:
+            lines.append("title=\"OpenCRAVAT Report Header\"")
+            lines.append(f"datafile={self.filename[:-7]}")
+        else:
+            lines.append("title=\"OpenCRAVAT Report\"")
+        lines.extend(
+            [
+                "created=" + datetime.datetime.now().strftime("%A %m/%d/%Y %X"),
+                "level=" + level,
+            ]
+        )
+        lines.append(f"datasource={self.dbpath}")
         self.write_preface_lines(lines)
 
     def write_header (self, level):
@@ -115,7 +132,10 @@ class Reporter(CravatReport):
                         include_col = False
                 if include_col:
                     [module_name, col_name] = col['col_name'].split('__')
-                    line = f'Column description. Column {display_colno} {module_name}{self.module_col_sep}{col_name}={col["col_title"]}'
+                    if module_name == 'base':
+                        line = f'Column description. Column {display_colno} {col_name}={col["col_title"]}'
+                    else:
+                        line = f'Column description. Column {display_colno} {module_name}{self.module_col_sep}{col_name}={col["col_title"]}'
                     self.write_preface_line(line)
                     display_colno += 1
                     self.colnos_to_display[level].append(colno)
@@ -127,13 +147,29 @@ class Reporter(CravatReport):
             if count == 0:
                 continue
             for col in self.colinfo[level]['columns'][colno:colno+count]:
-                row.append(col['col_name'].replace('__', self.module_col_sep))
+                [module_name, col_name] = col['col_name'].split('__')
+                if module_name == 'base':
+                    new_colname = col_name
+                else:
+                    new_colname = module_name + self.module_col_sep + col_name
+                row.append(new_colname)
                 colno += 1
         if self.separate_header_file:
             self.wf.close()
-            self.filename = f'{self.filename_prefix}.{level}.csv'
+            self.filename = f'{self.filename_prefix}.{level}{self.filename_postfix}'
+            self.filenames.append(self.filename)
             self.wf = open(self.filename, 'w', encoding='utf-8', newline='')
             self.csvwriter = csv.writer(self.wf, lineterminator='\n')
+        for colgroup in self.colinfo[level]['colgroups']:
+            count = colgroup['count']
+            if count == 0:
+                continue
+            for col in self.colinfo[level]['columns'][colno:colno+count]:
+                if col['col_name'].startswith('base__'):
+                    row.append(col['col_name'].split('__')[1])
+                else:
+                    row.append(col['col_name'].replace('__', self.module_col_sep))
+                colno += 1
         self.write_body_line(row)
 
     def write_table_row (self, row):

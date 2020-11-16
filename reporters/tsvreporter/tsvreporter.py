@@ -69,7 +69,7 @@ class Reporter(CravatReport):
         if self.wf is not None:
             self.wf.close()
         if self.zip:
-            zipfile_path = self.filename_prefix + '.tsv.zip'
+            zipfile_path = self.filename_prefix + f'{self.filename_postfix}.zip'
             zf = zipfile.ZipFile(zipfile_path, mode='w', compression=zipfile.ZIP_DEFLATED)
             for filename in self.filenames:
                 zf.write(filename, os.path.relpath(filename, start=os.path.dirname(filename)))
@@ -142,6 +142,18 @@ class Reporter(CravatReport):
                 colno += 1
         row = []
         colno = 0
+        for colgroup in self.colinfo[level]['colgroups']:
+            count = colgroup['count']
+            if count == 0:
+                continue
+            for col in self.colinfo[level]['columns'][colno:colno+count]:
+                [module_name, col_name] = col['col_name'].split('__')
+                if module_name == 'base':
+                    new_colname = col_name
+                else:
+                    new_colname = module_name + self.module_col_sep + col_name
+                row.append(new_colname)
+                colno += 1
         if self.separate_header_file:
             self.wf.close()
             self.filename = f'{self.filename_prefix}.{level}{self.filename_postfix}'
@@ -159,7 +171,7 @@ class Reporter(CravatReport):
                     row.append(col['col_name'].replace('__', self.module_col_sep))
                 colno += 1
         self.write_body_line(row)
-    
+
     def write_table_row (self, row):
         if self.level not in self.levels_to_write:
             return
