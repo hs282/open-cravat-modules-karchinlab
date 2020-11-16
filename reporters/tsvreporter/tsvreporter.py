@@ -20,7 +20,7 @@ class Reporter(CravatReport):
             self.filename_prefix = 'cravat_result'
         else:
             self.filename_prefix = self.savepath
-        self.levels_to_write = self.get_standardized_module_option(self.confs.get('pages', 'variant')).split(',')
+        self.levels_to_write = self.get_standardized_module_option(self.confs.get('pages', 'variant'))
         self.separate_header_file = self.get_standardized_module_option(self.confs.get('separate-header-file', 'false')) == True
         self.zip = self.get_standardized_module_option(self.confs.get('zip', 'false')) == True
         self.show_default_cols_only = self.get_standardized_module_option(self.confs.get('show-default-columns-only', 'false')) == True
@@ -88,6 +88,7 @@ class Reporter(CravatReport):
             self.wf.close()
         if self.separate_header_file:
             self.filename = f'{self.filename_prefix}.{level}{self.filename_postfix}.header'
+            self.filenames.append(self.filename)
         else:
             self.filename = f'{self.filename_prefix}.{level}{self.filename_postfix}'
             self.filenames.append(self.filename)
