@@ -118,7 +118,7 @@ class Reporter(CravatReport):
                     colname = colgroup_name + '__' + output_dict['name']
                     if colname in self.dataframe_colnames:
                         self.dataframe_cols[self.level].append(colname)
-                        self.dataframe_headers[self.level][colname] = [v['name'] for v in output_dict['table_headers']]
+                        self.dataframe_headers[self.level][colname] = [v for v in output_dict['table_headers']]
         colno = 0
         for col in self.colinfo[self.level]['columns']:
             colname = col['col_name']
@@ -158,7 +158,8 @@ class Reporter(CravatReport):
     def end (self):
         self.dfs = {}
         for level in self.headers.keys():
-            level_data = pd.DataFrame(self.data[level], columns=self.colnames_to_display[level])
+            columns=[v if v.startswith('base__') == False else v[6:] for v in self.colnames_to_display[level]]
+            level_data = pd.DataFrame(self.data[level], columns=[v if v.startswith('base__') == False else v[6:] for v in self.colnames_to_display[level]])
             self.filename = f'{self.filename_prefix}.{level}.{self.filename_postfix}'
             self.filenames.append(self.filename)
             pyreadr.write_rdata(self.filename, level_data, df_name=f'{self.filename_prefix}_{level}')

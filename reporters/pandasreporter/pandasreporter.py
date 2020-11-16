@@ -60,7 +60,7 @@ class Reporter(CravatReport):
         self.dfs = {}
         for level in self.headers.keys():
             self.dfs[level] = pd.DataFrame(self.data[level], columns=self.headers[level])
-        return self.dfs
+        return self.dfs['variant']
 
 def main ():
     reporter = Reporter(sys.argv)

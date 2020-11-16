@@ -1,5 +1,5 @@
 title: RData Reporter
-version: 1.0.0
+version: 1.0.1
 type: reporter
 description: RData file is generated from a result database.
 requires_opencravat: '>=2.1.3'

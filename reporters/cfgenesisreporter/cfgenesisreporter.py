@@ -148,10 +148,14 @@ class Reporter(CravatReport):
                 self.colno_so = colno
             elif colname == 'base__coding':
                 self.colno_coding = colno
-            elif colname == 'extra_vcf_info__CSQ_Consequence':
-                self.colno_csqconsequence = colno
+            elif colname == 'extra_vcf_info__CSQ':
+                self.colno_csq = colno
             elif colname == 'extra_vcf_info__CSQ_SYMBOL':
-                self.colno_csqsymbol = colno
+                self.colno_csq_symbol = colno
+            elif colname == 'extra_vcf_info__CSQ_Consequence':
+                self.colno_csq_consequence = colno
+            elif colname == 'extra_vcf_info__CSQ_LoF':
+                self.colno_csq_lof = colno
             colno += 1
         colno = 0
         self.colnos_to_display[level] = []
@@ -191,22 +195,35 @@ class Reporter(CravatReport):
         hugo = filtered_row[self.colno_to_display_hugo]
         so = row[self.colno_so]
         coding = row[self.colno_coding]
-        if coding == 'Yes' or so == 'splice_site_variant':
-            group_id = hugo
+        #csq = row[self.colno_csq]
+        #csq_lof_tokno = 50
+        #csq_symbol_tokno = 3
+        #csq_consequence_tokno = 1
+        csq_lof = row[self.colno_csq_lof]
+        if csq_lof is None:
+            csq_lof = ''
+        csq_symbol = row[self.colno_csq_symbol]
+        if csq_symbol is None:
+            csq_symbol = ''
+        csq_symbol = csq_symbol.split(',')[0].split(';')[0]
+        csq_consequence = row[self.colno_csq_consequence]
+        if csq_consequence is None:
+            csq_consequence = ''
+        if coding == 'Yes' or so == 'splice_site_variant' or 'HC' in csq_lof:
+            if hugo is not None and hugo != '':
+                group_id = hugo
+            else:
+                group_id = csq_symbol
         else:
             genehancertargetgenes = row[self.colno_genehancertargetgenes]
             if genehancertargetgenes is not None:
                 toks = genehancertargetgenes.split(',')
                 group_id = toks[0].split(':')[0]
             else:
-                csq_consequence = row[self.colno_csqconsequence]
-                if csq_consequence is None:
-                    group_id = ''
+                if 'upstream_gene_variant' in csq_consequence:
+                    group_id = csq_symbol
                 else:
-                    if 'upstream_gene_variant' in csq_consequence:
-                        group_id = row[self.colno_csqsymbol].split(',')[0].split(';')[0]
-                    else:
-                        group_id = ''
+                    group_id = ''
         filtered_row[self.colno_to_display_hugo] = group_id
         self.data[self.level].append([v for v in list(filtered_row)])
         for colno in self.dataframe_colnos[self.level]:
