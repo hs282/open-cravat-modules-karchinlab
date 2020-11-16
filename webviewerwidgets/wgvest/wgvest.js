@@ -4,7 +4,7 @@ widgetGenerators['vest'] = {
 		'height': 180, 
 		'default_hidden': true,
 		'function': function (div, row, tabName) {
-			var allMappings = getWidgetData(tabName, 'vest', row, 'all_results');
+			var allMappings = getWidgetData(tabName, 'vest', row, 'all');
 			if (allMappings == null) {
                 var span = getEl('span');
                 span.classList.add('nodata');

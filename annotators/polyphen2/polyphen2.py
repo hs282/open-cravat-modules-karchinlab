@@ -39,7 +39,7 @@ class CravatAnnotator(BaseAnnotator):
                 'hvar_pred': hvar_pred,
                 'hdiv_rank': hdiv_rank,
                 'hvar_rank': hvar_rank,
-                'results': json.dumps(results)
+                'all': json.dumps(results)
             }
         else:
             out = {}

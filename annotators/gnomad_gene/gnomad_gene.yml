@@ -62,8 +62,8 @@ output_columns:
   hidden: true
   filterable: false
   desc: Probability of being tolerant of heterozygous and homozygous LOF variants
-- name: all_results
-  title: All Results
+- name: all
+  title: All annotations
   type: string
   hidden: true
   filterable: false

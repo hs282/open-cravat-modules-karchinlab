@@ -64,7 +64,7 @@ class CravatAnnotator(BaseAnnotator):
                     out['pval'] = pvalue
                     #result = '*'+result
                 results.append(result)
-            out['results'] = json.dumps(results)
+            out['all'] = json.dumps(results)
         return out
 
     def summarize_by_gene (self, hugo, input_data):

@@ -24,10 +24,11 @@ output_columns:
   type: float
   width: 72
   hidden: false
-- name: results
-  title: Results
+- name: all
+  title: All annotations
   type: string
   table: true
+  hidden: true
   table_headers:
   - name: uniprot
     title: Uniprot

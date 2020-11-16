@@ -17,12 +17,12 @@ class CravatAnnotator(BaseAnnotator):
         self.cursor.execute(stmt)
         row = self.cursor.fetchone()
         if row is not None:
-            domains = row[2].split(';')
+            domains = [None if v == '.' else v for v in row[2].split(';')]
             accs = row[0].split(';')
             trs = row[1].split(';')
             hits = [list(v) for v in zip(domains, accs, trs)]
-            out['domain'] = json.dumps(list(set([v for v in domains if v != '.'])))
-            out['results'] = json.dumps(hits)
+            out['domain'] = json.dumps(list(set([v for v in domains if v is not None])))
+            out['all'] = json.dumps(hits)
             return out
     
     def cleanup(self):

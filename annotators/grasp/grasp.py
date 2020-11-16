@@ -26,7 +26,7 @@ class CravatAnnotator (BaseAnnotator):
             phenotypes = list(phenotypes)
             phenotypes.sort()
             out['phenotype'] = ';'.join(phenotypes)
-            out['results'] = json.dumps(hits)
+            out['all'] = json.dumps(hits)
         return out
 
 if __name__ == '__main__':

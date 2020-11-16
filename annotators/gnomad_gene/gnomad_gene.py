@@ -66,7 +66,7 @@ class CravatAnnotator(BaseAnnotator):
             out['pLI'] = pLI
             out['pRec'] = pRec
             out['pNull'] = pNull
-            out['all_results'] = json.dumps(all_results)
+            out['all'] = json.dumps(all_results)
         return out
     
     def cleanup(self):

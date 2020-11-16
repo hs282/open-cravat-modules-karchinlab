@@ -24,9 +24,10 @@ output_columns:
   title: Domain
   type: string
   width: 62
-- name: results
-  title: Results
+- name: all
+  title: All annotations
   type: string
+  hidden: true
   width: 70
   filterable: false
 - desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"

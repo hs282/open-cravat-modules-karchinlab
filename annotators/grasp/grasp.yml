@@ -27,8 +27,8 @@ output_columns:
   title: Phenotype
   type: string
   width: 70
-- name: results
-  title: Results
+- name: all
+  title: All annotations
   type: string
   table: true
   table_headers:

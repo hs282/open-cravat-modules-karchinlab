@@ -83,7 +83,7 @@ class CravatAnnotator(BaseAnnotator):
                     'transcript': worst_transcript,
                     'score': max_score,
                     'pval': worst_pval,
-                    'all_results': json.dumps(all_results_list),
+                    'all': json.dumps(all_results_list),
                     'hugo': input_data['hugo'],
                 }
                 return ret

@@ -12,7 +12,7 @@ widgetGenerators['chasmplus'] = {
 				addInfoLine(div, row, 'P-value', 'chasmplus__pval', tabName);
 			}
 			addInfoLine(div, 'Transcript', getWidgetData(tabName, 'chasmplus', row, 'transcript'), tabName);
-            var allMappings = getWidgetData(tabName, 'chasmplus', row, 'results');
+            var allMappings = getWidgetData(tabName, 'chasmplus', row, 'all');
             if (allMappings != null) {
                 var results = JSON.parse(allMappings);
                 var table = getWidgetTableFrame();

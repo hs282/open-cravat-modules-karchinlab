@@ -11,7 +11,7 @@ widgetGenerators['polyphen2'] = {
 			}
 			var hdivRank = getWidgetData(tabName, 'polyphen2', row, 'hdiv_rank');
 			var hvarRank = getWidgetData(tabName, 'polyphen2', row, 'hvar_rank');
-			var results = getWidgetData(tabName, 'polyphen2', row, 'results');
+			var results = getWidgetData(tabName, 'polyphen2', row, 'all');
             if (results != null) {
                 results = JSON.parse(results);
                 var table = getWidgetTableFrame();

@@ -4,7 +4,7 @@ widgetGenerators['interpro'] = {
 		'height': 140, 
 		'word-break': 'normal',
 		'function': function (div, row, tabName) {
-			var hits = getWidgetData(tabName, 'interpro', row, 'results')
+			var hits = getWidgetData(tabName, 'interpro', row, 'all')
             if (hits != null) {
                 hits = JSON.parse(hits);
                 var table = getWidgetTableFrame();

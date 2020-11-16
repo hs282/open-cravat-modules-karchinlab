@@ -4,7 +4,7 @@ widgetGenerators['haploreg_asn'] = {
 		'height': 200, 
 		'function': function (div, row, tabName) {
 			if (infomgr.getColumnNo('variant', 'base__hugo')) {
-				var snps = getWidgetData(tabName, 'haploreg_asn', row, 'snps');
+				var snps = getWidgetData(tabName, 'haploreg_asn', row, 'all');
 				if (snps) {
                     snps = JSON.parse(snps);
 					var table = getWidgetTableFrame();

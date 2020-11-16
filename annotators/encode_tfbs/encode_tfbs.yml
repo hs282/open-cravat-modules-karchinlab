@@ -19,8 +19,8 @@ output_columns:
   - name: factor
     title: Factor
     type: string
-- name: studies
-  title: Studies
+- name: all
+  title: All annotations
   type: string
   hidden: true
   table: true

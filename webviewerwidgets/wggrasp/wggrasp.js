@@ -3,7 +3,7 @@ widgetGenerators['grasp'] = {
 		'width': 280, 
 		'height': 180, 
 		'function': function (div, row, tabName) {
-			var hits = getWidgetData(tabName, 'grasp', row, 'results');
+			var hits = getWidgetData(tabName, 'grasp', row, 'all');
             if (hits != null) {
                 hits = JSON.parse(hits);
                 var table = getWidgetTableFrame();

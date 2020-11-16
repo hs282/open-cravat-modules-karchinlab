@@ -26,7 +26,7 @@ class CravatAnnotator(BaseAnnotator):
             factor = list(set(map(lambda x: x[4], rows)))
             return {
                 'factor': json.dumps(factor),
-                'studies': json.dumps(studies),
+                'all': json.dumps(studies),
             }
     
     def cleanup(self):

@@ -3,7 +3,7 @@ widgetGenerators['gnomad_gene'] = {
 		'width': 840, 
 		'height': 150, 
 		'function': function (div, row, tabName) {
-			var results = getWidgetData(tabName, 'gnomad_gene', row, 'all_results');
+			var results = getWidgetData(tabName, 'gnomad_gene', row, 'all');
             if (results != null) {
                 results = JSON.parse(results);
                 var table = getWidgetTableFrame();

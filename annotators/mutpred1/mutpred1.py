@@ -41,7 +41,7 @@ class CravatAnnotator(BaseAnnotator):
         external_protein_id = None
         amino_acid_substitution = None
         mutpred_general_score = None
-        mutpred_top5_mechanisms = []
+        mutpred_top5_mechanisms = None
         mutpred_rankscore = None
         if result is not None:
             # Absent values are returned as None from the db
