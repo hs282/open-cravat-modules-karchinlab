@@ -1,30 +1,30 @@
-#CRAVAT Report
-#Created at Thursday 11/12/2020 15:44:31
-#Report level: variant
-#
-#Column description. Column 0 base:uid=UID
-#Column description. Column 1 base:chrom=Chrom
-#Column description. Column 2 base:pos=Position
-#Column description. Column 3 base:ref_base=Ref Base
-#Column description. Column 4 base:alt_base=Alt Base
-#Column description. Column 5 base:note=Note
-#Column description. Column 6 base:coding=Coding
-#Column description. Column 7 base:hugo=Gene
-#Column description. Column 8 base:transcript=Transcript
-#Column description. Column 9 base:so=Sequence Ontology
-#Column description. Column 10 base:cchange=cDNA change
-#Column description. Column 11 base:achange=Protein Change
-#Column description. Column 12 base:all_mappings=All Mappings
-#Column description. Column 13 base:numsample=Sample Count
-#Column description. Column 14 base:samples=Samples
-#Column description. Column 15 base:tags=Tags
-#Column description. Column 16 cgl:class=Class
-#Column description. Column 17 vest:transcript=Score Transcript
-#Column description. Column 18 vest:score=Score
-#Column description. Column 19 vest:pval=P-value
-#Column description. Column 20 vest:all_results=All transcripts
-#Column description. Column 21 vest:hugo=HUGO
-##base:uid,base:chrom,base:pos,base:ref_base,base:alt_base,base:note,base:coding,base:hugo,base:transcript,base:so,base:cchange,base:achange,base:all_mappings,base:numsample,base:samples,base:tags,cgl:class,vest:transcript,vest:score,vest:pval,vest:all_results,vest:hugo
+#title="OpenCRAVAT Report"
+#created=Tuesday 11/17/2020 09:23:28
+#level=variant
+#datasource=D:\git\open-cravat\cravat\cravat_test_1605622960812\csvreporter\oc_output.sqlite
+#Column description. Column 0 uid=UID
+#Column description. Column 1 chrom=Chrom
+#Column description. Column 2 pos=Position
+#Column description. Column 3 ref_base=Ref Base
+#Column description. Column 4 alt_base=Alt Base
+#Column description. Column 5 note=Note
+#Column description. Column 6 coding=Coding
+#Column description. Column 7 hugo=Gene
+#Column description. Column 8 transcript=Transcript
+#Column description. Column 9 so=Sequence Ontology
+#Column description. Column 10 cchange=cDNA change
+#Column description. Column 11 achange=Protein Change
+#Column description. Column 12 all_mappings=All Mappings
+#Column description. Column 13 numsample=Sample Count
+#Column description. Column 14 samples=Samples
+#Column description. Column 15 tags=Tags
+#Column description. Column 16 cgl.class=Class
+#Column description. Column 17 vest.transcript=Score Transcript
+#Column description. Column 18 vest.score=Score
+#Column description. Column 19 vest.pval=P-value
+#Column description. Column 20 vest.all_results=All transcripts
+#Column description. Column 21 vest.hugo=HUGO
+uid,chrom,pos,ref_base,alt_base,note,coding,hugo,transcript,so,cchange,achange,all_mappings,numsample,samples,tags,cgl.class,vest.transcript,vest.score,vest.pval,vest.all_results,vest.hugo
 1,chr10,121593817,T,A,,Yes,FGFR2,ENST00000358487.9,start_lost,c.1A>T,p.Met1?,"ENST00000346997.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000351936.10:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000356226.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000357555.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000358487.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000359354.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000360144.7:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369056.5:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369059.5:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369060.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369061.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000457416.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000490349.5:FGFR2::processed_transcript::; ENST00000491111.1:FGFR2::processed_transcript::; ENST00000604236.5:FGFR2::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000611527.1:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000613048.4:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000636922.1:FGFR2::NSD_transcript::",1,s0,,Oncogene,ENST00000356226.8,0.797,0.03249,"ENST00000346997.6(0.738:0.05465),ENST00000351936.10(0.734:0.05637),*ENST00000356226.8(0.797:0.03249),ENST00000357555.9(0.74:0.05425),ENST00000358487.9(0.694:0.07611),ENST00000359354.6(0.728:0.0592),ENST00000360144.7(0.749:0.04989),ENST00000369056.5(0.657:0.09554),ENST00000369059.5(0.768:0.04392),ENST00000369060.8(0.776:0.04089),ENST00000369061.8(0.765:0.04504),ENST00000457416.6(0.789:0.03623),ENST00000611527.1(0.599:0.12782),ENST00000613048.4(0.667:0.09078)",FGFR2
 2,chr10,2987654,T,A,,,,,,,,,1,s1,,,,,,,
 3,chr10,43077259,A,T,,Yes,RET,ENST00000355710.8,start_lost,c.1A>T,p.Met1?,"ENST00000340058.6:RET:P07949:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000355710.8:RET:P07949:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000615310.4:RET::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000671844.1:RET::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000672389.1:RET::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T",1,s2,,Oncogene,ENST00000615310.4,0.682,0.0837,*ENST00000615310.4(0.682:0.0837),RET
