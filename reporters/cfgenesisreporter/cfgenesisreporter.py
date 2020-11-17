@@ -35,9 +35,6 @@ class Reporter(CravatReport):
             )
             == True
         )
-        self.cols_to_display = self.get_standardized_module_option(
-            self.confs.get("extract-columns", [])
-        )
         self.cols_to_display = [
             'base__hugo',
             'base__chrom',
@@ -57,11 +54,12 @@ class Reporter(CravatReport):
             'base__ref_base': 'ref',
             'base__alt_base': 'alt',
         }
-        self.display_select_columns = len(self.cols_to_display) > 0
+        self.display_select_columns = {}
+        self.display_select_columns['variant'] = len(self.cols_to_display) > 0
         self.module_col_sep = "."
         self.colnos_to_display = {}
         self.colnames_to_display = {}
-        if self.display_select_columns == False and self.show_default_cols_only:
+        if self.display_select_columns['variant'] == False and self.show_default_cols_only:
             db = sqlite3.connect(self.dbpath)
             c = db.cursor()
             q = f'select name from sqlite_master where name like "%_header"'
@@ -156,6 +154,8 @@ class Reporter(CravatReport):
                 self.colno_csq_consequence = colno
             elif colname == 'extra_vcf_info__CSQ_LoF':
                 self.colno_csq_lof = colno
+            elif colname == 'extra_vcf_info__CSQ_Gene':
+                self.colno_csq_gene = colno
             colno += 1
         colno = 0
         self.colnos_to_display[level] = []
@@ -178,9 +178,9 @@ class Reporter(CravatReport):
             filtered_row = row
         ref = filtered_row[self.colno_to_display_ref]
         alt = filtered_row[self.colno_to_display_alt]
+        pos = int(filtered_row[self.colno_to_display_pos])
         if ref == '-' or alt == '-': # deletion or insertion
             chrom = filtered_row[self.colno_to_display_chrom]
-            pos = int(filtered_row[self.colno_to_display_pos])
             pos = pos - 1
             prev_base = self.wgs_reader.get_bases(chrom, pos).upper()
             if ref != '-' and alt == '-': # deletion
@@ -195,7 +195,7 @@ class Reporter(CravatReport):
         hugo = filtered_row[self.colno_to_display_hugo]
         so = row[self.colno_so]
         coding = row[self.colno_coding]
-        #csq = row[self.colno_csq]
+        csq = row[self.colno_csq]
         #csq_lof_tokno = 50
         #csq_symbol_tokno = 3
         #csq_consequence_tokno = 1
@@ -209,31 +209,39 @@ class Reporter(CravatReport):
         csq_consequence = row[self.colno_csq_consequence]
         if csq_consequence is None:
             csq_consequence = ''
+        csq_gene = row[self.colno_csq_gene]
+        if csq_gene is None:
+            csq_gene = ''
+        genename = ''
+        if csq_gene != '':
+            genename = csq_gene.split(',')[0]
+        else:
+            csq_toks = csq.split('|')
+            for tok in csq_toks:
+                if tok.startswith('ENSG'):
+                    genename = tok
+                elif tok == 'HC':
+                    csq_lof = tok
         if coding == 'Yes' or so == 'splice_site_variant' or 'HC' in csq_lof:
-            if hugo is not None and hugo != '':
-                group_id = hugo
-            else:
-                group_id = csq_symbol
+            group_id = genename
+            #if hugo is not None and hugo != '':
+            #    group_id = hugo
+            #else:
+            #    group_id = csq_symbol
         else:
             genehancertargetgenes = row[self.colno_genehancertargetgenes]
             if genehancertargetgenes is not None:
-                toks = genehancertargetgenes.split(',')
-                group_id = toks[0].split(':')[0]
+                #toks = genehancertargetgenes.split(',')
+                #group_id = toks[0].split(':')[0]
+                group_id = genename
             else:
                 if 'upstream_gene_variant' in csq_consequence:
-                    group_id = csq_symbol
+                    #group_id = csq_symbol
+                    group_id = genename
                 else:
                     group_id = ''
         filtered_row[self.colno_to_display_hugo] = group_id
         self.data[self.level].append([v for v in list(filtered_row)])
-        for colno in self.dataframe_colnos[self.level]:
-            dfhdata = self.data[self.level][-1][colno]
-            if dfhdata is not None:
-                dfhdata = json.loads(dfhdata.replace("'", '"'))
-            else:
-                dfhdata = []
-            colname = self.colno_to_colname[self.level][colno]
-            self.data[self.level][-1][colno] = pd.DataFrame(dfhdata, columns=self.dataframe_headers[self.level][colname])
 
     def end (self):
         self.dfs = {}
