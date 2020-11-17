@@ -1,5 +1,5 @@
 title: CSV Reporter
-version: 2.0.4
+version: 2.1.0
 type: reporter
 description: CSV format text file reporter
 requires_opencravat: '>=2.1.3'
@@ -13,6 +13,7 @@ developer:
   citation: ''
 hidden: false
 release_note:
+  2.1.0: works with --concise-report option.
   2.0.2: default variant level only, more can be made with module-option pages
   2.0.1: optimized for pandas.
   2.0.0: returns zip file path.
