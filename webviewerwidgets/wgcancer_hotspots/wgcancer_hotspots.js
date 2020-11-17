@@ -12,7 +12,10 @@ widgetGenerators['cancer_hotspots'] = {
 		],
 		function: function (div, row, tabName) {
 			let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
-            if (samples != undefined && samples != null) {
+            if (samples != undefined && samples != null && typeof(samples) == 'object') {
+                if (!samples) {
+                    return;
+                }
                 samples = JSON.parse(samples);
                 const table = getWidgetTableFrame();
                 addEl(div, table);

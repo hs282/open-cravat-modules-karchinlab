@@ -6,7 +6,7 @@ widgetGenerators['cosmic_gene'] = {
 		'function': function (div, row, tabName) {
 			addInfoLine(div, row, 'Occurrences', 'cosmic_gene__occurrences', tabName);
             var vcTissue = getWidgetData(tabName, 'cosmic_gene', row, 'gene_count');
-			if (vcTissue != undefined && vcTissue !== null) {
+			if (vcTissue != undefined && vcTissue !== null && typeof(vcTissue) == 'object') {
                 var results = JSON.parse(vcTissue);
 				var table = getWidgetTableFrame();
 				var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);

@@ -29,6 +29,7 @@ widgetGenerators['go'] = {
                 }
                 addEl(div, addEl(table, tbody));
             } else {
+                var goid = getWidgetData(tabName, 'go', row, 'id');
                 var idls = goid != null ? goid.split(';') : [];
                 var goname = getWidgetData(tabName, 'go', row, 'name');
                 var namels = goname != null ? goname.split(';') : [];
