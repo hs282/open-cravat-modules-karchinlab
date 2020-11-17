@@ -13,7 +13,7 @@ widgetGenerators['mutpred1'] = {
 			}
 			addBarComponent(div, row, 'MutPred Score', 'mutpred1__mutpred_general_score', tabName);
 			var top5Mechs = getWidgetData(tabName, 'mutpred1', row, 'mutpred_top5_mechanisms');
-			if (top5Mechs != undefined && top5Mechs != null && typeof(top5Mechs) == 'object') {
+			if (top5Mechs != undefined && top5Mechs != null && top5Mechs.indexOf('[[') == 0) {
 				var all_mechs = JSON.parse(top5Mechs);
 				var table = getWidgetTableFrame();
 				var thead = getWidgetTableHead(['Mechanism', 'Location', 'P-value'],['60%','20%','20%']);

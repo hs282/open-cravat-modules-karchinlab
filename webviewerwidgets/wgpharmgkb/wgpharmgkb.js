@@ -10,7 +10,7 @@ widgetGenerators['pharmgkb'] = {
 			addEl(chemsDiv, titleSpan);
 			addEl(titleSpan, getTn('Chemicals: '));
 			titleSpan.style['font-weight'] = 'bold';
-			if (chemical != undefined && chemical != null && typeof(chemical) == 'object') {
+			if (chemical != undefined && chemical != null && chemical.indexOf('[[') == 0) {
 				var chemicals = JSON.parse(chemical);
 				for (let i=0; i<chemicals.length; i++) {
                     var row = chemicals[i];
