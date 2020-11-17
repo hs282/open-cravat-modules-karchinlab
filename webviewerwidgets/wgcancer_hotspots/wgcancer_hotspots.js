@@ -12,20 +12,43 @@ widgetGenerators['cancer_hotspots'] = {
 		],
 		function: function (div, row, tabName) {
 			let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
-			if (!samples) {
-				return;
-			}
-            samples = JSON.parse(samples);
-			const table = getWidgetTableFrame();
-			addEl(div, table);
-			const thead = getWidgetTableHead(['Cancer Type','Count']);
-			addEl(table, thead);
-			const tbody = getEl('tbody');
-			addEl(table, tbody);
-			for (var i = 0; i < samples.length; i++) {
-                let tr = getWidgetTableTr(samples[i]);
-                addEl(tbody, tr);
-			}
+            if (samples != undefined && samples != null) {
+                samples = JSON.parse(samples);
+                const table = getWidgetTableFrame();
+                addEl(div, table);
+                const thead = getWidgetTableHead(['Cancer Type','Count']);
+                addEl(table, thead);
+                const tbody = getEl('tbody');
+                addEl(table, tbody);
+                for (var i = 0; i < samples.length; i++) {
+                    let tr = getWidgetTableTr(samples[i]);
+                    addEl(tbody, tr);
+                }
+            } else {
+                let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
+                if (!samples) {
+                    return;
+                }
+                let occurs = {};
+                for (let stok of samples.split('; ')) {
+                    [cancer,occur] = stok.split(':');
+                    occurs[cancer] = occur;
+                }
+                const table = getWidgetTableFrame();
+                addEl(div, table);
+                const thead = getWidgetTableHead(['Cancer Type','Count']);
+                addEl(table, thead);
+                const tbody = getEl('tbody');
+                addEl(table, tbody);
+                for (let cancer of this.cancerTypes) {
+                    let occur = occurs[cancer];
+                    if (!occur) {
+                        continue;
+                    }
+                    let tr = getWidgetTableTr([cancer,occur]);
+                    addEl(tbody, tr);
+                }
+            }
 		}
 	}
 }
