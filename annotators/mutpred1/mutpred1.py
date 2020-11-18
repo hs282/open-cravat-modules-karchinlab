@@ -62,7 +62,10 @@ class CravatAnnotator(BaseAnnotator):
         out['external_protein_id'] = external_protein_id
         out['amino_acid_substitution'] = amino_acid_substitution
         out['mutpred_general_score'] = mutpred_general_score
-        out['mutpred_top5_mechanisms'] = json.dumps(mutpred_top5_mechanisms)
+        if mutpred_top5_mechanisms is not None:
+            out['mutpred_top5_mechanisms'] = json.dumps(mutpred_top5_mechanisms)
+        else:
+            out['mutpred_top5_mechanisms'] = mutpred_top5_mechanisms
         out['mutpred_rankscore'] = mutpred_rankscore
         return out
     
