@@ -212,18 +212,19 @@ class Reporter(CravatReport):
         csq_gene = row[self.colno_csq_gene]
         if csq_gene is None:
             csq_gene = ''
-        genename = ''
+        genenames = []
         if csq_gene != '':
-            genename = csq_gene.split(',')[0]
+            genenames = [m for v in csq_gene.split(',') for m in v.split(';')]
         else:
             csq_toks = csq.split('|')
             for tok in csq_toks:
-                if tok.startswith('ENSG'):
-                    genename = tok
+                if 'ENSG' in tok:
+                    genenames = [m for v in tok.split(',') for m in v.split(';')]
                 elif tok == 'HC':
                     csq_lof = tok
+        group_ids = []
         if coding == 'Yes' or so == 'splice_site_variant' or 'HC' in csq_lof:
-            group_id = genename
+            group_ids = genenames
             #if hugo is not None and hugo != '':
             #    group_id = hugo
             #else:
@@ -233,15 +234,22 @@ class Reporter(CravatReport):
             if genehancertargetgenes is not None:
                 #toks = genehancertargetgenes.split(',')
                 #group_id = toks[0].split(':')[0]
-                group_id = genename
+                group_ids = genenames
             else:
                 if 'upstream_gene_variant' in csq_consequence:
                     #group_id = csq_symbol
-                    group_id = genename
-                else:
-                    group_id = ''
-        filtered_row[self.colno_to_display_hugo] = group_id
-        self.data[self.level].append([v for v in list(filtered_row)])
+                    group_ids = genenames
+        chrom = filtered_row[self.colno_to_display_chrom]
+        if len(group_ids) == 0:
+            print(f'{chrom} {pos} {ref} {alt} {csq}')
+        else:
+            if chrom.startswith('chr'):
+                chrom = chrom[3:]
+                filtered_row[self.colno_to_display_chrom] = chrom
+            group_ids = [v for v in group_ids if v != '']
+            for group_id in group_ids:
+                filtered_row[self.colno_to_display_hugo] = group_id
+                self.data[self.level].append([v for v in list(filtered_row)])
 
     def end (self):
         self.dfs = {}
