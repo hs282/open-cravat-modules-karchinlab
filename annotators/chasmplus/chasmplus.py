@@ -30,6 +30,7 @@ class CravatAnnotator(BaseAnnotator):
                 self.dataframe_colinfo[colname] = col['dataframe_headers']
     
     def annotate(self, input_data):
+        print(f'@ chasmplus annotate')
         out = {}
         ref_base = input_data['ref_base']
         alt_base = input_data['alt_base']
@@ -52,7 +53,6 @@ class CravatAnnotator(BaseAnnotator):
         if len(rows) > 0:
             results = []
             max_alen_index = rows.index(max(rows, key=lambda row: row[2]))
-            #results.append([v['name'] for v in self.dataframe_colinfo['results']])
             for i, row in enumerate(rows):
                 score = row[0]
                 transc = row[1]
@@ -64,7 +64,7 @@ class CravatAnnotator(BaseAnnotator):
                     out['pval'] = pvalue
                     #result = '*'+result
                 results.append(result)
-            out['all'] = json.dumps(results)
+            out['all'] = results
         return out
 
     def summarize_by_gene (self, hugo, input_data):
