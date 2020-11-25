@@ -148,7 +148,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_driver');
     showWidget('driverpanel', ['base','cgc', 'cgl', 'chasmplus', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_protein');
-    showWidget('proteinpanel', ['base', 'lollipop'], 'variant', parentDiv);
+    showWidget('proteinpanel', ['base', 'lollipop2'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_structure');
     showWidget('structurepanel', ['base', 'mupit'], 'variant', parentDiv, null, 'unset', false);
     var parentDiv = document.querySelector('#contdiv_germline');
@@ -862,12 +862,12 @@ widgetGenerators['proteinpanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
-            var generator = widgetGenerators['lollipop']['variant'];
+            var generator = widgetGenerators['lollipop2']['variant'];
             generator['width'] = sectionWidth;
             generator['height'] = 200;
             generator['variables']['hugo'] = '';
             annotData['base']['numsample'] = 1;
-            var divs = showWidget('lollipop', ['base'], 'variant', div);
+            var divs = showWidget('lollipop2', ['base'], 'variant', div);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
