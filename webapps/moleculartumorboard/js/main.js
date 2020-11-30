@@ -538,7 +538,7 @@ widgetGenerators['pharmgkb2'] = {
 widgetInfo['clinvar2'] = {'title': ''};
 widgetGenerators['clinvar2'] = {
     'variant': {
-        'width': 480, 
+        'width': 1100, 
         'height': 250, 
         'function': function (div, row, tabName) {
             var id = getWidgetData(tabName, 'clinvar', row, 'id');
@@ -548,27 +548,38 @@ widgetGenerators['clinvar2'] = {
             span.classList.add('detail-info-line-header');
             span.textContent = 'ClinVar significance: ';
             addEl(sdiv, span);
+            var ssdiv = getEl('div');
+            ssdiv.style.display = 'inline-block';
+            ssdiv.style.position = 'relative';
+            ssdiv.style.left = '6px';
             var span = getEl('span');
             span.classList.add('detail-info-line-content');
             span.textContent = sig;
-            addEl(sdiv, span);
-            addEl(sdiv, getTn('\xa0'));
-            //addInfoLine(div, 'Significance by ClinVar', sig, tabName);
-            //var link = '';
+            addEl(ssdiv, span);
+            addEl(ssdiv, getTn('\xa0'));
             if(id != null){
                 link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
                 var a = getEl('a');
                 a.href = link;
                 a.textContent = id;
                 sdiv.style.position = 'relative';
-                addEl(sdiv, getTn('(ID: '));
-                addEl(sdiv, a);
-                addEl(sdiv, getTn(')'));
-                addEl(div, sdiv);
-            } else {
-                //id = '';
+                addEl(ssdiv, getTn('(ID: '));
+                addEl(ssdiv, a);
+                addEl(ssdiv, getTn(')'));
             }
-            //addInfoLineLink(div, 'ClinVar ID', id, link, 10);
+            addEl(sdiv, ssdiv);
+            addEl(div, sdiv);
+            var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + id + '&retmode=json'
+            fetch(url).then(response=>{return response.json()}).then(response=>{
+                var trait_set = response['result'][id].trait_set;
+                var traitNames = [];
+                for (var i = 0; i < trait_set.length; i++) {
+                    traitNames.push(trait_set[i].trait_name);
+                }
+                traitNames.sort();
+                var traitNames = traitNames.join(', ');
+                addInfoLine(div, 'ClinVar conditions', traitNames, 'variant', 130);
+            });
         }
     }
 }
