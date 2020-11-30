@@ -12,18 +12,17 @@ class CravatPostAggregator (BasePostAggregator):
         return 'cohorts' in self.confs
 
     def setup (self):
+        self.cursor_samples = self.dbconn.cursor()
+        q = 'select distinct base__sample_id from sample'
+        self.cursor_samples.execute(q)
+        self.all_samples = {r[0] for r in self.cursor_samples}
         self.cohorts = defaultdict(set)
         with open(self.confs['cohorts']) as f:
             for l in f:
                 toks = l.strip().split()
                 self.cohorts[toks[1]].add(toks[0])
-        self.case_samples = self.cohorts['case']
-        self.cont_samples = self.cohorts['control']
-        self.cursor_samples = self.dbconn.cursor()
-        q = 'select distinct base__sample_id from sample'
-        self.cursor_samples.execute(q)
-        self.all_samples = {r[0] for r in self.cursor_samples}
-        self.cohort_samples = self.all_samples & (self.case_samples | self.cont_samples)
+        self.case_samples = self.all_samples & self.cohorts['case']
+        self.cont_samples = self.all_samples & self.cohorts['control']
         q = 'pragma table_info(sample);'
         self.cursor_samples.execute(q)
         samp_cols = {r[1] for r in self.cursor_samples}
@@ -55,22 +54,22 @@ class CravatPostAggregator (BasePostAggregator):
         ref_case = len(self.case_samples) - hom_case - het_case
         hom_cont = len(self.cont_samples & hom_samples)
         het_cont = len(self.cont_samples & het_samples)
-        ref_cont = len(self.cont_samples) - hom_case - het_case
+        ref_cont = len(self.cont_samples) - hom_cont - het_cont
         dom_table = [
             [hom_case + het_case, ref_case],
             [hom_cont + het_cont, ref_cont]
         ]
-        dom_pvalue = fisher_exact(dom_table,'less')[1]
+        dom_pvalue = fisher_exact(dom_table,'greater')[1]
         rec_table = [
             [hom_case, ref_case + het_case],
-            [hom_cont, ref_cont + het_case]
+            [hom_cont, ref_cont + het_cont]
         ]
-        rec_pvalue = fisher_exact(rec_table,'less')[1]
+        rec_pvalue = fisher_exact(rec_table,'greater')[1]
         all_table = [
             [2*hom_case + het_case, 2*ref_case + het_case],
             [2*hom_cont + het_cont, 2*ref_cont + het_cont]
         ]
-        all_pvalue = fisher_exact(all_table,'less')[1]
+        all_pvalue = fisher_exact(all_table,'greater')[1]
         return {
             'dom_pvalue': dom_pvalue,
             'rec_pvalue': rec_pvalue,
