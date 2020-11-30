@@ -255,7 +255,7 @@ class Reporter(CravatReport):
         self.dfs = {}
         for level in self.headers.keys():
             level_data = pd.DataFrame(self.data[level], columns=self.colnames_to_display[level])
-            level_data = level_data.drop_duplicates(subset=['group_id'])
+            level_data = level_data.drop_duplicates()
             self.filename = f'{self.filename_prefix}.{level}.{self.filename_postfix}'
             self.filenames.append(self.filename)
             pyreadr.write_rdata(self.filename, level_data, df_name=f'{self.filename_prefix}_{level}')
