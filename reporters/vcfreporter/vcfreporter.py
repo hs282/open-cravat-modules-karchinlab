@@ -89,8 +89,8 @@ class Reporter(CravatReport):
                 elif colname == 'base__samples':
                     newcolnames_to_display.append(colname)
                     newcolnos_to_display.append(i)
-        self.colnames_to_display[level] = newcolnames_to_display
-        self.colnos_to_display[level] = newcolnos_to_display
+            self.colnames_to_display[level] = newcolnames_to_display
+            self.colnos_to_display[level] = newcolnos_to_display
         self.extracted_cols[level] = self.get_extracted_header_columns(level)
         self.wf = open(self.filename, 'w', encoding='utf-8', newline='')
         lines = ['#fileformat=VCFv4.2',
@@ -119,7 +119,9 @@ class Reporter(CravatReport):
                         f = open(inputfile)
                     lineno = 0
                     self.vcflines[input_path_no] = {}
+                    print(f'@ f={f}')
                     for line in f:
+                        print(f'@ line={line}')
                         lineno += 1
                         if line.startswith('##fileformat='):
                             continue

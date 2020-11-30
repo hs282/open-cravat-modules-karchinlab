@@ -1,8 +1,13 @@
 import aiosqlite
 import os
+import cravat
 
 async def make_db ():
-    dbpath = 'wglollipop.sqlite'
+    dbpath = os.path.join(
+        os.path.dirname(cravat.admin_util.get_local_module_info('wglollipop').script_path),
+        'data',
+        'wglollipop.sqlite')
+    #dbpath = 'wglollipop.sqlite'
     conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
     table_name = 'variant'
