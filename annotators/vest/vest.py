@@ -6,7 +6,6 @@ import sqlite3
 import re
 from cravat.inout import AllMappingsParser
 import stouffer
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -83,7 +82,7 @@ class CravatAnnotator(BaseAnnotator):
                     'transcript': worst_transcript,
                     'score': max_score,
                     'pval': worst_pval,
-                    'all': json.dumps(all_results_list),
+                    'all': all_results_list,
                     'hugo': input_data['hugo'],
                 }
                 return ret
