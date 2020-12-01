@@ -119,9 +119,7 @@ class Reporter(CravatReport):
                         f = open(inputfile)
                     lineno = 0
                     self.vcflines[input_path_no] = {}
-                    print(f'@ f={f}')
                     for line in f:
-                        print(f'@ line={line}')
                         lineno += 1
                         if line.startswith('##fileformat='):
                             continue

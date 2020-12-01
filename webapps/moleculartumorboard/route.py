@@ -181,19 +181,6 @@ async def get_oncokb_annotation (request):
     response = r.json()
     return web.json_response(response)
 
-#async def get_mupit (request):
-#    print(f'@ request={request}')
-#    print(f'@ tail={request.match_info["tail"]}')
-#    url = f'https://www.cravat.us/MuPIT_Interactive/{request.match_info["tail"]}'
-#    if request.method == 'GET':
-#        queries = request.rel_url.query
-#        print(f'@ queries={queries}')
-#        url += '?'
-#        for k in iter(queries):
-#            url += str(k) + '=' + queries[k] + '&'
-#    print(f'@ url={url}')
-#    return web.HTTPFound(url)
-
 f = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'oncokb_conf.yml'))
 oncokb_conf = oyaml.full_load(f)
 f.close()
