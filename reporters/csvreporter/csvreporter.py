@@ -48,9 +48,9 @@ class Reporter(CravatReport):
         return zipfile_path
 
     def write_preface (self, level): 
+        self.level = level
         if level not in self.levels_to_write:
             return
-        self.level = level
         if self.wf is not None:
             self.wf.close()
         if self.separate_header_file:
