@@ -4,12 +4,12 @@ type: postaggregator
 level: variant
 output_columns:
 - name: dom_pvalue
-  title: Dom. p-value
+  title: Dominant p-value
   type: float
   desc: Dominant model p-value
   width: 70
 - name: rec_pvalue
-  title: Rec. p-value
+  title: Recessive p-value
   type: float
   desc: Reccesive model p-value
   width: 70

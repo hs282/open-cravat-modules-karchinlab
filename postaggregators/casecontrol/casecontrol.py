@@ -5,6 +5,7 @@ from cravat import InvalidData
 import sqlite3
 from collections import defaultdict
 from scipy.stats import fisher_exact
+from pathlib import Path
 
 class CravatPostAggregator (BasePostAggregator):
 
@@ -17,7 +18,8 @@ class CravatPostAggregator (BasePostAggregator):
         self.cursor_samples.execute(q)
         self.all_samples = {r[0] for r in self.cursor_samples}
         self.cohorts = defaultdict(set)
-        with open(self.confs['cohorts']) as f:
+        cohorts_path = Path(self.confs['cohorts']).expanduser().resolve()
+        with cohorts_path.open() as f:
             for l in f:
                 toks = l.strip().split()
                 self.cohorts[toks[1]].add(toks[0])
