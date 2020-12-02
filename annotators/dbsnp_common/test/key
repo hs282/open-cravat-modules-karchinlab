@@ -1,0 +1,42 @@
+#CRAVAT Report
+#Created at Thursday 10/29/2020 16:35:24
+#Report level: variant
+#
+Variant Annotation																dbSNP Common
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	rsID
+1	chr1	13110	G	A									1	s1		rs540538026
+2	chr1	10178	-	C									1	s2		rs367896724
+3	chr16	10013	T	C									1	s3		rs1263039761
+4	chr9	10052	C	AGT									1	s4		rs370278117
+5	chr22	10515076	-	A									1	s5		rs1302135366
+6	chr15	19803192	-	TCAA									1	s6		rs112623053
+#CRAVAT Report
+#Created at Thursday 10/29/2020 16:35:24
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+#CRAVAT Report
+#Created at Thursday 10/29/2020 16:35:24
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s1
+2	s2
+3	s3
+4	s4
+5	s5
+6	s6
+#CRAVAT Report
+#Created at Thursday 10/29/2020 16:35:24
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
