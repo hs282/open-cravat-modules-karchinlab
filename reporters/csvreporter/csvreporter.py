@@ -127,6 +127,17 @@ class Reporter(CravatReport):
             return
         self.wf.write('#' + line + '\n')
 
+    def get_standardized_module_option (self, v):
+        tv = type(v)
+        if tv == str:
+            if ',' in v:
+                v = [val for val in v.split(',') if val != '']
+        if v == 'true':
+            v = True
+        elif v == 'false':
+            v = False
+        return v
+
 def main ():
     reporter = Reporter(sys.argv)
     reporter.run()
