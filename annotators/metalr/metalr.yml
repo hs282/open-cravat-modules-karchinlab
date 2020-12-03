@@ -34,7 +34,8 @@ output_columns:
 tags:
 - variant effect prediction
 title: MetaLR
-version: 1.0.2
+version: 1.0.3
 type: annotator
 release_note:
+  1.0.3: bugfix
   1.0.1: bugfix for variants without annotation
