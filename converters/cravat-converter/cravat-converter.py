@@ -71,6 +71,10 @@ class CravatConverter(BaseConverter):
     
     def check_format(self, f):
         format_correct = False
+        l = f.readline()
+        if '23and' in l or 'Ancestry' in l:
+            return False
+        f.seek(0)
         for l in f:
             if not(l.startswith('#')):
                 format_correct, _ = self._check_line(l)

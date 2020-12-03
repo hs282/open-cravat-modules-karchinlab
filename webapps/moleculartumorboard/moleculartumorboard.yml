@@ -1,5 +1,5 @@
 title: Molecular Tumor Board Variant Report
-version: 0.0.1
+version: 1.0.0
 type: webapp
 live_modules:
 - cancer_hotspots
@@ -148,6 +148,4 @@ release_note:
 tags:
 - webapp
 hidden: false
-requires_opencravat: '>=2.1.1'
-uselocalonstore: true
-private: true
+requires_opencravat: '>=2.1.2'

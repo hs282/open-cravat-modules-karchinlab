@@ -1,6 +1,6 @@
 title: dbSNP Converter
-version: 1.1.1
-datasource: '153'
+version: 1.2.0
+datasource: '154'
 type: converter
 description: Input converter for dbSNP rsid input
 developer:
@@ -15,5 +15,6 @@ requires_opencravat: '>=1.7.0'
 tags:
 - converters
 release_note:
+  1.2.0: data update to build 154
   1.1.1: comment lines return IGNORE.
   1.1.0: no-data line returns False

@@ -148,7 +148,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_driver');
     showWidget('driverpanel', ['base','cgc', 'cgl', 'chasmplus', 'cancer_hotspots', 'cosmic'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_protein');
-    showWidget('proteinpanel', ['base', 'lollipop'], 'variant', parentDiv);
+    showWidget('proteinpanel', ['base', 'lollipop2'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_structure');
     showWidget('structurepanel', ['base', 'mupit'], 'variant', parentDiv, null, 'unset', false);
     var parentDiv = document.querySelector('#contdiv_germline');
@@ -538,7 +538,7 @@ widgetGenerators['pharmgkb2'] = {
 widgetInfo['clinvar2'] = {'title': ''};
 widgetGenerators['clinvar2'] = {
     'variant': {
-        'width': 480, 
+        'width': 1100, 
         'height': 250, 
         'function': function (div, row, tabName) {
             var id = getWidgetData(tabName, 'clinvar', row, 'id');
@@ -548,27 +548,38 @@ widgetGenerators['clinvar2'] = {
             span.classList.add('detail-info-line-header');
             span.textContent = 'ClinVar significance: ';
             addEl(sdiv, span);
+            var ssdiv = getEl('div');
+            ssdiv.style.display = 'inline-block';
+            ssdiv.style.position = 'relative';
+            ssdiv.style.left = '6px';
             var span = getEl('span');
             span.classList.add('detail-info-line-content');
             span.textContent = sig;
-            addEl(sdiv, span);
-            addEl(sdiv, getTn('\xa0'));
-            //addInfoLine(div, 'Significance by ClinVar', sig, tabName);
-            //var link = '';
+            addEl(ssdiv, span);
+            addEl(ssdiv, getTn('\xa0'));
             if(id != null){
                 link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
                 var a = getEl('a');
                 a.href = link;
                 a.textContent = id;
                 sdiv.style.position = 'relative';
-                addEl(sdiv, getTn('(ID: '));
-                addEl(sdiv, a);
-                addEl(sdiv, getTn(')'));
-                addEl(div, sdiv);
-            } else {
-                //id = '';
+                addEl(ssdiv, getTn('(ID: '));
+                addEl(ssdiv, a);
+                addEl(ssdiv, getTn(')'));
             }
-            //addInfoLineLink(div, 'ClinVar ID', id, link, 10);
+            addEl(sdiv, ssdiv);
+            addEl(div, sdiv);
+            var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + id + '&retmode=json'
+            fetch(url).then(response=>{return response.json()}).then(response=>{
+                var trait_set = response['result'][id].trait_set;
+                var traitNames = [];
+                for (var i = 0; i < trait_set.length; i++) {
+                    traitNames.push(trait_set[i].trait_name);
+                }
+                traitNames.sort();
+                var traitNames = traitNames.join(', ');
+                addInfoLine(div, 'ClinVar conditions', traitNames, 'variant', 130);
+            });
         }
     }
 }
@@ -587,7 +598,27 @@ widgetGenerators['cosmic2'] = {
         'function': function (div, row, tabName) {
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
-                vcTissue = JSON.parse(vcTissue);
+                if (vcTissue.indexOf('(')) {
+                    var toks = vcTissue.split(';')
+                    var vcTissue = [];
+                    for (var i = 0; i < toks.length; i++) {
+                        var toks2 = toks[i].split('(')
+                        var tissue = toks2[0];
+                        var count = parseInt(toks2[1].split(')')[0]);
+                        vcTissue.push([tissue, count]);
+                    }
+                    for (var i = 0; i < vcTissue.length - 1; i++) {
+                        for (var j = i + 1; j < vcTissue.length; j++) {
+                            if (vcTissue[i][1] < vcTissue[j][1]) {
+                                var tmp = vcTissue[i];
+                                vcTissue[i] = vcTissue[j];
+                                vcTissue[j] = tmp;
+                            }
+                        }
+                    }
+                } else {
+                    vcTissue = JSON.parse(vcTissue);
+                }
                 var outTable = getEl('table');
                 var outTr = getEl('tr');
                 var outTd = getEl('td');
@@ -862,12 +893,12 @@ widgetGenerators['proteinpanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
-            var generator = widgetGenerators['lollipop']['variant'];
+            var generator = widgetGenerators['lollipop2']['variant'];
             generator['width'] = sectionWidth;
             generator['height'] = 200;
             generator['variables']['hugo'] = '';
             annotData['base']['numsample'] = 1;
-            var divs = showWidget('lollipop', ['base'], 'variant', div);
+            var divs = showWidget('lollipop2', ['base'], 'variant', div);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
@@ -980,7 +1011,9 @@ widgetGenerators['mupit2'] = {
             var chrom = getWidgetData(tabName, 'base', row, 'chrom');
             var pos = getWidgetData(tabName, 'base', row, 'pos');
             var url = location.protocol + '//www.cravat.us/MuPIT_Interactive/rest/showstructure/check?pos=' + chrom + ':' + pos;
+            //var url = 'mupit/rest/showstructure/check?pos=' + chrom + ':' + pos;
             var iframe = getEl('iframe');
+            iframe.setAttribute('crossorigin', 'anonymous');
             iframe.style.position = 'absolute';
             iframe.style.top = '15px';
             iframe.style.left = '0px';
@@ -991,6 +1024,7 @@ widgetGenerators['mupit2'] = {
             $.get(url).done(function (response) {
                 if (response.hit == true) {
                     iframe.src = location.protocol + '//www.cravat.us/MuPIT_Interactive?gm=' + chrom + ':' + pos + '&embed=true';
+                    //iframe.src = 'mupit/?gm=' + chrom + ':' + pos + '&embed=true';
                 } else {
                     iframe.parentElement.removeChild(iframe);
                     var sdiv = getEl('div');

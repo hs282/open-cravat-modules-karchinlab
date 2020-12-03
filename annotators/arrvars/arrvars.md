@@ -23,11 +23,7 @@ This dataset was updated with papers published through January 2020. The descrip
 
 ## Calculating Penetrance
 
-In this work, penetrance is an estimate of the probability for long QT diagnosis for each variant using a Bayesian method that integrates together patient data and variant features (changes in variant function, protein structure, and in silico predictions).
+In this work, penetrance is an estimate of the probability for long QT diagnosis for each variant using a Bayesian method that integrates together patient data and variant features (changes in variant function, protein structure, and in silico predictions). More information at https://oates.app.vumc.org/vancart/SCN5A/SCN5A-report.html and https://oates.app.vumc.org/vancart/KCNH2/KCNH2-report.html. 
 
-## Automated Patch Clamp Data
-
-We have recently published an automated patch clamp study of >80 SCN5A variants (Glazer et al, American Journal of Human Genetics, 2020). This is a promising method for rapidly collecting in vitro functional data and reclassifying variants of uncertain significance. The full automated patch clamp dataset is available here [https://ars.els-cdn.com/content/image/1-s2.0-S0002929720301622-mmc2.csv] and has been integrated into the dataset on this website.
-
-Information from https://oates.app.vumc.org/vancart/SCN5A/about.php
+Information from https://oates.app.vumc.org/vancart/SCN5A/about.php and
 

@@ -1,10 +1,10 @@
 title: RData Format Reporter for Genesis
-version: 0.0.8
+version: 0.0.11
 type: reporter
 description: RData format file is generated from a result database. For use with Genesis.
 requires_opencravat: '>=2.1.0'
 output_filename_schema:
-- '{run_name}.cfgenesis.RData'
+- '{run_name}.cfgenesis.variant.RData'
 developer:
   name: Rick Kim
   organization: In Silico Solutions
