@@ -1,69 +1,44 @@
-#CRAVAT Report
-#Created at Tuesday 03/26/2019 15:36:16
-#Report level: variant
-#
-Variant Annotation												dbSNP	Tag Sampler		
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	rsID	Number of Samples	Samples	Tags
-1	chr1	22586480	C	A		Yes	EPHA8	ENST00000166244.7	missense	A275D	ENST00000166244.7:EPHA8:P29322:missense:A275D:C824A; ENST00000374644.8:EPHA8:(na):missense:A275D:C824A; ENST00000538803.1:EPHA8:(na):missense:A275D:C824A	rs754009354	0		plus_SBS_EPHA8
-2	chr17	31327741	-	C		Yes	NF1	ENST00000358273.8	frameshift insertion	_1837_	ENST00000356175.7:NF1:(na):frameshift insertion:_1816_:-5448C; ENST00000358273.8:NF1:P21359:frameshift insertion:_1837_:-5511C	rs267606596	0		plus_ins_NF1
-3	chr7	55181320	-	GGGTTG		Yes	EGFR	ENST00000275493.6	inframe insertion	_771_	ENST00000275493.6:EGFR:P00533:inframe insertion:_771_:-2311GGGTTG; ENST00000442591.5:EGFR:A0A0B4J1Y5:intron:(na):(na); ENST00000454757.6:EGFR:E9PFD7:inframe insertion:_726_:-2176GGGTTG; ENST00000455089.5:EGFR:Q504U8:inframe insertion:_726_:-2176GGGTTG	rs397517111	0		plus_ins_EGFR
-4	chr4	1801942	C	-		Yes	FGFR3	ENST00000440486.6	frameshift deletion	_283_	ENST00000260795.6:FGFR3:P22607:frameshift deletion:_283_:C847-; ENST00000340107.8:FGFR3:(na):frameshift deletion:_283_:C847-; ENST00000352904.5:FGFR3:(na):frameshift deletion:_283_:C847-; ENST00000412135.6:FGFR3:(na):frameshift deletion:_283_:C847-; ENST00000440486.6:FGFR3:P22607:frameshift deletion:_283_:C847-; ENST00000481110.6:FGFR3:F8W9L4:frameshift deletion:_283_:C847-; ENST00000613647.4:FGFR3:I6LM06:frameshift deletion:_283_:C847-	rs587776836	0		plus_del_FGFR3
-5	chr10	87864485	AA	-		Yes	PTEN	ENST00000371953.7	frameshift deletion	_6_	ENST00000371953.7:PTEN:P60484:frameshift deletion:_6_:AA16-; ENST00000445946.3:KLLN:B2CW77:2kb upstream:(na):(na); ENST00000610634.1:PTEN:A0A087WT17:5-prime utr:(na):(na)	rs121913290	0		plus_del_PTEN
-6	chr7	140753351	A	G		Yes	BRAF	ENST00000288602.10	missense	F595S	ENST00000288602.10:BRAF:P15056:missense:F595S:T1784C	rs121913225	0		minus_SBS_BRAF
-7	chr15	45363948	-	T		Yes	GATM	ENST00000396659.7	frameshift insertion	_371_	ENST00000396659.7:GATM:P50440:frameshift insertion:_371_:-1112A; ENST00000558336.5:GATM:(na):frameshift insertion:_371_:-1112A	rs397515542	0		minus_ins_GATM
-8	chr17	7675097	-	ACCTC		Yes	TP53	ENST00000445888.6	frameshift insertion	_172_	ENST00000269305.8:TP53:P04637:frameshift insertion:_172_:-516GAGGT; ENST00000359597.8:TP53:J3KP33:frameshift insertion:_172_:-516GAGGT; ENST00000413465.6:TP53:E7EQX7:frameshift insertion:_172_:-516GAGGT; ENST00000420246.6:TP53:(na):frameshift insertion:_172_:-516GAGGT; ENST00000445888.6:TP53:P04637:frameshift insertion:_172_:-516GAGGT; ENST00000455263.6:TP53:(na):frameshift insertion:_172_:-516GAGGT; ENST00000504290.5:TP53:(na):frameshift insertion:_40_:-120GAGGT; ENST00000504937.5:TP53:(na):frameshift insertion:_40_:-120GAGGT; ENST00000510385.5:TP53:(na):frameshift insertion:_40_:-120GAGGT; ENST00000610292.4:TP53:(na):frameshift insertion:_133_:-399GAGGT; ENST00000610538.4:TP53:(na):frameshift insertion:_133_:-399GAGGT; ENST00000610623.4:TP53:A0A087WT22:frameshift insertion:_13_:-39GAGGT; ENST00000615910.4:TP53:A0A087WZU8:frameshift insertion:_161_:-483GAGGT; ENST00000617185.4:TP53:(na):frameshift insertion:_172_:-516GAGGT; ENST00000618944.4:TP53:A0A087WXZ1:frameshift insertion:_13_:-39GAGGT; ENST00000619186.4:TP53:A0A087X1Q1:frameshift insertion:_13_:-39GAGGT; ENST00000619485.4:TP53:(na):frameshift insertion:_133_:-399GAGGT; ENST00000620739.4:TP53:(na):frameshift insertion:_133_:-399GAGGT; ENST00000622645.4:TP53:(na):frameshift insertion:_133_:-399GAGGT	rs786202514	0		minus_ins_TP53
-9	chr12	25227263	A	-		Yes	KRAS	ENST00000256078.8	frameshift deletion	_87_	ENST00000256078.8:KRAS:P01116:frameshift deletion:_87_:T261-; ENST00000311936.7:KRAS:(na):frameshift deletion:_87_:T261-; ENST00000557334.5:KRAS:G3V5T7:intron:(na):(na)	rs397517038	0		minus_del_KRAS
-10	chr17	7675153	GGGCGGGGGT	-		Yes	TP53	ENST00000445888.6	frameshift deletion	_150_	ENST00000269305.8:TP53:P04637:frameshift deletion:_150_:ACCCCCGCCC450-; ENST00000359597.8:TP53:J3KP33:frameshift deletion:_150_:ACCCCCGCCC450-; ENST00000413465.6:TP53:E7EQX7:frameshift deletion:_150_:ACCCCCGCCC450-; ENST00000420246.6:TP53:(na):frameshift deletion:_150_:ACCCCCGCCC450-; ENST00000445888.6:TP53:P04637:frameshift deletion:_150_:ACCCCCGCCC450-; ENST00000455263.6:TP53:(na):frameshift deletion:_150_:ACCCCCGCCC450-; ENST00000504290.5:TP53:(na):frameshift deletion:_18_:ACCCCCGCCC54-; ENST00000504937.5:TP53:(na):frameshift deletion:_18_:ACCCCCGCCC54-; ENST00000510385.5:TP53:(na):frameshift deletion:_18_:ACCCCCGCCC54-; ENST00000610292.4:TP53:(na):frameshift deletion:_111_:ACCCCCGCCC333-; ENST00000610538.4:TP53:(na):frameshift deletion:_111_:ACCCCCGCCC333-; ENST00000610623.4:TP53:A0A087WT22:5-prime utr:(na):(na); ENST00000615910.4:TP53:A0A087WZU8:frameshift deletion:_139_:ACCCCCGCCC417-; ENST00000617185.4:TP53:(na):frameshift deletion:_150_:ACCCCCGCCC450-; ENST00000618944.4:TP53:A0A087WXZ1:5-prime utr:(na):(na); ENST00000619186.4:TP53:A0A087X1Q1:5-prime utr:(na):(na); ENST00000619485.4:TP53:(na):frameshift deletion:_111_:ACCCCCGCCC333-; ENST00000620739.4:TP53:(na):frameshift deletion:_111_:ACCCCCGCCC333-; ENST00000622645.4:TP53:(na):frameshift deletion:_111_:ACCCCCGCCC333-	rs137852791	0		minus_del_TP53
-11	chr17	31327741	-	T		Yes	NF1	ENST00000358273.8	frameshift insertion	_1837_	ENST00000356175.7:NF1:(na):frameshift insertion:_1816_:-5448T; ENST00000358273.8:NF1:P21359:frameshift insertion:_1837_:-5511T		0		fuzzy_ins_NF1
-12	chr10	87864486	A	-		Yes	PTEN	ENST00000371953.7	frameshift deletion	_6_	ENST00000371953.7:PTEN:P60484:frameshift deletion:_6_:A17-; ENST00000445946.3:KLLN:B2CW77:2kb upstream:(na):(na); ENST00000610634.1:PTEN:A0A087WT17:5-prime utr:(na):(na)		0		fuzzy_del_PTEN
-#CRAVAT Report
-#Created at Tuesday 03/26/2019 15:36:16
-#Report level: gene
-#
-Variant Annotation				
-Hugo	Variants in Gene	Sequence Ontology	All Sequence Ontologies	Note
-EPHA8	1	missense	missense(1)	
-NF1	2	frameshift insertion	frameshift insertion(2)	
-EGFR	1	inframe insertion	inframe insertion(1)	
-FGFR3	1	frameshift deletion	frameshift deletion(1)	
-PTEN	2	frameshift deletion	frameshift deletion(2)	
-BRAF	1	missense	missense(1)	
-GATM	1	frameshift insertion	frameshift insertion(1)	
-TP53	2	frameshift insertion	frameshift insertion(1),frameshift deletion(1)	
-KRAS	1	frameshift deletion	frameshift deletion(1)	
-#CRAVAT Report
-#Created at Tuesday 03/26/2019 15:36:16
-#Report level: sample
-#
-Variant Annotation	
-UID	Sample
-1	
-2	
-3	
-4	
-5	
-6	
-7	
-8	
-9	
-10	
-11	
-12	
-#CRAVAT Report
-#Created at Tuesday 03/26/2019 15:36:16
-#Report level: mapping
-#
-Variant Annotation		
-Original Line	User Tags	UID
-2	plus_SBS_EPHA8	1
-3	plus_ins_NF1	2
-4	plus_ins_EGFR	3
-5	plus_del_FGFR3	4
-6	plus_del_PTEN	5
-7	minus_SBS_BRAF	6
-8	minus_ins_GATM	7
-9	minus_ins_TP53	8
-10	minus_del_KRAS	9
-11	minus_del_TP53	10
-12	fuzzy_ins_NF1	11
-13	fuzzy_del_PTEN	12
+2020/10/29 17:50:15 cravat               /Library/Frameworks/Python.framework/Versions/3.8/bin/oc run -l hg38 inputcopy -a dbsnp -t text
+2020/10/29 17:50:15 cravat               started: Thu Oct 29 17:50:15 2020
+2020/10/29 17:50:15 cravat               conf file: None
+2020/10/29 17:50:15 cravat               input files: /Users/madisonlarsen/insilico/jobs/dbsnp_common/inputcopy
+2020/10/29 17:50:15 cravat               input assembly: hg38
+2020/10/29 17:50:15 cravat.converter     started: Thu Oct 29 17:50:15 2020
+2020/10/29 17:50:15 cravat.converter     Input file(s): /Users/madisonlarsen/insilico/jobs/dbsnp_common/inputcopy
+2020/10/29 17:50:16 cravat.converter     input format: cravat
+2020/10/29 17:50:16 cravat.converter     error lines: 0
+2020/10/29 17:50:16 cravat.converter     finished: Thu Oct 29 17:50:16 2020
+2020/10/29 17:50:16 cravat.converter     num input lines: 6
+2020/10/29 17:50:16 cravat.converter     runtime: 0.001
+2020/10/29 17:50:16 cravat               num_workers: 11
+2020/10/29 17:50:16 cravat               input line chunksize=1 total number of input lines=6 number of chunks=7
+2020/10/29 17:50:19 cravat               num_workers: 11
+2020/10/29 17:50:21 cravat.aggregator    level: variant
+2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
+2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    runtime: 0.005
+2020/10/29 17:50:21 cravat.aggregator    level: gene
+2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
+2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    runtime: 0.002
+2020/10/29 17:50:21 cravat.aggregator    level: sample
+2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
+2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    runtime: 0.003
+2020/10/29 17:50:21 cravat.aggregator    level: mapping
+2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
+2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.aggregator    runtime: 0.003
+2020/10/29 17:50:21 cravat.tagsampler    started: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.tagsampler    finished: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.tagsampler    runtime: 0.005
+2020/10/29 17:50:21 cravat.textreporter  started: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.mapper        input file: /Users/madisonlarsen/insilico/jobs/dbsnp_common/__dummy__
+2020/10/29 17:50:21 cravat.textreporter  finished: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat.textreporter  runtime: 0.063
+2020/10/29 17:50:21 cravat               finished: Thu Oct 29 17:50:21 2020
+2020/10/29 17:50:21 cravat               runtime: 6.769s

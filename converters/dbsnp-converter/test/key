@@ -1,31 +1,27 @@
 #CRAVAT Report
-#Created at Thursday 08/27/2020 02:49:13
+#Created at Wednesday 12/02/2020 16:52:54
 #Report level: variant
 #
-Variant Annotation															
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags
-1	chr7	117587778	G	A		Yes	CFTR	ENST00000003084.11	missense_variant	c.1624G>A	p.Gly542Arg	ENST00000003084.11:CFTR:P13569:missense_variant:p.Gly542Arg:c.1624G>A; ENST00000472848.1:CFTR::2kb_downstream_variant,processed_transcript::; ENST00000647978.1:CFTR::NMD_transcript_variant,3_prime_UTR_variant::c.*1338G>A; ENST00000648260.1:CFTR::intron_variant::c.1402-15048G>A; ENST00000649406.1:CFTR::missense_variant:p.Gly481Arg:c.1441G>A; ENST00000649781.1:CFTR:P13569:missense_variant:p.Gly481Arg:c.1441G>A	1	s01	cystic_fibrosis
-2	chr7	117587778	G	T		Yes	CFTR	ENST00000003084.11	stop_gained	c.1624G>T	p.Gly542Ter	ENST00000003084.11:CFTR:P13569:stop_gained:p.Gly542Ter:c.1624G>T; ENST00000472848.1:CFTR::2kb_downstream_variant,processed_transcript::; ENST00000647978.1:CFTR::NMD_transcript_variant,3_prime_UTR_variant::c.*1338G>T; ENST00000648260.1:CFTR::intron_variant::c.1402-15048G>T; ENST00000649406.1:CFTR::stop_gained:p.Gly481Ter:c.1441G>T; ENST00000649781.1:CFTR:P13569:stop_gained:p.Gly481Ter:c.1441G>T	1	s01	cystic_fibrosis
+Variant Annotation																hg19 coordinates		Arrhythmia Channelopathy Variants										CIViC				COSMIC					COSMIC Gene		Cancer Gene Landscape	Cancer Hotspots	Candidate cis-Regulatory Elements by ENCODE (SCREEN)				CardioBoost				ClinGen Gene				ClinVar					Gene Ontology				InterPro			LitVar	MaveDB			MuPIT		MutPred					MutPred-Indel			OMIM	Open Regulatory Annotation Database (ORegAnno)				PangaloDB								REVEL				Segway Brain									SpliceAI								Swiss-Prot PTM				Swissprot Topological Domains				Trinity CTAT	VEST4					dbSNP	dbSNP Common	miRBase			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Chrom	Position	LQT	BrS	unaffected	other	BrS Penetrance	LQT Penetrance	Function	BrS Hotspot	LQT Hotspot	More Information	Description	Clinical actionability score	Diseases	ID	ID	Variant Count (Tissue)	Variant Count	Transcript	Protein Change	Occurrences	Tissue count	Class	Cancer Types	ENCODE Accession ID	cCRE Accession ID	Classification	CTCF Bound	Cardiomyopathy Score	Cardiomyopathy Class	Arrhythmia Score	Arrhythmia Class	Disease	ID	Classification	Link	Clinical Significance	Disease Ref Nums	Disease Names	Review Status	ClinVar ID	Biological Process	Cellular Component	Molecular Function	All Annotations	Domain	UniProt Accession Number	Ensembl Transcript ID	rsID	Score	MaveVis	Score Set	Link	Hugo	Uniprot	Variant	Score	Top 5 molecular mechanisms	Rank Score	Score	Rank score	Property	Entry ID	Oreg ID	Outcome	Types	All Annotations	Cell Type	Ubiquitousness Index	Description	Germ Layer	Organ	Sensitivity	Specificity	All Annotations	Transcript ID	Score	Rank Score	All Annotations	Brain Angular Gyrus	Brain Anterior Caudate	Brain Cingulate Gyrus	Brain Hippocampus Middle	Brain Inferior Temporal Lobe	Brain Mid Frontal Lobe	Brain Substantia Nigra	Fetal Brain Female	Fetal Brain Male	Acceptor Gain Score	Acceptor Loss Score	Donor Gain Score	Donor Loss Score	Acceptor Gain Position	Acceptor Loss Position	Donor Gain Position	Donor Loss Posiiton	UniProtKB Accession Number	Modification	Additional Information	Pubmed	UniProtKB Accession Number	Topological Domain	PubMed	All Annotations	RNA Editing Database	Score Transcript	Score	P-value	All transcripts	HUGO	rsID	rsID	Transcript	Accession ID	Name	Derives From
+1	chr1	10002	A	C									1	s01	cystic_fibrosis	chr1	10002																																																															OREG1491117		transcription factor binding site	"[[\"OREG1491117\", \"\", \"transcription factor binding site\"]]"																																												rs1570391692					
 #CRAVAT Report
-#Created at Thursday 08/27/2020 02:49:13
+#Created at Wednesday 12/02/2020 16:52:54
 #Report level: gene
 #
-Variant Annotation					
-Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
-CFTR		2	0	stop_gained	intron_variant(2),missense_variant(1),NMD_transcript_variant(2),processed_transcript(2),stop_gained(1),3_prime_UTR_variant(2)
+Variant Annotation						COSMIC Gene		Cancer Gene Landscape	ClinGen Gene				Gene Ontology				InterPro	MuPIT	PangaloDB								VEST4		
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies	Occurrences	Tissue count	Class	Disease	ID	Classification	Link	Biological Process	Cellular Component	Molecular Function	All Annotations	Domain	Link	Cell Type	Ubiquitousness Index	Description	Germ Layer	Organ	Sensitivity	Specificity	All Annotations	Max Score	Mean Score	Gene p-value
 #CRAVAT Report
-#Created at Thursday 08/27/2020 02:49:13
+#Created at Wednesday 12/02/2020 16:52:54
 #Report level: sample
 #
 Variant Annotation	
 UID	Sample
 1	s01
-2	s01
 #CRAVAT Report
-#Created at Thursday 08/27/2020 02:49:13
+#Created at Wednesday 12/02/2020 16:52:54
 #Report level: mapping
 #
 Variant Annotation			
 Original Line	User Tags	UID	Input File Number
 2	cystic_fibrosis	1	0
-2	cystic_fibrosis	2	0
