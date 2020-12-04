@@ -169,7 +169,15 @@ class CravatConverter(BaseConverter):
                     if wdict['alt_base'] == '*':
                         continue
                     wdict['sample_id'] = call.sample
-                    wdict['zygosity'] = 'het' if call.is_het else 'hom'
+                    if call.is_het == True:
+                        wdict['zygosity'] = 'het'
+                    elif call.is_het == False:
+                        wdict['zygosity'] = 'hom'
+                    elif call.is_het is None:
+                        wdict['zygosity'] = None
+                    else:
+                        wdict['zygosity'] = None
+                    # wdict['zygosity'] = 'het' if call.is_het else 'hom'
                     wdict['tot_reads'], wdict['alt_reads'], wdict['af'] = self.extract_read_info(call, gt)
                     wdict['hap_block'] = None #TODO
                     wdict['hap_strand'] = None #TODO
