@@ -148,4 +148,4 @@ release_note:
 tags:
 - webapp
 hidden: false
-requires_opencravat: '>=2.1.2'
+requires_opencravat: '>=2.1.3'
