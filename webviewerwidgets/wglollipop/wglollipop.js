@@ -1466,6 +1466,7 @@ widgetGenerators['lollipop'] = {
                 table.className = 'lollipop_gene_varianttable';
                 table.style.width = '300px';
                 table.style.fontSize = '10px';
+                table.style.tableLayout = 'fixed';
                 addEl(div, table);
                 var thead = getEl('thead');
                 var tr = getEl('tr');
