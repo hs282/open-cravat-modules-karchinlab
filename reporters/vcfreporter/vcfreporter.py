@@ -15,6 +15,7 @@ class Reporter(CravatReport):
         self.wf = None
         self.filename = None
         self.filename_prefix = None
+        self.levels_to_write = ['variant']
         if self.savepath == None:
             self.filename_prefix = 'cravat_result'
         else:
@@ -75,6 +76,22 @@ class Reporter(CravatReport):
             self.wf.close()
         if level != 'variant':
             return
+        if 'base__samples' not in self.colnames_to_display[level]:
+            newcolnames_to_display = []
+            newcolnos_to_display = []
+            cols = self.colinfo[level]['columns']
+            for i in range(len(cols)):
+                col = cols[i]
+                colname = col['col_name']
+                if colname in self.colnames_to_display[level]:
+                    newcolnames_to_display.append(colname)
+                    newcolnos_to_display.append(i)
+                elif colname == 'base__samples':
+                    newcolnames_to_display.append(colname)
+                    newcolnos_to_display.append(i)
+            self.colnames_to_display[level] = newcolnames_to_display
+            self.colnos_to_display[level] = newcolnos_to_display
+        self.extracted_cols[level] = self.get_extracted_header_columns(level)
         self.wf = open(self.filename, 'w', encoding='utf-8', newline='')
         lines = ['#fileformat=VCFv4.2',
             '#OpenCRAVATFileDate=' + datetime.datetime.now().strftime('%Y%m%d'),
@@ -140,7 +157,8 @@ class Reporter(CravatReport):
         self.output_candidate = {}
         self.col_names = []
         if self.info_type == 'separate':
-            for column in self.colinfo[self.level]['columns']:
+            for column in self.extracted_cols[level]:
+            #for column in self.colinfo[self.level]['columns']:
                 col_name = column['col_name']
                 col_type = column['col_type'].capitalize()
                 col_desc = column['col_desc']
@@ -163,7 +181,8 @@ class Reporter(CravatReport):
             line = '#INFO=<ID={},Number=.,Type=String,Description="OpenCRAVAT annotation. Format: '.format(self.info_fieldname_prefix)
             columns_to_add = []
             desc = []
-            for column in self.colinfo[self.level]['columns']:
+            for column in self.extracted_cols[level]:
+            #for column in self.colinfo[self.level]['columns']:
                 col_name = column['col_name']
                 col_desc = column['col_desc']
                 if col_name in ['base__uid', 'base__chrom', 'base__pos', 'base__ref_base', 'base__alt_base']:
@@ -186,7 +205,8 @@ class Reporter(CravatReport):
     def write_table_row (self, row):
         if self.level != 'variant':
             return
-        columns = self.colinfo[self.level]['columns']
+        #columns = self.colinfo[self.level]['columns']
+        columns = self.extracted_cols[self.level]
         row = list(row)
         writerow = []
         info = []

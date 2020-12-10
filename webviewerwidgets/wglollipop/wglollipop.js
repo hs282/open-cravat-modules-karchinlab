@@ -1466,6 +1466,7 @@ widgetGenerators['lollipop'] = {
                 table.className = 'lollipop_gene_varianttable';
                 table.style.width = '300px';
                 table.style.fontSize = '10px';
+                table.style.tableLayout = 'fixed';
                 addEl(div, table);
                 var thead = getEl('thead');
                 var tr = getEl('tr');
@@ -1511,6 +1512,7 @@ widgetGenerators['lollipop'] = {
                     tr = getEl('tr');
                     td = getEl('td');
                     td.style.cursor = 'default';
+                    td.style.textAlign = 'center';
                     td.addEventListener('mouseover', function (evt) {
                         var aachange = evt.target.textContent;
                         var circles = $('circle.lollipop_gene[aachange="' + aachange + '"]');
@@ -1531,9 +1533,11 @@ widgetGenerators['lollipop'] = {
                     addEl(td, getTn(variant.achange));
                     addEl(tr, td);
                     td = getEl('td');
+                    td.style.textAlign = 'center';
                     addEl(td, getTn(variant.so));
                     addEl(tr, td);
                     td = getEl('td');
+                    td.style.textAlign = 'center';
                     addEl(td, getTn(variant.count));
                     addEl(tr, td);
                     addEl(tbody, tr);

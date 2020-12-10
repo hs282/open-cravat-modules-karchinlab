@@ -1,4 +1,4 @@
-datasource: v151
+datasource: v154
 description: Comprehensive database of both single base nucleotide subsitutions and
   short deletion and insertion polymorphisms
 developer:
@@ -12,7 +12,7 @@ developer:
 input_format: crv
 level: variant
 output_columns:
-- name: snp
+- name: rsid
   title: rsID
   type: string
   link_format: https://www.ncbi.nlm.nih.gov/snp/${.*}
@@ -21,7 +21,9 @@ tags:
 - literature
 title: dbSNP
 type: annotator
-version: 151.0.9
+version: 154.0.0
+release_note:
+  154.0.0: data update to build 154
 requires_opencravat: '>=1.4.0'
 requires:
 - wgdbsnp

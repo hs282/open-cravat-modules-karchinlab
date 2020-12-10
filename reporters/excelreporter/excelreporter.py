@@ -30,11 +30,20 @@ class Reporter(CravatReport):
         self.boldfont.set_bold()
         self.boldfont.set_font_size(14)
         self.write_info_sheet()
-        
+        self.levels_to_write = self.get_standardized_module_option(self.confs.get('pages', 'variant,gene,sample,mapping'))
+
     def end (self):
         self.wb.close()
         return self.savepath
-    
+
+    def should_write_level (self, level):
+        if self.levels_to_write is None:
+            return True
+        elif level in self.levels_to_write:
+            return True
+        else:
+            return False
+
     def write_info_sheet (self):
         self.rowno = 0
         self.ws = self.wb.add_worksheet('Info')
@@ -47,51 +56,66 @@ class Reporter(CravatReport):
         for i in range(len(lines)):
             self.ws.write(self.rowno, self.colno, lines[i])
             self.rowno += 1
-            
+
     def get_cell_coordinate (self):
         return get_column_letter(self.colno) + str(self.rowno)
-    
+
     def get_cell (self):
         return self.ws.cell(row=self.rowno, column=self.colno)
-    
+
     def write_preface (self, level):
         self.ws = self.wb.add_worksheet(level[0].upper() + level[1:])
         self.sheetno += 1
         self.rowno = 0
         self.colno = 0
-        self.ws.freeze_panes(2, 1)
-   
+        self.ws.freeze_panes(2, 0)
+
     def write_header (self, level):
         self.colno = 0
-        self.lastcols = []
         groupno = 0
         self.graycols = []
+        coltitles = []
+        lastcolno = 0
         for colgroup in self.colinfo[level]['colgroups']:
             count = colgroup['count']
             if count == 0:
                 continue
-            groupno += 1
-            displayname = colgroup['displayname']
-            lastcol = colgroup['lastcol']
-            lastcolno = self.colno + count - 1
-            if count > 1:
-                self.ws.merge_range(self.rowno, self.colno, self.rowno, lastcolno, displayname)
-            else:
-                self.ws.write(self.rowno, self.colno, displayname)
-            if groupno % 2 == 0:
-                self.ws.set_column(self.colno, lastcolno - 1, None, self.grayfill)
-                self.ws.set_column(lastcolno, lastcolno, None, self.grayright)
-            else:
-                self.ws.set_column(lastcolno, lastcolno, None, self.rightborder)
-            self.colno += count
-            self.lastcols.append(lastcol)
+            count = 0
+            colgrp_name = colgroup['name']
+            for col in self.colinfo[level]['columns']:
+                module_col_name = col['col_name']
+                [module_name, col_name] = module_col_name.split('__')
+                incl = False
+                if module_name == colgrp_name:
+                    if self.display_select_columns[level]:
+                        if module_col_name in self.colnames_to_display[level]:
+                            incl = True
+                    else:
+                        incl = True
+                if incl:
+                    count += 1
+                    coltitles.append(col['col_title'])
+            if count > 0:
+                displayname = colgroup['displayname']
+                lastcolno = self.colno + count - 1
+                if count > 1:
+                    self.ws.merge_range(self.rowno, self.colno, self.rowno, lastcolno, displayname)
+                else:
+                    self.ws.write(self.rowno, self.colno, displayname)
+                groupno += 1
+                if groupno % 2 == 0:
+                    self.ws.set_column(self.colno, lastcolno, None, self.grayfill)
+                    self.ws.set_column(lastcolno, lastcolno, None, self.grayright)
+                else:
+                    self.ws.set_column(lastcolno, lastcolno, None, self.rightborder)
+                self.colno += count
         self.rowno += 1
         self.colno = 0
-        for column in self.colinfo[level]['columns']:
-            self.ws.write(self.rowno, self.colno, column['col_title'])
+        for coltitle in coltitles:
+            self.ws.write(self.rowno, self.colno, coltitle)
             self.colno += 1
         self.rowno += 1
-        
+
     def write_table_row (self, row):
         row = [v if v != None else '' for v in list(row)]
         self.colno = 0
@@ -113,6 +137,6 @@ class Reporter(CravatReport):
 def main ():
     r = Reporter(sys.argv)
     r.run()
-    
+
 if __name__ == '__main__':
     main()

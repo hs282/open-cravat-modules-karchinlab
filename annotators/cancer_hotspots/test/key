@@ -1,26 +1,27 @@
 #CRAVAT Report
-#Created at Thursday 07/30/2020 11:22:56
+#Created at Tuesday 11/10/2020 17:45:53
 #Report level: variant
 #
-Variant Annotation																Cancer Hotspots	VEST4				
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Cancer Types	Score Transcript	Score	P-value	All transcripts	HUGO
-1	chr3	41266113	C	T			ULK4	ENST00000301831.9	intron_variant	c.3679-16539G>A		ENST00000301831.9:ULK4:Q96C45:intron_variant::c.3679-16539G>A; ENST00000489118.1:ULK4::intron_variant,processed_transcript::	1	s0		lung:16; uterus:11; esophagusstomach:8; bladder:4; cnsbrain:3; liver:3; bowel:2; pancreas:2; prostate:2; cervix:1; headandneck:1; ovaryfallopiantube:1; unk:1					
-2	chr9	21971120	G	A		Yes	CDKN2A	ENST00000498124.1	missense_variant	c.239C>T	p.Arg80Leu	ENST00000304494.9:CDKN2A:P42771:missense_variant:p.Arg80Leu:c.239C>T; ENST00000380150.2:CDKN2A::processed_transcript::; ENST00000380151.3:CDKN2A:P42771:NMD_transcript_variant,3_prime_UTR_variant::c.*162C>T; ENST00000404796.3:AL359922.1::intron_variant,NMD_transcript_variant::c.348-58313G>A; ENST00000479692.2:CDKN2A::missense_variant:p.Arg29Leu:c.86C>T; ENST00000494262.5:CDKN2A:P42771:missense_variant:p.Arg29Leu:c.86C>T; ENST00000497750.1:CDKN2A::missense_variant:p.Arg29Leu:c.86C>T; ENST00000498124.1:CDKN2A:P42771:missense_variant:p.Arg80Leu:c.239C>T; ENST00000498628.6:CDKN2A:P42771:missense_variant:p.Arg29Leu:c.86C>T; ENST00000530628.2:CDKN2A:Q8N726:synonymous_variant:p.Pro94=:c.282C>T; ENST00000577854.1:CDKN2A::2kb_upstream_variant,processed_transcript::; ENST00000578845.2:CDKN2A:P42771:missense_variant:p.Arg29Leu:c.86C>T; ENST00000579122.1:CDKN2A::missense_variant:p.Arg80Leu:c.239C>T; ENST00000579755.1:CDKN2A:Q8N726:synonymous_variant:p.Pro94=:c.282C>T	1	s1		headandneck:26; skin:17; pancreas:12; lung:11; esophagusstomach:9; bladder:5; bowel:5; unk:3; kidney:2; uterus:2; biliarytract:1; cnsbrain:1; lymph:1; prostate:1; thymus:1					
-3	chr17	7577121	G	A		Yes	EIF4A1	ENST00000293831.13	missense_variant	c.580G>A	p.Asp194Asn	ENST00000293831.13:EIF4A1:P60842:missense_variant:p.Asp194Asn:c.580G>A; ENST00000384423.1:SNORA67::2kb_upstream_variant,snoRNA::; ENST00000459579.1:SNORD10::2kb_downstream_variant,snoRNA::; ENST00000577269.5:EIF4A1:P60842:missense_variant:p.Asp194Asn:c.580G>A; ENST00000578476.5:EIF4A1::2kb_downstream_variant,NMD_transcript_variant::c.*866G>A; ENST00000579139.1:EIF4A1::2kb_downstream_variant,NMD_transcript_variant::c.*2096G>A; ENST00000580461.5:EIF4A1::2kb_downstream_variant,NMD_transcript_variant::c.*2131G>A; ENST00000580888.5:EIF4A1::2kb_downstream_variant,NMD_transcript_variant::c.*503G>A; ENST00000581544.5:EIF4A1::NMD_transcript_variant,3_prime_UTR_variant::c.*152G>A; ENST00000581621.1:AC016876.3::lnc_RNA::; ENST00000581808.1:EIF4A1::2kb_upstream_variant,processed_transcript::; ENST00000582746.5:EIF4A1::missense_variant:p.Asp194Asn:c.580G>A	1	s2		cnsbrain:81; bowel:48; esophagusstomach:36; breast:17; ovaryfallopiantube:15; headandneck:14; lung:14; prostate:14; uterus:11; pancreas:7; bladder:6; bone:3; kidney:3; lymph:3; blood:2; softtissue:2; thyroid:2; adrenalgland:1; liver:1; skin:1; thymus:1; unk:1					
-4	chr16	3788618	G	A			CREBBP	ENST00000262367.10	intron_variant	c.1330+3363C>T		ENST00000262367.10:CREBBP:Q92793:intron_variant::c.1330+3363C>T; ENST00000382070.7:CREBBP:Q92793:intron_variant::c.1216+4768C>T; ENST00000635753.1:CREBBP::intron_variant,processed_transcript::	1	s3		headandneck:3; cervix:2; lung:2; lymph:2; skin:2; bladder:1; bowel:1; cnsbrain:1					
-5	chr17	7577534	C	A			EIF4A1	ENST00000293831.13	intron_variant	c.769-35C>A		ENST00000293831.13:EIF4A1:P60842:intron_variant::c.769-35C>A; ENST00000380498.10:CD68:P34810:2kb_upstream_variant::c.-2144C>A; ENST00000384423.1:SNORA67::2kb_upstream_variant,snoRNA::; ENST00000459579.1:SNORD10::2kb_downstream_variant,snoRNA::; ENST00000577269.5:EIF4A1:P60842:intron_variant::c.769-35C>A; ENST00000578476.5:EIF4A1::2kb_downstream_variant,NMD_transcript_variant::c.*1279C>A; ENST00000580461.5:EIF4A1::2kb_downstream_variant,NMD_transcript_variant::c.*2544C>A; ENST00000580888.5:EIF4A1::2kb_downstream_variant,NMD_transcript_variant::c.*916C>A; ENST00000581544.5:EIF4A1::intron_variant,NMD_transcript_variant::c.*341-35C>A; ENST00000581621.1:AC016876.3::intron_variant,lnc_RNA::; ENST00000581808.1:EIF4A1::2kb_upstream_variant,processed_transcript::; ENST00000582746.5:EIF4A1::intron_variant::c.769-35C>A	1	s4		liver:12; lung:12; breast:3; headandneck:3; bladder:2; esophagusstomach:2; pancreas:2; prostate:2; unk:2; uterus:2; bowel:1; cnsbrain:1; skin:1					
+Variant Annotation																Cancer Hotspots
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Cancer Types
+1	chr16	3738617	G	A		Yes	CREBBP	ENST00000262367.10	missense_variant	c.4336C>T	p.Arg1446Cys	ENST00000262367.10:CREBBP:Q92793:missense_variant:p.Arg1446Cys:c.4336C>T; ENST00000382070.7:CREBBP:Q92793:missense_variant:p.Arg1408Cys:c.4222C>T	1	s0		lymph:5; bladder:4; bowel:4; head_neck:4; brain:3; lung:3; stomach:3; cervix:2; liver:2; skin:2; pleura:1
+2	chr2	208248388	C	T		Yes	IDH1	ENST00000345146.6	missense_variant	c.395G>A	p.Arg132His	ENST00000345146.6:IDH1:O75874:missense_variant:p.Arg132His:c.395G>A; ENST00000415913.5:IDH1:O75874:missense_variant:p.Arg132His:c.395G>A; ENST00000446179.5:IDH1:O75874:missense_variant:p.Arg132His:c.395G>A	1	s1		brain:612; biliary_tract:57; skin:25; blood:23; prostate:11; lung:8; bone:6; bowel:5; liver:4; bladder:2; breast:2; head_neck:2; pancreas:2; soft_tissue:2; unk:2; adrenal_gland:1; thymus:1; thyroid:1
+3	chr9	21971121	G	A		Yes	CDKN2A	ENST00000498124.1	stop_gained	c.238C>T	p.Arg80Ter	ENST00000304494.9:CDKN2A:P42771:stop_gained:p.Arg80Ter:c.238C>T; ENST00000380150.2:CDKN2A::processed_transcript::; ENST00000380151.3:CDKN2A:P42771:NMD_transcript_variant,3_prime_UTR_variant::c.*161C>T; ENST00000404796.3:AL359922.1::intron_variant,NMD_transcript_variant::c.348-58312G>A; ENST00000479692.2:CDKN2A::stop_gained:p.Arg29Ter:c.85C>T; ENST00000494262.5:CDKN2A:P42771:stop_gained:p.Arg29Ter:c.85C>T; ENST00000497750.1:CDKN2A::stop_gained:p.Arg29Ter:c.85C>T; ENST00000498124.1:CDKN2A:P42771:stop_gained:p.Arg80Ter:c.238C>T; ENST00000498628.6:CDKN2A:P42771:stop_gained:p.Arg29Ter:c.85C>T; ENST00000530628.2:CDKN2A:Q8N726:missense_variant:p.Pro94Leu:c.281C>T; ENST00000577854.1:CDKN2A::2kb_upstream_variant,processed_transcript::; ENST00000578845.2:CDKN2A:P42771:stop_gained:p.Arg29Ter:c.85C>T; ENST00000579122.1:CDKN2A::stop_gained:p.Arg80Ter:c.238C>T; ENST00000579755.1:CDKN2A:Q8N726:missense_variant:p.Pro94Leu:c.281C>T	1	s2		head_neck:26; skin:17; pancreas:12; lung:11; stomach:11; bladder:5; bowel:5; unk:3; kidney:2; uterus:2; biliary_tract:1; brain:1; lymph:1; prostate:1; thymus:1
+4	chr4	152330755	G	A		Yes	FBXW7	ENST00000281708.10	stop_gained	c.1099C>T	p.Arg367Ter	ENST00000281708.10:FBXW7:Q969H0:stop_gained:p.Arg367Ter:c.1099C>T; ENST00000296555.11:FBXW7:Q969H0:stop_gained:p.Arg249Ter:c.745C>T; ENST00000393956.9:FBXW7:Q969H0:stop_gained:p.Arg287Ter:c.859C>T; ENST00000603548.6:FBXW7:Q969H0:stop_gained:p.Arg367Ter:c.1099C>T; ENST00000603841.1:FBXW7:Q969H0:stop_gained:p.Arg367Ter:c.1099C>T; ENST00000647183.1:FBXW7::processed_transcript::	1	s3		bowel:9; stomach:2; cervix:1; head_neck:1; lung:1; pancreas:1; soft_tissue:1; uterus:1
+5	chr12	25245350	C	A		Yes	KRAS	ENST00000256078.9	missense_variant	c.35G>T	p.Gly12Val	ENST00000256078.9:KRAS:P01116:missense_variant:p.Gly12Val:c.35G>T; ENST00000311936.8:KRAS:P01116:missense_variant:p.Gly12Val:c.35G>T; ENST00000556131.1:KRAS::missense_variant:p.Gly12Val:c.35G>T; ENST00000557334.5:KRAS::missense_variant:p.Gly12Val:c.35G>T	1	s4		pancreas:745; lung:570; bowel:500; uterus:84; unk:42; stomach:40; bladder:36; ovary:25; biliary_tract:21; testis:19; breast:15; cervix:15; blood:13; ampulla_of_vater:10; soft_tissue:8; brain:6; kidney:5; prostate:4; skin:4; head_neck:3; thyroid:3; lymph:2; thymus:2; bone:1; liver:1; vulva:1
 #CRAVAT Report
-#Created at Thursday 07/30/2020 11:22:56
+#Created at Tuesday 11/10/2020 17:45:53
 #Report level: gene
 #
-Variant Annotation						VEST4		
-Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies	Max Score	Mean Score	Gene p-value
-ULK4		0	1	intron_variant	intron_variant(1),processed_transcript(1)			
-CDKN2A		1	0	missense_variant	missense_variant(1),NMD_transcript_variant(1),processed_transcript(1),synonymous_variant(1),3_prime_UTR_variant(1)			
-EIF4A1		1	1	missense_variant	intron_variant(1),missense_variant(1),NMD_transcript_variant(2),processed_transcript(2),3_prime_UTR_variant(1)			
-CREBBP		0	1	intron_variant	intron_variant(1),processed_transcript(1)			
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+CREBBP		1	0	missense_variant	missense_variant(1)
+IDH1		1	0	missense_variant	missense_variant(1)
+CDKN2A		1	0	stop_gained	missense_variant(1),NMD_transcript_variant(1),processed_transcript(1),stop_gained(1),3_prime_UTR_variant(1)
+FBXW7		1	0	stop_gained	processed_transcript(1),stop_gained(1)
+KRAS		1	0	missense_variant	missense_variant(1)
 #CRAVAT Report
-#Created at Thursday 07/30/2020 11:22:56
+#Created at Tuesday 11/10/2020 17:45:53
 #Report level: sample
 #
 Variant Annotation	
@@ -31,7 +32,7 @@ UID	Sample
 4	s3
 5	s4
 #CRAVAT Report
-#Created at Thursday 07/30/2020 11:22:56
+#Created at Tuesday 11/10/2020 17:45:53
 #Report level: mapping
 #
 Variant Annotation			

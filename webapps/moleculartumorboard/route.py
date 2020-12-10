@@ -182,7 +182,7 @@ async def get_oncokb_annotation (request):
     return web.json_response(response)
 
 f = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'oncokb_conf.yml'))
-oncokb_conf = oyaml.full_load(f)
+oncokb_conf = oyaml.safe_load(f)
 f.close()
 
 routes = [
@@ -191,4 +191,5 @@ routes = [
    ['POST', 'annotate', get_live_annotation_post],
    ['GET', 'loadlivemodules', load_live_modules],
    ['GET', 'oncokb', get_oncokb_annotation],
+   #['GET', 'mupit/{tail:.*}', get_mupit],
 ]
