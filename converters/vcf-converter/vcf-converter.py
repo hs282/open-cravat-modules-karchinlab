@@ -132,7 +132,10 @@ class CravatConverter(BaseConverter):
         self._buffer.truncate()
         self._buffer.write(l)
         self._buffer.seek(0)
-        variant = next(self._reader)
+        try:
+            variant = next(self._reader)
+        except StopIteration:
+            return self.IGNORE
         wdict_blanks = {}
         for alt_index, alt in enumerate(variant.ALT):
             if alt is None:
