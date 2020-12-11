@@ -411,7 +411,7 @@ widgetGenerators['brca'] = {
 widgetInfo['oncokb'] = {'title': 'OncoKB'};
 widgetGenerators['oncokb'] = {
     'variant': {
-        'width': 580, 
+        'width': 880, 
         'height': 200, 
         'function': function (div, row, tabName) {
             var widgetName = 'brca';
@@ -429,17 +429,43 @@ widgetGenerators['oncokb'] = {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
                         var response = JSON.parse(xhr.responseText);
-                        effect = response.mutationEffect.knownEffect
-                        oncogenic = response.oncogenic
-                        hugo = response.query.hugoSymbol
-                        link = 'https://www.oncokb.org/gene/' + hugo
-                        if (effect == 'Unknown'){
-                            addInfoLineLink2(div, 'No annotation for OncoKB available');
+                        if (response.notoken == true) {
+                            var sdiv = getEl('div');
+                            var span = getEl('span');
+                            span.textContent = 'No OncoKB data was obtained (add OncoKB token and click save to obtain OncoKB annotation:\xa0'
+                            addEl(sdiv, span);
+                            var ip = getEl('input');
+                            ip.type = 'text';
+                            addEl(sdiv, ip);
+                            var btn = getEl('button');
+                            btn.textContent = 'Save';
+                            addEl(sdiv, btn);
+                            var span = getEl('span');
+                            span.textContent = ').';
+                            addEl(sdiv, span);
+                            addEl(div, sdiv);
+                            btn.addEventListener('click', function (evt) {
+                                var token = ip.value;
+                                fetch('/webapps/moleculartumorboard/saveoncokbtoken?token=' + token)
+                                .then(data=>{return data.json()})
+                                .then(response=>{
+                                    if (response.result == 'success') {
+                                        location.reload();
+                                    }
+                                });
+                            });
+                        } else {
+                            effect = response.mutationEffect.knownEffect
+                            oncogenic = response.oncogenic
+                            hugo = response.query.hugoSymbol
+                            link = 'https://www.oncokb.org/gene/' + hugo
+                            if (effect == 'Unknown'){
+                                addInfoLineLink2(div, 'No annotation for OncoKB available');
+                                }
+                            else {
+                                addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'OncoKB', link)
                             }
-                        else {
-                            addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'OncoKB', link)
                         }
-                        
                     }
                 };
             }
@@ -784,7 +810,7 @@ widgetGenerators['actionpanel'] = {
             addEl(div, br);
             var generator = widgetGenerators['oncokb']['variant'];
             generator['width'] = 400;
-            var divs = showWidget('oncokb', ['base'], 'variant', div, null, 220)
+            var divs = showWidget('oncokb', ['base'], 'variant', div, 800, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';

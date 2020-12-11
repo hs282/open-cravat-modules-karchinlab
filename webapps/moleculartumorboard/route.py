@@ -169,21 +169,52 @@ async def load_live_modules ():
 
 async def get_oncokb_annotation (request):
     global oncokb_conf
-    queries = request.rel_url.query
-    chrom = queries['chrom']
-    start = queries['start']
-    end = queries['end']
-    ref_base = queries['ref_base']
-    alt_base = queries['alt_base']
-    url = f'https://www.oncokb.org/api/v1/annotate/mutations/byGenomicChange?genomicLocation={chrom},{start},{end},{ref_base},{alt_base}&referenceGenome=GRCh38'
-    headers = {'Authorization': 'Bearer ' + oncokb_conf['token']}
-    r = requests.get(url, headers=headers)
-    response = r.json()
-    return web.json_response(response)
+    cookies = request.cookies
+    if 'oncokb_token' in cookies:
+        token = cookies['oncokb_token']
+        if token == '':
+            token = None
+    elif oncokb_conf is not None and 'token' in oncokb_conf:
+        token = oncokb_conf['token']
+    else:
+        token = None
+    if token is None:
+        response = web.json_response({'notoken': True})
+    else:
+        queries = request.rel_url.query
+        chrom = queries['chrom']
+        start = queries['start']
+        end = queries['end']
+        ref_base = queries['ref_base']
+        alt_base = queries['alt_base']
+        url = f'https://www.oncokb.org/api/v1/annotate/mutations/byGenomicChange?genomicLocation={chrom},{start},{end},{ref_base},{alt_base}&referenceGenome=GRCh38'
+        headers = {'Authorization': 'Bearer ' + token}
+        r = requests.get(url, headers=headers)
+        rjson = r.json()
+        if 'status' in rjson and rjson['status'] == 401:
+            rjson = {'notoken': True}
+            response = web.json_response(rjson)
+            response.cookies['oncokb_token'] = ''
+        else:
+            response = web.json_response(rjson)
+    return response
 
-f = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'oncokb_conf.yml'))
-oncokb_conf = oyaml.safe_load(f)
-f.close()
+async def save_oncokb_token (request):
+    queries = request.rel_url.query
+    token = queries['token']
+    oncokb_conf = {'token': token}
+    response = web.json_response({"result": "success"})
+    response.cookies['oncokb_token'] = token
+    return response
+
+oncokb_conf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'oncokb_conf.yml')
+
+if os.path.exists(oncokb_conf_path):
+    f = open(oncokb_conf_path)
+    oncokb_conf = oyaml.safe_load(f)
+    f.close()
+else:
+    oncokb_conf = None
 
 routes = [
    ['GET', 'test', test],
@@ -191,5 +222,5 @@ routes = [
    ['POST', 'annotate', get_live_annotation_post],
    ['GET', 'loadlivemodules', load_live_modules],
    ['GET', 'oncokb', get_oncokb_annotation],
-   #['GET', 'mupit/{tail:.*}', get_mupit],
+   ['GET', 'saveoncokbtoken', save_oncokb_token],
 ]

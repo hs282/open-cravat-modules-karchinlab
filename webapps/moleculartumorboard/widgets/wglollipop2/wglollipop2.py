@@ -3,10 +3,8 @@ import os
 import cravat
 
 async def make_db ():
-    dbpath = os.path.join(
-        os.path.dirname(cravat.admin_util.get_local_module_info('wglollipop').script_path),
-        'data',
-        'wglollipop.sqlite')
+    dbpath = os.path.join(os.path.dirname(__file__), 'data',
+                          'wglollipop.sqlite')
     #dbpath = 'wglollipop.sqlite'
     conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
@@ -41,8 +39,10 @@ async def make_db ():
 
 async def get_data (queries):
     hugo = queries['hugo']
-    dbpath = os.path.join(os.path.dirname(__file__), 'data',
-                          'wglollipop.sqlite')
+    dbpath = os.path.join(
+        os.path.dirname(cravat.admin_util.get_local_module_info('wglollipop').script_path),
+        'data',
+        'wglollipop.sqlite')
     conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
     
