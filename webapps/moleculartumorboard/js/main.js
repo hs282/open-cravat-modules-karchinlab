@@ -436,8 +436,10 @@ widgetGenerators['oncokb'] = {
                             addEl(sdiv, span);
                             var ip = getEl('input');
                             ip.type = 'text';
+                            ip.style.fontSize = '10px';
                             addEl(sdiv, ip);
                             var btn = getEl('button');
+                            btn.style.fontSize = '10px';
                             btn.textContent = 'Save';
                             addEl(sdiv, btn);
                             var span = getEl('span');
