@@ -180,7 +180,6 @@ class CravatConverter(BaseConverter):
                         wdict['zygosity'] = None
                     else:
                         wdict['zygosity'] = None
-                    # wdict['zygosity'] = 'het' if call.is_het else 'hom'
                     wdict['tot_reads'], wdict['alt_reads'], wdict['af'] = self.extract_read_info(call, gt)
                     wdict['hap_block'] = None #TODO
                     wdict['hap_strand'] = None #TODO
@@ -211,7 +210,10 @@ class CravatConverter(BaseConverter):
     def extract_read_info(call, gt):
         if hasattr(call.data,'AD'):
             tot_reads = sum(call.data.AD)
-            alt_reads = call.data.AD[gt]
+            try:
+                alt_reads = call.data.AD[gt]
+            except IndexError:
+                alt_reads = None
         elif hasattr(call.data,'DP'):
             tot_reads = call.data.DP
             alt_reads = None
