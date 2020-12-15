@@ -45,10 +45,7 @@ output_columns:
   type: float
   width: 60
 tags:
-- variants
-- noncoding
-- germline
-- populations
+- allele frequency
 title: 1000 Genomes-African
 type: annotator
 version: 4.1.0
