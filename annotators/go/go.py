@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 class CravatAnnotator(BaseAnnotator):
     def annotate(self, input_data, secondary_data=None):

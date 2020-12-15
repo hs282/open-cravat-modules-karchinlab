@@ -4,7 +4,6 @@ from cravat import InvalidData
 import sqlite3
 import os
 import pickle
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -24,7 +23,7 @@ class CravatAnnotator(BaseAnnotator):
         if d:
             out = {}
             out.update(d)
-            out['chemical'] = json.dumps([list(v) for v in list(zip(out['chemical'], out['chemid']))])
+            out['chemical'] = [list(v) for v in list(zip(out['chemical'], out['chemid']))]
         else:
             return None
 

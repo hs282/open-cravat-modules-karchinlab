@@ -1,7 +1,6 @@
 import sys
 from cravat import BaseAnnotator
 from cravat.util import get_ucsc_bins
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -25,8 +24,8 @@ class CravatAnnotator(BaseAnnotator):
             studies = [list(v) for v in rows]
             factor = list(set(map(lambda x: x[4], rows)))
             return {
-                'factor': json.dumps(factor),
-                'all': json.dumps(studies),
+                'factor': factor,
+                'all': studies,
             }
     
     def cleanup(self):

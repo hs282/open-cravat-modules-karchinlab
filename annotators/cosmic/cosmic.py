@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -47,7 +46,7 @@ class CravatAnnotator(BaseAnnotator):
                             primary_rd['primarysitenos'].split(';'))
             site_toks = [[site, int(n)] for site, n in site_list]
             site_toks.sort(key=lambda x: x[1], reverse=True)
-            out['variant_count_tissue'] = json.dumps(site_toks)
+            out['variant_count_tissue'] = site_toks
         return out
 
     def get_cosmic_mut_type(self, ref, alt): #THIS VERSION DOESN'T USE crx

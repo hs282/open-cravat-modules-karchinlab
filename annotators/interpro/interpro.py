@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -21,8 +20,8 @@ class CravatAnnotator(BaseAnnotator):
             accs = row[0].split(';')
             trs = row[1].split(';')
             hits = [list(v) for v in zip(domains, accs, trs)]
-            out['domain'] = json.dumps(list(set([v for v in domains if v is not None])))
-            out['all'] = json.dumps(hits)
+            out['domain'] = list(set([v for v in domains if v is not None]))
+            out['all'] = hits
             return out
     
     def cleanup(self):

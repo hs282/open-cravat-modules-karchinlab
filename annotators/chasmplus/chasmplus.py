@@ -4,7 +4,6 @@ from cravat import InvalidData
 import sqlite3
 import os
 import stouffer
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -30,7 +29,6 @@ class CravatAnnotator(BaseAnnotator):
                 self.dataframe_colinfo[colname] = col['dataframe_headers']
     
     def annotate(self, input_data):
-        print(f'@ chasmplus annotate')
         out = {}
         ref_base = input_data['ref_base']
         alt_base = input_data['alt_base']

@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 pred_order = {'D': 1, 'P': 2, 'B': 3}
 
@@ -39,7 +38,7 @@ class CravatAnnotator(BaseAnnotator):
                 'hvar_pred': hvar_pred,
                 'hdiv_rank': hdiv_rank,
                 'hvar_rank': hvar_rank,
-                'all': json.dumps(results)
+                'all': results
             }
         else:
             out = {}

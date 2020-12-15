@@ -2,7 +2,6 @@ import sys
 import os
 import sqlite3
 from cravat import BaseAnnotator
-import json
 
 class CravatAnnotator (BaseAnnotator):
 
@@ -26,7 +25,7 @@ class CravatAnnotator (BaseAnnotator):
             phenotypes = list(phenotypes)
             phenotypes.sort()
             out['phenotype'] = ';'.join(phenotypes)
-            out['all'] = json.dumps(hits)
+            out['all'] = hits
         return out
 
 if __name__ == '__main__':

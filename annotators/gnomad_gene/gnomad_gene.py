@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -66,7 +65,7 @@ class CravatAnnotator(BaseAnnotator):
             out['pLI'] = pLI
             out['pRec'] = pRec
             out['pNull'] = pNull
-            out['all'] = json.dumps(all_results)
+            out['all'] = all_results
         return out
     
     def cleanup(self):

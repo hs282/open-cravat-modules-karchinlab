@@ -3,7 +3,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import os
-import json
 
 class CravatAnnotator(BaseAnnotator):
 
@@ -18,7 +17,7 @@ class CravatAnnotator(BaseAnnotator):
             for row in samples_tmp:
                 toks = row.split(':')
                 samples.append([toks[0], int(toks[1])])
-            out = {'samples': json.dumps(samples)}
+            out = {'samples': samples}
         else:
             out = None
         return out
