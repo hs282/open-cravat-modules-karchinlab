@@ -21,6 +21,12 @@ class CravatAnnotator(BaseAnnotator):
         cnames_query = 'select name from sqlite_master where type="table" and name like "chr%%";'
         self.cursor.execute(cnames_query)
         self.available_chroms = [x[0] for x in self.cursor]
+        self.dataframe_colinfo = {}
+        for col in self.conf['output_columns']:
+            if col.get('dataframe', False) == True:
+                colname = col['name']
+                self.dataframe_colinfo[colname] = []
+                self.dataframe_colinfo[colname] = col['dataframe_headers']
     
     def annotate(self, input_data):
         out = {}
@@ -49,14 +55,13 @@ class CravatAnnotator(BaseAnnotator):
                 score = row[0]
                 transc = row[1]
                 pvalue = self.pvals.get(score, 0.0)
-                result = '{0}:({1:.3f}:{2:.3g})'.format(transc, score, pvalue)
+                result = [transc, score, pvalue]
                 if i == max_alen_index:
-                    out['score'] = score
                     out['transcript'] = transc
+                    out['score'] = score
                     out['pval'] = pvalue
-                    result = '*'+result
                 results.append(result)
-            out['results'] = (',').join(results)
+            out['all'] = results
         return out
 
     def summarize_by_gene (self, hugo, input_data):

@@ -1,10 +1,10 @@
 title: Cancer Hotspots
-version: 1.0.0
+version: 1.0.1
 type: webviewerwidget
 required_annotator: cancer_hotspots
 description: Cancer Hotspots webviewer widget
 hidden: true
-requires_opencravat: '>=1.7.0'
+requires_opencravat: '>=2.2.1'
 developer:
   name: Kyle Moad
   organization: In Silico Solutions
@@ -14,4 +14,6 @@ developer:
 tags:
 - visualization
 release_note:
+  1.0.1: works with table data
   1.0.0: Initial release
+private: true

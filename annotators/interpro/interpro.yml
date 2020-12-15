@@ -17,6 +17,29 @@ gene_summary_output_columns:
   title: Domain
   type: string
   width: 160
+old_output_columns:
+    71.2.0:
+        output_columns:
+        - desc: Domain or conserved site on which the variant is located. Multiple entries separated by ";"
+          filterable: true
+          name: domain
+          title: Domain
+          type: string
+          width: 62
+        - desc: Associated UniProt accession number. Multiple entries separated by ";"
+          hidden: true
+          name: uniprot_acc
+          title: UniProt Accession Number
+          type: string
+          width: 70
+          filterable: false
+        - desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"
+          filterable: true
+          name: ensembl_transcriptid
+          title: Ensembl Transcript ID
+          type: string
+          width: 80
+          hidden: true
 output_columns:
 - desc: Domain or conserved site on which the variant is located. Multiple entries separated by ";"
   filterable: true
@@ -24,28 +47,32 @@ output_columns:
   title: Domain
   type: string
   width: 62
-- desc: Associated UniProt accession number. Multiple entries separated by ";"
-  hidden: true
-  name: uniprot_acc
-  title: UniProt Accession Number
+- name: all
+  title: All annotations
   type: string
+  hidden: true
   width: 70
   filterable: false
-- desc: Associated Ensembl Transcript ID. Multiple entries separated by ";"
-  filterable: true
-  name: ensembl_transcriptid
-  title: Ensembl Transcript ID
-  type: string
-  width: 80
-  hidden: true
+  table: true
+  table_headers:
+  - name: domain
+    title: Domain
+    type: string
+  - name: uniprot_acc
+    title: UniProt Accession Number
+    type: string
+  - name: ensembl_transcriptid
+    title: Ensembl Transcript ID
+    type: string
 tags:
 - genes
 title: InterPro
 type: annotator
-version: 71.2.0
+version: 71.2.1
 requires:
 - wginterpro
 release_note:
   71.0.6: gene level aggregation for 1.5.0
   71.1.0: ensembl transcript ids added
   71.2.0: return None if no annotation
+requires_opencravat: '>=2.2.1'

@@ -1,8 +1,8 @@
 title: Haploreg Asian
-version: 1.1.0
+version: 1.1.1
 type: webviewerwidget
 required_annotator: haploreg_asn
-requires_opencravat: '>=1.7.0'
+requires_opencravat: '>=2.2.1'
 description: Haploreg Asian information webviewer widget
 developer:
   name: Rick Kim
@@ -13,5 +13,7 @@ developer:
 tags:
 - visualization
 release_note:
+  1.1.1: works with table data
   1.1.0: works with single variant page in oc 1.7.0.
 hidden: true
+private: true

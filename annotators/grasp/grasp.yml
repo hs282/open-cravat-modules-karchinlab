@@ -27,6 +27,24 @@ output_columns:
   title: Phenotype
   type: string
   width: 70
+- name: all
+  title: All annotations
+  type: string
+  table: true
+  table_headers:
+  - name: nhlbi
+    title: NHLBI Key
+    type: int
+  - name: pmid
+    title: PMID
+    type: int
+    desc: PubMed ID
+  - name: phenotype
+    title: Phenotype
+    type: string
+  - name: pvalue
+    title: p-value
+    type: float
 release_note:
   2.0.2: removed double quotation from phenotype in data
   2.0.3: test key encoded in UTF-8
@@ -50,3 +68,4 @@ smartfilters:
     column: grasp__phenotype
     test: hasData
 commercial_warning: 'For commercial use, contact johnsonad2@nhlbi.nih.gov. '
+requires_opencravat: '>=2.2.1'

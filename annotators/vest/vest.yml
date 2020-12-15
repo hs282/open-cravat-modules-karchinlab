@@ -23,6 +23,37 @@ gene_summary_output_columns:
 input_format: crx
 level: variant
 name: vest
+old_output_columns:
+    4.3.1:
+        output_columns:
+        - hidden: true
+          name: transcript
+          title: Score Transcript
+          type: string
+          width: 68
+          filterable: false
+        - name: score
+          title: Score
+          type: float
+          hidden: false
+        - name: pval
+          title: P-value
+          type: float
+          filterable: false
+          hidden: true
+        - hidden: true
+          name: all_results
+          title: All transcripts
+          type: string
+          width: 70
+          filterable: false
+        - aggregate: false
+          hidden: true
+          name: hugo
+          title: HUGO
+          type: string
+          filterable: false
+          desc: Gene ID
 output_columns:
 - hidden: true
   name: transcript
@@ -33,38 +64,44 @@ output_columns:
 - name: score
   title: Score
   type: float
-  hidden: false
+  hidden: true
 - name: pval
   title: P-value
   type: float
   filterable: false
-  hidden: true
+  hidden: false
 - hidden: true
-  name: all_results
-  title: All transcripts
+  name: all
+  title: All annotations
   type: string
   width: 70
   filterable: false
-- aggregate: false
-  hidden: true
-  name: hugo
-  title: HUGO
-  type: string
-  filterable: false
-  desc: Gene ID
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: score
+    title: Score
+    type: float
+  - name: pval
+    title: p-value
+    type: float
 tags:
 - variants
 - variant effect prediction
 title: VEST4
 type: annotator
-version: 4.3.1
+version: 4.3.2
+requires_opencravat: '>=2.2.1'
 release_note:
+  4.3.2: table data enabled
   4.3.1: bugfix for non-SNV variants at a position with VEST annotation
   4.3.0: handles multiple sequence ontologies by new hg38
   4.2.0: works with oc 1.8.1 and new hg38
   4.1.0: new gene summary architecture for open-cravat 1.5.0
   4.1.2: change title to VEST4
-requires_opencravat: '>=1.8.1'
 requires:
 - wgvest
-commercial_warning: 'Freely available for non-commercial use.'
+commercial_warning: null
+private: true

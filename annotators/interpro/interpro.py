@@ -16,9 +16,12 @@ class CravatAnnotator(BaseAnnotator):
         self.cursor.execute(stmt)
         row = self.cursor.fetchone()
         if row is not None:
-            out['uniprot_acc'] = row[0]
-            out['ensembl_transcriptid'] = row[1]
-            out['domain'] = row[2]
+            domains = [None if v == '.' else v for v in row[2].split(';')]
+            accs = row[0].split(';')
+            trs = row[1].split(';')
+            hits = [list(v) for v in zip(domains, accs, trs)]
+            out['domain'] = list(set([v for v in domains if v is not None]))
+            out['all'] = hits
             return out
     
     def cleanup(self):

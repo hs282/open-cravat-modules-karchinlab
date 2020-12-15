@@ -12,7 +12,11 @@ class CravatAnnotator(BaseAnnotator):
         self.cursor.execute(q)
         row = self.cursor.fetchone()
         if row:
-            samples = str(row[0]).replace('|', '; ')
+            samples_tmp = str(row[0]).split('|')
+            samples = []
+            for row in samples_tmp:
+                toks = row.split(':')
+                samples.append([toks[0], int(toks[1])])
             out = {'samples': samples}
         else:
             out = None

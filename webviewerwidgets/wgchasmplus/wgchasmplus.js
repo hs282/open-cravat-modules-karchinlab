@@ -12,25 +12,46 @@ widgetGenerators['chasmplus'] = {
 				addInfoLine(div, row, 'P-value', 'chasmplus__pval', tabName);
 			}
 			addInfoLine(div, 'Transcript', getWidgetData(tabName, 'chasmplus', row, 'transcript'), tabName);
-            var allMappings = getWidgetData(tabName, 'chasmplus', row, 'results');
-            if (allMappings != null) {
+            var allMappings = getWidgetData(tabName, 'chasmplus', row, 'all');
+            if (allMappings != undefined && allMappings != null) {
+                var results = JSON.parse(allMappings);
                 var table = getWidgetTableFrame();
                 table.style.width = '100%';
                 var thead = getWidgetTableHead(['Transcript', 'Score', 
                     'P-value'], ['60%', '20%', '20%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
-                var lines = allMappings.split(',')
-                for (var i = 0; i < lines.length; i++) {
-                    var toks = lines[i].split(':')
-                    var transcript = toks[0]
-                    var score = toks[1].replace('(', '')
-                    var pval = toks[2].replace(')', '')
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    var transcript = row[0]
+                    var score = row[1];
+                    var pval = row[2];
                     var tr = getWidgetTableTr([transcript, score, pval]);
                     addEl(tbody, tr);
                 }
                 addEl(div, addEl(table, tbody));
+            } else { // older version data
+                var allMappings = getWidgetData(tabName, 'chasmplus', row, 'results');
+                if (allMappings != null) {
+                    var table = getWidgetTableFrame();
+                    table.style.width = '100%';
+                    var thead = getWidgetTableHead(['Transcript', 'Score', 
+                        'P-value'], ['60%', '20%', '20%']);
+                    addEl(table, thead);
+                    var tbody = getEl('tbody');
+                    var lines = allMappings.split(',')
+                    for (var i = 0; i < lines.length; i++) {
+                        var toks = lines[i].split(':')
+                        var transcript = toks[0]
+                        var score = toks[1].replace('(', '')
+                        var pval = toks[2].replace(')', '')
+                        var tr = getWidgetTableTr([transcript, score, pval]);
+                        addEl(tbody, tr);
+                    }
+                    addEl(div, addEl(table, tbody));
+                }
             }
+
 		}
 	}
 }

@@ -10,7 +10,12 @@ class CravatAnnotator(BaseAnnotator):
     def annotate(self, input_data, secondary_data=None):
         if not secondary_data['dbsnp']:
             return None
-        rsids = secondary_data['dbsnp'][0]['snp'].split(',')
+        dbsnp_result = secondary_data['dbsnp'][0].get('snp')
+        if dbsnp_result is None:
+            dbsnp_result = secondary_data['dbsnp'][0].get('rsid')
+        if dbsnp_result is None:
+            return None
+        rsids = dbsnp_result.split(',')
         if rsids:
             one = rsids[0]
             out = {'rsid': one}
