@@ -60,7 +60,6 @@ class CravatAnnotator(BaseAnnotator):
                     out['transcript'] = transc
                     out['score'] = score
                     out['pval'] = pvalue
-                    #result = '*'+result
                 results.append(result)
             out['all'] = results
         return out
