@@ -17,7 +17,7 @@ class CravatAnnotator(BaseAnnotator):
                 pred = 'Damaging'
             else:
                 pred = None
-            out = {'score': row[0], 'rankscore': row[1], 'pred': metalr_pred}
+            out = {'score': row[0], 'rankscore': row[1], 'pred': pred}
         else:
             out = {}
         return out

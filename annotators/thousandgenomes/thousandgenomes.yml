@@ -52,7 +52,6 @@ output_columns:
   width: 80
   hidden: true
 tags:
-- non coding
 - allele frequency
 title: 1000 Genomes
 type: annotator

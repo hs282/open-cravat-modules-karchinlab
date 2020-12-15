@@ -6,22 +6,30 @@ import os
 import json
 
 class CravatAnnotator(BaseAnnotator):
-
-    def annotate(self, input_data):
+    def annotate(self, input_data, secondary_data=None):
         out = {}
-        hugo = input_data['hugo']
-        
-        q = 'SELECT dname, go_id.id, go_id.name, aspect, go_ref, evi FROM go_id join go_annotation JOIN go_name ON go_annotation.name=go_name.name and go_id.id=go_annotation.id WHERE go_annotation.name="%s";' \
-            %(hugo)
+        q = 'select hugo, go_id, ontology from go where hugo = "{hugo}"'.format(
+            hugo = input_data['hugo'])
         self.cursor.execute(q)
-        result = self.cursor.fetchall()
-        if result:
-            hits = []
-            for res in result:
-                hits.append(res[1:6])
-            out['dname'] = res[0]
-            out['hits'] = json.dumps(hits)
+        rows = self.cursor.fetchall()
+        if rows is not None:
+            cco_ = []
+            bpo_ = []
+            mfo_ = []
+            for row in rows:
+                if row[2] == 'cco':
+                    cco_.append(row[1])
+                elif row[2] == 'bpo':
+                    bpo_.append(row[1])
+                elif row[2] == 'mfo':
+                    mfo_.append(row[1])
+            out['cco_'] = ';'.join(cco_)
+            out['bpo_'] = ';'.join(bpo_)
+            out['mfo_'] = ';'.join(mfo_)
         return out
+
+    def cleanup(self):
+        pass
     
 if __name__ == '__main__':
     annotator = CravatAnnotator(sys.argv)

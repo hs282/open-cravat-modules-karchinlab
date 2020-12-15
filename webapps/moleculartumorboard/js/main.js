@@ -411,7 +411,7 @@ widgetGenerators['brca'] = {
 widgetInfo['oncokb'] = {'title': 'OncoKB'};
 widgetGenerators['oncokb'] = {
     'variant': {
-        'width': 580, 
+        'width': 880, 
         'height': 200, 
         'function': function (div, row, tabName) {
             var widgetName = 'brca';
@@ -429,17 +429,45 @@ widgetGenerators['oncokb'] = {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
                         var response = JSON.parse(xhr.responseText);
-                        effect = response.mutationEffect.knownEffect
-                        oncogenic = response.oncogenic
-                        hugo = response.query.hugoSymbol
-                        link = 'https://www.oncokb.org/gene/' + hugo
-                        if (effect == 'Unknown'){
-                            addInfoLineLink2(div, 'No annotation for OncoKB available');
+                        if (response.notoken == true) {
+                            var sdiv = getEl('div');
+                            var span = getEl('span');
+                            span.textContent = 'No OncoKB data was obtained (add OncoKB token and click save to obtain OncoKB annotation:\xa0'
+                            addEl(sdiv, span);
+                            var ip = getEl('input');
+                            ip.type = 'text';
+                            ip.style.fontSize = '10px';
+                            addEl(sdiv, ip);
+                            var btn = getEl('button');
+                            btn.style.fontSize = '10px';
+                            btn.textContent = 'Save';
+                            addEl(sdiv, btn);
+                            var span = getEl('span');
+                            span.textContent = ').';
+                            addEl(sdiv, span);
+                            addEl(div, sdiv);
+                            btn.addEventListener('click', function (evt) {
+                                var token = ip.value;
+                                fetch('/webapps/moleculartumorboard/saveoncokbtoken?token=' + token)
+                                .then(data=>{return data.json()})
+                                .then(response=>{
+                                    if (response.result == 'success') {
+                                        location.reload();
+                                    }
+                                });
+                            });
+                        } else {
+                            effect = response.mutationEffect.knownEffect
+                            oncogenic = response.oncogenic
+                            hugo = response.query.hugoSymbol
+                            link = 'https://www.oncokb.org/gene/' + hugo
+                            if (effect == 'Unknown'){
+                                addInfoLineLink2(div, 'No annotation for OncoKB available');
+                                }
+                            else {
+                                addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'OncoKB', link)
                             }
-                        else {
-                            addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'OncoKB', link)
                         }
-                        
                     }
                 };
             }
@@ -538,7 +566,7 @@ widgetGenerators['pharmgkb2'] = {
 widgetInfo['clinvar2'] = {'title': ''};
 widgetGenerators['clinvar2'] = {
     'variant': {
-        'width': 480, 
+        'width': 1100, 
         'height': 250, 
         'function': function (div, row, tabName) {
             var id = getWidgetData(tabName, 'clinvar', row, 'id');
@@ -548,27 +576,38 @@ widgetGenerators['clinvar2'] = {
             span.classList.add('detail-info-line-header');
             span.textContent = 'ClinVar significance: ';
             addEl(sdiv, span);
+            var ssdiv = getEl('div');
+            ssdiv.style.display = 'inline-block';
+            ssdiv.style.position = 'relative';
+            ssdiv.style.left = '6px';
             var span = getEl('span');
             span.classList.add('detail-info-line-content');
             span.textContent = sig;
-            addEl(sdiv, span);
-            addEl(sdiv, getTn('\xa0'));
-            //addInfoLine(div, 'Significance by ClinVar', sig, tabName);
-            //var link = '';
+            addEl(ssdiv, span);
+            addEl(ssdiv, getTn('\xa0'));
             if(id != null){
                 link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
                 var a = getEl('a');
                 a.href = link;
                 a.textContent = id;
                 sdiv.style.position = 'relative';
-                addEl(sdiv, getTn('(ID: '));
-                addEl(sdiv, a);
-                addEl(sdiv, getTn(')'));
-                addEl(div, sdiv);
-            } else {
-                //id = '';
+                addEl(ssdiv, getTn('(ID: '));
+                addEl(ssdiv, a);
+                addEl(ssdiv, getTn(')'));
             }
-            //addInfoLineLink(div, 'ClinVar ID', id, link, 10);
+            addEl(sdiv, ssdiv);
+            addEl(div, sdiv);
+            var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + id + '&retmode=json'
+            fetch(url).then(response=>{return response.json()}).then(response=>{
+                var trait_set = response['result'][id].trait_set;
+                var traitNames = [];
+                for (var i = 0; i < trait_set.length; i++) {
+                    traitNames.push(trait_set[i].trait_name);
+                }
+                traitNames.sort();
+                var traitNames = traitNames.join(', ');
+                addInfoLine(div, 'ClinVar conditions', traitNames, 'variant', 130);
+            });
         }
     }
 }
@@ -773,7 +812,7 @@ widgetGenerators['actionpanel'] = {
             addEl(div, br);
             var generator = widgetGenerators['oncokb']['variant'];
             generator['width'] = 400;
-            var divs = showWidget('oncokb', ['base'], 'variant', div, null, 220)
+            var divs = showWidget('oncokb', ['base'], 'variant', div, 800, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
