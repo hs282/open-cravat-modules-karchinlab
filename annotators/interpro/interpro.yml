@@ -75,3 +75,4 @@ release_note:
   71.0.6: gene level aggregation for 1.5.0
   71.1.0: ensembl transcript ids added
   71.2.0: return None if no annotation
+requires_opencravat: '>=2.2.1'

@@ -4,7 +4,7 @@ type: webviewerwidget
 required_annotator: cancer_hotspots
 description: Cancer Hotspots webviewer widget
 hidden: true
-requires_opencravat: '>=1.7.0'
+requires_opencravat: '>=2.2.1'
 developer:
   name: Kyle Moad
   organization: In Silico Solutions

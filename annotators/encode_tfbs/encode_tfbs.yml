@@ -51,3 +51,4 @@ developer:
 tags:
 - non coding
 private: true
+requires_opencravat: '>=2.2.1'
