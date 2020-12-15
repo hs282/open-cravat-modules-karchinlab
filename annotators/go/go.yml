@@ -1,4 +1,4 @@
-datasource: 2018.12.06
+datasource: 2020.12.03
 description: Gene Ontology (GO) project provides a comprehensive computable knowledge
   regarding the functions of genes and gene products.
 developer:
@@ -10,56 +10,29 @@ developer:
   website: http://geneontology.org/
 level: gene
 output_columns:
-- name: dname
-  title: Term
+- name: bpo_
+  title: Biological Process
   type: string
-  hidden: false
-  width: 140
-- hidden: true
-  name: id
-  title: ID
+  width: 90
+  desc: The larger processes, or ‘biological programs’ accomplished by multiple molecular activities. 
+- name: cco_
+  title: Cellular Component
   type: string
-  filterable: false
-  desc: GO Accession
-- hidden: true
-  name: name
-  title: GO Name
+  width: 90
+  desc: The locations relative to cellular structures in which a gene product performs a function
+- name: mfo_
+  title: Molecular Function
   type: string
-  filterable: false
-  desc: Term name
-- hidden: true
-  name: aspect
-  title: Full Aspects
-  type: string
-  width: 60
-  filterable: false
-  desc: Full list of annotated apects (molecular function(F), biological product (P),
-    cellular component (C))
-- desc: List of annotated apects (molecular function(F), biological product (P), cellular
-    component (C))
-  name: set_asp
-  title: Aspects
-  type: string
-  width: 60
-  hidden: true
-- hidden: true
-  name: go_ref
-  title: Reference
-  type: string
-  width: 75
-  filterable: false
-  desc: Reference identifiers for each annotation
-- hidden: true
-  name: evi
-  title: Evidence Code
-  type: string
-  width: 60
-  filterable: false
-  desc: Indicates how the annotation is supported.
+  width: 90
+  desc: Molecular-level activities performed by gene products.
+
 tags:
 - genes
 title: Gene Ontology
 type: annotator
-version: 2019.08.16
+version: 2020.12.03
+release_note:
+  2020.12.03: Data update
 requires:
 - wggo
+private: true
