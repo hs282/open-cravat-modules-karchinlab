@@ -1,5 +1,5 @@
 title: Protein diagram
-version: 2.0.3
+version: 2.1.0
 requires_opencravat: '>=2.0.2'
 required_annotator: base
 type: webviewerwidget
@@ -13,6 +13,7 @@ developer:
 tags:
 - visualization
 release_note:
+  2.1.0: update with gencode v33
   2.0.2: aiosqlite instead of aiosqlite3
   1.3.0: works with oc 1.8.1 and hg38.
   1.2.0: works with single variant page in oc 1.7.0.
