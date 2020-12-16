@@ -64,4 +64,4 @@ developer:
   citation: ''
 release_note:
   1.0.0: initial release
-private: true
+requires_opencravat: '>=2.2.0'
