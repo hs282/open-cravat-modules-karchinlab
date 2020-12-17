@@ -4,7 +4,6 @@ from cravat import BasePostAggregator
 from cravat import InvalidData
 import sqlite3
 from collections import defaultdict
-from scipy.stats import fisher_exact
 from pathlib import Path
 
 class CravatPostAggregator (BasePostAggregator):
@@ -13,6 +12,8 @@ class CravatPostAggregator (BasePostAggregator):
         return 'cohorts' in self.confs
 
     def setup (self):
+        from scipy.stats import fisher_exact
+        self.fisher_exact = fisher_exact
         self.cursor_samples = self.dbconn.cursor()
         q = 'select distinct base__sample_id from sample'
         self.cursor_samples.execute(q)
@@ -28,9 +29,9 @@ class CravatPostAggregator (BasePostAggregator):
         notfound_case = len(self.cohorts['case'] - self.all_samples)
         notfound_cont = len(self.cohorts['control'] - self.all_samples)
         if (notfound_case + notfound_cont) > 0:
-            msg = f'Some {self.conf["title"]} samples were not found in the job. {notfound_case} case and {notfound_cont} control'
+            msg = f'WARNING: Some {self.conf["title"]} samples were not found in the job. {notfound_case} case and {notfound_cont} control'
             self.logger.warn(msg)
-            print(f'WARNING: {msg}', file=sys.stderr)
+            print(msg, file=sys.stderr)
         q = 'pragma table_info(sample);'
         self.cursor_samples.execute(q)
         samp_cols = {r[1] for r in self.cursor_samples}
@@ -67,17 +68,17 @@ class CravatPostAggregator (BasePostAggregator):
             [hom_case + het_case, ref_case],
             [hom_cont + het_cont, ref_cont]
         ]
-        dom_pvalue = fisher_exact(dom_table,'greater')[1]
+        dom_pvalue = self.fisher_exact(dom_table,'greater')[1]
         rec_table = [
             [hom_case, ref_case + het_case],
             [hom_cont, ref_cont + het_cont]
         ]
-        rec_pvalue = fisher_exact(rec_table,'greater')[1]
+        rec_pvalue = self.fisher_exact(rec_table,'greater')[1]
         all_table = [
             [2*hom_case + het_case, 2*ref_case + het_case],
             [2*hom_cont + het_cont, 2*ref_cont + het_cont]
         ]
-        all_pvalue = fisher_exact(all_table,'greater')[1]
+        all_pvalue = self.fisher_exact(all_table,'greater')[1]
         return {
             'dom_pvalue': dom_pvalue,
             'rec_pvalue': rec_pvalue,

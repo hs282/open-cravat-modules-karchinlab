@@ -1,15 +1,16 @@
 title: VCF Converter
-version: 2.0.0
+version: 2.0.1
 type: converter
 description: Converter for VCF format input
 developer:
   name: 'Kyle Moad, Rick Kim'
   organization: 'In Silico Solutions'
-  email: 'kmoad@insilico.us.com'
+  email: 'support@cravat.us'
   website: 'http://www.insilico.us.com'
   citation: ''
 requires_opencravat: '>=2.2.0'
 release_note:
+  2.0.1: better extraction of AD in multiallelic sites
   2.0.0: use pyvcf library
   1.5.4: bugfix for multiple input files
   1.5.3: handles module option include_info.

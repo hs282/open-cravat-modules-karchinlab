@@ -90,3 +90,4 @@ smartfilters:
     test: greaterThanEq
     value: ${value}
 private: true
+requires_opencravat: '>=2.2.1'

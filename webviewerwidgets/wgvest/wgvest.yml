@@ -15,5 +15,5 @@ release_note:
 tags:
 - visualization
 hidden: true
-requires_opencravat: '>=1.7.0'
+requires_opencravat: '>=2.2.1'
 private: true

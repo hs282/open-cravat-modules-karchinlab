@@ -34,5 +34,4 @@ release_note:
   1.1.0: Updated data to hg38
 type: annotator
 
-
-
+requires_opencravat: '>=2.2.1'
