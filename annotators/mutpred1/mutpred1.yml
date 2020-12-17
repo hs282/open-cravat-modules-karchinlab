@@ -11,6 +11,12 @@ developer:
   website: http://mutpred1.mutdb.org/
 level: variant
 output_columns:
+- name: transcript
+  title: Transcripts
+  type: string
+  width: 80
+  desc: Ensembl Transcript ID.
+  hidden: true
 - hidden: true
   name: external_protein_id
   title: Uniprot
@@ -22,40 +28,54 @@ output_columns:
   title: Variant
   type: string
   filterable: false
-- desc: Pathogenicity score
+- desc: Max Pathogenicity score across all transcripts. 
   title: Score
   filterable: true
   name: mutpred_general_score
   type: float
   width: 85
   hidden: true
+- hidden: false
+  name: mutpred_rankscore
+  title: Rank Score
+  type: float
+  width: 70
+  desc: The max rank score across all transcripts. The ratio of the rank of the score over the total number of MutPred scores.
 - hidden: true
   name: mutpred_top5_mechanisms
-  title: Top 5 molecular mechanisms
+  title: All Annotations
   type: string
   width: 90
   filterable: false
   table: true
   table_headers:
+  - name: transcript
+    title: Transcripts
+    type: string
+  - name: external_protein_id
+    title: Uniprot
+    type: string
   - name: mechanism
     title: Mechanism
     type: string
   - name: pvalue
     title: p-value
     type: float
-- hidden: false
-  name: mutpred_rankscore
-  title: Rank Score
-  type: float
-  width: 70
-  desc: The ratio of the rank of the score over the total number of MutPred scores in dbNSFP.
+  - name: mutpred_general_score
+    title: Score
+    type: float
+  -  name: mutpred_rankscore
+     title: Rank Score
+     type: float
 tags:
 - variant effect prediction
 release-note:
+  1.4.0: table data enabled
   1.3.0: updated to include rank score.
 title: MutPred
 type: annotator
-version: 1.3.0s
+version: 1.4.0
+requires_opencravat: '>=2.2.1'
 requires:
 - wgmutpred1
 smartfilters:
