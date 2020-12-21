@@ -1,6 +1,6 @@
 widgetGenerators['mutpred1'] = {
 	'variant': {
-		'width': 380, 
+		'width': 450, 
 		'height': 180, 
 		'default_hidden': true,
 		'function': function (div, row, tabName) {
@@ -12,58 +12,36 @@ widgetGenerators['mutpred1'] = {
                 return;
 			}
 			addBarComponent(div, row, 'MutPred Score', 'mutpred1__mutpred_general_score', tabName);
-			var top5Mechs = getWidgetData(tabName, 'mutpred1', row, 'mutpred_top5_mechanisms');
-			if (top5Mechs != undefined && top5Mechs != null && top5Mechs.indexOf('[[') == 0) {
-				var all_mechs = JSON.parse(top5Mechs);
+			var allMappings = getWidgetData(tabName, 'mutpred1', row, 'mutpred_top5_mechanisms');
+			if (allMappings != undefined && allMappings != null) {
+                var results = JSON.parse(allMappings);
 				var table = getWidgetTableFrame();
-				var thead = getWidgetTableHead(['Mechanism', 'Location', 'P-value'],['60%','20%','20%']);
+				var thead = getWidgetTableHead(["Transcript", "Mechanism", "Location","P-value", "Score", "Rank Score"],["25%", '20%']);
 				addEl(table, thead);
-				var tbody = getEl('tbody');
-				for (var i = 0; i < all_mechs.length; i++) {
-					var mech = all_mechs[i];
-					var tr = getWidgetTableTr(mech);
+                var tbody = getEl('tbody');
+                var withAtRe = /at ([A-Z]\d+)/;
+                for (var i = 0; i < results.length; i++) {
+                    var row = results[i];
+                    var location = ''
+					var id = row[0];
+					var mechname = row[2];
+					var ca = row[3];
+					var dna = row[4];
+                    var metal = row[5]
+                    var withAtMatch = withAtRe.exec(mechname);
+                    if (withAtMatch != null) {
+                        location =  withAtMatch[0]
+                        mechname = mechname.replace(location, '')
+                    }
+
+					var tr = getWidgetTableTr([id,mechname,location, ca, dna, metal]);
 					addEl(tbody, tr);
 				}
 				addEl(div, addEl(table, tbody));
-			} else {
-                var value = getWidgetData(tabName, 'mutpred1', row, 'mutpred_general_score');
-                if (value != undefined && value != null) {
-                    addBarComponent(div, row, 'MutPred Score', 'mutpred1__mutpred_general_score', tabName);
-                    var top5Mechs = getWidgetData(tabName, 'mutpred1', row, 'mutpred_top5_mechanisms');
-                    if (top5Mechs == null) {
-                        addEl(div, addEl(getEl('span'), getTn('N/A')));
-                    } else {
-                        var all_mechs = top5Mechs.split('; ');
-                        var withAtRe = /(.*) at ([A-Z]\d+).*P = (0\.\d+)/;
-                        var withoutAtRe = /(.*) \(P = (0\.\d+)\)/;
-                        var table = getWidgetTableFrame();
-                        var thead = getWidgetTableHead(['Mechanism', 'Location', 'P-value'],['60%','20%','20%']);
-                        addEl(table, thead);
-                        var tbody = getEl('tbody');
-                        for (var i = 0; i < all_mechs.length; i++) {
-                            var mech = all_mechs[i];
-                            var withAtMatch = withAtRe.exec(mech);
-                            var mechName = '';
-                            var mechLoc = '';
-                            var pval = '';
-                            if (withAtMatch != null) {
-                                mechName = withAtMatch[1];
-                                mechLoc = withAtMatch[2];
-                                pval = withAtMatch[3];
-                            } else {
-                                var withoutAtMatch = withoutAtRe.exec(mech);
-                                mechName = withoutAtMatch[1];
-                                pval = withoutAtMatch[2];
-                            }
-                            var tr = getWidgetTableTr([mechName, mechLoc, pval]);
-                            addEl(tbody, tr);
-                        }
-                        addEl(div, addEl(table, tbody));
-                    }
-                } else {
-                    addEl(div, addEl(getEl('span'), getTn('N/A')));
-                }
-            }
+			}
 		}
 	}
 }
+
+
+

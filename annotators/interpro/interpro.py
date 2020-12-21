@@ -14,15 +14,20 @@ class CravatAnnotator(BaseAnnotator):
         out = {}
         stmt = 'SELECT uniprot_acc, ensembl_transcriptid, interpro_domain FROM {chr} WHERE pos = {pos} AND alt = "{alt}"'.format(chr=input_data["chrom"], pos=int(input_data["pos"]), alt = input_data["alt_base"])
         self.cursor.execute(stmt)
-        row = self.cursor.fetchone()
-        if row is not None:
-            domains = [None if v == '.' else v for v in row[2].split(';')]
-            accs = row[0].split(';')
-            trs = row[1].split(';')
-            hits = [list(v) for v in zip(domains, accs, trs)]
-            out['domain'] = list(set([v for v in domains if v is not None]))
-            out['all'] = hits
-            return out
+        rows = self.cursor.fetchall()
+        if rows is not None:
+            all_results = []
+            for row in rows:
+                accs = str(row[0]).split(';')
+                trs = str(row[1]).split(';')
+                domain = str(row[2]).split(';')
+                for i in range(len(domain)):
+                    hits = [domain[i], accs[i], trs[i]]
+                    all_results.append(hits)
+            if all_results:
+                out['domain'] = domain
+                out['all'] = all_results
+        return out
     
     def cleanup(self):
         self.dbconn.close()

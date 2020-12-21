@@ -21,13 +21,13 @@ output_columns:
   name: score
   title: Score
   type: float
-  desc: Pathogenicity score
+  desc: Max pathogenicity score across all transcripts. 
   hidden: true
 - name: rankscore
   title: Rank Score
   type: float
   hidden: false
-  desc: The ratio of the rank of the score over the total number of REVEL scores in dbNSFP.
+  desc: Max rank score across all transcripts. The ratio of the rank of the score over the total number of REVEL scores.
 - hidden: true
   name: all
   title: All Annotations

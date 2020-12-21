@@ -32,41 +32,64 @@ class CravatAnnotator(BaseAnnotator):
         #aa_query = 'select amino_acid_substitution from mutpred_precomputed where chr="%s" and position="%s" and ref="%s" and alt="%s"' % chrom, pos, ref_base, alt_base
         #general_query = 'select mutpred_general_score from mutpred_precomputed where chr="%s" and position="%s" and ref="%s" and alt="%s"' % chrom, pos, ref_base, alt_base
         #mech_query = 'select mutpred_top5_mechanisms from mutpred_precomputed where chr="%s" and position="%s" and ref="%s" and alt="%s"' % chrom, pos, ref_base, alt_base
-        query = 'select external_protein_id, amino_acid_substitution, mutpred_general_score, mutpred_top5_mechanisms, mutpred_rankscore from {chr} where pos = {pos} and alt = "{alt}"'.format(
+        query = 'select transcript, external_protein_id, amino_acid_substitution, mutpred_general_score, mutpred_top5_mechanisms, mutpred_rankscore from {chr} where pos = {pos} and alt = "{alt}"'.format(
             chr = input_data["chrom"], pos = int(input_data["pos"]), alt = input_data["alt_base"])
         self.cursor.execute(query)
-        result = self.cursor.fetchone()
-
+        rows = self.cursor.fetchall()
+        transcript = None
         external_protein_id = None
         amino_acid_substitution = None
         mutpred_general_score = None
         mutpred_top5_mechanisms = None
         mutpred_rankscore = None
-        if result is not None:
-            # Absent values are returned as None from the db
-            external_protein_id = result[0]
-            amino_acid_substitution = result[1]
-            mutpred_general_score = result[2]
-            # Top 5 mechanisms stored in compact form, must be expanded
-            mutpred_top5_mechanisms = []
-            top5tmp = self.expand_mechanisms(result[3])
-            for r in [v.strip() for v in top5tmp.split(';')]:
-                [v1, v2] = r.split('(')
-                mechanism = v1.strip()
-                pvalue = float(v2.split('=')[1].split(')')[0])
-                mutpred_top5_mechanisms.append([mechanism, pvalue])
-            mutpred_rankscore = result[4]
-        
-        out = {}
-        out['external_protein_id'] = external_protein_id
-        out['amino_acid_substitution'] = amino_acid_substitution
-        out['mutpred_general_score'] = mutpred_general_score
-        if mutpred_top5_mechanisms is not None:
-            out['mutpred_top5_mechanisms'] = mutpred_top5_mechanisms
-        else:
-            out['mutpred_top5_mechanisms'] = mutpred_top5_mechanisms
-        out['mutpred_rankscore'] = mutpred_rankscore
-        return out
+        if rows:
+            out = {}
+            precomp_data = []
+            for result in rows:
+                transcript = result[0]
+                # Absent values are returned as None from the db
+                external_protein_id = result[1]
+                amino_acid_substitution = result[2]
+                mutpred_general_score = result[3]
+                mutpred_rankscore = result[5]
+                # Top 5 mechanisms stored in compact form, must be expanded
+                mutpred_top5_mechanisms = []
+                top5tmp = self.expand_mechanisms(result[4])
+                new = transcript.strip().split(';')
+                for i in range(len(new)):
+                    transc = new[i]
+                    for r in [v.strip() for v in top5tmp.split(';')]:
+                        [v1, v2] = r.split('(')
+                        mechanism = v1.strip()
+                        pvalue = float(v2.split('=')[1].split(')')[0])
+                        mutpred_top5_mechanisms = [transc,external_protein_id, mechanism, pvalue, mutpred_general_score, mutpred_rankscore]
+                        precomp_data.append({'transcript': transc, 'external_protein_id': external_protein_id, 'amino_acid_substitution': amino_acid_substitution, 'mutpred_general_score': mutpred_general_score, 'mutpred_rankscore': mutpred_rankscore, 'full_result':mutpred_top5_mechanisms})
+                if precomp_data:
+                    all_transcripts = set()
+                    scores = [x['mutpred_rankscore'] for x in precomp_data]
+                    all_results_list = [x['full_result'] for x in precomp_data]
+                    max_rankscore = max(scores)
+                    for x in precomp_data:
+                        if x['mutpred_rankscore'] == max_rankscore:
+                            all_transcripts.add(x['transcript'])
+                    all_transcripts = list(all_transcripts)
+                    all_transcripts.sort()
+                    all_transcripts = ';'.join(all_transcripts)
+                    max_index = scores.index(max_rankscore)
+                    worst_mapping = precomp_data[max_index]
+                    worst_score = worst_mapping['mutpred_general_score']
+                    worst_protein_id = worst_mapping['external_protein_id']
+                    worst_aa = worst_mapping['amino_acid_substitution']
+                    out['transcript'] = all_transcripts
+                    out['external_protein_id'] = worst_protein_id
+                    out['amino_acid_substitution'] = worst_aa
+                    out['mutpred_general_score'] = worst_score
+                    if mutpred_top5_mechanisms is not None:
+                        out['mutpred_top5_mechanisms'] = all_results_list
+                    else:
+                        out['mutpred_top5_mechanisms'] = all_results_list
+                    out['mutpred_rankscore'] = max_rankscore
+            return out
     
     def cleanup(self):
         """
