@@ -626,27 +626,6 @@ widgetGenerators['cosmic2'] = {
         'function': function (div, row, tabName) {
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
-                if (vcTissue.indexOf('(')) {
-                    var toks = vcTissue.split(';')
-                    var vcTissue = [];
-                    for (var i = 0; i < toks.length; i++) {
-                        var toks2 = toks[i].split('(')
-                        var tissue = toks2[0];
-                        var count = parseInt(toks2[1].split(')')[0]);
-                        vcTissue.push([tissue, count]);
-                    }
-                    for (var i = 0; i < vcTissue.length - 1; i++) {
-                        for (var j = i + 1; j < vcTissue.length; j++) {
-                            if (vcTissue[i][1] < vcTissue[j][1]) {
-                                var tmp = vcTissue[i];
-                                vcTissue[i] = vcTissue[j];
-                                vcTissue[j] = tmp;
-                            }
-                        }
-                    }
-                } else {
-                    vcTissue = JSON.parse(vcTissue);
-                }
                 var outTable = getEl('table');
                 var outTr = getEl('tr');
                 var outTd = getEl('td');
