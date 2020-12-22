@@ -33,15 +33,26 @@ output_columns:
   filterable: false
   link_format: https://civicdb.org/links/variant/${.*}
   hidden: true
+smartfilters:
+- name: hasdata
+  title: CIVIC
+  description: Only include variants with data from CIVIC
+  selector:
+    type: empty
+  filter:
+    column: civic__id
+    test: hasData
 tags:
 - variants
 - clinical relevance
 - cancer
+- literature
 title: CIViC
 type: annotator
-version: 1.0.14
+version: 1.0.15
 requires_opencravat: '>=1.4.0'
 requires:
 - wgcivic
 release_note:
+  1.0.15: Add smartfilter
   1.0.14: Fail more gracefully when data can't be loaded

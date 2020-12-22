@@ -1,5 +1,5 @@
 title: ClinGen Gene
-version: 1.0.0
+version: 1.0.1
 type: annotator
 level: gene
 output_columns:
@@ -22,6 +22,15 @@ output_columns:
   title: Link
   type: string
   hidden: true
+smartfilters:
+- name: hasdata
+  title: ClinGen
+  description: Only include variants with data from ClinGen
+  selector:
+    type: empty
+  filter:
+    column: clingen__mondo
+    test: hasData
 description: ClinGen is a National Institutes of Health (NIH)-funded resource dedicated
   to building a central resource that defines the clinical relevance of genes and
   variants for use in precision medicine and research.

@@ -23,7 +23,8 @@ class CravatAnnotator(BaseAnnotator):
         if d:
             out = {}
             out.update(d)
-            out['chemical'] = [list(v) for v in list(zip(out['chemical'], out['chemid']))]
+            out['chemical'] = ';'.join(out['chemical'])
+            out['chemid'] = ';'.join(out['chemid'])
         else:
             return None
 
