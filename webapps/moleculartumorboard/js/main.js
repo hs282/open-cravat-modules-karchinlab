@@ -626,7 +626,7 @@ widgetGenerators['cosmic2'] = {
         'function': function (div, row, tabName) {
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
-                if (vcTissue.indexOf('(')) {
+                if (typeof(vcTissue) == 'string') {
                     var toks = vcTissue.split(';')
                     var vcTissue = [];
                     for (var i = 0; i < toks.length; i++) {

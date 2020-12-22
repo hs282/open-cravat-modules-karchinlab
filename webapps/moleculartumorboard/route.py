@@ -118,8 +118,34 @@ async def live_annotate (input_data, annotators):
             traceback.print_exc()
             response[module_name] = None
     del crx_data[mapping_parser_name]
+    set_crx_canonical(crx_data)
     response['crx'] = crx_data
     return response
+
+def set_crx_canonical (crx_data):
+    global canonicals
+    if canonicals is None:
+        f = open(os.path.join(os.path.dirname(__file__), 'canonical_transcripts.txt'))
+        canonicals = {}
+        for line in f:
+            [hugo, enstnv] = line[:-1].split()
+            canonicals[hugo] = enstnv
+        f.close()
+    all_mappings = json.loads(crx_data['all_mappings'])
+    for hugo in all_mappings.keys():
+        if hugo not in canonicals:
+            continue
+        mappings = all_mappings[hugo]
+        for mapping in mappings:
+            [uniprot, achange, sos, tr, cchange] = mapping
+            if tr.split('.')[0] == canonicals[hugo]:
+                crx_data['hugo'] = hugo
+                crx_data['transcript'] = tr
+                crx_data['so'] = sos
+                crx_data['cchange'] = cchange
+                crx_data['achange'] = achange
+                break
+    return crx_data
 
 async def load_live_modules ():
     global live_modules
@@ -224,3 +250,5 @@ routes = [
    ['GET', 'oncokb', get_oncokb_annotation],
    ['GET', 'saveoncokbtoken', save_oncokb_token],
 ]
+
+canonicals = None
