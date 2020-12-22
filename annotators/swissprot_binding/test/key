@@ -1,0 +1,51 @@
+#CRAVAT Report
+#Created at Tuesday 12/22/2020 12:31:48
+#Report level: variant
+#
+Variant Annotation																Swiss-Prot Binding									
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	UniProtKB Accession Number	Active Binding Site	Binding Site	Calcium Binding Site	DNA Binding Site	Metal Ion Binding Site	Nucleotide Phosphate Binding Site	Zinc Finger	Pubmed	All Annotations
+1	chr4	190070987	T	C									1	dna		C3U3A0;Q9UBX2				Homeobox;Homeobox 1				30540931	[["C3U3A0", "", "", "", "Homeobox", "", "", "", ""], ["Q9UBX2", "", "", "", "Homeobox 1", "", "", "", "30540931"]]
+2	chr1	9972120	C	A		Yes	NMNAT1	ENST00000377205.6	stop_gained	c.47C>A	p.Ser16Ter	ENST00000377205.6:NMNAT1:Q9HAN9:stop_gained:p.Ser16Ter:c.47C>A; ENST00000403197.5:NMNAT1::stop_gained:p.Ser16Ter:c.47C>A; ENST00000462686.1:NMNAT1:Q9HAN9:NMD_transcript_variant,stop_gained:p.Ser16Ter:c.47C>A; ENST00000492735.1:NMNAT1::processed_transcript::	1	np		Q9HAN9						ATP		11788603	[["Q9HAN9", "", "", "", "", "", "ATP", "", "11788603"]]
+3	chr11	63997526	T	C		Yes	OTUB1	ENST00000543004.5	missense_variant	c.823T>C	p.Tyr275His	ENST00000255681.7:MACROD1:Q9BQ69:2kb_downstream_variant::c.*1192A>G; ENST00000422031.6:OTUB1::missense_variant:p.Tyr267His:c.799T>C; ENST00000428192.6:OTUB1:Q96FW1:missense_variant:p.Tyr266His:c.796T>C; ENST00000535140.1:OTUB1::2kb_downstream_variant,NMD_transcript_variant::c.*305T>C; ENST00000535715.5:OTUB1::intron_variant::c.696+100T>C; ENST00000538042.1:MACROD1::2kb_downstream_variant,processed_transcript::; ENST00000538426.5:OTUB1:Q96FW1:missense_variant:p.Tyr266His:c.796T>C; ENST00000541041.1:MACROD1::2kb_downstream_variant,processed_transcript::; ENST00000541478.5:OTUB1::missense_variant:p.Tyr165His:c.493T>C; ENST00000543004.5:OTUB1::missense_variant:p.Tyr275His:c.823T>C; ENST00000543422.5:MACROD1::2kb_downstream_variant,processed_transcript::; ENST00000543988.1:OTUB1::missense_variant:p.Tyr236His:c.706T>C	1	bind		F5GYN4;F5H6Q1;J3KR44;Q96FW1								22325355;22367539	[["F5GYN4", "", "", "", "", "", "", "", ""], ["F5H6Q1", "", "", "", "", "", "", "", ""], ["J3KR44", "", "", "", "", "", "", "", ""], ["Q96FW1", "", "", "", "", "", "", "", "22367539"], ["Q96FW1", "", "", "", "", "", "", "", "22325355"]]
+4	chr1	11972935	C	A		Yes	PLOD1	ENST00000196061.5	missense_variant	c.1966C>A	p.His656Asn	ENST00000196061.5:PLOD1:Q02809:missense_variant:p.His656Asn:c.1966C>A; ENST00000491536.5:PLOD1::intron_variant,processed_transcript::	1	metal		Q02809					Iron			8621606	[["Q02809", "", "", "", "", "Iron", "", "", "8621606"]]
+5	chr12	323187	G	C		Yes	KDM5A	ENST00000399788.7	synonymous_variant	c.2170C>G	p.Asp724=	ENST00000399788.7:KDM5A:P29375:synonymous_variant:p.Asp724=:c.2170C>G	1	zn		P29375							C5HC2	27214401;27499454	[["P29375", "", "", "", "", "", "", "C5HC2", "27499454"], ["P29375", "", "", "", "", "", "", "C5HC2", "27214401"]]
+6	chr2	186637097	G	A		Yes	ITGAV	ENST00000261023.8	missense_variant	c.790G>A	p.Asp264Asn	ENST00000261023.8:ITGAV:P06756:missense_variant:p.Asp264Asn:c.790G>A; ENST00000374907.7:ITGAV:P06756:missense_variant:p.Asp228Asn:c.682G>A; ENST00000433736.6:ITGAV:P06756:missense_variant:p.Asp218Asn:c.652G>A	1	ca		P06756			calcium-binding region_260-268_314-322_379-387_443-451					28117447	[["P06756", "", "", "calcium-binding region_260-268_314-322_379-387_443-451", "", "", "", "", "28117447"]]
+7	chr13	75566794	T	G		Yes	UCHL3	ENST00000377595.7	missense_variant	c.283T>G	p.Cys95Gly	ENST00000377595.7:UCHL3:P15374:missense_variant:p.Cys95Gly:c.283T>G; ENST00000471792.6:UCHL3::processed_transcript::; ENST00000563635.5:AL137782.1::lnc_RNA::; ENST00000570285.1:AL137782.1::2kb_upstream_variant,lnc_RNA::; ENST00000618773.4:UCHL3::missense_variant:p.Cys59Gly:c.175T>G	1	act		P15374	Nucleophile							19154770;20380862;9790970	[["P15374", "Nucleophile", "", "", "", "", "", "", "9790970"], ["P15374", "Nucleophile", "", "", "", "", "", "", "19154770"], ["P15374", "Nucleophile", "", "", "", "", "", "", "20380862"]]
+#CRAVAT Report
+#Created at Tuesday 12/22/2020 12:31:48
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+NMNAT1		1	0	stop_gained	NMD_transcript_variant(1),processed_transcript(1),stop_gained(1)
+OTUB1		1	0	missense_variant	intron_variant(1),missense_variant(1),NMD_transcript_variant(1)
+PLOD1		1	0	missense_variant	intron_variant(1),missense_variant(1),processed_transcript(1)
+KDM5A		1	0	synonymous_variant	synonymous_variant(1)
+ITGAV		1	0	missense_variant	missense_variant(1)
+UCHL3		1	0	missense_variant	missense_variant(1),processed_transcript(1)
+#CRAVAT Report
+#Created at Tuesday 12/22/2020 12:31:48
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	dna
+2	np
+3	bind
+4	metal
+5	zn
+6	ca
+7	act
+#CRAVAT Report
+#Created at Tuesday 12/22/2020 12:31:48
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
+7		7	0
