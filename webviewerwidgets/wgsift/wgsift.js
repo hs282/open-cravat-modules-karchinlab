@@ -17,9 +17,10 @@ widgetGenerators['sift'] = {
 					var score = row[1];
 					var pred = row[2];
 					var rank = row[3];
+					rank = rank.toFixed(3);
 					var med = row[4];
-					var conf = row[5]
-					var seqs = row[6]
+					var conf = row[5];
+					var seqs = row[6];
 					var tr = getWidgetTableTr([trans, pred,conf,score, rank, med, seqs]);
 					addEl(tbody, tr);
 				}
