@@ -13,6 +13,7 @@ input_format: crx
 level: variant
 output_columns:
 - filterable: false
+  hidden: true
   name: cosmic_id
   title: ID
   type: string
@@ -25,11 +26,20 @@ output_columns:
   type: string
   width: 110
   hidden: true
+  table: true
+  table_headers:
+  - name: tissue
+    title: Tissue
+    type: string
+  - name: count
+    title: Count
+    type: int
 - name: variant_count
   title: Variant Count
   type: int
   width: 80
   desc: Occurences in COSMIC
+  hidden: false
 - filterable: false
   hidden: true
   name: transcript
@@ -47,8 +57,8 @@ tags:
 - genes
 title: COSMIC
 type: annotator
-version: 91.0.0
-requires_opencravat: '>=1.4.0'
+version: 91.0.1s
+requires_opencravat: '>=2.2.1'
 requires:
 - wgcosmic
 smartfilters:
@@ -61,5 +71,7 @@ smartfilters:
     column: cosmic__cosmic_id
     test: hasData
 commercial_warning: For commercial use, contact cosmic@sanger.ac.uk
+private: true
 release_note:
+  91.0.1: table data enabled
   91.0.0: data update to COSMIC v91
