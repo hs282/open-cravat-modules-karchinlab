@@ -10,21 +10,39 @@ developer:
   website: http://geneontology.org/
 level: gene
 output_columns:
-- name: bpo_
+- name: bpo_name
   title: Biological Process
   type: string
   width: 90
   desc: The larger processes, or ‘biological programs’ accomplished by multiple molecular activities. 
-- name: cco_
+- name: bpo_id
+  title: Biological Process GO ID
+  type: string
+  width: 100
+  desc: The larger processes, or ‘biological programs’ accomplished by multiple molecular activities. 
+  hidden: true
+- name: cco_name
   title: Cellular Component
   type: string
   width: 90
+  desc: The locations relative to cellular structures in which a gene product performs a function.
+- name: cco_id
+  title: Cellular Component GO ID
+  type: string
+  width: 90
   desc: The locations relative to cellular structures in which a gene product performs a function
-- name: mfo_
+  hidden: true
+- name: mfo_name
   title: Molecular Function
   type: string
   width: 90
   desc: Molecular-level activities performed by gene products.
+- name: mfo_id
+  title: Molecular Function GO ID
+  type: string
+  width: 100
+  desc: Molecular-level activities performed by gene products.
+  hidden: true
 
 tags:
 - genes
