@@ -1,0 +1,23 @@
+description: Directly link to the Molecualr Tumor Board report page, based on variant. 
+developer:
+  name: Rick Kim
+  organization: In Silico Solutions
+  email: rkim@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+
+level: variant
+output_columns:
+- name: link
+  title: Link
+  type: string
+  desc: Link to the Molecular Tumor Board report page. 
+  width: 80
+
+
+title: Molecular Tumor Board Report
+version: 1.0.0
+type: annotator
+private: true
+
+
