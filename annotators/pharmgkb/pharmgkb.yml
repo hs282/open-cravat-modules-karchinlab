@@ -1,5 +1,5 @@
 title: PharmGKB
-version: 1.1.0
+version: 1.1.1
 type: annotator
 level: variant
 output_columns:
@@ -54,6 +54,7 @@ developer:
 requires:
 - wgpharmgkb
 release-note: 
+  1.1.1: added table-data columns
   1.1.0: Data update
 tags:
 - variants
