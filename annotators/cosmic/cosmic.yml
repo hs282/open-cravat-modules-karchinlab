@@ -57,7 +57,7 @@ tags:
 - genes
 title: COSMIC
 type: annotator
-version: 91.0.1s
+version: 91.0.1
 requires_opencravat: '>=2.2.1'
 requires:
 - wgcosmic
@@ -71,7 +71,6 @@ smartfilters:
     column: cosmic__cosmic_id
     test: hasData
 commercial_warning: For commercial use, contact cosmic@sanger.ac.uk
-private: true
 release_note:
   91.0.1: table data enabled
   91.0.0: data update to COSMIC v91
