@@ -137,7 +137,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_vannot');
     parentDiv.style.position = 'relative';
     parentDiv.style.width = sectionWidth + 'px';
-    parentDiv.style.height = '350px';
+    parentDiv.style.height = '400px';
     var retDivs = showWidget('basepanel', ['base','hgvs'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_action');
     parentDiv.style.position = 'relative';
@@ -644,8 +644,6 @@ widgetGenerators['cosmic2'] = {
                             }
                         }
                     }
-                } else {
-                    vcTissue = JSON.parse(vcTissue);
                 }
                 var outTable = getEl('table');
                 var outTr = getEl('tr');
@@ -787,7 +785,7 @@ widgetGenerators['basepanel'] = {
             //var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, 220);
             var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, 1175, 300);
             divs[0].style.position = 'absolute';
-            divs[0].style.top = '180px';
+            divs[0].style.top = '210px';
             divs[0].style.left = '0px';
         }
     }

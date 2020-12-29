@@ -97,6 +97,10 @@ async def live_annotate (input_data, annotators):
             continue
         try:
             conf = module_confs[module_name]
+            json_colnames = []
+            for col in conf['output_columns']:
+                if 'table' in col and col['table'] == True:
+                    json_colnames.append(col['name'])
             if 'secondary_inputs' in conf:
                 sec_mods = conf['secondary_inputs']
                 secondary_data = {}
@@ -112,6 +116,12 @@ async def live_annotate (input_data, annotators):
                 annot_data = None
             elif type(annot_data) is dict:
                 annot_data = clean_annot_dict(annot_data)
+            if annot_data is not None:
+                for colname in json_colnames:
+                    json_data = annot_data.get(colname, None)
+                    if json_data is not None:
+                        json_data = json.loads(json_data)
+                    annot_data[colname] = json_data
             response[module_name] = annot_data
         except Exception as e:
             import traceback
