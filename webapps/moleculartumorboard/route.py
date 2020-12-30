@@ -119,7 +119,7 @@ async def live_annotate (input_data, annotators):
             if annot_data is not None:
                 for colname in json_colnames:
                     json_data = annot_data.get(colname, None)
-                    if json_data is not None:
+                    if json_data is not None and type(json_data) == str:
                         json_data = json.loads(json_data)
                     annot_data[colname] = json_data
             response[module_name] = annot_data

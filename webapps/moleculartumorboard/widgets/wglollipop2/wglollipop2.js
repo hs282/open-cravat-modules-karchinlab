@@ -2,7 +2,7 @@ widgetInfo['lollipop2'] = {'title': 'Protein Diagram'};
 widgetGenerators['lollipop2'] = {
 	'variant': {
 		'donterase': true,
-		'width': 580, 
+		'width': '100%', 
 		'height': 180, 
 		'variables': {
             'soPoints': {
@@ -192,7 +192,7 @@ widgetGenerators['lollipop2'] = {
             function drawMain () {
                 var data = v['data'];
                 var widgetContentDiv = document.getElementById('widgetcontentdiv_' + widgetName + '_' + self.variables.tabName);
-                widgetContentDiv.style.width = 'calc(100% - 200px)';
+                widgetContentDiv.style.width = '95vw';
                 var spinner = widgetContentDiv.getElementsByClassName('widgetspinner')[0];
                 $(spinner).remove();
                 widgetGenerators[widgetName]['data'] = data;
@@ -364,7 +364,7 @@ widgetGenerators['lollipop2'] = {
 					categories.sort();
 					categoryPartDiv.style.display = 'inline-block';
 				}
-				var option = new Option('', '');
+				var option = new Option('Tissue:', '');
 				categorySelect.options.add(option);
 				for (var i = 0; i < categories.length; i++) {
 					var category = categories[i];
@@ -427,6 +427,8 @@ widgetGenerators['lollipop2'] = {
 				if (datasource == '') {
 					return;
 				}
+				var dsDiv = canvas.parentElement;
+                dsDiv.style.height = '300px';
 				v.sitedatasource = datasource;
 				var stage = acgraph.create(canvasId);
 				var y = 0;
@@ -469,10 +471,10 @@ widgetGenerators['lollipop2'] = {
 						}
 					}
 				}
-				var dsDiv = canvas.parentElement;
-				var maxStackLevel = Math.max(Object.keys(stacks));
-				dsDiv.style.height = maxStackLevel * (v.domainLineHeight + 2) 
-					+ 5 + 'px';
+				var maxStackLevel = Math.max(Object.keys(stacks).length);
+                console.log('@ stacks=', stacks, 'maxstacklevel=', maxStackLevel, 'total=', maxStackLevel, v.domainLineHeight);
+				dsDiv.style.height = (maxStackLevel * (v.domainLineHeight + 2) + 5) + 'px';
+                console.log('@ dsDiv height=', dsDiv.style.height);
 			}
 
 			function setupVariantPopup (element, variant) {
@@ -633,9 +635,12 @@ widgetGenerators['lollipop2'] = {
 				v.proteinWidth = parseInt(
 					v.proteinWidth.substring(0, v.proteinWidth.length - 2)) 
 					- v.variantRadius - v.xEndPad;
+                console.log('@ proteinwidth=', v.proteinWidth);
 				v.aalen = data['len'];
 				v.aaWidth = v.proteinWidth / v.aalen;
 				v.reftranscript = data['transcript'];
+                var titlediv = document.querySelector('#detailwidget_variant_lollipop2 legend.detailwidgettitle');
+                titlediv.textContent = titlediv.textContent + ' (' + v.reftranscript + ')';
 				drawControlPanel(data);
 				drawMyVariants(data);
 				drawProtein(data);
@@ -652,21 +657,19 @@ widgetGenerators['lollipop2'] = {
 				// Container
 				var dsDiv = getEl('div');
 				dsDiv.style.width = '100%';
-				dsDiv.style.height = '20px';
+                dsDiv.style.fontSize = '18px';
 				addEl(div, dsDiv);
-
+                addEl(dsDiv, getEl('br'));
+                
 				// Protein site datasource selector
 				var partDiv = getEl('div');
 				partDiv.style.display = 'inline-block';
-				span = getEl('span');
-				addEl(span, getTn('Track: '));
-				addEl(partDiv, span);
 				select = getEl('select');
 				select.id = getProtSiteSourceSelectorId();
 				select.className = 'detailwidgetselect';
 				var datasources = Object.keys(data['domains']);
 				datasources.sort();
-				var option = new Option('', '');
+				var option = new Option('Track:', '');
 				select.options.add(option);
 				for (var i = 0; i < datasources.length; i++) {
 					var datasource = datasources[i];
@@ -689,9 +692,6 @@ widgetGenerators['lollipop2'] = {
 				datasources.sort();
 				var partDiv = getEl('div');
 				partDiv.style.display = 'inline-block';
-				var span = getEl('span');
-				addEl(span, getTn('\xa0\xa0Reference variants from: '));
-				addEl(partDiv, span);
 				var select = getEl('select');
 				select.id = getVarDatasourceSelectorId();
 				select.className = 'detailwidgetselect';
@@ -700,7 +700,7 @@ widgetGenerators['lollipop2'] = {
 					onChangeOtherVariantDatasource(select, data);
 				});
 				addEl(partDiv, select);
-				var option = new Option('', '');
+				var option = new Option('Reference variants:', '');
 				select.options.add(option);
 				for (var i = 0; i < datasources.length; i++) {
 					var datasource = datasources[i];
@@ -713,9 +713,6 @@ widgetGenerators['lollipop2'] = {
 				var partDiv = getEl('div');
 				partDiv.id = getVarCategorySelectorDivId();
 				partDiv.style.display = 'none';
-				span = getEl('span');
-				addEl(span, getTn('  (Category: '));
-				addEl(partDiv, span);
 				select = getEl('select');
 				select.id = getVarCategorySelectorId();
 				select.className = 'detailwidgetselect';
@@ -728,8 +725,8 @@ widgetGenerators['lollipop2'] = {
 							select.options[select.selectedIndex].value);
 				});
 				addEl(partDiv, select);
-				addEl(partDiv, addEl(getEl('span'), getTn(')')));
 				addEl(dsDiv, partDiv);
+                addEl(div, getEl('br'));
 			}
 
 			function drawMyVariants (data) {
@@ -773,25 +770,16 @@ widgetGenerators['lollipop2'] = {
 
 				// Protein container
 				var dsDiv = getEl('div');
-				dsDiv.style.width = '100%';
+				dsDiv.style.width = v.proteinWidth;
 				dsDiv.style.height = '30px';
 				dsDiv.setAttribute('datasource', datasource);
 				addEl(div, dsDiv);
-
-                // Transcript
-                var tsDiv = getEl('div');
-                tsDiv.style.position = 'absolute';
-                tsDiv.style.bottom = '7px';
-                tsDiv.style.right = '12px';
-                tsDiv.textContent = v.reftranscript;
-                addEl(div, tsDiv);
 
 				// Protein canvas
 				var canvas = getEl('div');
 				var canvasId = getProtCanvasId();
 				canvas.id = canvasId;
-				canvas.style.width = '100%';
-				canvas.style.height = '100%';
+				canvas.style.width = (v.proteinWidth + 10) + 'px';
 				addEl(dsDiv, canvas);
 
 				// Protein stage
@@ -845,6 +833,7 @@ widgetGenerators['lollipop2'] = {
 				var dsDiv = getEl('div');
 				dsDiv.style.width = '100%';
 				dsDiv.style.height = '30px';
+                dsDiv.style.fontSize = '18px';
 
 				var canvas = getEl('div');
 				var canvasId = getSiteCanvasId();
@@ -859,15 +848,8 @@ widgetGenerators['lollipop2'] = {
             function drawLegend () {
                 var parentDiv = document.getElementById('detailwidget_' + self.variables.tabName + '_' + widgetName);
                 var sdiv = getEl('div');
-                sdiv.style.position = 'absolute';
-                sdiv.style.top = '0px';
-                sdiv.style.right = '0px';
-                sdiv.style.width = '200px';
-                sdiv.style.height = '150px';
+                sdiv.id = 'wglollipop_legend';
                 addEl(parentDiv, sdiv);
-                var canvas = getEl('div')
-                addEl(sdiv, canvas);
-				var stage = acgraph.create(canvas);
                 var sos = [
                     'synonymous_variant',
                     'missense_variant',
@@ -881,20 +863,22 @@ widgetGenerators['lollipop2'] = {
                     'frameshift_truncation',
                 ];
                 var v = widgetGenerators[widgetName][tabName]['variables'];
-                var x = 10;
-                var y = 0;
-                var width = v.variantMinWidth;
-                var height = 10;
                 for (var i = 0; i < sos.length; i++) {
                     var so = sos[i];
 					var color = v.varColors[so];
 					if (color == undefined) {
 						color = v.varColorNoSo;
 					}
-					var circle = stage.circle(x, y + 6, 5).fill(color);
-                    var text = stage.text(x + 8, y + 8, so);
-                    text.fontSize(2);
-                    y = y + 15;
+                    var ssdiv = getEl('div');
+                    ssdiv.style.display = 'inline-block';
+                    var circle = getEl('span');
+                    circle.classList.add('circle');
+                    circle.style.backgroundColor = color;
+                    addEl(ssdiv, circle);
+                    var span = getEl('span');
+                    span.textContent = so;
+                    addEl(ssdiv, span);
+                    addEl(sdiv, ssdiv);
                 }
             }
 

@@ -22,8 +22,12 @@
 	url('/result/fonts/sourcesanspro-bold-webfont.woff2') format('woff2');
 }
 
+body {
+    margin: 0vw;
+}
+
 body * {
-	font-family: 'roboto-light';
+	font-family: 'Helvetica';
 	margin: 0px;
 }
 
@@ -58,14 +62,20 @@ body * {
     padding-right: 0px;
 }
 
+/*
 .detailcontentdiv * {
     font-size: 11px;
 }
+*/
 
 .detailwidget {
-	font-size: 12px;
+	font-size: 18px;
 	border: 1px solid #d0d0d0;
     padding: 0px;
+}
+
+.detailwidget table span,p {
+    font-size: 18px;
 }
 
 .detailwidgetheader {
@@ -83,7 +93,7 @@ body * {
 	width: calc(100% - 4px);
 	background: #4a87bd;
     font-family: sourcesanspro-bold;
-	font-size: 13px;
+	font-size: 18px;
     height: 18px;
     margin-bottom: 6px;
 }
@@ -110,7 +120,7 @@ body * {
 
 .detailwidgetpinbutton {
 	cursor: default;
-	font-size: 12px;
+	font-size: 18px;
 	text-align: center;
 	border: 1px solid gray;
 	width: 14px;
@@ -133,19 +143,19 @@ body * {
 }
 
 .detailwidgetselect {
-	font-family: roboto-light;
-	font-size: 11px;
+	font-size: 18px;
 }
 
 .detail-info-line-header {
     vertical-align: top;
-    min-width: 75px;
+    min-width: 115px;
     font-weight: bold;
 }
 
 .detail-info-line-content {
     vertical-align: top;
     min-width: 60px;
+    word-break: break-word;
 }
 
 .nodata {
