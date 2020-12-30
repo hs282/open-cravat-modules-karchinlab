@@ -33,8 +33,8 @@ widgetGenerators['cancer_hotspots'] = {
                     return;
                 }
                 let occurs = {};
-                for (let stok of samples.split('; ')) {
-                    [cancer,occur] = stok.split(':');
+                for (let stok of samples) {
+                    [cancer,occur] = stok;
                     occurs[cancer] = occur;
                 }
                 const table = getWidgetTableFrame();
