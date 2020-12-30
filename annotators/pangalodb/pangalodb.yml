@@ -1,0 +1,97 @@
+datasource: 2020.03.27
+description: PanglaoDB is a single cell gene expression resource for the scientific community. The goal of this database is to provide exploration of single cell RNA sequencing experiments.
+developer:
+  name: 'Oscar Franzen'
+  organization: 'Integrated Cardio Metabolic Centre at Karolinska Institutet.'
+  email: 'support@cravat.us'
+  website: 'https://panglaodb.se/markers.html?cell_type=%27Smooth%20muscle%20cells%27'
+  citation: 'Oscar Franzén, Li-Ming Gan, Johan L M Björkegren, PanglaoDB: a web server for exploration of mouse and human single-cell RNA sequencing data, Database, Volume 2019, 2019, baz046, https://doi.org/10.1093/database/baz046'
+
+level: gene
+
+output_columns:
+- name: cell_type
+  title: Cell Type
+  type: string
+  width: 75
+  hidden: true
+
+- name: ui
+  title: Ubiquitousness Index
+  type: float
+  desc: Ranges 0-1. 0 indicates the gene is not expressed in any cell cluster and 1 indicates the gene is expressed in all cell clusters.
+  width: 95
+  hidden: true
+
+- name: desc
+  title: Description
+  type: string
+  width: 90
+  hidden: true
+
+- name: germlayer
+  title: Germ Layer
+  type: string
+  width: 80
+  hidden: true
+
+- name: organ
+  title: Organ
+  type: string
+  width: 75
+  hidden: true
+
+- name: sensitivity
+  title: Sensitivity
+  type: float
+  desc: Shows how frequently this marker is expressed in cells of this particular cell type.
+  width: 65
+  hidden: false
+
+- name: specificity
+  title: Specificity
+  type: float
+  desc: Shows how frequently this marker is expressed in cells  NOT of this particular cell type.
+  width: 65
+  hidden: false
+
+- name: hits
+  title: All Annotations
+  type: string
+  width: 75
+  hidden: true
+  table: true
+  table_headers:
+  - name: cell_type
+    title: Cell Type
+    type: string
+  - name: ui
+    title: Ubiquitousness Index
+    type: float
+  - name: desc
+    title: Description
+    type: string
+  - name: germlayer
+    title: Germ Layer
+    type: string
+  - name: organ
+    title: Organ
+    type: string
+  - name: sensitivity
+    title: Sensitivity
+    type: float
+  - name: specificity
+    title: Specificity
+    type: float
+
+requires:
+- wgpangalodb
+requires_opencravat: '>=2.2.1'
+tags:
+  - gene
+title: PangaloDB
+version: 1.0.0
+type: annotator
+private: true
+
+

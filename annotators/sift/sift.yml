@@ -1,8 +1,14 @@
 title: SIFT
-version: 1.0.0
+version: 1.1.0
 type: annotator
 level: variant
 output_columns:
+- name: transcript
+  title: Transcript
+  type: string
+  hidden: true
+  width: 90
+  desc: Ensembl Transcript ID
 - name: prediction
   title: Prediction
   type: string
@@ -28,6 +34,11 @@ output_columns:
   desc: Ranges from 0 to 1. The amino acid substitution is predicted damaging is the
     score is <= 0.05, and tolerated if the score is > 0.05.
   hidden: true
+- name: rankscore
+  title: Rank Score
+  type: float
+  hidden: false
+  desc: Max rank score across all transcripts. The ratio of the rank of the score over the total number of SIFT scores.
 - name: med
   title: Median Info
   type: float
@@ -44,6 +55,35 @@ output_columns:
     represented at that position, and this column indicates this.
   width: 60
   hidden: true
+- hidden: true
+  name: all
+  title: All Annotations
+  type: string
+  width: 75
+  filterable: false
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: score
+    title: Score
+    type: float
+  - name: prediction
+    title: prediction
+    type: string
+  - name: rankscore
+    title: rankscore
+    type: float
+  - name: med
+    title: med
+    type: float
+  - name: confidence
+    title: confidence
+    type: string
+  - name: seqs
+    title: seqs
+    type: int
 description: SIFT predicts whether an amino acid substitution affects protein function
 developer:
   name: Pauline Ng
@@ -56,6 +96,11 @@ developer:
 datasource: SIFT4G 2016-02-22
 tags:
 - variant effect prediction
+requires:
+- wgsift
+requires_opencravat: '>=2.2.1'
+release_note:
+  1.1.0: data update and table column enabled
 smartfilters:
 - name: prediction
   title: SIFT Prediction
@@ -67,5 +112,4 @@ smartfilters:
     column: sift__prediction
     test: equals
     value: ${value}
-
 commercial_warning: 'Freely available to the academic community. Commercial licensees should contact Steven Henikoff.'

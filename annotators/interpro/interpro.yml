@@ -77,5 +77,3 @@ release_note:
   71.1.0: ensembl transcript ids added
   71.2.0: return None if no annotation
   71.3.0: table data enabled
-
-private: true

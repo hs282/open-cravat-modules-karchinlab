@@ -8,7 +8,7 @@ class CravatAnnotator(BaseAnnotator):
     def setup(self): 
         pass
     def annotate(self, input_data, secondary_data=None):
-        if not secondary_data['dbsnp']:
+        if not secondary_data['dbsnp'] or secondary_data['dbsnp'][0] is None:
             return None
         dbsnp_result = secondary_data['dbsnp'][0].get('snp')
         if dbsnp_result is None:

@@ -1,44 +1,42 @@
-2020/10/29 17:50:15 cravat               /Library/Frameworks/Python.framework/Versions/3.8/bin/oc run -l hg38 inputcopy -a dbsnp -t text
-2020/10/29 17:50:15 cravat               started: Thu Oct 29 17:50:15 2020
-2020/10/29 17:50:15 cravat               conf file: None
-2020/10/29 17:50:15 cravat               input files: /Users/madisonlarsen/insilico/jobs/dbsnp_common/inputcopy
-2020/10/29 17:50:15 cravat               input assembly: hg38
-2020/10/29 17:50:15 cravat.converter     started: Thu Oct 29 17:50:15 2020
-2020/10/29 17:50:15 cravat.converter     Input file(s): /Users/madisonlarsen/insilico/jobs/dbsnp_common/inputcopy
-2020/10/29 17:50:16 cravat.converter     input format: cravat
-2020/10/29 17:50:16 cravat.converter     error lines: 0
-2020/10/29 17:50:16 cravat.converter     finished: Thu Oct 29 17:50:16 2020
-2020/10/29 17:50:16 cravat.converter     num input lines: 6
-2020/10/29 17:50:16 cravat.converter     runtime: 0.001
-2020/10/29 17:50:16 cravat               num_workers: 11
-2020/10/29 17:50:16 cravat               input line chunksize=1 total number of input lines=6 number of chunks=7
-2020/10/29 17:50:19 cravat               num_workers: 11
-2020/10/29 17:50:21 cravat.aggregator    level: variant
-2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
-2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    runtime: 0.005
-2020/10/29 17:50:21 cravat.aggregator    level: gene
-2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
-2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    runtime: 0.002
-2020/10/29 17:50:21 cravat.aggregator    level: sample
-2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
-2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    runtime: 0.003
-2020/10/29 17:50:21 cravat.aggregator    level: mapping
-2020/10/29 17:50:21 cravat.aggregator    input directory: /Users/madisonlarsen/insilico/jobs/dbsnp_common
-2020/10/29 17:50:21 cravat.aggregator    started: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    finished: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.aggregator    runtime: 0.003
-2020/10/29 17:50:21 cravat.tagsampler    started: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.tagsampler    finished: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.tagsampler    runtime: 0.005
-2020/10/29 17:50:21 cravat.textreporter  started: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.mapper        input file: /Users/madisonlarsen/insilico/jobs/dbsnp_common/__dummy__
-2020/10/29 17:50:21 cravat.textreporter  finished: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat.textreporter  runtime: 0.063
-2020/10/29 17:50:21 cravat               finished: Thu Oct 29 17:50:21 2020
-2020/10/29 17:50:21 cravat               runtime: 6.769s
+#CRAVAT Report
+#Created at Tuesday 12/29/2020 00:31:12
+#Report level: variant
+#
+Variant Annotation																dbSNP
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	rsID
+1	chr1	13110	G	A									1	s1		rs540538026
+2	chr1	10178	-	C									1	s2		rs367896724
+3	chr16	10013	T	C									1	s3		rs1263039761
+4	chr9	10052	C	AGT									1	s4		rs370278117
+5	chr22	10515076	-	A									1	s5		rs1302135366
+6	chr15	19803192	-	TCAA									1	s6		rs112623053
+#CRAVAT Report
+#Created at Tuesday 12/29/2020 00:31:12
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+#CRAVAT Report
+#Created at Tuesday 12/29/2020 00:31:12
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s1
+2	s2
+3	s3
+4	s4
+5	s5
+6	s6
+#CRAVAT Report
+#Created at Tuesday 12/29/2020 00:31:12
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0

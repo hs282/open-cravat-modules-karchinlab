@@ -5,24 +5,16 @@ It is a high quality annotated and non-redundant protein sequence database, whic
 
 Swiss-Prot has a subsection 'PTM / Processing' that describes post-transitional modifications (PTMs). This subsection complements the information provided at the sequence level or describes modifications for which position-specific data is not yet available.
 
-## PTMs
-
-* A post-translational modification is a covalent processing event resulting from a proteolytic cleavage or from the addition of a modifying group to one amino acid. They modulate the function of most eukaryote proteins by altering their activity state, localization, turnover, and interactions with other proteins. 
-
-* Although proteins can be modified pre-, co- or post-translationally, all protein modifications are generally referred to as PTMs, because a majority of them are made post-translationally, after the protein is folded.
-
-## Modified Residue
-
-* This subsection of the 'PTM / Processing' section specifies the position and type of each modified residue excluding lipids, glycans and protein cross-links.
-
-* Common modifications include phosphorylation, methylation, acetylation, amidation, formation of pyrrolidone carboxylic acid, isomerization, hydroxylation, sulfation, flavin-binding, cysteine oxidation and nitrosylation.
-
-* We describe the chemical nature of the modified residue using a controlled vocabulary (see the document ['Controlled vocabulary of posttranslational modifications (PTM)')](https://www.uniprot.org/docs/ptmlist).
-
-### We provide additional information concerning the modification, such as:
-
-* The enzyme which carries out the modification. For proteins of infectious organisms, such as viruses, phages and bacteria, we also indicate whether the modification is carried out by a host protein.
-
-* The Relationship with another feature ('partial', 'alternate', 'transient'). The term 'partial' indicates that not all protein molecules are modified, 'alternate' means that the same amino acid can be modified in more than one way, and 'transient' is applied to exceptional cases of otherwise stable modifications. For partial modifications, we do not propagate this comment to homologous proteins and we do not specify the fraction of proteins modified, as this may depend on the experimental conditions.
+|Subsection|Content|
+|----------|:------|
+|[Cross-link](https://www.uniprot.org/help/crosslnk)|Residues participating in covalent linkage(s) between proteins|
+|[Disulfide Bond](https://www.uniprot.org/help/disulfid)|Cysteine residues participating in disulfide bonds|
+|[Glycosylation](https://www.uniprot.org/help/carbohyd)|Covalently attached glycan group(s)|
+|[Initiator methionine](https://www.uniprot.org/help/init_met)|Cleaved initiator methionine|
+|[Lipidication](https://www.uniprot.org/help/lipid)|Covalently attached lipid group(s)|
+|[Modified residue](https://www.uniprot.org/help/mod_res)|Modified residues excluding lipids, glycans and protein crosslinks|
+|[Propeptide](https://www.uniprot.org/help/propep)|Part of a protein that is cleaved during maturation or activation|
+|[Signal](https://www.uniprot.org/help/signal)|Sequence targeting proteins to the secretory pathway or periplasmic space|
+|[Transit Peptide](https://www.uniprot.org/help/transit)|Extent of a transit peptide for organelle targeting|
 
 Information from https://www.uniprot.org/help/post-translational_modification

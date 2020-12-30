@@ -42,15 +42,6 @@ output_columns:
   type: string
   hidden: true
   width: 120
-smartfilters:
-- name: hasdata
-  title: PharmGKB
-  description: Only include variants with data from PharmGKB
-  selector:
-    type: empty
-  filter:
-    column: pharmgkb__pmid
-    test: hasData
 description: Clinically actionable gene-drug associations and genotype-phenotype relationships
 developer:
   name: Teri E. Klein
@@ -62,8 +53,8 @@ developer:
     Medicine" Clinical Pharmacology & Therapeutics (2012) 92(4): 414-417'
 requires:
 - wgpharmgkb
-release-note:
-  1.1.1: Add smartfilter
+release-note: 
+  1.1.1: added table-data columns
   1.1.0: Data update
 tags:
 - variants
@@ -71,3 +62,4 @@ tags:
 - cancer
 - cardiovascular
 - literature
+requires_opencravat: '>=2.2.1'
