@@ -116,7 +116,7 @@ widgetGenerators['lollipop'] = {
                 'frameshift_truncation': 'rgb(200, 0, 255)',
 			},
 			'varColorNoSo': '#aaaaaa',
-			'reftranscript': null,
+			'reftranscripts': null,
 			'aaWidth': null,
 			'boxDomainHeight': 30,
 			'boxR': 6,
@@ -300,13 +300,12 @@ widgetGenerators['lollipop'] = {
                 var allMappings = JSON.parse(getWidgetData(tabName, 'base', row, 'all_mappings'));
 				var hugos = Object.keys(allMappings);
 				variant = {};
-                var reftrNoVer = v.reftranscript.split('.')[0];
 				for (var i = 0; i < hugos.length; i++) {
 					var hugo = hugos[i];
 					var uniprot_ds = allMappings[hugo];
 					for (var j = 0; j < uniprot_ds.length; j++) {
 						var transcript = uniprot_ds[j][3];
-						if (transcript.split('.')[0] == reftrNoVer) {
+						if (v.reftrNoVers.indexOf(transcript.split('.')[0]) >= 0) {
 							var protchange = uniprot_ds[j][1];
 							if (protchange == null || protchange == '') {
 								continue;
@@ -328,7 +327,11 @@ widgetGenerators['lollipop'] = {
                             }
 							variant['so'] = bestSo;
 							var start = protchange.match(/\d+/)[0];
-							variant['start'] = start;
+                            if (start.indexOf('_') > 0) {
+                                variant['start'] = start.split('_')[0];
+                            } else {
+                                variant['start'] = start;
+                            }
 							variant['achange'] = protchange;
                             variant['count'] = getWidgetData(tabName, 'base', row, 'numsample');
 							break;
@@ -628,7 +631,11 @@ widgetGenerators['lollipop'] = {
 					- v.variantRadius - v.xEndPad;
 				v.aalen = data['len'];
 				v.aaWidth = v.proteinWidth / v.aalen;
-				v.reftranscript = data['transcript'];
+				v.reftranscripts = data['transcripts'];
+                v.reftrNoVers = [];
+                for (var i = 0; i < v.reftranscripts.length; i++) {
+                    v.reftrNoVers.push(v.reftranscripts[i].split('.')[0]);
+                }
 				drawControlPanel(data);
 				drawMyVariants(data);
 				drawProtein(data);
@@ -775,7 +782,7 @@ widgetGenerators['lollipop'] = {
                 tsDiv.style.position = 'absolute';
                 tsDiv.style.bottom = '7px';
                 tsDiv.style.right = '12px';
-                tsDiv.textContent = v.reftranscript;
+                tsDiv.textContent = v.reftranscripts[0];
                 addEl(div, tsDiv);
 
 				// Protein canvas
@@ -966,7 +973,8 @@ widgetGenerators['lollipop'] = {
                 'frameshift_truncation': 'rgb(200, 0, 255)',
 			},
 			'varColorNoSo': '#aaaaaa',
-			'reftranscript': null,
+			'reftranscripts': null,
+            'reftrNoVers': null,
 			'aaWidth': null,
 			'boxDomainHeight': 30,
 			'boxR': 6,
@@ -1444,8 +1452,11 @@ widgetGenerators['lollipop'] = {
 
 				v.aalen = data['len'];
 				v.aaWidth = v.proteinWidth / v.aalen;
-				v.reftranscript = data['transcript'];
-
+				v.reftranscripts = data['transcripts'];
+                v.reftrNoVers = [];
+                for (var i = 0; i < v.reftranscripts.length; i++) {
+                    v.reftrNoVers.push(v.reftranscripts[i].split('.')[0]);
+                }
 				drawControlPanel(data);
 				drawMyVariants(data);
 				drawProtein(data);
@@ -1682,13 +1693,12 @@ widgetGenerators['lollipop'] = {
 				var allMappings = JSON.parse(getWidgetData('variant', 'base', row, 'all_mappings'));
 				var hugos = Object.keys(allMappings);
 				variant = {};
-                var reftrNoVer = v.reftranscript.split('.')[0];
 				for (var i = 0; i < hugos.length; i++) {
 					var hugo = hugos[i];
 					var uniprot_ds = allMappings[hugo];
 					for (var j = 0; j < uniprot_ds.length; j++) {
 						var transcript = uniprot_ds[j][3];
-						if (transcript.split('.')[0] == reftrNoVer) {
+						if (v.reftrNoVers.indexOf(transcript.split('.')[0]) >= 0) {
 							var protchange = uniprot_ds[j][1];
                             if (protchange == '') {
                                 continue;
@@ -1709,7 +1719,12 @@ widgetGenerators['lollipop'] = {
                                 }
                             }
 							variant['so'] = bestSo;
-							variant['start'] = protchange.match(/\d+/)[0];
+							var start = protchange.match(/\d+/)[0];
+                            if (start.indexOf('_') > 0) {
+                                variant['start'] = start.split('_')[0];
+                            } else {
+                                variant['start'] = start;
+                            }
 							variant['achange'] = protchange;
                             variant['count'] = getWidgetData('variant', 'base', row, 'numsample');
 							break;
@@ -1735,7 +1750,7 @@ widgetGenerators['lollipop'] = {
                 tsDiv.style.position = 'absolute';
                 tsDiv.style.bottom = '7px';
                 tsDiv.style.right = '12px';
-                tsDiv.textContent = v.reftranscript;
+                tsDiv.textContent = v.reftranscripts[0];
                 addEl(div, tsDiv);
 
 				// Protein canvas
