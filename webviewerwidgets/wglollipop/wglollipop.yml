@@ -1,5 +1,5 @@
 title: Protein diagram
-version: 2.2.0
+version: 2.2.1
 requires_opencravat: '>=2.0.2'
 required_annotator: base
 type: webviewerwidget
