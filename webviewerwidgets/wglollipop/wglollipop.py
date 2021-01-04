@@ -106,7 +106,6 @@ async def get_data (queries):
             variants[data_source][tissue] = l
     ret['variants'] = variants
     ret['hugo'] = hugo
-    print(f'@ ret={ret}')
     await cursor.close()
     await conn.close()
     return ret
