@@ -110,12 +110,11 @@ output_columns:
     title: pubmed
     type: int
 
-requires_opencravat: '>=2.1.3'
+requires_opencravat: '>=2.2.1'
 requires:
 - wgswissprot_domains
 title: Swiss-Prot Domains
 version: 1.0.0
 type: annotator
-private: true
 
 
