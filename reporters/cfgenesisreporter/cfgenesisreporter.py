@@ -462,7 +462,10 @@ class Reporter(CravatReport):
             for i in range(len(csq_ensts)):
                 if csq_ensts[i] == canonical_enst:
                     sos = self.convert_csq_consequence(csq_consequences[i])
-                    canonical_sos[hugo] = sos
+                    if hugo not in canonical_sos:
+                        canonical_sos[hugo] = sos
+                    else:
+                        canonical_sos[hugo] += ',' + sos
                     break
         # Collects group_id.
         group_ids = set() 
@@ -475,7 +478,7 @@ class Reporter(CravatReport):
                     enstnv = self.remove_version(csq_ensts[i])
                     if enstnv == canonical_enstnv:
                         csq_consq = csq_consequences[i]
-                        if 'intron' in csq_consq or 'downstream' in csq_consq or 'non_coding' in csq_consq or 'upstream' in csq_consq:
+                        if ('intron' in csq_consq and 'splice' not in csq_consq) or 'downstream' in csq_consq or 'non_coding' in csq_consq or 'upstream' in csq_consq:
                             break
                         elif enstnv not in self.enstnv_to_alens:
                             print(f'{enstnv} not in oc aalen')
