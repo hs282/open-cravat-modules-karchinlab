@@ -1,4 +1,4 @@
-##fileformat=VCFv4.2
+##fileformat=VCFv4.2 
 ##OpenCRAVATFileDate=20210107
 ##INFO=<ID=CRV,Number=.,Type=String,Description="OpenCRAVAT annotation. Format: base__note|base__coding|base__hugo|base__transcript|base__so|base__cchange|base__achange|base__all_mappings|base__numsample|base__samples|base__tags|cgl__class|vest__transcript|vest__score|vest__pval|vest__all_results|vest__hugo Explanation: base__numsample=Number of samples which contain the variant.|base__samples=Samples which contain the variant.|base__tags=Variant tags from the input file.|vest__hugo=Gene ID">
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	s0	s1	s2	s3	s4
