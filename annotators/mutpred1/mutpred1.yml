@@ -89,5 +89,4 @@ smartfilters:
     column: mutpred1__mutpred_rankscore
     test: greaterThanEq
     value: ${value}
-private: true
 requires_opencravat: '>=2.2.1'

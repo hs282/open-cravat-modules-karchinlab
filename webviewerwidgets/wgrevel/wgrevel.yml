@@ -16,4 +16,3 @@ requires_opencravat: '>=2.2.1'
 release_note:
   1.2.0: works with table data in oc 2.2.1.
   1.1.0: works with single variant page in oc 1.7.0.
-private: true

@@ -27,7 +27,7 @@ widgetGenerators['pangalodb'] = {
                     }
                     var spec = hit[6];
                     if (spec != undefined){
-                        spec = spec.toFixed(3)
+                        spec = spec.toFixed(3);
                     }
                     var tr = getWidgetTableTr([cell, ui, desc, germ, organ, sens, spec]);
                     addEl(tbody, tr);

@@ -14,4 +14,3 @@ release_note:
   1.2.0: works with go version 2020.12.03
   1.1.0: works with single variant page in oc 1.7.0.
   1.0.5: uses https.
-private: true
