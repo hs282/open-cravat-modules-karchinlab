@@ -37,7 +37,7 @@ tags:
 - clinical relevance
 title: Denovo-DB
 type: annotator
-version: 1.6.10
+version: 1.6.11
+release_note:
+  1.6.11: removed widget requirement
 requires_opencravat: '>=1.4.0'
-requires:
-- wgdenovo

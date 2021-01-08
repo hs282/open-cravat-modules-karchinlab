@@ -21,13 +21,12 @@ tags:
 - literature
 title: dbSNP
 type: annotator
-version: 154.0.1
+version: 154.0.2
 release_note:
+  154.0.2: removed widget requirement
   154.0.1: data fix
   154.0.0: data update to build 154
 requires_opencravat: '>=1.4.0'
-requires:
-- wgdbsnp
 smartfilters:
 - name: rsid
   title: dbSNP ID
