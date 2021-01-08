@@ -4,7 +4,7 @@ type: webviewerwidget
 required_annotator: swissprot_ptm
 description: Swiss-Prot PTM webviewer widget
 hidden: true
-requires_opencravat: '>=2.1.3'
+requires_opencravat: '>=2.2.1'
 developer:
   name: Madison Larsen
   organization: In Silico Solutions
@@ -17,4 +17,3 @@ release_note:
   1.1.1: returns no data
   1.1.0: widget for table column data
   1.0.0: Initial release
-private: true
