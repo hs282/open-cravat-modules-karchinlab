@@ -1,5 +1,5 @@
 title: ClinGen
-version: 1.1.0
+version: 1.1.1
 type: webviewerwidget
 required_annotator: clingen
 requires_opencravat: '>=1.7.0'
@@ -13,6 +13,7 @@ developer:
 tags:
 - visualization
 release_note:
+  1.1.1: updated size, returns no data.
   1.1.0: works with single variant page in oc 1.7.0.
   1.0.7: added gene tab aggregated columns.
   1.0.5: uses full sequence ontology names.

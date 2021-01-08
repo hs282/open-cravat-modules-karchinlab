@@ -3,7 +3,13 @@ widgetGenerators['grasp'] = {
 		'width': 280, 
 		'height': 180, 
 		'function': function (div, row, tabName) {
-			var hits = getWidgetData(tabName, 'grasp', row, 'all');
+            var hits = getWidgetData(tabName, 'grasp', row, 'all');
+            if (hits == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
             if (hits != undefined && hits != null) {
                 hits = JSON.parse(hits);
                 var table = getWidgetTableFrame();
@@ -43,6 +49,7 @@ widgetGenerators['grasp'] = {
                     var match = re.exec(phenoVal);
                     if (match !== null) {
                         var pheno = match[1];
+    
                         var pval = match[2];
                         var nhlbi = nhlbis[i];
                         var pmid = pmids[i];
