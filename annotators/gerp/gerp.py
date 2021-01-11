@@ -21,7 +21,7 @@ class CravatAnnotator(BaseAnnotator):
             out['gerp_nr'] = self.myCast(row[0])
             out['gerp_rs'] = self.myCast(row[1])
             out['gerp_rs_rank'] = self.myCast(row[2])
-            return out
+        return out
     
     def cleanup(self):
         self.dbconn.close()
