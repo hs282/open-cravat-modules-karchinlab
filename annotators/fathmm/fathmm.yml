@@ -46,6 +46,8 @@ tags:
 - variant effect prediction
 title: FATHMM
 type: annotator
-version: 2.3.5
+version: 2.3.6
 requires:
 - wgfathmm
+release_note:
+  2.3.6: handle only specific alt chroms
