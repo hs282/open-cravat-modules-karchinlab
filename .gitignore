@@ -22,7 +22,7 @@ example_annotator
 **/**/__dummy__*
 **/**/startofinstall
 **/**/endofinstall
-annotators/segway*
+annotators/segway_*
 *.swp
 **/**/*.so
 **/**/*.pyd
