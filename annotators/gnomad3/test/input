@@ -2,7 +2,7 @@
 chr10	2987654	+	T	A		Does_Not_Exist
 chr10	2987655	+	C	G		Exists_in_v3
 chr3	41194775	+	C	A		plus_upstream_CTNNB1
-chr15 	48717160	+	G	C		plus_SBS_SEP152
+chr15	48717160	+	G	C		plus_SBS_SEP152
 chr7	55019338	+	G	A		plus_SBS_EGFR
 chr1	7965337	+	-	T		plus_ins_PARK7
 chr17	31343157	+	-	TATT		plus_ins_NF1_intron

@@ -4,6 +4,12 @@ widgetGenerators['gtex'] = {
 		'height': 80, 
 		'function': function (div, row, tabName) {
 			var genes = getWidgetData(tabName, 'gtex', row, 'gtex_gene');
+			if (genes == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
 			var genels = genes != null ? genes.split('|') : [];
 			var tissues = getWidgetData(tabName, 'gtex', row, 'gtex_tissue');
 			var tissuels = tissues != null ? tissues.split('|') : [];

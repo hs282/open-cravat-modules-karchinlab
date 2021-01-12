@@ -1,9 +1,15 @@
 widgetGenerators['clingen'] = {
 	'gene': {
 		'width': 380,
-		'height': 200,
+		'height': 120,
 		'function': function (div, row, tabName) {
-            var disease = getWidgetData(tabName, 'clingen', row, 'disease');
+			var disease = getWidgetData(tabName, 'clingen', row, 'disease');
+			if (disease == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
 			if (disease != undefined && disease != null) {
 				var diseases = getWidgetData(tabName, 'clingen', row, 'disease').split(';');
 				var classifications = getWidgetData(tabName, 'clingen', row, 'classification').split(';');

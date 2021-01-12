@@ -1,0 +1,40 @@
+#CRAVAT Report
+#Created at Wednesday 01/06/2021 10:58:04
+#Report level: variant
+#
+Variant Annotation																ALFA: Allele Frequency Aggregator	
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Global AC	Global AF
+1	chr14	56835893	A	G			OTX2-AS1	ENST00000534909.2	lnc_RNA			ENST00000534909.2:OTX2-AS1::intron_variant,lnc_RNA::; ENST00000554149.1:AL161757.4::intron_variant,lnc_RNA::; ENST00000554358.1:OTX2-AS1::intron_variant,lnc_RNA::; ENST00000554428.1:OTX2-AS1::intron_variant,lnc_RNA::; ENST00000554725.1:OTX2-AS1::intron_variant,lnc_RNA::; ENST00000557467.1:AL161757.4::intron_variant,lnc_RNA::; ENST00000653425.1:OTX2-AS1::intron_variant,lnc_RNA::	1	ssss		40331	0.9044041799345204
+2	chr1	22586480	C	A		Yes	EPHA8	ENST00000166244.8	missense_variant	c.824C>A	p.Ala275Asp	ENST00000166244.8:EPHA8:P29322:missense_variant:p.Ala275Asp:c.824C>A; ENST00000374644.8:EPHA8:P29322:missense_variant:p.Ala275Asp:c.824C>A	1	s1		1	0.00011125945705384957
+3	chr12	9261271	A	G			AC010175.1	ENST00000647751.1	lnc_RNA			ENST00000647751.1:AC010175.1::2kb_downstream_variant,lnc_RNA::	1	s2		66759	0.6511421493084681
+4	chr17	41624191	C	T		Yes	KRT17	ENST00000311208.13	missense_variant	c.319G>A	p.Glu107Lys	ENST00000311208.13:KRT17:Q04695:missense_variant:p.Glu107Lys:c.319G>A; ENST00000540235.5:KRT17::missense_variant:p.Met24Ile:c.72G>A	1	s0		21	0.0018790264853256978
+#CRAVAT Report
+#Created at Wednesday 01/06/2021 10:58:04
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+OTX2-AS1		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+EPHA8		1	0	missense_variant	missense_variant(1)
+AC010175.1		0	1	lnc_RNA	lnc_RNA(1)
+KRT17		1	0	missense_variant	missense_variant(1)
+#CRAVAT Report
+#Created at Wednesday 01/06/2021 10:58:04
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	ssss
+2	s1
+3	s2
+4	s0
+#CRAVAT Report
+#Created at Wednesday 01/06/2021 10:58:04
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0

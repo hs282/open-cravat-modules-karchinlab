@@ -1,5 +1,5 @@
 title: GeneHancer
-version: 1.0.0
+version: 1.0.1
 type: webviewerwidget
 required_annotator: genehancer
 description: GeneHancer webviewer widget
@@ -12,4 +12,6 @@ developer:
 tags:
 - visualization
 hidden: true
+release_note:
+  1.0.1: returns no data. 
 requires_opencravat: '>=1.7.0'

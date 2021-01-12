@@ -4,7 +4,14 @@ widgetGenerators['siphy'] = {
 		'height': 210, 
 		'word-break': 'normal',
 		'function': function (div, row, tabName) {
-			addInfoLine(div, 'Score', getWidgetData(tabName, 'siphy', row, 'logodds'), tabName, 25);
+			var log = getWidgetData(tabName, 'siphy', row, 'logodds');
+			if (log == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
+			addInfoLine(div, 'Score',log , tabName, 25);
 			addGradientBarComponent(div, row, 'Rank Score', 'siphy__logodds_rank', tabName);
 			var pis = getWidgetData(tabName, 'siphy', row, 'pi');
 			var pils = pis != null ? pis.split(';') : [];

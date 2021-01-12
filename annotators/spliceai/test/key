@@ -1,0 +1,55 @@
+#CRAVAT Report
+#Created at Wednesday 11/11/2020 08:30:28
+#Report level: variant
+#
+Variant Annotation																SpliceAI							
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Acceptor Gain Score	Acceptor Loss Score	Donor Gain Score	Donor Loss Score	Acceptor Gain Position	Acceptor Loss Position	Donor Gain Position	Donor Loss Posiiton
+1	chr1	69098	C	G		Yes	OR4F5	ENST00000641515.2	missense_variant	c.71C>G	p.Thr24Ser	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Thr3Ser:c.8C>G; ENST00000641515.2:OR4F5::missense_variant:p.Thr24Ser:c.71C>G	1	s0		0.0001	0.0	0.265	0.0	-5	35	-5	17
+2	chr20	87765	A	T		Yes	DEFB125	ENST00000382410.3	missense_variant	c.56A>T	p.Lys19Ile	ENST00000382410.3:DEFB125:Q8N687:missense_variant:p.Lys19Ile:c.56A>T; ENST00000608838.1:DEFB125::intron_variant,processed_transcript::	1	s1		0.001	0.0	0.0175	0.1403	3	1	-25	2
+3	chr14	81197485	C	G			GTF2A1	ENST00000553612.6	splice_site_variant	c.403-1G>C		ENST00000298173.7:GTF2A1::intron_variant,NMD_transcript_variant,splice_site_variant::c.*290-1G>C; ENST00000434192.2:GTF2A1:P52655:intron_variant,splice_site_variant::c.286-1G>C; ENST00000553612.6:GTF2A1:P52655:intron_variant,splice_site_variant::c.403-1G>C	1	s2		0.9917	0.9998	0.0	0.0	-3	-1	-17	-40
+4	chr14	18988422	G	C			POTEM	ENST00000547889.6	splice_site_variant	c.1409+1G>C		ENST00000547889.6:POTEM:A6NI47:intron_variant,splice_site_variant::c.1409+1G>C; ENST00000552966.5:POTEM::intron_variant,NMD_transcript_variant,splice_site_variant::c.*696+1G>C; ENST00000616847.1:POTEM::intron_variant,NMD_transcript_variant,splice_site_variant::c.1409+1G>C	1	s3		0.0	0.0	0.1348	0.9997	3	-35	3	-1
+5	chr2	41714	C	A			FAM110C	ENST00000327669.5	intron_variant	c.947-87G>T		ENST00000327669.5:FAM110C:Q1W6H9:intron_variant::c.947-87G>T; ENST00000460464.1:FAM110C::intron_variant,processed_transcript::; ENST00000461026.1:FAM110C::intron_variant,processed_transcript::	1	s4		0.0009	0.0	0.1432	0.0	-49	-23	2	23
+6	chr8	3408123	G	T		Yes	CSMD1	ENST00000635120.2	stop_gained	c.1847C>A	p.Ser616Ter	ENST00000400186.7:CSMD1::stop_gained:p.Ser617Ter:c.1850C>A; ENST00000520002.5:CSMD1::stop_gained:p.Ser617Ter:c.1850C>A; ENST00000602557.5:CSMD1::stop_gained:p.Ser617Ter:c.1850C>A; ENST00000602723.5:CSMD1::stop_gained:p.Ser617Ter:c.1850C>A; ENST00000635120.2:CSMD1:Q96PZ7:stop_gained:p.Ser616Ter:c.1847C>A; ENST00000647677.1:AC026991.2::2kb_upstream_variant,lnc_RNA::	1	s5		0.3147	0.0	0.0001	0.0	-2	42	-50	-11
+7	chr10	48074	G	T		Yes	TUBB8	ENST00000568584.5	stop_gained	c.318C>A	p.Tyr106Ter	ENST00000561967.1:TUBB8::missense_variant:p.Thr114Lys:c.341C>A; ENST00000562809.1:TUBB8::missense_variant:p.Thr70Lys:c.209C>A; ENST00000564130.2:TUBB8::stop_gained:p.Tyr72Ter:c.216C>A; ENST00000567466.1:TUBB8::NMD_transcript_variant,3_prime_UTR_variant::c.*162C>A; ENST00000568584.5:TUBB8:Q3ZCM7:stop_gained:p.Tyr106Ter:c.318C>A; ENST00000568866.5:TUBB8::stop_gained:p.Tyr69Ter:c.207C>A	1	s6		0.003	0.1098	0.0784	0.0	41	40	41	-23
+8	chr14	18988380	A	C		Yes	POTEM	ENST00000547889.6	missense_variant	c.1368A>C	p.Glu456Asp	ENST00000547889.6:POTEM:A6NI47:missense_variant:p.Glu456Asp:c.1368A>C; ENST00000552966.5:POTEM::NMD_transcript_variant,3_prime_UTR_variant::c.*655A>C; ENST00000616847.1:POTEM::missense_variant,NMD_transcript_variant:p.Glu456Asp:c.1368A>C	1	s7									
+#CRAVAT Report
+#Created at Wednesday 11/11/2020 08:30:28
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+OR4F5		1	0	missense_variant	missense_variant(1)
+DEFB125		1	0	missense_variant	intron_variant(1),missense_variant(1),processed_transcript(1)
+GTF2A1		0	1	splice_site_variant	intron_variant(1),NMD_transcript_variant(1),splice_site_variant(1)
+POTEM		1	1	splice_site_variant	intron_variant(1),missense_variant(1),NMD_transcript_variant(2),splice_site_variant(1),3_prime_UTR_variant(1)
+FAM110C		0	1	intron_variant	intron_variant(1),processed_transcript(1)
+CSMD1		1	0	stop_gained	stop_gained(1)
+TUBB8		1	0	stop_gained	missense_variant(1),NMD_transcript_variant(1),stop_gained(1),3_prime_UTR_variant(1)
+#CRAVAT Report
+#Created at Wednesday 11/11/2020 08:30:28
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+6	s5
+7	s6
+8	s7
+#CRAVAT Report
+#Created at Wednesday 11/11/2020 08:30:28
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
+7		7	0
+8		8	0

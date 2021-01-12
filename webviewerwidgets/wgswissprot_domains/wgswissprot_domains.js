@@ -4,7 +4,12 @@ widgetGenerators['swissprot_domains'] = {
 		'height': 180, 
 		'function': function (div, row, tabName) {
 			var allMappings = getWidgetData(tabName, 'swissprot_domains', row, 'all');
-            console.log(allMappings)
+			if (allMappings == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
 			if (allMappings != undefined && allMappings != null) {
                 var results = JSON.parse(allMappings);
 				var table = getWidgetTableFrame();

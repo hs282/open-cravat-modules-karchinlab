@@ -60,6 +60,8 @@ tags:
 - evolution
 title: Phast Cons
 type: annotator
-version: 3.5.7
+version: 3.5.8
 requires:
 - wgphastcons
+release_note:
+  3.5.8: handle only specific alt chroms

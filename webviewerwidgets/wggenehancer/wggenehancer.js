@@ -4,6 +4,12 @@ widgetGenerators['genehancer'] = {
 		'height': 280, 
 		'function': function (div, row, tabName) {
 			var featureName = getWidgetData(tabName, 'genehancer', row, 'feature_name');
+			if (featureName == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
 			var targetsStr = getWidgetData(tabName, 'genehancer', row, 'target_genes');
 			if (!targetsStr) return
 			addInfoLine(div, 'Type', featureName, tabName);

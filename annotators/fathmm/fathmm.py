@@ -13,6 +13,8 @@ class CravatAnnotator(BaseAnnotator):
         self.curs = self.conn.cursor()
         assert isinstance(self.conn, sqlite3.Connection)
         assert isinstance(self.curs, sqlite3.Cursor)
+        self.curs.execute('select name from sqlite_master where type="table"')
+        self.supported_chroms |= {r[0] for r in self.curs}
     
     def annotate(self, input_data, secondary_data=None):
         out = {}

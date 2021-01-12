@@ -1,4 +1,4 @@
-datasource: 2020.02.11
+datasource: 2021.01.11
 description: ClinVar is an archive of reports of the relationships among human variations
   and phenotypes, with supporting evidence.
 developer:
@@ -46,7 +46,7 @@ output_columns:
   width: 55
   link_format: https://www.ncbi.nlm.nih.gov/clinvar/variation/${.*}/
 release_note:
-  2020.12.02: data updated
+  2021.01.12: data updated
   2020.11.02: data updated 
   2020.02.11.1: strict ref/alt indels, not fuzzy
   2020.02.11: data update
@@ -60,7 +60,7 @@ tags:
 - literature
 title: ClinVar
 type: annotator
-version: 2020.12.02
+version: 2021.01.12
 requires_opencravat: '>=1.4.0'
 requires:
 - wgclinvar
@@ -73,4 +73,3 @@ smartfilters:
   filter:
     column: clinvar__id
     test: hasData
-private: true

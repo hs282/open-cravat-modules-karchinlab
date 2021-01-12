@@ -53,6 +53,6 @@ tags:
 - genes
 title: Essential Genes
 type: annotator
-version: 3.5.7
-requires:
-- wgess_gene
+version: 3.5.8
+release_note:
+  3.5.8: removed widget requirement

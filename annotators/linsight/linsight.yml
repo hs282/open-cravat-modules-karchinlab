@@ -23,7 +23,7 @@ tags:
 - evolution
 title: LINSIGHT
 type: annotator
-version: 2019.05.13
-requires:
-- wglinsight
+version: 2021.01.08
+release_note:
+  2021.01.08: removed widget requirement
 commercial_warning: For commercial use, contact xmliu.uth@gmail.com

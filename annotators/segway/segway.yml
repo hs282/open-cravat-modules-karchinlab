@@ -1,5 +1,5 @@
 title: Segway
-version: 1.0.0
+version: 1.2.0
 type: annotator
 level: variant
 output_columns:
@@ -31,3 +31,5 @@ tags:
 - genomic features
 requires:
 - segway_group
+release_note:
+  1.2.0: support new alt chrom picker
