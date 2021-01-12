@@ -23,7 +23,6 @@ example_annotator
 **/**/startofinstall
 **/**/endofinstall
 annotators/segway*
-annotators/haploreg*
 *.swp
 **/**/*.so
 **/**/*.pyd
