@@ -21,8 +21,8 @@ class CravatAnnotator(BaseAnnotator):
         )
         rows = self.cursor.fetchall()
         if rows:
-            studies = [list(v) for v in rows]
-            factor = list(set(map(lambda x: x[4], rows)))
+            studies = sorted([list(v) for v in rows], key=lambda x: x[2])
+            factor = sorted(list(set(map(lambda x: x[4], rows))), key=str.lower)
             return {
                 'factor': factor,
                 'all': studies,
