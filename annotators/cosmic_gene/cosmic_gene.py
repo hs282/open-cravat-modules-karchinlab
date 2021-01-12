@@ -23,7 +23,7 @@ class CravatAnnotator(BaseAnnotator):
                 #list.append("%s(%s)" % (site, psnlist[i]))
                 gclist.append([site, psnlist[i]])
             #out['gene_count'] = ';'.join(list)
-            out['gene_count'] = gclist
+            out['gene_count'] = sorted(gclist, key=lambda x: int(x[1]), reverse=True)
             out['occurrences'] = occurences
         return out
 
