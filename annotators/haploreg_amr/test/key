@@ -1,32 +1,36 @@
 #CRAVAT Report
-#Created at Tuesday 01/12/2021 06:14:23
+#Created at Tuesday 01/12/2021 21:48:30
 #Report level: variant
 #
 Variant Annotation																HaploReg American	dbSNP
 UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	All annotations	rsID
 1	chr7	140742186	-	T			BRAF	ENST00000644969.1	intron_variant	c.2113-2240dup		ENST00000288602.11:BRAF::intron_variant::c.2113-2240dup; ENST00000496384.7:BRAF::intron_variant::c.1993-2240dup; ENST00000497784.2:BRAF::intron_variant,NMD_transcript_variant::c.*1443-2240dup; ENST00000642228.1:BRAF::intron_variant,NMD_transcript_variant::c.*1071-2240dup; ENST00000644120.1:BRAF::intron_variant,processed_transcript::; ENST00000644969.1:BRAF::intron_variant::c.2113-2240dup; ENST00000646730.1:BRAF::intron_variant,NMD_transcript_variant::c.*651-2240dup; ENST00000646891.1:BRAF:P15056:intron_variant::c.1993-2240dup	1	s4			
 2	chr10	121593817	T	A		Yes	FGFR2	ENST00000358487.9	start_lost	c.1A>T	p.Met1?	ENST00000346997.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000351936.10:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000356226.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000357555.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000358487.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000359354.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000360144.7:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369056.5:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369059.5:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369060.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369061.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000457416.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000490349.5:FGFR2::processed_transcript::; ENST00000491111.1:FGFR2::processed_transcript::; ENST00000604236.5:FGFR2::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000611527.1:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000613048.4:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000636922.1:FGFR2::NSD_transcript::	1	s0			rs774885289
+3	chr17	37101975	-	TC			ACACA	ENST00000616317.5	intron_variant	c.6566-3992_6566-3991dup		ENST00000612895.4:ACACA:Q13085:intron_variant::c.6281-3992_6281-3991dup; ENST00000614428.4:ACACA:Q13085:intron_variant::c.6455-3992_6455-3991dup; ENST00000616317.5:ACACA:Q13085:intron_variant::c.6566-3992_6566-3991dup; ENST00000617649.4:ACACA:Q13085:intron_variant::c.6221-3992_6221-3991dup	1	s2		[["rs1266180", 0.96, 1.0], ["rs1266182", 0.91, 1.0], ["rs1266175", 1.0, 1.0], ["rs11653028", 0.93, -0.99], ["rs12450937", 0.88, -0.99]]	rs71159686
 #CRAVAT Report
-#Created at Tuesday 01/12/2021 06:14:23
+#Created at Tuesday 01/12/2021 21:48:30
 #Report level: gene
 #
 Variant Annotation					
 Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
 BRAF		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1),processed_transcript(1)
 FGFR2		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),NSD_transcript(1),processed_transcript(1)
+ACACA		0	1	intron_variant	intron_variant(1)
 #CRAVAT Report
-#Created at Tuesday 01/12/2021 06:14:23
+#Created at Tuesday 01/12/2021 21:48:30
 #Report level: sample
 #
 Variant Annotation	
 UID	Sample
 1	s4
 2	s0
+3	s2
 #CRAVAT Report
-#Created at Tuesday 01/12/2021 06:14:23
+#Created at Tuesday 01/12/2021 21:48:30
 #Report level: mapping
 #
 Variant Annotation			
 Original Line	User Tags	UID	Input File Number
 1		1	0
 2		2	0
+3		3	0

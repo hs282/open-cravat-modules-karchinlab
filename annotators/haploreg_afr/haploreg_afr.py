@@ -13,23 +13,15 @@ class CravatAnnotator(BaseAnnotator):
         if not secondary_data['dbsnp']:
             return None
         rsids = secondary_data['dbsnp'][0]['rsid'].split(',')
-        snps = []
-        r2s = []
-        dprimes = []
+        all = []
         for rsid in rsids:
             rsnum = int(rsid.replace('rs',''))
             q = f'select ldsnp, r2, dprime from haploreg where qsnp={rsnum}'
             self.cursor.execute(q)
-            for r in self.cursor:
-                snp, r2, dprime = r
-                snps.append('rs'+str(snp))
-                r2s.append(str(r2))
-                dprimes.append(str(dprime))
-        if snps and r2s and dprimes:
+            all += [['rs'+str(r[0]),r[1],r[2],] for r in self.cursor]
+        if all:
             out = {
-                'snps': ','.join(snps),
-                'r2s': ','.join(r2s),
-                'dprimes': ','.join(dprimes),
+                'all': all,
             }
             return out
         else:
