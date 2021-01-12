@@ -133,6 +133,7 @@ function addInfoLineText (div, header, text) {
 }
 
 function addInfoLineLink (div, header, text, link, trimlen) {
+    console.log('@ addinfolink', link, trimlen);
     var span = getLineHeader(header);
     span.classList.add('detail-info-line-header');
 	addEl(div, span);
@@ -150,6 +151,7 @@ function addInfoLineLink (div, header, text, link, trimlen) {
 				text = text.substring(0, trimlen) + '...';
 			}
 		}
+        console.log('@ spanText=', spanText);
 	}
 	addEl(spanText, getTn(text));
 	addEl(div, spanText);

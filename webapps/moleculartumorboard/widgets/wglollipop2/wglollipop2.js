@@ -1,4 +1,4 @@
-widgetInfo['lollipop2'] = {'title': 'Protein Diagram'};
+widgetInfo['lollipop2'] = {'title': ''};
 widgetGenerators['lollipop2'] = {
 	'variant': {
 		'donterase': true,
@@ -640,7 +640,7 @@ widgetGenerators['lollipop2'] = {
 				v.aaWidth = v.proteinWidth / v.aalen;
 				v.reftranscript = data['transcript'];
                 var titlediv = document.querySelector('#detailwidget_variant_lollipop2 legend.detailwidgettitle');
-                titlediv.textContent = titlediv.textContent + ' (' + v.reftranscript + ')';
+                titlediv.textContent = v.reftranscript;
 				drawControlPanel(data);
 				drawMyVariants(data);
 				drawProtein(data);

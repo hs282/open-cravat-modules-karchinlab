@@ -115,14 +115,20 @@
     width: 3vw;
     position: absolute;
     top: 1vw;
-    right: 5vw;
+    right: 9vw;
 }
 
 #question_btn {
     width: 1vw;
     position: absolute;
-    right: 3vw;
+    right: 6vw;
     top: 1.4vw;
+}
+
+#mtblogo {
+    width: 4vw;
+    position: absolute;
+    right: 1vw;
 }
 
 #wglollipop_legend > div {
