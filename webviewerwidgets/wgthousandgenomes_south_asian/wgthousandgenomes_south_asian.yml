@@ -1,0 +1,13 @@
+title: 1000 Genomes-South Asian
+version: 1.0.0
+type: webviewerwidget
+required_annotator: thousandgenomes_south_asian
+description: 1000 genomes webviewer widget
+developer:
+  name: Madison Larsen
+  organization: In Silico Solutions
+  email: mlarsen@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization

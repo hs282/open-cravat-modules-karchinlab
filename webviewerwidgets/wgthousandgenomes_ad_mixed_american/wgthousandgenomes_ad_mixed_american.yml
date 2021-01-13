@@ -1,16 +1,14 @@
-title: 1000 Genomes
-version: 1.0.2
+title: 1000 Genomes-Ad Mixed American
+version: 1.0.0
 type: webviewerwidget
-required_annotator: thousandgenomes
+required_annotator: thousandgenomes_ad_mixed_american
 description: 1000 genomes webviewer widget
 developer:
-  name: Rick Kim
+  name: Madison Larsen
   organization: In Silico Solutions
-  email: rkim@insilico.us.com
+  email: mlarsen@insilico.us.com
   website: http://www.insilico.us.com
   citation: ''
 tags:
 - visualization
 hidden: true
-release_note:
-  1.0.2: returns no data.
