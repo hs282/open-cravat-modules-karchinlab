@@ -1,5 +1,5 @@
 title: UK10K Cohort
-version: 1.1.0
+version: 1.1.1
 type: webviewerwidget
 required_annotator: uk10k_cohort
 description: UK10K Cohort webviewer widget
@@ -14,4 +14,5 @@ tags:
 hidden: true
 requires_opencravat: '>=1.7.0'
 release_note:
+  1.1.1: changed format
   1.1.0: works with single variant page in oc 1.7.0.

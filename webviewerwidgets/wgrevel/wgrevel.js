@@ -5,6 +5,12 @@ widgetGenerators['revel'] = {
         'default_hidden': true,
 		'function': function (div, row, tabName) {
 			var allMappings = getWidgetData(tabName, 'revel', row, 'all');
+			if (allMappings == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
 			if (allMappings != undefined && allMappings != null) {
                 var results = JSON.parse(allMappings);
 				var table = getWidgetTableFrame();

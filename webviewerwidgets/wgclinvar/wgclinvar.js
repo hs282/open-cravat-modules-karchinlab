@@ -1,9 +1,15 @@
 widgetGenerators['clinvar'] = {
 	'variant': {
-		'width': 480, 
-		'height': 250, 
+		'width': 450, 
+		'height': 150, 
 		'function': function (div, row, tabName) {
-			var id = getWidgetData(tabName, 'clinvar', row, 'id');
+            var id = getWidgetData(tabName, 'clinvar', row, 'id');
+            if (id == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
             var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
             var revstat = getWidgetData(tabName, 'clinvar', row, 'rev_stat');
             addInfoLine(div, 'Significance', sig, tabName);
@@ -14,7 +20,7 @@ widgetGenerators['clinvar'] = {
 			}
 			else{
 				id = '';
-			}
+            }
             addInfoLineLink(div, 'ClinVar ID', id, link, 10);
             var diseases = getWidgetData(tabName, 'clinvar', row, 'disease_names');
             var refs = getWidgetData(tabName, 'clinvar', row, 'disease_refs');
@@ -31,15 +37,15 @@ widgetGenerators['clinvar'] = {
 			}
 			var table = getWidgetTableFrame();
 			addEl(div, table);
-			var thead = getWidgetTableHead(['Disease', 'Database', 'Link'],
-										   ['70%','20%','10%']);
+			var thead = getWidgetTableHead(['Disease', 'Database'],
+										   ['70%','30%']);
 			addEl(table, thead);
 			var tbody = getEl('tbody');
 			addEl(table, tbody);
 			for (var j=0;j<disease_objls.length;j++){
 				for (var ref in disease_objls[j].refs){
-					var link = disease_objls[j].refs[ref];
-					var tr = getWidgetTableTr([disease_objls[j].name, ref, link]);
+                    var link = disease_objls[j].refs[ref];
+					var tr = getWidgetTableTr([disease_objls[j].name,link], [ref]);
 					addEl(tbody, tr);
 				}
 			addEl(div, addEl(table, tbody));
