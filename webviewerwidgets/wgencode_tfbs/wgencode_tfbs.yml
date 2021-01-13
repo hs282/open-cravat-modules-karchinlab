@@ -1,0 +1,17 @@
+title: ENCODE TFBS
+version: 1.0.0
+type: webviewerwidget
+required_annotator: encode_tfbs
+description: ENCODE TFBS webviewer widget
+developer:
+  name: Madison Larsen
+  organization: In Silico Solutions
+  email: mlarsen@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization
+hidden: true
+requires_opencravat: '>=2.2.1'
+release_note:
+  1.0.0: initial release
