@@ -11,7 +11,13 @@ widgetGenerators['cancer_hotspots'] = {
 			'uterus'
 		],
 		function: function (div, row, tabName) {
-			let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
+            let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
+            if (samples == null) {
+                var span = getEl('span');
+                span.classList.add('nodata');
+				addEl(div, addEl(span, getTn('No data')));
+                return;
+			}
             if (samples != undefined && samples != null && samples.indexOf('[[') == 0) {
                 if (!samples) {
                     return;

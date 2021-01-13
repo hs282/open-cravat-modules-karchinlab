@@ -1,0 +1,17 @@
+title: Ensembl Regulatory Build
+version: 1.0.0
+type: webviewerwidget
+required_annotator: ensembl_regulatory_build
+description: Ensembl Regulatory Build webviewer widget
+hidden: true
+requires_opencravat: '>=1.7.0'
+developer:
+  name: Madison Larsen
+  organization: In Silico Solutions
+  email: mlarsen@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization
+release_note:
+  1.0.0: initial release.
