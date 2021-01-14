@@ -1,5 +1,5 @@
 title: PharmGKB
-version: 1.1.1
+version: 1.1.0
 type: annotator
 level: variant
 output_columns:
@@ -7,16 +7,12 @@ output_columns:
   title: Chemical
   type: string
   width: 85
-  hidden: false
-  table: true
-  table_headers:
-  - name: chemical
-    title: Chemical
-    type: string
-  - name: chemid
-    title: Chemical ID
-    type: string
-    link_format: https://www.pharmgkb.org/chemical/${PA\d+}
+- name: chemid
+  title: Chemical ID
+  type: string
+  width: 85
+  link_format: https://www.pharmgkb.org/chemical/${PA\d+}
+  hidden: true
 - name: pmid
   title: Study
   type: string
@@ -54,7 +50,6 @@ developer:
 requires:
 - wgpharmgkb
 release-note: 
-  1.1.1: added table-data columns
   1.1.0: Data update
 tags:
 - variants
@@ -62,4 +57,3 @@ tags:
 - cancer
 - cardiovascular
 - literature
-requires_opencravat: '>=2.2.1'
