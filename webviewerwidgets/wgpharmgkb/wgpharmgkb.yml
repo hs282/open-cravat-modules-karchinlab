@@ -12,7 +12,7 @@ developer:
   citation: ''
 tags:
 - visualization
-requires_opencravat: '>=2.2.1'
+requires_opencravat: '>=2.2.2'
 release_note:
   2.0.0: new pharmgkb data format
   1.1.1: works with table data

@@ -57,4 +57,4 @@ tags:
 - cancer
 - cardiovascular
 - literature
-requires_opencravat: '>=2.2.1'
+requires_opencravat: '>=2.2.2'
