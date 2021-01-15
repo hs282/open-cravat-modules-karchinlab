@@ -1,43 +1,41 @@
+private: true
 title: PharmGKB
-version: 1.1.0
+version: 2.0.0
+datasource: '2021-01-14'
 type: annotator
 level: variant
 output_columns:
-- name: chemical
-  title: Chemical
+- name: id
+  title: ID
   type: string
   width: 85
-- name: chemid
-  title: Chemical ID
-  type: string
-  width: 85
-  link_format: https://www.pharmgkb.org/chemical/${PA\d+}
-  hidden: true
-- name: pmid
-  title: Study
-  type: string
-  link_format: https://www.ncbi.nlm.nih.gov/pubmed/${.*}
-  hidden: true
-  width: 65
-- name: pheno_cat
-  title: Phenotype Category
+  link_format: https://www.pharmgkb.org/variant/${.*}
+- name: drug_assoc
+  title: Drug Associations
   type: string
   hidden: true
-  width: 70
-- name: sig
-  title: Significance
-  type: string
-  hidden: true
-  width: 78
-- name: notes
-  title: Notes
-  type: string
-  hidden: true
-- name: sentence
-  title: Description
-  type: string
-  hidden: true
-  width: 120
+  width: 100
+  table: true
+  table_headers:
+  - name: chemicals
+    title: Chemicals
+    type: string
+    desc: Chemicals and links
+  - name: sentence
+    title: Description
+    type: string
+  - name: pheno_cat
+    title: Phenotype Category
+    type: string
+  - name: sig
+    title: Significance
+    type: string
+  - name: pmid
+    title: Study
+    type: string
+  - name: notes
+    title: Notes
+    type: string
 description: Clinically actionable gene-drug associations and genotype-phenotype relationships
 developer:
   name: Teri E. Klein
@@ -48,8 +46,10 @@ developer:
     C.F. Thorn, R.B. Altman and T.E. Klein. "Pharmacogenomics Knowledge for Personalized
     Medicine" Clinical Pharmacology & Therapeutics (2012) 92(4): 414-417'
 requires:
-- wgpharmgkb
+- wgpharmgkb>=2.0.0
 release-note: 
+  2.0.0: Improved handling of variants with multiple associations
+  1.1.1: added table-data columns
   1.1.0: Data update
 tags:
 - variants
@@ -57,3 +57,4 @@ tags:
 - cancer
 - cardiovascular
 - literature
+requires_opencravat: '>=2.2.1'
