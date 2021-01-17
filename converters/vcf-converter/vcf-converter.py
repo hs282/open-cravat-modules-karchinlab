@@ -208,12 +208,23 @@ class CravatConverter(BaseConverter):
 
     @staticmethod
     def extract_read_info(call, gt):
+        # AD is depth for each allele
         if hasattr(call.data,'AD'):
-            tot_reads = sum(call.data.AD)
+            # tot_reads
+            if hasattr(call.data.AD, '__iter__'):
+                tot_reads = sum([0 if x is None else x for x in call.data.AD])
+            elif call.data.AD is None:
+                tot_reads = 0
+            else:
+                tot_reads = call.data.AD
+            # alt_reads
             try:
                 alt_reads = call.data.AD[gt]
-            except IndexError:
+            except IndexError: # Wrong length
                 alt_reads = None
+            except TypeError: # Not indexable
+                alt_reads = call.data.AD
+        # DP is total depth
         elif hasattr(call.data,'DP'):
             tot_reads = call.data.DP
             alt_reads = None
