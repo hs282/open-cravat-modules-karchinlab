@@ -1,0 +1,48 @@
+#CRAVAT Report
+#Created at Wednesday 11/25/2020 11:08:28
+#Report level: variant
+#
+Variant Annotation																MutPred-Indel		
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Score	Rank score	Property
+1	chr12	52587783	CCG	-		Yes	KRT72	ENST00000293745.7	inframe_deletion	c.1156_1158del	p.Arg386del	ENST00000293745.7:KRT72:Q14CN4:inframe_deletion:p.Arg386del:c.1156_1158del; ENST00000354310.4:KRT72:Q14CN4:inframe_deletion:p.Arg344del:c.1030_1032del; ENST00000537672.6:KRT72:Q14CN4:inframe_deletion:p.Arg386del:c.1156_1158del	1	s0		0.852	0.8828633405639913	 MoRF(p=0.044701);
+2	chr7	127590072	ATC	-		Yes	ARF5	ENST00000000233.10	inframe_deletion	c.265_267del	p.Ile89del	ENST00000000233.10:ARF5:P84085:inframe_deletion:p.Ile89del:c.265_267del; ENST00000467281.5:ARF5::2kb_downstream_variant,processed_transcript::; ENST00000473728.1:GCC1::2kb_downstream_variant,processed_transcript::; ENST00000478328.1:FSCN3::2kb_upstream_variant,processed_transcript::; ENST00000497650.1:GCC1::intron_variant,processed_transcript::	1	s1		0.776	0.8004338394793926	 Magnesium binding(p=0.027798); Sodium binding(p=0.04756);
+3	chr6	33728176	CTG	-		Yes	IP6K3	ENST00000293756.5	inframe_deletion	c.322_324del	p.Gln108del	ENST00000293756.5:IP6K3:Q96PC2:inframe_deletion:p.Gln108del:c.322_324del; ENST00000451316.6:IP6K3:Q96PC2:inframe_deletion:p.Gln108del:c.322_324del	1	s2		0.339	0.3264642082429501	
+4	chr8	124486544	TCC	-		Yes	RNF139	ENST00000303545.3	inframe_deletion	c.897_899del	p.Ser300del	ENST00000276692.11:TATDN1:Q6P1N9:2kb_downstream_variant::c.*2048_*2050del; ENST00000303545.3:RNF139:Q8WU17:inframe_deletion:p.Ser300del:c.897_899del; ENST00000518639.1:AC090198.1::2kb_upstream_variant,lnc_RNA::; ENST00000519548.5:TATDN1:Q6P1N9:2kb_downstream_variant::c.*2048_*2050del; ENST00000522927.5:TATDN1::2kb_downstream_variant,NMD_transcript_variant::c.*2461_*2463del; ENST00000523214.5:TATDN1::2kb_downstream_variant,NMD_transcript_variant::c.*2430_*2432del; ENST00000630259.1:TATDN1::2kb_downstream_variant::c.*2048_*2050del	1	s3		0.412	0.40563991323210413	 Copper binding(p=0.032895);
+5	chr3	38093649	GAA	-		Yes	DLEC1	ENST00000308059.11	inframe_deletion	c.1801_1803del	p.Glu601del	ENST00000308059.11:DLEC1:Q9Y238:inframe_deletion:p.Glu601del:c.1801_1803del; ENST00000346219.7:DLEC1:Q9Y238:inframe_deletion:p.Glu601del:c.1801_1803del	1	s4		0.256	0.23644251626898047	 Strand(p=0.045039);
+6	chr19	49781786	ATC	-		Yes	AP2A1	ENST00000354293.9	inframe_deletion	c.98_100del	p.Ile33del	ENST00000354293.9:AP2A1:O95782:inframe_deletion:p.Ile33del:c.98_100del; ENST00000359032.9:AP2A1:O95782:inframe_deletion:p.Ile33del:c.98_100del; ENST00000600199.1:AP2A1::processed_transcript::	1	s5		0.345	0.3329718004338395	
+#CRAVAT Report
+#Created at Wednesday 11/25/2020 11:08:28
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+KRT72		1	0	inframe_deletion	inframe_deletion(1)
+ARF5		1	0	inframe_deletion	inframe_deletion(1),processed_transcript(1)
+IP6K3		1	0	inframe_deletion	inframe_deletion(1)
+RNF139		1	0	inframe_deletion	inframe_deletion(1)
+DLEC1		1	0	inframe_deletion	inframe_deletion(1)
+AP2A1		1	0	inframe_deletion	inframe_deletion(1),processed_transcript(1)
+#CRAVAT Report
+#Created at Wednesday 11/25/2020 11:08:28
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+5	s4
+6	s5
+#CRAVAT Report
+#Created at Wednesday 11/25/2020 11:08:28
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0

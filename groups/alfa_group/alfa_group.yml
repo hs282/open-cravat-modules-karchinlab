@@ -13,4 +13,3 @@ title: 'ALFA: Allele Frequency Aggregator'
 type: group
 version: 1.0.0
 requires_opencravat: '>=1.4.4'
-private: true

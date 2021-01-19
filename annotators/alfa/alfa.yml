@@ -31,5 +31,4 @@ title: 'ALFA: Allele Frequency Aggregator'
 version: 1.0.0
 type: annotator
 level: variant
-private: true
 

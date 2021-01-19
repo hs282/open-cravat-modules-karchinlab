@@ -24,7 +24,6 @@ version: 1.0.1
 release_note:
   1.0.1: data fix
 type: annotator
-private: true
 smartfilters:
 - name: rsid
   title: dbSNP Common ID

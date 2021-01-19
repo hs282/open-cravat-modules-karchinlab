@@ -1,5 +1,5 @@
 title: gnomAD Gene
-version: 2.2.1s
+version: 2.2.1
 type: annotator
 level: gene
 description: Gene level population statistics from gnomAD
@@ -122,4 +122,3 @@ requires:
 - wggnomad_gene
 tags:
 - genes
-private: true
