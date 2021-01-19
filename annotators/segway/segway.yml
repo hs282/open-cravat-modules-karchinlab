@@ -27,8 +27,7 @@ groups:
 - segway_group
 tags:
 - variants
-- noncoding
-- genomic features
+- non coding
 requires:
 - segway_group
 release_note:
