@@ -1,0 +1,98 @@
+datasource: v4.1a
+description: ALoFT provides extensive annotations to putative loss-of-function variants (LoF) in protein-coding genes including functional, evolutionary and network features.
+developer:
+  name: 'Gerstein Lab'
+  organization: 'Yale University'
+  email: 'support@cravat.us'
+  website: 'http://aloft.gersteinlab.org/'
+  citation: 'Suganthi Balasubramanian, Yao Fu, Mayur Pawashe, Patrick McGillivray, Mike Jin, Jeremy Liu, Konrad J. Karczewski, Daniel G. MacArthur, and Mark Gerstein. "Using ALoFT to determine the impact of putative loss-of-function variants in protein-coding genes." Nature Communications 8 (2017).'
+output_columns:
+- name: transcript
+  title: Transcript ID
+  type: string
+  width: 70
+  desc: Ensembl transcript ids
+  hidden: true
+- name: affect
+  title: Transcripts Affected
+  type: string
+  width: 75
+  desc: the fraction of the transcripts of the gene affected i.e. No. of transcripts affected by the SNP/Total no. of protein_coding transcripts for the gene.
+  hidden: true
+  category: multi
+- name: tolerant
+  title: Tolerant Probability
+  type: float
+  width: 75
+  desc: Probability of the SNP being classified as benign by ALoFT
+  hidden: true
+- name: recessive
+  title: Recessive Probability
+  type: float
+  width: 75
+  desc: Probability of the SNP being classified as recessive disease-causing by ALoFT
+  hidden: true
+- name: dominant
+  title: Dominant Probability
+  type: float
+  width: 75
+  desc: Probability of the SNP being classified as dominant disease-causing by ALoFT
+  hidden: false
+- name: pred
+  title: Classification
+  type: string
+  width: 85
+  desc: final classification predicted by ALoFT; values can be Tolerant, Recessive or Dominant
+  category: multi
+  hidden: false
+- name: conf
+  title: Confidence
+  type: string
+  width: 75
+  desc: Confidence level of Aloft_pred; values can be "High Confidence" (p < 0.05) or "Low Confidence" (p > 0.05)
+  category: multi
+  hidden: true
+- hidden: true
+  name: all
+  title: All Annotations
+  type: string
+  width: 75
+  filterable: false
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: affect
+    title: Affect
+    type: string
+  - name: tolerant
+    title: Tolerant
+    type: float
+  - name: recesive
+    title: Recessive
+    type: float
+  - name: dominant
+    title: Dominant
+    type: float
+  - name: pred
+    title: Prediction
+    type: string
+  - name: conf
+    title: Confidence
+    type: string
+
+tags:
+- variant
+- variant effect prediction
+
+requires_opencravat: '>=2.2.1'
+requires:
+- wgaloft
+title: ALoFT
+version: 1.0.0
+type: annotator
+level: variant
+
+
+
