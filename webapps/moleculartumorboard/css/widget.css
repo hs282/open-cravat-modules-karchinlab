@@ -1,25 +1,29 @@
 @font-face {
-	font-family: 'roboto-medium';
-    src: url('/result/fonts/roboto-medium-webfont.woff') format('woff'),
-	url('/result/fonts/roboto-medium-webfont.woff2') format('woff2');
+	font-family: 'open-sans-regular';
+    src: local(''),
+         url('../fonts/open-sans-v18-latin-regular.woff') format('woff'),
+         url('../fonts/open-sans-v18-latin-regular.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: 'roboto-light';
-    src: url('/result/fonts/roboto-light-webfont.woff') format('woff'),
-         url('/result/fonts/roboto-light-webfont.woff2') format('woff2');
+	font-family: 'open-sans-300';
+    src: local(''),
+         url('../fonts/open-sans-v18-latin-300.woff') format('woff'),
+         url('../fonts/open-sans-v18-latin-300.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: 'roboto-bold';
-    src: url('/result/fonts/roboto-bold-webfont.woff') format('woff'),
-         url('/result/fonts/roboto-bold-webfont.woff2') format('woff2');
+	font-family: 'source-sans-pro-regular';
+    src: local(''),
+         url('../fonts/source-sans-pro-v14-latin-regular.woff') format('woff'),
+         url('../fonts/source-sans-pro-v14-latin-regular.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: 'sourcesanspro-bold';
-    src: url('/result/fonts/sourcesanspro-bold-webfont.woff') format('woff'),
-	url('/result/fonts/sourcesanspro-bold-webfont.woff2') format('woff2');
+	font-family: 'source-sans-pro-bold';
+    src: local(''),
+         url('../fonts/source-sans-pro-v14-latin-700.woff') format('woff'),
+         url('../fonts/source-sans-pro-v14-latin-700.woff2') format('woff2');
 }
 
 body {
@@ -27,7 +31,8 @@ body {
 }
 
 body * {
-	font-family: 'Helvetica';
+	/*font-family: 'Helvetica';*/
+    font-family: 'open-sans-300';
 	margin: 0px;
 }
 
@@ -69,7 +74,7 @@ body * {
 */
 
 .detailwidget {
-	font-size: 18px;
+	font-size: 17px;
 	border: 1px solid #d0d0d0;
     padding: 0px;
 }
@@ -91,8 +96,7 @@ body * {
 .detailwidgettitle {
 	display: inline-block;
 	width: calc(100% - 4px);
-	background: #4a87bd;
-    font-family: sourcesanspro-bold;
+	/*background: #4a87bd;*/
 	font-size: 18px;
     height: 18px;
     margin-bottom: 6px;
@@ -135,7 +139,7 @@ body * {
 
 .detailwidgetpinbutton.pinned {
 	color: white;
-	background-color: #848484;
+	/*background-color: #848484;*/
 }
 
 .detailwidget-camerabutton {

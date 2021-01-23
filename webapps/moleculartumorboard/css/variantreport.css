@@ -40,7 +40,7 @@
 }
 
 .singlevariantpage .detailwidgettitle {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     background: none;
 }
 
@@ -57,18 +57,19 @@
 }
 
 .container_titlediv {
-    font-size: 26px;
+    font-family: 'source-sans-pro-bold';
+    font-size: 30px;
     font-weight: bold;
-    padding: 6px;
-    color: white;
-    box-shadow: inset 0 0 0 1000px #4a87bd;
+    /*padding: 6px;*/
+    color: black;
+    /*box-shadow: inset 0 0 0 1000px #4a87bd;*/
     /*width: 1188px;*/
 }
 
 .singlevariantpage.widgettitle {
     font-size: 16px;
-    background-color: lightblue;
-    text-decoration: underline;
+    /*background-color: lightblue;*/
+    /*text-decoration: underline;*/
 }
 
 #logodiv {
@@ -85,15 +86,24 @@
 #detaildiv_variant {
     position: relative;
     background-color: white;
-    padding: 1vw;
+    padding-top: 1vw;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    line-height: 1.5;
 }
 
 #spinnerdiv {
-    position: absolute;
-    width: calc(100% - 0px);
-    height: calc(100% - 0px);
-    z-index: 1;
+    display: flex; 
+    flex-direction: column; 
+    opacity: 0.5;
+    position: fixed; 
+    width: 100vw; 
+    height: 94vw; 
     background-color: white;
+    top: 6vw; 
+    left: 0; 
+    align-items: center; 
+    justify-content: center;
 }
 
 #pagetitle {
@@ -103,6 +113,7 @@
     text-align: center;
     margin: 0px;
     color: black;
+    font-family: 'source-sans-pro-bold';
 }
 
 #pagetitle_hr {
@@ -153,12 +164,12 @@
     width: 400px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1080px) {
     #widgetcontentdiv_cosmic2_variant div:first-child {
-        width: 96vw;
+        width: 92vw;
     }
     #widgetcontentdiv_cancer_hotspots_variant {
-        width: 96vw;
+        width: 92vw;
     }
 }
 
@@ -166,3 +177,6 @@
     font-size: 18px;
 }
 
+.hidden {
+    display: none;
+}
