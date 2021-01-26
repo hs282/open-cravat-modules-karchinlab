@@ -7,7 +7,6 @@ import os
 class CravatAnnotator(BaseAnnotator):
 
     def setup(self):
-        print('setup')
         dir_path = os.path.dirname(os.path.realpath(__file__))
         db_path = os.path.join(dir_path, "data", "phastcons100-phastcons20_sqlite.db")
         self.conn = sqlite3.connect(db_path)

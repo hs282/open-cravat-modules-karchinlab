@@ -33,6 +33,7 @@
     border: 0px;
     position: relative;
     height: unset;
+    padding-bottom: 1rem;
 }
 
 .singlevariantpage .detailwidget.nodata {
@@ -94,11 +95,10 @@
 
 #spinnerdiv {
     display: flex; 
-    flex-direction: column; 
     opacity: 0.5;
     position: fixed; 
     width: 100vw; 
-    height: 94vw; 
+    height: 94vh; 
     background-color: white;
     top: 6vw; 
     left: 0; 
@@ -164,14 +164,14 @@
     width: 400px;
 }
 
-@media only screen and (max-width: 1080px) {
+/*@media only screen and (max-width: 1080px) {
     #widgetcontentdiv_cosmic2_variant div:first-child {
         width: 92vw;
     }
     #widgetcontentdiv_cancer_hotspots_variant {
         width: 92vw;
     }
-}
+}*/
 
 .detailcontentdiv th {
     font-size: 18px;

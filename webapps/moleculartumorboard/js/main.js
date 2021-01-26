@@ -1,7 +1,7 @@
 var CLOSURE_NO_DEPS = true;
 var annotData = null;
-var mqMaxMatch = window.matchMedia('(max-width: 900px)');
-var mqMinMatch = window.matchMedia('(min-width: 900px)');
+var mqMaxMatch = window.matchMedia('(max-width: 1024px)');
+var mqMinMatch = window.matchMedia('(min-width: 1024px)');
 
 function mqMaxMatchHandler (e) {
     if (e.matches) {
@@ -824,6 +824,7 @@ widgetGenerators['cosmic2'] = {
         'height': undefined,
         'word-break': 'normal',
         'function': function (div, row, tabName) {
+            div.style.display = 'flex';
             var divHeight = '400px';
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
@@ -849,9 +850,9 @@ widgetGenerators['cosmic2'] = {
                 var sdiv = getEl('div');
                 sdiv.style.maxHeight = '400px';
                 sdiv.style.overflow = 'auto';
-                sdiv.style.display = 'inline-block';
                 var table = getWidgetTableFrame();
                 table.style.width = 'calc(100% - 1px)';
+                table.style.fontSize = '14px';
                 var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
@@ -895,8 +896,7 @@ widgetGenerators['cosmic2'] = {
                 ];
                 var sdiv = getEl('div');
                 sdiv.style.overflow = 'auto';
-                sdiv.style.display = 'inline-block';
-                sdiv.style.width = 'calc(100% - 400px)';
+                //sdiv.style.width = 'calc(100% - 400px)';
                 sdiv.style.minWidth = '600px';
                 sdiv.style.height = '400px';
                 var chartDiv = getEl('canvas');
@@ -1073,14 +1073,14 @@ widgetGenerators['driverpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             var br = getEl("br");
-            addEl(div, br);
+            //addEl(div, br);
             var generator = widgetGenerators['cancer_hotspots2']['variant'];
             generator['width'] = '100%'
-            var divs = showWidget('cancer_hotspots2', ['cancer_hotspots'], 'variant', div, 600, 220);
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
-            console.log('@', divs);
+            var divs = showWidget('cancer_hotspots2', ['cancer_hotspots'], 'variant', div, 450, 220);
+            //divs[0].style.position = 'relative';
+            //divs[0].style.top = '0px';
+            //divs[0].style.left = '0px';
+            //console.log('@', divs);
             divs[0].querySelector('div legend').textContent = 
                     'Hotspot mutation per cancer type (Cancer Hotspots)';
             var br = getEl("br");
@@ -1261,7 +1261,7 @@ widgetGenerators['mupit2'] = {
             addEl(div, iframe);
             $.get(url).done(function (response) {
                 if (response.hit == true) {
-                    if (window.innerWidth >= 900) {
+                    if (window.innerWidth > 1024) {
                         url = location.protocol + '//www.cravat.us/MuPIT_Interactive?gm=' + chrom + ':' + pos + '&embed=true';
                     } else {
                         url = location.protocol + '//www.cravat.us/MuPIT_Interactive?gm=' + chrom + ':' + pos + '&embed=true&showrightpanel=false';
@@ -1305,6 +1305,9 @@ widgetGenerators['cancer_hotspots2'] = {
                     return;
                 }
                 samples = JSON.parse(samples);
+                samples.sort(function(a, b) {
+                    return a[1] - b[1];
+                });
                 const table = getWidgetTableFrame();
                 addEl(div, table);
                 const thead = getWidgetTableHead(['Cancer Type','Count']);
@@ -1320,24 +1323,19 @@ widgetGenerators['cancer_hotspots2'] = {
                 if (!samples) {
                     return;
                 }
-                let occurs = {};
-                for (let stok of samples) {
-                    [cancer,occur] = stok;
-                    occurs[cancer] = occur;
-                }
+                samples.sort(function(a, b) {
+                    return b[1] - a[1];
+                });
+                console.log('@ samples 2=', samples);
                 const table = getWidgetTableFrame();
                 addEl(div, table);
                 const thead = getWidgetTableHead(['Cancer Type','Count']);
                 addEl(table, thead);
                 const tbody = getEl('tbody');
                 addEl(table, tbody);
-                for (let cancer of this.cancerTypes) {
-                    let occur = occurs[cancer];
-                    if (!occur) {
-                        continue;
-                    }
-                    let tr = getWidgetTableTr([cancer,occur]);
-                    if (occur > 25) {
+                for (var i = 0; i < samples.length; i++) {
+                    let tr = getWidgetTableTr(samples[i]);
+                    if (samples[i][1] > 25) {
                         tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
                     }
                     addEl(tbody, tr);
