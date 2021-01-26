@@ -171,7 +171,6 @@ function showAnnotation (response) {
     showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb', 
             'cancer_genome_interpreter', 'litvar'], 'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_diseasecausing');
-    console.log('@ III parentDiv display=', parentDiv.style.display);
     showWidget('diseasecausingpanel', 
             ['base', 'clinvar', 'gnomad3', 'thousandgenomes', 'revel'], 
             'variant', parentDiv, null, null, false);
@@ -352,7 +351,6 @@ widgetGenerators['base2'] = {
             var chrom = chrom.substring(3)
             var thous_af = getWidgetData(tabName, 'thousandgenomes', row, 'af');
             var gnomad_af = getWidgetData(tabName, 'gnomad', row, 'af')
-            console.log('@ gnomad 1000g', gnomad_af, thous_af);
             var span = getEl('span');
             span.classList.add('detail-info-line-header');
             span.style.fontSize = '2rem';
@@ -682,7 +680,6 @@ widgetGenerators['ncbi'] = {
         'height': undefined, 
         'word-break': 'break-word',
         'function': function (div, row, tabName) {
-            console.log('@', row);
             var desc = getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc')
             if (desc == null){
                 addInfoLineLink2(div, 'There is no annotation available for NCBI Gene')
@@ -691,9 +688,7 @@ widgetGenerators['ncbi'] = {
                 addInfoLineLink2(div, desc, tabName)
             }
             var hugo = getWidgetData(tabName, 'base', row, 'hugo');
-            console.log('@ hugo=', hugo);
             var link = 'https://cancer.sanger.ac.uk/cosmic/census-page/' + hugo;
-            console.log('@ link=', link);
             addInfoLineLink2(div, '', 'Hallmarks of Cancer', link);
         }
     }
@@ -1080,7 +1075,6 @@ widgetGenerators['driverpanel'] = {
             //divs[0].style.position = 'relative';
             //divs[0].style.top = '0px';
             //divs[0].style.left = '0px';
-            //console.log('@', divs);
             divs[0].querySelector('div legend').textContent = 
                     'Hotspot mutation per cancer type (Cancer Hotspots)';
             var br = getEl("br");
@@ -1192,7 +1186,6 @@ widgetGenerators['germlinepanel'] = {
             var td = getEl('div');
             td.style.display = 'inline-block';
             td.style.width = 'calc(100% - 130px)';
-            console.log('@', annotData['gnomad3']);
             if (annotData['gnomad3'] == null) {
                 var span = getEl('span');
                 span.textContent = 'No annotation available for ' + hugo + ' ' + achange;
@@ -1326,7 +1319,6 @@ widgetGenerators['cancer_hotspots2'] = {
                 samples.sort(function(a, b) {
                     return b[1] - a[1];
                 });
-                console.log('@ samples 2=', samples);
                 const table = getWidgetTableFrame();
                 addEl(div, table);
                 const thead = getWidgetTableHead(['Cancer Type','Count']);
