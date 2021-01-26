@@ -166,7 +166,7 @@ function showAnnotation (response) {
     hideSpinner();
     showSectionTitles();
     var parentDiv = document.querySelector('#contdiv_vannot');
-    var retDivs = showWidget('basepanel', ['base','hgvs'], 'variant', parentDiv);
+    var retDivs = showWidget('basepanel', ['base'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_action');
     showWidget('actionpanel', ['base','target', 'civic', 'pharmgkb', 
             'cancer_genome_interpreter', 'litvar'], 'variant', parentDiv, null, null, false);
