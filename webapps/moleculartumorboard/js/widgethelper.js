@@ -133,7 +133,6 @@ function addInfoLineText (div, header, text) {
 }
 
 function addInfoLineLink (div, header, text, link, trimlen) {
-    console.log('@ addinfolink', link, trimlen);
     var span = getLineHeader(header);
     span.classList.add('detail-info-line-header');
 	addEl(div, span);
@@ -151,7 +150,6 @@ function addInfoLineLink (div, header, text, link, trimlen) {
 				text = text.substring(0, trimlen) + '...';
 			}
 		}
-        console.log('@ spanText=', spanText);
 	}
 	addEl(spanText, getTn(text));
 	addEl(div, spanText);
@@ -177,11 +175,9 @@ function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIf
         color = '#aaaaaa';
     }
     var thresholdColor = '#888888';
-    console.log('@ revel value=', value);
 	// Div
 	var div = getEl('div');
     addEl(outerDiv, div);
-    console.log('@ div display=', div.style.display, 'outer=', outerDiv.style.display);
 	div.style.display = 'inline-block';
 	div.style.margin = '2px';
     div.style.color = color;
@@ -213,7 +209,6 @@ function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIf
 	var box = paper.rect(paddingX, lineOverhang + paddingTop, 
             barWidth, barHeight);
     var b = box.getBBox();
-    console.log('@ box size=', b.width, b.height);
 	var c = null;
 	if (value != '') {
 		c = (1.0 - Math.min(1.0, value / 0.3)) * 255;

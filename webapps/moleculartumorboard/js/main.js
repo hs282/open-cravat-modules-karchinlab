@@ -851,6 +851,14 @@ widgetGenerators['cosmic2'] = {
                 table.style.fontSize = '14px';
                 var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
                 addEl(table, thead);
+                var titleEl = div.parentElement.firstChild.querySelector('legend');
+                var title = titleEl.textContent;
+                titleEl.textContent = '';
+                var a = getEl('a');
+                a.href = 'https://cancer.sanger.ac.uk/cosmic/search?q=' + annotData['cosmic']['cosmic_id'];
+                a.target = '_blank';
+                a.textContent = title;
+                addEl(titleEl, a);
                 var tbody = getEl('tbody');
                 var tissues = [];
                 var counts = [];
