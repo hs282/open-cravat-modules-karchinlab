@@ -578,7 +578,8 @@ widgetGenerators['oncokb'] = {
                             var effect = response.mutationEffect.knownEffect
                             var oncogenic = response.oncogenic
                             var hugo = response.query.hugoSymbol
-                            var link = 'https://www.oncokb.org/gene/' + hugo
+                            var achange = changeAchange3to1(annotData['base']['achange']);
+                            var link = 'https://www.oncokb.org/gene/' + hugo + '/' + achange + '?refGenome=GRCh38';
                             if (effect == 'Unknown'){
                                 addInfoLineLink2(div, 'No annotation for OncoKB available');
                                 }
