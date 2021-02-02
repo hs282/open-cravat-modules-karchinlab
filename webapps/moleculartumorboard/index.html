@@ -17,7 +17,8 @@
 <body>
 
 <div id='logodiv'>
-    <a href='/' target='_blank' style='position: fixed; top: 0.6vw; left: 2vw;'>
+    <img src='mtblogo_crop.png' style='width: 4vw; position: absolute; left: 2.5vw;' />
+    <a href='/' target='_blank' style='position: fixed; top: 0.6vw; right: 3vw;'>
         <img src='/submit/logo.png' style='width: 5vw;'>
     </a>
     <span id='pagetitle'>Variant Characterization & Actionability Report</span>
@@ -26,14 +27,20 @@
     <!--<a href='https://github.com/KarchinLab/open-cravat/wiki' target='_blank' id='question_btn'>
         <img src='/result/images/question.png' style='width: 1.2vw;' />
     </a>-->
-    <div id='inputdiv' style='display: none; position: absolute; top: 44px; right: 22px; font-size: 12px; z-index: 3; background-color: white; padding: 20px; width: 250px; box-shadow: 4px 4px 4px gray; border: 1px dashed gray;'>
-        <span>Type a variant and enter or click the Update annotation button. The syntax of a variant is chromosome, position, reference allele, and alternate allele, concatenated with a colon. Strand is assumed to be plus. For example, chr17:39724004:C:G</span>
+    <div id='inputdiv' style='display: none; position: absolute; top: 3rem; right: 9.5vw; 
+            font-size: 12px; z-index: 3; background-color: white; padding: 20px; width: 250px; 
+            box-shadow: 4px 4px 4px gray; border: 1px dashed gray;'>
+        <span>Type a variant and enter or click the Update annotation button. The syntax of a 
+        variant is chromosome, position, reference allele, and alternate allele, 
+        concatenated with a colon. Strand is assumed to be plus. For example, chr17:39724004:C:G</span>
         <br />
         <input id="input_variant" name="inputVariant" style='margin-top: 8px;' />
-        <button id="input_submit" onclick="submitForm();" style='margin-top: 8px;' >Update annotation</button>
+        <button id="input_submit" onclick="submitForm();" style='margin-top: 8px;' >
+            Update annotation</button>
     </div>
-    <img src='mtblogo_crop.png' style='width: 4vw; position: absolute; right: 1vw;' />
-    <img src='menu_book-black-48dp.svg' style='width: 3vw; height: 3vw; position: absolute; right: 5.3vw; top: 0.8vw; cursor: pointer;' onclick='window.open("https://opencravat.org/files/MTB_Documentation.pdf");'/>
+    <img src='menu_book-black-48dp.svg' style='width: 3vw; height: 3vw; position: absolute; 
+            right: 9vw; top: 0.8vw; cursor: pointer;' 
+            onclick='window.open("https://opencravat.org/files/MTB_Documentation.pdf");'/>
 </div>
 <div id='detaildiv_variant' class='detaildiv singlevariantpage'>
     <div id='spinnerdiv'>
@@ -43,8 +50,10 @@
         </a>-->
         <img src='/result/images/arrow-spinner.gif'/>
     </div>
-    <div id='screendiv' style='position: absolute; width: 100%; height: 100%; background-color: gray; display: none; z-index: 2;'></div>
-    <div class='container_titlediv' style='margin-bottom: 5vw; background-color: white; height: 0vw;' >&nbsp;</div>
+    <div id='screendiv' style='position: absolute; width: 100%; height: 100%; 
+            background-color: gray; display: none; z-index: 2;'></div>
+    <div class='container_titlediv' style='margin-bottom: 5vw; background-color: white; 
+            height: 0vw;' >&nbsp;</div>
     <div class='container_titlediv hidden'>I. Variant Annotation</div>
     <div id='wrapdiv_vannot' class='detailcontainerwrapdiv' >
         <div id='contdiv_vannot' class='detailcontainerdiv' ></div>

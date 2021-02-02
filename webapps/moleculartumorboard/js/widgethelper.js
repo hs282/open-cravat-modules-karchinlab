@@ -192,7 +192,7 @@ function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIf
     var paddingX = 20;
     var paddingTop = 20;
     var paddingBottom = 40;
-	var barHeight = 0.25;
+	var barHeight = 12;
     var lineWidth = 0.25;
 	var lineOverhang = 15;
     var thresholdLineHalfHeight = 10;
@@ -207,7 +207,7 @@ function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIf
 	var paper = Raphael(subDiv, paperWidth, paperHeight);
 	// Box. Red color maxes at 0.3.
 	var box = paper.rect(paddingX, lineOverhang + paddingTop, 
-            barWidth, barHeight);
+            barWidth, barHeight, 5);
     var b = box.getBBox();
 	var c = null;
 	if (value != '') {

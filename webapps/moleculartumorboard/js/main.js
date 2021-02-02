@@ -436,6 +436,30 @@ widgetGenerators['base2'] = {
                 link = 'https://www.ncbi.nlm.nih.gov/snp/' + snp
                 addInfoLineLink(div, 'dbSNP ID', snp, link);
             }
+            var sdiv = getEl('div')
+            var span = getEl('span')
+            span.textContent = 'Hallmarks of Cancer: '
+            span.classList.add('detail-info-line-header')
+            addEl(sdiv, span)
+            var span = getEl('span')
+            span.id = 'hallmarks_func_summary'
+            span.style.color = 'gray'
+            span.textContent = 'Fetching data...'
+            addEl(sdiv, span)
+            addEl(div, sdiv)
+            var link = '/webapps/moleculartumorboard/hallmarks?hugo=' + hugo
+            fetch(link).then(data=>{return data.json()}).then(response=>{
+                let span = document.querySelector('#hallmarks_func_summary')
+                span.textContent = response['func_summary']
+                span.style.color = 'black'
+                let parentEl = span.parentElement
+                let a = getEl('a')
+                a.href = 'https://cancer.sanger.ac.uk/cosmic/census-page/' + hugo
+                a.target = '_blank'
+                a.textContent = ' \u{1f517}'
+                a.style.textDecoration = 'none'
+                addEl(parentEl, a)
+            })
         }
     }
 }
@@ -461,31 +485,27 @@ widgetGenerators['litvar'] = {
             var n = v['rsids2pmids'][rsid];
             var link = 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=' + rsid;
             if (n != undefined) {
-                    addInfoLineLink(div, n , '# publications for the variant (' + rsid + ')', link);
-                        } else {
-                        var url = 'https://www.ncbi.nlm.nih.gov/research/bionlp/litvar/api/v1/public/rsids2pmids?rsids=' + rsid;
-                        var xhr = new XMLHttpRequest();
-                        xhr.open('GET', url, true);
-                        xhr.onreadystatechange = function () {
-                        if (xhr.readyState == XMLHttpRequest.DONE) {
+                addInfoLineLink(div, n , '# publications for the variant (' + rsid + ')', link);
+            } else {
+                var url = 'litvar?rsid=' + rsid
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
                         if (xhr.status == 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.length == 0) {
-                        n = 0;
-                        } else {
-                        n = response[0]['pmids'].length;
+                            var response = JSON.parse(xhr.responseText);
+                            n = response['n']
+                            v['rsids2pmids'][rsid] = n;
+                            addInfoLineLink2(div, '',  
+                                    n + ' publications for the variant (' + rsid + ')', link);
                         }
-                        v['rsids2pmids'][rsid] = n;
-                        addInfoLineLink2(div,'',  n + ' publications for the variant (' + rsid + ')', link);
-                                }
-                                }
-                                };
-                                xhr.send();
-                                }
-                                return;
-                                }
-                                },
-                                }
+                    }
+                }
+                xhr.send();
+            }
+        }
+    }
+}
 
 widgetInfo['brca'] = {'title': 'BRCA mutation classification (BRCA Exchange)'};
 widgetGenerators['brca'] = {
@@ -532,6 +552,11 @@ widgetGenerators['oncokb'] = {
         'height': undefined,
         'word-break': 'break-word',
         'function': function (div, row, tabName) {
+            var levelDic = {'LEVEL_1': 'L1', 'LEVEL_2':'L2', 'LEVEL_R1':'L2', 
+                    'LEVEL_3A':'L3', 'LEVEL_R2':'L3',
+                    'LEVEL_3B':'L4', 'LEVEL_4':'L5'}
+            var levelNum = {'L1':1, 'L2':2, 'L3':3, 'L4':4, 'L5':5}
+            var levelNumToLevel = {1:'L1', 2:'L2', 3:'L3', 4:'L4', 5:'L5'}
             var widgetName = 'brca';
             var v = widgetGenerators[widgetName][tabName]['variables'];
             var chrom = getWidgetData(tabName, 'base', row, 'chrom');
@@ -584,15 +609,44 @@ widgetGenerators['oncokb'] = {
                                 addInfoLineLink2(div, 'No annotation for OncoKB available');
                                 }
                             else {
-                                addInfoLineLink2(div, effect  +', ' + oncogenic +', ', 'OncoKB', link)
+                                const minLevelNum = Math.min(...response.treatments.map(
+                                        t => levelNum[levelDic[t.level]]))
+                                const minLevel = levelNumToLevel[minLevelNum]
+                                var treatments = response.treatments;
                                 var ssdiv = getEl('div');
                                 ssdiv.style.display = 'flex';
                                 ssdiv.style.flexWrap = 'wrap';
-                                var treatments = response.treatments;
+                                var sssdiv = getEl('div');
+                                sssdiv.style.display = 'flex';
+                                //sssdiv.style.width = '100%';
+                                var s4div = getEl('div');
+                                s4div.style.display = 'flex';
+                                s4div.style.flexDirection = 'column';
+                                var span = getEl('span');
+                                span.textContent = minLevel;
+                                span.style.fontSize = '7rem';
+                                addEl(s4div, span);
+                                var span = getEl('span');
+                                span.textContent = effect;
+                                addEl(s4div, span);
+                                var span = getEl('span');
+                                span.textContent = oncogenic;
+                                addEl(s4div, span);
+                                addEl(sssdiv, s4div);
+                                var img = getEl('img');
+                                img.src = 'LOE.jpeg';
+                                img.style.width = '100%';
+                                img.style.maxWidth = '600px';
+                                img.style.maxHeight = '30rem';
+                                addEl(sssdiv, img);
+                                addEl(ssdiv, sssdiv);
+                                addEl(div, ssdiv);
+                                // Drug table
                                 var sdiv = getEl('div');
                                 sdiv.style.height = '30rem';
                                 sdiv.style.overflow = 'auto';
                                 sdiv.style.maxWidth = '600px';
+                                addEl(ssdiv, sdiv);
                                 var table = getEl('table');
                                 var thead = getEl('thead');
                                 var tr = getEl('tr');
@@ -620,6 +674,18 @@ widgetGenerators['oncokb'] = {
                                     var c = t.levelAssociatedCancerType;
                                     var cancer = c.mainType.name;
                                     var level = t.level;
+                                    // LOE conversion
+                                    if (level == 'LEVEL_1') {
+                                        level = 'L1'
+                                    } else if (level == 'LEVEL_2' || level == 'LEVEL_R1') {
+                                        level = 'L2'
+                                    } else if (level == 'LEVEL_3A' || level == 'LEVEL_R2') {
+                                        level = 'L3'
+                                    } else if (level == 'LEVEL_3B') {
+                                        level = 'L4'
+                                    } else if (level == 'LEVEL_4') {
+                                        level = 'L5'
+                                    }
                                     var maxJ = drugs.length - 1;
                                     for (var j = 0; j < drugs.length; j++) {
                                         var d = drugs[j];
@@ -654,14 +720,15 @@ widgetGenerators['oncokb'] = {
                                 }
                                 addEl(table, tbody);
                                 addEl(sdiv, table);
-                                addEl(ssdiv, sdiv);
-                                var img = getEl('img');
-                                img.src = 'level_V2.png';
-                                img.style.width = '100%';
-                                img.style.maxWidth = '600px';
-                                img.style.maxHeight = '30rem';
-                                addEl(ssdiv, img);
-                                addEl(div, ssdiv);
+                                // Title link
+                                var titleEl = div.parentElement.firstChild.querySelector('legend');
+                                var title = titleEl.textContent;
+                                titleEl.textContent = '';
+                                var a = getEl('a');
+                                a.href = link;
+                                a.target = '_blank';
+                                a.textContent = title;
+                                addEl(titleEl, a);
                             }
                         }
                     }
@@ -689,8 +756,6 @@ widgetGenerators['ncbi'] = {
                 addInfoLineLink2(div, desc, tabName)
             }
             var hugo = getWidgetData(tabName, 'base', row, 'hugo');
-            var link = 'https://cancer.sanger.ac.uk/cosmic/census-page/' + hugo;
-            addInfoLineLink2(div, '', 'Hallmarks of Cancer', link);
         }
     }
 }
@@ -922,6 +987,7 @@ widgetGenerators['cosmic2'] = {
                         responsiveAnimationDuration: 500,
                         maintainAspectRatio: false,
                         legend: {
+                            display: false,
                             position: 'right',
                         },
                         plugins: {

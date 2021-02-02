@@ -472,9 +472,7 @@ widgetGenerators['lollipop2'] = {
 					}
 				}
 				var maxStackLevel = Math.max(Object.keys(stacks).length);
-                console.log('@ stacks=', stacks, 'maxstacklevel=', maxStackLevel, 'total=', maxStackLevel, v.domainLineHeight);
 				dsDiv.style.height = (maxStackLevel * (v.domainLineHeight + 2) + 5) + 'px';
-                console.log('@ dsDiv height=', dsDiv.style.height);
 			}
 
 			function setupVariantPopup (element, variant) {
@@ -635,7 +633,6 @@ widgetGenerators['lollipop2'] = {
 				v.proteinWidth = parseInt(
 					v.proteinWidth.substring(0, v.proteinWidth.length - 2)) 
 					- v.variantRadius - v.xEndPad;
-                console.log('@ proteinwidth=', v.proteinWidth);
 				v.aalen = data['len'];
 				v.aaWidth = v.proteinWidth / v.aalen;
 				v.reftranscript = data['transcript'];
