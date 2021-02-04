@@ -48,8 +48,10 @@ tags:
 - genes
 title: Gene Ontology
 type: annotator
-version: 2020.12.03
+version: 2021.02.04
 release_note:
+  2021.02.04: Data works with wggosummary
   2020.12.03: Data update
 requires:
 - wggo
+private: true

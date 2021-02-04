@@ -5,9 +5,13 @@ import sqlite3
 import os
 
 class CravatAnnotator(BaseAnnotator):
+    def setup(self): 
+        self.cursor.execute('select go_id, name from go_name;')
+        self.mid2mech = {row[0]:row[1] for row in self.cursor}
+
     def annotate(self, input_data, secondary_data=None):
         out = {}
-        q = 'select hugo, go_id, go_name, ontology from go where hugo = "{hugo}"'.format(
+        q = 'select hugo, go_id, go_aspect from go_annotation where hugo = "{hugo}"'.format(
             hugo = input_data['hugo'])
         self.cursor.execute(q)
         rows = self.cursor.fetchall()
@@ -19,15 +23,17 @@ class CravatAnnotator(BaseAnnotator):
             cco_ids = []
             mfo_ids = []
             for row in rows:
-                if row[3] == 'cco':
+                if row[2] == 'cco':
                     cco_ids.append(row[1])
-                    cco_names.append(row[2])
-                elif row[3] == 'bpo':
+                    cco_names.append(self.mid2mech[row[1]])
+                elif row[2] == 'bpo':
                     bpo_ids.append(row[1])
-                    bpo_names.append(row[2])
-                elif row[3] == 'mfo':
+                    bpo_names.append(self.mid2mech[row[1]])
+                elif row[2] == 'mfo':
                     mfo_ids.append(row[1])
-                    mfo_names.append(row[2])
+                    mfo_names.append(self.mid2mech[row[1]])
+                else:
+                    continue
             out['cco_name'] = ';'.join(cco_names)
             out['mfo_name'] = ';'.join(mfo_names)
             out['bpo_name'] = ';'.join(bpo_names)
