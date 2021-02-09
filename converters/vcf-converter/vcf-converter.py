@@ -14,6 +14,7 @@ from io import StringIO
 import copy
 from pathlib import Path
 from math import isnan
+from collections import OrderedDict
 
 class CravatConverter(BaseConverter):
 
@@ -163,7 +164,8 @@ class CravatConverter(BaseConverter):
         if len(variant.samples) > 0:
             all_gt_zero = True
             for call in variant.samples:
-                for gt in set(call.gt_alleles):
+                # Dedup gt but maintain order
+                for gt in list(OrderedDict.fromkeys(call.gt_alleles)):
                     if gt == '0' or gt is None:
                         continue
                     all_gt_zero = False
