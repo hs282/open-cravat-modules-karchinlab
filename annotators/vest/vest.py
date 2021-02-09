@@ -43,7 +43,7 @@ class CravatAnnotator(BaseAnnotator):
             sos = mapping.so.split(',')
             for so in sos:
                 if so in ['MIS','STG','STL']:
-                    transc_ontologies[mapping.transcript] = so
+                    transc_ontologies[mapping.transcript.split('.')[0]] = so
         if transc_ontologies == {}:
             return
                     
@@ -57,9 +57,10 @@ class CravatAnnotator(BaseAnnotator):
             for r in qr:
                 score = r[0]
                 transc = r[1]
-                if transc not in transc_ontologies:
+                transc_base = transc.split('.')[0]
+                if transc_base not in transc_ontologies:
                     continue
-                transc_so = transc_ontologies[transc]
+                transc_so = transc_ontologies[transc_base]
                 if transc_so in self.pvalue_table:
                     pval = self.pvalue_table[transc_so][score]
                 else:
