@@ -20,11 +20,13 @@ from cravat import get_live_annotator, get_live_mapper
 from cravat.config_loader import ConfigLoader
 import requests
 import oyaml
+import datetime
 
 live_modules = {}
 live_mapper = None
 module_confs = {}
 modules_to_run_ordered = []
+oncokb_cache = {}
 
 async def test (request):
     return web.json_response({'result': 'success'})
@@ -205,6 +207,15 @@ async def load_live_modules ():
 
 async def get_oncokb_annotation (request):
     global oncokb_conf
+    global oncokb_cache
+    print(f'@ oncokb_cache no={len(oncokb_cache)}')
+    queries = request.rel_url.query
+    chrom = queries['chrom']
+    start = queries['start']
+    end = queries['end']
+    ref_base = queries['ref_base']
+    alt_base = queries['alt_base']
+    cache_key = f'{chrom}:{start}:{end}:{ref_base}:{alt_base}'
     cookies = request.cookies
     if 'oncokb_token' in cookies:
         token = cookies['oncokb_token']
@@ -214,25 +225,35 @@ async def get_oncokb_annotation (request):
         token = oncokb_conf['token']
     else:
         token = None
-    if token is None:
-        response = web.json_response({'notoken': True})
-    else:
-        queries = request.rel_url.query
-        chrom = queries['chrom']
-        start = queries['start']
-        end = queries['end']
-        ref_base = queries['ref_base']
-        alt_base = queries['alt_base']
-        url = f'https://www.oncokb.org/api/v1/annotate/mutations/byGenomicChange?genomicLocation={chrom},{start},{end},{ref_base},{alt_base}&referenceGenome=GRCh38'
-        headers = {'Authorization': 'Bearer ' + token}
-        r = requests.get(url, headers=headers)
-        rjson = r.json()
-        if 'status' in rjson and rjson['status'] == 401:
-            rjson = {'notoken': True}
-            response = web.json_response(rjson)
-            response.cookies['oncokb_token'] = ''
+    if cache_key in oncokb_cache:
+        cache_date = oncokb_cache[cache_key]['date']
+        now = datetime.datetime.now()
+        diff = now - cache_date
+        if diff.days > 30:
+            del oncokb_cache[cache_key]
+            use_cache = False
         else:
-            response = web.json_response(rjson)
+            use_cache = True
+        print(f'@ cache_date={cache_date} now={now} diff={diff.days} use_cache={use_cache}')
+    else:
+        use_cache = False
+    if use_cache:
+        response = web.json_response(oncokb_cache[cache_key]['rjson'])
+    else:
+        if token is None:
+            response = web.json_response({'notoken': True})
+        else:
+            print(f'@ fetching oncokb online')
+            url = f'https://www.oncokb.org/api/v1/annotate/mutations/byGenomicChange?genomicLocation={chrom},{start},{end},{ref_base},{alt_base}&referenceGenome=GRCh38'
+            headers = {'Authorization': 'Bearer ' + token}
+            r = requests.get(url, headers=headers)
+            rjson = r.json()
+            if 'status' in rjson and rjson['status'] == 401:
+                response = web.json_response({'notoken': True})
+                response.cookies['oncokb_token'] = ''
+            else:
+                response = web.json_response(rjson)
+                oncokb_cache[cache_key] = {'date': datetime.datetime.now(), 'rjson': rjson}
     return response
 
 async def get_hallmarks (request):

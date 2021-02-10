@@ -438,7 +438,7 @@ widgetGenerators['base2'] = {
             }
             var sdiv = getEl('div')
             var span = getEl('span')
-            span.textContent = 'Hallmarks of Cancer: '
+            span.textContent = 'Hallmarks of Cancer function summary: '
             span.classList.add('detail-info-line-header')
             addEl(sdiv, span)
             var span = getEl('span')
