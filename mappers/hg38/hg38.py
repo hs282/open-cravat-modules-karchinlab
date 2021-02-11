@@ -831,6 +831,13 @@ class Mapper(cravat.BaseMapper):
     def map(self, crv_data):
         tr_info = self.tr_info
         chrom = crv_data["chrom"]
+        if chrom.startswith('chrK') or chrom.startswith('chrG') or chrom.startswith('chrJ'):
+            chrom_nover = chrom[3:].split('.')[0]
+            q = f'select chrom from chroms where substr(chrom, instr(chrom, "_") + 1, instr(chrom, "v") - instr(chrom, "_") - 1) like "{chrom_nover}%"'
+            self.c.execute(q)
+            r = self.c.fetchone()
+            if r is not None:
+                chrom = r[0]
         gpos = crv_data["pos"]
         ref_base_str = crv_data["ref_base"]
         alt_base_str = crv_data["alt_base"]
