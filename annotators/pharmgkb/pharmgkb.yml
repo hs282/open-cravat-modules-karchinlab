@@ -54,6 +54,5 @@ tags:
 - variants
 - clinical relevance
 - cancer
-- cardiovascular
 - literature
 requires_opencravat: '>=2.2.2'
