@@ -39,10 +39,10 @@ widgetGenerators['rankscore'] = {
             addEl(table, tbody);
             tr = getEl('tr')
             var td = getEl('td');
-            var d = infomgr.getData('variant'); 
+            var d = infomgr.getData('variant');
+            var nums = {}; 
             for (var j = 0; j < d.length; j++) {
                 var rowd = d[j]; 
-                var nums = {};
                 for (var i = 0; i < module_names.length; i++) {
                     var modules = module_names[i];
                     var c = column_names[i];
@@ -50,12 +50,13 @@ widgetGenerators['rankscore'] = {
                     if (all != undefined){
                         all = all.toFixed(3);
                     }
+                    nums[modules] = all;
+                    
                     var achange = getWidgetData('variant', 'base', rowd, 'achange');
                     if (achange == null){
                         achange = '';
                     }
                     var cchange = getWidgetData('variant', 'base', rowd, 'cchange');
-                    nums[c] = all;
                 }
             var withre = /[+-]?([0-9]*[.])?[0-9]+/;
             var hugos = [];
@@ -72,6 +73,7 @@ widgetGenerators['rankscore'] = {
                 tr = getWidgetTableTr(numbers);
                 for (var k = 0; k < numbers.length; k++) {
                     var rankscore= numbers[k];
+                    console.log(rankscore)
                     getGradientColor = function(start_color, end_color, percent) {
                         start_color = start_color.replace(/^\s*#|\s*$/g, '');
                         end_color = end_color.replace(/^\s*#|\s*$/g, '');
