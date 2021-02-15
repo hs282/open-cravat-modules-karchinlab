@@ -138,13 +138,17 @@ class Reporter(CravatReport):
             self.enstnv_to_alens[self.remove_version(enst)] = int(alen)
         f.close()
         # hugo to ensg
-        f = open(os.path.join(data_path, 'data', 'hugo_ensg.txt'))
+        f = open(os.path.join(data_path, 'data', 'hugo_ensg_chrom.txt'))
         self.hugo_to_ensg = {}
+        self.hugo_to_chrom = {}
         for line in f:
-            [hugo, ensg] = line[:-1].split('\t')
+            [hugo, ensg, chrom] = line[:-1].split('\t')
             #if hugo in self.hugo_synonyms:
             #    hugo = self.hugo_synonyms[hugo]
-            self.hugo_to_ensg[hugo] = ensg
+            self.hugo_to_ensg[hugo] = ensg.split('.')[0]
+            if hugo not in self.hugo_to_chrom:
+                self.hugo_to_chrom[hugo] = []
+            self.hugo_to_chrom[hugo].append(chrom)
         f.close()
         self.csq_consequence_to_oc_so = {
             'splice_acceptor_variant': 'splice_site_variant',
@@ -414,7 +418,7 @@ class Reporter(CravatReport):
                 canonical_ensts[hugo] = enst
                 canonical_enstnvs[hugo] = self.remove_version(enst)
             for hugo in other_hugos:
-                if hugo in self.hugo_to_ensg:
+                if hugo in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
                     ensgs[hugo] = self.hugo_to_ensg[hugo]
                 elif hugo in csq_hugos:
                     ensgs[hugo] = csq_genes[csq_hugos.index(hugo)]
@@ -424,7 +428,7 @@ class Reporter(CravatReport):
             for hugo in csq_other_hugos:
                 if hugo in ensgs:
                     continue
-                if hugo in self.hugo_to_ensg:
+                if hugo in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
                     ensgs[hugo] = self.hugo_to_ensg[hugo]
                 elif hugo in csq_hugos:
                     ensgs[hugo] = csq_genes[csq_hugos.index(hugo)]
@@ -581,7 +585,7 @@ class Reporter(CravatReport):
                     if target.startswith('ENSG') and target not in group_ids:
                         group_ids.add(target)
                         genehancer_target_exists = True
-                    elif target in self.hugo_to_ensg:
+                    elif target in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
                         ensg = self.hugo_to_ensg[target]
                         if ensg not in group_ids:
                             group_ids.add(ensg)
