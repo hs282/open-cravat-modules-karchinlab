@@ -1786,42 +1786,42 @@ class Mapper(cravat.BaseMapper):
             if gposend_kind == FRAG_UP2K:
                 so = (SO_2KU,)
             elif gposend_kind == FRAG_DN2K:  # no transcript
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                 coding = CODING
             elif gposend_kind == FRAG_UTR5:
                 so = (SO_2KU, SO_UT5)
             elif gposend_kind == FRAG_UTR3:  # no transcript
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                 coding = CODING
             elif gposend_kind == FRAG_CDS:  # no transcript
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_2KU, SO_NSO)
+                so = (SO_2KU, SO_UNK)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_2KU, SO_UT5)
             elif gposend_kind == FRAG_UTR3INTRON:  # no transcript
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                 coding = CODING
             elif gposend_kind == FRAG_CDSINTRON:  # no transcript
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_2KU, SO_NSO)
+                so = (SO_2KU, SO_UNK)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
                         so = (SO_2KU,)
                 else:
-                    if gposend_kind < gpos:
-                        so = (SO_TAB,)
+                    if gposend < gpos:
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
                         so = (SO_2KU,)
         elif kind == FRAG_DN2K:
             if gposend_kind == FRAG_UP2K:  # no transcript
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                 coding = CODING
             elif gposend_kind == FRAG_DN2K:
                 so = (SO_2KD,)
@@ -1841,7 +1841,7 @@ class Mapper(cravat.BaseMapper):
                 achange = ""
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_2KU, SO_NSO)
+                so = (SO_2KU, SO_UNK)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_MLO, SO_2KU, SO_UT5)
                 coding = CODING
@@ -1852,18 +1852,18 @@ class Mapper(cravat.BaseMapper):
                 achange = ""
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_2KU, SO_NSO)
+                so = (SO_2KU, SO_UNK)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
                         so = (SO_2KD,)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so = (SO_2KD,)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
         elif kind == FRAG_UTR5:
             if gposend_kind == FRAG_UP2K:
                 so = (SO_2KU, SO_UT5)
@@ -1883,7 +1883,7 @@ class Mapper(cravat.BaseMapper):
                 so = so + so_addl
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_UT5, SO_NSO)
+                so = (SO_UT5, SO_UNK)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_UT5,)
             elif gposend_kind == FRAG_UTR3INTRON:
@@ -1894,24 +1894,21 @@ class Mapper(cravat.BaseMapper):
                 achange = ""
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_UT5, SO_NSO)
+                so = (SO_UT5, SO_UNK)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
-                        so = (SO_MLO, SO_UT5)
+                        so = (SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (SO_UT5, SO_2KU)
+                        so = (SO_2KU, SO_UT5)
                 else:
-                    if gposend_kind < gpos:
-                        so = (SO_MLO, SO_UT5)
+                    if gposend < gpos:
+                        so = (SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (
-                            SO_UT5,
-                            SO_2KU,
-                        )
+                        so = (SO_2KU, SO_UT5)
         elif kind == FRAG_UTR3:
             if gposend_kind == FRAG_UP2K:
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                 coding = CODING
             elif gposend_kind == FRAG_DN2K:
                 so = (SO_UT3, SO_2KD)
@@ -1925,7 +1922,7 @@ class Mapper(cravat.BaseMapper):
                 achange = ""
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_UT3, SO_NSO)
+                so = (SO_UT3, SO_UNK)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_MLO, SO_UT5, SO_UT3)
                 coding = CODING
@@ -1936,21 +1933,21 @@ class Mapper(cravat.BaseMapper):
                 achange = ""
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_UT3, SO_NSO)
+                so = (SO_UT3, SO_UNK)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
                         so = (SO_UT3, SO_2KD)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so = (SO_UT3, SO_2KD)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
         elif kind == FRAG_CDS:
             if gposend_kind == FRAG_UP2K:
-                so = (SO_TAB,)
+                so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO)
                 coding = CODING
             elif gposend_kind == FRAG_DN2K:
                 so = (SO_STL, SO_2KD)
@@ -1983,7 +1980,7 @@ class Mapper(cravat.BaseMapper):
                 )
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_NSO, SO_NSO)
+                so = (SO_UNK,)
                 coding = CODING
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_MLO, SO_UT5)
@@ -2022,21 +2019,21 @@ class Mapper(cravat.BaseMapper):
                 so += so_addl
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_NSO,)
+                so = (SO_UNK,)
                 coding = CODING
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
                         so = (SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (SO_MLO, SO_UT5, SO_2KU)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO)
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so = (SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (SO_MLO, SO_UT5, SO_2KU)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO)
         elif kind == FRAG_NCRNA:
-            so = (SO_NSO,)
+            so = (SO_UNK,)
         elif kind == FRAG_UTR5INTRON:
             if gposend_kind == FRAG_UP2K:
                 so = (SO_UT5, SO_2KU)
@@ -2052,7 +2049,7 @@ class Mapper(cravat.BaseMapper):
                 so = (SO_MLO, SO_UT5)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_NSO,)
+                so = (SO_UNK,)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_UT5,)
             elif gposend_kind == FRAG_UTR3INTRON:
@@ -2063,18 +2060,18 @@ class Mapper(cravat.BaseMapper):
                 achange = ""
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_NSO,)
+                so = (SO_UNK,)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
-                        so = (SO_MLO, SO_UT5, SO_UT3, SO_2KD)
+                        so = (SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (SO_UT5, SO_2KU)
+                        so = (SO_2KU, SO_UT5)
                 else:
-                    if gposend_kind < gpos:
-                        so = (SO_MLO, SO_UT5, SO_UT3, SO_2KD)
+                    if gposend < gpos:
+                        so = (SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (SO_UT5, SO_2KU)
+                        so = (SO_2KU, SO_UT5)
         elif kind == FRAG_UTR3INTRON:
             if gposend_kind == FRAG_UP2K:
                 so = (SO_UT5, SO_2KU)
@@ -2090,7 +2087,7 @@ class Mapper(cravat.BaseMapper):
                 so = (SO_MLO, SO_UT5)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_NSO,)
+                so = (SO_UNK,)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (SO_MLO, SO_UT5, SO_UT3)
                 coding = CODING
@@ -2101,18 +2098,18 @@ class Mapper(cravat.BaseMapper):
                 achange = ""
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_NSO,)
+                so = (SO_UNK,)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
                         so = (SO_UT3, SO_2KD)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so = (SO_UT3, SO_2KD)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_UT5, SO_MLO, SO_STL, SO_UT3)
         elif kind == FRAG_CDSINTRON:
             if gposend_kind == FRAG_UP2K:
                 so = (SO_MLO, SO_UT5, SO_2KU)
@@ -2162,7 +2159,7 @@ class Mapper(cravat.BaseMapper):
                 )
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so = (SO_NSO,)
+                so = (SO_UNK,)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so = (
                     SO_MLO,
@@ -2212,35 +2209,35 @@ class Mapper(cravat.BaseMapper):
                 ):
                     coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so = (SO_NSO,)
+                so = (SO_UNK,)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
                         so = (SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (SO_MLO, SO_UT5, SO_2KU)
+                        so = (SO_2KU, SO_UT5, SO_MLO)
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so = (SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so = (SO_MLO, SO_UT5, SO_2KU)
+                        so = (SO_2KU, SO_UT5, SO_MLO)
         elif kind == FRAG_NCRNAINTRON:
             if gposend_kind == FRAG_UP2K:
-                so = (SO_2KU,)
+                so = (SO_2KU, SO_UNK)
             elif gposend_kind == FRAG_DN2K:
-                so = (SO_2KD,)
+                so = (SO_2KD, SO_UNK)
             elif gposend_kind == FRAG_UTR5:
-                so = (SO_UT5,)
+                so = (SO_UT5, SO_UNK)
             elif gposend_kind == FRAG_UTR3:
-                so = (SO_UT3,)
+                so = (SO_UT3, SO_UNK)
             elif gposend_kind == FRAG_CDS:
                 so = (SO_UNK,)
             elif gposend_kind == FRAG_NCRNA:
                 so = (SO_UNK,)
             elif gposend_kind == FRAG_UTR5INTRON:
-                so = (SO_UT5,)
+                so = (SO_UT5, SO_UNK)
             elif gposend_kind == FRAG_UTR3INTRON:
-                so = (SO_UT3,)
+                so = (SO_UT3, SO_UNK)
             elif gposend_kind == FRAG_CDSINTRON:
                 so = (SO_UNK,)
             elif gposend_kind == FRAG_NCRNAINTRON:
@@ -2250,29 +2247,29 @@ class Mapper(cravat.BaseMapper):
         elif kind == FRAG_FLAG_IG:
             if gposend_kind == FRAG_UP2K:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
+                    if gposend > gpos:
                         so = (SO_2KU,)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                 else:
                     if gposend < gpos:
                         so = (SO_2KU,)
                     else:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
             elif gposend_kind == FRAG_DN2K:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_TAB,)
+                    if gposend > gpos:
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
                         so = (SO_2KD,)
                 else:
                     if gposend < gpos:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                     else:
                         so = (SO_2KD,)
             elif gposend_kind == FRAG_UTR5:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
+                    if gposend > gpos:
                         so = (SO_UT5, SO_2KU)
                     else:
                         so = (SO_MLO, SO_UT5, SO_UT3, SO_2KD)
@@ -2283,82 +2280,87 @@ class Mapper(cravat.BaseMapper):
                         so = (SO_MLO, SO_UT5, SO_UT3, SO_2KD)
             elif gposend_kind == FRAG_UTR3:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_TAB,)
+                    if gposend > gpos:
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                     else:
                         so = (SO_UT3, SO_2KD)
                 else:
                     if gposend < gpos:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                     else:
                         so = (SO_UT3, SO_2KD)
             elif gposend_kind == FRAG_CDS:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_MLO, SO_UT5, SO_2KU)
+                    if gposend > gpos:
+                        so = (SO_2KU, SO_UT5, SO_MLO)
                     else:
                         so = (SO_STL, SO_UT3, SO_2KD)
                 else:
                     if gposend < gpos:
-                        so = (SO_MLO, SO_UT5, SO_2KU)
+                        so = (SO_2KU, SO_UT5, SO_MLO)
                     else:
                         so = (SO_STL, SO_UT3, SO_2KD)
             elif gposend_kind == FRAG_NCRNA:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_TAB,)
+                    if gposend > gpos:
+                        so = (SO_TAB, SO_UNK)
                     else:
                         so = (SO_UNK,)
                 else:
                     if gposend < gpos:
-                        so = (SO_TAB,)
+                        so = (SO_TAB, SO_UNK)
                     else:
                         so = (SO_UNK,)
             elif gposend_kind == FRAG_UTR5INTRON:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_TAB, SO_UT5, SO_2KU)
+                    if gposend > gpos:
+                        so = (SO_TAB, SO_2KU, SO_UT5)
                     else:
-                        so = (SO_MLO, SO_UT5, SO_UT3, SO_2KD)
+                        so = (SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                 else:
                     if gposend < gpos:
-                        so = (SO_TAB, SO_UT5, SO_2KU)
+                        so = (SO_TAB, SO_2KU, SO_UT5)
                     else:
-                        so = (SO_MLO, SO_UT5, SO_UT3, SO_2KD)
+                        so = (SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
             elif gposend_kind == FRAG_UTR3INTRON:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_TAB, SO_UT5, SO_UT3, SO_2KU, SO_2KD)
+                    if gposend > gpos:
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                     else:
-                        so = (SO_UT3, SO_2KU)
+                        so = (SO_UT3, SO_2KD)
                 else:
                     if gposend < gpos:
-                        so = (SO_TAB, SO_UT5, SO_UT3, SO_2KU, SO_2KD)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                     else:
-                        so = (SO_UT3, SO_2KU)
+                        so = (SO_UT3, SO_2KD)
             elif gposend_kind == FRAG_CDSINTRON:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_TAB, SO_UT5, SO_2KU)
+                    if gposend > gpos:
+                        #TODO: MLO should be separately determined.
+                        so = (SO_TAB, SO_2KU, SO_UT5)
                     else:
+                        #TODO: MLO should be separately determined.
                         so = (SO_STL, SO_UT3, SO_2KD)
                 else:
                     if gposend < gpos:
-                        so = (SO_TAB, SO_UT5, SO_2KU)
+                        #TODO: MLO should be separately determined.
+                        so = (SO_TAB, SO_2KU, SO_UT5)
                     else:
+                        #TODO: MLO should be separately determined.
                         so = (SO_STL, SO_UT3, SO_2KD)
             elif gposend_kind == FRAG_NCRNAINTRON:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so = (SO_TAB,)
+                    if gposend > gpos:
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_UNK)
                     else:
                         so = (SO_UNK,)
                 else:
                     if gposend < gpos:
-                        so = (SO_UNK,)
+                        so = (SO_TAB, SO_2KU, SO_UT5, SO_UNK)
                     else:
-                        so = (SO_NSO,)
+                        so = (SO_UNK,)
             elif gposend_kind == FRAG_FLAG_IG:
+                #TODO: whole gene deletion should be separately determined.
                 so = (SO_NSO,)
         # hgvs c.
         if kind == FRAG_CDS and gposend_kind == FRAG_CDS:
@@ -2576,16 +2578,19 @@ class Mapper(cravat.BaseMapper):
                 so += (SO_TAB, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                 coding = CODING
             elif gposend_kind == FRAG_UTR5:
+                #TODO: SO_TAB should be separately determined.
                 so += (SO_UT5,)
             elif gposend_kind == FRAG_UTR3:
                 so += (SO_TAB, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                 coding = CODING
             elif gposend_kind == FRAG_CDS:
+                #TODO: SO_MLO should be separately determined.
                 so += (SO_TAB, SO_UT5, SO_MLO)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNA:
-                so += (SO_TAB,)
+                so += (SO_TAB, SO_UT5, SO_UNK)
             elif gposend_kind == FRAG_UTR5INTRON:
+                #TODO: SO_TAB should be separately determined.
                 so += (SO_UT5,)
             elif gposend_kind == FRAG_UTR3INTRON:
                 so += (SO_TAB, SO_UT5, SO_MLO, SO_STL, SO_UT3)
@@ -2603,7 +2608,7 @@ class Mapper(cravat.BaseMapper):
                 so += (SO_TAB, SO_UT5, SO_MLO)
                 coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
-                so += (SO_TAB,)
+                so += (SO_TAB, SO_UNK)
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
@@ -2612,7 +2617,7 @@ class Mapper(cravat.BaseMapper):
                     else:
                         so += (SO_2KU,)
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so += (SO_TAB, SO_UT5, SO_MLO, SO_STL, SO_UT3, SO_2KD)
                         coding = CODING
                     else:
@@ -2635,7 +2640,7 @@ class Mapper(cravat.BaseMapper):
                 if apos == 1:
                     so += (SO_MLO,)
             elif gposend_kind == FRAG_NCRNA:
-                so += (SO_UT3,)
+                so += (SO_UNK,)
             elif gposend_kind == FRAG_UTR5INTRON:
                 so += (SO_UT3, SO_STL, SO_MLO, SO_UT5)
                 coding = CODING
@@ -2658,15 +2663,15 @@ class Mapper(cravat.BaseMapper):
             elif gposend_kind == FRAG_FLAG_IG:
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
-                        so += (SO_2KD,)
+                        pass
                     else:
-                        so += (SO_TAB, SO_UT3, SO_STL, SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                         coding = CODING
                 else:
-                    if gposend_kind < gpos:
-                        so += (SO_2KD,)
+                    if gposend < gpos:
+                        pass
                     else:
-                        so += (SO_TAB, SO_UT3, SO_STL, SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL, SO_UT3)
                         coding = CODING
         elif kind == FRAG_UTR5:
             so += (SO_UT5,)
@@ -2715,7 +2720,7 @@ class Mapper(cravat.BaseMapper):
                     else:
                         so += (SO_2KU,)
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so += (SO_MLO, SO_STL, SO_UT3, SO_2KD)
                         coding = CODING
                     else:
@@ -2761,13 +2766,13 @@ class Mapper(cravat.BaseMapper):
                     if gposend > gpos:
                         so += (SO_2KD,)
                     else:
-                        so += (SO_TAB, SO_STL, SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL)
                         coding = CODING
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so += (SO_2KD,)
                     else:
-                        so += (SO_TAB, SO_STL, SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL)
                         coding = CODING
         elif kind == FRAG_CDS:
             coding = CODING
@@ -2816,12 +2821,12 @@ class Mapper(cravat.BaseMapper):
                     if gposend > gpos:
                         so += (SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so += (SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_2KU, SO_UT5, SO_MLO)
                 else:
                     if gposend < gpos:
                         so += (SO_STL, SO_UT3, SO_2KD)
                     else:
-                        so += (SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_2KU, SO_UT5, SO_MLO)
         elif kind == FRAG_NCRNA:
             so += (SO_UNK,)
         elif kind == FRAG_UTR5INTRON:
@@ -2914,13 +2919,13 @@ class Mapper(cravat.BaseMapper):
                     if gposend > gpos:
                         so += (SO_2KD,)
                     else:
-                        so += (SO_TAB, SO_STL, SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL)
                         coding = CODING
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so += (SO_2KD,)
                     else:
-                        so += (SO_TAB, SO_STL, SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_TAB, SO_2KU, SO_UT5, SO_MLO, SO_STL)
                         coding = CODING
         elif kind == FRAG_CDSINTRON:
             if (
@@ -2932,15 +2937,19 @@ class Mapper(cravat.BaseMapper):
                 so += (SO_SPL,)
             else:
                 so += (SO_INT,)
-            coding = CODING
             if gposend_kind == FRAG_UP2K:
-                so += (SO_TAB, SO_MLO, SO_UT5, SO_2KU)
+                so += (SO_TAB, SO_2KU, SO_UT5, SO_MLO)
+                coding = CODING
             elif gposend_kind == FRAG_DN2K:
                 so += (SO_STL, SO_UT3, SO_2KD)
+                coding = CODING
             elif gposend_kind == FRAG_UTR5:
+                #TODO: what if cds - stp - ut3 - 2kd - ig - 2ku - ut5 change?
                 so += (SO_MLO, SO_UT5)
+                coding = CODING
             elif gposend_kind == FRAG_UTR3:
                 so += (SO_STL, SO_UT3)
+                coding = CODING
             elif gposend_kind == FRAG_CDS:
                 pass
             elif gposend_kind == FRAG_NCRNA:
@@ -2948,11 +2957,14 @@ class Mapper(cravat.BaseMapper):
                 coding = NONCODING
             elif gposend_kind == FRAG_UTR5INTRON:
                 so += (SO_MLO, SO_UT5)
+                coding = CODING
             elif gposend_kind == FRAG_UTR3INTRON:
                 so += (SO_STL, SO_UT3)
+                coding = CODING
             elif gposend_kind == FRAG_CDSINTRON:
                 if exonno != gposend_exonno:
                     so += (SO_EXL,)
+                    coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
                 so += (SO_UNK,)
                 coding = NONCODING
@@ -2960,13 +2972,17 @@ class Mapper(cravat.BaseMapper):
                 if strand == PLUSSTRAND:
                     if gposend > gpos:
                         so += (SO_STL, SO_UT3, SO_2KD)
+                        coding = CODING
                     else:
-                        so += (SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_2KU, SO_UT5, SO_MLO)
+                        coding = CODING
                 else:
-                    if gposend_kind < gpos:
+                    if gposend < gpos:
                         so += (SO_STL, SO_UT3, SO_2KD)
+                        coding = CODING
                     else:
-                        so += (SO_MLO, SO_UT5, SO_2KU)
+                        so += (SO_2KU, SO_UT5, SO_MLO)
+                        coding = CODING
         elif kind == FRAG_NCRNAINTRON:
             so += (SO_UNK,)
         elif kind == FRAG_FLAG_IG:
@@ -3040,12 +3056,12 @@ class Mapper(cravat.BaseMapper):
             elif gposend_kind == FRAG_NCRNA:
                 if strand == PLUSSTRAND:
                     if gpos < gposend:
-                        so += (SO_TAB,)
+                        so += (SO_TAB, SO_2KU, SO_UNK)
                     else:
                         so += (SO_UNK,)
                 else:
                     if gposend < gpos:
-                        so += (SO_TAB,)
+                        so += (SO_TAB, SO_2KU, SO_UNK)
                     else:
                         so += (SO_UNK,)
             elif gposend_kind == FRAG_UTR5INTRON:
@@ -3102,15 +3118,15 @@ class Mapper(cravat.BaseMapper):
                         coding = CODING
             elif gposend_kind == FRAG_NCRNAINTRON:
                 if strand == PLUSSTRAND:
-                    if gpos < gposend:
-                        so += (SO_TAB,)
+                    if gposend > gpos:
+                        so += (SO_TAB, SO_UNK)
                     else:
                         so += (SO_UNK,)
                 else:
                     if gposend < gpos:
-                        so += (SO_UNK,)
+                        so += (SO_TAB, SO_UNK)
                     else:
-                        so += (SO_NSO,)
+                        so += (SO_UNK,)
             elif gposend_kind == FRAG_FLAG_IG:
                 so = (SO_NSO,)
         # hgvs c.
