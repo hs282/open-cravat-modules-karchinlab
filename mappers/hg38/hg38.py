@@ -2603,6 +2603,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
                 so += (SO_TAB, SO_UT5, SO_MLO)
@@ -2654,6 +2655,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
                 so += (SO_UT3, SO_STL)
@@ -2706,6 +2708,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
                 so += (SO_MLO,)
@@ -2755,6 +2758,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
                 so += (SO_STL,)
@@ -2811,6 +2815,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
             elif gposend_kind == FRAG_NCRNAINTRON:
@@ -2859,6 +2864,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
                 so += (SO_MLO,)
@@ -2908,6 +2914,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
                 so += (SO_STL,)
@@ -2935,6 +2942,7 @@ class Mapper(cravat.BaseMapper):
                 == TRUE
             ):
                 so += (SO_SPL,)
+                coding = CODING
             else:
                 so += (SO_INT,)
             if gposend_kind == FRAG_UP2K:
@@ -3100,6 +3108,7 @@ class Mapper(cravat.BaseMapper):
                     == TRUE
                 ):
                     so += (SO_SPL,)
+                    coding = CODING
                 else:
                     so += (SO_INT,)
                 if strand == PLUSSTRAND:
