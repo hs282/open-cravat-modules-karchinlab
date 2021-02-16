@@ -1,5 +1,5 @@
-title: Genes Ranked by Total Variants
-version: 2.0.2
+title: Recurrently Mutated Genes
+version: 2.1.0
 type: webviewerwidget
 requires_opencravat: '>=2.0.2'
 required_annotator: base
@@ -11,7 +11,9 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 release_note:
+  2.1.0: no longer takes into account gene length
   2.0.2: aiosqlite instead of aiosqlite3
   1.2.0: works with oc 1.8.1.
 tags:
-- visualization
+- visualization widgets
+private: true

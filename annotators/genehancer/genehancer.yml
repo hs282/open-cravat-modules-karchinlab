@@ -40,6 +40,7 @@ output_columns:
 
 requires:
 - wggenehancer
+- wgenhancer
 
 tags:
 - non coding
@@ -47,5 +48,8 @@ tags:
 commercial_warning: 'Freely available for non-commercial use.'
 
 title: GeneHancer
-version: 1.0.0
+version: 1.1.0
+release_note:
+  1.1.0: Enhancer summary widget requirement
 type: annotator
+private: true

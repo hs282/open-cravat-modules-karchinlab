@@ -1,0 +1,18 @@
+title: Allele Frequency Spectrum
+version: 1.0.0
+type: webviewerwidget
+required_annotator: gnomad
+description: Allele Frequency Spectrum webviewer widget
+hidden: false
+requires_opencravat: '>=1.8.1'
+developer:
+  name: Madison Larsen
+  organization: In Silico Solutions
+  email: mlarsen@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization widgets
+release_note:
+  1.0.0: Initial release
+private: true

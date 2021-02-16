@@ -74,3 +74,7 @@ type: annotator
 version: 2.1.8
 requires:
 - wggnomad
+- wgallelefrequency
+release_note:
+  2.2.0: AF summary widget requirement
+private: true

@@ -95,11 +95,23 @@ widgetGenerators[widgetName] = {
 				var count = counts[labels[i]];
 				data.push(count);
 			}
+			
+			if (labels.length > 17){
+				labels = labels.slice(0, 17);
+				var other = data.slice(17, data.length)
+				other = other.reduce((a, b) => a + b, 0)
+				data = data.slice(0, 17);
+				data.push(other);
+				labels.push('other');
+
+			}
+
 			div.style.width = 'calc(100% - 37px)';
 			var chartDiv = getEl('canvas');
 			chartDiv.style.width = 'calc(100% - 20px)';
 			chartDiv.style.height = 'calc(100% - 20px)';
 			addEl(div, chartDiv);
+
 			var chart = new Chart(chartDiv, {
 				type: 'doughnut',
 				data: {
