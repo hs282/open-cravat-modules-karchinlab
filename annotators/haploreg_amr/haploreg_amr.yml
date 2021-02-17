@@ -31,6 +31,8 @@ secondary_inputs:
 requires:
   - dbsnp
   - wghaploreg_amr
+tags:
+- non coding
 developer:
   name: Luke Ward
   organization: MIT Kellis Lab

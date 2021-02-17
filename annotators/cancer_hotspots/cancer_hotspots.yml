@@ -34,5 +34,6 @@ release_note:
   1.2.0: Fix in data
   1.1.0: Updated data to hg38
 type: annotator
-
+tags:
+- cancer
 requires_opencravat: '>=2.2.1'

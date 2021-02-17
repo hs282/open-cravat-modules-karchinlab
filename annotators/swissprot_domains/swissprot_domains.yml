@@ -110,6 +110,8 @@ output_columns:
     title: pubmed
     type: int
 
+tags:
+- functional studies
 requires_opencravat: '>=2.2.1'
 requires:
 - wgswissprot_domains
