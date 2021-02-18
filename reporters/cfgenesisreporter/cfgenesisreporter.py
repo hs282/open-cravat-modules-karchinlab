@@ -585,7 +585,9 @@ class Reporter(CravatReport):
                     if target.startswith('ENSG') and target not in group_ids:
                         group_ids.add(target)
                         genehancer_target_exists = True
-                    elif target in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
+                    elif target in self.hugo_to_ensg 
+                            and target in self.hugo_to_chrom
+                            and chrom in self.hugo_to_chrom[target]:
                         ensg = self.hugo_to_ensg[target]
                         if ensg not in group_ids:
                             group_ids.add(ensg)
