@@ -300,7 +300,7 @@ class Reporter(CravatReport):
                 #    hugo = self.hugo_synonyms[hugo]
             except:
                 print(f'#####################|\nAn exception occurred. Please contact the OpenCRAVAT team with the following information:')
-                print(f'all_mappings_t={all_mappings_t}')
+                print(f'#exception: getting hugo from mapping\nall_mappings_t={all_mappings_t}')
                 print(f'mapping={mapping}')
                 return {}
             if hugo not in all_mappings:
@@ -395,7 +395,10 @@ class Reporter(CravatReport):
                     hugos_in_mane.append(hugo)
                 elif hugo not in other_hugos:
                     other_hugos.append(hugo)
-            for hugo in csq_hugos:
+            for i in range(len(csq_hugos)):
+                hugo = csq_hugos[i]
+                if csq_ensts[i].startswith('ENST') == False:
+                    continue
                 if hugo in self.mane_hugos and hugo not in csq_hugos_in_mane:
                     csq_hugos_in_mane.append(hugo)
                 elif hugo not in csq_other_hugos:
@@ -494,7 +497,7 @@ class Reporter(CravatReport):
                 canonical_enst = canonical_ensts[hugo]
                 canonical_enstnv = canonical_enstnvs[hugo]
                 for i in range(len(csq_ensts)):
-                    if csq_ensts[i] == canonical_enst:
+                    if csq_ensts[i].split('.')[0] == canonical_enstnv:
                         sos = self.convert_csq_consequence(csq_consequences[i])
                         if hugo not in canonical_sos:
                             canonical_sos[hugo] = sos
@@ -506,6 +509,8 @@ class Reporter(CravatReport):
             ensts = {}
             ## coding and splice site variant
             for hugo in canonical_ensts:
+                if hugo == '': # For example, ENSTR.
+                    continue
                 sos = None
                 if hugo not in canonical_sos:
                     canonical_enstnv = canonical_enstnvs[hugo]
@@ -513,7 +518,7 @@ class Reporter(CravatReport):
                         enstnv = self.remove_version(csq_ensts[i])
                         if enstnv == canonical_enstnv:
                             csq_consq = csq_consequences[i]
-                            if ('intron' in csq_consq and 'splice' not in csq_consq) or 'downstream' in csq_consq or 'non_coding' in csq_consq or 'upstream' in csq_consq:
+                            if ('intron' in csq_consq and not ('splice_donor' in csq_consq or 'splice_acceptor' in csq_consq)) or 'downstream' in csq_consq or 'non_coding' in csq_consq or 'upstream' in csq_consq:
                                 break
                             elif enstnv not in self.enstnv_to_alens:
                                 print(f'{enstnv} not in oc aalen')
@@ -527,7 +532,7 @@ class Reporter(CravatReport):
                                     break
                             if sos is None:
                                 print(f'##################\nAn exception occurred. Please contact the OpenCRAVAT team with the following information:')
-                                print(f'canonical_enstnvs={canonical_enstnvs}\ncanonical_sos={canonical_sos}\nin mane? {hugo in self.mane_hugos}\nall_mappings={all_mappings}\ncsq_ensts={csq_ensts}\ncsq_hugos={csq_hugos}\ncsq_consequenced={csq_consequences}\ncsq_hugos_in_mane={csq_hugos_in_mane}\ncsq={csq}\nhugo={hugo}')
+                                print(f'#exception: sos is None\n#row={row}\ncanonical_enstnvs={canonical_enstnvs}\ncanonical_sos={canonical_sos}\nin mane? {hugo in self.mane_hugos}\nall_mappings={all_mappings}\ncsq_ensts={csq_ensts}\ncsq_hugos={csq_hugos}\ncsq_consequenced={csq_consequences}\ncsq_hugos_in_mane={csq_hugos_in_mane}\ncsq={csq}\nhugo={hugo}')
                                 return
                         if sos is not None:
                             break
@@ -585,9 +590,7 @@ class Reporter(CravatReport):
                     if target.startswith('ENSG') and target not in group_ids:
                         group_ids.add(target)
                         genehancer_target_exists = True
-                    elif target in self.hugo_to_ensg 
-                            and target in self.hugo_to_chrom
-                            and chrom in self.hugo_to_chrom[target]:
+                    elif target in self.hugo_to_ensg and target in self.hugo_to_chrom and chrom in self.hugo_to_chrom[target]:
                         ensg = self.hugo_to_ensg[target]
                         if ensg not in group_ids:
                             group_ids.add(ensg)
@@ -619,42 +622,65 @@ class Reporter(CravatReport):
                                 break
                             else:
                                 upstream_but_no_canonical = True
+            so_ignores = [
+                'intron_variant', 
+                'synonymous_variant', 
+                '3_prime_UTR_variant', 
+                '5_prime_UTR_variant', 
+                'downstream_gene_variant', 
+                'intergenic_variant', 
+                'non_coding_transcript_exon_variant',
+                'splice_region_variant',
+                'start_retained_variant',
+                'stop_retained_variant',
+                'mature_miRNA_variant',
+                'NMD_transcript_variant',
+                'non_coding_transcript_variant',
+                'TFBS_ablation',
+                'TFBS_amplification',
+                'TF_binding_site_variant',
+                'regulatory_region_ablation',
+                'regulatory_region_amplification',
+                'feature_elongation',
+                'regulatory_region_variant',
+                'feature_truncation',
+                'incomplete_terminal_codon_variant',
+            ]
             if len(group_ids) == 0:
                 errmsgs = set()
+                correct_so = False
                 for hugo in canonical_sos:
-                    sos = canonical_sos[hugo]
-                    for so_ignore in [
-                            'intron_variant', 
-                            'synonymous_variant', 
-                            '3_prime_UTR_variant', 
-                            '5_prime_UTR_variant', 
-                            'downstream_gene_variant', 
-                            'intergenic_variant', 
-                            'non_coding_transcript_exon_variant',
-                            'splice_region_variant',
-                            'start_retained_variant',
-                            'stop_retained_variant',
-                            'mature_miRNA_variant',
-                            'NMD_transcript_variant',
-                            'non_coding_transcript_variant',
-                            'TFBS_ablation',
-                            'TFBS_amplification',
-                            'TF_binding_site_variant',
-                            'regulatory_region_ablation',
-                            'regulatory_region_amplification',
-                            'feature_elongation',
-                            'regulatory_region_variant',
-                            'feature_truncation',
-                            'incomplete_terminal_codon_variant',
-                            ]:
-                        if so_ignore in sos:
-                            errmsgs.add(f'{so_ignore} in canonical transcript')
-                if genehancertargetgenes is not None and len(genehancertargetgenes) > 0 and genehancer_target_exists == False:
+                    sos = canonical_sos[hugo].split(',')
+                    if self.has_coding_so(sos):
+                        correct_so = True
+                        break
+                if correct_so == False:
+                    errmsgs.add(f'no valid so in canonical transcript')
+                if genehancertargetgenes is not None \
+                        and len(genehancertargetgenes) > 0 \
+                        and genehancer_target_exists == False:
                     errmsgs.add(f'GeneHancer targets are not ENSG')
                 if upstream_but_no_canonical:
                     errmsgs.add('5k upstream on non-canonical transcript')
                 if len(csq_ensts) == 0:
                     errmsgs.add('no transcript detected')
+                if 'HC' in csq_lofs:
+                    correct_lof_canonical_so = False
+                    for lof_i in range(len(csq_lofs)):
+                        lof = csq_lofs[lof_i]
+                        enst = csq_ensts[lof_i]
+                        consequence = csq_consequences[lof_i]
+                        hugo = csq_hugos[lof_i]
+                        if hugo in canonical_enstnvs:
+                            canonical = canonical_enstnvs[hugo]
+                        else:
+                            canonical = ''
+                        if lof == 'HC' and enst.split('.')[0] == canonical\
+                                and consequence not in so_ignores:
+                            correct_lof_canonical_so = True
+                            break
+                    if correct_lof_canonical_so == False:
+                        errmsgs.add('no HC lof for canonical transcript with valid so')
                 no_canonical_enst = True
                 for hugo in canonical_enstnvs:
                     if hugo in all_mappings:
@@ -667,6 +693,8 @@ class Reporter(CravatReport):
                 if len(csq_hugos) > 0:
                     for enst_i in range(len(csq_ensts)):
                         enstnv = csq_ensts[enst_i].split('.')[0]
+                        if enstnv.startswith('ENST') == False:
+                            continue
                         hugo = csq_hugos[enst_i]
                         #if hugo in self.hugo_synonyms:
                         #    hugo = self.hugo_synonyms[hugo]
@@ -683,7 +711,7 @@ class Reporter(CravatReport):
                     errmsgs.add('no canonical transcript')
                 if len(errmsgs) == 0:
                     print(f'#################\nAn exception occurred. Please contact the OpenCRAVAT team with the following information:')
-                    print(f'# No gene name for {chrom} {pos} {ref} {alt}\n# csq={csq}\n# row={row}\n# csq_genes={csq_genes}\n# canonical_sos={canonical_sos}\n# coding={coding}\n# csq_lofs={csq_lofs}\n# genehancertargetgenes={genehancertargetgenes}\n# csq_ensts={csq_ensts}\n# csq_consequence={csq_consequences}\n# group_ids={group_ids}\n# canonical_ensts={canonical_ensts}\n# hugos_in_mane={hugos_in_mane}\n# other_hugos={other_hugos}\n# csq_hugos_in_mane={csq_hugos_in_mane}\n# csq_other_hugos={csq_other_hugos}\n# all_mappings={all_mappings}\n# genehancer_target_exists={genehancer_target_exists}\n# errmsgs={errmsgs}')
+                    print(f'#exception: No gene name for {chrom} {pos} {ref} {alt}\n#row={row}\n# csq={csq}\n# row={row}\n# csq_genes={csq_genes}\n# canonical_sos={canonical_sos}\n# coding={coding}\n# csq_lofs={csq_lofs}\n# genehancertargetgenes={genehancertargetgenes}\n# csq_ensts={csq_ensts}\n# csq_consequence={csq_consequences}\n# group_ids={group_ids}\n# canonical_ensts={canonical_ensts}\n# hugos_in_mane={hugos_in_mane}\n# other_hugos={other_hugos}\n# csq_hugos_in_mane={csq_hugos_in_mane}\n# csq_other_hugos={csq_other_hugos}\n# all_mappings={all_mappings}\n# genehancer_target_exists={genehancer_target_exists}\n# errmsgs={errmsgs}')
             else:
                 if chrom.startswith('chr'):
                     chrom = chrom[3:]
@@ -696,10 +724,10 @@ class Reporter(CravatReport):
                     self.data[self.level].append([v for v in list(filtered_row)])
         except Exception as e:
             print(f'#################\nAn exception occurred. Please contact the OpenCRAVAT team with the following information:')
-            print(f'exception={e}')
+            print(f'#exception: {e}')
             import traceback
-            traceback.print_exc()
-            print(f'row={row}')
+            traceback.print_exc(file=sys.stdout)
+            print(f'#row={row}')
 
     def end (self):
         self.dfs = {}
