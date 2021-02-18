@@ -28,7 +28,8 @@ output_columns:
   hidden: true
   width: 80
   desc: 0 - highly significant scores; 2 - significant scores; 2 - informative scores; 3 - other scores.
-
+tags:
+- variant effect prediction
 title: fitCons
 version: 1.0.0
 type: annotator

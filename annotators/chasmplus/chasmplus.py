@@ -21,12 +21,6 @@ class CravatAnnotator(BaseAnnotator):
         cnames_query = 'select name from sqlite_master where type="table" and name like "chr%%";'
         self.cursor.execute(cnames_query)
         self.available_chroms = [x[0] for x in self.cursor]
-        self.dataframe_colinfo = {}
-        for col in self.conf['output_columns']:
-            if col.get('dataframe', False) == True:
-                colname = col['name']
-                self.dataframe_colinfo[colname] = []
-                self.dataframe_colinfo[colname] = col['dataframe_headers']
     
     def annotate(self, input_data):
         out = {}
@@ -57,8 +51,8 @@ class CravatAnnotator(BaseAnnotator):
                 pvalue = self.pvals.get(score, 0.0)
                 result = [transc, score, pvalue]
                 if i == max_alen_index:
-                    out['transcript'] = transc
                     out['score'] = score
+                    out['transcript'] = transc
                     out['pval'] = pvalue
                 results.append(result)
             out['all'] = results

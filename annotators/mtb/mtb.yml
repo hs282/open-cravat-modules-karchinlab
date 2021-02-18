@@ -1,4 +1,4 @@
-description: Directly link to the Molecualr Tumor Board report page, based on variant. 
+description: Directly link to the Molecular Tumor Board report page, based on variant. 
 developer:
   name: Rick Kim
   organization: In Silico Solutions
@@ -14,10 +14,9 @@ output_columns:
   desc: Link to the Molecular Tumor Board report page. 
   width: 80
 
+tags:
+- cancer
 
 title: Molecular Tumor Board Report
-version: 1.0.0
+version: 1.0.1
 type: annotator
-private: true
-
-

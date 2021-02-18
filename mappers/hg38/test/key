@@ -1,5 +1,5 @@
 #CRAVAT Report
-#Created at Wednesday 07/22/2020 15:28:18
+#Created at Tuesday 02/16/2021 12:43:52
 #Report level: variant
 #
 Variant Annotation															
@@ -59,9 +59,9 @@ UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontolo
 53	chr17	41619441	A	G			KRT17	ENST00000311208.13	2kb_downstream_variant	c.*153T>C		ENST00000311208.13:KRT17:Q04695:2kb_downstream_variant::c.*153T>C; ENST00000540235.5:KRT17::2kb_downstream_variant::c.*153T>C	1	no-sample	minus_at_ds_start
 54	chr17	41617442	G	C			KRT17	ENST00000311208.13	2kb_downstream_variant	c.*2152C>G		ENST00000311208.13:KRT17:Q04695:2kb_downstream_variant::c.*2152C>G	1	no-sample	minus_at_ds_end
 55	chr17	41617441	G	C									1	no-sample	minus_after_ds_end
-56	chr1	155206698	C	AT		Yes	THBS3	ENST00000368378.7	intron_variant	c.80-292delinsAT		ENST00000368378.7:THBS3:P49746:intron_variant::c.80-292delinsAT; ENST00000422665.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000428962.2:THBS3::intron_variant,NMD_transcript_variant::c.80-292delinsAT; ENST00000430312.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000453136.5:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000457183.6:THBS3:P49746:intron_variant::c.80-292delinsAT; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::intron_variant::c.80-292delinsAT; ENST00000541990.5:THBS3::5_prime_UTR_variant::c.-1318-292delinsAT	1	no-sample	del_plus    Intergenic
-57	chr1	155206698	CG	T		Yes	THBS3	ENST00000368378.7	intron_variant	c.80-293_80-292delinsA		ENST00000368378.7:THBS3:P49746:intron_variant::c.80-293_80-292delinsA; ENST00000422665.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000428962.2:THBS3::intron_variant,NMD_transcript_variant::c.80-293_80-292delinsA; ENST00000430312.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000453136.5:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000457183.6:THBS3:P49746:intron_variant::c.80-293_80-292delinsA; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::intron_variant::c.80-293_80-292delinsA; ENST00000541990.5:THBS3::5_prime_UTR_variant::c.-1318-293_-1318-292delinsA	1	no-sample	del_plus    Intergenic_2ku
-58	chr1	155206699	G	CA		Yes	THBS3	ENST00000368378.7	intron_variant	c.80-293delinsTG		ENST00000368376.7:MTX1:Q13505:2kb_upstream_variant::c.-2106delinsCA; ENST00000368378.7:THBS3:P49746:intron_variant::c.80-293delinsTG; ENST00000422665.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000428962.2:THBS3::intron_variant,NMD_transcript_variant::c.80-293delinsTG; ENST00000430312.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000453136.5:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000457183.6:THBS3:P49746:intron_variant::c.80-293delinsTG; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::intron_variant::c.80-293delinsTG; ENST00000541990.5:THBS3::5_prime_UTR_variant::c.-1318-293delinsTG	1	no-sample	del_plus    2KU
+56	chr1	155206698	C	AT			THBS3	ENST00000368378.7	intron_variant	c.80-292delinsAT		ENST00000368378.7:THBS3:P49746:intron_variant::c.80-292delinsAT; ENST00000422665.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000428962.2:THBS3::intron_variant,NMD_transcript_variant::c.80-292delinsAT; ENST00000430312.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000453136.5:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000457183.6:THBS3:P49746:intron_variant::c.80-292delinsAT; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::intron_variant::c.80-292delinsAT; ENST00000541990.5:THBS3::5_prime_UTR_variant::c.-1318-292delinsAT	1	no-sample	del_plus    Intergenic
+57	chr1	155206698	CG	T			THBS3	ENST00000368378.7	intron_variant	c.80-293_80-292delinsA		ENST00000368378.7:THBS3:P49746:intron_variant::c.80-293_80-292delinsA; ENST00000422665.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000428962.2:THBS3::intron_variant,NMD_transcript_variant::c.80-293_80-292delinsA; ENST00000430312.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000453136.5:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000457183.6:THBS3:P49746:intron_variant::c.80-293_80-292delinsA; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::intron_variant::c.80-293_80-292delinsA; ENST00000541990.5:THBS3::5_prime_UTR_variant::c.-1318-293_-1318-292delinsA	1	no-sample	del_plus    Intergenic_2ku
+58	chr1	155206699	G	CA			THBS3	ENST00000368378.7	intron_variant	c.80-293delinsTG		ENST00000368376.7:MTX1:Q13505:2kb_upstream_variant::c.-2106delinsCA; ENST00000368378.7:THBS3:P49746:intron_variant::c.80-293delinsTG; ENST00000422665.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000428962.2:THBS3::intron_variant,NMD_transcript_variant::c.80-293delinsTG; ENST00000430312.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000453136.5:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000457183.6:THBS3:P49746:intron_variant::c.80-293delinsTG; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::intron_variant::c.80-293delinsTG; ENST00000541990.5:THBS3::5_prime_UTR_variant::c.-1318-293delinsTG	1	no-sample	del_plus    2KU
 59	chr1	155208698	CA	T			MTX1	ENST00000368376.7	5_prime_UTR_variant	c.-107_-106delinsT		ENST00000316721.8:MTX1:Q13505:2kb_upstream_variant::c.-107_-106delinsT; ENST00000368376.7:MTX1:Q13505:2kb_upstream_variant,5_prime_UTR_variant::c.-107_-106delinsT; ENST00000368378.7:THBS3:P49746:2kb_upstream_variant::c.-823_-822delinsA; ENST00000424959.5:MTX1::2kb_upstream_variant,NMD_transcript_variant::c.-554_-553delinsT; ENST00000428962.2:THBS3::2kb_upstream_variant,NMD_transcript_variant::c.-823_-822delinsA; ENST00000457183.6:THBS3:P49746:2kb_upstream_variant::c.-823_-822delinsA; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::2kb_upstream_variant::c.-823_-822delinsA; ENST00000541990.5:THBS3::2kb_upstream_variant::c.-2220_-2219delinsA; ENST00000609421.1:MTX1:Q13505:2kb_upstream_variant::c.-554_-553delinsT	1	no-sample	del_plus    2ku_utr5_discuss
 60	chr1	155208699	A	GG			MTX1	ENST00000368376.7	5_prime_UTR_variant	c.-106delinsGG		ENST00000316721.8:MTX1:Q13505:2kb_upstream_variant::c.-106delinsGG; ENST00000368376.7:MTX1:Q13505:5_prime_UTR_variant::c.-106delinsGG; ENST00000368378.7:THBS3:P49746:2kb_upstream_variant::c.-823delinsCC; ENST00000424959.5:MTX1::2kb_upstream_variant,NMD_transcript_variant::c.-553delinsGG; ENST00000428962.2:THBS3::2kb_upstream_variant,NMD_transcript_variant::c.-823delinsCC; ENST00000457183.6:THBS3:P49746:2kb_upstream_variant::c.-823delinsCC; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::2kb_upstream_variant::c.-823delinsCC; ENST00000541990.5:THBS3::2kb_upstream_variant::c.-2220delinsCC; ENST00000609421.1:MTX1:Q13505:2kb_upstream_variant::c.-553delinsGG	1	no-sample	del_plus    UTR5
 61	chr1	155208804	CA	T		Yes	MTX1	ENST00000368376.7	start_lost	c.-1_1delinsT		ENST00000316721.8:MTX1:Q13505:start_lost,5_prime_UTR_variant::c.-1_1delinsT; ENST00000368376.7:MTX1:Q13505:start_lost,5_prime_UTR_variant::c.-1_1delinsT; ENST00000368378.7:THBS3:P49746:2kb_upstream_variant::c.-929_-928delinsA; ENST00000424959.5:MTX1::2kb_upstream_variant,NMD_transcript_variant::c.-448_-447delinsT; ENST00000428962.2:THBS3::2kb_upstream_variant,NMD_transcript_variant::c.-929_-928delinsA; ENST00000457183.6:THBS3:P49746:2kb_upstream_variant::c.-929_-928delinsA; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::2kb_upstream_variant::c.-929_-928delinsA; ENST00000541990.5:THBS3::2kb_upstream_variant::c.-2326_-2325delinsA; ENST00000609421.1:MTX1:Q13505:2kb_upstream_variant::c.-448_-447delinsT	1	no-sample	del_plus    utr5_atg_discuss
@@ -76,8 +76,8 @@ UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontolo
 70	chr6	87409943	TTATGGTAAG	AAA		Yes	CFAP206	ENST00000369562.9	intron_variant	c.104_108+5delinsAAA		ENST00000369562.9:CFAP206:Q8IYR0:intron_variant::c.104_108+5delinsAAA; ENST00000489338.6:CFAP206::intron_variant,NMD_transcript_variant::c.104_108+5delinsAAA; ENST00000507897.5:AL049697.1::intron_variant,NMD_transcript_variant::c.104_108+5delinsAAA	1	del_plus	p.Phe35Ter
 71	chr6	87409949	T	GG		Yes	CFAP206	ENST00000369562.9	splice_site_variant	c.108+2delinsGG		ENST00000369562.9:CFAP206:Q8IYR0:splice_site_variant::c.108+2delinsGG; ENST00000489338.6:CFAP206::NMD_transcript_variant,splice_site_variant::c.108+2delinsGG; ENST00000507897.5:AL049697.1::NMD_transcript_variant,splice_site_variant::c.108+2delinsGG	1	del_plus	P.Val37Glufs*7
 72	chr6	87409949	TAAG	CC		Yes	CFAP206	ENST00000369562.9	splice_site_variant	c.108+2_108+5delinsCC		ENST00000369562.9:CFAP206:Q8IYR0:splice_site_variant::c.108+2_108+5delinsCC; ENST00000489338.6:CFAP206::NMD_transcript_variant,splice_site_variant::c.108+2_108+5delinsCC; ENST00000507897.5:AL049697.1::NMD_transcript_variant,splice_site_variant::c.108+2_108+5delinsCC	1	del_plus	P.Val37Glufs*6
-73	chr6	87409960	ATTT	CC		Yes	CFAP206	ENST00000369562.9	intron_variant	c.108+13_108+16delinsCC		ENST00000369562.9:CFAP206:Q8IYR0:intron_variant::c.108+13_108+16delinsCC; ENST00000489338.6:CFAP206::intron_variant,NMD_transcript_variant::c.108+13_108+16delinsCC; ENST00000507897.5:AL049697.1::intron_variant,NMD_transcript_variant::c.108+13_108+16delinsCC	1	del_plus	INT_CFAP206
-74	chr6	87410575	TTTTTTCTAG	GGT		Yes	CFAP206	ENST00000369562.9	intron_variant	c.109-10_109-1delinsGGT		ENST00000369562.9:CFAP206:Q8IYR0:intron_variant::c.109-10_109-1delinsGGT; ENST00000489338.6:CFAP206::intron_variant,NMD_transcript_variant::c.109-10_109-1delinsGGT; ENST00000507897.5:AL049697.1::intron_variant,NMD_transcript_variant::c.109-10_109-1delinsGGT	1	del_plus	intron_spa_del_discuss
+73	chr6	87409960	ATTT	CC			CFAP206	ENST00000369562.9	intron_variant	c.108+13_108+16delinsCC		ENST00000369562.9:CFAP206:Q8IYR0:intron_variant::c.108+13_108+16delinsCC; ENST00000489338.6:CFAP206::intron_variant,NMD_transcript_variant::c.108+13_108+16delinsCC; ENST00000507897.5:AL049697.1::intron_variant,NMD_transcript_variant::c.108+13_108+16delinsCC	1	del_plus	INT_CFAP206
+74	chr6	87410575	TTTTTTCTAG	GGT			CFAP206	ENST00000369562.9	intron_variant	c.109-10_109-1delinsGGT		ENST00000369562.9:CFAP206:Q8IYR0:intron_variant::c.109-10_109-1delinsGGT; ENST00000489338.6:CFAP206::intron_variant,NMD_transcript_variant::c.109-10_109-1delinsGGT; ENST00000507897.5:AL049697.1::intron_variant,NMD_transcript_variant::c.109-10_109-1delinsGGT	1	del_plus	intron_spa_del_discuss
 75	chr6	87410583	AG	C		Yes	CFAP206	ENST00000369562.9	splice_site_variant	c.109-2_109-1delinsC		ENST00000369562.9:CFAP206:Q8IYR0:splice_site_variant::c.109-2_109-1delinsC; ENST00000489338.6:CFAP206::NMD_transcript_variant,splice_site_variant::c.109-2_109-1delinsC; ENST00000507897.5:AL049697.1::NMD_transcript_variant,splice_site_variant::c.109-2_109-1delinsC	1	del_plus	SPL_discuss
 76	chr6	87410584	G	CC		Yes	CFAP206	ENST00000369562.9	splice_site_variant	c.109-1delinsCC		ENST00000369562.9:CFAP206:Q8IYR0:splice_site_variant::c.109-1delinsCC; ENST00000489338.6:CFAP206::NMD_transcript_variant,splice_site_variant::c.109-1delinsCC; ENST00000507897.5:AL049697.1::NMD_transcript_variant,splice_site_variant::c.109-1delinsCC	1	del_plus	p.Val37Ter_discuss
 77	chr6	87410584	GGT	CC		Yes	CFAP206	ENST00000369562.9	splice_site_variant	c.109-1_110delinsCC		ENST00000369562.9:CFAP206:Q8IYR0:splice_site_variant::c.109-1_110delinsCC; ENST00000489338.6:CFAP206::NMD_transcript_variant,splice_site_variant::c.109-1_110delinsCC; ENST00000507897.5:AL049697.1::NMD_transcript_variant,splice_site_variant::c.109-1_110delinsCC	1	del_plus	p.Val37del
@@ -88,7 +88,7 @@ UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontolo
 82	chr1	1014482	C	GT			ISG15	ENST00000649529.1	3_prime_UTR_variant	c.*4delinsGT		ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::3_prime_UTR_variant::c.*4delinsGT; ENST00000649529.1:ISG15:P05161:3_prime_UTR_variant::c.*4delinsGT	1	del_plus	UTR3_ISG15
 83	chr1	1014540	AT	GC			ISG15	ENST00000649529.1	3_prime_UTR_variant	c.*62_*63delinsGC		ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::2kb_downstream_variant,3_prime_UTR_variant::c.*62_*63delinsGC; ENST00000649529.1:ISG15:P05161:2kb_downstream_variant,3_prime_UTR_variant::c.*62_*63delinsGC	1	del_plus	utr3_2kd_discuss
 84	chr6	87464480	T	AA			CFAP206	ENST00000369562.9	2kb_downstream_variant	c.*230delinsAA		ENST00000369562.9:CFAP206:Q8IYR0:2kb_downstream_variant::c.*230delinsAA; ENST00000489338.6:CFAP206::2kb_downstream_variant,NMD_transcript_variant::c.*1934delinsAA; ENST00000506888.5:AL049697.1::intron_variant,processed_transcript::; ENST00000507897.5:AL049697.1::NMD_transcript_variant,3_prime_UTR_variant::c.*60+170delinsAA; ENST00000513191.1:AL049697.1::intron_variant,processed_transcript::	1	del_plus	2KD_ISG15
-85	chr6	87466465	CA	TT			CFAP206	ENST00000369562.9	2kb_downstream_variant	c.*2215_*2216delinsTT		ENST00000369562.9:CFAP206:Q8IYR0:2kb_downstream_variant,2kb_downstream_variant::c.*2215_*2216delinsTT; ENST00000506888.5:AL049697.1::intron_variant,processed_transcript::; ENST00000507897.5:AL049697.1::NMD_transcript_variant,3_prime_UTR_variant::c.*60+2155_*60+2156delinsTT; ENST00000513191.1:AL049697.1::intron_variant,processed_transcript::	1	del_plus	2kd_intergenic_discuss
+85	chr6	87466465	CA	TT			CFAP206	ENST00000369562.9	2kb_downstream_variant	c.*2215_*2216delinsTT		ENST00000369562.9:CFAP206:Q8IYR0:2kb_downstream_variant::c.*2215_*2216delinsTT; ENST00000506888.5:AL049697.1::intron_variant,processed_transcript::; ENST00000507897.5:AL049697.1::NMD_transcript_variant,3_prime_UTR_variant::c.*60+2155_*60+2156delinsTT; ENST00000513191.1:AL049697.1::intron_variant,processed_transcript::	1	del_plus	2kd_intergenic_discuss
 86	chr1	935896	G	CT		Yes	SAMD11	ENST00000622503.4	frameshift_elongation	c.430delinsCT	p.Gly144LeufsTer2	ENST00000342066.8:SAMD11:Q96NU1:complex_substitution,frameshift_elongation:p.Gly144LeufsTer2:c.430delinsCT; ENST00000616016.4:SAMD11::complex_substitution,frameshift_elongation:p.Gly144LeufsTer2:c.430delinsCT; ENST00000616125.4:SAMD11::complex_substitution,frameshift_elongation:p.Gly144LeufsTer2:c.430delinsCT; ENST00000617307.4:SAMD11::complex_substitution,frameshift_elongation:p.Gly144LeufsTer2:c.430delinsCT; ENST00000618181.4:SAMD11::complex_substitution,frameshift_elongation:p.Gly127LeufsTer2:c.379delinsCT; ENST00000618323.4:SAMD11::intron_variant::c.339+91delinsCT; ENST00000618779.4:SAMD11::complex_substitution,frameshift_elongation:p.Gly144LeufsTer2:c.430delinsCT; ENST00000620200.4:SAMD11::intron_variant::c.305+4807delinsCT; ENST00000622503.4:SAMD11::complex_substitution,frameshift_elongation:p.Gly144LeufsTer2:c.430delinsCT	1	del_plus	c.430del_not_c.431del
 87	chr1	935890	C	GAA		Yes	SAMD11	ENST00000622503.4	frameshift_elongation	c.424delinsGAA	p.Pro142GlufsTer60	ENST00000342066.8:SAMD11:Q96NU1:complex_substitution,frameshift_elongation:p.Pro142GlufsTer59:c.424delinsGAA; ENST00000616016.4:SAMD11::complex_substitution,frameshift_elongation:p.Pro142GlufsTer59:c.424delinsGAA; ENST00000616125.4:SAMD11::complex_substitution,frameshift_elongation:p.Pro142GlufsTer60:c.424delinsGAA; ENST00000617307.4:SAMD11::complex_substitution,frameshift_elongation:p.Pro142GlufsTer59:c.424delinsGAA; ENST00000618181.4:SAMD11::complex_substitution,frameshift_elongation:p.Pro125GlufsTer60:c.373delinsGAA; ENST00000618323.4:SAMD11::intron_variant::c.339+85delinsGAA; ENST00000618779.4:SAMD11::complex_substitution,frameshift_elongation:p.Pro142GlufsTer36:c.424delinsGAA; ENST00000620200.4:SAMD11::intron_variant::c.305+4801delinsGAA; ENST00000622503.4:SAMD11::complex_substitution,frameshift_elongation:p.Pro142GlufsTer60:c.424delinsGAA	1	del_plus	c.426del_not_c.424del
 88	chr1	1014476	TAA	G		Yes	ISG15	ENST00000649529.1	frameshift_truncation	c.496_498delinsG	p.Ter166GlyfsTer?	ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::complex_substitution,frameshift_truncation,stop_lost:p.Ter158GlyfsTer?:c.472_474delinsG; ENST00000649529.1:ISG15:P05161:complex_substitution,frameshift_truncation,stop_lost:p.Ter166GlyfsTer?:c.496_498delinsG	1	del_plus	p.Ter158delext*?
@@ -325,7 +325,7 @@ UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontolo
 319	chr19	38408862	AAG	-		Yes	FAM98C	ENST00000252530.9	inframe_deletion	c.1045_1047del	p.Lys349del	ENST00000252530.9:FAM98C:Q17RN3:inframe_deletion:p.Lys349del:c.1045_1047del; ENST00000293062.13:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000343358.11:FAM98C:Q17RN3:inframe_deletion:p.Lys267del:c.799_801del; ENST00000426920.6:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000433821.6:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000454404.6:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000586305.5:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000587738.2:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000587753.5:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000588262.5:FAM98C::3_prime_UTR_variant::c.*83_*85del; ENST00000589358.5:RASGRP4:Q8TDF6:2kb_downstream_variant,NMD_transcript_variant::c.*592_*594del; ENST00000589474.5:RASGRP4:Q8TDF6:2kb_downstream_variant,NMD_transcript_variant::c.*592_*594del; ENST00000614135.4:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000615439.5:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000617966.4:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del; ENST00000618320.4:RASGRP4::2kb_downstream_variant::c.*1439_*1441del; ENST00000622174.4:RASGRP4:Q8TDF6:2kb_downstream_variant::c.*1176_*1178del	1	s1	same_aa_until_ter_exonend_ENST00000252530.9_c.1045_1047del_p.Lys349del
 320	chr3	197003375	GAGGGCGGGCGGGAGCAGGCGGGCGGC	-		Yes	MELTF	ENST00000296350.10	inframe_deletion	c.2188_2214del	p.Ala730_Leu738del	ENST00000296350.10:MELTF:P08582:inframe_deletion:p.Ala730_Leu738del:c.2188_2214del; ENST00000414354.1:MELTF-AS1::2kb_upstream_variant,lnc_RNA::; ENST00000415244.1:MELTF-AS1::intron_variant,lnc_RNA::; ENST00000424769.1:MELTF-AS1::intron_variant,lnc_RNA::; ENST00000437064.1:MELTF-AS1::2kb_upstream_variant,lnc_RNA::; ENST00000446695.1:MELTF-AS1::intron_variant,lnc_RNA::	1	s1	del_until_before_ter_ENST00000296350.10_c.2188_2214del_p.Ala730_Leu738del
 #CRAVAT Report
-#Created at Wednesday 07/22/2020 15:28:18
+#Created at Tuesday 02/16/2021 12:43:52
 #Report level: gene
 #
 Variant Annotation					
@@ -339,7 +339,7 @@ POLI		2	0	inframe_insertion	complex_substitution(1),inframe_deletion(1),inframe_
 ASIC1		1	0	frameshift_elongation	frameshift_elongation(1),NMD_transcript_variant(1),3_prime_UTR_variant(1)
 ARHGAP24		1	0	frameshift_truncation	frameshift_truncation(1),processed_transcript(1)
 RBM15		1	0	frameshift_truncation	frameshift_truncation(1)
-THBS3		3	5	intron_variant	intron_variant(8),NMD_transcript_variant(8),processed_transcript(8),5_prime_UTR_variant(6)
+THBS3		0	8	intron_variant	intron_variant(8),NMD_transcript_variant(8),processed_transcript(8),5_prime_UTR_variant(6)
 BRCA1		24	20	start_lost	complex_substitution(2),frameshift_truncation(4),frameshift_elongation(2),inframe_deletion(2),inframe_insertion(5),intron_variant(34),missense_variant(4),start_lost(5),start_retained_variant(1),NMD_transcript_variant(43),processed_transcript(7),splice_site_variant(9),stop_gained(2),stop_lost(1),stop_retained_variant(1),3_prime_UTR_variant(8),5_prime_UTR_variant(27)
 KRT17		18	13	frameshift_elongation	frameshift_truncation(2),frameshift_elongation(7),inframe_insertion(4),intron_variant(4),missense_variant(3),splice_site_variant(2),stop_gained(1),stop_lost(3),stop_retained_variant(1),synonymous_variant(1),3_prime_UTR_variant(5),5_prime_UTR_variant(1)
 ARL1		1	0	stop_lost	NMD_transcript_variant(1),processed_transcript(1),stop_lost(1)
@@ -349,7 +349,7 @@ ARHGAP4		1	0	frameshift_elongation	frameshift_elongation(1),NMD_transcript_varia
 FLT4		1	0	frameshift_elongation	frameshift_elongation(1)
 KCNN3		1	0	inframe_insertion	inframe_insertion(1)
 PTH2		1	0	inframe_deletion	inframe_deletion(1)
-CFAP206		61	20	start_lost	complex_substitution(6),frameshift_truncation(9),frameshift_elongation(13),inframe_deletion(2),inframe_insertion(15),intron_variant(13),missense_variant(4),start_lost(5),start_retained_variant(3),NMD_transcript_variant(78),splice_site_variant(15),stop_gained(7),synonymous_variant(2),3_prime_UTR_variant(27),5_prime_UTR_variant(2)
+CFAP206		59	22	start_lost	complex_substitution(6),frameshift_truncation(9),frameshift_elongation(13),inframe_deletion(2),inframe_insertion(15),intron_variant(13),missense_variant(4),start_lost(5),start_retained_variant(3),NMD_transcript_variant(78),splice_site_variant(15),stop_gained(7),synonymous_variant(2),3_prime_UTR_variant(27),5_prime_UTR_variant(2)
 ISG15		29	4	frameshift_elongation	complex_substitution(7),frameshift_truncation(10),frameshift_elongation(5),inframe_deletion(6),inframe_insertion(5),stop_lost(15),stop_retained_variant(4),3_prime_UTR_variant(10)
 SAMD11		5	4	frameshift_elongation	complex_substitution(2),frameshift_truncation(2),frameshift_elongation(3),intron_variant(9),splice_site_variant(3)
 LRRC7		2	0	exon_loss_variant	exon_loss_variant(2),frameshift_truncation(1),intron_variant(1),start_lost(1),5_prime_UTR_variant(2)
@@ -372,7 +372,7 @@ SELENON		1	0	frameshift_elongation	frameshift_elongation(1)
 FAM98C		1	0	inframe_deletion	inframe_deletion(1),3_prime_UTR_variant(1)
 MELTF		1	0	inframe_deletion	inframe_deletion(1)
 #CRAVAT Report
-#Created at Wednesday 07/22/2020 15:28:18
+#Created at Tuesday 02/16/2021 12:43:52
 #Report level: sample
 #
 Variant Annotation	
@@ -432,8 +432,275 @@ UID	Sample
 53	no-sample
 54	no-sample
 55	no-sample
+56	no-sample
+57	no-sample
+58	no-sample
+59	no-sample
+60	no-sample
+61	no-sample
+62	no-sample
+63	no-sample
+64	no-sample
+65	no-sample
+66	no-sample
+67	del_plus
+68	del_plus
+69	del_plus
+70	del_plus
+71	del_plus
+72	del_plus
+73	del_plus
+74	del_plus
+75	del_plus
+76	del_plus
+77	del_plus
+78	del_plus
+79	del_plus
+80	del_plus
+81	del_plus
+82	del_plus
+83	del_plus
+84	del_plus
+85	del_plus
+86	del_plus
+87	del_plus
+88	del_plus
+89	del_plus
+90	del_plus
+91	del_plus
+92	del_plus
+93	del_plus
+94	del_plus
+95	del_plus
+96	del_plus
+97	del_plus
+98	del_plus
+99	del_plus
+100	del_plus
+101	del_plus
+102	del_plus
+103	del_plus
+104	del_plus
+105	del_plus
+106	del_plus
+107	del_plus
+108	del_plus
+109	del_plus
+110	del_plus
+111	del_plus
+112	del_plus
+113	del_plus
+114	del_plus
+115	del_plus
+116	del_plus
+117	del_plus
+118	del_plus
+119	del_plus
+120	del_plus
+121	del_plus
+122	del_plus
+123	del_plus
+124	del_plus
+125	del_plus
+126	del_plus
+127	del_plus
+128	del_plus
+129	del_plus
+130	del_minus
+131	del_minus
+132	del_minus
+133	del_minus
+134	del_minus
+135	del_minus
+136	del_minus
+137	del_minus
+138	del_minus
+139	del_minus
+140	del_minus
+141	del_minus
+142	del_minus
+143	del_minus
+144	del_minus
+145	del_minus
+146	del_minus
+147	del_minus
+148	del_minus
+149	del_minus
+150	del_minus
+151	del_minus
+152	del_minus
+153	del_minus
+154	del_minus
+155	del_minus
+156	del_minus
+157	del_minus
+158	del_minus
+159	del_minus
+160	ins_plus
+161	ins_plus
+162	ins_plus
+163	ins_plus
+164	ins_plus
+165	ins_plus
+166	ins_plus
+167	ins_plus
+168	ins_plus
+169	ins_plus
+169	ins_plus
+170	ins_plus
+171	ins_plus
+172	ins_plus
+173	ins_plus
+174	ins_plus
+175	ins_plus
+176	ins_plus
+177	ins_plus
+178	ins_plus
+179	ins_plus
+180	ins_plus
+181	ins_plus
+182	ins_plus
+183	ins_plus
+184	ins_plus
+185	ins_plus
+186	ins_plus
+187	ins_plus
+188	ins_plus
+177	ins_plus
+189	ins_plus
+190	ins_plus
+191	ins_plus
+192	ins_plus
+193	ins_plus
+194	ins_plus
+195	ins_plus
+196	ins_plus
+197	ins_plus
+198	ins_plus
+199	ins_plus
+200	ins_plus
+201	ins_plus
+202	ins_plus
+203	ins_plus
+204	ins_plus
+205	ins_plus
+206	ins_plus
+207	ins_plus
+208	ins_plus
+209	ins_plus
+210	ins_plus
+211	ins_plus
+212	ins_plus
+213	ins_plus
+214	ins_plus
+215	ins_plus
+216	ins_plus
+217	ins_plus
+218	ins_plus
+219	ins_plus
+220	ins_plus
+221	ins_plus
+222	ins_plus
+223	ins_plus
+224	ins_plus
+225	ins_plus
+226	ins_plus
+227	snv_minus
+228	snv_minus
+229	snv_minus
+230	snv_minus
+231	snv_minus
+232	snv_minus
+233	snv_minus
+234	snv_minus
+235	ins_minus
+236	ins_minus
+237	ins_minus
+238	ins_minus
+239	ins_minus
+240	ins_minus
+241	ins_minus
+242	ins_minus
+243	ins_minus
+244	ins_minus
+245	ins_minus
+246	ins_minus
+247	ins_minus
+248	ins_minus
+249	ins_minus
+250	ins_minus
+251	ins_minus
+252	ins_minus
+253	ins_minus
+254	ins_minus
+255	ins_minus
+256	ins_minus
+257	ins_minus
+258	ins_minus
+259	ins_minus
+260	ins_minus
+261	ins_minus
+262	ins_minus
+263	ins_minus
+264	ins_minus
+265	ins_minus
+266	ins_minus
+267	ins_minus
+268	snv_plus
+269	snv_plus
+270	snv_plus
+271	snv_plus
+272	snv_plus
+273	snv_plus
+274	snv_plus
+275	snv_plus
+276	snv_plus
+277	snv_plus
+278	snv_plus
+279	snv_plus
+280	snv_plus
+281	snv_plus
+282	snv_plus
+283	snv_plus
+284	snv_plus
+285	snv_plus
+286	snv_plus
+287	snv_plus
+288	snv_plus
+289	snv_plus
+290	snv_plus
+291	snv_plus
+292	snv_plus
+293	snv_minus
+294	snv_minus
+295	snv_minus
+296	snv_minus
+297	snv_minus
+298	snv_minus
+299	snv_minus
+300	snv_minus
+301	snv_minus
+302	snv_minus
+303	snv_minus
+304	snv_minus
+305	snv_minus
+306	snv_minus
+307	snv_minus
+308	snv_minus
+309	snv_minus
+310	snv_minus
+311	snv_minus
+312	snv_minus
+313	snv_minus
+314	no-sample
+315	no-sample
+316	no-sample
+317	no-sample
+318	no-sample
+319	s1
+320	s1
 #CRAVAT Report
-#Created at Wednesday 07/22/2020 15:28:18
+#Created at Tuesday 02/16/2021 12:43:52
 #Report level: mapping
 #
 Variant Annotation			
@@ -493,3 +760,270 @@ Original Line	User Tags	UID	Input File Number
 56	minus_at_ds_start	53	0
 57	minus_at_ds_end	54	0
 58	minus_after_ds_end	55	0
+59	del_plus    Intergenic	56	0
+60	del_plus    Intergenic_2ku	57	0
+61	del_plus    2KU	58	0
+62	del_plus    2ku_utr5_discuss	59	0
+63	del_plus    UTR5	60	0
+64	del_plus    utr5_atg_discuss	61	0
+65	del_plus    p.Met1Thr	62	0
+66	del_plus    p.Pro2_Gln5del	63	0
+67	del_plus    p.Pro3Lysfs*4	64	0
+68	del_plus    p.Pro2Leufs*10	65	0
+69	del_plus    p.Set157Ilefs*?	66	0
+70	p.Ser146del	67	0
+71	p.Leu134_Lys135delinsGln	68	0
+72	p.Val37Ter	69	0
+73	p.Phe35Ter	70	0
+74	P.Val37Glufs*7	71	0
+75	P.Val37Glufs*6	72	0
+76	INT_CFAP206	73	0
+77	intron_spa_del_discuss	74	0
+78	SPL_discuss	75	0
+79	p.Val37Ter_discuss	76	0
+80	p.Val37del	77	0
+81	SPL_CFAP206_discuss	78	0
+82	p.Ter158Ter_fsd	79	0
+83	p.Ter158Ter_ind	80	0
+84	p.Ter158Cysfs*14	81	0
+85	UTR3_ISG15	82	0
+86	utr3_2kd_discuss	83	0
+87	2KD_ISG15	84	0
+88	2kd_intergenic_discuss	85	0
+89	c.430del_not_c.431del	86	0
+90	c.426del_not_c.424del	87	0
+91	p.Ter158delext*?	88	0
+92	p.S157_Ter158delext*?	89	0
+93	p.S157_Ter158delext*?	90	0
+94	p.R156_*158delinsGlnext*?	91	0
+95	exon_del_M1_c.2-3_303+3del	92	0
+96	Integenic	93	0
+97	Integenic	94	0
+98	2KU	95	0
+99	2ku_utr5_discuss	96	0
+100	UTR5	97	0
+101	utr5_atg_discuss	98	0
+102	p.Met1Thr	99	0
+103	p.Pro2_Gln5del	100	0
+104	p.Pro3Lysfs*4	101	0
+105	p.Pro2Leufs*10	102	0
+106	p.Set157Ilefs*?	103	0
+107	p.Ser138del	104	0
+108	p.Leu134_Lys135delinsGln	105	0
+109	p.Val37Ter	106	0
+110	p.Phe35Ter	107	0
+111	P.Val37Glufs*7	108	0
+112	P.Val37Glufs*6	109	0
+113	INT_CFAP206	110	0
+114	intron_spa_del_discuss	111	0
+115	SPL_discuss	112	0
+116	p.Val37Ter_discuss	113	0
+117	p.Val37del	114	0
+118	SPL_CFAP206_discuss	115	0
+119	p.Ter158Ter	116	0
+120	p.Ter158Ter	117	0
+121	p.Ter158Cysfs*14	118	0
+122	UTR3_ISG15	119	0
+123	utr3_2kd_discuss	120	0
+124	2KD_ISG15	121	0
+125	2kd_intergenic_discuss	122	0
+126	c.430del_not_c.431del	123	0
+127	c.426del_not_c.424del	124	0
+128	p.Ter158del	125	0
+129	p.S157_Ter158delext*?	126	0
+130	p.S157_Ter158delext*?	127	0
+131	p.R156_*158delinsGlnext*?	128	0
+132	exon_del_M1	129	0
+133	Intergenic	130	0
+134	intergenic_2ku_discuss	131	0
+135	2KU_VANGL1	132	0
+136	2ku_utr5_discuss	133	0
+137	UTR5_VANGL1	134	0
+138	utr5_atg_discuss	135	0
+139	p.Met1Arg	136	0
+140	p.Ala2_Gln3del	137	0
+141	p.Asp2Argfs*2	138	0
+142	p.Val8Ter	139	0
+143	p.Asn340Ilefs*?	140	0
+144	p.Val8del	141	0
+145	p.Leu3_Ser4delinsPhe	142	0
+146	p.Cys27Ter	143	0
+147	p.Cys27Ter	144	0
+148	p.Cys27Ter	145	0
+149	p.Cys27Ter	146	0
+150	INT_BRCA1	147	0
+151	intro_spa_del_discuss	148	0
+152	SPL_discuss	149	0
+153	p.Gly63Alafs*104	150	0
+154	p.Cys27_Leu28Trp	151	0
+155	SPL_BRCA1_discuss	152	0
+156	p.Ter278Ter	153	0
+157	p.Ter433Ter	154	0
+158	p.Ter433Trpfs*42	155	0
+159	UTR3_KRT17	156	0
+160	utr3_2kd_discuss	157	0
+161	2KD_KRT17	158	0
+162	2kd_intergenic_discuss	159	0
+163	Intergenic_OR4F5_start	160	0
+164	Intergenic_CCDC27_end	161	0
+165	2KU_KLHL17_start	162	0
+166	2KU_KLHL17_middle	163	0
+167	2KU_KLHL17_end	164	0
+168	UTR5_KLHL17_start	165	0
+169	UTR5_KLHL17_middle	166	0
+170	UTR5_KLHL17_end	167	0
+171	UTR5_ATG_between	168	0
+172	p.Met1=	169	0
+173	p.Met1Asn_discuss	169	0
+174	p.Met1delinsMetMet_discuss	170	0
+175	p.Met1delinsIleMet_discuss	171	0
+176	p.Pro3Serfs*28_Pro2_does_not_change	172	0
+177	p.Thr622Tyrfs*10	173	0
+178	p.S157Sfs*?	174	0
+179	p.Thr4Ter	175	0
+180	p.Asp618_Val619insPro	176	0
+181	exon_L546_CFAP206_before_SPD_discuss	177	0
+182	SPL_L546_A547_CFAP206_SPD_pos1_discuss	178	0
+183	SPL_L546_A547_CFAP206_SPD_pos2_discuss	179	0
+184	Intron_after_SPD_discuss	180	0
+185	INT_CFAP206	181	0
+186	exon_after_SPA_discuss	182	0
+187	SPL_L546_A547_CFAP206_SPA_pos1_samebase_discuss	183	0
+188	SPL_L546_A547_CFAP206_SPA_pos1_difbase_discuss	184	0
+189	SPL_L546_A547_CFAP206_SPA_pos2_discuss	185	0
+190	intron_before_SPA	186	0
+191	p.Leu546delinsPhePro	187	0
+192	p.Leu546delinsPhe*	188	0
+193	p.Ala547Glyfa*2	177	0
+194	p.Arg14Lysfs*64	189	0
+195	p.Arg14?	190	0
+196	p.Arg14delinsLysTer	191	0
+197	p.Arg14delinsLysGly	192	0
+198	p.Ter158Tyrfs*2	193	0
+199	p.Ter158Tyrfs*?	194	0
+200	p.Ser157_Ter158insPhe	195	0
+201	p.Ter158=	196	0
+202	p.Ter158=	197	0
+203	UTR3_CFAP206_start	198	0
+204	UTR3_CFAP206_middle	199	0
+205	UTR3_CFAP206_end	200	0
+206	2KD_CFAP206_start	201	0
+207	2KD_CFAP206_middle	202	0
+208	2KD_CFAP206_end	203	0
+209	AT_dup	204	0
+210	repeat	205	0
+211	p.M1_P2dup	206	0
+212	codonpos1ins1	207	0
+213	codonpos1ins2	208	0
+214	codonpos1ins3	209	0
+215	codonpos2ins1	210	0
+216	codonpos2ins2	211	0
+217	codonpos2ins3	212	0
+218	codonpos3ins1	213	0
+219	codonpos3ins2	214	0
+220	codonpos3ins3	215	0
+221	p.M1_M2insEL	216	0
+222	p.L546delinsFG*	217	0
+223	p.L546*	218	0
+224	p.*158Yext*3	219	0
+225	p.M1ext-2	220	0
+226	p.Arg14delinsLysTer	221	0
+227	p.Ser157_Ter158insGly	222	0
+228	p.*158Y?_discuss	223	0
+229	p.T4_S8dup	224	0
+230	c.399_400dup	225	0
+231	c.?	226	0
+232	Intergenic_SH2D1B_start	227	0
+233	Intergenic_end_RNF223	228	0
+234	2KU_RNF223_start	229	0
+235	2KU_RNF223_middle	230	0
+236	2KU_RNF223_end	231	0
+237	UTR5_BRCA1_start	232	0
+238	UTR5_BRCA1_middle	233	0
+239	UTR5_BRCA1_end	234	0
+240	UTR5	235	0
+241	p.Met1Ile_discuss	236	0
+242	p.Met1MetMet_discuss	237	0
+243	p.Met1delinsIleTer	238	0
+244	p.Met1IleMet_discuss	239	0
+245	p.Thr110Aspfs*2_KRT17	240	0
+246	p.Arg432Profs*44	241	0
+247	p.Arg432Thrfs*?	242	0
+248	p.Gln426Leu*	243	0
+249	p.Gln426ArgGlu	244	0
+250	SPL_KRT17	245	0
+251	SPL_KRT17	246	0
+252	INT_KRT17	247	0
+253	SPA_discuss	248	0
+254	SPA_discuss	249	0
+255	SPA_discuss	250	0
+256	p.Pro402LeuPro	251	0
+257	p.Pro402Leu*	252	0
+258	p.His394Glnfs*82	253	0
+259	p.Glu114Glyfs*3_UBE2J2	254	0
+260	p.Glu114*	255	0
+261	p.Glu114PheGlu	256	0
+262	p.Ter433Leufs*43	257	0
+263	p.Ter208fs*?	258	0
+264	p.Ter208PheTer	259	0
+265	p.Ter208Ter	260	0
+266	UTR3_UBE2J2	261	0
+267	UTR3_UBE2J2	262	0
+268	UTR3_UBE2J2	263	0
+269	2KD_UBE2J2	264	0
+270	2KD_UBE2J2	265	0
+271	2KD_UBE2J2	266	0
+272	p.Met1?	267	0
+273	Intergenic_OR4F5	268	0
+274	Intergenic_OR4F5	269	0
+275	2KU_KLHL17_start	270	0
+276	2KU_KLHL17_middle	271	0
+277	2KU_KLHL17_end	272	0
+278	UTR5_KLHL17_start	273	0
+279	UTR5_KLHL17_middle	274	0
+280	UTR5_KLHL17_end	275	0
+281	Intron_UTR5_start	276	0
+282	Intron_UTR5_middle	277	0
+283	Intron_UTR5_end	278	0
+284	p.Met1Leu_atg	279	0
+285	p.Ala547Thr_exon_start	280	0
+286	p.Asp618Asp	281	0
+287	p.Asp618His	282	0
+288	p.Leu546Leu_exon_end	283	0
+289	p.Leu546Phe_exon_end	284	0
+290	INT_MTX1_before_midpoint	285	0
+291	INT_MTX1_after_midpoint	286	0
+292	INT_MTX1_middle	287	0
+293	p.Ter719Ter	288	0
+294	UTR3_HOOK3_start	289	0
+295	UTR3_HOOK3_middle	290	0
+296	UTR3_HOOK3_end	291	0
+297	2KD_MTX1_middle	292	0
+298	Intergenic_start_RND2	293	0
+299	Intergenic_end_RNF223	294	0
+300	2KU_RNF223_start	295	0
+301	2KU_RNF223_middle	296	0
+302	2KU_RNF223_end	297	0
+303	UTR5_BRCA1_start	298	0
+304	UTR5_BRCA1_middle	299	0
+305	UTR5_BRCA1_end	300	0
+306	p.Met1Leu_atg	301	0
+307	p.Asn109Lys	302	0
+308	p.Asp111Ter	303	0
+309	p.Lys144Lys_exon_end	304	0
+310	p.Ala311Thr_exon_end	305	0
+311	p.Ter722Arg	306	0
+312	p.Ter722Ter	307	0
+313	UTR3_BRCA1_start	308	0
+314	UTR3_BRCA1_middle	309	0
+315	UTR3_BRCA1_end	310	0
+316	2KD_BRCA1_start	311	0
+317	2KD_BRCA1_middle	312	0
+318	2KD_BRCA1_end	313	0
+319		314	0
+320		315	0
+321		316	0
+322		317	0
+323		318	0
+324	same_aa_until_ter_exonend_ENST00000252530.9_c.1045_1047del_p.Lys349del	319	0
+325	del_until_before_ter_ENST00000296350.10_c.2188_2214del_p.Ala730_Leu738del	320	0

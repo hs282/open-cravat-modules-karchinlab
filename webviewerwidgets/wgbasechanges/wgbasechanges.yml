@@ -1,0 +1,17 @@
+title: Base Changes
+version: 1.0.0
+type: webviewerwidget
+required_annotator: base
+description: Base Changes webviewer widget
+developer:
+  name: Madison Larsen
+  organization: In Silico Solutions
+  email: mlarsen@insilico.us.com
+  website: http://www.insilico.us.com
+  citation: ''
+tags:
+- visualization widgets
+requires_opencravat: '>=1.8.1'
+release_note:
+  1.0.0: Initial release
+private: true

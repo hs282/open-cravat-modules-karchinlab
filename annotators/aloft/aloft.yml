@@ -83,7 +83,7 @@ output_columns:
     type: string
 
 tags:
-- variant
+- variants
 - variant effect prediction
 
 requires_opencravat: '>=2.2.1'

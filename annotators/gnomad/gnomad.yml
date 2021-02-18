@@ -71,6 +71,10 @@ tags:
 - allele frequency
 title: gnomAD
 type: annotator
-version: 2.1.8
+version: 2.2.0
 requires:
 - wggnomad
+- wgallelefrequency
+release_note:
+  2.2.0: AF summary widget requirement
+private: true

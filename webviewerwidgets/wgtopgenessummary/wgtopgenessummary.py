@@ -8,11 +8,11 @@ async def get_data (queries):
                           'wgtopgenessummary.sqlite')
     conn = await aiosqlite.connect(dbpath)
     cursor = await conn.cursor()
-    q = 'select hugo, aalen from genelen'
-    await cursor.execute(q)
-    genelen = {}
-    for row in await cursor.fetchall():
-        genelen[row[0]] = row[1]
+    # q = 'select hugo, aalen from genelen'
+    # await cursor.execute(q)
+    # genelen = {}
+    # for row in await cursor.fetchall():
+    #     genelen[row[0]] = row[1]
     await cursor.close()
     await conn.close()
     dbpath = queries['dbpath']
@@ -38,11 +38,8 @@ async def get_data (queries):
         if hugo == '':
             continue
         count = row[1]
-        if hugo in genelen:
-            aalen = genelen[hugo]
-            perc = count / aalen
-            gene_var_perc[hugo] = perc
-    
+        # if hugo in genelen:
+        gene_var_perc[hugo] = count
     num_gene_to_extract = 10
     sorted_hugos = sorted(gene_var_perc, key=gene_var_perc.get, reverse=True)
     extracted_hugos = sorted_hugos[:num_gene_to_extract]
@@ -52,8 +49,7 @@ async def get_data (queries):
         q = 'select count(distinct(sample.base__sample_id)) from sample, variant where variant.base__uid=sample.base__uid and variant.base__hugo="' + hugo + '"'
         await cursor.execute(q)
         num_sample = (await cursor.fetchone())[0]
-        perc_sample = num_sample / num_total_sample * 100.0
-        genesampleperc[hugo] = perc_sample
+        genesampleperc[hugo] = num_sample
     sorted_hugos = sorted(genesampleperc, key=genesampleperc.get, reverse=True)
     response = {'data': []}
     for hugo in sorted_hugos:

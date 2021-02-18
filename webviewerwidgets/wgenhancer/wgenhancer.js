@@ -1,6 +1,6 @@
-widgetGenerators['topgenessummary'] = {
+widgetGenerators['enhancer'] = {
 	'info': {
-		'name': 'Most Frequently Mutated Genes (normalized by gene length and sorted by % samples mutated)',
+		'name': 'Most Frequenty Mutated Enhancers',
 		'width': 380, 
 		'height': 380, 
 		'callserver': true,
@@ -10,7 +10,7 @@ widgetGenerators['topgenessummary'] = {
             this['variables']['data'] = data;
         },
         'shoulddraw': function () {
-            if (this['variables']['data'] == null || infomgr.datas.variant.length > 500) {
+            if (this['variables']['data'] == null) {
                 return false;
             } else {
                 return true;
@@ -27,12 +27,18 @@ widgetGenerators['topgenessummary'] = {
 			addEl(div, chartDiv);
 			var x = [];
 			var y = [];
+			var hugos = [];
 			var data = this['variables']['data'];
-			for (var i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
 				var row = data[i];
-				x.push(row[0]);
+				var full = row[0].split(':');
+				var gid = full[0];
+				var hugo = full[1];
+				x.push(gid);
+				hugos.push(hugo);
 				y.push(row[1]);
 			}
+
 			var chart = new Chart(chartDiv, {
 				type: 'horizontalBar',
 				data: {
@@ -43,36 +49,58 @@ widgetGenerators['topgenessummary'] = {
 							borderColor: '#000000',
 							borderWidth: 0.7,
 							hoverBorderColor: '#aaaaaa',
-							backgroundColor: '#f49e42'
+							backgroundColor: '#69a3ef'
 						}
 					]
 				},
 				options: {
-					responsive: true,
 					maintainAspectRatio: false,
 					legend: {display: false},
 					scales: {
 						xAxes: [{
 							scaleLabel: {
 								display: true,
-								labelString: 'Number of Samples',
+								labelString: '% of Bases Impacted',
 							},
 							ticks: {
 								beginAtZero: true,
 							}
-						}],
+						}],	
 					},
+					onClick:function(e){
+						var activePoints = chart.getElementsAtEvent(e);
+						var gid = activePoints[0]._model.label;
+						var selectedIndex = activePoints[0]._index;
+						var gene = hugos[selectedIndex];
+						window.open('https://www.genecards.org/cgi-bin/carddisp.pl?gene=' + gene + '&keywords=' + gid)
+					},
+		
 					tooltips: {
+						callbacks: {
+							label: function(tooltipItem, data) {
+								var text = 'Click for more information';
+								var label = data.datasets[tooltipItem.datasetIndex].label || '';
+			
+								if (label) {
+									label += ': ';
+								}
+								label += Math.round(tooltipItem.xLabel * 100) / 100;
+								label += '%';
+								return [label, text];
+							}
+						},
 						backgroundColor: '#ffffff',
 						displayColors: false,
 						titleFontColor: '#000000',
 						titleFontStyle: 'normal',
 						bodyFontColor: '#000000',
 						borderColor: '#333333',
-						borderWidth: 1,
+						borderWidth: 1, 
 					}
 				}
 			});
 		}
 	}
-};
+}
+	
+

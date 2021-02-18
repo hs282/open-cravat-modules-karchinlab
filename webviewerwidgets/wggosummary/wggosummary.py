@@ -1,5 +1,9 @@
 import aiosqlite
 import os
+import cravat.admin_util as au
+
+info = au.get_local_module_info('go')
+path = info.directory
 
 async def get_data (queries):
     response = {}
@@ -39,9 +43,9 @@ async def get_data (queries):
     if hugos == []:
         return response
 
-    conn = await aiosqlite.connect(os.path.join(os.path.dirname(__file__), 
+    conn = await aiosqlite.connect(os.path.join(path, 
                                         'data', 
-                                        'wggosummary.sqlite'))
+                                        'go.sqlite'))
     cursor = await conn.cursor()
 
     go = {}
@@ -74,13 +78,16 @@ async def get_data (queries):
             go_desc = row
         go[go_id]['description'] = go_desc
         data.append(go[go_id])
+
     
     # Remove protein_binding from the names, it crowds out all the others
     rm_index = -1
+    ident_idx = -1
     for i,v in enumerate(data):
         if v['description'] == 'protein binding':
             rm_index = i
             break
+        
     if rm_index != -1:
         data = data[:rm_index]+data[rm_index+1:]
 
