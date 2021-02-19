@@ -1,0 +1,77 @@
+datasource: v4.1a
+description: Evaluates disease-causing potential of sequence alterations
+developer:
+  name: ''
+  organization: 'Department of Neuropediatrics, “Charité–Universitätsmedizin Berlin”, Berlin, Germany'
+  email: 'support@cravat.us'
+  website: 'http://www.mutationtaster.org/ChrPos.html'
+  citation: 'Schwarz, J., Rödelsperger, C., Schuelke, M. et al. MutationTaster evaluates disease-causing potential of sequence alterations. Nat Methods 7, 575–576 (2010). https://doi.org/10.1038/nmeth0810-575'
+level: variant
+output_columns:
+- name: transcript
+  title: Transcript ID
+  type: string
+  hidden: true
+  width: 70
+  desc: Ensembl transcript ids
+- name: score
+  title: Score
+  type: float
+  desc: p-value, ranges from 0 to 1. 
+  width: 70
+  hidden: true
+- name: rankscore
+  title: Rank Score
+  type: float
+  desc:  The scores were first converted. If there are multiple scores of a SNV, only the largest converted score was used in ranking. The rankscore is the ratio of the rank of the converted score over the total number of converted scores. The scores range from 0.08979 to 0.81001.
+  width: 70
+- name: prediction
+  title: Prediction
+  type: string
+  desc: The score cutoff between "Disease Causing" and "Polymorphism" is 0.5 for converted score and 0.31733 for the rankscore.
+  width: 158
+  category: multi
+- name: model
+  title: Model
+  type: string
+  desc: Predicted models.
+  width: 80
+  hidden: true
+  category: multi
+- hidden: true
+  name: all
+  title: All Annotations
+  type: string
+  width: 75
+  filterable: false
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: score
+    title: Score
+    type: float
+  - name: rankscore
+    title: rankscore
+    type: float
+  - name: prediction
+    title: Prediction
+    type: string
+  - name: model
+    title: model
+    type: string
+
+requires:
+- wgmutationtaster
+tags:
+- variant effect prediction
+requires_opencravat: '>=2.2.1'
+
+title: MutationTaster
+version: 1.0.0
+type: annotator
+  
+
+
+
