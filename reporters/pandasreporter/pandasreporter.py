@@ -45,6 +45,7 @@ class Reporter(CravatReport):
             self.headers[self.level].append(colname)
             if colname in self.dataframe_cols[self.level]:
                 self.dataframe_colnos[self.level].append(colno)
+                self.colno_to_colname[self.level][colno] = colname
             colno += 1
         self.data[self.level] = []
 

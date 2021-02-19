@@ -1,5 +1,5 @@
 title: pandas Reporter
-version: 1.1.0
+version: 1.2.0
 type: reporter
 description: Python pandas DataFrame reporter
 requires_opencravat: '>=2.1.3'
@@ -10,6 +10,7 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 release_note:
+  1.2.0: fixed a bug about table data.
   1.1.0: works with --concise-reporter option.
   1.0.0: Initial release
 tags:
