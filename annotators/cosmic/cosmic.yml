@@ -52,12 +52,19 @@ output_columns:
   title: Protein Change
   type: string
   width: 100
+- name: match
+  title: Match
+  type: string
+  hidden: true
+  desc: 'Whether the variant is an exact match (matching: chrom, pos, ref, alt), matches the protein change, or just the position (chrom, pos).'
+  category: single
+  width: 100
 tags:
 - variants
 - genes
 title: COSMIC
 type: annotator
-version: 92.0.0
+version: 92.1.0
 requires_opencravat: '>=2.2.1'
 requires:
 - wgcosmic
@@ -72,6 +79,8 @@ smartfilters:
     test: hasData
 commercial_warning: For commercial use, contact cosmic@sanger.ac.uk
 release_note:
+  92.1.0: queries an exact, protein, or position match
   92.0.0: data update to COSMIC v92
   91.0.1: table data enabled
   91.0.0: data update to COSMIC v91
+private: true
