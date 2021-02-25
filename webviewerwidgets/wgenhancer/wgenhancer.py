@@ -31,6 +31,8 @@ async def get_data (queries):
     await cursor.execute(q)
     for row in await cursor.fetchall():
         hugo = row[0]
+        if hugo == None:
+            continue
         gid = row[1]
         count = row[2]
         if gid in enhancer:
