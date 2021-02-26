@@ -464,7 +464,7 @@ widgetGenerators[widgetName] = {
                             yAxes: [{
                                 scaleLabel: {
                                     display: true,
-                                    labelString: 'log (frequency)',
+                                    labelString: 'log (Number of Variants)',
                                 },
                                 type: 'logarithmic',
                                 position: 'left',

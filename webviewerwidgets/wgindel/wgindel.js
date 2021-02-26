@@ -124,10 +124,10 @@ widgetGenerators[widgetName] = {
                     sums = sums + freq2[i];
                 }
             }
+            labs.push(color);
             var label = name;
             var datas = [(sums/totals) * 100];
             t.push(datas);
-            console.log(label, t, labs);
             for (var i = 0; i < labels.length; i++) {
                 if (labels[i] >= -6 && labels[i] <= 0){
                     datas = [(freq2[i]/totals) * 100];
@@ -156,8 +156,7 @@ widgetGenerators[widgetName] = {
             var label = name;
             var datas = [(s/totals) * 100];
             t.push(datas);
-            labs.push(color)
-            console.log(t);
+            labs.push(color);
             var chart = new Chart(chartDiv, {
                 type: 'bar',
                 data: {

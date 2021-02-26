@@ -14,4 +14,3 @@ tags:
 requires_opencravat: '>=1.8.1'
 release_note:
   1.0.0: Initial release
-private: true
