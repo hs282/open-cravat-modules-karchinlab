@@ -365,7 +365,7 @@ widgetGenerators['base2'] = {
             addEl(div, span);
             addEl(div, getEl('br'));
             var sdiv = getEl('div');
-            if (annotData['cgl'].class != null) {
+            if (annotData['cgl'] != null && annotData['cgl'].class != null) {
                 var span = getEl('span');
                 span.textContent = annotData['cgl'].class;
                 addEl(sdiv, span);
