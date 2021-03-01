@@ -4,8 +4,7 @@ widgetGenerators['gnomad_gene'] = {
 		'height': 150, 
 		'function': function (div, row, tabName) {
 			var results = getWidgetData(tabName, 'gnomad_gene', row, 'all');
-            if (results != undefined && results != null) {
-                results = JSON.parse(results);
+            if (results != undefined && results != null && typeof(results)=='object') {
                 var table = getWidgetTableFrame();
                 addEl(div, table);
                 var thead = getWidgetTableHead(['Transcript','Obv/Exp LoF','Obv/Exp Mis','Obv/Exp Syn','LoF Z-Score','Mis Z-Score','Syn Z-Score','pLI','pRec','pNull'],['20%']);
