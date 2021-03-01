@@ -11,8 +11,7 @@ widgetGenerators['interpro'] = {
 				addEl(div, addEl(span, getTn('No data')));
                 return;
 			}
-            if (hits != undefined && hits != null) {
-                hits = JSON.parse(hits);
+            if (hits != undefined && hits != null && typeof(hits)=='object') {
                 var table = getWidgetTableFrame();
                 addEl(div, table);
                 var thead = getWidgetTableHead(['Domain', 'UniProt', 'Ensembl', 'Link'],['55%','13%','22%','10%']);
