@@ -54,4 +54,3 @@ release_note:
   2020.12.03: Data update
 requires:
 - wggo
-private: true

@@ -54,6 +54,7 @@ widgetGenerators['enhancer'] = {
 					]
 				},
 				options: {
+					responsive: true,
 					maintainAspectRatio: false,
 					legend: {display: false},
 					scales: {

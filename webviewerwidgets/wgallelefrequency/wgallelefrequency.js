@@ -464,13 +464,13 @@ widgetGenerators[widgetName] = {
                             yAxes: [{
                                 scaleLabel: {
                                     display: true,
-                                    labelString: 'log (frequency)',
+                                    labelString: 'log (Number of Variants)',
                                 },
                                 type: 'logarithmic',
                                 position: 'left',
                                 ticks: {
                                      min: 0.1, //minimum tick
-                                     max: 1000, //maximum tick
+                                     max: 10000, //maximum tick
                                      callback: function (value, index, values) {
                                          return Number(value.toString());//pass tick values as a string into Number function
                                      }
@@ -482,6 +482,7 @@ widgetGenerators[widgetName] = {
                                     chartObj.ticks.push(10);
                                     chartObj.ticks.push(100);
                                     chartObj.ticks.push(1000);
+                                    chartObj.ticks.push(10000);
                                 }
                             }]
                         },

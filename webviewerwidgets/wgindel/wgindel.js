@@ -73,20 +73,8 @@ widgetGenerators[widgetName] = {
             chartDiv.style.height = 'calc(100% - 20px)';
             addEl(div, chartDiv);
             var totals = infomgr.datas.variant.length;
-            var highend = Math.max.apply(Math, dif);
-            var lowend = Math.min.apply(Math, dif);
-            if (lowend < 0){
-                lowend = lowend * -1;
-            }
-            if (lowend > highend){
-                var maxnum = lowend;
-                var minnum = lowend * -1;
-            } else {
-                var maxnum = highend;
-                var minnum = highend * -1;
-            }
             var list = [];
-            for (var i = minnum; i <= maxnum; i++) {
+            for (var i = -6; i <= 6; i++) {
                 if (i == 0){
                     continue;
                 }
@@ -115,7 +103,6 @@ widgetGenerators[widgetName] = {
                 l.push(x);
             }
             var labels = l.sort((a, b) => a - b);
-            
             var freq = Object.values(counts);
             var freq2 = Object.values(counts2);
             freq2.push.apply(freq2, freq)
@@ -137,10 +124,10 @@ widgetGenerators[widgetName] = {
                     sums = sums + freq2[i];
                 }
             }
+            labs.push(color);
             var label = name;
             var datas = [(sums/totals) * 100];
             t.push(datas);
-            labs.push(color);
             for (var i = 0; i < labels.length; i++) {
                 if (labels[i] >= -6 && labels[i] <= 0){
                     datas = [(freq2[i]/totals) * 100];
@@ -169,7 +156,7 @@ widgetGenerators[widgetName] = {
             var label = name;
             var datas = [(s/totals) * 100];
             t.push(datas);
-            labs.push(color)
+            labs.push(color);
             var chart = new Chart(chartDiv, {
                 type: 'bar',
                 data: {

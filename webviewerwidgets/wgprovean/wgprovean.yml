@@ -1,8 +1,8 @@
-title: Base Changes
+title: PROVEAN
 version: 1.0.0
 type: webviewerwidget
-required_annotator: base
-description: Base Changes webviewer widget
+required_annotator: provean
+description: PROVEAN webviewer widget
 developer:
   name: Madison Larsen
   organization: In Silico Solutions
@@ -10,7 +10,5 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 tags:
-- visualization widgets
-requires_opencravat: '>=1.8.1'
-release_note:
-  1.0.0: Initial release
+- visualization
+requires_opencravat: '>=2.2.1'

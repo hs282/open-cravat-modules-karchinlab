@@ -1,0 +1,37 @@
+#CRAVAT Report
+#Created at Thursday 02/11/2021 13:08:48
+#Report level: variant
+#
+Variant Annotation																PROVEAN: Protein Variant Effect Analyzer					
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Transcript ID	UniProt Accession Number	Score	Rank Score	Prediction	All Annotations
+1	chr1	925942	A	C		Yes	SAMD11	ENST00000622503.4	start_lost	c.1A>C	p.Met1?	ENST00000342066.8:SAMD11:Q96NU1:missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000616016.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000616125.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000617307.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000618181.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000618323.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000618779.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000620200.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C; ENST00000622503.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>C	1	s0		ENST00000437963	Q5SV95	-2.46	0.53736	Neutral	[["ENST00000437963", "Q5SV95", -2.46, 0.53736, "Neutral"], ["ENST00000342066", "Q96NU1", -1.77, 0.53736, "Neutral"]]
+2	chr1	925942	A	G		Yes	SAMD11	ENST00000622503.4	start_lost	c.1A>G	p.Met1?	ENST00000342066.8:SAMD11:Q96NU1:missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000616016.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000616125.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000617307.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000618181.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000618323.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000618779.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000620200.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G; ENST00000622503.4:SAMD11::missense_variant,start_lost:p.Met1?:c.1A>G	1	s1		ENST00000437963	Q5SV95	-3.38	0.6678	Neutral	[["ENST00000437963", "Q5SV95", -3.38, 0.6678, "Damaging"], ["ENST00000342066", "Q96NU1", -2.32, 0.6678, "Neutral"]]
+3	chr1	925943	T	G		Yes	SAMD11	ENST00000622503.4	start_lost	c.2T>G	p.Met1?	ENST00000342066.8:SAMD11:Q96NU1:missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000616016.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000616125.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000617307.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000618181.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000618323.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000618779.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000620200.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G; ENST00000622503.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>G	1	s2		ENST00000437963	Q5SV95	-4.82	0.80851	Damaging	[["ENST00000437963", "Q5SV95", -4.82, 0.80851, "Damaging"], ["ENST00000342066", "Q96NU1", -3.28, 0.80851, "Damaging"]]
+4	chr1	925943	T	A		Yes	SAMD11	ENST00000622503.4	start_lost	c.2T>A	p.Met1?	ENST00000342066.8:SAMD11:Q96NU1:missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000616016.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000616125.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000617307.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000618181.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000618323.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000618779.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000620200.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A; ENST00000622503.4:SAMD11::missense_variant,start_lost:p.Met1?:c.2T>A	1	s3		ENST00000437963	Q5SV95	-4.87	0.81269	Damaging	[["ENST00000437963", "Q5SV95", -4.87, 0.81269, "Damaging"], ["ENST00000342066", "Q96NU1", -3.28, 0.81269, "Damaging"]]
+#CRAVAT Report
+#Created at Thursday 02/11/2021 13:08:48
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+SAMD11		4	0	start_lost	missense_variant(4),start_lost(4)
+#CRAVAT Report
+#Created at Thursday 02/11/2021 13:08:48
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s3
+#CRAVAT Report
+#Created at Thursday 02/11/2021 13:08:48
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0

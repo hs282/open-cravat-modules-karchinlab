@@ -2,7 +2,6 @@ title: Insertions and Deletions
 version: 1.0.0
 type: webviewerwidget
 required_annotator: base
-# hidden: true
 description: Insertions and Deletions webviewer widget
 developer:
   name: Madison Larsen
@@ -12,7 +11,6 @@ developer:
   citation: ''
 tags:
 - visualization widgets
-# requires_opencravat: '>=1.8.1'
+requires_opencravat: '>=1.8.1'
 release_note:
   1.0.0: Initial release
-private: true

@@ -1,0 +1,87 @@
+datasource: v4.1a
+description: A tool to predict the functional effect of amino acid substitutions and indels.
+developer:
+  name: Yongwook Choi, Agnes Chan
+  organization: J. Craig Venter Institute (JCVI)
+  email: support@cravat.us
+  website: http://provean.jcvi.org/index.php
+  citation: 'Choi Y, Chan AP (2015) PROVEAN web server: a tool to predict the functional effect of amino acid substitutions and indels. Bioinformatics 31(16): 2745-2747.'
+
+level: variant
+output_columns:
+- name: transcript
+  title: Transcript ID
+  type: string
+  hidden: true
+  width: 70
+  desc: Ensembl transcript ids
+- name: uniprot
+  title: UniProt Accession Number
+  type: string
+  width: 70
+  hidden: true
+- name: score
+  title: Score
+  type: float
+  desc: Scores range from -14 to 14. The smaller the score the more likely the SNP has damaging effect.
+  hidden: true
+  width: 60
+- name: rankscore
+  title: Rank Score
+  type: float
+  desc: The ratio of the rank the PROVEAN score over the total number of PROVEAN scores.
+  hidden: false
+  width: 70
+- name: prediction
+  title: Prediction
+  type: string
+  desc: If score <= -2.5 (rankscore>=0.54382) the corresponding nsSNV is predicted as "D(amaging)"; otherwise it is predicted as "N(eutral)". 
+  hidden: false
+  width: 65
+  category: multi
+- hidden: true
+  name: all
+  title: All Annotations
+  type: string
+  width: 75
+  filterable: false
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: uniprot
+    title: Uniprot
+    type: string
+  - name: score
+    title: Score
+    type: float
+  - name: rankscore
+    title: rankscore
+    type: float
+  - name: prediction
+    title: Prediction
+    type: string
+
+requires_opencravat: '>=2.2.1'
+smartfilters:
+- name: rankscore
+  title: PROVEAN Rank Score >=
+  description: Include variants which have a rank score greater than or equal to 0.90.
+  selector:
+    type: inputFloat
+    defaultValue: 0.90
+  filter:
+    column: provean__rankscore
+    test: greaterThanEq
+    value: ${value}
+requires:
+- wgprovean
+tags:
+- variant effect prediction
+
+title: "PROVEAN: Protein Variant Effect Analyzer"
+type: annotator
+version: 1.0.0
+
+
