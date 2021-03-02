@@ -1,5 +1,5 @@
 title: VEST
-version: 1.1.1
+version: 1.2.0
 type: webviewerwidget
 required_annotator: vest
 description: VEST webviewer widget
@@ -15,5 +15,4 @@ release_note:
 tags:
 - visualization
 hidden: true
-requires_opencravat: '>=2.2.1'
-private: true
+requires_opencravat: '>=2.2.2'
