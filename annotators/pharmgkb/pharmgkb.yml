@@ -1,6 +1,6 @@
 title: PharmGKB
-version: 2.0.0
-datasource: '2021-01-14'
+version: 2.1.0
+datasource: '2021-03-03'
 type: annotator
 level: variant
 output_columns:
@@ -47,6 +47,7 @@ developer:
 requires:
 - wgpharmgkb>=2.0.0
 release-note: 
+  2.1.0: Data update
   2.0.0: Improved handling of variants with multiple associations
   1.1.1: added table-data columns
   1.1.0: Data update
