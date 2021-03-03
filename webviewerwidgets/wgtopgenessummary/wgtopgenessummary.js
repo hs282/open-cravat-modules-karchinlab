@@ -10,7 +10,7 @@ widgetGenerators['topgenessummary'] = {
             this['variables']['data'] = data;
         },
         'shoulddraw': function () {
-            if (this['variables']['data'] == null || infomgr.datas.variant.length > 500) {
+            if (this['variables']['data'].length == 0 || this['variables']['data'] == null || infomgr.datas.variant.length > 500){
                 return false;
             } else {
                 return true;

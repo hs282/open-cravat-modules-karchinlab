@@ -49,6 +49,8 @@ async def get_data (queries):
         q = 'select count(distinct(sample.base__sample_id)) from sample, variant where variant.base__uid=sample.base__uid and variant.base__hugo="' + hugo + '"'
         await cursor.execute(q)
         num_sample = (await cursor.fetchone())[0]
+        if num_sample == 0:
+            continue
         genesampleperc[hugo] = num_sample
     sorted_hugos = sorted(genesampleperc, key=genesampleperc.get, reverse=True)
     response = {'data': []}
