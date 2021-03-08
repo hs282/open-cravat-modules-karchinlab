@@ -55,7 +55,7 @@ widgetGenerators['rankscore'] = {
                         achange = '';
                     }
                     var cchange = getWidgetData('variant', 'base', rowd, 'cchange');
-                    nums[c] = all;
+                    nums[modules] = all;
                 }
             var withre = /[+-]?([0-9]*[.])?[0-9]+/;
             var hugos = [];

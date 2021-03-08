@@ -56,7 +56,7 @@ output_columns:
   title: Match
   type: string
   hidden: true
-  desc: 'Whether the variant matches the genomic location (matching: chrom, pos, ref, alt), the protein change, or just the position (chrom, pos).'
+  desc: 'Whether the variant is an exact match (matching: chrom, pos, ref, alt), macthes the protein change, or just the genomic location (chrom, pos).'
   category: single
   width: 100
 tags:

@@ -37,7 +37,7 @@ class CravatAnnotator(BaseAnnotator):
         has_results = False
         for r in self.cursor:
             has_results = True
-            match = "Genomic Location"
+            match = "Exact Match"
         if not has_results:
             q = 'select cosmic_id, accession, aachange_cosmic, primarysites, primarysitenos, occurrences, genename '\
             +'from cosmic_genomic where genename="%s" and aachange_cosmic="%s" and mutation_type="%s"'\
@@ -51,7 +51,7 @@ class CravatAnnotator(BaseAnnotator):
             q = 'select cosmic_id, accession, aachange_cosmic, primarysites, primarysitenos, occurrences, genename '\
             +'from cosmic_genomic where chromosome="%s" and position=%s and mutation_type="%s"'\
                 %(chrom, pos, mut_type)
-            match = 'Position'
+            match = 'Genomic Location'
         self.cursor.execute(q)
         for r in self.cursor:
             has_results = True
