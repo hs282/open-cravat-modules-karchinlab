@@ -23,15 +23,22 @@ function mqMinMatchHandler (e) {
 
 function getInputDataFromUrl () {
     var urlParams = new URLSearchParams(window.location.search);
+    console.log('@ urlparams=', urlParams)
     var inputChrom = urlParams.get('chrom');
     var inputPos = urlParams.get('pos');
     var inputRef = urlParams.get('ref_base');
     var inputAlt = urlParams.get('alt_base');
-    var inputData = cleanInputData(inputChrom, inputPos, inputRef, inputAlt);
+    var assembly = urlParams.get('assembly')
+    if (assembly == undefined) {
+        assembly = 'hg38'
+    }
+    console.log('@ chrom=', inputChrom, 'assembly=', assembly)
+    var inputData = cleanInputData(inputChrom, inputPos, inputRef, inputAlt, assembly);
+    console.log('@ inputdata=', inputData)
     return inputData;
 }
 
-function cleanInputData (inputChrom, inputPos, inputRef, inputAlt) {
+function cleanInputData (inputChrom, inputPos, inputRef, inputAlt, assembly) {
     if (inputChrom == '') {
         inputChrom = null;
     }
@@ -44,17 +51,25 @@ function cleanInputData (inputChrom, inputPos, inputRef, inputAlt) {
     if (inputAlt == '') {
         inputAlt = null;
     }
+    if (assembly == undefined) {
+        assembly = 'hg38'
+    }
     if (inputChrom == null || inputPos == null || inputRef == null || inputAlt == null) {
         return null;
     } else {
-        return {'chrom': inputChrom, 'pos': inputPos, 'ref': inputRef, 'alt': inputAlt};
+        return {
+            'chrom': inputChrom, 
+            'pos': inputPos, 
+            'ref': inputRef, 
+            'alt': inputAlt, 
+            'assembly': assembly};
     }
 }
 
 function submitForm () {
     var value = document.querySelector('#input_variant').value;
     var toks = value.split(':');
-    if (toks.length != 4) {
+    if (toks.length != 4 && toks.length != 5) {
         return;
     }
     var chrom = toks[0];
@@ -62,18 +77,26 @@ function submitForm () {
     var ref = toks[2];
     var alt = toks[3];
     var inputData = cleanInputData(chrom, pos, ref, alt);
+    var assembly = 'hg38'
+    if (toks.length == 5) {
+        var assembly = toks[4]
+    }
+    inputData['assembly'] = assembly
     if (inputData != null) {
         showContentDiv();
         submitAnnotate(inputData['chrom'], inputData['pos'], inputData['ref'], 
-                inputData['alt']);
+                inputData['alt'], 'hg38')
         hideSearch();
     }
 }
 
-function submitAnnotate (inputChrom, inputPos, inputRef, inputAlt) {
+function submitAnnotate (inputChrom, inputPos, inputRef, inputAlt, assembly) {
+    if (assembly == undefined) {
+        assembly = 'hg38'
+    }
     var url = 'annotate';
     var params = {'chrom':inputChrom, 'pos':parseInt(inputPos), 
-            'ref_base':inputRef, 'alt_base':inputAlt};
+            'ref_base':inputRef, 'alt_base':inputAlt, 'assembly': assembly};
     $.ajax({
         type: 'POST',
         url: url,
@@ -565,7 +588,8 @@ widgetGenerators['oncokb'] = {
             var alt = getWidgetData(tabName, 'base', row, 'alt_base')
             var search_term = chrom + '%2C'+pos + '2%C' + pos+'2%C' +ref+'2%C' +alt
             var genome = '&referenceGenome=GRCh37'
-            var url = 'oncokb?chrom=' + chrom +'&start=' + pos + '&end=' + pos + '&ref_base=' + ref + '&alt_base=' + alt;
+            var url = 'oncokb?chrom=' + chrom +'&start=' + pos + '&end=' 
+                + pos + '&ref_base=' + ref + '&alt_base=' + alt;
             var xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
             xhr.onreadystatechange = function () {
@@ -575,7 +599,9 @@ widgetGenerators['oncokb'] = {
                         if (response.notoken == true) {
                             var sdiv = getEl('div');
                             var span = getEl('span');
-                            span.textContent = 'No OncoKB data was obtained (add OncoKB token and click save to obtain OncoKB annotation:\xa0'
+                            span.textContent = 'No OncoKB data was obtained ' + 
+                                '(add OncoKB token and click save to obtain ' + 
+                                'OncoKB annotation:\xa0'
                             addEl(sdiv, span);
                             var ip = getEl('input');
                             ip.type = 'text';
@@ -591,7 +617,8 @@ widgetGenerators['oncokb'] = {
                             addEl(div, sdiv);
                             btn.addEventListener('click', function (evt) {
                                 var token = ip.value;
-                                fetch('/webapps/moleculartumorboard/saveoncokbtoken?token=' + token)
+                                fetch('/webapps/moleculartumorboard/saveoncokbtoken?token=' 
+                                    + token)
                                 .then(data=>{return data.json()})
                                 .then(response=>{
                                     if (response.result == 'success') {
@@ -604,14 +631,18 @@ widgetGenerators['oncokb'] = {
                             var oncogenic = response.oncogenic
                             var hugo = response.query.hugoSymbol
                             var achange = changeAchange3to1(annotData['base']['achange']);
-                            var link = 'https://www.oncokb.org/gene/' + hugo + '/' + achange + '?refGenome=GRCh38';
+                            var link = 'https://www.oncokb.org/gene/' + hugo + '/' 
+                                + achange + '?refGenome=GRCh38';
                             if (effect == 'Unknown'){
                                 addInfoLineLink2(div, 'No annotation for OncoKB available');
                                 }
                             else {
                                 const minLevelNum = Math.min(...response.treatments.map(
                                         t => levelNum[levelDic[t.level]]))
-                                const minLevel = levelNumToLevel[minLevelNum]
+                                var minLevel = levelNumToLevel[minLevelNum]
+                                if (minLevel == undefined) {
+                                    minLevel = 'NA'
+                                }
                                 var treatments = response.treatments;
                                 var ssdiv = getEl('div');
                                 ssdiv.style.display = 'flex';
@@ -643,7 +674,7 @@ widgetGenerators['oncokb'] = {
                                 addEl(div, ssdiv);
                                 // Drug table
                                 var sdiv = getEl('div');
-                                sdiv.style.height = '30rem';
+                                sdiv.style.maxHeight = '30rem';
                                 sdiv.style.overflow = 'auto';
                                 sdiv.style.maxWidth = '600px';
                                 addEl(ssdiv, sdiv);
@@ -668,54 +699,49 @@ widgetGenerators['oncokb'] = {
                                 var tbody = getEl('tbody');
                                 var maxI = treatments.length - 1;
                                 var d_c_ls = [];
-                                for (var i = 0; i < treatments.length; i++) {
-                                    var t = treatments[i];
-                                    var drugs = t.drugs;
-                                    var c = t.levelAssociatedCancerType;
-                                    var cancer = c.mainType.name;
-                                    var level = t.level;
-                                    // LOE conversion
-                                    if (level == 'LEVEL_1') {
-                                        level = 'L1'
-                                    } else if (level == 'LEVEL_2' || level == 'LEVEL_R1') {
-                                        level = 'L2'
-                                    } else if (level == 'LEVEL_3A' || level == 'LEVEL_R2') {
-                                        level = 'L3'
-                                    } else if (level == 'LEVEL_3B') {
-                                        level = 'L4'
-                                    } else if (level == 'LEVEL_4') {
-                                        level = 'L5'
-                                    }
-                                    var maxJ = drugs.length - 1;
-                                    for (var j = 0; j < drugs.length; j++) {
-                                        var d = drugs[j];
-                                        var drug = d.drugName;
-                                        var d_c_l = drug + '_' + cancer + '_' + level;
-                                        if (d_c_ls.indexOf(d_c_l) >= 0) {
-                                            continue;
-                                        } else {
-                                            d_c_ls.push(d_c_l);
+                                if (treatments.length == 0) {
+                                    var tr = getEl('tr')
+                                    var td = getEl('td')
+                                    td.textContent = 'NA'
+                                    addEl(tbody, addEl(tr, td))
+                                } else {
+                                    for (var i = 0; i < treatments.length; i++) {
+                                        var t = treatments[i];
+                                        var drugs = t.drugs;
+                                        var c = t.levelAssociatedCancerType;
+                                        var cancer = c.mainType.name;
+                                        var level = levelDic[t.level];
+                                        var maxJ = drugs.length - 1;
+                                        for (var j = 0; j < drugs.length; j++) {
+                                            var d = drugs[j];
+                                            var drug = d.drugName;
+                                            var d_c_l = drug + '_' + cancer + '_' + level;
+                                            if (d_c_ls.indexOf(d_c_l) >= 0) {
+                                                continue;
+                                            } else {
+                                                d_c_ls.push(d_c_l);
+                                            }
+                                            var tr = getEl('tr');
+                                            var td = getEl('td');
+                                            if (i == maxI && j == maxJ) {
+                                                td.style.borderBottom = '1px solid gray';
+                                            }
+                                            td.textContent = drug;
+                                            addEl(tr, td);
+                                            var td = getEl('td');
+                                            if (i == maxI && j == maxJ) {
+                                                td.style.borderBottom = '1px solid gray';
+                                            }
+                                            td.textContent = cancer;
+                                            addEl(tr, td);
+                                            var td = getEl('td');
+                                            if (i == maxI && j == maxJ) {
+                                                td.style.borderBottom = '1px solid gray';
+                                            }
+                                            td.textContent = level;
+                                            addEl(tr, td);
+                                            addEl(tbody, tr);
                                         }
-                                        var tr = getEl('tr');
-                                        var td = getEl('td');
-                                        if (i == maxI && j == maxJ) {
-                                            td.style.borderBottom = '1px solid gray';
-                                        }
-                                        td.textContent = drug;
-                                        addEl(tr, td);
-                                        var td = getEl('td');
-                                        if (i == maxI && j == maxJ) {
-                                            td.style.borderBottom = '1px solid gray';
-                                        }
-                                        td.textContent = cancer;
-                                        addEl(tr, td);
-                                        var td = getEl('td');
-                                        if (i == maxI && j == maxJ) {
-                                            td.style.borderBottom = '1px solid gray';
-                                        }
-                                        td.textContent = level;
-                                        addEl(tr, td);
-                                        addEl(tbody, tr);
                                     }
                                 }
                                 addEl(table, tbody);
@@ -920,7 +946,8 @@ widgetGenerators['cosmic2'] = {
                 var title = titleEl.textContent;
                 titleEl.textContent = '';
                 var a = getEl('a');
-                a.href = 'https://cancer.sanger.ac.uk/cosmic/search?q=' + annotData['cosmic']['cosmic_id'];
+                a.href = 'https://cancer.sanger.ac.uk/cosmic/search?q=' 
+                    + annotData['cosmic']['cosmic_id'];
                 a.target = '_blank';
                 a.textContent = title;
                 addEl(titleEl, a);
@@ -966,7 +993,7 @@ widgetGenerators['cosmic2'] = {
                 var sdiv = getEl('div');
                 sdiv.style.overflow = 'auto';
                 //sdiv.style.width = 'calc(100% - 400px)';
-                sdiv.style.minWidth = '600px';
+                sdiv.style.minWidth = '400px';
                 sdiv.style.height = '400px';
                 var chartDiv = getEl('canvas');
                 chartDiv.width = '1000';
@@ -1062,8 +1089,8 @@ widgetGenerators['basepanel'] = {
 widgetInfo['actionpanel'] = {'title': ''};
 widgetGenerators['actionpanel'] = {
     'variant': {
-        'width': '100%',
-        'height': '100%',
+        'width': null,
+        'height': null,
         'function': function (div, row, tabName) {
             var br = getEl("br");
             addEl(div, br);
@@ -1073,7 +1100,7 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
-            divs[0].style.width = '92vw';
+            divs[0].style.width = '50rem';
             var br = getEl("br");
             addEl(div, br);
             var divs = showWidget('cgi', ['cancer_genome_interpreter'], 'variant', div, null, null)
@@ -1081,6 +1108,7 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
+            divs[1].style.width = '50rem';
             var br = getEl("br");
             addEl(div, br);
             /*
@@ -1100,21 +1128,21 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            divs[0].style.width = '92vw';
+            divs[1].style.width = '50rem';
             var br = getEl("br");
             addEl(div, br);
             var divs = showWidget('civic2', ['civic'], 'variant', div, null, null)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            divs[0].style.width = '92vw';
+            divs[1].style.width = '50rem';
             var br = getEl("br");
             addEl(div, br);
             var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220)
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            divs[0].style.width = '92vw';
+            divs[1].style.width = '50rem';
             var br = getEl("br");
             addEl(div, br);
             var generator = widgetGenerators['brca']['variant'];
@@ -1123,6 +1151,7 @@ widgetGenerators['actionpanel'] = {
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
             divs[1].style.paddingLeft = '1px';
+            divs[1].style.width = '50rem';
             var br = getEl("br");
             addEl(div, br);
         }
@@ -1414,7 +1443,7 @@ widgetGenerators['cancer_hotspots2'] = {
 
 function writeToVariantArea (inputData) {
     var value = inputData['chrom'] + ':' + inputData['pos'] + 
-            ':' + inputData['ref'] + ':' + inputData['alt'];
+            ':' + inputData['ref'] + ':' + inputData['alt'] + ':' + inputData['assembly']
     document.querySelector('#input_variant').value = value;
 }
 
@@ -1431,7 +1460,7 @@ function processUrl () {
     if (inputData != null) {
         writeToVariantArea(inputData);
         submitAnnotate(inputData['chrom'], inputData['pos'], 
-                inputData['ref'], inputData['alt']);
+                inputData['ref'], inputData['alt'], inputData['assembly']);
     }
 }
 

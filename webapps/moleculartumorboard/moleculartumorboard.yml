@@ -1,5 +1,5 @@
 title: Molecular Tumor Board Variant Report
-version: 1.2.1
+version: 1.2.2
 type: webapp
 live_modules:
 - cancer_genome_interpreter
