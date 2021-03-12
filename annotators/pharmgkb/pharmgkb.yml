@@ -1,5 +1,5 @@
 title: PharmGKB
-version: 2.1.0
+version: 2.2.0
 datasource: '2021-03-03'
 type: annotator
 level: variant
@@ -9,8 +9,17 @@ output_columns:
   type: string
   width: 85
   link_format: https://www.pharmgkb.org/variant/${.*}
+- name: chemicals
+  title: Chemicals
+  type: string
+  width: 85
+- name: pheno_cat
+  title: Phenotype Category
+  type: string
+  width: 85
+  hidden: true
 - name: drug_assoc
-  title: Drug Associations
+  title: All Annotations
   type: string
   hidden: true
   width: 100
@@ -47,6 +56,7 @@ developer:
 requires:
 - wgpharmgkb>=2.0.0
 release-note: 
+  2.2.0: Extra columns added
   2.1.0: Data update
   2.0.0: Improved handling of variants with multiple associations
   1.1.1: added table-data columns
@@ -57,3 +67,4 @@ tags:
 - cancer
 - literature
 requires_opencravat: '>=2.2.2'
+private: true

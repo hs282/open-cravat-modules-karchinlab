@@ -22,12 +22,20 @@ class CravatAnnotator(BaseAnnotator):
         if hits:
             pharmgkb_id = hits[0]['pharmgkb_id']
             assocs = []
+            chem = set()
+            cat = set()
             for hit in hits:
                 chemicals = hit['chemical']
+                category = hit['pheno_cat']
                 chem_urls = [
                     f'https://www.pharmgkb.org/chemical/{chemid}' 
                     for chemid in hit['chemid']
                 ]
+                c = ' '.join(chemicals)
+                if category != '':
+                    ca = ''.join(category)
+                chem.add(c)
+                cat.add(ca)
                 assocs.append([
                     list(zip(chemicals, chem_urls)),
                     hit['sentence'],
@@ -36,8 +44,12 @@ class CravatAnnotator(BaseAnnotator):
                     hit['pmid'],
                     hit['notes'],
                 ])
+            chems = list(chem)
+            categories = list(cat)
             return {
                 'id': pharmgkb_id,
+                'chemicals': ';'.join(chems),
+                'pheno_cat': ';'.join(categories),
                 'drug_assoc': assocs,
             }
         else:

@@ -14,7 +14,7 @@ widgetGenerators['pharmgkb'] = {
 				table.style.tableLayout = 'auto';
 				table.style.width = '100%';
 				var thead = getWidgetTableHead(
-					['Chemicals', 'Sentence','Category','Significant','Study', 'Notes'], 
+					['Chemicals', 'Description','Category','Significant','Study', 'Notes'], 
 					['15%',       '30%',     '8%',     '10%',        '12%',   '25%'  ]
 				);
 				addEl(table, thead);
