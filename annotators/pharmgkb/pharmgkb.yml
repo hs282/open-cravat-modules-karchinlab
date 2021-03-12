@@ -67,4 +67,3 @@ tags:
 - cancer
 - literature
 requires_opencravat: '>=2.2.2'
-private: true
