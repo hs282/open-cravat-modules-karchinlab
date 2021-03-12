@@ -21,12 +21,15 @@ from cravat.config_loader import ConfigLoader
 import requests
 import oyaml
 import datetime
+from pyliftover import LiftOver
+import cravat
 
 live_modules = {}
 live_mapper = None
 module_confs = {}
 modules_to_run_ordered = []
 oncokb_cache = {}
+wgsreader = cravat.get_wgs_reader(assembly='hg38')
 
 async def test (request):
     return web.json_response({'result': 'success'})
@@ -46,11 +49,18 @@ async def get_live_annotation (queries):
     pos = queries['pos']
     ref_base = queries['ref_base']
     alt_base = queries['alt_base']
+    assembly = queries['assembly']
     if 'uid' not in queries:
         uid = ''
     else:
         uid = queries['uid']
-    input_data = {'uid': uid, 'chrom': chrom, 'pos': int(pos), 'ref_base': ref_base, 'alt_base': alt_base}
+    input_data = {
+        'uid': uid, 
+        'chrom': chrom, 
+        'pos': int(pos), 
+        'ref_base': ref_base, 
+        'alt_base': alt_base,
+        'assembly': assembly}
     if 'annotators' in queries:
         annotators = queries['annotators'].split(',')
     else:
@@ -81,6 +91,79 @@ def clean_annot_dict (d):
             d = None
     return d
 
+def liftover(input_data, lifter):
+    global wgsreader
+    chrom = input_data['chrom']
+    pos = input_data['pos']
+    ref = input_data['ref_base']
+    alt = input_data['alt_base']
+    reflen = len(ref)
+    altlen = len(alt)
+    if reflen == 1 and altlen == 1:
+        res = lifter.convert_coordinate(chrom, pos - 1)
+        if res is None or len(res) == 0:
+            raise LiftoverFailure('Liftover failure')
+        if len(res) > 1:
+            raise LiftoverFailure('Liftover failure')
+        try:
+            el = res[0]
+        except:
+            raise LiftoverFailure('Liftover failure')
+        newchrom = el[0]
+        newpos = el[1] + 1
+    elif reflen >= 1 and altlen == 0: # del
+        pos1 = pos
+        pos2 = pos + reflen - 1
+        res1 = lifter.convert_coordinate(chrom, pos1 - 1)
+        res2 = lifter.convert_coordinate(chrom, pos2 - 1)
+        if res1 is None or res2 is None or len(res1) == 0 or len(res2) == 0:
+            raise LiftoverFailure('Liftover failure')
+        if len(res1) > 1 or len(res2) > 1:
+            raise LiftoverFailure('Liftover failure')
+        el1 = res1[0]
+        el2 = res2[0]
+        newchrom1 = el1[0]
+        newpos1 = el1[1] + 1
+        newchrom2 = el2[0]
+        newpos2 = el2[1] + 1
+        newchrom = newchrom1
+        newpos = newpos1
+        newpos = min(newpos1, newpos2)
+    elif reflen == 0 and altlen >= 1: # ins
+        res = lifter.convert_coordinate(chrom, pos - 1)
+        if res is None or len(res) == 0:
+            raise LiftoverFailure('Liftover failure')
+        if len(res) > 1:
+            raise LiftoverFailure('Liftover failure')
+        el = res[0]
+        newchrom = el[0]
+        newpos = el[1] + 1
+    else:
+        pos1 = pos
+        pos2 = pos + reflen - 1
+        res1 = lifter.convert_coordinate(chrom, pos1 - 1)
+        res2 = lifter.convert_coordinate(chrom, pos2 - 1)
+        if res1 is None or res2 is None or len(res1) == 0 or len(res2) == 0:
+            raise LiftoverFailure('Liftover failure')
+        if len(res1) > 1 or len(res2) > 1:
+            raise LiftoverFailure('Liftover failure')
+        el1 = res1[0]
+        el2 = res2[0]
+        newchrom1 = el1[0]
+        newpos1 = el1[1] + 1
+        newchrom2 = el2[0]
+        newpos2 = el2[1] + 1
+        newchrom = newchrom1
+        newpos = min(newpos1, newpos2)
+    hg38_ref = wgsreader.get_bases(newchrom, newpos)
+    if hg38_ref == cravat.util.reverse_complement(ref):
+        newref = hg38_ref
+        newalt = cravat.util.reverse_complement(alt)
+    else:
+        newref = ref
+        newalt = alt
+    return [newchrom, newpos, newref, newalt]
+
 async def live_annotate (input_data, annotators):
     from cravat.constants import mapping_parser_name
     from cravat.constants import all_mappings_col_name
@@ -90,6 +173,14 @@ async def live_annotate (input_data, annotators):
     global module_confs
     global modules_to_run_ordered
     response = {}
+    assembly = input_data.get('assembly', 'hg38')
+    if assembly in cravat.constants.liftover_chain_paths:
+        lifter = LiftOver(cravat.constants.liftover_chain_paths[assembly])
+        chrom, pos, ref, alt = liftover(input_data, lifter)
+        input_data['chrom'] = chrom
+        input_data['pos'] = pos
+        input_data['ref'] = ref
+        input_data['alt'] = alt
     crx_data = live_mapper.map(input_data)
     crx_data = live_mapper.live_report_substitute(crx_data)
     crx_data[mapping_parser_name] = AllMappingsParser(crx_data[all_mappings_col_name])
@@ -208,7 +299,6 @@ async def load_live_modules ():
 async def get_oncokb_annotation (request):
     global oncokb_conf
     global oncokb_cache
-    print(f'@ oncokb_cache no={len(oncokb_cache)}')
     queries = request.rel_url.query
     chrom = queries['chrom']
     start = queries['start']
@@ -234,7 +324,6 @@ async def get_oncokb_annotation (request):
             use_cache = False
         else:
             use_cache = True
-        print(f'@ cache_date={cache_date} now={now} diff={diff.days} use_cache={use_cache}')
     else:
         use_cache = False
     if use_cache:
@@ -243,7 +332,6 @@ async def get_oncokb_annotation (request):
         if token is None:
             response = web.json_response({'notoken': True})
         else:
-            print(f'@ fetching oncokb online')
             url = f'https://www.oncokb.org/api/v1/annotate/mutations/byGenomicChange?genomicLocation={chrom},{start},{end},{ref_base},{alt_base}&referenceGenome=GRCh38'
             headers = {'Authorization': 'Bearer ' + token}
             r = requests.get(url, headers=headers)

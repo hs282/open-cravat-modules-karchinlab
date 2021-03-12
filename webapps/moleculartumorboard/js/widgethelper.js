@@ -156,8 +156,11 @@ function addInfoLineLink (div, header, text, link, trimlen) {
 	addEl(div, getEl('br'));
 }
 
-function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIfNoValue, threshold, beginText, endText) {
-	var cutoff = 0.01;
+function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIfNoValue, threshold, beginText, endText, maxVal) {
+    if (maxVal == undefined) {
+        maxVal = 1.0
+    }
+	var cutoff = threshold
 	// Value
     var value = null;
 	if (typeof(row) === 'object' && row.constructor == Object) {
@@ -168,7 +171,13 @@ function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIf
 	if (value == null) {
 		value = '';
 	} else {
-        value = value.toFixed(3);
+        if (value == 0) {
+            value = '0'
+        } else if (value >= 0.01) {
+            value = value.toFixed(3);
+        } else {
+            value = value.toExponential(1);
+        }
 	}
     var color = 'black';
     if (value == '') {
@@ -211,22 +220,27 @@ function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIf
     var b = box.getBBox();
 	var c = null;
 	if (value != '') {
-		c = (1.0 - Math.min(1.0, value / 0.3)) * 255;
+        if (value < threshold) {
+            c = 255
+        } else {
+            c = (1.0 - (value - threshold) / (maxVal - threshold)) * 255;
+        }
 	} else {
 		c = 255;
 	}
     var valueColor = 'rgb(255, ' + c + ', ' + c + ')';
-	box.attr('fill', valueColor);
+    console.log('@ value=', value, 'c=', c, 'color=', color, 'valuecolor=', valueColor)
 	box.attr('stroke', color);
+	box.attr('fill', valueColor);
 	// Value
 	if (value != '') {
         var valueX = value * barWidth + paddingX;
 		var bar = paper.rect(valueX, paddingTop, 1, valueHeight, lineWidth);
-		bar.attr('fill', valueColor);
-		bar.attr('stroke', valueColor);
+		bar.attr('fill', color);
+		bar.attr('stroke', color);
         var text = paper.text(valueX, 8, value);
-        text.attr('fill', valueColor);
-        text.attr('stroke', valueColor);
+        text.attr('fill', color);
+        text.attr('stroke', color);
 	}
     // Threshold
     if (threshold != null) {
@@ -291,8 +305,8 @@ function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIf
     return paper;
 }
 
-function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfNoValue) {
-	var cutoff = 0.01;
+function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfNoValue, cutoff) {
+	//var cutoff = 0.01;
 	var barStyle = {
 		"top": 0,
 		"height": lineHeight,
@@ -312,7 +326,13 @@ function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfN
 	if (value == null) {
 		value = '';
 	} else {
-        value = value.toFixed(3);
+        if (value == 0) {
+            value = '0'
+        } else if (value >= 0.01) {
+            value = value.toFixed(3);
+        } else {
+            value = value.toExponential(1);
+        }
 	}
     var color = 'black';
     if (value == '') {
@@ -326,9 +346,12 @@ function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfN
     div.style.color = color;
 
 	// Header
-	addEl(div, addEl(getEl('span'), getTn(header + ': ')));
-	addEl(div, addEl(getEl('span'), getTn(value)));
-	addEl(div, getEl('br'));
+    var sdiv = getEl('div')
+    sdiv.style.fontSize = '0.9rem'
+	addEl(sdiv, addEl(getEl('span'), getTn(header + ': ')));
+	addEl(sdiv, addEl(getEl('span'), getTn(value)));
+	addEl(div, sdiv)
+	//addEl(div, getEl('br'));
 	
 	// Paper
     if (barWidth == undefined) {
