@@ -141,13 +141,17 @@ class Reporter(CravatReport):
         f = open(os.path.join(data_path, 'data', 'hugo_ensg_chrom.txt'))
         self.hugo_to_ensg = {}
         self.hugo_to_chrom = {}
+        self.ensg_to_chrom = {}
         for line in f:
             [hugo, ensg, chrom] = line[:-1].split('\t')
+            ensg = ensg.split('.')[0]
             #if hugo in self.hugo_synonyms:
             #    hugo = self.hugo_synonyms[hugo]
-            self.hugo_to_ensg[hugo] = ensg.split('.')[0]
+            self.hugo_to_ensg[hugo] = ensg
             if hugo not in self.hugo_to_chrom:
                 self.hugo_to_chrom[hugo] = []
+            if ensg not in self.ensg_to_chrom:
+                self.ensg_to_chrom[ensg] = chrom
             self.hugo_to_chrom[hugo].append(chrom)
         f.close()
         self.csq_consequence_to_oc_so = {
@@ -156,6 +160,7 @@ class Reporter(CravatReport):
             'frameshift_variant': 'frameshift_elongation,frameshift_truncation'
         }
         self.no_mane_hugos = {}
+        self.filter_name = os.path.basename(self.filterpath)
 
     def get_standardized_module_option(self, v):
         tv = type(v)
@@ -238,6 +243,22 @@ class Reporter(CravatReport):
                 self.colno_transcript = colno
             elif colname == 'base__all_mappings':
                 self.colno_all_mappings = colno
+            elif colname == 'metasvm__score':
+                self.colno_metasvm_score = colno
+            elif colname == 'fathmm_xf__score':
+                self.colno_fathmm_xf_score = colno
+            elif colname == 'sift__prediction':
+                self.colno_sift_prediction = colno
+            elif colname == 'lrt__lrt_pred':
+                self.colno_lrt_lrt_pred = colno
+            elif colname == 'polyphen2__hdiv_pred':
+                self.colno_polyphen2_hdiv_pred = colno
+            elif colname == 'polyphen2__hvar_pred':
+                self.colno_polyphen2_hvar_pred = colno
+            elif colname == 'genehancer__feature_name':
+                self.colno_genehancer_feature_name = colno
+            elif colname == 'ensembl_regulatory_build__region':
+                self.colno_ensembl_regulatory_build_region = colno
             colno += 1
         colno = 0
         self.colnos_to_display[level] = []
@@ -308,6 +329,466 @@ class Reporter(CravatReport):
             all_mappings[hugo].append(mapping)
         return all_mappings
 
+    def get_canonicals(self, row, all_mappings, chrom):
+        # Which hugos are in MANE and which are not.
+        hugos_in_mane = []
+        other_hugos = []
+        csq_hugos_in_mane = []
+        csq_other_hugos = []
+        csq_biotypes = row[self.colno_csq_biotype]
+        csq_hugos = row[self.colno_csq_symbol]
+        csq_ensts = row[self.colno_csq_ensts]
+        if csq_ensts is None:
+            csq_ensts = []
+        else:
+            csq_ensts = csq_ensts.split(';')
+        if csq_hugos is None:
+            csq_hugos = []
+        else:
+            csq_hugos = csq_hugos.split(';')
+        for hugo in all_mappings:
+            if hugo in self.mane_hugos and hugo not in hugos_in_mane:
+                hugos_in_mane.append(hugo)
+            elif hugo not in other_hugos:
+                other_hugos.append(hugo)
+        for i in range(len(csq_hugos)):
+            hugo = csq_hugos[i]
+            if csq_ensts[i].startswith('ENST') == False:
+                continue
+            if csq_biotypes[i] != 'protein_coding':
+                continue
+            if hugo in self.mane_hugos and hugo not in csq_hugos_in_mane:
+                csq_hugos_in_mane.append(hugo)
+            elif hugo not in csq_other_hugos:
+                csq_other_hugos.append(hugo)
+        # ENSG and canonical ENST
+        self.ensgs = {}
+        canonical_ensts = {}
+        canonical_enstnvs = {}
+        # MANE transcript as canonical
+        for hugo in hugos_in_mane:
+            self.ensgs[hugo] = self.mane_hugo_to_ensg[hugo]
+            enst = self.mane_hugo_to_canonical_enst[hugo]
+            canonical_ensts[hugo] = enst
+            canonical_enstnvs[hugo] = self.remove_version(enst)
+        for hugo in csq_hugos_in_mane:
+            if hugo in self.ensgs:
+                continue
+            self.ensgs[hugo] = self.mane_hugo_to_ensg[hugo]
+            enst = self.mane_hugo_to_canonical_enst[hugo]
+            canonical_ensts[hugo] = enst
+            canonical_enstnvs[hugo] = self.remove_version(enst)
+        for hugo in other_hugos:
+            if hugo in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
+                self.ensgs[hugo] = self.hugo_to_ensg[hugo]
+            elif hugo in csq_hugos:
+                self.ensgs[hugo] = csq_genes[csq_hugos.index(hugo)]
+            else:
+                print(f'ENSG ID for {hugo} was not found. Using {hugo} as group_id')
+                self.ensgs[hugo] = hugo
+        for hugo in csq_other_hugos:
+            if hugo in self.ensgs:
+                continue
+            if hugo in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
+                self.ensgs[hugo] = self.hugo_to_ensg[hugo]
+            elif hugo in csq_hugos:
+                self.ensgs[hugo] = csq_genes[csq_hugos.index(hugo)]
+            else:
+                print(f'ENSG ID for {hugo} was not found. Using {hugo} as group_id')
+                self.ensgs[hugo] = hugo
+        # Longest transcript as canonical
+        for hugo in other_hugos:
+            mappings = all_mappings[hugo]
+            enst = mappings[0][0]
+            enstnv = self.remove_version(enst)
+            canonical_ensts[hugo] = enst
+            canonical_enstnvs[hugo] = enstnv
+            if enstnv in self.enstnv_to_alens:
+                canonical_alen = self.enstnv_to_alens[enstnv]
+            else:
+                canonical_alen = -1
+            for mapping in mappings[1:]:
+                enst, sos = self.parse_mapping(mapping)
+                enstnv = self.remove_version(enst)
+                if enstnv in self.enstnv_to_alens:
+                    alen = self.enstnv_to_alens[enstnv]
+                else:
+                    alen = -1
+                if alen > canonical_alen:
+                    canonical_alen = alen
+                    canonical_ensts[hugo] = enst
+                    canonical_enstnvs[hugo] = enstnv
+        for hugo in csq_other_hugos:
+            enst = csq_ensts[0]
+            enstnv = self.remove_version(enst)
+            if enst.startswith('ENST'):
+                canonical_ensts[hugo] = enst
+                canonical_enstnvs[hugo] = enstnv
+            else:
+                canonical_ensts[hugo] = None
+                canonical_enstnvs[hugo] = None
+            if enstnv in self.enstnv_to_alens:
+                canonical_alen = self.enstnv_to_alens[enstnv]
+            else:
+                canonical_alen = -1
+            for i in range(1, len(csq_ensts)):
+                enst = csq_ensts[i]
+                enstnv = self.remove_version(enst)
+                if enst.startswith('ENST') == False:
+                    continue
+                if enstnv in self.enstnv_to_alens:
+                    alen = self.enstnv_to_alens[enstnv]
+                else:
+                    alen = -1
+                if canonical_ensts[hugo] is None or alen > canonical_alen:
+                    canonical_alen = alen
+                    canonical_ensts[hugo] = enst
+                    canonical_enstnvs[hugo] = enstnv
+        # SO for canonical transcripts
+        canonical_sos = {}
+        for hugo in list(set(hugos_in_mane) | set(other_hugos)):
+            canonical_mapping = self.find_canonical_mapping(hugo, all_mappings, canonical_enstnvs[hugo])
+            if canonical_mapping is not None:
+                enst, sos = self.parse_mapping(canonical_mapping)
+                canonical_sos[hugo] = sos
+        csq_consequences = row[self.colno_csq_consequence]
+        for hugo in list(set(csq_hugos_in_mane) | set(csq_other_hugos)):
+            canonical_enstnv = canonical_enstnvs[hugo]
+            for i in range(len(csq_ensts)):
+                if csq_ensts[i].split('.')[0] == canonical_enstnv:
+                    sos = self.convert_csq_consequence(csq_consequences[i])
+                    if hugo not in canonical_sos:
+                        canonical_sos[hugo] = sos
+                    else:
+                        canonical_sos[hugo] += ',' + sos
+                    break
+        return canonical_enstnvs, canonical_sos
+
+    def get_lof_of_enstnv(self, enstnv, csq_lofs, csq_enstnvs):
+        if len(csq_lofs) == 0:
+            return None
+        if enstnv in csq_enstnvs:
+            return csq_lofs[csq_enstnvs.index(enstnv)]
+        else:
+            return None
+
+    def get_all_mappings(self, row):
+        all_mappings_t = row[self.colno_all_mappings]
+        if all_mappings_t != '':
+            all_mappings = self.parse_all_mappings_str(all_mappings_t)
+        else:
+            all_mappings = {}
+
+    def get_so_of_enstnv(self, row, hugo, enstnv, csq_enstnvs, all_mappings, csq_sos):
+        if hugo in all_mappings:
+            for mapping in all_mappings[hugo]:
+                if enstnv == mapping[3].split('.')[0]:
+                    return mapping[2]
+        if enstnv in csq_enstnvs:
+            return self.convert_csq_consequence(csq_sos[csq_enstnvs.index(enstnv)])
+        else:
+            return None
+
+    def get_csq_lofs(self, row):
+        csq_lofs = row[self.colno_csq_lofs]
+        if csq_lofs is None:
+            return []
+        else:
+            return csq_lofs.split(';')
+
+    def get_csq_enstnvs(self, row):
+        csq_ensts = row[self.colno_csq_ensts]
+        if csq_ensts is None:
+            return []
+        else:
+            return [v.split('.')[0] for v in csq_ensts.split(';')]
+
+    def run_coding1_filter(self, row, all_mappings, canonical_enstnvs, canonical_sos, csq_sos):
+        csq_lofs = self.get_csq_lofs(row)
+        csq_enstnvs = self.get_csq_enstnvs(row)
+        metasvm_score = row[self.colno_metasvm_score]
+        fathmm_xf_score = row[self.colno_fathmm_xf_score]
+        group_ids = set()
+        for hugo in canonical_enstnvs:
+            enstnv = canonical_enstnvs[hugo]
+            lof = self.get_lof_of_enstnv(enstnv, csq_lofs, csq_enstnvs)
+            so = self.get_so_of_enstnv(
+                row, hugo, enstnv, csq_enstnvs, all_mappings, csq_sos) # oc over vep
+            if  lof == 'HC'\
+                or\
+                (so == 'missense_variant' and metasvm_score is not None and metasvm_score > 0)\
+                or\
+                (fathmm_xf_score is not None and fathmm_xf_score > 0.5 and\
+                    so in ['complex_substitution', 
+                    'exon_loss_variant',
+                    'frameshift_variant',
+                    'frameshift_elongation',
+                    'frameshift_truncation',
+                    'inframe_insertion',
+                    'inframe_deletion'
+                    'missense_variant',
+                    'splice_site_variant',
+                    'splice_acceptor_variant',
+                    'splice_donor_variant',
+                    'start_lost',
+                    'stop_gained',
+                    'stop_lost',
+                    'transcript_ablation'])\
+                or\
+                (so == 'synonymous_variant' and\
+                    fathmm_xf_score is not None and fathmm_xf_score > 0.5):
+                group_ids.add(self.ensgs[hugo])
+        return group_ids
+
+    def run_coding2_filter(self, row, all_mappings, canonical_enstnvs, canonical_sos, csq_sos):
+        csq_lofs = self.get_csq_lofs(row)
+        csq_enstnvs = self.get_csq_enstnvs(row)
+        fathmm_xf_score = row[self.colno_fathmm_xf_score]
+        sift_prediction = row[self.colno_sift_prediction]
+        lrt_pred = row[self.colno_lrt_lrt_pred]
+        polyphen2_hdiv_pred = row[self.colno_polyphen2_hdiv_pred]
+        polyphen2_hvar_pred = row[self.colno_polyphen2_hvar_pred]
+        group_ids = set()
+        for hugo in canonical_enstnvs:
+            enstnv = canonical_enstnvs[hugo]
+            lof = self.get_lof_of_enstnv(enstnv, csq_lofs, csq_enstnvs)
+            so = self.get_so_of_enstnv(row, hugo, enstnv, csq_enstnvs, all_mappings, csq_sos)
+            if  (\
+                    so == 'missense_variant' and\
+                    sift_prediction == 'Damaging' and\
+                    lrt_pred == 'Deleterious' and\
+                    polyphen2_hdiv_pred is not None and 'P' in polyphen2_hdiv_pred and\
+                    polyphen2_hvar_pred is not None and 'P' in polyphen2_hvar_pred
+                ) or\
+                (fathmm_xf_score is not None and fathmm_xf_score > 0.5 and so in [
+                    'complex_substitution', 
+                    'exon_loss_variant',
+                    'frameshift_variant',
+                    'frameshift_elongation',
+                    'frameshift_truncation',
+                    'inframe_insertion',
+                    'inframe_deletion'
+                    'missense_variant',
+                    'splice_site_variant',
+                    'splice_acceptor_variant',
+                    'splice_donor_variant',
+                    'start_lost',
+                    'stop_gained',
+                    'stop_lost',
+                    'transcript_ablation']\
+                ) or\
+                (\
+                    so == 'synonymous_variant' and\
+                    fathmm_xf_score is not None and fathmm_xf_score > 0.5\
+                ) or\
+                (lof == 'HC'):
+                group_ids.add(self.ensgs[hugo])
+        return group_ids
+
+    def run_coding3_filter(self, row, all_mappings, canonical_enstnvs, canonical_sos, csq_sos):
+        csq_lofs = self.get_csq_lofs(row)
+        csq_enstnvs = self.get_csq_enstnvs(row)
+        fathmm_xf_score = row[self.colno_fathmm_xf_score]
+        sift_prediction = row[self.colno_sift_prediction]
+        lrt_pred = row[self.colno_lrt_lrt_pred]
+        polyphen2_hdiv_pred = row[self.colno_polyphen2_hdiv_pred]
+        polyphen2_hvar_pred = row[self.colno_polyphen2_hvar_pred]
+        group_ids = set()
+        for hugo in canonical_enstnvs:
+            enstnv = canonical_enstnvs[hugo]
+            lof = self.get_lof_of_enstnv(enstnv, csq_lofs, csq_enstnvs)
+            so = self.get_so_of_enstnv(row, hugo, enstnv, csq_enstnvs, all_mappings, csq_sos)
+            if  (\
+                    so == 'missense_variant' and\
+                    (\
+                        sift_prediction == 'Damaging' or\
+                        lrt_pred == 'Deleterious' or\
+                        (polyphen2_hdiv_pred is not None and 'P' in polyphen2_hdiv_pred) or\
+                        (polyphen2_hvar_pred is not None and 'P' in polyphen2_hvar_pred)\
+                    )\
+                )\
+                or\
+                (fathmm_xf_score is not None and fathmm_xf_score > 0.5 and so in [
+                    'complex_substitution', 
+                    'exon_loss_variant',
+                    'frameshift_variant',
+                    'frameshift_elongation',
+                    'frameshift_truncation',
+                    'inframe_insertion',
+                    'inframe_deletion'
+                    'missense_variant',
+                    'splice_site_variant',
+                    'splice_acceptor_variant',
+                    'splice_donor_variant',
+                    'start_lost',
+                    'stop_gained',
+                    'stop_lost',
+                    'transcript_ablation']) or\
+                (so == 'synonymous_variant' and\
+                    fathmm_xf_score is not None and fathmm_xf_score > 0.5)\
+                or\
+                (lof == 'HC'):
+                group_ids.add(self.ensgs[hugo])
+        return group_ids
+
+    def run_coding_noncoding_filter_1(
+            self, row, all_mappings, canonical_enstnvs, canonical_sos, csq_sos):
+        csq_lofs = self.get_csq_lofs(row)
+        csq_enstnvs = self.get_csq_enstnvs(row)
+        fathmm_xf_score = row[self.colno_fathmm_xf_score]
+        metasvm_score = row[self.colno_metasvm_score]
+        sift_prediction = row[self.colno_sift_prediction]
+        lrt_pred = row[self.colno_lrt_lrt_pred]
+        genehancer_feature_name = row[self.colno_genehancer_feature_name]
+        ensembl_regulatory_build_region = row[self.colno_ensembl_regulatory_build_region]
+        group_ids = set()
+        for hugo in canonical_enstnvs:
+            enstnv = canonical_enstnvs[hugo]
+            lof = self.get_lof_of_enstnv(enstnv, csq_lofs, csq_enstnvs)
+            so = self.get_so_of_enstnv(row, hugo, enstnv, csq_enstnvs, all_mappings, csq_sos)
+            if  lof == 'HC'\
+                or\
+                (so == 'missense_variant' and metasvm_score is not None and metasvm_score > 0)\
+                or\
+                (fathmm_xf_score is not None and fathmm_xf_score > 0.5 and\
+                    so in ['complex_substitution', 
+                    'exon_loss_variant',
+                    'frameshift_variant',
+                    'frameshift_elongation',
+                    'frameshift_truncation',
+                    'inframe_insertion',
+                    'inframe_deletion'
+                    'missense_variant',
+                    'splice_site_variant',
+                    'splice_acceptor_variant',
+                    'splice_donor_variant',
+                    'start_lost',
+                    'stop_gained',
+                    'stop_lost',
+                    'transcript_ablation'])\
+                or\
+                (so == 'synonymous_variant' and\
+                    fathmm_xf_score is not None and fathmm_xf_score > 0.5):
+                group_ids.add(self.ensgs[hugo])
+            elif genehancer_feature_name == 'Enhancer' and\
+                (\
+                    (fathmm_xf_score is not None and fathmm_xf_score > 0.5)\
+                    or\
+                    (ensembl_regulatory_build_region in [\
+                        'CTCF_binding_site', 'TF_binding_site'\
+                    ])\
+                ):
+                genehancer_target_genes = [v.split(':')[0]\
+                    for v in row[self.colno_genehancertargetgenes].split(',')]
+                for target in genehancer_target_genes:
+                    if target.startswith('ENSG'):
+                        group_ids.add(target)
+            elif genehancer_feature_name == 'Promoter' and\
+                (\
+                    (fathmm_xf_score is not None and fathmm_xf_score > 0.5)\
+                    or\
+                    (ensembl_regulatory_build_region in [
+                        'CTCF_binding_site', 'TF_binding_site'
+                    ])\
+                ):
+                genehancer_target_genes = [v.split(':')[0]\
+                    for v in row[self.colno_genehancertargetgenes].split(',')]
+                for target in genehancer_target_genes:
+                    if target.startswith('ENSG'):
+                        group_ids.add(target)
+            elif so is not None and 'upstream_gene_variant' in so and\
+                (\
+                    (fathmm_xf_score is not None and fathmm_xf_score > 0.5)\
+                    or\
+                    (ensembl_regulatory_build_region in [\
+                        'CTCF_binding_site', 'TF_binding_site'\
+                    ])\
+                ):
+                group_ids.add(self.ensgs[hugo])
+        return group_ids
+
+    def run_coding_noncoding_filter_2(
+            self, row, all_mappings, canonical_enstnvs, canonical_sos, csq_sos):
+        csq_lofs = self.get_csq_lofs(row)
+        csq_enstnvs = self.get_csq_enstnvs(row)
+        fathmm_xf_score = row[self.colno_fathmm_xf_score]
+        metasvm_score = row[self.colno_metasvm_score]
+        sift_prediction = row[self.colno_sift_prediction]
+        lrt_pred = row[self.colno_lrt_lrt_pred]
+        genehancer_feature_name = row[self.colno_genehancer_feature_name]
+        ensembl_regulatory_build_region = row[self.colno_ensembl_regulatory_build_region]
+        group_ids = set()
+        for hugo in canonical_enstnvs:
+            enstnv = canonical_enstnvs[hugo]
+            lof = self.get_lof_of_enstnv(enstnv, csq_lofs, csq_enstnvs)
+            so = self.get_so_of_enstnv(row, hugo, enstnv, csq_enstnvs, all_mappings, csq_sos)
+            if  lof == 'HC'\
+                or\
+                (so == 'missense_variant' and metasvm_score is not None and metasvm_score > 0)\
+                or\
+                (fathmm_xf_score is not None and fathmm_xf_score > 0.5 and\
+                    so in ['complex_substitution', 
+                    'exon_loss_variant',
+                    'frameshift_variant',
+                    'frameshift_elongation',
+                    'frameshift_truncation',
+                    'inframe_insertion',
+                    'inframe_deletion'
+                    'missense_variant',
+                    'splice_site_variant',
+                    'splice_acceptor_variant',
+                    'splice_donor_variant',
+                    'start_lost',
+                    'stop_gained',
+                    'stop_lost',
+                    'transcript_ablation'])\
+                or\
+                (so == 'synonymous_variant' and\
+                    fathmm_xf_score is not None and fathmm_xf_score > 0.5):
+                group_ids.add(self.ensgs[hugo])
+            elif genehancer_feature_name == 'Enhancer' and\
+                fathmm_xf_score is not None and fathmm_xf_score > 0.5 and\
+                    ensembl_regulatory_build_region in [
+                    'CTCF_binding_site', 
+                    'TF_binding_site',
+                    'enhancer',
+                    'open_chromatin_region',
+                    'promoter',
+                    'promoter_flanking_region'
+                ]:
+                genehancer_target_genes = [v.split(':')[0]\
+                    for v in row[self.colno_genehancertargetgenes].split(',')]
+                for target in genehancer_target_genes:
+                    if target.startswith('ENSG'):
+                        group_ids.add(target)
+            elif genehancer_feature_name == 'Promoter' and\
+                fathmm_xf_score is not None and fathmm_xf_score > 0.5 and\
+                    ensembl_regulatory_build_region in [
+                    'CTCF_binding_site', 
+                    'TF_binding_site'
+                    'enhancer',
+                    'open_chromatin_region',
+                    'promoter',
+                    'promoter_flanking_region'
+                ]:
+                genehancer_target_genes = [v.split(':')[0]\
+                    for v in row[self.colno_genehancertargetgenes].split(',')]
+                for target in genehancer_target_genes:
+                    if target.startswith('ENSG'):
+                        group_ids.add(target)
+            elif so is not None and 'upstream_gene_variant' in so and\
+                fathmm_xf_score is not None and fathmm_xf_score > 0.5 and\
+                    ensembl_regulatory_build_region in [
+                    'CTCF_binding_site', 
+                    'TF_binding_site'
+                    'enhancer',
+                    'open_chromatin_region',
+                    'promoter',
+                    'promoter_flanking_region'
+                ]:
+                group_ids.add(self.ensgs[hugo])
+        return group_ids
+
     def write_table_row (self, row):
         if self.should_write_level(self.level) == False:
             return
@@ -338,177 +819,147 @@ class Reporter(CravatReport):
                 all_mappings = self.parse_all_mappings_str(all_mappings_t)
             else:
                 all_mappings = {}
-            coding = row[self.colno_coding]
-            genehancertargetgenes = row[self.colno_genehancertargetgenes]
-            # VEP annotations
-            csq = row[self.colno_csq]
-            csq_hugos = row[self.colno_csq_symbol]
-            csq_genes = row[self.colno_csq_gene]
-            csq_lofs = row[self.colno_csq_lofs]
             csq_consequences = row[self.colno_csq_consequence]
-            csq_biotypes = row[self.colno_csq_biotype]
-            csq_ensts = row[self.colno_csq_ensts]
-            if csq_hugos is None:
-                csq_hugos = []
-            else:
-                #csq_hugos = [self.hugo_synonyms[v] if v in self.hugo_synonyms else v for v in csq_hugos.split(';')]
-                csq_hugos = csq_hugos.split(';')
-            if csq_ensts is None:
-                csq_ensts = []
-            else:
-                csq_ensts = csq_ensts.split(';')
             if csq_consequences is None:
                 csq_consequences = []
             else:
                 csq_consequences = csq_consequences.split(';')
-            if csq_genes is not None:
-                csq_genes = [m for v in csq_genes.split(',') for m in v.split(';')]
-            else:
-                csq_toks = csq.split('|')
-                for tok in csq_toks:
-                    if 'ENSG' in tok:
-                        csq_genes = [m for v in tok.split(',') for m in v.split(';')]
-                        break
-            if csq_genes is None:
-                csq_genes = []
-            if csq_lofs is not None:
-                csq_lofs = csq_lofs.split(';')
-            else:
-                csq_toks = csq.split('|')
-                for tok in csq_toks:
-                    if 'HC' in tok:
-                        csq_lofs = tok.split(';')
-                        break
-            if csq_lofs is None:
-                csq_lofs = []
-            if csq_biotypes is None:
-                csq_biotypes = []
-            else:
-                csq_biotypes = csq_biotypes.split(';')
-            # Which hugos are in MANE and which are not.
-            hugos_in_mane = []
-            other_hugos = []
-            csq_hugos_in_mane = []
-            csq_other_hugos = []
-            for hugo in all_mappings:
-                if hugo in self.mane_hugos and hugo not in hugos_in_mane:
-                    hugos_in_mane.append(hugo)
-                elif hugo not in other_hugos:
-                    other_hugos.append(hugo)
-            for i in range(len(csq_hugos)):
-                hugo = csq_hugos[i]
-                if csq_ensts[i].startswith('ENST') == False:
-                    continue
-                if hugo in self.mane_hugos and hugo not in csq_hugos_in_mane:
-                    csq_hugos_in_mane.append(hugo)
-                elif hugo not in csq_other_hugos:
-                    csq_other_hugos.append(hugo)
-            # ENSG and canonical ENST
-            ensgs = {}
-            canonical_ensts = {}
-            canonical_enstnvs = {}
-            # MANE transcript as canonical
-            for hugo in hugos_in_mane:
-                ensgs[hugo] = self.mane_hugo_to_ensg[hugo]
-                enst = self.mane_hugo_to_canonical_enst[hugo]
-                canonical_ensts[hugo] = enst
-                canonical_enstnvs[hugo] = self.remove_version(enst)
-            for hugo in csq_hugos_in_mane:
-                if hugo in ensgs:
-                    continue
-                ensgs[hugo] = self.mane_hugo_to_ensg[hugo]
-                enst = self.mane_hugo_to_canonical_enst[hugo]
-                canonical_ensts[hugo] = enst
-                canonical_enstnvs[hugo] = self.remove_version(enst)
-            for hugo in other_hugos:
-                if hugo in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
-                    ensgs[hugo] = self.hugo_to_ensg[hugo]
-                elif hugo in csq_hugos:
-                    ensgs[hugo] = csq_genes[csq_hugos.index(hugo)]
-                else:
-                    print(f'ENSG ID for {hugo} was not found. Using {hugo} as group_id')
-                    ensgs[hugo] = hugo
-            for hugo in csq_other_hugos:
-                if hugo in ensgs:
-                    continue
-                if hugo in self.hugo_to_ensg and chrom in self.hugo_to_chrom[hugo]:
-                    ensgs[hugo] = self.hugo_to_ensg[hugo]
-                elif hugo in csq_hugos:
-                    ensgs[hugo] = csq_genes[csq_hugos.index(hugo)]
-                else:
-                    print(f'ENSG ID for {hugo} was not found. Using {hugo} as group_id')
-                    ensgs[hugo] = hugo
-            # Longest transcript as canonical
-            for hugo in other_hugos:
-                mappings = all_mappings[hugo]
-                enst = mappings[0][0]
-                enstnv = self.remove_version(enst)
-                canonical_ensts[hugo] = enst
-                canonical_enstnvs[hugo] = enstnv
-                if enstnv in self.enstnv_to_alens:
-                    canonical_alen = self.enstnv_to_alens[enstnv]
-                else:
-                    canonical_alen = -1
-                for mapping in mappings[1:]:
-                    enst, sos = self.parse_mapping(mapping)
-                    enstnv = self.remove_version(enst)
-                    if enstnv in self.enstnv_to_alens:
-                        alen = self.enstnv_to_alens[enstnv]
-                    else:
-                        alen = -1
-                    if alen > canonical_alen:
-                        canonical_alen = alen
-                        canonical_ensts[hugo] = enst
-                        canonical_enstnvs[hugo] = enstnv
-            for hugo in csq_other_hugos:
-                enst = csq_ensts[0]
-                enstnv = self.remove_version(enst)
-                if enst.startswith('ENST'):
-                    canonical_ensts[hugo] = enst
-                    canonical_enstnvs[hugo] = enstnv
-                else:
-                    canonical_ensts[hugo] = None
-                    canonical_enstnvs[hugo] = None
-                if enstnv in self.enstnv_to_alens:
-                    canonical_alen = self.enstnv_to_alens[enstnv]
-                else:
-                    canonical_alen = -1
-                for i in range(1, len(csq_ensts)):
-                    enst = csq_ensts[i]
-                    enstnv = self.remove_version(enst)
-                    if enst.startswith('ENST') == False:
-                        continue
-                    if enstnv in self.enstnv_to_alens:
-                        alen = self.enstnv_to_alens[enstnv]
-                    else:
-                        alen = -1
-                    if canonical_ensts[hugo] is None or alen > canonical_alen:
-                        canonical_alen = alen
-                        canonical_ensts[hugo] = enst
-                        canonical_enstnvs[hugo] = enstnv
-            # SO for canonical transcripts
-            canonical_sos = {}
-            for hugo in list(set(hugos_in_mane) | set(other_hugos)):
-                canonical_mapping = self.find_canonical_mapping(hugo, all_mappings, canonical_enstnvs[hugo])
-                if canonical_mapping is not None:
-                    enst, sos = self.parse_mapping(canonical_mapping)
-                    canonical_sos[hugo] = sos
-            for hugo in list(set(csq_hugos_in_mane) | set(csq_other_hugos)):
-                canonical_enst = canonical_ensts[hugo]
-                canonical_enstnv = canonical_enstnvs[hugo]
-                for i in range(len(csq_ensts)):
-                    if csq_ensts[i].split('.')[0] == canonical_enstnv:
-                        sos = self.convert_csq_consequence(csq_consequences[i])
-                        if hugo not in canonical_sos:
-                            canonical_sos[hugo] = sos
-                        else:
-                            canonical_sos[hugo] += ',' + sos
-                        break
+            #coding = row[self.colno_coding]
+            #genehancertargetgenes = row[self.colno_genehancertargetgenes]
+            # VEP annotations
+            #csq = row[self.colno_csq]
+            #csq_hugos = row[self.colno_csq_symbol]
+            #csq_genes = row[self.colno_csq_gene]
+            #csq_lofs = row[self.colno_csq_lofs]
+            #csq_biotypes = row[self.colno_csq_biotype]
+            #csq_ensts = row[self.colno_csq_ensts]
+            #if csq_hugos is None:
+            #    csq_hugos = []
+            #else:
+                #csq_hugos = [self.hugo_synonyms[v] if v in self.hugo_synonyms else v\
+                    #for v in csq_hugos.split(';')]
+            #    csq_hugos = csq_hugos.split(';')
+            #if csq_ensts is None:
+            #    csq_ensts = []
+            #else:
+            #    csq_ensts = csq_ensts.split(';')
+            #if csq_genes is not None:
+            #    csq_genes = [m for v in csq_genes.split(',') for m in v.split(';')]
+            #else:
+            #    csq_toks = csq.split('|')
+            #    for tok in csq_toks:
+            #        if 'ENSG' in tok:
+            #            csq_genes = [m for v in tok.split(',') for m in v.split(';')]
+            #            break
+            #if csq_genes is None:
+            #    csq_genes = []
+            #if csq_lofs is not None:
+            #    csq_lofs = csq_lofs.split(';')
+            #else:
+            #    csq_toks = csq.split('|')
+            #    for tok in csq_toks:
+            #        if 'HC' in tok:
+            #            csq_lofs = tok.split(';')
+            #            break
+            #if csq_lofs is None:
+            #    csq_lofs = []
+            #if csq_biotypes is None:
+            #    csq_biotypes = []
+            #else:
+            #    csq_biotypes = csq_biotypes.split(';')
+            canonical_enstnvs, canonical_sos = self.get_canonicals(row, all_mappings, chrom)
+            # Filters
+            if self.filter_name.startswith('coding1.json'):
+                group_ids = self.run_coding1_filter(
+                    row, 
+                    all_mappings, 
+                    canonical_enstnvs, 
+                    canonical_sos,
+                    csq_consequences
+                )
+            elif self.filter_name.startswith('coding2.json'):
+                group_ids = self.run_coding2_filter(
+                    row, 
+                    all_mappings, 
+                    canonical_enstnvs, 
+                    canonical_sos,
+                    csq_consequences
+                )
+            elif self.filter_name.startswith('coding3.json'):
+                group_ids = self.run_coding3_filter(
+                    row, 
+                    all_mappings, 
+                    canonical_enstnvs, 
+                    canonical_sos,
+                    csq_consequences
+                )
+            elif self.filter_name.startswith('coding_noncoding_1.json'):
+                group_ids = self.run_coding_noncoding_filter_1(
+                    row, 
+                    all_mappings, 
+                    canonical_enstnvs, 
+                    canonical_sos,
+                    csq_consequences
+                )
+            elif self.filter_name.startswith('coding_noncoding_2.json'):
+                group_ids = self.run_coding_noncoding_filter_2(
+                    row, 
+                    all_mappings, 
+                    canonical_enstnvs, 
+                    canonical_sos,
+                    csq_consequences
+                )
+            '''
+            # GeneHancer targets
+            if genehancertargetgenes is not None:
+                genehancertargetgenes = [v.split(':')[0].strip() for v in genehancertargetgenes.split(',')]
+                for target in genehancertargetgenes:
+                    if target.startswith('ENSG') and target not in group_ids:
+                        group_ids.add(target)
+                        genehancer_target_exists = True
+                    elif target in self.hugo_to_ensg and target in self.hugo_to_chrom and chrom in self.hugo_to_chrom[target]:
+                        ensg = self.hugo_to_ensg[target]
+                        if ensg not in group_ids:
+                            group_ids.add(ensg)
+                            genehancer_target_exists = True
+            '''
+            wrong_chrom_ensgs = []
+            for ensg in group_ids:
+                if ensg in self.ensg_to_chrom and self.ensg_to_chrom[ensg] != chrom:
+                    wrong_chrom_ensgs.append(ensg)
+            if len(wrong_chrom_ensgs) > 0:
+                print(f'@@@ wrong_chrom_ensgs={wrong_chrom_ensgs}')
+            for ensg in wrong_chrom_ensgs:
+                    group_ids.remove(ensg)
+            '''
+            so_ignores = [
+                'intron_variant', 
+                'synonymous_variant', 
+                '3_prime_UTR_variant', 
+                '5_prime_UTR_variant', 
+                'downstream_gene_variant', 
+                'intergenic_variant', 
+                'non_coding_transcript_exon_variant',
+                'splice_region_variant',
+                'start_retained_variant',
+                'stop_retained_variant',
+                'mature_miRNA_variant',
+                'NMD_transcript_variant',
+                'non_coding_transcript_variant',
+                'TFBS_ablation',
+                'TFBS_amplification',
+                'TF_binding_site_variant',
+                'regulatory_region_ablation',
+                'regulatory_region_amplification',
+                'feature_elongation',
+                'regulatory_region_variant',
+                'feature_truncation',
+                'incomplete_terminal_codon_variant',
+            ]
             # Collects group_id.
             group_ids = set() 
-            ensts = {}
             ## coding and splice site variant
-            for hugo in canonical_ensts:
+            for hugo in canonical_enstsnv:
                 if hugo == '': # For example, ENSTR.
                     continue
                 sos = None
@@ -523,6 +974,10 @@ class Reporter(CravatReport):
                             elif enstnv not in self.enstnv_to_alens:
                                 print(f'{enstnv} not in oc aalen')
                                 break
+                            elif (self.filter_name == 'coding1' or self.filter_name == 'coding2' or self.filter_name == 'coding3'):
+                                if csq_biotypes[i] != 'protein_coding':
+                                    break
+                                elif self.has_coding_so(
                             if csq_hugos[i] in canonical_sos:
                                 sos = canonical_sos[csq_hugos[i]]
                                 break
@@ -532,7 +987,7 @@ class Reporter(CravatReport):
                                     break
                             if sos is None:
                                 print(f'##################\nAn exception occurred. Please contact the OpenCRAVAT team with the following information:')
-                                print(f'#exception: sos is None\n#row={row}\ncanonical_enstnvs={canonical_enstnvs}\ncanonical_sos={canonical_sos}\nin mane? {hugo in self.mane_hugos}\nall_mappings={all_mappings}\ncsq_ensts={csq_ensts}\ncsq_hugos={csq_hugos}\ncsq_consequenced={csq_consequences}\ncsq_hugos_in_mane={csq_hugos_in_mane}\ncsq={csq}\nhugo={hugo}')
+                                print(f'#exception: sos is None\n#row={row}\ncanonical_enstnvs={canonical_enstnvs}\ncanonical_sos={canonical_sos}\nin mane? {hugo in self.mane_hugos}\nall_mappings={all_mappings}\ncsq_ensts={csq_ensts}\ncsq_hugos={csq_hugos}\ncsq_consequenced={csq_consequences}\ncsq={csq}\nhugo={hugo}')
                                 return
                         if sos is not None:
                             break
@@ -541,16 +996,15 @@ class Reporter(CravatReport):
                 else:
                     sos = canonical_sos[hugo]
                 if self.has_coding_so(sos):
-                    ensg = ensgs[hugo]
+                    ensg = self.ensgs[hugo]
                     group_ids.add(ensg)
-                    ensts[hugo] = enst
             ## HC Lof from VEP
             if len(csq_ensts) == len(csq_lofs):
-                for hugo in canonical_ensts:
-                    canonical_enstnv = canonical_ensts[hugo]
+                for hugo in canonical_enstsnv:
+                    canonical_enstnv = canonical_enstsnv[hugo]
                     if canonical_enstnv is None:
                         continue
-                    ensg = ensgs[hugo]
+                    ensg = self.ensgs[hugo]
                     if ensg in group_ids:
                         continue
                     for i in range(len(csq_lofs)):
@@ -580,7 +1034,6 @@ class Reporter(CravatReport):
                         ### thus, no need for checking BIOTYPE "protein_coding".
                         if enstnv == canonical_enstnv and lof == 'HC':
                             group_ids.add(ensg)
-                            ensts[ensg] = enst
                             break
             ## GeneHancer
             genehancer_target_exists = False
@@ -598,11 +1051,10 @@ class Reporter(CravatReport):
             ## 5k upstream
             upstream_but_no_canonical = False
             if len(csq_consequences) > 0:
-                for hugo in canonical_ensts:
-                    ensg = ensgs[hugo]
+                for hugo in canonical_enstsnv:
+                    ensg = self.ensgs[hugo]
                     if ensg in group_ids:
                         continue
-                    canonical_enst = canonical_ensts[hugo]
                     canonical_enstnv = canonical_enstnvs[hugo]
                     for i in range(len(csq_genes)):
                         hugo = csq_hugos[i]
@@ -617,35 +1069,10 @@ class Reporter(CravatReport):
                         if 'upstream_gene_variant' in consequence:
                             if enstnv == canonical_enstnv:
                                 group_ids.add(csq_genes[i])
-                                ensts[ensg] = canonical_enst
                                 upstream_but_no_canonical = False
                                 break
                             else:
                                 upstream_but_no_canonical = True
-            so_ignores = [
-                'intron_variant', 
-                'synonymous_variant', 
-                '3_prime_UTR_variant', 
-                '5_prime_UTR_variant', 
-                'downstream_gene_variant', 
-                'intergenic_variant', 
-                'non_coding_transcript_exon_variant',
-                'splice_region_variant',
-                'start_retained_variant',
-                'stop_retained_variant',
-                'mature_miRNA_variant',
-                'NMD_transcript_variant',
-                'non_coding_transcript_variant',
-                'TFBS_ablation',
-                'TFBS_amplification',
-                'TF_binding_site_variant',
-                'regulatory_region_ablation',
-                'regulatory_region_amplification',
-                'feature_elongation',
-                'regulatory_region_variant',
-                'feature_truncation',
-                'incomplete_terminal_codon_variant',
-            ]
             if len(group_ids) == 0:
                 errmsgs = set()
                 correct_so = False
@@ -711,7 +1138,7 @@ class Reporter(CravatReport):
                     errmsgs.add('no canonical transcript')
                 if len(errmsgs) == 0:
                     print(f'#################\nAn exception occurred. Please contact the OpenCRAVAT team with the following information:')
-                    print(f'#exception: No gene name for {chrom} {pos} {ref} {alt}\n#row={row}\n# csq={csq}\n# row={row}\n# csq_genes={csq_genes}\n# canonical_sos={canonical_sos}\n# coding={coding}\n# csq_lofs={csq_lofs}\n# genehancertargetgenes={genehancertargetgenes}\n# csq_ensts={csq_ensts}\n# csq_consequence={csq_consequences}\n# group_ids={group_ids}\n# canonical_ensts={canonical_ensts}\n# hugos_in_mane={hugos_in_mane}\n# other_hugos={other_hugos}\n# csq_hugos_in_mane={csq_hugos_in_mane}\n# csq_other_hugos={csq_other_hugos}\n# all_mappings={all_mappings}\n# genehancer_target_exists={genehancer_target_exists}\n# errmsgs={errmsgs}')
+                    print(f'#exception: No gene name for {chrom} {pos} {ref} {alt}\n#row={row}\n# csq={csq}\n# row={row}\n# csq_genes={csq_genes}\n# canonical_sos={canonical_sos}\n# coding={coding}\n# csq_lofs={csq_lofs}\n# genehancertargetgenes={genehancertargetgenes}\n# csq_ensts={csq_ensts}\n# csq_consequence={csq_consequences}\n# group_ids={group_ids}\n# canonical_ensts={canonical_ensts}\n# all_mappings={all_mappings}\n# genehancer_target_exists={genehancer_target_exists}\n# errmsgs={errmsgs}')
             else:
                 if chrom.startswith('chr'):
                     chrom = chrom[3:]
@@ -722,6 +1149,16 @@ class Reporter(CravatReport):
                 for group_id in group_ids:
                     filtered_row[self.colno_to_display_hugo] = group_id
                     self.data[self.level].append([v for v in list(filtered_row)])
+            '''
+            if chrom.startswith('chr'):
+                chrom = chrom[3:]
+                filtered_row[self.colno_to_display_chrom] = chrom
+            group_ids = list(group_ids)
+            group_ids.sort()
+            group_ids = [v for v in group_ids if v != '']
+            for group_id in group_ids:
+                filtered_row[self.colno_to_display_hugo] = group_id
+                self.data[self.level].append([v for v in list(filtered_row)])
         except Exception as e:
             print(f'#################\nAn exception occurred. Please contact the OpenCRAVAT team with the following information:')
             print(f'#exception: {e}')
