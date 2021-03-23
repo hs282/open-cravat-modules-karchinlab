@@ -509,7 +509,7 @@ widgetGenerators['base2'] = {
                   'https://cancer.sanger.ac.uk/cosmic/search?q=' 
                   + annotData['cosmic']['cosmic_id']);
             } else {
-              var a = 'N/A'
+              var a = getNoAnnotMsgVariantLevel()
             }
             addDlRow(dl, 'COSMIC ID', a)
             var snp = getWidgetData(tabName, 'dbsnp', row, 'rsid');
@@ -526,7 +526,7 @@ widgetGenerators['base2'] = {
 
 
 
-widgetInfo['litvar'] = {'title': 'Publications for this mutation (LitVar)'};
+widgetInfo['litvar'] = {'title': ''};
 widgetGenerators['litvar'] = {
     'variant': {
         'width': undefined, 
@@ -536,16 +536,28 @@ widgetGenerators['litvar'] = {
         },
         'word-break': 'break-word',
         'function': function (div, row, tabName) {
+          var dl = getEl('dl')
+          addEl(div, dl)
+          var title = 'Publications for this mutation (LitVar)'
             var widgetName = 'litvar';
             var v = widgetGenerators[widgetName][tabName]['variables'];
             var rsid = getWidgetData(tabName, 'dbsnp', row, 'rsid');
             if (rsid == null) {
-                return;
+              addDlRow(dl, title, getNoAnnotMsgVariantLevel())
+              return;
             }
             var n = v['rsids2pmids'][rsid];
             var link = 'https://www.ncbi.nlm.nih.gov/CBBresearch/Lu/Demo/LitVar/#!?query=' + rsid;
             if (n != undefined) {
-                addInfoLineLink(div, n , '# publications for the variant (' + rsid + ')', link);
+                //addInfoLineLink(div, n , '# publications for the variant (' + rsid + ')', link);
+              if (n == 0) {
+                var a = getNoAnnotMsgVariantLevel()
+              } else if (n == 1) {
+                var a = makeA(n + ' publication for the variant (' + rsid + ')', link)
+              } else {
+                var a = makeA(n + ' publications for the variant (' + rsid + ')', link)
+              }
+              addDlRow(dl, title, a)
             } else {
                 var url = 'litvar?rsid=' + rsid
                 var xhr = new XMLHttpRequest();
@@ -556,8 +568,18 @@ widgetGenerators['litvar'] = {
                             var response = JSON.parse(xhr.responseText);
                             n = response['n']
                             v['rsids2pmids'][rsid] = n;
-                            addInfoLineLink2(div, '',  
-                                    n + ' publications for the variant (' + rsid + ')', link);
+                            //addInfoLineLink2(div, '',  
+                            //        n + ' publications for the variant (' + rsid + ')', link);
+                            if (n == 0) {
+                              var a = getNoAnnotMsgVariantLevel()
+                            } else if (n == 1) {
+                              var a = makeA(
+                                n + ' publication for the variant (' + rsid + ')', link)
+                            } else {
+                              var a = makeA(
+                                n + ' publications for the variant (' + rsid + ')', link)
+                            }
+                            addDlRow(dl, 'Publication(s) for this mutation (LitVar)', a)
                         }
                     }
                 }
@@ -573,6 +595,9 @@ widgetGenerators['brca'] = {
 'width': 580, 
 'height': 200, 
 'function': function (div, row, tabName) {
+  var dl = getEl('dl')
+  addEl(div, dl)
+  var title = 'BRCA mutation classification (BRCA Exchange)'
     var widgetName = 'brca';
     var v = widgetGenerators[widgetName][tabName]['variables'];
     var chrom = getWidgetData(tabName, 'base', row, 'chrom');
@@ -591,10 +616,13 @@ widgetGenerators['brca'] = {
             link = 'https://brcaexchange.org/variant/' + id
             sig = response.data.Clinical_significance_ENIGMA
             if (id == null){
-                addInfoLineLink2(div, "No Annotation Available for BRCA")
+                //addInfoLineLink2(div, "No Annotation Available for BRCA")
+                addDlRow(dl, title, getNoAnnotMsgVariantLevel())
             }
             else {
-                addInfoLineLink2(div, sig + ', ', 'BRCA Exchange', link);
+                //addInfoLineLink2(div, sig + ', ', 'BRCA Exchange', link);
+                var a = makeA(sig + ',  BRCA Exchange', link);
+                addDlRow(dl, title, a)
             }
             }
         };
@@ -612,6 +640,9 @@ widgetGenerators['oncokb'] = {
         'height': undefined,
         'word-break': 'break-word',
         'function': function (div, row, tabName) {
+          var title = 'Mutation Actionability (OncoKB)'
+          var dl = getEl('dl')
+          addEl(div, dl)
             var levelDic = {'LEVEL_1': 'L1', 'LEVEL_2':'L2', 'LEVEL_R1':'L2', 
                     'LEVEL_3A':'L3', 'LEVEL_R2':'L3',
                     'LEVEL_3B':'L4', 'LEVEL_4':'L5'}
@@ -651,7 +682,7 @@ widgetGenerators['oncokb'] = {
                             var span = getEl('span');
                             span.textContent = ').';
                             addEl(sdiv, span);
-                            addEl(div, sdiv);
+                            //addEl(div, sdiv);
                             btn.addEventListener('click', function (evt) {
                                 var token = ip.value;
                                 fetch('/webapps/moleculartumorboard/saveoncokbtoken?token=' 
@@ -663,6 +694,7 @@ widgetGenerators['oncokb'] = {
                                     }
                                 });
                             });
+                            addDlRow(dl, 'Mutation Actionability (OncoKB)', sdiv)
                         } else {
                             var effect = response.mutationEffect.knownEffect
                             var oncogenic = response.oncogenic
@@ -671,8 +703,10 @@ widgetGenerators['oncokb'] = {
                             var link = 'https://www.oncokb.org/gene/' + hugo + '/' 
                                 + achange + '?refGenome=GRCh38';
                             if (effect == 'Unknown'){
-                                addInfoLineLink2(div, 'No annotation for OncoKB available');
-                                }
+                              //addInfoLineLink2(div, 'No annotation for OncoKB available');
+                              addDlRow(dl, 'Mutation Actionability (OncoKB)', 
+                                getNoAnnotMsgVariantLevel())
+                            }
                             else {
                                 const minLevelNum = Math.min(...response.treatments.map(
                                         t => levelNum[levelDic[t.level]]))
@@ -708,7 +742,7 @@ widgetGenerators['oncokb'] = {
                                 img.style.maxHeight = '30rem';
                                 addEl(sssdiv, img);
                                 addEl(ssdiv, sssdiv);
-                                addEl(div, ssdiv);
+                                //addEl(div, ssdiv);
                                 // Drug table
                                 var sdiv = getEl('div');
                                 sdiv.style.maxHeight = '30rem';
@@ -783,15 +817,17 @@ widgetGenerators['oncokb'] = {
                                 }
                                 addEl(table, tbody);
                                 addEl(sdiv, table);
+                                var a = makeA(title, link)
+                                addDlRow(dl, a, ssdiv)
                                 // Title link
-                                var titleEl = div.parentElement.firstChild.querySelector('legend');
-                                var title = titleEl.textContent;
-                                titleEl.textContent = '';
-                                var a = getEl('a');
-                                a.href = link;
-                                a.target = '_blank';
-                                a.textContent = title;
-                                addEl(titleEl, a);
+                                //var titleEl = div.parentElement.firstChild.querySelector('legend');
+                                //var title = titleEl.textContent;
+                                //titleEl.textContent = '';
+                                //var a = getEl('a');
+                                //a.href = link;
+                                //a.target = '_blank';
+                                //a.textContent = title;
+                                //addEl(titleEl, a);
                             }
                         }
                     }
@@ -803,6 +839,13 @@ widgetGenerators['oncokb'] = {
     },
 }
 
+const getNoAnnotMsgGeneLevel = function() {
+  return 'No annotation available for ' + annotData['base']['hugo']
+}
+
+const getNoAnnotMsgVariantLevel = function() {
+  return 'No annotation available for ' + getHugoAchange()
+}
 
 widgetInfo['ncbi'] = {'title': ''};
 widgetGenerators['ncbi'] = {
@@ -850,12 +893,12 @@ widgetGenerators['ncbi'] = {
             .catch(e => {
               let span = document.querySelector('#hallmarks_func_summary')
               span.style.color = 'black'
-              span.textContent = 'N/A'
+              span.textContent = getNoAnnotMsgGeneLevel()
             })
             var desc = getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc')
             desc = desc.split(/\[.*\]$/)[0]
             if (desc == null){
-                addDlRow(dl, 'RefSeq Gene Summary', 'N/A')
+                addDlRow(dl, 'RefSeq Gene Summary', getNoAnnotMsgGeneLevel())
             }
             else {
                 addDlRow(dl, 'RefSeq Gene Summary', desc)
@@ -913,17 +956,28 @@ widgetGenerators['chasmplus2'] = {
 }
 
 
-widgetInfo['civic2'] = {'title': 'Clinical Interpretation (CIVIC)'};
+widgetInfo['civic2'] = {'title': ''};
 widgetGenerators['civic2'] = {
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function (div, row, tabName) {
+          var dl = getEl('dl')
+          addEl(div, dl)
             var score = getWidgetData(tabName, 'civic', row, 'clinical_a_score');
             var description = getWidgetData(tabName, 'civic', row, 'description');
-            //addInfoLine3(div, 'Clinical Actionability Score', score, tabName);
-            addInfoLine3(div, 'Description', description, tabName);
+            if (description == undefined) {
+              addDlRow(dl, 'Clinical Interpretation (CIViC)', 
+                getNoAnnotMsgVariantLevel())
+            } else {
+              var span = getEl('span')
+              span.style.wordBreak = 'break-word'
+              span.textContent = 'Description: ' + description
+              //addInfoLine3(div, 'Clinical Actionability Score', score, tabName);
+              //addInfoLine3(div, 'Description', description, tabName);
+              addDlRow(dl, 'Clinical Interpretation (CIViC)', span)
             }
+          }
 
         }
     }
@@ -934,7 +988,16 @@ widgetGenerators['pharmgkb2'] = {
         'width': undefined,
         'height': undefined,
         'function': function (div, row, tabName) {
-            addInfoLine3(div, 'PharmGKB', getWidgetData(tabName, 'pharmgkb', row, 'notes'))
+          var dl = getEl('dl')
+          addEl(div, dl)
+            //addInfoLine3(div, 'PharmGKB', getWidgetData(tabName, 'pharmgkb', row, 'notes'))
+          if (annotData['pharmgkb'] == null) {
+            addDlRow(dl, 'Drug Response (PharmGKB)', 
+                getNoAnnotMsgVariantLevel())
+          } else {
+            addDlRow(dl, 'Drug Response (PharmGKB)', 
+                annotData['pharmgkb']['notes'])
+          }
         }
     }
 }
@@ -973,12 +1036,10 @@ widgetGenerators['clinvar2'] = {
           addEl(dd, span)
           //addEl(ssdiv, getTn('\xa0'));
           addEl(dd, getTn('\xa0'));
-          var sigLower = sigLower==undefined? '':sig.toLowerCase()
+          var sigLower = sig==undefined? '':sig.toLowerCase()
           if(id != null && sigLower != 'not provided' && sigLower != '') {
             link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
-            var a = getEl('a');
-            a.href = link;
-            a.textContent = id;
+            var a = makeA(id, link)
             //sdiv.style.position = 'relative';
             //addEl(ssdiv, getTn('(ID: '));
             //addEl(ssdiv, a);
@@ -992,15 +1053,33 @@ widgetGenerators['clinvar2'] = {
                 var trait_set = response['result'][id].trait_set;
                 var traitNames = [];
                 for (var i = 0; i < trait_set.length; i++) {
-                    traitNames.push(trait_set[i].trait_name);
+                  var trait_name = trait_set[i].trait_name
+                  if (trait_name == 'not provided' ||
+                      trait_name == 'none provided' ||
+                      trait_name == 'not specified') {
+                    continue
+                  }
+                  traitNames.push(trait_name)
                 }
                 traitNames.sort();
-                var traitNames = traitNames.join(', ');
+                var sdiv = getEl('div')
+                sdiv.style.display = 'flex'
+                sdiv.style.flexWrap = 'wrap'
+                for (var i = 0; i < traitNames.length; i++) {
+                  var span = getEl('div')
+                  span.classList.add('clinvar_traitname')
+                  span.textContent = traitNames[i]
+                  addEl(sdiv, span)
+                }
+                //var traitNames = traitNames.join(', ');
+                //var span = getEl('span')
+                //span.style.wordBreak = 'break-word'
+                //span.textContent = traitNames
                 //addInfoLine3(div, 'ClinVar conditions', traitNames, 'variant', 184);
-                addDlRow(dl, 'ClinVar Conditions', traitNames)
+                addDlRow(dl, 'ClinVar Conditions', sdiv)
             });
           } else {
-            addDlRow(dl, 'ClinVar', 'No annotation available for ' + getHugoAchange())
+            addDlRow(dl, 'ClinVar', getNoAnnotMsgVariantLevel())
           }
         }
     }
@@ -1013,7 +1092,12 @@ widgetGenerators['cosmic2'] = {
         'height': undefined,
         'word-break': 'normal',
         'function': function (div, row, tabName) {
-            div.style.display = 'flex';
+          var title = 'Catalog of somatic mutations in cancer (COSMIC)'
+          var dl = getEl('dl')
+          addEl(div, dl)
+          var wdiv = getEl('div')
+            wdiv.style.display = 'flex'
+            wdiv.style.flexWrap = 'wrap'
             var divHeight = '400px';
             var vcTissue = getWidgetData(tabName, 'cosmic', row, 'variant_count_tissue');
             if (vcTissue != undefined && vcTissue !== null) {
@@ -1036,23 +1120,23 @@ widgetGenerators['cosmic2'] = {
                         }
                     }
                 }
-                var sdiv = getEl('div');
-                sdiv.style.maxHeight = '400px';
-                sdiv.style.overflow = 'auto';
+                var sdiv = getEl('div')
+                sdiv.style.width = '28rem'
+                sdiv.style.maxHeight = '400px'
+                sdiv.style.overflow = 'auto'
+                sdiv.style.marginRight = '5rem'
                 var table = getWidgetTableFrame();
-                table.style.width = 'calc(100% - 1px)';
-                table.style.fontSize = '14px';
+                //table.style.width = '400px'
+                //table.style.fontSize = '14px';
                 var thead = getWidgetTableHead(['Tissue', 'Count'],['85%','15%']);
                 addEl(table, thead);
-                var titleEl = div.parentElement.firstChild.querySelector('legend');
-                var title = titleEl.textContent;
-                titleEl.textContent = '';
-                var a = getEl('a');
-                a.href = 'https://cancer.sanger.ac.uk/cosmic/search?q=' 
+                //var titleEl = div.parentElement.firstChild.querySelector('legend');
+                //var title = titleEl.textContent;
+                //titleEl.textContent = '';
+                var link = 'https://cancer.sanger.ac.uk/cosmic/search?q=' 
                     + annotData['cosmic']['cosmic_id'];
-                a.target = '_blank';
-                a.textContent = title;
-                addEl(titleEl, a);
+                var a = makeA(title, link)
+                //addEl(titleEl, a);
                 var tbody = getEl('tbody');
                 var tissues = [];
                 var counts = [];
@@ -1072,26 +1156,8 @@ widgetGenerators['cosmic2'] = {
                 }
                 var labels = tissues.slice(0, 10)
                 var data = counts.slice(0, 10);
-                addEl(div, addEl(sdiv, addEl(table, tbody)));
-                var colors = [
-                    '#008080', // teal
-                    '#ffd700', // gold
-                    '#00ff00', // lime
-                    '#ff0000', // red
-                    '#dc143c', // crimson
-                    '#d2691e', // chocolate
-                    '#8b4513', // saddle brown
-                    '#0000ff', // blue
-                    '#ff4500', // orange red
-                    '#ffa500', // orange
-                    '#adff2f', // green yellow
-                    '#7fffd4', // aqua marine
-                    '#00ced1', // dark turquoise
-                    '#00bfff', // deep sky blue
-                    '#ffff00', // yellow
-                    '#00ffff', // aqua
-                    '#000080', // navy
-                ];
+                addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
+                var colors = ['#8dd3c7','#ffffb3','#bebada','#fb8072','#80b1d3','#fdb462','#b3de69','#fccde5','#d9d9d9','#bc80bd','#ccebc5','#ffed6f']
                 var sdiv = getEl('div');
                 sdiv.style.overflow = 'auto';
                 //sdiv.style.width = 'calc(100% - 400px)';
@@ -1101,7 +1167,8 @@ widgetGenerators['cosmic2'] = {
                 chartDiv.width = '1000';
                 chartDiv.height = '1000';
                 addEl(sdiv, chartDiv);
-                addEl(div, sdiv);
+                addEl(wdiv, sdiv);
+                console.log('@ wdiv=', wdiv)
                 var chart = new Chart(chartDiv, {
                     type: 'pie',
                     data: {
@@ -1129,25 +1196,31 @@ widgetGenerators['cosmic2'] = {
                         },
                     },
                 });
+                addDlRow(dl, a, wdiv)
             }
         }
     }
 }
 
-widgetInfo['cgi'] = {'title': 'Therapeutically actionable alterations (Cancer Genome Interpreter)'};
+widgetInfo['cgi'] = {'title': ''};
 widgetGenerators['cgi'] = {
     'variant': {
         'width': '100%', 
         'height': 'unset', 
         'function': function (div, row, tabName) {
+          var dl = getEl('dl')
+          addEl(div, dl)
             var assoc = getWidgetData(tabName, 'cancer_genome_interpreter', row, 'association');
             if (assoc == undefined) {
-                addInfoLine(div, 'No information in Cancer Genome Interpreter');
+                //addInfoLine(div, 'No information in Cancer Genome Interpreter');
+                var sdiv = getNoAnnotMsgVariantLevel()
             }
             else {
-                addInfoLineLink2(div, 'Drug ' + assoc + ', CGI');
+                var sdiv = 'Drug ' + assoc + ', CGI'
             }
-            
+          addDlRow(dl, 
+            'Therapeutically Actionable Alterations (Cancer Genome Interpreter)',
+            sdiv)
         }
     }
 }
@@ -1162,7 +1235,7 @@ widgetGenerators['target2'] = {
             var therapy = getWidgetData(tabName, 'target', row, 'therapy');
             var rationale = getWidgetData(tabName, 'target', row, 'rationale');
             if (rationale == null) {
-                addInfoLine3(div, 'No annotation available for Target');
+                addInfoLine3(div, getNoAnnotMsgGeneLevel())
             }
             else {
                 addInfoLineLink2(div, "Identifies this gene associated with " + therapy + '. The rationale is ' + rationale)
@@ -1193,25 +1266,22 @@ widgetGenerators['actionpanel'] = {
         'width': null,
         'height': null,
         'function': function (div, row, tabName) {
-            var br = getEl("br");
-            addEl(div, br);
+            var dl = getEl('dl')
+            addEl(div, dl)
             var generator = widgetGenerators['oncokb']['variant'];
-            var divs = showWidget('oncokb', ['base'], 'variant', div, null, null)
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
-            divs[1].style.paddingLeft = '1px';
-            divs[0].style.width = '50rem';
-            var br = getEl("br");
-            addEl(div, br);
-            var divs = showWidget('cgi', ['cancer_genome_interpreter'], 'variant', div, null, null)
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
-            divs[1].style.paddingLeft = '1px';
-            divs[1].style.width = '50rem';
-            var br = getEl("br");
-            addEl(div, br);
+            var divs = showWidget('oncokb', ['base'], 'variant', div, null, null, false)
+            //divs[0].style.position = 'relative';
+            //divs[0].style.top = '0px';
+            //divs[0].style.left = '0px';
+            //divs[1].style.paddingLeft = '1px';
+            //divs[0].style.width = '50rem';
+            var divs = showWidget('cgi', ['cancer_genome_interpreter'], 
+                'variant', div, null, null, false)
+            //divs[0].style.position = 'relative';
+            //divs[0].style.top = '0px';
+            //divs[0].style.left = '0px';
+            //divs[1].style.paddingLeft = '1px';
+            //divs[1].style.width = '50rem';
             /*
             var generator = widgetGenerators['target2']['variant'];
             generator['width'] = '100%';
@@ -1225,34 +1295,29 @@ widgetGenerators['actionpanel'] = {
             addEl(div, br);
             */
             var generator = widgetGenerators['litvar']['variant'];
-            var divs = showWidget('litvar', ['litvar', 'dbsnp'], 'variant', div, null, null);
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
-            divs[1].style.width = '50rem';
-            var br = getEl("br");
-            addEl(div, br);
-            var divs = showWidget('civic2', ['civic'], 'variant', div, null, null)
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
-            divs[1].style.width = '50rem';
-            var br = getEl("br");
-            addEl(div, br);
-            var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220)
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
-            divs[1].style.width = '50rem';
-            var br = getEl("br");
-            addEl(div, br);
+            var divs = showWidget('litvar', ['litvar', 'dbsnp'], 'variant', 
+                div, null, null, false);
+            //divs[0].style.position = 'relative';
+            //divs[0].style.top = '0px';
+            //divs[0].style.left = '0px';
+            //divs[1].style.width = '50rem';
+            var divs = showWidget('civic2', ['civic'], 'variant', div, null, null, false)
+            //divs[0].style.position = 'relative';
+            //divs[0].style.top = '0px';
+            //divs[0].style.left = '0px';
+            //divs[1].style.width = '50rem';
+            var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220, false)
+            //divs[0].style.position = 'relative';
+            //divs[0].style.top = '0px';
+            //divs[0].style.left = '0px';
+            //divs[1].style.width = '50rem';
             var generator = widgetGenerators['brca']['variant'];
-            var divs = showWidget('brca', ['base'], 'variant', div, null, 220)
-            divs[0].style.position = 'relative';
-            divs[0].style.top = '0px';
-            divs[0].style.left = '0px';
-            divs[1].style.paddingLeft = '1px';
-            divs[1].style.width = '50rem';
+            var divs = showWidget('brca', ['base'], 'variant', div, null, 220, false)
+            //divs[0].style.position = 'relative';
+            //divs[0].style.top = '0px';
+            //divs[0].style.left = '0px';
+            //divs[1].style.paddingLeft = '1px';
+            //divs[1].style.width = '50rem';
             var br = getEl("br");
             addEl(div, br);
         }
@@ -1268,7 +1333,7 @@ widgetGenerators['driverpanel'] = {
             var br = getEl("br");
             addEl(div, br);
             var generator = widgetGenerators['cosmic2']['variant'];
-            var divs = showWidget('cosmic2', ['cosmic'], 'variant', div, null, null);
+            var divs = showWidget('cosmic2', ['cosmic'], 'variant', div, null, null, false);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
@@ -1276,22 +1341,18 @@ widgetGenerators['driverpanel'] = {
             //addEl(div, br);
             var generator = widgetGenerators['cancer_hotspots2']['variant'];
             generator['width'] = '100%'
-            var divs = showWidget('cancer_hotspots2', ['cancer_hotspots'], 'variant', div, 450, 220);
+            var divs = showWidget('cancer_hotspots2', ['cancer_hotspots'], 'variant', div, null, '16rem');
             //divs[0].style.position = 'relative';
             //divs[0].style.top = '0px';
             //divs[0].style.left = '0px';
-            divs[0].querySelector('div legend').textContent = 
-                    'Hotspot mutation per cancer type (Cancer Hotspots)';
-            var br = getEl("br");
-            addEl(div, br);
+            //divs[0].querySelector('div legend').textContent = 
+            //        'Hotspot mutation per cancer type (Cancer Hotspots)';
             var generator = widgetGenerators['chasmplus2']['variant'];
             generator['width'] = '100%'
             var divs = showWidget('chasmplus2', ['base', 'chasmplus'], 'variant', div, null, 220);
             divs[0].style.position = 'relative';
             divs[0].style.top = '0px';
             divs[0].style.left = '0px';
-            var br = getEl("br");
-            addEl(div, br);
             /*
             var generator = widgetGenerators['cgc2']['gene'];
             generator['width'] = '100%'
@@ -1395,6 +1456,12 @@ widgetGenerators['diseasecausingpanel'] = {
               var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
             }
             addDlRow(dl, 'REVEL Pathogenicity Prediction Score', sdiv)
+            if (annotData['fathmm'] != null) {
+              var sdiv = getDialWidget('FATHMM Rank Score', annotData['fathmm']['fathmm_rscore'], 0.75)
+            } else {
+              var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+            }
+            addDlRow(dl, 'FATHMM', sdiv)
             //addBarComponent2(div, row, null, 'revel__score', tabName, 200, true, 0.75, 'Benign', 'Pathogenic');
         }
     }
@@ -1551,7 +1618,7 @@ widgetGenerators['germlinepanel'] = {
               addBarComponent(td, row, 'South Asian', 'gnomad3__af_sas', tabName);
           }*/
           if (annotData['gnomad3'] == null) {
-            var td = 'No annotation available for ' + hugoAchange
+            var td = getNoAnnotMsgVariantLevel()
             addDlRow(dl, 'gnomADv3 allele frequency', td)
           } else {
             let af = annotData['gnomad3']['af']
@@ -1654,7 +1721,7 @@ widgetGenerators['germlinepanel'] = {
             })
           }
           if (annotData['thousandgenomes'] == null) {
-            var td = 'No annotation available for ' + hugoAchange
+            var td = getNoAnnotMsgVariantLevel()
             addDlRow(dl, '1000 Genomes Allele Frequency', td)
           } else {
             let af = annotData['thousandgenomes']['af']
@@ -1809,7 +1876,7 @@ widgetGenerators['mupit2'] = {
                 } else {
                     iframe.parentElement.removeChild(iframe);
                     var sdiv = getEl('div');
-                    sdiv.textContent = 'No annotation available for MuPIT';
+                    sdiv.textContent = getNoAnnotMsgVariantLevel()
                     addEl(div, sdiv);
                     div.parentElement.style.height = '50px';
                 }
@@ -1818,10 +1885,10 @@ widgetGenerators['mupit2'] = {
 	}
 }
 
-widgetInfo['cancer_hotspots2'] = {'title': 'Hotspot mutation per cancer type (Cancer Hotspots)'};
+widgetInfo['cancer_hotspots2'] = {'title': ''};
 widgetGenerators['cancer_hotspots2'] = {
 	variant: {
-		width: 180, 
+		//width: 180, 
 		height: 180, 
 		cancerTypes: [
 			'adrenagland', 'ampullaofvater', 'billarytract', 'bladder', 
@@ -1834,53 +1901,68 @@ widgetGenerators['cancer_hotspots2'] = {
 		function: function (div, row, tabName) {
       var dl = getEl('dl')
       addEl(div, dl)
-            let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
-            if (samples == null) {
-                var span = getEl('span');
-                span.classList.add('nodata');
-                addEl(div, addEl(span, getTn('No data')));
-                return;
-            }
-            if (samples != undefined && samples != null && samples.indexOf('[[') == 0) {
-                if (!samples) {
-                    return;
-                }
-                samples = JSON.parse(samples);
-                samples.sort(function(a, b) {
-                    return a[1] - b[1];
-                });
-                const table = getWidgetTableFrame();
-                addEl(div, table);
-                const thead = getWidgetTableHead(['Cancer Type','Count']);
-                addEl(table, thead);
-                const tbody = getEl('tbody');
-                addEl(table, tbody);
-                for (var i = 0; i < samples.length; i++) {
-                    let tr = getWidgetTableTr(samples[i]);
-                    addEl(tbody, tr);
-                }
-            } else {
-                let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
-                if (!samples) {
-                    return;
-                }
-                samples.sort(function(a, b) {
-                    return b[1] - a[1];
-                });
-                const table = getWidgetTableFrame();
-                addEl(div, table);
-                const thead = getWidgetTableHead(['Cancer Type','Count']);
-                addEl(table, thead);
-                const tbody = getEl('tbody');
-                addEl(table, tbody);
-                for (var i = 0; i < samples.length; i++) {
-                    let tr = getWidgetTableTr(samples[i]);
-                    if (samples[i][1] > 25) {
-                        tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
-                    }
-                    addEl(tbody, tr);
-                }
-            }
+      let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
+      if (samples == null) {
+          //var span = getEl('span');
+          //span.classList.add('nodata');
+          //addEl(div, addEl(span, getTn('No data')));
+          addDlRow(dl, 'Hotspot Mutation per Cancer Type (Cancer Hotspots)',
+            getNoAnnotMsgVariantLevel())
+          return;
+      }
+      if (samples != undefined && samples != null && samples.indexOf('[[') == 0) {
+          if (!samples) {
+              addDlRow(dl, 'Hotspot Mutation per Cancer Type (Cancer Hotspots)',
+                getNoAnnotMsgVariantLevel())
+              return;
+          }
+          samples = JSON.parse(samples);
+          samples.sort(function(a, b) {
+              return a[1] - b[1];
+          });
+          var sdiv = getEl('div')
+          sdiv.style.height = '48rem'
+          sdiv.style.overflow = 'auto'
+          var table = getWidgetTableFrame();
+          addEl(sdiv, table)
+          //addEl(div, table);
+          const thead = getWidgetTableHead(['Cancer Type','Count']);
+          addEl(table, thead);
+          const tbody = getEl('tbody');
+          addEl(table, tbody);
+          for (var i = 0; i < samples.length; i++) {
+              let tr = getWidgetTableTr(samples[i]);
+              addEl(tbody, tr);
+          }
+      } else {
+          let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
+          if (!samples) {
+              return;
+          }
+          samples.sort(function(a, b) {
+              return b[1] - a[1];
+          });
+          var sdiv = getEl('div')
+          sdiv.style.height = '14rem'
+          sdiv.style.width = '24rem'
+          sdiv.style.overflow = 'auto'
+          var table = getWidgetTableFrame();
+          addEl(sdiv, table)
+          //addEl(div, table);
+          const thead = getWidgetTableHead(['Cancer Type','Count']);
+          addEl(table, thead);
+          const tbody = getEl('tbody');
+          addEl(table, tbody);
+          for (var i = 0; i < samples.length; i++) {
+              let tr = getWidgetTableTr(samples[i]);
+              if (samples[i][1] > 25) {
+                  tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
+              }
+              addEl(tbody, tr);
+          }
+      }
+      addDlRow(dl, 'Hotspot Mutation per Cancer Type (Cancer Hotspots)',
+        sdiv)
 		}
 	}
 }

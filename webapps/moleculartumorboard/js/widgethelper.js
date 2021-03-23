@@ -4,7 +4,7 @@ var widgetGridSize = 10;
 
 function getWidgetTableFrame () {
 	var table = getEl('table');
-	table.style.fontSize = '12px';
+	//table.style.fontSize = '12px';
 	table.style.borderSpacing = '0px';
 	table.style.borderCollapse = 'collapse';
 	//table.style.borderTop = widgetTableBorderStyle;

@@ -160,9 +160,9 @@
     border: 1px black solid;
 }
 
-#widgetcontentdiv_cosmic2_variant div:first-child {
+/*#widgetcontentdiv_cosmic2_variant div:first-child {
     width: 400px;
-}
+}*/
 
 /*@media only screen and (max-width: 1080px) {
     #widgetcontentdiv_cosmic2_variant div:first-child {
@@ -260,5 +260,16 @@ dd {
 
 .dialdiv > div > div:nth-child(2) {
   font-size: 1.250rem;
+}
+
+.clinvar_traitname {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid #bbbbbb;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 

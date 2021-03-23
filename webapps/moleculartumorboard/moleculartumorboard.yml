@@ -11,6 +11,7 @@ live_modules:
 - clinvar
 - cosmic
 - dbsnp
+- fathmm
 - gnomad
 - gnomad3
 - litvar
@@ -30,6 +31,7 @@ requires:
 - clinvar
 - cosmic
 - dbsnp
+- fathmm
 - gnomad
 - gnomad3
 - litvar
