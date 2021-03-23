@@ -23,7 +23,6 @@ function mqMinMatchHandler (e) {
 
 function getInputDataFromUrl () {
     var urlParams = new URLSearchParams(window.location.search);
-    console.log('@ urlparams=', urlParams)
     var inputChrom = urlParams.get('chrom');
     var inputPos = urlParams.get('pos');
     var inputRef = urlParams.get('ref_base');
@@ -32,9 +31,7 @@ function getInputDataFromUrl () {
     if (assembly == undefined) {
         assembly = 'hg38'
     }
-    console.log('@ chrom=', inputChrom, 'assembly=', assembly)
     var inputData = cleanInputData(inputChrom, inputPos, inputRef, inputAlt, assembly);
-    console.log('@ inputdata=', inputData)
     return inputData;
 }
 
@@ -161,17 +158,17 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         }
     }
     var data = getModulesData(moduleNames);
-    if (Object.keys(data).length == 0) {
-        var span = getEl('span');
-        span.textContent = 'No annotation available for ' + widgetInfo[widgetName]['title'];
-        addEl(divs[1], span);
-    } else {
+    //if (Object.keys(data).length == 0) {
+    //    var span = getEl('span');
+    //    span.textContent = 'No annotation available for ' + widgetInfo[widgetName]['title'];
+    //    addEl(divs[1], span);
+    //} else {
         if (level == 'gene') {
             data['base__hugo'] = annotData['crx'].hugo;
         }
         var ret = widgetGenerators[widgetName][level]['function'](
                 divs[1], data, 'variant', true); // last true is to highlight if value exists.
-    }
+    //}
     addEl(parentDiv, divs[0]);
     return divs;
 }
@@ -358,6 +355,46 @@ function changeAchange3to1 (achange) {
 var widgetInfo = {};
 var widgetGenerators = {};
 
+const prettyVal = function(val) {
+  if (val == '') {
+    return val
+  } else if (val < 0.01 && val > -0.01) {
+    return val.toExponential(2)
+  } else {
+    return val.toPrecision(3)
+  }
+}
+
+const addDlRow = function(dl, title, content) {
+  var ddiv = getEl('div')
+  var dt = getEl('dt')
+  if (typeof title == 'string') {
+    dt.textContent = title
+  } else {
+    addEl(dt, title)
+  }
+  var dd = getEl('dd')
+  var contentType = typeof content
+  if (contentType == 'string') {
+    dd.textContent = content
+  } else if (contentType == 'number') {
+    dd.textContent = '' + content
+  } else {
+    addEl(dd, content)
+  }
+  addEl(ddiv, dt)
+  addEl(ddiv, dd)
+  addEl(dl, ddiv)
+}
+
+const makeA = function(text, url) {
+  var a = getEl('a')
+  a.href = url
+  a.textContent = text
+  a.target = '_blank'
+  return a
+}
+
 widgetInfo['base2'] = {'title': ''};
 widgetGenerators['base2'] = {
     'variant': {
@@ -377,6 +414,7 @@ widgetGenerators['base2'] = {
             var span = getEl('span');
             span.classList.add('detail-info-line-header');
             span.style.fontSize = '2rem';
+            span.style.fontWeight = '600';
             span.textContent = hugo;
             addEl(div, span);
             var span = getEl('span');
@@ -390,6 +428,13 @@ widgetGenerators['base2'] = {
             var sdiv = getEl('div');
             if (annotData['cgl'] != null && annotData['cgl'].class != null) {
                 var span = getEl('span');
+                span.classList.add('cgl_class')
+                var cl = annotData['cgl'].class;
+                if (cl == 'Oncogene') {
+                  span.classList.add('cgl_oncogene')
+                } else if (cl == 'TSG') {
+                  span.classList.add('cgl_tsg')
+                }
                 span.textContent = annotData['cgl'].class;
                 addEl(sdiv, span);
             }
@@ -412,8 +457,11 @@ widgetGenerators['base2'] = {
             addEl(sdiv, span);*/
             addEl(div, sdiv);
             addEl(div, getEl('br'));
-            addInfoLine3(div, 'Variant type', 
-                    variant_type + ' (' + ref_base + '>' + alt_base + ')');
+            var dl = getEl('dl')
+            addEl(div, dl)
+            addDlRow(dl, 'Variant type', variant_type + ' (' + ref_base + '>' + alt_base + ')')
+            /*addInfoLine3(div, 'Variant type', 
+                    variant_type + ' (' + ref_base + '>' + alt_base + ')');*/
             var variant_length = null;
             if (variant_type == 'single nucleotide variant'){
                 variant_length = '1';
@@ -425,7 +473,8 @@ widgetGenerators['base2'] = {
                 variant_length = nalt;
             }
             //addInfoLine3(div, 'Variant Length', variant_length);
-            addInfoLine3(div, 'Genomic location',  'chr' + chrom + ':' + getWidgetData(tabName, 'base', row, 'pos') + ' '+ '(genome build GRCh38)', tabName);
+            addDlRow(dl, 'Genomic location',  'chr' + chrom + ':' + getWidgetData(tabName, 'base', row, 'pos') + ' '+ '(genome build GRCh38)', tabName)
+            //addInfoLine3(div, 'Genomic location',  'chr' + chrom + ':' + getWidgetData(tabName, 'base', row, 'pos') + ' '+ '(genome build GRCh38)', tabName);
             var so = getWidgetData(tabName, 'base', row, 'so');
             var consequence = '';
             if (so == 'synonymous_variant') {
@@ -433,7 +482,8 @@ widgetGenerators['base2'] = {
             } else {
                 consequence = 'nonsynonymous';
             }
-            addInfoLine3(div, 'Variant consequence', consequence + ' (' + so.replace('_', ' ') + ')', tabName);
+            //addInfoLine3(div, 'Variant consequence', consequence + ' (' + so.replace('_', ' ') + ')', tabName);
+            addDlRow(dl, 'Variant consequence', consequence + ' (' + so.replace('_', ' ') + ')', tabName)
             var max_af = null;
             if (thous_af != undefined && gnomad_af != undefined) {
                 if (thous_af > gnomad_af) {
@@ -446,43 +496,30 @@ widgetGenerators['base2'] = {
             } else if (thous_af == undefined && gnomad_af != undefined) {
                 max_af = gnomad_af;
             }
+            /*
             if (max_af == null) {
-                addInfoLine3(div, '1000g/gnomAD max AF','There is no annotation available')
+                addDlRow(dl, '1000g/gnomAD max AF','There is no annotation available')
             }
             else {
-                addInfoLine3(div, '1000g/gnomAD max AF', max_af);
+                addDlRow(dl, '1000g/gnomAD max AF', prettyVal(max_af));
             }
+            */
+            if (annotData['cosmic'] != null) {
+              var a = makeA(annotData['cosmic']['cosmic_id'], 
+                  'https://cancer.sanger.ac.uk/cosmic/search?q=' 
+                  + annotData['cosmic']['cosmic_id']);
+            } else {
+              var a = 'N/A'
+            }
+            addDlRow(dl, 'COSMIC ID', a)
             var snp = getWidgetData(tabName, 'dbsnp', row, 'rsid');
             if (snp == null) {
-                addInfoLine3(div, 'dbSNP ID','No dbSNP ID is available');
+                addDlRow(dl, 'dbSNP ID','No dbSNP ID is available');
             } else {
                 link = 'https://www.ncbi.nlm.nih.gov/snp/' + snp
-                addInfoLineLink(div, 'dbSNP ID', snp, link);
+                var a = makeA(snp, link)
+                addDlRow(dl, 'dbSNP ID', a)
             }
-            var sdiv = getEl('div')
-            var span = getEl('span')
-            span.textContent = 'Hallmarks of Cancer function summary: '
-            span.classList.add('detail-info-line-header')
-            addEl(sdiv, span)
-            var span = getEl('span')
-            span.id = 'hallmarks_func_summary'
-            span.style.color = 'gray'
-            span.textContent = 'Fetching data...'
-            addEl(sdiv, span)
-            addEl(div, sdiv)
-            var link = '/webapps/moleculartumorboard/hallmarks?hugo=' + hugo
-            fetch(link).then(data=>{return data.json()}).then(response=>{
-                let span = document.querySelector('#hallmarks_func_summary')
-                span.textContent = response['func_summary']
-                span.style.color = 'black'
-                let parentEl = span.parentElement
-                let a = getEl('a')
-                a.href = 'https://cancer.sanger.ac.uk/cosmic/census-page/' + hugo
-                a.target = '_blank'
-                a.textContent = ' \u{1f517}'
-                a.style.textDecoration = 'none'
-                addEl(parentEl, a)
-            })
         }
     }
 }
@@ -774,14 +811,55 @@ widgetGenerators['ncbi'] = {
         'height': undefined, 
         'word-break': 'break-word',
         'function': function (div, row, tabName) {
+            var hugo = getWidgetData(tabName, 'base', row, 'hugo');
+            var dl = getEl('dl')
+            addEl(div, dl)
+            /*var sdiv = getEl('div')
+            var span = getEl('span')
+            span.textContent = 'Hallmarks of Cancer function summary: '
+            span.classList.add('detail-info-line-header')
+            addEl(sdiv, span)
+            */
+            var span = getEl('span')
+            span.id = 'hallmarks_func_summary'
+            span.style.color = 'gray'
+            span.textContent = 'Fetching data...'
+            addDlRow(dl, 'Hallmarks of Cancer Function Gene Summary', span)
+            var link = '/webapps/moleculartumorboard/hallmarks?hugo=' + hugo
+            fetch(link)
+            .then(data => {
+              console.log('@ data=', data)
+              if (data.ok == false) {
+                throw Error(data.statusText)
+              }
+              return data.json()
+            })
+            .then(response => {
+              console.log('@ resp=', response)
+                let span = document.querySelector('#hallmarks_func_summary')
+                span.textContent = response['func_summary']
+                span.style.color = 'black'
+                let parentEl = span.parentElement
+                let a = getEl('a')
+                a.href = 'https://cancer.sanger.ac.uk/cosmic/census-page/' + hugo
+                a.target = '_blank'
+                a.textContent = ' \u{1f517}'
+                a.style.textDecoration = 'none'
+                addEl(parentEl, a)
+            })
+            .catch(e => {
+              let span = document.querySelector('#hallmarks_func_summary')
+              span.style.color = 'black'
+              span.textContent = 'N/A'
+            })
             var desc = getWidgetData(tabName, 'ncbigene', row, 'ncbi_desc')
+            desc = desc.split(/\[.*\]$/)[0]
             if (desc == null){
-                addInfoLineLink2(div, 'There is no annotation available for NCBI Gene')
+                addDlRow(dl, 'RefSeq Gene Summary', 'N/A')
             }
             else {
-                addInfoLineLink2(div, desc, tabName)
+                addDlRow(dl, 'RefSeq Gene Summary', desc)
             }
-            var hugo = getWidgetData(tabName, 'base', row, 'hugo');
         }
     }
 }
@@ -813,14 +891,23 @@ widgetGenerators['cgl2'] = {
     }
 }
 
-widgetInfo['chasmplus2'] = {'title': 'Cancer driver prediction for missense mutations (CHASMplus)'};
+widgetInfo['chasmplus2'] = {'title': ''};
 widgetGenerators['chasmplus2'] = {
     'variant': {
         'width': '540', 
         'height': 500, 
         'function': function (div, row, tabName) {
+          var dl = getEl('dl')
+          addEl(div, dl)
             var pvalue = getWidgetData(tabName, 'chasmplus', row, 'pval');
-            addBarComponent2(div, row, 'Score (p-value=' + pvalue + ')', 'chasmplus__score', tabName, 200, true, 0.75, 'Passenger', 'Driver');
+            var sdiv = getDialWidget(
+              'CHASMplus Score (p-value=' + prettyVal(pvalue) + ')', 
+              annotData['chasmplus']['score'], 0.75)
+            addDlRow(
+              dl,
+              'Cancer Driver Prediction for Missense Mutations (CHASMplus)',
+              sdiv)
+            //addBarComponent2(div, row, 'Score (p-value=' + pvalue + ')', 'chasmplus__score', tabName, 200, true, 0.75, 'Passenger', 'Driver');
         }
     }
 }
@@ -854,6 +941,9 @@ widgetGenerators['pharmgkb2'] = {
 
 
 
+const getHugoAchange = function() {
+  return annotData['base']['hugo'] + ' ' + changeAchange3to1(annotData['base']['achange'])
+}
 
 widgetInfo['clinvar2'] = {'title': ''};
 widgetGenerators['clinvar2'] = {
@@ -861,34 +951,42 @@ widgetGenerators['clinvar2'] = {
         'width': undefined, 
         'height': undefined, 
         'function': function (div, row, tabName) {
-            var id = getWidgetData(tabName, 'clinvar', row, 'id');
-            var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
-            var sdiv = getEl('div');
-            var span = getEl('span');
-            span.classList.add('detail-info-line-header');
-            span.textContent = 'ClinVar significance: ';
-            addEl(sdiv, span);
-            var ssdiv = getEl('div');
-            ssdiv.style.display = 'inline-block';
-            ssdiv.style.position = 'relative';
-            ssdiv.style.left = '6px';
-            var span = getEl('span');
-            span.classList.add('detail-info-line-content');
-            span.textContent = sig;
-            addEl(ssdiv, span);
-            addEl(ssdiv, getTn('\xa0'));
-            if(id != null){
-                link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
-                var a = getEl('a');
-                a.href = link;
-                a.textContent = id;
-                sdiv.style.position = 'relative';
-                addEl(ssdiv, getTn('(ID: '));
-                addEl(ssdiv, a);
-                addEl(ssdiv, getTn(')'));
-            }
-            addEl(sdiv, ssdiv);
-            addEl(div, sdiv);
+          div.parentElement.style.paddingBottom = '0'
+          var id = getWidgetData(tabName, 'clinvar', row, 'id');
+          var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
+          var dl = getEl('dl')
+          addEl(div, dl)
+          //var sdiv = getEl('div');
+          //var span = getEl('span');
+          //span.classList.add('detail-info-line-header');
+          //span.textContent = 'ClinVar significance: ';
+          //addEl(sdiv, span);
+          //var ssdiv = getEl('div');
+          //ssdiv.style.display = 'inline-block';
+          //ssdiv.style.position = 'relative';
+          //ssdiv.style.left = '6px';
+          var span = getEl('span');
+          //span.classList.add('detail-info-line-content');
+          span.textContent = sig;
+          //addEl(ssdiv, span);
+          var dd = getEl('div')
+          addEl(dd, span)
+          //addEl(ssdiv, getTn('\xa0'));
+          addEl(dd, getTn('\xa0'));
+          var sigLower = sigLower==undefined? '':sig.toLowerCase()
+          if(id != null && sigLower != 'not provided' && sigLower != '') {
+            link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/'+id;
+            var a = getEl('a');
+            a.href = link;
+            a.textContent = id;
+            //sdiv.style.position = 'relative';
+            //addEl(ssdiv, getTn('(ID: '));
+            //addEl(ssdiv, a);
+            //addEl(ssdiv, getTn(')'));
+            addEl(dd, getTn('(ID: '));
+            addEl(dd, a);
+            addEl(dd, getTn(')'));
+            addDlRow(dl, 'ClinVar Significance', dd)
             var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + id + '&retmode=json'
             fetch(url).then(response=>{return response.json()}).then(response=>{
                 var trait_set = response['result'][id].trait_set;
@@ -898,8 +996,12 @@ widgetGenerators['clinvar2'] = {
                 }
                 traitNames.sort();
                 var traitNames = traitNames.join(', ');
-                addInfoLine3(div, 'ClinVar conditions', traitNames, 'variant', 184);
+                //addInfoLine3(div, 'ClinVar conditions', traitNames, 'variant', 184);
+                addDlRow(dl, 'ClinVar Conditions', traitNames)
             });
+          } else {
+            addDlRow(dl, 'ClinVar', 'No annotation available for ' + getHugoAchange())
+          }
         }
     }
 }
@@ -962,9 +1064,9 @@ widgetGenerators['cosmic2'] = {
                         tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
                     }
                     addEl(tbody, tr);
-                    if (tissue == 'breast' || tissue == 'urinary_tract') {
+                    /*if (tissue == 'breast' || tissue == 'urinary_tract') {
                         continue;
-                    }
+                    }*/
                     tissues.push(tissue)
                     counts.push(parseInt(count));
                 }
@@ -1081,7 +1183,6 @@ widgetGenerators['basepanel'] = {
             var divs = showWidget('base2', ['base', 'dbsnp', 'thousandgenomes', 'gnomad'], 'variant', div, null, null, false);
             var generator = widgetGenerators['ncbi']['gene'];
             var divs = showWidget('ncbi', ['base', 'ncbigene'], 'gene', div, null, null);
-            addEl(div, getEl('br'));
         }
     }
 }
@@ -1246,22 +1347,164 @@ widgetGenerators['structurepanel'] = {
     }
 }
 
+const getDialWidget = function(title, value, threshold) {
+  var sdiv = getEl('div');
+  sdiv.classList.add('dialdiv')
+  var svg = drawDialGraph(title, value, threshold)
+  addEl(sdiv, svg)
+  var ssdiv = getEl('div')
+  var sssdiv = getEl('div')
+  sssdiv.textContent = title
+  addEl(ssdiv, sssdiv)
+  sssdiv = getEl('div')
+  sssdiv.textContent = prettyVal(value)
+  addEl(ssdiv, sssdiv)
+  addEl(sdiv, ssdiv)
+  return sdiv
+}
+
 widgetInfo['diseasecausingpanel'] = {'title': ''};
 widgetGenerators['diseasecausingpanel'] = {
     'variant': {
         'width': undefined,
         'height': 'unset',
         'function': function (div, row, tabName) {
-            div.style.overflow = 'unset';
+            //div.style.overflow = 'unset';
             showWidget('clinvar2', ['clinvar'], 'variant', div, null, null);
-            addEl(div, getEl('br'));
-            var sdiv = getEl('div');
-            sdiv.textContent = 'REVEL score';
-            sdiv.classList.add('detail-info-line-header');
-            addEl(div, sdiv);
-            addBarComponent2(div, row, null, 'revel__score', tabName, 200, true, 0.75, 'Benign', 'Pathogenic');
+            //addEl(div, getEl('br'));
+            //sdiv.textContent = 'REVEL score';
+            //sdiv.classList.add('detail-info-line-header');
+            //addEl(div, sdiv);
+            var dl = getEl('dl')
+            addEl(div, dl)
+            if (annotData['revel'] != null) {
+              //sdiv.classList.add('dialdiv')
+              //var svg = drawDialGraph('REVEL Score', annotData['revel']['score'], 0.75)
+              //var svg = drawDialGraph('REVEL Score', 0.85, 0.75)
+              //addEl(sdiv, svg)
+              //var ssdiv = getEl('div')
+              //var sssdiv = getEl('div')
+              //sssdiv.textContent = 'REVEL Score'
+              //addEl(ssdiv, sssdiv)
+              //sssdiv = getEl('div')
+              //sssdiv.textContent = prettyVal(annotData['revel']['score'])
+              //addEl(ssdiv, sssdiv)
+              //addEl(sdiv, ssdiv)
+              var sdiv = getDialWidget('REVEL Pathogenicity Prediction Score', annotData['revel']['score'], 0.75)
+            } else {
+              var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+            }
+            addDlRow(dl, 'REVEL Pathogenicity Prediction Score', sdiv)
+            //addBarComponent2(div, row, null, 'revel__score', tabName, 200, true, 0.75, 'Benign', 'Pathogenic');
         }
     }
+}
+
+const drawDialFragment = function(
+    centerx, centery, radius1, radius2, angle0, angle1, fill, stroke) {
+  let angleDiff = angle1 - angle0
+  sub = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  xy = getCirclePoint(centerx, centery, radius1, angle0)
+  d = `M ${xy.x} ${xy.y}`
+  xy = getCirclePoint(centerx, centery, radius1, angle1)
+  if (angleDiff < 180) {
+    d += ` A ${radius1} ${radius1} 0 0 1 ${xy.x} ${xy.y}`
+  } else {
+    d += ` A ${radius1} ${radius1} 0 1 1 ${xy.x} ${xy.y}`
+  }
+  xy = getCirclePoint(centerx, centery, radius2, angle1)
+  d += ` L ${xy.x} ${xy.y}`
+  xy = getCirclePoint(centerx, centery, radius2, angle0)
+  if (angleDiff < 180) {
+    d += ` A ${radius2} ${radius2} 0 0 0 ${xy.x} ${xy.y}`
+  } else {
+    d += ` A ${radius2} ${radius2} 0 1 0 ${xy.x} ${xy.y}`
+  }
+  xy = getCirclePoint(centerx, centery, radius1, angle0)
+  d += ` L ${xy.x} ${xy.y}`
+  sub.setAttributeNS(null, 'fill', fill)
+  sub.setAttributeNS(null, 'stroke', stroke)
+  sub.setAttributeNS(null, 'd', d)
+  return sub
+}
+
+const getCirclePoint = function(centerx, centery, radius, angle) {
+  let x = centerx + Math.cos(angle / 180 * Math.PI) * radius
+  let y = centery + Math.sin(angle / 180 * Math.PI) * radius
+  let xy = {x: x, y: y}
+  return xy
+}
+
+const drawDialGraph = function(title, value, threshold) {
+  let el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  el.style.width = '6rem'
+  el.style.height = '6rem'
+  let centerx = 50
+  let centery = 50
+  let radius1 = 40
+  let radius2 = 30 
+  let angle0 = 135
+  let angle1 = 405
+  let angleRange = angle1 - angle0
+  let dotradius = 5
+  let angleAdd = value * angleRange
+  let angle = angle0 + angleAdd
+  let thresholdAngle = threshold * angleRange + angle0
+  // Needle
+  let sub = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+  let xy = getCirclePoint(centerx, centery, dotradius, angle - 90)
+  let points = '' + xy.x + ',' + xy.y
+  xy = getCirclePoint(centerx, centery, radius2, angle)
+  let pointXy = xy
+  points += ' ' + xy.x + ',' + xy.y
+  xy = getCirclePoint(centerx, centery, dotradius, angle + 90)
+  points += ' ' + xy.x + ',' + xy.y
+  sub.setAttributeNS(null, 'points', points)
+  if (value < threshold) {
+    sub.setAttributeNS(null, 'stroke', '#aaaaaa')
+    sub.setAttributeNS(null, 'fill', '#aaaaaa')
+  } else {
+    sub.setAttributeNS(null, 'stroke', '#ff5555')
+    sub.setAttributeNS(null, 'fill', '#ff5555')
+  }
+  el.appendChild(sub)
+  // Dot
+  sub = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  sub.setAttributeNS(null, 'cx', centerx)
+  sub.setAttributeNS(null, 'cy', centery)
+  sub.setAttributeNS(null, 'r', dotradius)
+  sub.setAttributeNS(null, 'r', dotradius)
+  if (value < threshold) {
+    sub.setAttributeNS(null, 'stroke', '#888888')
+    sub.setAttributeNS(null, 'fill', '#ffffff')
+  } else {
+    sub.setAttributeNS(null, 'stroke', '#888888')
+    sub.setAttributeNS(null, 'fill', '#ffffff')
+  }
+  el.appendChild(sub)
+  // Circle
+  if (value < threshold) {
+    el.appendChild(
+      drawDialFragment(
+        centerx, centery, radius1, radius2, angle0, angle, '#ffaaaa', '#aaaaaa'))
+    el.appendChild(
+      drawDialFragment(
+        centerx, centery, radius1, radius2, angle, thresholdAngle, '#ffffff', '#aaaaaa'))
+    el.appendChild(
+      drawDialFragment(
+        centerx, centery, radius1, radius2, thresholdAngle, angle1, '#aaaaaa', '#aaaaaa'))
+  } else {
+    el.appendChild(
+      drawDialFragment(
+        centerx, centery, radius1, radius2, angle0, thresholdAngle, '#ffaaaa', '#aaaaaa'))
+    el.appendChild(
+      drawDialFragment(
+        centerx, centery, radius1, radius2, thresholdAngle, angle, '#ff5555', '#aaaaaa'))
+    el.appendChild(
+      drawDialFragment(
+        centerx, centery, radius1, radius2, angle, angle1, '#aaaaaa', '#aaaaaa'))
+  }
+  return el
 }
 
 widgetInfo['germlinepanel'] = {'title': ''};
@@ -1270,72 +1513,271 @@ widgetGenerators['germlinepanel'] = {
         'width': undefined,
         'height': 'unset',
         'function': function (div, row, tabName) {
-            div.style.marginTop = '2vh';
-            var hugo = annotData['base']['hugo'];
-            var achange = changeAchange3to1(annotData['base']['achange']);
-            div.style.overflow = 'unset';
-            var sdiv = getEl('div');
-            /*var span = getEl('div');
-            span.textContent = 'Allele frequencies';
-            addEl(sdiv, span);
-            addEl(sdiv, getEl('br'));
-            addEl(sdiv, getEl('br'));*/
-            var span = getEl('div');
-            span.classList.add('detail-info-line-header');
-            //span.style.width = '130px';
-            span.textContent = 'gnomADv3 allele frequency';
-            //span.style.textAlign = 'left';
-            //span.style.display = 'inline-block';
-            addEl(sdiv, span);
-            var td = getEl('div');
-            td.style.display = 'inline-block';
-            td.style.width = 'calc(100% - 130px)';
-            if (annotData['gnomad3'] == null) {
-                var span = getEl('span');
-                span.textContent = 'No annotation available for ' + hugo + ' ' + achange;
-                addEl(td, span);
-            } else {
-                addBarComponent(td, row, 'Total', 'gnomad3__af', tabName);
-                addBarComponent(td, row, 'African', 'gnomad3__af_afr', tabName);
-                addBarComponent(td, row, 'American', 'gnomad3__af_amr', tabName);
-                addBarComponent(td, row, 'Ashkenazi', 'gnomad3__af_asj', tabName);
-                addBarComponent(td, row, 'East Asn', 'gnomad3__af_eas', tabName);
-                addBarComponent(td, row, 'Finn', 'gnomad3__af_fin', tabName);
-                addBarComponent(td, row, 'Non-Finn Eur', 'gnomad3__af_nfe', tabName);
-                addBarComponent(td, row, 'Other', 'gnomad3__af_oth', tabName);
-                addBarComponent(td, row, 'South Asn', 'gnomad3__af_sas', tabName);
-            }
-            addEl(sdiv, td);
-            addEl(sdiv, getEl('br'));
-            addEl(sdiv, getEl('br'));
-            var span = getEl('div');
-            span.classList.add('detail-info-line-header');
-            //span.style.width = '130px';
-            span.textContent = '1000 Genomes allele frequency';
-            //span.style.textAlign = 'left';
-            //span.style.display = 'inline-block';
-            addEl(sdiv, span);
-            var td = getEl('div');
-            if (annotData['thousandgenomes'] == null) {
-                var span = getEl('span');
-                span.textContent = 'No annotation available for ' + hugo + ' ' + achange;
-                addEl(td, span);
-            } else {
-                addBarComponent(td, row, 'Total', 'thousandgenomes__af', tabName);
-                addBarComponent(td, row, 'African', 'thousandgenomes__afr_af', tabName);
-                addBarComponent(td, row, 'American', 'thousandgenomes__amr_af', tabName);
-                addBarComponent(td, row, 'East Asn', 'thousandgenomes__eas_af', tabName);
-                addBarComponent(td, row, 'European', 'thousandgenomes__eur_af', tabName);
-                addBarComponent(td, row, 'South Asn', 'thousandgenomes__sas_af', tabName);
-            }
-            addEl(sdiv, td);
-            addEl(div, sdiv);
-            var br = getEl("br");
-            addEl(div, br);
+          var dl = getEl('dl')
+          dl.style.width = 'calc(100% - 1rem)'
+          addEl(div, dl)
+          div.style.marginTop = '2vh';
+          var hugoAchange = getHugoAchange()
+          //div.style.overflow = 'unset';
+          //var sdiv = getEl('div');
+          /*var span = getEl('div');
+          span.textContent = 'Allele frequencies';
+          addEl(sdiv, span);
+          addEl(sdiv, getEl('br'));
+          addEl(sdiv, getEl('br'));*/
+          //var span = getEl('div');
+          //span.classList.add('detail-info-line-header');
+          //span.style.width = '130px';
+          //span.textContent = 'gnomADv3 allele frequency';
+          //span.style.textAlign = 'left';
+          //span.style.display = 'inline-block';
+          //addEl(sdiv, span);
+          /*var td = getEl('div');
+          td.style.display = 'inline-block';
+          td.style.width = 'calc(100% - 130px)';
+          if (annotData['gnomad3'] == null) {
+              var span = getEl('span');
+              span.textContent = 'No annotation available for ' + hugo + ' ' + achange;
+              addEl(td, span);
+          } else {
+              addBarComponent(td, row, 'Total', 'gnomad3__af', tabName);
+              addBarComponent(td, row, 'African/African American', 'gnomad3__af_afr', tabName);
+              addBarComponent(td, row, 'Latino/Admixed American', 'gnomad3__af_amr', tabName);
+              addBarComponent(td, row, 'Ashkenazi Jewish', 'gnomad3__af_asj', tabName);
+              addBarComponent(td, row, 'East Asian', 'gnomad3__af_eas', tabName);
+              addBarComponent(td, row, 'Finnish', 'gnomad3__af_fin', tabName);
+              addBarComponent(td, row, 'Non-Finnish European', 'gnomad3__af_nfe', tabName);
+              addBarComponent(td, row, 'Other', 'gnomad3__af_oth', tabName);
+              addBarComponent(td, row, 'South Asian', 'gnomad3__af_sas', tabName);
+          }*/
+          if (annotData['gnomad3'] == null) {
+            var td = 'No annotation available for ' + hugoAchange
+            addDlRow(dl, 'gnomADv3 allele frequency', td)
+          } else {
+            let af = annotData['gnomad3']['af']
+            let afr = annotData['gnomad3']['af_afr']
+            let asj = annotData['gnomad3']['af_asj']
+            let eas = annotData['gnomad3']['af_eas']
+            let fin = annotData['gnomad3']['af_fin']
+            let amr = annotData['gnomad3']['af_amr']
+            let nfe = annotData['gnomad3']['af_nfe']
+            let oth = annotData['gnomad3']['af_oth']
+            let sas = annotData['gnomad3']['af_sas']
+            /*af = 1
+            afr = 0.5
+            asj = 0.25
+            eas = 0.05*/
+            var tableData = [af, afr, asj, eas, fin, amr, nfe, oth, sas]
+            var barColors = [
+              `rgba(255, ${(1 - af) * 255}, ${(1 - af) * 240}, 1)`,
+              `rgba(255, ${(1 - afr) * 255}, ${(1 - afr) * 240}, 1)`,
+              `rgba(255, ${(1 - asj) * 255}, ${(1 - asj) * 240}, 1)`,
+              `rgba(255, ${(1 - eas) * 255}, ${(1 - eas) * 240}, 1)`,
+              `rgba(255, ${(1 - fin) * 255}, ${(1 - fin) * 240}, 1)`,
+              `rgba(255, ${(1 - amr) * 255}, ${(1 - amr) * 240}, 1)`,
+              `rgba(255, ${(1 - nfe) * 255}, ${(1 - nfe) * 240}, 1)`,
+              `rgba(255, ${(1 - oth) * 255}, ${(1 - oth) * 240}, 1)`,
+              `rgba(255, ${(1 - sas) * 255}, ${(1 - sas) * 240}, 1)`,
+            ]
+            var labels = [
+              'Total',
+              'African/African American',
+              'Ashkenazi Jewish',
+              'East Asian',
+              'Finnish',
+              'Latino/Admixed American',
+              'Non-Finnish European',
+              'Other',
+              'South Asian',
+            ]
+            var td = getEl('canvas')
+            td.id = 'gnomad3_chart'
+            td.style.width = '100%'
+            td.style.height = '24rem'
+            addDlRow(dl, 'gnomADv3 allele frequency', td)
+            var chart = new Chart(td, {
+              type: 'horizontalBar',
+              data: {
+                datasets: [{
+                  data: tableData,
+                  backgroundColor: barColors,
+                }],
+                labels: labels,
+              },
+              options: {
+                animation: {
+                  onComplete: function() {
+                    var ctx = this.chart.ctx
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily)
+                    ctx.fillStyle = this.chart.config.options.defaultFontColor
+                    ctx.textAlign = 'center'
+                    ctx.textBaseline = 'bottom'
+                    this.data.datasets.forEach(function (dataset) {
+                      for (var i = 0; i < dataset.data.length; i++) {
+                        var model = dataset._meta[
+                            Object.keys(dataset._meta)[0]].data[i]._model;
+                        if (dataset.data[i] != undefined) {
+                          ctx.fillText(
+                            prettyVal(dataset.data[i]), 
+                            Math.max(model.base + 30, model.x - 20), 
+                            model.y + 5
+                          )
+                        }
+                      }
+                    })
+                  }
+                },
+                scales: {
+                  xAxes: [{
+                    ticks: {
+                      max: 1.0,
+                      min: 0.0,
+                    }
+                  }],
+                },
+                responsive: true,
+                responsiveAnimationDuration: 500,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false,
+                  position: 'right',
+                },
+                plugins: {
+                  labels: {
+                    render: 'label',
+                    fontColor: '#000000',
+                    overlap: false,
+                    outsidePadding: 4,
+                  }
+                },
+              },
+            })
+          }
+          if (annotData['thousandgenomes'] == null) {
+            var td = 'No annotation available for ' + hugoAchange
+            addDlRow(dl, '1000 Genomes Allele Frequency', td)
+          } else {
+            let af = annotData['thousandgenomes']['af']
+            let amr = annotData['thousandgenomes']['amr_af']
+            let afr = annotData['thousandgenomes']['afr_af']
+            let eas = annotData['thousandgenomes']['eas_af']
+            let eur = annotData['thousandgenomes']['eur_af']
+            let sas = annotData['thousandgenomes']['sas_af']
+            /*af = 1
+            afr = 0.5
+            asj = 0.25
+            eas = 0.05*/
+            var tableData = [af, amr, afr, eas, eur, sas]
+            var barColors = [
+              `rgba(255, ${(1 - af) * 255}, ${(1 - af) * 240}, 1)`,
+              `rgba(255, ${(1 - amr) * 255}, ${(1 - amr) * 240}, 1)`,
+              `rgba(255, ${(1 - afr) * 255}, ${(1 - afr) * 240}, 1)`,
+              `rgba(255, ${(1 - eas) * 255}, ${(1 - eas) * 240}, 1)`,
+              `rgba(255, ${(1 - eur) * 255}, ${(1 - eur) * 240}, 1)`,
+              `rgba(255, ${(1 - sas) * 255}, ${(1 - sas) * 240}, 1)`,
+            ]
+            var labels = [
+              'Total',
+              'Ad Mixed American',
+              'African',
+              'East Asian',
+              'European',
+              'South Asian',
+            ]
+            var td = getEl('canvas')
+            td.id = 'thousandgenomes_chart'
+            td.style.width = '100%'
+            td.style.height = '17rem'
+            addDlRow(dl, '1000 Genomes Allele Frequency', td)
+            var chart = new Chart(td, {
+              type: 'horizontalBar',
+              data: {
+                datasets: [{
+                  data: tableData,
+                  backgroundColor: barColors,
+                }],
+                labels: labels,
+              },
+              options: {
+                animation: {
+                  onComplete: function() {
+                    var ctx = this.chart.ctx
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, 'normal', Chart.defaults.global.defaultFontFamily)
+                    ctx.fillStyle = this.chart.config.options.defaultFontColor
+                    ctx.textAlign = 'center'
+                    ctx.textBaseline = 'bottom'
+                    this.data.datasets.forEach(function (dataset) {
+                      for (var i = 0; i < dataset.data.length; i++) {
+                        var model = dataset._meta[
+                            Object.keys(dataset._meta)[0]].data[i]._model;
+                        if (dataset.data[i] != undefined) {
+                          ctx.fillText(
+                            prettyVal(dataset.data[i]), 
+                            Math.max(model.base + 30, model.x - 20), 
+                            model.y + 5
+                          )
+                        }
+                      }
+                    })
+                  }
+                },
+                scales: {
+                  xAxes: [{
+                    ticks: {
+                      max: 1.0,
+                      min: 0.0,
+                    }
+                  }],
+                },
+                responsive: true,
+                responsiveAnimationDuration: 500,
+                maintainAspectRatio: false,
+                legend: {
+                  display: false,
+                  position: 'right',
+                },
+                plugins: {
+                  labels: {
+                    render: 'label',
+                    fontColor: '#000000',
+                    overlap: false,
+                    outsidePadding: 4,
+                  }
+                },
+              },
+            })
+          }
+          //addEl(sdiv, td);
+          //addEl(sdiv, getEl('br'));
+          //addEl(sdiv, getEl('br'));
+          //var span = getEl('div');
+          //span.classList.add('detail-info-line-header');
+          //span.style.width = '130px';
+          //span.textContent = '1000 Genomes allele frequency';
+          //span.style.textAlign = 'left';
+          //span.style.display = 'inline-block';
+          //addEl(sdiv, span);
+          /*var td = getEl('div');
+          if (annotData['thousandgenomes'] == null) {
+              var span = getEl('span');
+              span.textContent = 'No annotation available for ' + hugo + ' ' + achange;
+              addEl(td, span);
+          } else {
+              addBarComponent(td, row, 'Total', 'thousandgenomes__af', tabName);
+              addBarComponent(td, row, 'African', 'thousandgenomes__afr_af', tabName);
+              addBarComponent(td, row, 'American', 'thousandgenomes__amr_af', tabName);
+              addBarComponent(td, row, 'East Asian', 'thousandgenomes__eas_af', tabName);
+              addBarComponent(td, row, 'European', 'thousandgenomes__eur_af', tabName);
+              addBarComponent(td, row, 'South Asian', 'thousandgenomes__sas_af', tabName);
+          }
+          addDlRow(dl, '1000 Genomes Allele Frequency', td)*/
+          //addEl(sdiv, td);
+          //addEl(div, sdiv);
+          //var br = getEl("br");
+          //addEl(div, br);
         }
     }
 }
-
 
 
 widgetInfo['mupit2'] = {'title': ''};
@@ -1390,13 +1832,15 @@ widgetGenerators['cancer_hotspots2'] = {
 			'uterus'
 		],
 		function: function (div, row, tabName) {
+      var dl = getEl('dl')
+      addEl(div, dl)
             let samples = getWidgetData(tabName, 'cancer_hotspots', row, 'samples');
             if (samples == null) {
                 var span = getEl('span');
                 span.classList.add('nodata');
-				addEl(div, addEl(span, getTn('No data')));
+                addEl(div, addEl(span, getTn('No data')));
                 return;
-			}
+            }
             if (samples != undefined && samples != null && samples.indexOf('[[') == 0) {
                 if (!samples) {
                     return;
