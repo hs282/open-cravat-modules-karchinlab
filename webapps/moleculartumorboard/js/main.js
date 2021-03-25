@@ -1056,7 +1056,7 @@ widgetGenerators['pharmgkb2'] = {
       var dl = getEl('dl')
       addEl(div, dl)
       //addInfoLine3(div, 'PharmGKB', getWidgetData(tabName, 'pharmgkb', row, 'notes'))
-      if (annotData['pharmgkb'] == null) {
+      if (annotData['pharmgkb'] == null || annotData['pharmgkb']['notes'] == undefined) {
         addDlRow(dl, 'Drug Response (PharmGKB)',
           getNoAnnotMsgVariantLevel())
       } else {
@@ -1542,7 +1542,7 @@ widgetGenerators['diseasecausingpanel'] = {
       if (annotData['fathmm'] != null) {
         var sdiv = getDialWidget('FATHMM Rank Score', annotData['fathmm']['fathmm_rscore'], 0.75)
       } else {
-        var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+        var sdiv = getNoAnnotMsgVariantLevel()
       }
       addDlRow(dl, 'FATHMM', sdiv)
       //addBarComponent2(div, row, null, 'revel__score', tabName, 200, true, 0.75, 'Benign', 'Pathogenic');
