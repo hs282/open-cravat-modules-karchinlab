@@ -273,3 +273,17 @@ dd {
   margin-bottom: 0.5rem;
 }
 
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: #cccccc;
+}
+

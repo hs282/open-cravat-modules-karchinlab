@@ -791,13 +791,13 @@ widgetGenerators['oncokb'] = {
                 img.src = 'LOE.jpeg';
                 img.style.width = '100%';
                 img.style.maxWidth = '600px';
-                img.style.maxHeight = '30rem';
+                img.style.maxHeight = '20rem';
                 addEl(sssdiv, img);
                 addEl(ssdiv, sssdiv);
                 //addEl(div, ssdiv);
                 // Drug table
                 var sdiv = getEl('div');
-                sdiv.style.maxHeight = '30rem';
+                sdiv.style.maxHeight = '20rem';
                 sdiv.style.overflow = 'auto';
                 sdiv.style.maxWidth = '600px';
                 addEl(ssdiv, sdiv);
@@ -1103,7 +1103,8 @@ widgetGenerators['clinvar2'] = {
       //addEl(ssdiv, getTn('\xa0'));
       addEl(dd, getTn('\xa0'));
       var sigLower = sig == undefined ? '' : sig.toLowerCase()
-      if (id != null && sigLower != 'not provided' && sigLower != '') {
+      if (id != null && sigLower != 'not provided' 
+          && sigLower != '' && sigLower != 'association not found') {
         link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + id;
         var a = makeA(id, link)
         //sdiv.style.position = 'relative';
@@ -1195,6 +1196,9 @@ widgetGenerators['cosmic2'] = {
         sdiv.style.maxHeight = '400px'
         sdiv.style.overflow = 'auto'
         sdiv.style.marginRight = '5rem'
+        sdiv.style.border = '1px solid #aaaaaa'
+        sdiv.style.borderRadius = '0.5rem'
+        sdiv.style.padding = '1rem'
         var table = getWidgetTableFrame();
         //table.style.width = '400px'
         //table.style.fontSize = '14px';
@@ -1287,7 +1291,7 @@ widgetGenerators['cgi'] = {
         //addInfoLine(div, 'No information in Cancer Genome Interpreter');
         var sdiv = getNoAnnotMsgVariantLevel()
       } else {
-        var sdiv = 'Drug ' + assoc + ', CGI'
+        var sdiv = 'Drug ' + assoc
       }
       addDlRow(dl,
         'Therapeutically Actionable Alterations (Cancer Genome Interpreter)',
@@ -1723,17 +1727,16 @@ widgetGenerators['germlinepanel'] = {
         asj = 0.25
         eas = 0.05*/
         var tableData = [af, afr, asj, eas, fin, amr, nfe, oth, sas]
-        var barColors = [
-          `rgba(255, ${(1 - af) * 255}, ${(1 - af) * 240}, 1)`,
-          `rgba(255, ${(1 - afr) * 255}, ${(1 - afr) * 240}, 1)`,
-          `rgba(255, ${(1 - asj) * 255}, ${(1 - asj) * 240}, 1)`,
-          `rgba(255, ${(1 - eas) * 255}, ${(1 - eas) * 240}, 1)`,
-          `rgba(255, ${(1 - fin) * 255}, ${(1 - fin) * 240}, 1)`,
-          `rgba(255, ${(1 - amr) * 255}, ${(1 - amr) * 240}, 1)`,
-          `rgba(255, ${(1 - nfe) * 255}, ${(1 - nfe) * 240}, 1)`,
-          `rgba(255, ${(1 - oth) * 255}, ${(1 - oth) * 240}, 1)`,
-          `rgba(255, ${(1 - sas) * 255}, ${(1 - sas) * 240}, 1)`,
-        ]
+        var barColors = []
+        for (var i = 0; i < tableData.length; i++) {
+          let val = tableData[i]
+          if (val < 0.002) {
+            var color = '#aaaaaa'
+          } else {
+            var color = `rgba(255, ${(1 - val) * 255}, ${(1 - val) * 240}, 1)`
+          }
+          barColors.push(color)
+        }
         var labels = [
           'Total',
           'African/African American',
@@ -1756,6 +1759,7 @@ widgetGenerators['germlinepanel'] = {
             datasets: [{
               data: tableData,
               backgroundColor: barColors,
+              borderColor: '#aaaaaa',
             }],
             labels: labels,
           },
@@ -1823,14 +1827,16 @@ widgetGenerators['germlinepanel'] = {
         asj = 0.25
         eas = 0.05*/
         var tableData = [af, amr, afr, eas, eur, sas]
-        var barColors = [
-          `rgba(255, ${(1 - af) * 255}, ${(1 - af) * 240}, 1)`,
-          `rgba(255, ${(1 - amr) * 255}, ${(1 - amr) * 240}, 1)`,
-          `rgba(255, ${(1 - afr) * 255}, ${(1 - afr) * 240}, 1)`,
-          `rgba(255, ${(1 - eas) * 255}, ${(1 - eas) * 240}, 1)`,
-          `rgba(255, ${(1 - eur) * 255}, ${(1 - eur) * 240}, 1)`,
-          `rgba(255, ${(1 - sas) * 255}, ${(1 - sas) * 240}, 1)`,
-        ]
+        var barColors = []
+        for (var i = 0; i < tableData.length; i++) {
+          let val = tableData[i]
+          if (val < 0.002) {
+            var color = '#aaaaaa'
+          } else {
+            var color = `rgba(255, ${(1 - val) * 255}, ${(1 - val) * 240}, 1)`
+          }
+          barColors.push(color)
+        }
         var labels = [
           'Total',
           'Ad Mixed American',
@@ -1850,6 +1856,7 @@ widgetGenerators['germlinepanel'] = {
             datasets: [{
               data: tableData,
               backgroundColor: barColors,
+              borderColor: '#aaaaaa',
             }],
             labels: labels,
           },
@@ -2015,6 +2022,9 @@ widgetGenerators['cancer_hotspots2'] = {
         var sdiv = getEl('div')
         sdiv.style.height = '48rem'
         sdiv.style.overflow = 'auto'
+        sdiv.style.border = '1px solid #aaaaaa'
+        sdiv.style.borderRadius = '0.5rem'
+        sdiv.style.padding = '1rem'
         var table = getWidgetTableFrame();
         addEl(sdiv, table)
         //addEl(div, table);
@@ -2038,6 +2048,9 @@ widgetGenerators['cancer_hotspots2'] = {
         sdiv.style.height = '14rem'
         sdiv.style.width = '24rem'
         sdiv.style.overflow = 'auto'
+        sdiv.style.border = '1px solid #aaaaaa'
+        sdiv.style.borderRadius = '0.5rem'
+        sdiv.style.padding = '1rem'
         var table = getWidgetTableFrame();
         addEl(sdiv, table)
         //addEl(div, table);
