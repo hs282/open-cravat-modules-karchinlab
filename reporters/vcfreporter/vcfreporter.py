@@ -8,8 +8,34 @@ import os
 import sqlite3
 import aiosqlite
 from cravat.util import detect_encoding
+import json
 
 class Reporter(CravatReport):
+
+    # Replacement of % must come first
+    perc_encode = [
+        [r'%', r'%25'],
+        [r':', r'%3A'],
+        [r';', r'%3B'],
+        [r'=', r'%3D'],
+        [r',', r'%2C'],
+        [r'\n', r'%0A'],
+        [r'\t', r'%09'],
+        [r'\r', r'%0D'],
+    ]
+
+    def vcf_encode(self, orig):
+        new = orig
+        if type(new) == str:
+            for k,v in self.perc_encode:
+                new = new.replace(k,v)
+        return new
+
+    def vcf_decode(self, orig):
+        new = orig
+        for k,v in self.perc_encode[::-1]:
+            new = new.replace(v,k)
+        return new
 
     def setup (self):
         self.wf = None
@@ -22,7 +48,7 @@ class Reporter(CravatReport):
             self.filename_prefix = self.savepath
         self.filename = self.filename_prefix + '.vcf'
         if not 'type' in self.confs:
-            self.info_type = 'combined'
+            self.info_type = 'separate'
         else:
             info_type = self.confs['type']
             if info_type in ['separate', 'combined']:
@@ -30,7 +56,9 @@ class Reporter(CravatReport):
             else:
                 self.info_type = 'combined'
         self.info_fieldname_prefix = 'CRV'
-        self.col_names_to_skip = ['base__uid', 'base__chrom', 'base__pos', 'base__ref_base', 'base__alt_base', 'tagsampler__numsample', 'tagsampler__samples', 'tagsampler__tags', 'vcfinfo__phred', 'vcfinfo__filter', 'vcfinfo__zygosity', 'vcfinfo__alt_reads', 'vcfinfo__tot_reads', 'vcfinfo__af', 'vcfinfo__hap_block', 'vcfinfo__hap_strand']
+        self.col_names_to_skip = {'base__uid', 'base__chrom', 'base__pos', 'base__ref_base', 'base__alt_base',
+            'base__numsample','base__samples','base__tags',
+            }
         q = 'select colval from info where colkey="_converter_format"'
         self.cursor2.execute(q)
         r = self.cursor2.fetchone()
@@ -149,6 +177,23 @@ class Reporter(CravatReport):
                     if v is None:
                         v = 'NOSAMPLEID'
                     self.samples.append(v)
+    
+    @staticmethod
+    def oc2vcf_key(col_name):
+        return f'OC_{col_name}'
+    
+    def include_column(self, col_name):
+        if col_name in self.col_names_to_skip:
+            return False
+        if col_name.startswith('extra_vcf_info__'):
+            return False
+        if col_name.startswith('vcfinfo__'):
+            return False
+        if col_name.startswith('tagsampler__'):
+            return False
+        if col_name.endswith('__original_line'):
+            return False
+        return True
 
     def write_header (self, level):
         self.level = level
@@ -162,13 +207,13 @@ class Reporter(CravatReport):
                 col_name = column['col_name']
                 col_type = column['col_type'].capitalize()
                 col_desc = column['col_desc']
-                if col_name in self.col_names_to_skip:
+                if not self.include_column(col_name):
                     continue
                 if col_desc is None:
                     col_desc = ''
                 if col_type == 'Int':
                     col_type = 'Integer'
-                line = '#INFO=<ID={},Number=.,Type={},Description="{}">'.format(col_name, col_type, col_desc)
+                line = '#INFO=<ID={},Number=A,Type={},Description="{}">'.format(self.oc2vcf_key(col_name), col_type, col_desc)
                 self.write_preface_line(line)
                 self.col_names.append(col_name)
             if len(self.samples) == 0:
@@ -185,7 +230,7 @@ class Reporter(CravatReport):
             #for column in self.colinfo[self.level]['columns']:
                 col_name = column['col_name']
                 col_desc = column['col_desc']
-                if col_name in ['base__uid', 'base__chrom', 'base__pos', 'base__ref_base', 'base__alt_base']:
+                if not(self.include_column(col_name)):
                     continue
                 columns_to_add.append(col_name)
                 if col_desc is not None:
@@ -242,21 +287,31 @@ class Reporter(CravatReport):
                             self.output_candidate[pathno][lineno] = {'noalts': noalts, 'noalts_starless':noalts_starless, 'alts':alts, 'line': vcfline, 'annots': []}
                 continue
             elif col_name == 'base__all_mappings':
-                cell = cell.replace('; ', '&')
+            #     cell = cell.replace('; ', '&')
                 cell = cell.replace(' ', '-')
-                cell = cell.replace(',','/')
-                info.append(cell)
-                continue
-            if self.input_format == 'vcf' and col_name in self.col_names_to_skip:
+            #     cell = cell.replace(',','/')
+            #     info.append(cell)
+            #     continue
+            if self.input_format == 'vcf' and not(self.include_column(col_name)):
                     continue
             if cell is None:
                 infocell = ''
             elif type(cell) is str:
-                cell = cell.replace('; ', '&')
-                cell = cell.replace(';', '&')
-                cell = cell.replace(' ', '-')
-                cell = cell.replace(',','/')
-                infocell = '"' + cell + '"'
+                # cell = cell.replace('; ', '&')
+                # cell = cell.replace(';', '&')
+                # cell = cell.replace(' ', '-')
+                # cell = cell.replace(',','/')
+                try:
+                    o = json.loads(cell)
+                    if type(o) in (dict, list):
+                        if len(o) == 0:
+                            infocell=''
+                        jsoncell = json.dumps(o, separators=(',',':'))
+                        infocell = self.vcf_encode(jsoncell)
+                    else:
+                        infocell = self.vcf_encode(cell)
+                except json.JSONDecodeError:
+                    infocell = self.vcf_encode(cell)
             else:
                 infocell = str(cell)
             info.append(infocell)
@@ -314,7 +369,8 @@ class Reporter(CravatReport):
                             has_value = True
                             break
                     if has_value:
-                        info_add_list.append(self.col_names[colno] + '=' + ','.join(combined_annots[colno]))
+                        info_add_list.append(
+                            self.oc2vcf_key(self.col_names[colno]) + '=' + ','.join(combined_annots[colno]))
                 info_add_str = ';'.join(info_add_list)
             elif self.info_type == 'combined':
                 info_add_str = self.info_fieldname_prefix + '=' + '|'.join([','.join(altlist) for altlist in combined_annots])
