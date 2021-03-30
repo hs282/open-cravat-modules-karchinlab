@@ -4,10 +4,10 @@ var widgetGridSize = 10;
 
 function getWidgetTableFrame () {
 	var table = getEl('table');
-	table.style.fontSize = '12px';
+	//table.style.fontSize = '12px';
 	table.style.borderSpacing = '0px';
 	table.style.borderCollapse = 'collapse';
-	table.style.borderTop = widgetTableBorderStyle;
+	//table.style.borderTop = widgetTableBorderStyle;
 	table.style.borderBottom = widgetTableBorderStyle;
 	table.style.tableLayout = 'fixed';
 	table.style['word-break'] = 'break-all';
@@ -42,7 +42,7 @@ function getWidgetTableTr (values,linkNames) {
 	var numBorder = values.length - 1;
 	var linkNameItr = 0;
 	var tr = getEl('tr');
-	tr.style.borderBottom = '1px solid #cccccc';
+	//tr.style.borderBottom = '1px solid #cccccc';
 	for (var i = 0; i < values.length; i++) {
 		var td = getEl('td');
 		var p = getEl('p');
@@ -156,8 +156,157 @@ function addInfoLineLink (div, header, text, link, trimlen) {
 	addEl(div, getEl('br'));
 }
 
-function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfNoValue) {
-	var cutoff = 0.01;
+function addBarComponent2 (outerDiv, row, header, col, tabName, barWidth, grayIfNoValue, threshold, beginText, endText, maxVal) {
+    if (maxVal == undefined) {
+        maxVal = 1.0
+    }
+	var cutoff = threshold
+	// Value
+    var value = null;
+	if (typeof(row) === 'object' && row.constructor == Object) {
+        value = row[col];
+    } else {
+        value = infomgr.getRowValue(tabName, row, col);
+    }
+	if (value == null) {
+		value = '';
+	} else {
+        if (value == 0) {
+            value = '0'
+        } else if (value >= 0.01) {
+            value = value.toFixed(3);
+        } else {
+            value = value.toExponential(1);
+        }
+	}
+    var color = 'black';
+    if (value == '') {
+        color = '#aaaaaa';
+    }
+    var thresholdColor = '#888888';
+	// Div
+	var div = getEl('div');
+    addEl(outerDiv, div);
+	div.style.display = 'inline-block';
+	div.style.margin = '2px';
+    div.style.color = color;
+	// Header
+    if (header != null) {
+        addEl(div, addEl(getEl('span'), getTn(header)));
+    }
+	// Paper
+    if (barWidth == undefined) {
+        barWidth = 200;
+    }
+    var paddingX = 20;
+    var paddingTop = 20;
+    var paddingBottom = 40;
+	var barHeight = 12;
+    var lineWidth = 0.25;
+	var lineOverhang = 15;
+    var thresholdLineHalfHeight = 10;
+	var valueHeight = barHeight + (2 * lineOverhang);
+    var paperWidth = barWidth + paddingX * 2;
+	var paperHeight = valueHeight + paddingTop + paddingBottom;
+	var subDiv = document.createElement('div');
+	addEl(div, subDiv);
+	subDiv.style.width = paperWidth + 'px';
+	subDiv.style.height = paperHeight + 'px';
+	var allele_frequencies_map_config = {};
+	var paper = Raphael(subDiv, paperWidth, paperHeight);
+	// Box. Red color maxes at 0.3.
+	var box = paper.rect(paddingX, lineOverhang + paddingTop, 
+            barWidth, barHeight, 5);
+    var b = box.getBBox();
+	var c = null;
+	if (value != '') {
+        if (value < threshold) {
+            c = 255
+        } else {
+            c = (1.0 - (value - threshold) / (maxVal - threshold)) * 255;
+        }
+	} else {
+		c = 255;
+	}
+    var valueColor = 'rgb(255, ' + c + ', ' + c + ')';
+    console.log('@ value=', value, 'c=', c, 'color=', color, 'valuecolor=', valueColor)
+	box.attr('stroke', color);
+	box.attr('fill', valueColor);
+	// Value
+	if (value != '') {
+        var valueX = value * barWidth + paddingX;
+		var bar = paper.rect(valueX, paddingTop, 1, valueHeight, lineWidth);
+		bar.attr('fill', color);
+		bar.attr('stroke', color);
+        var text = paper.text(valueX, 8, value);
+        text.attr('fill', color);
+        text.attr('stroke', color);
+	}
+    // Threshold
+    if (threshold != null) {
+        var thresholdX = threshold * barWidth + paddingX;
+		var bar = paper.rect(thresholdX, 
+                lineOverhang - thresholdLineHalfHeight + paddingTop, 
+                1, barHeight + thresholdLineHalfHeight * 2, lineWidth);
+		//bar.attr('fill', thresholdColor);
+		//bar.attr('stroke', thresholdColor);
+        var text = paper.text(thresholdX, valueHeight, threshold + ' threshold');
+        //text.attr('fill', thresholdColor);
+        //text.attr('stroke', thresholdColor);
+	}
+    // Begin text
+    if (beginText != null) {
+        var text = paper.text(paddingX,
+                paperHeight / 2 - 4, beginText)
+            .attr('text-anchor', 'start');
+        /*text.attr('fill', thresholdColor);
+        text.attr('stroke', thresholdColor);
+		var bar = paper.rect(paddingX, 
+                paddingTop + lineOverhang + barHeight + lineOverhang, 
+                0.5, paddingBottom / 2, 1);
+        bar.attr('fill', thresholdColor);
+        bar.attr('stroke', thresholdColor);*/
+	}
+    // End text
+    if (endText != null) {
+        var text = paper.text(paperWidth - paddingX,
+                paperHeight / 2 - 4, endText)
+            .attr('text-anchor', 'end');
+        /*text.attr('fill', thresholdColor);
+        text.attr('stroke', thresholdColor);
+		var bar = paper.rect(paperWidth - paddingX, 
+                paddingTop + lineOverhang + barHeight + lineOverhang, 
+                0.5, paddingBottom / 2, 1);
+        bar.attr('fill', thresholdColor);
+        bar.attr('stroke', thresholdColor);*/
+	}
+    if (beginText != null && endText != null) {
+        var centerY = paperHeight - 11;
+        var arrowStartX = paddingX + barWidth / 3;
+        var arrowEndX = paddingX + barWidth / 3 * 2;
+		var bar = paper.path('M'+arrowStartX+','+centerY+
+                'L'+arrowEndX+','+centerY)
+            .attr('width', 0.25);
+        var bar = paper.path('M'+arrowEndX+','+centerY+
+                'L'+(arrowEndX-5)+','+(centerY-5))
+            .attr('width', 0.25);
+        var bar = paper.path('M'+arrowEndX+','+centerY+
+                'L'+(arrowEndX-5)+','+(centerY+5))
+            .attr('width', 0.25);
+        /*
+		var bar = paper.rect(paddingX + barWidth / 3 + barWidth / 3, centerY,
+                barWidth / 3, 0.25, 0);
+        bar.attr('stroke', '#000000');
+		var bar = paper.rect(paddingX + barWidth / 3, centerY,
+                barWidth / 3, 0.25, 0);
+        bar.attr('stroke', '#000000');
+        */
+    }
+    return paper;
+}
+
+function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfNoValue, cutoff) {
+	//var cutoff = 0.01;
 	var barStyle = {
 		"top": 0,
 		"height": lineHeight,
@@ -177,7 +326,13 @@ function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfN
 	if (value == null) {
 		value = '';
 	} else {
-        value = value.toFixed(3);
+        if (value == 0) {
+            value = '0'
+        } else if (value >= 0.01) {
+            value = value.toFixed(3);
+        } else {
+            value = value.toExponential(1);
+        }
 	}
     var color = 'black';
     if (value == '') {
@@ -191,9 +346,12 @@ function addBarComponent (outerDiv, row, header, col, tabName, barWidth, grayIfN
     div.style.color = color;
 
 	// Header
-	addEl(div, addEl(getEl('span'), getTn(header + ': ')));
-	addEl(div, addEl(getEl('span'), getTn(value)));
-	addEl(div, getEl('br'));
+    var sdiv = getEl('div')
+    sdiv.style.fontSize = '0.9rem'
+	addEl(sdiv, addEl(getEl('span'), getTn(header + ': ')));
+	addEl(sdiv, addEl(getEl('span'), getTn(value)));
+	addEl(div, sdiv)
+	//addEl(div, getEl('br'));
 	
 	// Paper
     if (barWidth == undefined) {

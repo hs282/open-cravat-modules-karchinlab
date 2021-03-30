@@ -1,3 +1,3 @@
-# Variant Report for a Single Variant
+# Molecular Tumor Board Report for Single Variant
 
-Variant Report is an OpenCRAVAT webapp which presents curated sets of annotations for a given single variant.
+Molecular Tumor Board Report is an OpenCRAVAT webapp which presents curated sets of annotations for a single variant.
