@@ -18,6 +18,7 @@ class CravatConverter(BaseConverter):
                 'type':'string'
             },
         ]
+        self.found_vars = set()
     
     def check_format(self, f):
         return '23andMe' in f.readline()
@@ -56,6 +57,11 @@ class CravatConverter(BaseConverter):
         for var in geno:
             if var in self.good_vars and var != ref:
                 alt = var
+                unq_var = (chrom, pos, ref, alt)
+                if unq_var in self.found_vars:
+                    continue
+                else:
+                    self.found_vars.add(unq_var)
                 wdict = {
                     'tags':tags,
                     'chrom':chrom,
