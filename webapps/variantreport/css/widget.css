@@ -31,19 +31,16 @@ body {
 }
 
 body * {
-	/*font-family: 'Helvetica';*/
     font-family: 'open-sans-300';
-	margin: 0px;
+	  margin: 0px;
 }
 
 .detaildiv {
-	overflow: auto;
-	position: absolute;
-    font-family: monospace;
+  font-family: monospace;
 }
 
 .detaildiv.resultviewer {
-	width: calc(100% - 8px);
+	#width: calc(100% - 8px);
 	bottom: 10px;
 	height: 350px;
 }
@@ -53,15 +50,12 @@ body * {
 }
 
 .detailcontainerwrapdiv {
-	width: 100%;
-	height: 100%;
 	overflow: auto;
-	position: relative;
 }
 
 .detailcontentdiv {
 	overflow: auto;
-	height: calc(100% - 32px);
+	#height: calc(100% - 32px);
 	padding: 0px;
     padding-left: 0px;
     padding-right: 0px;
@@ -87,7 +81,7 @@ body * {
 	font-size: 14px;
 	font-weight: bold;
 	display: inline-block;
-	width: 100%;
+	#width: 100%;
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -95,7 +89,7 @@ body * {
 
 .detailwidgettitle {
 	display: inline-block;
-	width: calc(100% - 4px);
+	#width: calc(100% - 4px);
 	/*background: #4a87bd;*/
 	font-size: 18px;
     height: 18px;

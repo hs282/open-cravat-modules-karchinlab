@@ -18,27 +18,27 @@
     <div id = 'body'> 
         <div id='logodiv'>
             <!-- <img src='mtblogo_crop.png' style='width: 4vw; position: absolute; left: 2.5vw;' /> -->
-            
-            <span id='pagetitle'>OpenCRAVAT Variant Report</span>
-            <hr id='pagetitle_hr' />
-            <img id='search_btn' src='search.png' onclick='onClickSearch();'/>
-            <!--<a href='https://github.com/KarchinLab/open-cravat/wiki' target='_blank' id='question_btn'>
-                <img src='/result/images/question.png' style='width: 1.2vw;' />
-            </a>-->
-            <div id='inputdiv' style='display: none; position: absolute; top: 3rem; right: 9.5vw; 
-                    font-size: 12px; z-index: 3; background-color: white; padding: 20px; width: 250px; 
-                    box-shadow: 4px 4px 4px gray; border: 1px dashed gray;'>
-                <span>Type a variant and enter or click the Update annotation button. The syntax of a 
-                variant is chromosome, position, reference allele, and alternate allele, 
-                concatenated with a colon. Strand is assumed to be plus. For example, chr17:39724004:C:G</span>
-                <br />
-                <input id="input_variant" name="inputVariant" style='margin-top: 8px;' />
-                <button id="input_submit" onclick="submitForm();" style='margin-top: 8px;' >
-                    Update annotation</button>
+            <div></div>
+            <div>
+              <span id='pagetitle'>OpenCRAVAT Variant Report</span>
             </div>
-            <img src='menu_book-black-48dp.svg' style='width: 5vw; height: 3vw; position: absolute; 
-                    right: 20vw; top: 1.2vw; cursor: pointer;' 
-                    onclick='window.open("https://opencravat.org/files/MTB_Documentation.pdf");'/>
+            <div>
+              <img id='search_btn' src='search.png' onclick='onClickSearch();'/>
+              <!--<a href='https://github.com/KarchinLab/open-cravat/wiki' target='_blank' id='question_btn'>
+                  <img src='/result/images/question.png' style='width: 1.2vw;' />
+              </a>-->
+              <div id='inputdiv'>
+                  <span>Type a variant and enter or click the Update annotation button. The syntax of a 
+                  variant is chromosome, position, reference allele, and alternate allele, 
+                  concatenated with a colon. Strand is assumed to be plus. For example, chr17:39724004:C:G</span>
+                  <br />
+                  <input id="input_variant" name="inputVariant" style='margin-top: 8px;' />
+                  <button id="input_submit" onclick="submitForm();" style='margin-top: 8px;' >
+                      Update annotation</button>
+              </div>
+              <img id='helpimg' src='menu_book-black-48dp.svg'
+                      onclick='window.open("https://opencravat.org/files/MTB_Documentation.pdf");'/>
+            </div>
         </div>
         <div id = 'bottom-div'>
             <div class="sidenav">

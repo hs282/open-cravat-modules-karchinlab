@@ -3,19 +3,13 @@
 }
 
 .detaildiv.singlevariantpage {
-    overflow: unset;
-    position: unset;
 }
 
 .singlevariantpage .detailcontainerwrapdiv {
-    width: unset;
-    height: unset;
     padding-bottom: 10px;
 }
 
 .singlevariantpage .detailcontentdiv {
-    height: 100%;
-    width: 1650px;
     /* overflow: auto; */
     background-color:#e8e8e8;
     border-radius: 20px;
@@ -40,10 +34,6 @@
 }
 
 .singlevariantpage .detailwidget {
-    margin: 0px;
-    border: 0px;
-    position: relative;
-    height: unset;
     padding-bottom: 1rem;
 }
 
@@ -84,11 +74,9 @@
     /*text-decoration: underline;*/
 }
 .container {
-    width:100%;
     /* border:1px solid white; */
 }
 .container div {
-    width: 100%;
 }
 .container .header {
     position: relative;
@@ -105,34 +93,29 @@
 #body {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 #bottom-div {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) 1fr;
+  margin: 0;
+  padding: 0;
 }
+
 #logodiv {
-    position: fixed;
-    left: 0vw;
     background-color: whitesmoke;
-    width: 100%;
-    top: 0vw;
-    padding-top: 1vw;
-    z-index: 4;
-    height: 5.0vw;
-    background-image: url("banner.png");
-    background-size: 2000px 130px;
+    height: 5vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0;
+}
+
+#logodiv > div {
+  display: flex;
 }
 
 #detaildiv_variant {
-    position: absolute;
     background-color: whitesmoke;
-    padding-top: 1vw;
-    padding-left: 15vw;
-    padding-right: 3vw;
-    line-height: 1.5;
-    /* display: flex;
-    flex-direction: column;
-    overflow-y: scroll; */
 }
 
 #spinnerdiv {
@@ -150,28 +133,26 @@
 
 #pagetitle {
     font-size: 3vw;
-    position: absolute;
-    width: 100%;
     text-align: center;
     margin: 0px;
     color: whitesmoke;
     font-family: 'source-sans-pro-bold';
     border-radius: 10px;
-    text-shadow: 0 0 6px #000;
-}
-
-#pagetitle_hr {
-    position: absolute;
-    top: -5.5vw;
-    width: 100%;
-    
 }
 
 #search_btn {
     width: 3vw;
-    position: absolute;
-    top: 1.5vw;
-    left: 72vw;
+}
+
+#inputdiv {
+  font-size: 12px;
+  background-color: white;
+}
+
+#helpimg {
+  width: 5vw; 
+  height: 3vh;
+  cursor: pointer;
 }
 
 #question_btn {
@@ -356,16 +337,7 @@ dd {
   }
 
 .sidenav {
-  /* height: 900px;
-  width: 260px; */
-  position: fixed;
-  z-index: 1;
-  top: 46;
-  left: 10;
-  background-color: rgb(73 134 189);
-  overflow-x: hidden;
-  /* padding-top: 160px; */
-  margin-top: 105px;
+  background-color: rgb(32,32,32);
   border-radius: 10px;  
   display: flex;
   flex-direction: column;
@@ -395,18 +367,14 @@ dd {
   background-color: whitesmoke;
 }
 
-/* Style page content */
-/* .main {
-  margin-top: 360px;
-  margin-left: 10px;
-  padding: 30px 20px;
-  position: relative;
-  float: left; */
-  /* display: flex;
-  flex-direction: column; */
-/* } */
+.main {
+  overflow: auto;
+  height: 95vh;
+  margin: 0;
+  padding: 0;
+}
 
- @media screen and (max-height: 450px) {
+@media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
@@ -446,35 +414,3 @@ dd {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
-
-  .logoHover {
-    opacity: 1.00;
-    transition: 0.5s ease-in-out;
-}
-
- .sidenav-header {
-  padding-bottom: 20px;
-  background: #e8e8e8;
-  /* margin-top: 40px; */
-}
-
-#logo {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 15px;
-  display: block;
-}
-h3 {
-  display: block;
-  font-size: 2em;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-  color: rgb(73 134 189);
-  font-family: 'open-sans-300';
-}
-#OC-title {
-  text-align: center;
-}
