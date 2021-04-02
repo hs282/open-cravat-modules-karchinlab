@@ -3,6 +3,139 @@ var annotData = null;
 var mqMaxMatch = window.matchMedia('(max-width: 1024px)');
 var mqMinMatch = window.matchMedia('(min-width: 1024px)');
 
+function addGradientStopBarComponent (outerDiv, row, header, col, tabName, width) {
+    colors={'0.0':[255,255,255],'1.0':[255,0,0]}
+    minval=0.0
+    maxval=1.0
+    var cutoff = 0.01;
+    var barStyle = {
+        "top": 0,
+        "height": lineHeight,
+        "width": 1,
+        "fill": 'black',
+        "stroke": 'black',
+        "round_edge": 1
+    };
+
+    var dtype = null;
+    var orderedPivots = [];
+    for (pivot in colors){
+        orderedPivots.push(pivot)
+    }
+    orderedPivots.sort(function(a,b){return a-b})
+    
+    // Value
+    var value = null;
+    if (typeof(row) === 'object' && row.constructor == Object) {
+        value = row[col];
+    } else {
+        value = infomgr.getRowValue(tabName, row, col);
+    }
+    if (value == null) {
+        value = '';
+    }
+    else if(typeof value == 'string'){
+        dtype = 'string'
+    }
+    else {
+        value = value.toFixed(3);
+    }
+    // Div
+    var div = getEl('div');
+    div.style.display = 'inline-block';
+    div.style.margin = '2px';
+    if (width != undefined) {
+        div.style.width = width
+        div.style.wordBreak = 'break-word'
+    }
+
+    // Header
+    var span = getEl('span');
+    addEl(div, addEl(span, getTn(header + ': ')));
+    if (value == undefined || value == '') {
+        span.classList.add('nodata');
+    }
+    var span = getEl('span');
+    addEl(div, addEl(span, getTn(value)));
+    if (value == undefined || value == '') {
+        span.classList.add('nodata');
+    }
+    addEl(div, getEl('br'));
+    if(value !== ''){
+        value = parseFloat(value);
+    }
+
+    // Paper
+    var barWidth = 108;
+    var barHeight = 12;
+    var lineOverhang = 3;
+    var lineHeight = barHeight + (2 * lineOverhang);
+    var paperHeight = lineHeight + 4;
+    var subDiv = document.createElement('div');
+    addEl(div, subDiv);
+    subDiv.style.width = (barWidth + 10) + 'px';
+    subDiv.style.height = paperHeight + 'px';
+    var allele_frequencies_map_config = {};
+    var paper = Raphael(subDiv, barWidth, paperHeight);
+
+    // Box with remainder white
+    var box = paper.rect(0, lineOverhang, barWidth, barHeight, 4);
+    box.attr('fill', 'white');
+
+    // Box.
+    var value = (value - parseFloat(minval))/(Math.abs(parseFloat(minval)) + Math.abs(parseFloat(maxval)));
+    var box = paper.rect(0, lineOverhang, value * barWidth, barHeight, 4);
+    var c = [];
+    if (value !== '') {
+        if(value <= orderedPivots[0]){
+            var piv = orderedPivots[0];
+            c = colors['%s',piv];
+        }
+        else if(value>=orderedPivots[orderedPivots.length-1]){
+            var piv = orderedPivots[orderedPivots.length-1];
+            c = colors['%s',piv];
+        }
+        else{
+            var boundColors = {color1:[], color2:[]};
+            var boundPivots = [];
+            for (var i=0; i<(orderedPivots.length-1); i++){
+                if (orderedPivots[i] <= value && value < orderedPivots[i+1]){
+                    boundPivots[0] = orderedPivots[i];
+                    boundPivots[1] = orderedPivots[i+1];
+                    boundColors.color1 = colors[boundPivots[0]];
+                    boundColors.color2 = colors[boundPivots[1]];
+                    break;
+                }
+            }
+            //semi-broken when values are negative
+            var ratio = (value - boundPivots[0])/(boundPivots[1]-boundPivots[0]);
+            c[0] = Math.round(boundColors.color1[0] * (1.0 - ratio) + boundColors.color2[0] * ratio);
+            c[1] = Math.round(boundColors.color1[1] * (1.0 - ratio) + boundColors.color2[1] * ratio);
+            c[2] = Math.round(boundColors.color1[2] * (1.0 - ratio) + boundColors.color2[2] * ratio);
+        }
+        
+    } else {
+        c = [255, 255, 255];
+    }
+    box.attr('fill', 'rgb('+c.toString()+')');
+    if (value == undefined || value == '') {
+        color = '#cccccc';
+    } else {
+        color = 'black';
+    }
+    box.attr('stroke', color);
+    
+    // Bar.
+    if (value !== '' && dtype != 'string') {
+        //Convert values onto 0 to 1 scale depending on min and max val provided (defaults to 0 and 1)
+        value = (value - parseFloat(minval))/(Math.abs(parseFloat(minval)) + Math.abs(parseFloat(maxval)));
+        var bar = paper.rect(value * barWidth, 0, 1, lineHeight, 1);
+        bar.attr('fill', color);
+        bar.attr('stroke', color);
+    }
+    addEl(outerDiv, div);
+}
+
 function mqMaxMatchHandler(e) {
   if (e.matches) {
     var iframe = document.querySelector('#mupitiframe');
@@ -1722,6 +1855,7 @@ widgetGenerators['germlinepanel'] = {
           addBarComponent(td, row, 'Other', 'gnomad3__af_oth', tabName);
           addBarComponent(td, row, 'South Asian', 'gnomad3__af_sas', tabName);
       }*/
+      let ww = '8rem'
       if (annotData['gnomad3'] == null) {
         var td = getNoAnnotMsgVariantLevel()
         addDlRow(dl, 'gnomADv3 allele frequency', td)
@@ -1735,11 +1869,29 @@ widgetGenerators['germlinepanel'] = {
         let nfe = annotData['gnomad3']['af_nfe']
         let oth = annotData['gnomad3']['af_oth']
         let sas = annotData['gnomad3']['af_sas']
-        /*af = 1
-        afr = 0.5
-        asj = 0.25
-        eas = 0.05*/
-        var tableData = [af, afr, asj, eas, fin, amr, nfe, oth, sas]
+        var labels = {
+          'af': 'Total',
+          'afr': 'African/African American',
+          'asj': 'Ashkenazi Jewish',
+          'eas': 'East Asian',
+          'fin': 'Finnish',
+          'amr': 'Latino/Admixed American',
+          'nfe': 'Non-Finnish European',
+          'oth': 'Other',
+          'sas': 'South Asian',
+        }
+        let td = getEl('div')
+        addGradientStopBarComponent(td, row, labels['af'], 'gnomad3__af', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['afr'], 'gnomad3__af_afr', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['asj'], 'gnomad3__af_asj', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['eas'], 'gnomad3__af_eas', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['fin'], 'gnomad3__af_fin', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['lat'], 'gnomad3__af_lat', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['nfe'], 'gnomad3__af_nfe', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['oth'], 'gnomad3__af_oth', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['sas'], 'gnomad3__af_sas', tabName, ww);
+        addDlRow(dl, 'gnomADv3 allele frequency', td)
+        /*var tableData = [af, afr, asj, eas, fin, amr, nfe, oth, sas]
         var barColors = []
         for (var i = 0; i < tableData.length; i++) {
           let val = tableData[i]
@@ -1823,22 +1975,19 @@ widgetGenerators['germlinepanel'] = {
               }
             },
           },
-        })
+        })*/
       }
       if (annotData['thousandgenomes'] == null) {
         var td = getNoAnnotMsgVariantLevel()
         addDlRow(dl, '1000 Genomes Allele Frequency', td)
       } else {
+        /*
         let af = annotData['thousandgenomes']['af']
         let amr = annotData['thousandgenomes']['amr_af']
         let afr = annotData['thousandgenomes']['afr_af']
         let eas = annotData['thousandgenomes']['eas_af']
         let eur = annotData['thousandgenomes']['eur_af']
         let sas = annotData['thousandgenomes']['sas_af']
-        /*af = 1
-        afr = 0.5
-        asj = 0.25
-        eas = 0.05*/
         var tableData = [af, amr, afr, eas, eur, sas]
         var barColors = []
         for (var i = 0; i < tableData.length; i++) {
@@ -1850,14 +1999,24 @@ widgetGenerators['germlinepanel'] = {
           }
           barColors.push(color)
         }
-        var labels = [
-          'Total',
-          'Ad Mixed American',
-          'African',
-          'East Asian',
-          'European',
-          'South Asian',
-        ]
+        */
+        var labels = {
+          'af': 'Total',
+          'amr': 'Ad Mixed American',
+          'afr': 'African',
+          'eas': 'East Asian',
+          'eur': 'European',
+          'sas': 'South Asian',
+        }
+        var td = getEl('div')
+        addGradientStopBarComponent(td, row, labels['af'], 'thousandgenomes__af', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['amr'], 'thousandgenomes__af_amr', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['afr'], 'thousandgenomes__af_afr', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['eas'], 'thousandgenomes__af_eas', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['eur'], 'thousandgenomes__af_eur', tabName, ww);
+        addGradientStopBarComponent(td, row, labels['sas'], 'thousandgenomes__af_sas', tabName, ww);
+        addDlRow(dl, '1000 Genomes Allele Frequency', td)
+        /*
         var td = getEl('canvas')
         td.id = 'thousandgenomes_chart'
         td.style.width = '100%'
@@ -1920,7 +2079,7 @@ widgetGenerators['germlinepanel'] = {
               }
             },
           },
-        })
+        })*/
       }
       //addEl(sdiv, td);
       //addEl(sdiv, getEl('br'));
