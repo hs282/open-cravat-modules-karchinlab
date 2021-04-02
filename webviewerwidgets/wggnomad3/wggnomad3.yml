@@ -1,5 +1,5 @@
 title: gnomAD3
-version: 1.0.0
+version: 1.1.0
 type: webviewerwidget
 required_annotator: gnomad3
 description: gnomAD3 webviewer widget
@@ -12,3 +12,6 @@ developer:
 tags:
 - visualization
 hidden: true
+release_note:
+  1.1.0: color stops at bar, updated pop names
+private: true
