@@ -192,7 +192,7 @@ widgetGenerators['lollipop2'] = {
             function drawMain () {
                 var data = v['data'];
                 var widgetContentDiv = document.getElementById('widgetcontentdiv_' + widgetName + '_' + self.variables.tabName);
-                widgetContentDiv.style.width = '92vw';
+                //widgetContentDiv.style.width = '92vw';
                 var spinner = widgetContentDiv.getElementsByClassName('widgetspinner')[0];
                 $(spinner).remove();
                 widgetGenerators[widgetName]['data'] = data;
@@ -654,9 +654,9 @@ widgetGenerators['lollipop2'] = {
 				// Container
 				var dsDiv = getEl('div');
 				dsDiv.style.width = '100%';
-                dsDiv.style.fontSize = '18px';
+        dsDiv.style.fontSize = '18px';
 				addEl(div, dsDiv);
-                addEl(dsDiv, getEl('br'));
+        addEl(dsDiv, getEl('br'));
                 
 				// Protein site datasource selector
 				var partDiv = getEl('div');
