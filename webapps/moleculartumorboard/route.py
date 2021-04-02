@@ -174,13 +174,27 @@ async def live_annotate (input_data, annotators):
     global modules_to_run_ordered
     response = {}
     assembly = input_data.get('assembly', 'hg38')
-    if assembly in cravat.constants.liftover_chain_paths:
+    if assembly == 'hg38':
+        chrom_hg38 = input_data['chrom']
+        pos_hg38 = input_data['pos']
+        ref_hg38 = input_data['ref_base']
+        alt_hg38 = input_data['alt_base']
+        lifter = LiftOver(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), 'hg38ToHg19.over.chain'))
+        [chrom_hg19, pos_hg19, ref_hg19, alt_hg19] = liftover(input_data, lifter)
+    elif assembly == 'hg19':
+        chrom_hg19 = input_data['chrom']
+        pos_hg19 = input_data['pos']
+        ref_hg19 = input_data['ref_base']
+        alt_hg19 = input_data['alt_base']
         lifter = LiftOver(cravat.constants.liftover_chain_paths[assembly])
-        chrom, pos, ref, alt = liftover(input_data, lifter)
-        input_data['chrom'] = chrom
-        input_data['pos'] = pos
-        input_data['ref'] = ref
-        input_data['alt'] = alt
+        [chrom_hg38, pos_38, ref_38, alt_38] = liftover(input_data, lifter)
+        input_data['chrom'] = chrom_hg38
+        input_data['pos'] = pos_hg38
+        input_data['ref_base'] = ref_hg38
+        input_data['alt_base'] = alt_hg38
+    else:
+        return {}
     crx_data = live_mapper.map(input_data)
     crx_data = live_mapper.live_report_substitute(crx_data)
     crx_data[mapping_parser_name] = AllMappingsParser(crx_data[all_mappings_col_name])
@@ -222,6 +236,10 @@ async def live_annotate (input_data, annotators):
             response[module_name] = None
     del crx_data[mapping_parser_name]
     set_crx_canonical(crx_data)
+    crx_data['hg38_coord'] = {
+        'chrom': chrom_hg38, 'pos': pos_hg38, 'ref_base': ref_hg38, 'alt_base': alt_hg38}
+    crx_data['hg19_coord'] = {
+        'chrom': chrom_hg19, 'pos': pos_hg19, 'ref_base': ref_hg19, 'alt_base': alt_hg19}
     response['crx'] = crx_data
     return response
 

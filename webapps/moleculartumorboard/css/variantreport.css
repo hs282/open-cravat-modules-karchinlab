@@ -197,8 +197,8 @@ dt {
   /*font-size: 0.875rem;*/
   line-height: 1.25rem;
   font-weight: 500;
-  color: rgba(107, 114, 128, 1);
-  /*color: rgba(17, 24, 39, 1);*/
+  /*color: rgba(107, 114, 128, 1);*/
+  color: rgba(17, 24, 39, 1);
   /*grid-column: span 3 / span 3;*/
   padding-right: 1rem;
   word-break: break-word;
@@ -285,5 +285,10 @@ dd {
 ::-webkit-scrollbar-thumb {
   border-radius: 1rem;
   background: #cccccc;
+}
+
+.linktitle {
+  text-decoration: underline dotted #aaaaaa;
+  color: rgba(17, 24, 39, 1);
 }
 

@@ -502,7 +502,18 @@ widgetGenerators['base2'] = {
         variant_length = nalt;
       }
       //addInfoLine3(div, 'Variant Length', variant_length);
-      addDlRow(dl, 'Genomic location', 'chr' + chrom + ':' + getWidgetData(tabName, 'base', row, 'pos') + ' ' + '(genome build GRCh38)', tabName)
+      var sdiv = getEl('div')
+      var ssdiv = getEl('div')
+      var coord = row['base__hg38_coord']
+      ssdiv.textContent = coord['chrom'] + ':' + 
+          coord['pos'] + ' ' + '(genome build GRCh38)'
+      addEl(sdiv, ssdiv)
+      var ssdiv = getEl('div')
+      var coord = row['base__hg19_coord']
+      ssdiv.textContent = coord['chrom'] + ':' + 
+          coord['pos'] + ' ' + '(genome build GRCh37)'
+      addEl(sdiv, ssdiv)
+      addDlRow(dl, 'Genomic location', sdiv)
       //addInfoLine3(div, 'Genomic location',  'chr' + chrom + ':' + getWidgetData(tabName, 'base', row, 'pos') + ' '+ '(genome build GRCh38)', tabName);
       var so = getWidgetData(tabName, 'base', row, 'so');
       var consequence = '';
@@ -921,7 +932,7 @@ widgetGenerators['ncbi'] = {
       span.id = 'hallmarks_func_summary'
       span.style.color = 'gray'
       span.textContent = 'Fetching data...'
-      addDlRow(dl, 'Hallmarks of Cancer Function Gene Summary', span)
+      addDlRow(dl, 'Hallmarks of Cancer Gene Summary', span)
       var link = '/webapps/moleculartumorboard/hallmarks?hugo=' + hugo
       fetch(link)
         .then(data => {
@@ -934,7 +945,8 @@ widgetGenerators['ncbi'] = {
         .then(response => {
           console.log('@ resp=', response)
           let span = document.querySelector('#hallmarks_func_summary')
-          span.textContent = response['func_summary']
+          let t = response['func_summary']
+          span.textContent = t.charAt(0).toUpperCase() + t.slice(1)
           span.style.color = 'black'
           let parentEl = span.parentElement
           let a = getEl('a')
@@ -1210,6 +1222,7 @@ widgetGenerators['cosmic2'] = {
         var link = 'https://cancer.sanger.ac.uk/cosmic/search?q=' +
           annotData['cosmic']['cosmic_id'];
         var a = makeA(title, link)
+        a.classList.add('linktitle')
         //addEl(titleEl, a);
         var tbody = getEl('tbody');
         var tissues = [];
@@ -1219,7 +1232,7 @@ widgetGenerators['cosmic2'] = {
           var count = vcTissue[i][1];
           var tr = getWidgetTableTr([tissue, count]);
           if (count > 25) {
-            tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
+            //tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
           }
           addEl(tbody, tr);
           /*if (tissue == 'breast' || tissue == 'urinary_tract') {
@@ -1235,7 +1248,7 @@ widgetGenerators['cosmic2'] = {
         var sdiv = getEl('div');
         sdiv.style.overflow = 'auto';
         //sdiv.style.width = 'calc(100% - 400px)';
-        sdiv.style.minWidth = '400px';
+        sdiv.style.maxWidth = '400px';
         sdiv.style.height = '400px';
         var chartDiv = getEl('canvas');
         chartDiv.width = '1000';
@@ -1355,8 +1368,8 @@ widgetGenerators['actionpanel'] = {
       //divs[0].style.left = '0px';
       //divs[1].style.paddingLeft = '1px';
       //divs[0].style.width = '50rem';
-      var divs = showWidget('cgi', ['cancer_genome_interpreter'],
-        'variant', div, null, null, false)
+      //var divs = showWidget('cgi', ['cancer_genome_interpreter'],
+      //  'variant', div, null, null, false)
       //divs[0].style.position = 'relative';
       //divs[0].style.top = '0px';
       //divs[0].style.left = '0px';
@@ -1386,13 +1399,13 @@ widgetGenerators['actionpanel'] = {
       //divs[0].style.top = '0px';
       //divs[0].style.left = '0px';
       //divs[1].style.width = '50rem';
-      var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220, false)
+      //var divs = showWidget('pharmgkb2', ['pharmgkb'], 'variant', div, null, 220, false)
       //divs[0].style.position = 'relative';
       //divs[0].style.top = '0px';
       //divs[0].style.left = '0px';
       //divs[1].style.width = '50rem';
-      var generator = widgetGenerators['brca']['variant'];
-      var divs = showWidget('brca', ['base'], 'variant', div, null, 220, false)
+      //var generator = widgetGenerators['brca']['variant'];
+      //var divs = showWidget('brca', ['base'], 'variant', div, null, 220, false)
       //divs[0].style.position = 'relative';
       //divs[0].style.top = '0px';
       //divs[0].style.left = '0px';
@@ -1421,9 +1434,9 @@ widgetGenerators['driverpanel'] = {
       divs[0].style.left = '0px';
       var br = getEl("br");
       //addEl(div, br);
-      var generator = widgetGenerators['cancer_hotspots2']['variant'];
-      generator['width'] = '100%'
-      var divs = showWidget('cancer_hotspots2', ['cancer_hotspots'], 'variant', div, null, '16rem');
+      //var generator = widgetGenerators['cancer_hotspots2']['variant'];
+      //generator['width'] = '100%'
+      //var divs = showWidget('cancer_hotspots2', ['cancer_hotspots'], 'variant', div, null, '16rem');
       //divs[0].style.position = 'relative';
       //divs[0].style.top = '0px';
       //divs[0].style.left = '0px';
@@ -2061,7 +2074,7 @@ widgetGenerators['cancer_hotspots2'] = {
         for (var i = 0; i < samples.length; i++) {
           let tr = getWidgetTableTr(samples[i]);
           if (samples[i][1] > 25) {
-            tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
+            //tr.style.backgroundColor = 'rgba(254, 202, 202, 255)';
           }
           addEl(tbody, tr);
         }
