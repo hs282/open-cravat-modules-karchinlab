@@ -17,9 +17,9 @@
     height: 100%;
     width: 1650px;
     /* overflow: auto; */
-    background-color: lightgray;
+    background-color:#e8e8e8;
     border-radius: 20px;
-    padding-left: 10px;
+    padding-left: 0px;
     /* display: flex;
     flex-direction: column; */
     /* max-width: 90%;
@@ -118,7 +118,9 @@
     top: 0vw;
     padding-top: 1vw;
     z-index: 4;
-    height: 4.6vw;
+    height: 5.0vw;
+    background-image: url("banner.png");
+    background-size: 2000px 130px;
 }
 
 #detaildiv_variant {
@@ -152,12 +154,10 @@
     width: 100%;
     text-align: center;
     margin: 0px;
-    color: rgb(32,32,32);
+    color: whitesmoke;
     font-family: 'source-sans-pro-bold';
-    background-color: lightblue;
     border-radius: 10px;
-    /* padding-left: 40px; */
-    /* left: 420px; */
+    text-shadow: 0 0 6px #000;
 }
 
 #pagetitle_hr {
@@ -356,20 +356,19 @@ dd {
   }
 
 .sidenav {
-  height: 900px;
-  width: 260px;
+  /* height: 900px;
+  width: 260px; */
   position: fixed;
   z-index: 1;
   top: 46;
   left: 10;
-  background-color: rgb(32,32,32);
+  background-color: rgb(73 134 189);
   overflow-x: hidden;
-  /* padding-top: 200px; */
+  /* padding-top: 160px; */
   margin-top: 105px;
   border-radius: 10px;  
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   height: 80vh;
   width: 12vw; 
 }
@@ -415,8 +414,8 @@ dd {
 #material-icons {
   width: 150px;
   position: absolute;
-  bottom:75px;
-  left: 2vw;
+  top: 20px;
+  padding-left: 2vw;
 }
 
   .arrow {
@@ -447,3 +446,35 @@ dd {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
+
+  .logoHover {
+    opacity: 1.00;
+    transition: 0.5s ease-in-out;
+}
+
+ .sidenav-header {
+  padding-bottom: 20px;
+  background: #e8e8e8;
+  /* margin-top: 40px; */
+}
+
+#logo {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  display: block;
+}
+h3 {
+  display: block;
+  font-size: 2em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  color: rgb(73 134 189);
+  font-family: 'open-sans-300';
+}
+#OC-title {
+  text-align: center;
+}
