@@ -84,6 +84,11 @@ output_columns:
   - name: seqs
     title: seqs
     type: int
+- name: multsite
+  type: string
+  title: Mult. Transcripts
+  desc: SIFT scored multiple transcripts for this variant
+  hidden: true
 description: SIFT predicts whether an amino acid substitution affects protein function
 developer:
   name: Pauline Ng
