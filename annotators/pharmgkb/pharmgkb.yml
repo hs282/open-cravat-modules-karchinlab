@@ -1,6 +1,6 @@
 title: PharmGKB
-version: 2.2.0
-datasource: '2021-03-03'
+version: 2.3.0
+datasource: '2021-04-01'
 type: annotator
 level: variant
 output_columns:
@@ -55,7 +55,8 @@ developer:
     Medicine" Clinical Pharmacology & Therapeutics (2012) 92(4): 414-417'
 requires:
 - wgpharmgkb>=2.0.0
-release-note: 
+release-note:
+  2.3.0: Data update 
   2.2.0: Extra columns added
   2.1.0: Data update
   2.0.0: Improved handling of variants with multiple associations
