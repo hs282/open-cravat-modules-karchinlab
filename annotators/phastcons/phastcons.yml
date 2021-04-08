@@ -60,8 +60,9 @@ tags:
 - evolution
 title: Phast Cons
 type: annotator
-version: 3.5.8
+version: 3.5.9
 requires:
 - wgphastcons
 release_note:
+  3.5.9: non-canonical chrom support for older oc versions
   3.5.8: handle only specific alt chroms

@@ -9,8 +9,11 @@ class CravatAnnotator(BaseAnnotator):
 
     def setup(self):
         self.cursor.execute('select distinct chrom from ensembl')
-        self.supported_chroms |= {r[0] for r in self.cursor}
-
+        if hasattr(self, 'supported_chroms'):
+            self.supported_chroms |= {r[0] for r in self.cursor}
+        else:
+            self.supported_chroms = {r[0] for r in self.cursor}
+            
     def annotate(self, input_data, secondary_data=None):
         chrom = input_data["chrom"]
         pos = input_data["pos"]
