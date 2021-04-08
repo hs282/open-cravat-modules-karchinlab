@@ -13,8 +13,7 @@ class CravatAnnotator(BaseAnnotator):
             self.supported_chroms |= {r[0] for r in self.cursor}
         else:
             self.supported_chroms = {r[0] for r in self.cursor}
-        print(self.supported_chroms)
-
+            
     def annotate(self, input_data, secondary_data=None):
         chrom = input_data["chrom"]
         pos = input_data["pos"]
