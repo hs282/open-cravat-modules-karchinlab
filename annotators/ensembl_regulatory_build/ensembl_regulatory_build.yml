@@ -36,8 +36,9 @@ tags:
 requires:
 - wgensembl_regulatory_build
 title: Ensembl Regulatory Build
-version: 1.0.2
+version: 1.0.3
 type: annotator
 release_note:
+  1.0.3: non-canonical chrom support for older oc versions
   1.0.2: added widget
   1.0.1: handle only specific alt chroms

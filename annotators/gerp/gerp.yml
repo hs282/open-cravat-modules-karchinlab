@@ -34,10 +34,11 @@ tags:
 - evolution
 title: GERP++
 type: annotator
-version: 3.6.1
+version: 3.6.2
 release-note:
   3.6.0: return None if no annotation
 requires:
 - wggerp
 release_note:
+  3.6.2: non-canonical chrom support for older oc versions
   3.6.1: handle only specific alt chroms
