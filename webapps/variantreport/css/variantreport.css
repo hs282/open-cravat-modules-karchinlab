@@ -12,8 +12,8 @@
 .singlevariantpage .detailcontentdiv {
     /* overflow: auto; */
     background-color:#e8e8e8;
-    border-radius: 20px;
-    padding-left: 0px;
+    border-radius: 10px;
+    padding-left: 5px;
     /* display: flex;
     flex-direction: column; */
     /* max-width: 90%;
@@ -35,6 +35,7 @@
 
 .singlevariantpage .detailwidget {
     padding-bottom: 1rem;
+    padding-left: 0px;
 }
 
 .singlevariantpage .detailwidget.nodata {
@@ -62,7 +63,10 @@
     font-family: 'source-sans-pro-bold';
     font-size: 30px;
     font-weight: 800;
+    padding-left: 5px;
+    padding-top: 20px;
     /*padding: 6px;*/
+    background-color: whitesmoke;
     color: black;
     /*box-shadow: inset 0 0 0 1000px #4a87bd;*/
     /*width: 1188px;*/
@@ -97,18 +101,21 @@
 }
 #bottom-div {
   display: grid;
-  grid-template-columns: minmax(0, 12rem) 1fr;
+  grid-template-columns: minmax(0, 17rem) 1fr;
   margin: 0;
   padding: 0;
+  background-color: whitesmoke;
 }
 
 #logodiv {
     background-color: whitesmoke;
-    height: 5vh;
+    height: 10vh;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     margin: 0;
-}
+    background-image: url("banner.png");
+    background-size: 100% 100%;
+  }
 
 #logodiv > div {
   display: flex;
@@ -132,16 +139,21 @@
 }
 
 #pagetitle {
-    font-size: 3vw;
+    font-size: 4vw;
     text-align: center;
     margin: 0px;
     color: whitesmoke;
     font-family: 'source-sans-pro-bold';
     border-radius: 10px;
+    text-shadow: 0 0 6px #000;
 }
 
 #search_btn {
     width: 3vw;
+    height: 5vh;
+    position: relative;
+    left: 0px;
+    top: 25px;
 }
 
 #inputdiv {
@@ -150,9 +162,12 @@
 }
 
 #helpimg {
-  width: 5vw; 
-  height: 3vh;
+  width: 7vw; 
+  height: 5vh;
   cursor: pointer;
+  position: relative;
+  /* right: 10px; */
+  top: 23px;
 }
 
 #question_btn {
@@ -319,7 +334,7 @@ dd {
     border: 1px solid #bbbbbb;
     /* margin-right: 0.5rem; */
     margin-bottom: 0.5rem;
-    background-color: lightgray;
+    background-color: #e8e8e8;
 
   }
   .cardio {
@@ -337,36 +352,44 @@ dd {
   }
 
 .sidenav {
-  background-color: rgb(32,32,32);
+  background-color: rgb(73 134 189);
   border-radius: 10px;  
   display: flex;
   flex-direction: column;
   height: 80vh;
   width: 12vw; 
+  margin-top: 40px;
+  margin-left: 10px;
+  margin-right: 20px;
+  overflow-y: scroll;
+  /* padding-right: 10px; */
 }
 
 
 .sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 19px;
+  padding: 10px 8px 6px 16px;
+  font-size: 17px;
   font-family: 'open-sans-300';
   color: whitesmoke;
   display: block;
   border-bottom: .5px solid whitesmoke;
-  
+  display:inline-block; 
+  text-decoration:none;
+  height: 13%;
+  /* width: 100%;  */
+  text-align: left;
+  vertical-align: middle;
+}
+.sidenav a:active{
+  background: #29abe2;
+  color: #fff;
+  border-radius: 5px; 
 }
 
 .sidenav a:hover {
-  color: rgb(32,32,32);
-  background-color: whitesmoke;
+    color: rgb(32,32,32);
+    background-color: whitesmoke;
 }
-
-.sidenav a:active {
-  color: rgb(32,32,32);
-  background-color: whitesmoke;
-}
-
 .main {
   overflow: auto;
   height: 95vh;
@@ -414,3 +437,83 @@ dd {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
+
+  .logoHover {
+    opacity: 1.00;
+    transition: 0.5s ease-in-out;
+    padding-top: 15px;
+}
+
+ .sidenav-header {
+  /* padding-bottom: 20px; */
+  background: #e8e8e8;
+  margin-top: 0px;
+  border-top-left-radius:10px ;
+  border-top-right-radius: 10px;
+  
+}
+
+#logo {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  display: block;
+}
+h3 {
+  display: block;
+  font-size: 2rem;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  color: rgb(73 134 189);
+  font-family: 'open-sans-300';
+}
+#OC-title {
+  text-align: center;
+}
+
+#gnomad th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: rgb(73 134 189);;
+  color: white;
+  height: 10px;
+  position: sticky;
+  top: 0;
+}
+
+#gnomad {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#gnomad td {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+#gnomad tr:nth-child(even){background-color: #f2f2f2;}
+
+#gnomad tr:hover {background-color: #ddd;}
+
+.logos {
+  /* width: 10%; */
+  /* display: block; */
+  vertical-align: middle;
+  margin-left: -14px;
+  width: 12%;
+  height: 28px;
+  filter: brightness(0) invert(1);
+  padding-bottom: 0px;
+}
+
+.sidenav a:hover .logos{
+  color: rgb(32,32,32);
+  background-color: whitesmoke;
+  filter: brightness(1);
+  
+}

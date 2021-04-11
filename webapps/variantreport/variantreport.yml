@@ -8,6 +8,7 @@ live_modules:
 - cancer_genome_interpreter
 - cancer_hotspots
 - cardioboost
+- ccre_screen
 - chasmplus
 - cgc
 - cgl
@@ -20,7 +21,10 @@ live_modules:
 - dbsnp
 - denovo
 - dgi
+- encode_tfbs
+- ensembl_regulatory_build
 - ess_gene
+- genehancer
 - gerp
 - geuvadis
 - ghis
@@ -36,6 +40,7 @@ live_modules:
 - litvar
 - loftool
 - mavedb
+- mirbase
 - ncbigene
 - ndex
 - ndex_chd
@@ -49,10 +54,16 @@ live_modules:
 - prec
 - revel
 - rvis
+- segway
 - siphy
+- swissprot_binding
+- swissprot_domains
+- swissprot_ptm
 - target
+- trinity
 - thousandgenomes
 - uniprot
+- vista_enhancer
 requires:
 - hg38
 - aloft
@@ -61,6 +72,7 @@ requires:
 - cancer_genome_interpreter
 - cancer_hotspots
 - cardioboost
+- ccre_screen
 - chasmplus
 - cgc
 - cgl
@@ -73,7 +85,10 @@ requires:
 - dbsnp
 - denovo
 - dgi
+- encode_tfbs
+- ensembl_regulatory_build
 - ess_gene
+- genehancer
 - gerp
 - geuvadis
 - ghis
@@ -89,6 +104,7 @@ requires:
 - litvar
 - loftool
 - mavedb
+- mirbase
 - ncbigene
 - ndex
 - ndex_chd
@@ -102,10 +118,16 @@ requires:
 - prec
 - revel
 - rvis
+- segway
 - siphy
+- swissprot_binding
+- swissprot_domains
+- swissprot_ptm
 - target
+- trinity
 - thousandgenomes
 - uniprot
+- vista_enhancer
 - wgbase
 - wgchasmplus
 - wgcgc

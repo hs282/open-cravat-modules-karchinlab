@@ -215,13 +215,13 @@ function showAnnotation (response) {
     showWidget('studiespanel', ['base', 'mavedb'], 
             'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_interactions');
-    showWidget('interactionspanel', ['base', 'biogrid', 'ndex', 'intact'], 
+    showWidget('interactionspanel', ['base', 'biogrid', 'ndex', 'ndex_chd','ndex_chasmplussummary', 'ndexsummary', 'ndex_signor','intact'], 
             'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_literature');
     showWidget('literaturepanel', ['base', 'litvar', 'dbsnp'], 
             'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_noncoding');
-    showWidget('noncodingpanel', ['base', 'gnomad3', 'thousandgenomes'], 
+    showWidget('noncodingpanel', ['base', 'ccre_screen', 'encode_tfbs', 'genehancer', 'vista_enhancer','ensembl_regulatory_build', 'trinity','segway'], 
             'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_prediction');
     showWidget('predictionpanel', ['base', 'gnomad3', 'thousandgenomes'], 
@@ -835,7 +835,7 @@ widgetGenerators['aloft2'] = {
 			var allMappings = getWidgetData(tabName, 'aloft', row, 'all');
 			if (allMappings != undefined && allMappings != null) {
                 var sdiv = getEl('div')
-                sdiv.style.width = '47rem'
+                sdiv.style.width = '50rem'
                 sdiv.style.maxHeight = '400px'
                 sdiv.style.overflow = 'auto'
                 sdiv.style.marginRight = '5rem'
@@ -893,7 +893,8 @@ widgetInfo['clinvar2'] = {
         //addEl(ssdiv, getTn('\xa0'));
         addEl(dd, getTn('\xa0'));
         var sigLower = sig == undefined ? '' : sig.toLowerCase()
-        if (id != null && sigLower != 'not provided' && sigLower != '') {
+        if (id != null && sigLower != 'not provided' 
+            && sigLower != '' && sigLower != 'association not found') {
           link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + id;
           var a = makeA(id, link)
           //sdiv.style.position = 'relative';
@@ -929,6 +930,7 @@ widgetInfo['clinvar2'] = {
               span.textContent = traitNames[i]
               addEl(sdiv, span)
             }
+            
             //var traitNames = traitNames.join(', ');
             //var span = getEl('span')
             //span.style.wordBreak = 'break-word'
@@ -1130,10 +1132,10 @@ widgetGenerators['clingen2'] = {
                 var links = getWidgetData(tabName, 'clingen', row, 'link').split(';');
                 var mondos = getWidgetData(tabName, 'clingen', row, 'mondo').split(';');
                 var sdiv = getEl('div')
-                // sdiv.style.width = '47rem'
-                // sdiv.style.maxHeight = '400px'
-                // sdiv.style.overflow = 'auto'
-                // sdiv.style.marginRight = '5rem'
+                sdiv.style.width = '47rem'
+                sdiv.style.maxHeight = '200px'
+                sdiv.style.overflow = 'auto'
+                sdiv.style.marginRight = '5rem'
                 var table = getWidgetTableFrame();
                 addEl(div, table);
                 var thead = getWidgetTableHead(['Disease', 'Classification','ClinGen','Monarch'], ['35%', '30%']);
@@ -1278,17 +1280,17 @@ widgetGenerators['grasp2'] = {
             var wdiv = getEl('div')
             wdiv.style.display = 'flex'
             wdiv.style.flexWrap = 'wrap'
-            var divHeight = '400px';
+            // var divHeight = '400px';
             var hits = getWidgetData(tabName, 'grasp', row, 'all');
             if (hits != undefined && hits != null) {
                 var sdiv = getEl('div')
-                sdiv.style.width = '84rem'
-                sdiv.style.maxHeight = '400px'
+                sdiv.style.width = '50rem'
+                sdiv.style.maxHeight = '150px'
                 sdiv.style.overflow = 'auto'
                 sdiv.style.marginRight = '5rem'
                 var table = getWidgetTableFrame();
                 addEl(div, table);
-                var thead = getWidgetTableHead(['Pval', 'Phenotype','NHLBI', 'PubMed'],['65px','40%','40%','20%']);
+                var thead = getWidgetTableHead(['Pval', 'Phenotype','NHLBI', 'PubMed'],['20%','30%','30%','20%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
                 addEl(table, tbody);
@@ -1360,10 +1362,10 @@ widgetGenerators['gtex2'] = {
             var tbody = getEl('tbody');
             addEl(table, tbody);
             var sdiv = getEl('div')
-            // sdiv.style.width = '84rem'
-            // sdiv.style.maxHeight = '400px'
-            // sdiv.style.overflow = 'auto'
-            // sdiv.style.marginRight = '5rem'
+            sdiv.style.width = '50rem'
+            sdiv.style.maxHeight = '150px'
+            sdiv.style.overflow = 'auto'
+            sdiv.style.marginRight = '5rem'
             for (var i =0; i<genels.length;i++){
                 var geneitr = genels[i];
                 var tissueitr = tissuels[i];
@@ -1381,21 +1383,31 @@ widgetInfo['gnomad_gene2'] = {'title': 'gnomAD Gene'};
 widgetGenerators['gnomad_gene2'] = {
 	'gene': {
 		'width': undefined, 
-		'height': undefined, 
+        'height': undefined, 
+        'word-break': 'normal',
 		'function': function (div, row, tabName) {
             var title = 'gnomAD Gene'
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
+            wdiv.style.display = 'flex'
+            wdiv.style.flexWrap = 'wrap'
+            var divHeight = '250px';
 			var results = getWidgetData(tabName, 'gnomad_gene', row, 'all');
             if (results != undefined && results != null && typeof(results)=='object') {
                 var table = getWidgetTableFrame();
+                table.setAttribute("id", "gnomad");
+                console.log(table)
                 addEl(div, table);
-                var thead = getWidgetTableHead(['Transcript','Obv/Exp LoF','Obv/Exp Mis','Obv/Exp Syn','LoF Z-Score','Mis Z-Score','Syn Z-Score','pLI','pRec','pNull'],['20%']);
+                var thead = getWidgetTableHead(['Transcript','Obv/Exp LoF','Obv/Exp Mis','Obv/Exp Syn','LoF Z-Score','Mis Z-Score','Syn Z-Score','pLI','pRec','pNull'],['15%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
                 addEl(table, tbody);
                 var sdiv = getEl('div')
+                sdiv.style.width = '90rem'
+                sdiv.style.maxHeight = '250px'
+                sdiv.style.overflow = 'auto'
+                sdiv.style.marginRight = '5rem'
                 for (var i=0; i < results.length; i++) {
                     var row = results[i];
                     var tr = getWidgetTableTr(row);
@@ -1431,6 +1443,10 @@ widgetGenerators['gnomad_gene2'] = {
                 var tbody = getEl('tbody');
                 addEl(table, tbody);
                 var sdiv = getEl('div')
+                sdiv.style.width = '47rem'
+                sdiv.style.maxHeight = '400px'
+                sdiv.style.overflow = 'auto'
+                sdiv.style.marginRight = '5rem'
                 for(var i=0;i<trxls.length;i++){
                     var tr = getWidgetTableTr([trxls[i],oelofls[i],oemisls[i],oesynls[i],lofzls[i],miszls[i],synzls[i],plils[i],precls[i],pnullls[i]]);
                     addEl(tbody, tr);
@@ -1584,7 +1600,7 @@ widgetGenerators['biogrid2'] = {
 		'width': undefined, 
 		'height': undefined, 
 		'function': function (div, row, tabName) {
-            var title = 'BioGRID'
+            var title = 'BioGRID Interactors'
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -1606,26 +1622,18 @@ widgetGenerators['biogrid2'] = {
 			}
             var a = makeA(id, link);
             addDlRow(dl, 'BioGRID ID', a)
-			// addInfoLineLink(div, head, id, link);
 			var actsls = acts != null ? acts.split(';') : [];
             if (actsls.length > 0) {
-                var table = getWidgetTableFrame();
-                addEl(div, table);
-                var thead = getWidgetTableHead(['Interactors']);
-                addEl(table, thead);
-                var tbody = getEl('tbody');
-                addEl(table, tbody);
-                var sdiv = getEl('div')
-                sdiv.style.width = '47rem'
-                sdiv.style.maxHeight = '200px'
-                sdiv.style.overflow = 'auto'
-                sdiv.style.marginRight = '5rem'
+                var sdiv = getEl('div');
+                sdiv.style.display = 'flex'
+                sdiv.style.flexWrap = 'wrap'
                 for (var j=0;j<actsls.length;j++){
-                    var tr = getWidgetTableTr([actsls[j]]);
-                    addEl(tbody, tr);
-                    addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
+                    var span = getEl('div')
+                    span.classList.add('clinvar_traitname')
+                    span.textContent = actsls[j]
+                    addEl(sdiv, span);
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, title, sdiv)
             }
 		}
 	}
@@ -1636,41 +1644,32 @@ widgetGenerators['intact2'] = {
 		'width': undefined, 
 		'height': undefined, 
 		'function': function (div, row, tabName) {
-            var title = 'IntAct'
+            var title = 'IntAct Interactors'
             var dl = getEl('dl')
             addEl(div, dl)
-            var wdiv = getEl('div')
-            var divHeight = '400px';
 			var value = getWidgetData(tabName, 'intact', row, 'acts');
 			var hugo = getWidgetData(tabName, 'base', row, 'hugo');
 			if (hugo) {
                 link = 'https://www.ebi.ac.uk/intact/query/geneName:'+hugo;
-                var a = makeA('IntAct', link)
+                var a = makeA(title, link)
 			}
 			var acts = getWidgetData(tabName, 'intact', row, 'acts');
 			var actsls = acts != null ? acts.split(';') : [];
-			var table = getWidgetTableFrame();
-			addEl(div, table);
-			var thead = getWidgetTableHead(['Interactors']);
-			addEl(table, thead);
-			var tbody = getEl('tbody');
-            addEl(table, tbody);
             var sdiv = getEl('div')
-            sdiv.style.width = '47rem'
-            sdiv.style.maxHeight = '200px'
-            sdiv.style.overflow = 'auto'
-            sdiv.style.marginRight = '5rem'
+            sdiv.style.display = 'flex'
+            sdiv.style.flexWrap = 'wrap'
 			for (var j=0;j<actsls.length;j++){
-				var tr = getWidgetTableTr([actsls[j]]);
-                addEl(tbody, tr);
-                addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-			}
-			addDlRow(dl, a, wdiv)
+                var span = getEl('div')
+                span.classList.add('clinvar_traitname')
+                span.textContent = actsls[j]
+                addEl(sdiv, span);
+            }
+            addDlRow(dl, a, sdiv)
 		}
 	}
 }
 widgetInfo['litvar'] = {
-    'title': ''
+    'title': 'LitVar'
   };
   widgetGenerators['litvar'] = {
     'variant': {
@@ -1733,6 +1732,51 @@ widgetInfo['litvar'] = {
       }
     }
   }
+  widgetInfo['phastcons2'] = {
+    'title': ''
+  };
+  widgetGenerators['phastcons2'] = {
+    'variant': {
+      'width': undefined,
+      'height': undefined,
+    //   'word-break': 'break-word',
+      'function': function (div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var wdiv = getEl('div')
+            wdiv.style.display = 'flex'
+            wdiv.style.flexWrap = 'wrap'
+            wdiv.style.position = 'relative';
+            wdiv.style.left = '115px';
+            var vert_r = getWidgetData(tabName, 'phastcons', row, 'phastcons100_vert');
+            if (vert_r != null || vert_r != undefined){
+                var span = getEl('span');
+                span.textContent = vert_r
+                // var v = vert_r;
+            }else{
+                var span = getEl('span');
+                var v = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+                span.textContent = v;
+            } 
+            var sdiv = getEl('div')
+            sdiv.style.width = '18rem'
+            addEl(wdiv, addEl(sdiv, span));
+            var mamm_r = getWidgetData(tabName, 'phastcons', row, 'phastcons30_mamm');
+            if (mamm_r != null || mamm_r != undefined){
+                var span = getEl('span');
+                span.textContent = mamm_r
+            }else{
+                var span = getEl('span');
+                var m = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+                span.textContent = m;
+            } 
+            var sdiv = getEl('div')
+            sdiv.style.width = '18rem'
+            addEl(wdiv, addEl(sdiv, span));
+            addDlRow(dl, 'Phast Cons Scores', wdiv)
+        }
+    }
+}
 widgetInfo['basepanel'] = {'title': ''};
 widgetGenerators['basepanel'] = {
     'variant': {
@@ -1745,7 +1789,223 @@ widgetGenerators['basepanel'] = {
         }
     }
 }
-
+widgetInfo['phastcons3'] = {
+    'title': ''
+  };
+  widgetGenerators['phastcons3'] = {
+    'variant': {
+      'width': undefined,
+      'height': undefined,
+      'word-break': 'break-word',
+      'function': function (div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var wdiv = getEl('div')
+            wdiv.style.display = 'flex'
+            wdiv.style.flexWrap = 'wrap'
+            var vert_r = getWidgetData(tabName, 'phastcons', row, 'phastcons100_vert_r');
+            if (vert_r != null || vert_r != undefined){
+                var v = getDialWidget('Vertebrate Rank Score', annotData['phastcons']['phastcons100_vert_r'], .75)
+            }else{
+                var v = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+            } 
+            var sdiv = getEl('div')
+            sdiv.style.width = '18rem'
+            addEl(wdiv, addEl(sdiv, v));
+            var mamm_r = getWidgetData(tabName, 'phastcons', row, 'phastcons30_mamm_r');
+            if (mamm_r != null || mamm_r != undefined){
+                var m = getDialWidget('Mammalian Rank Score', annotData['phastcons']['phastcons30_mamm_r'], .75)
+            }else{
+                var m = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+            } 
+            var sdiv = getEl('div')
+            sdiv.style.width = '18rem'
+            addEl(wdiv, addEl(sdiv, m));
+            addDlRow(dl, 'Phast Cons Rank Scores', wdiv)
+        }
+    }
+}
+widgetInfo['phylop2'] = {
+    'title': ''
+  };
+  widgetGenerators['phylop2'] = {
+    'variant': {
+      'width': undefined,
+      'height': undefined,
+      'word-break': 'normal',
+      'function': function (div, row, tabName) {
+        var dl = getEl('dl')
+        addEl(div, dl)
+        var wdiv = getEl('div')
+        wdiv.style.display = 'flex'
+        wdiv.style.flexWrap = 'wrap'
+        var vert_r = getWidgetData(tabName, 'phylop', row, 'phylop100_vert_r');
+        if (vert_r != null || vert_r != undefined){
+            var v = getDialWidget('PhyloP Vertebrate Rank Score', annotData['phylop']['phylop100_vert_r'], 1.00)
+        }else{
+            var v = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+        } 
+        var sdiv = getEl('div')
+        sdiv.style.width = '18rem'
+        addEl(wdiv, addEl(sdiv, v));
+        var mamm_r = getWidgetData(tabName, 'phylop', row, 'phylop30_mamm_r');
+        if (mamm_r != null || mamm_r != undefined){
+            var m = getDialWidget('PhyloP Mammalian Rank Score', annotData['phylop']['phylop30_mamm_r'], .75)
+        }else{
+            var m = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+        } 
+        var sdiv = getEl('div')
+        sdiv.style.width = '18rem'
+        addEl(wdiv, addEl(sdiv, m));
+        var prim_r = getWidgetData(tabName, 'phylop', row, 'phylop17_primate_r');
+        if (prim_r != null || prim_r != undefined){
+            var p = getDialWidget('PhyloP Primate Rank Score', annotData['phylop']['phylop17_primate_r'], .90)
+        }else{
+            var p = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+        } 
+        var sdiv = getEl('div')
+        sdiv.style.width = '18rem'
+        addEl(wdiv, addEl(sdiv, p));
+        addDlRow(dl, 'PhyloP Rank Scores', wdiv)
+        }
+    }
+}
+widgetInfo['phylop3'] = {
+    'title': ''
+  };
+  widgetGenerators['phylop3'] = {
+    'variant': {
+      'width': undefined,
+      'height': undefined,
+      'word-break': 'normal',
+      'function': function (div, row, tabName) {
+        var dl = getEl('dl')
+        addEl(div, dl)
+        var wdiv = getEl('div')
+        wdiv.style.display = 'flex'
+        wdiv.style.flexWrap = 'wrap'
+        wdiv.style.position = 'relative';
+        wdiv.style.left = '115px';
+        var vert = getWidgetData(tabName, 'phylop', row, 'phylop100_vert');
+        if (vert != null || vert != undefined){
+            var span = getEl('span');
+            span.textContent = vert;
+        }else{
+            var span = getEl('span');
+            span.textContent = getNoAnnotMsgVariantLevel()
+        } 
+        var sdiv = getEl('div')
+        sdiv.style.width = '18rem'
+        addEl(wdiv, addEl(sdiv, span));
+        var mamm = getWidgetData(tabName, 'phylop', row, 'phylop30_mamm');
+        if (mamm != null || mamm != undefined){
+            var span = getEl('span');
+            span.textContent = mamm;
+        }else{
+            var span = getEl('span');
+            span.textContent = getNoAnnotMsgVariantLevel()
+        } 
+        var sdiv = getEl('div')
+        sdiv.style.width = '18rem'
+        addEl(wdiv, addEl(sdiv, span));
+        var prim = getWidgetData(tabName, 'phylop', row, 'phylop17_primate');
+        if (prim != null || prim != undefined){
+            var span = getEl('span');
+            span.textContent = prim;
+        }else{
+            var span = getEl('span');
+            span.textContent = getNoAnnotMsgVariantLevel()
+        } 
+        var sdiv = getEl('div')
+        sdiv.style.width = '18rem'
+        addEl(wdiv, addEl(sdiv, span));
+        addDlRow(dl, 'Phast Cons Scores', wdiv)
+        }
+    }
+}
+widgetInfo['ccre_screen2'] = {'title': 'Candidate cis_Regulatory Elements by ENCODE (SCREEN)'};
+widgetGenerators['ccre_screen2'] = {
+	'variant': {
+		'width': 420, 
+		'height': 90, 
+		'function': function (div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var br = getEl("br");
+            addEl(div, br);
+            var e_id = getWidgetData(tabName, 'ccre_screen', row, 'acc_e');
+            var group = getWidgetData(tabName, 'ccre_screen', row, '_group');
+            var bound = getWidgetData(tabName, 'ccre_screen', row, 'bound');
+            if (group != null || group != undefined){
+            addDlRow(dl, 'Classification', group, tabName);
+            }else{
+                addDlRow(dl, 'Classification', getNoAnnotMsgVariantLevel())
+            }
+            if (bound != null || bound != undefined){
+                addDlRow(dl, 'CTCF Bound', bound, tabName);
+            }else{
+                addDlRow(dl, 'CTCF Bound', getNoAnnotMsgVariantLevel())
+            }
+			var link = '';
+			if(e_id != null){
+				link = 'https://screen.encodeproject.org/search/?q='+e_id + '&assembly=GRCh38';
+                var a = makeA(e_id, link);
+                addDlRow(dl, 'cCRE Accession ID', a);
+			}
+			else{
+				e_id = '';
+                addDlRow(dl, 'cCRE Accession ID', getNoAnnotMsgVariantLevel())
+            }
+        }
+    }
+}
+widgetInfo['encode_tfbs2'] = {'title': 'ENCODE TFBS'};
+widgetGenerators['encode_tfbs2'] = {
+	'variant': {
+		'width': 480, 
+		'height': 120, 
+        'default_hidden': true,
+		'function': function (div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var title = 'ENCODE TFBS';
+            var wdiv = getEl('div')
+			var allMappings = getWidgetData(tabName, 'encode_tfbs', row, 'all');
+			if (allMappings != undefined && allMappings != null) {
+				var table = getWidgetTableFrame();
+				var thead = getWidgetTableHead(['Factor', 'Cell', 'Quality', 'Antibody', 'Study'], ['20%', '20%','15%', '20%', '25%']);
+				addEl(table, thead);
+				var tbody = getEl('tbody');
+                var sdiv = getEl('div')
+                for (var i = 0; i < allMappings.length; i++) {
+					var row = allMappings[i];
+					var factor= row[4];
+					var cell = row[0];
+					var quality = row[1];
+                    var antibody = row[2];
+                    var study = row[3];
+					var tr = getWidgetTableTr([factor, cell, quality, antibody, study]);
+					addEl(tbody, tr);
+                    addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
+				}
+                addDlRow(dl, title, wdiv)
+				// addEl(div, addEl(table, tbody));
+			}
+		}
+	}
+}
+widgetInfo['basepanel'] = {'title': ''};
+widgetGenerators['basepanel'] = {
+    'variant': {
+        'width': '100%',
+        'height': '100%',
+        'function': function (div, row, tabName) {
+            var generator = widgetGenerators['base2']['variant'];
+            var divs = showWidget('base2', ['base', 'dbsnp', 'thousandgenomes', 'gnomad', 'uniprot'], 'variant', div, null, null, false);
+            addEl(div, getEl('br'));
+        }
+    }
+}
 widgetInfo['genepanel'] = {'title': ''};
 widgetGenerators['genepanel'] = {
     'variant': {
@@ -1757,19 +2017,34 @@ widgetGenerators['genepanel'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             var crisp = getWidgetData(tabName, 'ess_gene', row, 'ess_gene_crispr');
-            if (crisp != null || script != undefined){
+            if (crisp != null || crisp != undefined){
+                if (crisp == 'E'){
+                    crisp = 'Essential'
+                }else if (crisp == 'N'){
+                    crisp = 'Non-essential phenotype-changing'
+                }
                 addDlRow(dl, 'Essential Genes CRISPR', crisp)
             }else{
                 addDlRow(dl, 'Essential Genes CRISPR', getNoAnnotMsgGeneLevel())
             }
             var crisp2 = getWidgetData(tabName, 'ess_gene', row, 'ess_gene_crispr2');
-            if (crisp2 != null || crsip2 != undefined){
+            if (crisp2 != null || crisp2 != undefined){
+                if (crisp2 == 'E'){
+                    crisp2 = 'Essential'
+                }else if (crisp2 == 'N'){
+                    crisp2 = 'Non-essential phenotype-changing'
+                }
                 addDlRow(dl, 'Essential Genes CRISPR2', crisp2);
             }else{
                 addDlRow(dl, 'Essential Genes CRISPR2', getNoAnnotMsgGeneLevel())
             }
             var trap = getWidgetData(tabName, 'ess_gene', row, 'ess_gene_gene_trap');
             if (trap != null || trap != undefined){
+                if (trap == 'E'){
+                    trap = 'Essential'
+                }else if (trap == 'N'){
+                    trap = 'Non-essential phenotype-changing'
+                }
                 addDlRow(dl, 'Essential Genes Gene Trap', trap)
             }else{
                 addDlRow(dl, 'Essential Genes Gene Trap', getNoAnnotMsgGeneLevel())
@@ -1782,6 +2057,11 @@ widgetGenerators['genepanel'] = {
             }
             var pred = getWidgetData(tabName, 'ess_gene', row, 'indispensability_pred');
             if (pred != null || pred != undefined){
+                if (pred == 'E'){
+                    pred = 'Essential'
+                }else if (pred == 'N'){
+                    pred = 'Non-essential phenotype-changing'
+                }
                 addDlRow(dl, 'Essential Genes Indispensability Prediction', pred)
             }else{
                 addDlRow(dl, 'Essential Genes Indispensability Prediction', getNoAnnotMsgGeneLevel())
@@ -1965,89 +2245,16 @@ widgetGenerators['evolutionpanel'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'))
-            var vert = getWidgetData(tabName, 'phastcons', row, 'phastcons100_vert');
-            if (vert != null || vert != undefined){
-                addDlRow(dl, 'Phast Cons Vertebrate Score', vert)
-                // var sdiv = getDialWidget('Phast Cons Vertebrate Score', annotData['phastcons']['phastcons100_vert'], 1.00)
-            }else{
-                addDlRow(dl, 'Phast Cons Vertebrate Score', getNoAnnotMsgVariantLevel())
-                // var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            // addDlRow(dl, 'Phast Cons Vertebrate Score', sdiv);
-            var vert_r = getWidgetData(tabName, 'phastcons', row, 'phastcons100_vert_r');
-            if (vert_r != null || vert_r != undefined){
-                var sdiv = getDialWidget('Phast Cons Vertebrate Rank Score', annotData['phastcons']['phastcons100_vert_r'], .75)
-            }else{
-                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            addDlRow(dl, 'Phast Cons Vertebrate Rank Score', sdiv);
-            var mamm = getWidgetData(tabName, 'phastcons', row, 'phastcons20_mamm');
-            if (mamm != null || mamm != undefined){
-                addDlRow(dl, 'Phast Cons Mammalian Score', mamm);
-                // var sdiv = getDialWidget('Phast Cons Mammalian Rank Score', annotData['phastcons']['phastcons100_mamm'], 1.00)
-            }else{
-                addDlRow(dl, 'Phast Cons Mammalian Score', getNoAnnotMsgVariantLevel());
-                // var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            // addDlRow(dl, 'Phast Cons Mammalian Score', sdiv);
-            var mamm_r = getWidgetData(tabName, 'phastcons', row, 'phastcons20_mamm_r');
-            if (mamm_r != null || mamm_r != undefined){
-                var sdiv = getDialWidget('Phast Cons Mammalian Rank Score', annotData['phastcons']['phastcons100_mamm_r'], .75)
-            }else{
-                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            addDlRow(dl, 'Phast Cons Mammalian Rank Score', sdiv);
+            var divs = showWidget('phastcons3', ['phastcons'], 'variant', div, null, null);
+            var divs = showWidget('phastcons2', ['phastcons'], 'variant', div, null, null);
+            // divs[0].style.position = 'relative';
+            // divs[0].style.bottom = '60px';
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'))
-            var vert = getWidgetData(tabName, 'phylop', row, 'phylop100_vert');
-            if (vert != null || vert != undefined){
-                addDlRow(dl, 'PhyloP Vertebrate Score', vert);
-                // var sdiv = getDialWidget('PhyloP Vertebrate Score', annotData['phylop']['phylop100_vert'], 1.00)
-            }else{
-                addDlRow(dl, 'PhyloP Vertebrate Score', getNoAnnotMsgVariantLevel());
-                // var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            // addDlRow(dl, 'PhyloP Vertebrate Score', sdiv);
-            var vert_r = getWidgetData(tabName, 'phylop', row, 'phylop100_vert_r');
-            if (vert_r != null || vert_r != undefined){
-                var sdiv = getDialWidget('PhyloP Vertebrate Rank Score', annotData['phylop']['phylop100_vert_r'], 1.00)
-            }else{
-                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            addDlRow(dl, 'PhyloP Vertebrate Rank Score', sdiv);
-            var mamm = getWidgetData(tabName, 'phylop', row, 'phylop30_mamm');
-            if (mamm != null || mamm != undefined){
-                addDlRow(dl, 'PhyloP Mammalian Score', mamm);
-                // var sdiv = getDialWidget('PhyloP Mammalian Rank Score', annotData['phylop']['phylop30_mamm'], 1.00)
-            }else{
-                addDlRow(dl, 'PhyloP Mammalian Score', getNoAnnotMsgVariantLevel());
-                // var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            // addDlRow(dl, 'PhyloP Mammalian Score', sdiv);
-            var mamm_r = getWidgetData(tabName, 'phylop', row, 'phylop30_mamm_r');
-            if (mamm_r != null || mamm_r != undefined){
-                var sdiv = getDialWidget('PhyloP Mammalian Rank Score', annotData['phylop']['phylop30_mamm_r'], .75)
-            }else{
-                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            addDlRow(dl, 'PhyloP Mammalian Rank Score', sdiv);
-            var prim = getWidgetData(tabName, 'phylop', row, 'phylop17_primate');
-            if (prim != null || prim != undefined){
-                addDlRow(dl, 'PhyloP Primate Score', prim);
-                // var sdiv = getDialWidget('PhyloP Mammalian Rank Score', annotData['phylop']['phylop30_mamm'], 1.00)
-            }else{
-                addDlRow(dl, 'PhyloP Primate Score', getNoAnnotMsgVariantLevel());
-                // var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            // addDlRow(dl, 'PhyloP Mammalian Score', sdiv);
-            var prim_r = getWidgetData(tabName, 'phylop', row, 'phylop17_primate_r');
-            if (prim_r != null || prim_r != undefined){
-                var sdiv = getDialWidget('PhyloP Primate Rank Score', annotData['phylop']['phylop17_primate_r'], .90)
-            }else{
-                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            } 
-            addDlRow(dl, 'PhyloP Primate Rank Score', sdiv);
+            var divs = showWidget('phylop2', ['phylop'], 'variant', div, null, null);
+            var divs = showWidget('phylop3', ['phylop'], 'variant', div, null, null);
+            addEl(div, getEl('br'));
             var divs = showWidget('siphy2', ['siphy'], 'variant', div, null, null, false);
         }
     }
@@ -2092,21 +2299,21 @@ widgetGenerators['interactionspanel'] = {
         'width': '100%',
         'height': undefined,
         'function': function (div, row, tabName) {
-            
+            var dl = getEl('dl')
+            addEl(div, dl)
             addEl(div, getEl('br'))
             var divs = showWidget('biogrid2', ['biogrid'], 'gene', div, null, null, false);
-            var generator = widgetGenerators['ndex']['gene'];
             var divs = showWidget('ndex', ['ndex'], 'gene', div, null, null, false);
+            divs[0].style.position = 'relative';
+            addDlRow(dl, 'NDEx', divs[0])
+            var divs = showWidget('ndex_chd', ['ndex_chd'], 'gene', div, null, null, false);
+            divs[0].style.position = 'relative';
+            addDlRow(dl, 'NDEx CHD', divs[0])
+            var divs = showWidget('ndex_signor', ['ndex_signor'], 'gene', div, null, null, false);
+            divs[0].style.position = 'relative';
+            addDlRow(dl, 'NDEx Signor', divs[0])
             addEl(div, getEl('br'))
             var divs = showWidget('intact2', ['intact'], 'gene', div, null, null, false);
-            // var dl = getEl('dl')
-            // addEl(div, dl)
-            // var intact = getWidgetData(tabName, 'intact', row, 'acts');
-            // if (intact != null || intact != undefined){
-            //     addDlRow(dl, 'IntAct Raw Data', intact)
-            // }else{
-            //     addDlRow(dl, 'IntAct Raw Data', getNoAnnotMsgGeneLevel())
-            // }
         }
     }
 }
@@ -2129,6 +2336,7 @@ widgetGenerators['noncodingpanel'] = {
         'function': function (div, row, tabName) {
             var br = getEl("br");
             addEl(div, br);
+            var divs = showWidget('ccre_screen2', ['ccre_screen'], 'variant', div, 600, 600);
         }
     }
 }
@@ -2191,11 +2399,15 @@ widgetGenerators['structurepanel'] = {
 }
 
 widgetInfo['clinpanel'] = {'title': ''};
-widgetGenerators['clinpanel'] = {
+widgetGenerators['clinpanel'] = { 
     'variant': {
         'width': null,
         'height': null,
         'function': function (div, row, tabName) {
+            var dl = getEl('dl')
+            dl.style.width = 'calc(100% - 1rem)'
+            addEl(div, dl)
+            div.style.marginTop = '2vh';
             var elem = document.getElementsByClassName("content");
             while(elem[0].firstChild) {
                 elem[0].removeChild(elem[0].firstChild);
@@ -2505,7 +2717,7 @@ widgetGenerators['allelefreqpanel'] = {
     'width': undefined,
     'height': 'unset',
     'function': function (div, row, tabName) {
-        var dl = getEl('dl')
+      var dl = getEl('dl')
       dl.style.width = 'calc(100% - 1rem)'
       addEl(div, dl)
       div.style.marginTop = '2vh';
