@@ -1,5 +1,5 @@
 title: 1000 Genomes
-version: 1.0.2
+version: 1.1.0
 type: webviewerwidget
 required_annotator: thousandgenomes
 description: 1000 genomes webviewer widget
@@ -13,4 +13,5 @@ tags:
 - visualization
 hidden: true
 release_note:
+  1.1.0: new gradient bar
   1.0.2: returns no data.

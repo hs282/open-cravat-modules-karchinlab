@@ -1,5 +1,5 @@
 title: 1000 Genomes-South Asian
-version: 1.0.0
+version: 1.1.0
 type: webviewerwidget
 required_annotator: thousandgenomes_south_asian
 description: 1000 genomes webviewer widget
@@ -11,3 +11,5 @@ developer:
   citation: ''
 tags:
 - visualization
+release_note:
+  1.1.0: new gradient bar

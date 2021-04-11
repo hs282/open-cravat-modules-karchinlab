@@ -10,13 +10,13 @@ widgetGenerators['thousandgenomes_african'] = {
 				addEl(div, addEl(span, getTn('No data')));
                 return;
 			}
-            addBarComponent(div, row, 'YRI Allele Frequency', 'thousandgenomes_african__yri_af', tabName);
-            addBarComponent(div, row, 'LWK Allele Frequency', 'thousandgenomes_african__lwk_af', tabName);
-            addBarComponent(div, row, 'GWD Allele Frequency', 'thousandgenomes_african__gwd_af', tabName);
-            addBarComponent(div, row, 'MSL Allele Frequency', 'thousandgenomes_african__msl_af', tabName);
-            addBarComponent(div, row, 'ESN Allele Frequency', 'thousandgenomes_african__esn_af', tabName);
-            addBarComponent(div, row, 'ASW Allele Frequency', 'thousandgenomes_african__asw_af', tabName);
-            addBarComponent(div, row, 'ACB Allele Frequency', 'thousandgenomes_african__acb_af', tabName);
+            addGradientStopBarComponent(div, row, 'YRI Allele Frequency', 'thousandgenomes_african__yri_af', tabName);
+            addGradientStopBarComponent(div, row, 'LWK Allele Frequency', 'thousandgenomes_african__lwk_af', tabName);
+            addGradientStopBarComponent(div, row, 'GWD Allele Frequency', 'thousandgenomes_african__gwd_af', tabName);
+            addGradientStopBarComponent(div, row, 'MSL Allele Frequency', 'thousandgenomes_african__msl_af', tabName);
+            addGradientStopBarComponent(div, row, 'ESN Allele Frequency', 'thousandgenomes_african__esn_af', tabName);
+            addGradientStopBarComponent(div, row, 'ASW Allele Frequency', 'thousandgenomes_african__asw_af', tabName);
+            addGradientStopBarComponent(div, row, 'ACB Allele Frequency', 'thousandgenomes_african__acb_af', tabName);
 		}
 	}
 }

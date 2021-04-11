@@ -112,14 +112,16 @@ widgetGenerators['sosamplesummary'] = {
 			var datasets = [];
             var initDatasets = [];
             var nextDatasets = [];
+            var sum = [];
 			for (var i = 0; i < sos.length; i++) {
 				var so = sos[i];
 				row = {};
 				var label = so
-				var backgroundColor = colorPalette[so];
+                var backgroundColor = colorPalette[so];
                 var counts = socountdata[so];
                 var initDatasetCounts = [];
                 var nextDatasetCounts = [];
+                var sums = 0;
                 for (var j = 0; j < counts.length; j++) {
                     if (j < initDrawNum) {
                         initDatasetCounts.push(counts[j]);
@@ -130,7 +132,7 @@ widgetGenerators['sosamplesummary'] = {
 				row['data'] = socountdata[so];
                 initDatasets.push({'label': label, 'backgroundColor': backgroundColor, 'data': initDatasetCounts});
                 nextDatasets.push({'label': label, 'backgroundColor': backgroundColor, 'data': nextDatasetCounts});
-			}
+            }
 			var chart = new Chart(chartDiv, {
 				type: 'bar',
 				data: {
