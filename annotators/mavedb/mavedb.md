@@ -32,24 +32,6 @@ MaveDB's variant effect scores are captured from two separate studies, involving
 * Includes genes: PTEN and TPMT
 * Method: Barcoded variant libraries were created using inverse PCR. Barcodes were associated with full-length variants using Pacific Biosciences SMRT sequencing to generate long reads. Each protein variant is fused to EGFP so that its abundance can be tracked using fluorescence. Cells were sorted into bins using FACS based on the ratio of EGFP to mCherry.
 
-## MaveVis
-
- MaveVis is a webtool for visualizing [Variant Effect Maps](https://link.springer.com/article/10.1007/s00439-018-1916-x) from MaveDB as heatmaps together with conservation and protein structure information.
-
- ### How to Intrepret the Output
-
-* The heatmap at center of the visualization plots the protein's amino acid positions along the x-axis against all possible amino acid changes. Each cell is colored on a scale from blue via white to red, where blue represents a null-like score (i.e. complete loss-of-function), white represents a wildtype-like score (i.e. no effect), and red represents scores greater than that of the wildtype protein. Yellow cells indicate the original amino acid in the wildtype sequence. Diagonal dashes on each cell indicate either standard deviation or standard error of the shown score (depending which is reported in the original score set) scaled to the difference between null and wildtype scores; i.e. a dash the size of the entire cell indicates stdev/stderr the size of 1 wt-null unit. Uncertainty greater than 1 wt-null unit is indicated by the cell being crossed out.
-
- * Above the central heatmap is a summary bar that shows the relative frequency of each color in each column. 
- 
- * The orange tracks above the summary bar indicate burial in protein-protein interactions based on the PDB structures selected. These can be interpreted as amino acid residues being part of an interaction interface.
-
- * The steelblue track above that indicates the relative solvent-accessible surface area of each residue. High-solvent accessibility indicates amino acids being on the outside surface of a protein.
-
- * The next track indicates the secondary structure of the protein. Spiral patterns indicate α-helices or 310-helices, while arrows indicate β-strands.
-
- * Finally, the top track shows residue-specific evolutionary sequence conservation, according to the AMAS algorithm based on the UniRef90 sequence set.
-
 ## References
 
 Matreyek, Kenneth A., et al. "Multiplex assessment of protein variant abundance by massively parallel sequencing." Nature genetics 50.6 (2018): 874-882.

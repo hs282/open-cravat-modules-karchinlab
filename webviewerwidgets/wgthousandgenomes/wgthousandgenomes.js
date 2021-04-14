@@ -10,7 +10,7 @@ widgetGenerators['thousandgenomes'] = {
 				addEl(div, addEl(span, getTn('No data')));
                 return;
 			}
-			addBarComponent(div, row, 'Allele Frequency', 'thousandgenomes__af', tabName);
+			addGradientStopBarComponent(div, row, 'Allele Frequency', 'thousandgenomes__af', tabName);
 		}
 	}
 }

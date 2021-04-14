@@ -10,11 +10,11 @@ widgetGenerators['thousandgenomes_european'] = {
 				addEl(div, addEl(span, getTn('No data')));
                 return;
 			}
-            addBarComponent(div, row, 'CEU Allele Frequency', 'thousandgenomes_european__ceu_af', tabName);
-            addBarComponent(div, row, 'TSI Allele Frequency', 'thousandgenomes_european__tsi_af', tabName);
-            addBarComponent(div, row, 'FIN Allele Frequency', 'thousandgenomes_european__fin_af', tabName);
-            addBarComponent(div, row, 'GBR Allele Frequency', 'thousandgenomes_european__gbr_af', tabName);
-            addBarComponent(div, row, 'IBS Allele Frequency', 'thousandgenomes_european__ibs_af', tabName);
+            addGradientStopBarComponent(div, row, 'CEU Allele Frequency', 'thousandgenomes_european__ceu_af', tabName);
+            addGradientStopBarComponent(div, row, 'TSI Allele Frequency', 'thousandgenomes_european__tsi_af', tabName);
+            addGradientStopBarComponent(div, row, 'FIN Allele Frequency', 'thousandgenomes_european__fin_af', tabName);
+            addGradientStopBarComponent(div, row, 'GBR Allele Frequency', 'thousandgenomes_european__gbr_af', tabName);
+            addGradientStopBarComponent(div, row, 'IBS Allele Frequency', 'thousandgenomes_european__ibs_af', tabName);
 		}
 	}
 }

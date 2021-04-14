@@ -70,6 +70,7 @@ class CravatAnnotator(BaseAnnotator):
                     out['confidence'] = worst_confidence
                     out['seqs'] = worst_seqs
                     out['all'] = all_results_list
+                    out['multsite'] = 'True' if len(all_results_list) > 1 else None
                     return out
     
     def cleanup(self):

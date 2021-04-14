@@ -10,10 +10,10 @@ widgetGenerators['thousandgenomes_ad_mixed_american'] = {
 				addEl(div, addEl(span, getTn('No data')));
                 return;
 			}
-            addBarComponent(div, row, 'MXL Allele Frequency', 'thousandgenomes_ad_mixed_american__mxl_af', tabName);
-            addBarComponent(div, row, 'PUR Allele Frequency', 'thousandgenomes_ad_mixed_american__pur_af', tabName);
-            addBarComponent(div, row, 'CLM Allele Frequency', 'thousandgenomes_ad_mixed_american__clm_af', tabName);
-            addBarComponent(div, row, 'PEL Allele Frequency', 'thousandgenomes_ad_mixed_american__pel_af', tabName);
+            addGradientStopBarComponent(div, row, 'MXL Allele Frequency', 'thousandgenomes_ad_mixed_american__mxl_af', tabName);
+            addGradientStopBarComponent(div, row, 'PUR Allele Frequency', 'thousandgenomes_ad_mixed_american__pur_af', tabName);
+            addGradientStopBarComponent(div, row, 'CLM Allele Frequency', 'thousandgenomes_ad_mixed_american__clm_af', tabName);
+            addGradientStopBarComponent(div, row, 'PEL Allele Frequency', 'thousandgenomes_ad_mixed_american__pel_af', tabName);
 		}
 	}
 }

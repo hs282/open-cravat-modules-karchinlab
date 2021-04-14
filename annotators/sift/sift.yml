@@ -1,5 +1,5 @@
 title: SIFT
-version: 1.1.0
+version: 1.2.0
 type: annotator
 level: variant
 output_columns:
@@ -84,6 +84,13 @@ output_columns:
   - name: seqs
     title: seqs
     type: int
+- name: multsite
+  type: string
+  title: Mult. Transcripts
+  desc: SIFT scored multiple transcripts for this variant
+  hidden: true
+  width: 75
+  category: single
 description: SIFT predicts whether an amino acid substitution affects protein function
 developer:
   name: Pauline Ng
@@ -100,6 +107,7 @@ requires:
 - wgsift
 requires_opencravat: '>=2.2.1'
 release_note:
+  1.2.0: mult transcript column
   1.1.0: data update and table column enabled
 smartfilters:
 - name: prediction

@@ -10,11 +10,11 @@ widgetGenerators['thousandgenomes_south_asian'] = {
 				addEl(div, addEl(span, getTn('No data')));
                 return;
 			}
-            addBarComponent(div, row, 'GIH Allele Frequency', 'thousandgenomes_south_asian__gih_af', tabName);
-            addBarComponent(div, row, 'PJL Allele Frequency', 'thousandgenomes_south_asian__pjl_af', tabName);
-            addBarComponent(div, row, 'BEB Allele Frequency', 'thousandgenomes_south_asian__beb_af', tabName);
-            addBarComponent(div, row, 'STU Allele Frequency', 'thousandgenomes_south_asian__stu_af', tabName);
-            addBarComponent(div, row, 'ITU Allele Frequency', 'thousandgenomes_south_asian__itu_af', tabName);
+            addGradientStopBarComponent(div, row, 'GIH Allele Frequency', 'thousandgenomes_south_asian__gih_af', tabName);
+            addGradientStopBarComponent(div, row, 'PJL Allele Frequency', 'thousandgenomes_south_asian__pjl_af', tabName);
+            addGradientStopBarComponent(div, row, 'BEB Allele Frequency', 'thousandgenomes_south_asian__beb_af', tabName);
+            addGradientStopBarComponent(div, row, 'STU Allele Frequency', 'thousandgenomes_south_asian__stu_af', tabName);
+            addGradientStopBarComponent(div, row, 'ITU Allele Frequency', 'thousandgenomes_south_asian__itu_af', tabName);
 		}
 	}
 }

@@ -10,11 +10,11 @@ widgetGenerators['thousandgenomes_east_asian'] = {
 				addEl(div, addEl(span, getTn('No data')));
                 return;
 			}
-            addBarComponent(div, row, 'CHB Allele Frequency', 'thousandgenomes_east_asian__chb_af', tabName);
-            addBarComponent(div, row, 'JPT Allele Frequency', 'thousandgenomes_east_asian__jpt_af', tabName);
-            addBarComponent(div, row, 'CHS Allele Frequency', 'thousandgenomes_east_asian__chs_af', tabName);
-            addBarComponent(div, row, 'CDX Allele Frequency', 'thousandgenomes_east_asian__cdx_af', tabName);
-            addBarComponent(div, row, 'KHV Allele Frequency', 'thousandgenomes_east_asian__khv_af', tabName);
+            addGradientStopBarComponent(div, row, 'CHB Allele Frequency', 'thousandgenomes_east_asian__chb_af', tabName);
+            addGradientStopBarComponent(div, row, 'JPT Allele Frequency', 'thousandgenomes_east_asian__jpt_af', tabName);
+            addGradientStopBarComponent(div, row, 'CHS Allele Frequency', 'thousandgenomes_east_asian__chs_af', tabName);
+            addGradientStopBarComponent(div, row, 'CDX Allele Frequency', 'thousandgenomes_east_asian__cdx_af', tabName);
+            addGradientStopBarComponent(div, row, 'KHV Allele Frequency', 'thousandgenomes_east_asian__khv_af', tabName);
 		}
 	}
 }
