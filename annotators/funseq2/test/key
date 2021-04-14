@@ -1,0 +1,79 @@
+#CRAVAT Report
+#Created at Tuesday 02/23/2021 12:02:08
+#Report level: variant
+#
+Variant Annotation																FunSeq2			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	HOT Region	Motif Analysis	Score	All Annotations
+1	chr1	155206797	G	C			THBS3	ENST00000368378.7	intron_variant	c.80-391C>G		ENST00000316721.8:MTX1:Q13505:2kb_upstream_variant::c.-2008G>C; ENST00000368376.7:MTX1:Q13505:2kb_upstream_variant::c.-2008G>C; ENST00000368378.7:THBS3:P49746:intron_variant::c.80-391C>G; ENST00000422665.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000428962.2:THBS3::intron_variant,NMD_transcript_variant::c.80-391C>G; ENST00000430312.1:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000453136.5:AC234582.1::2kb_downstream_variant,lnc_RNA::; ENST00000457183.6:THBS3:P49746:intron_variant::c.80-391C>G; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::intron_variant::c.80-391C>G; ENST00000541990.5:THBS3::intron_variant::c.-1318-391C>G	1	s1				0.417876600561959	[["", "", "", "", "", "", "0.417876600561959"]]
+2	chr1	155208797	T	C			MTX1	ENST00000368376.7	5_prime_UTR_variant	c.-8T>C		ENST00000316721.8:MTX1:Q13505:5_prime_UTR_variant::c.-8T>C; ENST00000368376.7:MTX1:Q13505:5_prime_UTR_variant::c.-8T>C; ENST00000368378.7:THBS3:P49746:2kb_upstream_variant::c.-921A>G; ENST00000424959.5:MTX1::2kb_upstream_variant,NMD_transcript_variant::c.-455T>C; ENST00000428962.2:THBS3::2kb_upstream_variant,NMD_transcript_variant::c.-921A>G; ENST00000457183.6:THBS3:P49746:2kb_upstream_variant::c.-921A>G; ENST00000486260.5:THBS3::intron_variant,processed_transcript::; ENST00000541576.5:THBS3::2kb_upstream_variant::c.-921A>G; ENST00000541990.5:THBS3::2kb_upstream_variant::c.-2318A>G; ENST00000609421.1:MTX1:Q13505:2kb_upstream_variant::c.-455T>C	1	s3		H1hesc;K562	Motif-Gaining	2.62934994359505	[["H1hesc", "Motif-Gaining", "", "ETS_known8", "5.743", "4.586", "2.62934994359505"], ["K562", "Motif-Gaining", "", "ETS_known8", "5.743", "4.586", "2.62934994359505"]]
+3	chr17	41619437	T	G			KRT17	ENST00000311208.13	2kb_downstream_variant	c.*157A>C		ENST00000311208.13:KRT17:Q04695:2kb_downstream_variant::c.*157A>C; ENST00000540235.5:KRT17::2kb_downstream_variant::c.*157A>C	1	s3			Motif-Gaining	2.30840150228138	[["", "Motif-Gaining", "", "HNF4_known10", "6.101", "1.707", "2.30840150228138"]]
+4	chr17	43079402	G	T			BRCA1	ENST00000357654.9	intron_variant	c.4358-2788C>A		ENST00000352993.7:BRCA1:P38398:intron_variant::c.932-2788C>A; ENST00000357654.9:BRCA1:P38398:intron_variant::c.4358-2788C>A; ENST00000461221.5:BRCA1:P38398:intron_variant,NMD_transcript_variant::c.*4141-2788C>A; ENST00000468300.5:BRCA1:P38398:intron_variant::c.1049-2791C>A; ENST00000471181.7:BRCA1:P38398:intron_variant::c.4358-3C>A; ENST00000491747.6:BRCA1:P38398:intron_variant::c.1049-2791C>A; ENST00000493795.5:BRCA1:P38398:intron_variant::c.4217-2788C>A; ENST00000586385.5:BRCA1::intron_variant::c.5-15451C>A; ENST00000591534.5:BRCA1::intron_variant::c.-43-4881C>A; ENST00000591849.5:BRCA1::intron_variant::c.-98-29212C>A; ENST00000621897.1:BRCA1::intron_variant,processed_transcript::	1	s3				1.13706098164866	[["", "", "", "", "", "", "1.13706098164866"]]
+5	chr17	43082402	A	T			BRCA1	ENST00000357654.9	splice_site_variant	c.4357+2T>A		ENST00000352993.7:BRCA1:P38398:intron_variant,splice_site_variant::c.931+2T>A; ENST00000357654.9:BRCA1:P38398:intron_variant,splice_site_variant::c.4357+2T>A; ENST00000461221.5:BRCA1:P38398:intron_variant,NMD_transcript_variant,splice_site_variant::c.*4140+2T>A; ENST00000468300.5:BRCA1:P38398:intron_variant,splice_site_variant::c.1048+2T>A; ENST00000471181.7:BRCA1:P38398:intron_variant,splice_site_variant::c.4357+2T>A; ENST00000491747.6:BRCA1:P38398:intron_variant,splice_site_variant::c.1048+2T>A; ENST00000493795.5:BRCA1:P38398:intron_variant,splice_site_variant::c.4216+2T>A; ENST00000586385.5:BRCA1::intron_variant::c.5-18451T>A; ENST00000591534.5:BRCA1::intron_variant::c.-43-7881T>A; ENST00000591849.5:BRCA1::intron_variant::c.-98-32212T>A; ENST00000621897.1:BRCA1::intron_variant,processed_transcript::	1	s0			Motif-Breaking	1.60450927759525	[["", "Motif-Breaking", "DHS", "FOXJ2_3", "0.009890", "0.970114", "1.60450927759525"], ["", "Motif-Breaking", "DHS", "FOXJ3_3", "0.011962", "0.966507", "1.60450927759525"], ["", "Motif-Breaking", "DHS", "FOXJ3_6", "0.039186", "0.919116", "1.60450927759525"]]
+6	chr17	43082403	C	T			BRCA1	ENST00000357654.9	splice_site_variant	c.4357+1G>A		ENST00000352993.7:BRCA1:P38398:intron_variant,splice_site_variant::c.931+1G>A; ENST00000357654.9:BRCA1:P38398:intron_variant,splice_site_variant::c.4357+1G>A; ENST00000461221.5:BRCA1:P38398:intron_variant,NMD_transcript_variant,splice_site_variant::c.*4140+1G>A; ENST00000468300.5:BRCA1:P38398:intron_variant,splice_site_variant::c.1048+1G>A; ENST00000471181.7:BRCA1:P38398:intron_variant,splice_site_variant::c.4357+1G>A; ENST00000491747.6:BRCA1:P38398:intron_variant,splice_site_variant::c.1048+1G>A; ENST00000493795.5:BRCA1:P38398:intron_variant,splice_site_variant::c.4216+1G>A; ENST00000586385.5:BRCA1::intron_variant::c.5-18452G>A; ENST00000591534.5:BRCA1::intron_variant::c.-43-7882G>A; ENST00000591849.5:BRCA1::intron_variant::c.-98-32213G>A; ENST00000621897.1:BRCA1::intron_variant,processed_transcript::	1	s1				1.75989527628948	[["", "", "", "", "", "", "1.75989527628948"]]
+7	chr3	41194775	C	A			CTNNB1	ENST00000643541.1	5_prime_UTR_variant	c.-291C>A		ENST00000405570.6:CTNNB1:P35222:2kb_upstream_variant::c.-291C>A; ENST00000433400.6:CTNNB1:P35222:2kb_upstream_variant::c.-980C>A; ENST00000642248.1:CTNNB1:P35222:2kb_upstream_variant::c.-294C>A; ENST00000643541.1:CTNNB1:P35222:5_prime_UTR_variant::c.-291C>A; ENST00000645210.1:CTNNB1:P35222:2kb_upstream_variant::c.-294C>A; ENST00000646381.1:CTNNB1::2kb_upstream_variant::c.-444C>A	1	s2			Motif-Gaining	2.58300091267431	[["", "Motif-Gaining", "", "SOX10_1", "6.832", "5.383", "2.58300091267431"], ["", "Motif-Gaining", "", "SOX10_2", "6.736", "3.922", "2.58300091267431"]]
+8	chr1	1006585	A	G			ISG15	ENST00000624697.4	intron_variant	c.-107-1609A>G		ENST00000624697.4:ISG15::intron_variant::c.-107-1609A>G	1	s3		Hepg2	Motif-Breaking;Motif-Gaining	2.67568540854498	[["Hepg2", "Motif-Breaking", "CHD2", "NR2C2_disc1", "0.226087", "0.226087", "2.67568540854498"], ["Hepg2", "Motif-Breaking", "DHS", "NR2C2_disc1", "0.226087", "0.226087", "2.67568540854498"], ["Hepg2", "Motif-Breaking", "ELF1", "NR2C2_disc1", "0.226087", "0.226087", "2.67568540854498"], ["Hepg2", "Motif-Breaking", "FOXA1", "NR2C2_disc1", "0.226087", "0.226087", "2.67568540854498"], ["Hepg2", "Motif-Breaking", "RXRA", "NR2C2_disc1", "0.226087", "0.226087", "2.67568540854498"], ["Hepg2", "Motif-Breaking", "SP1", "NR2C2_disc1", "0.226087", "0.226087", "2.67568540854498"], ["Hepg2", "Motif-Breaking", "SRF", "NR2C2_disc1", "0.226087", "0.226087", "2.67568540854498"], ["Hepg2", "Motif-Breaking", "USF2", "NR2C2_disc1", "0.226087", "0.539131", "2.67568540854498"], ["Hepg2", "Motif-Gaining", "", "ATF3_known11", "6.680", "3.754", "2.67568540854498"]]
+9	chr1	1006590	C	T			ISG15	ENST00000624697.4	intron_variant	c.-107-1604C>T		ENST00000624697.4:ISG15::intron_variant::c.-107-1604C>T	1	s1		Hepg2		1.70238737510881	[["Hepg2", "", "", "", "", "", "1.70238737510881"]]
+10	chr1	1014471	G	A		Yes	ISG15	ENST00000649529.1	missense_variant	c.491G>A	p.Arg164Gln	ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::missense_variant:p.Arg156Gln:c.467G>A; ENST00000649529.1:ISG15:P05161:missense_variant:p.Arg164Gln:c.491G>A	1	s2				3.0	[["", "", "", "", "", "", "3"]]
+11	chr1	1014474	G	A		Yes	ISG15	ENST00000649529.1	missense_variant	c.494G>A	p.Ser165Asn	ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::missense_variant:p.Ser157Asn:c.470G>A; ENST00000649529.1:ISG15:P05161:missense_variant:p.Ser165Asn:c.494G>A	1	s0				3.0	[["", "", "", "", "", "", "3"]]
+12	chr1	102402	C	G			AL627309.1	ENST00000466430.5	lnc_RNA			ENST00000466430.5:AL627309.1::intron_variant,lnc_RNA::; ENST00000477740.5:AL627309.1::intron_variant,lnc_RNA::	1	s2				2.83151577438682e-21	[["", "", "", "", "", "", "2.83151577438682e-21"]]
+13	chr1	1014419	A	G		Yes	ISG15	ENST00000649529.1	missense_variant	c.439A>G	p.Thr147Ala	ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::missense_variant:p.Thr139Ala:c.415A>G; ENST00000649529.1:ISG15:P05161:missense_variant:p.Thr147Ala:c.439A>G	1	s2				4.0	[["", "", "", "", "", "", "4"]]
+14	chr1	1014428	A	G		Yes	ISG15	ENST00000649529.1	missense_variant	c.448A>G	p.Met150Val	ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::missense_variant:p.Met142Val:c.424A>G; ENST00000649529.1:ISG15:P05161:missense_variant:p.Met150Val:c.448A>G	1	s2				4.0	[["", "", "", "", "", "", "4"]]
+15	chr1	1014104	C	T		Yes	ISG15	ENST00000649529.1	stop_gained	c.124C>T	p.Gln42Ter	ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::stop_gained:p.Gln34Ter:c.100C>T; ENST00000649529.1:ISG15:P05161:stop_gained:p.Gln42Ter:c.124C>T	1	s0				5.0	[["", "", "", "", "", "", "5"]]
+16	chr1	1014107	C	T		Yes	ISG15	ENST00000649529.1	stop_gained	c.127C>T	p.Gln43Ter	ENST00000458555.1:AL645608.1::2kb_upstream_variant,lnc_RNA::; ENST00000624697.4:ISG15::stop_gained:p.Gln35Ter:c.103C>T; ENST00000649529.1:ISG15:P05161:stop_gained:p.Gln43Ter:c.127C>T	1	s1				5.0	[["", "", "", "", "", "", "5"]]
+#CRAVAT Report
+#Created at Tuesday 02/23/2021 12:02:08
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+THBS3		0	1	intron_variant	intron_variant(1),NMD_transcript_variant(1),processed_transcript(1)
+MTX1		0	1	5_prime_UTR_variant	NMD_transcript_variant(1),5_prime_UTR_variant(1)
+KRT17		0	1	2kb_downstream_variant	
+BRCA1		0	3	splice_site_variant	intron_variant(3),NMD_transcript_variant(3),processed_transcript(3),splice_site_variant(2)
+CTNNB1		0	1	5_prime_UTR_variant	5_prime_UTR_variant(1)
+ISG15		6	2	stop_gained	intron_variant(2),missense_variant(4),stop_gained(2)
+AL627309.1		0	1	lnc_RNA	intron_variant(1),lnc_RNA(1)
+#CRAVAT Report
+#Created at Tuesday 02/23/2021 12:02:08
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s1
+2	s3
+3	s3
+4	s3
+5	s0
+6	s1
+7	s2
+8	s3
+9	s1
+10	s2
+11	s0
+12	s2
+13	s2
+14	s2
+15	s0
+16	s1
+#CRAVAT Report
+#Created at Tuesday 02/23/2021 12:02:08
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
+7		7	0
+8		8	0
+9		9	0
+10		10	0
+11		11	0
+12		12	0
+13		13	0
+14		14	0
+15		15	0
+16		16	0
