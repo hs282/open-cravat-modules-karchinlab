@@ -1,4 +1,4 @@
-datasource: v1.7.1
+datasource: v1.7.2
 description: MaveDB is a public repository for datasets from Multiplexed Assays of Variant Effect (MAVEs).
 developer:
   name: 'Fowler Lab'
@@ -17,20 +17,12 @@ output_columns:
   width: 60
   hidden: false
 
-- name: vis
-  title: MaveVis
-  type: string
-  link_format: http://varianteffect.com/?ssid=${.*}
-  width: 80
-  desc: A webtool for visualizing variant effect maps.
-  hidden: false
-
 - name: accession
   title: Score Set
   type: string
   link_format: https://www.mavedb.org/scoreset/${.*}
   width: 80
-  hidden: true
+  hidden: false
   desc: Information from the study specific to each gene.
 
 tags:
@@ -39,3 +31,6 @@ tags:
 title: MaveDB
 version: 1.0.1
 type: annotator
+
+release_note:
+1.7.2: removed MaveVis due to unavailability

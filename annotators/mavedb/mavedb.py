@@ -14,7 +14,7 @@ class CravatAnnotator(BaseAnnotator):
         row = self.cursor.fetchone()
         accession = row[1]
         if row:
-            return {'score': row[0], 'accession': accession, 'vis': accession}
+            return {'score': row[0], 'accession': accession}
 
     def cleanup(self):
         pass
