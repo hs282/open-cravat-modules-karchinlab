@@ -70,13 +70,6 @@ output_columns:
   type: float
   filterable: false
   hidden: false
-- aggregate: false
-  hidden: true
-  name: hugo
-  title: HUGO
-  type: string
-  filterable: false
-  desc: Gene ID
 - hidden: true
   name: all
   title: All annotations
