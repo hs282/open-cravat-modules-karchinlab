@@ -1,0 +1,84 @@
+#CRAVAT Report
+#Created at Monday 04/26/2021 10:20:06
+#Report level: variant
+#
+Variant Annotation																CScape
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Score
+1	chr10	121593817	T	A		Yes	FGFR2	ENST00000358487.9	start_lost	c.1A>T	p.Met1?	ENST00000346997.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000351936.10:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000356226.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000357555.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000358487.9:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000359354.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000360144.7:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369056.5:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369059.5:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369060.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000369061.8:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000457416.6:FGFR2:P21802:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000490349.5:FGFR2::processed_transcript::; ENST00000491111.1:FGFR2::processed_transcript::; ENST00000604236.5:FGFR2::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000611527.1:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000613048.4:FGFR2::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000636922.1:FGFR2::NSD_transcript::	1	s0		0.930086
+2	chr10	2987654	T	A									1	s1		0.655001
+3	chr10	43077259	A	T		Yes	RET	ENST00000355710.8	start_lost	c.1A>T	p.Met1?	ENST00000340058.6:RET:P07949:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000355710.8:RET:P07949:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000615310.4:RET::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000671844.1:RET::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000672389.1:RET::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T	1	s2		0.91234
+4	chr11	32430539	T	A		Yes	WT1	ENST00000379079.8	start_lost	c.1A>T	p.Met1?	ENST00000332351.8:WT1::intron_variant::c.662-1920A>T; ENST00000379077.8:WT1::intron_variant,NMD_transcript_variant::c.662-1920A>T; ENST00000379079.8:WT1:P19544:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000448076.8:WT1::intron_variant::c.662-1920A>T; ENST00000452863.9:WT1::intron_variant::c.662-1920A>T; ENST00000527775.1:WT1::2kb_upstream_variant,processed_transcript::; ENST00000530998.5:WT1:P19544:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000640146.2:WT1::intron_variant::c.38-1920A>T	1	s1		0.843467
+5	chr11	35206205	A	C		Yes	CD44	ENST00000428726.8	missense_variant	c.1376A>C	p.His459Pro	ENST00000263398.10:CD44:P16070:intron_variant::c.668-8647A>C; ENST00000278386.10:CD44:P16070:intron_variant::c.234-15500A>C; ENST00000352818.8:CD44:P16070:intron_variant::c.668-13111A>C; ENST00000415148.6:CD44:P16070:missense_variant:p.His416Pro:c.1247A>C; ENST00000425428.6:CD44::intron_variant,NMD_transcript_variant::c.*291-8647A>C; ENST00000428726.8:CD44:P16070:missense_variant:p.His459Pro:c.1376A>C; ENST00000433892.6:CD44:P16070:intron_variant::c.668-1900A>C; ENST00000434472.6:CD44:P16070:intron_variant::c.668-5041A>C; ENST00000526669.6:CD44::intron_variant::c.290-13135A>C; ENST00000528086.5:CD44::intron_variant,processed_transcript::	1	s2		0.918393
+6	chr11	534322	T	A		Yes	HRAS	ENST00000311189.8	start_lost	c.1A>T	p.Met1?	ENST00000311189.8:HRAS:P01112:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000397594.5:HRAS:P01112:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000397596.6:HRAS:P01112:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000417302.5:HRAS:P01112:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000451590.5:HRAS:P01112:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000462734.1:HRAS::2kb_upstream_variant,processed_transcript::; ENST00000468682.2:HRAS::processed_transcript::; ENST00000478324.5:HRAS::2kb_upstream_variant,processed_transcript::; ENST00000479482.1:HRAS::2kb_upstream_variant,processed_transcript::; ENST00000482021.1:HRAS::processed_transcript::; ENST00000493230.5:HRAS:P01112:missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T	1	s3		0.909276
+7	chr14	80955681	A	T		Yes	TSHR	ENST00000298171.6	start_lost	c.1A>T	p.Met1?	ENST00000298171.6:TSHR::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000342443.10:TSHR:P16473:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000541158.6:TSHR::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000554263.5:TSHR::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000554368.1:CEP128::intron_variant,processed_transcript::; ENST00000554435.1:TSHR:P16473:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000555326.5:TSHR::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000557096.1:TSHR::processed_transcript::; ENST00000642209.1:TSHR::missense_variant,start_lost:p.Met1?:c.1A>T	1	s0		0.884671
+8	chr14	92039685	T	A		Yes	TRIP11	ENST00000267622.8	start_lost	c.1A>T	p.Met1?	ENST00000267622.8:TRIP11:Q15643:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000555105.1:TRIP11::processed_transcript::	1	s1		0.865173
+9	chr1	50970369	A	T		Yes	CDKN2C	ENST00000371761.4	start_lost	c.1A>T	p.Met1?	ENST00000262662.5:CDKN2C:P42773:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000371761.4:CDKN2C:P42773:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000396148.2:CDKN2C:P42773:missense_variant,start_lost:p.Met1?:c.1A>T	1	s2		0.951366
+10	chr1	532970	T	G									1	s3		
+11	chr15	44711547	A	T		Yes	B2M	ENST00000559916.1	start_lost	c.1A>T	p.Met1?	ENST00000349264.10:B2M::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000544417.5:B2M::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000557901.5:B2M::missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000558573.1:PATL2::2kb_upstream_variant,processed_transcript::; ENST00000559907.5:B2M::2kb_upstream_variant,processed_transcript::; ENST00000559916.1:B2M:P61769:missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000561424.5:B2M:P61769:missense_variant,start_lost,NMD_transcript_variant:p.Met1?:c.1A>T; ENST00000648006.2:B2M:P61769:missense_variant,start_lost:p.Met1?:c.1A>T	1	s4		0.82347
+12	chr15	45201222	A	C			SHF	ENST00000290894.12	2kb_upstream_variant	c.-542T>G		ENST00000290894.12:SHF:Q7M4L6:2kb_upstream_variant::c.-542T>G; ENST00000560034.1:AC051619.3::2kb_downstream_variant,lnc_RNA::; ENST00000563103.1:AC051619.7::2kb_upstream_variant,lnc_RNA::	1	s0		0.601528
+13	chr15	45201223	T	C			SHF	ENST00000290894.12	2kb_upstream_variant	c.-543A>G		ENST00000290894.12:SHF:Q7M4L6:2kb_upstream_variant::c.-543A>G; ENST00000560034.1:AC051619.3::2kb_downstream_variant,lnc_RNA::; ENST00000563103.1:AC051619.7::2kb_upstream_variant,lnc_RNA::	1	s1		0.600101
+14	chr15	45363947	-	T		Yes	GATM	ENST00000396659.8	frameshift_elongation	c.1112_1113insA	p.Met371IlefsTer6	ENST00000396659.8:GATM:P50440:frameshift_elongation:p.Met371IlefsTer6:c.1112_1113insA; ENST00000558336.5:GATM:P50440:frameshift_elongation:p.Met371IlefsTer6:c.1112_1113insA	1	s2		0.838656
+15	chr15	45364871	-	A			GATM	ENST00000396659.8	intron_variant	c.979-11dup		ENST00000396659.8:GATM:P50440:intron_variant::c.979-11dup; ENST00000558336.5:GATM:P50440:intron_variant::c.979-11dup	1	s3		
+16	chr1	59868328	G	T		Yes	HOOK1	ENST00000371208.5	stop_gained	c.1924G>T	p.Glu642Ter	ENST00000371208.5:HOOK1:Q9UJC3:stop_gained:p.Glu642Ter:c.1924G>T; ENST00000465876.5:HOOK1::processed_transcript::; ENST00000466803.1:HOOK1::processed_transcript::	1	s1		0.984526
+#CRAVAT Report
+#Created at Monday 04/26/2021 10:20:06
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+FGFR2		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),NSD_transcript(1),processed_transcript(1)
+RET		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1)
+WT1		1	0	start_lost	intron_variant(1),missense_variant(1),start_lost(1),NMD_transcript_variant(1),processed_transcript(1)
+CD44		1	0	missense_variant	intron_variant(1),missense_variant(1),NMD_transcript_variant(1),processed_transcript(1)
+HRAS		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),processed_transcript(1)
+TSHR		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),processed_transcript(1)
+TRIP11		1	0	start_lost	missense_variant(1),start_lost(1),processed_transcript(1)
+CDKN2C		1	0	start_lost	missense_variant(1),start_lost(1)
+B2M		1	0	start_lost	missense_variant(1),start_lost(1),NMD_transcript_variant(1),processed_transcript(1)
+SHF		0	2	2kb_upstream_variant	
+GATM		1	1	frameshift_elongation	frameshift_elongation(1),intron_variant(1)
+HOOK1		1	0	stop_gained	processed_transcript(1),stop_gained(1)
+#CRAVAT Report
+#Created at Monday 04/26/2021 10:20:06
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s2
+4	s1
+5	s2
+6	s3
+7	s0
+8	s1
+9	s2
+10	s3
+11	s4
+12	s0
+13	s1
+14	s2
+15	s3
+16	s1
+#CRAVAT Report
+#Created at Monday 04/26/2021 10:20:06
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+5		5	0
+6		6	0
+7		7	0
+8		8	0
+9		9	0
+10		10	0
+11		11	0
+12		12	0
+13		13	0
+14		14	0
+15		15	0
+16		16	0
