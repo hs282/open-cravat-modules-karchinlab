@@ -1,7 +1,32 @@
 widgetGenerators['casecontrolsummary'] = {
 	'info': {
         'width': 380,
-        'height': 380,               
+        'height': 380,
+        'variables': {},
+        'init': function () {
+            var v = this['variables'];
+			for (var i = 0; i < infomgr.colModels.variant.length; i++) {
+                var cols = infomgr.colModels.variant[i].colModel;
+                for (var j = 0; j < cols.length; j++) { 
+                    var col = cols[j];
+                    if (col.col.includes("casecontrol")){
+                        var column = col.col;
+                        v['column'] = column;
+                    }else{
+                        v['column'] = 0;
+                    }
+                }
+            }
+        },
+
+        'shoulddraw': function () {
+            var v = this['variables'];
+            if (v['column'] == 0){
+                return false
+            }else{
+                return true
+            }
+        },
 		'function': function (div, row, tabName) {
             var labels = [];
             var dom_labels = [];
@@ -16,6 +41,7 @@ widgetGenerators['casecontrolsummary'] = {
             var all_count = [];
             var count = [];
             var hugos = [];
+            var cases = [];
             var geneDataModels = infomgr.datas.gene;
             for (var i = 0; i < geneDataModels.length; i++) {
                 var row = geneDataModels[i];
@@ -86,6 +112,7 @@ widgetGenerators['casecontrolsummary'] = {
                     all_counts[all_labels[i]] = 0;
                 ++all_counts[all_labels[i]];
             }
+            console.log(counts)
             var items = Object.keys(counts).map(function(key) {
                 return [key, counts[key]];
               });
@@ -130,6 +157,7 @@ widgetGenerators['casecontrolsummary'] = {
                   all_labs.push(all_items[i][0]);
                   all_count.push(all_items[i][1]);
               }
+              
                 div.style.width = 'calc(100% - 37px)';
                 var chartDiv = getEl('canvas');
                 chartDiv.style.width = 'calc(100% - 20px)';

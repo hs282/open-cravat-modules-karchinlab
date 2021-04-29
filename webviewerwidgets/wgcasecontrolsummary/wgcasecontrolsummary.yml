@@ -1,5 +1,5 @@
 title: Case-Control Summary
-version: 1.0.0
+version: 1.0.1
 type: webviewerwidget
 required_annotator: base
 description: Case webviewer widget
@@ -13,4 +13,6 @@ developer:
 tags:
 - visualization widgets
 release_note:
+  1.0.1: Bug fix
   1.0.0: Initial release
+private: true
