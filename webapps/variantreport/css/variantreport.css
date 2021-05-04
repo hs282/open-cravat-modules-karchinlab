@@ -303,6 +303,36 @@ dd {
   font-size: 1.250rem;
 }
 
+.dialdiv2 {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+}
+
+.dialdiv2 > div {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.dialdiv2 > div > div:first-child {
+  font-size: 0.800rem;
+  font-weight: bolder;
+}
+
+.preddiv > div {
+  display: flex;
+  flex-direction: column;
+  padding:10px;
+  /* padding-top: 1rem; */
+}
+
+.preddiv > div > div:first-child {
+  font-size: 0.750rem;
+}
+
+.preddiv > div > div:nth-child(2) {
+  font-size: 1.250rem;
+}
 .clinvar_traitname {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
@@ -408,40 +438,50 @@ dd {
   top: 20px;
   padding-left: 2vw;
 }
+.arrow_pharm {
+  /* border: solid white; */
+  width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 8px solid white;
+  display: inline-block;
+  position: relative;
+  left: 10px;
+  /* padding: 4px; */
+  /* right: 135px; */
 
-  .arrow {
-    border: solid white;
-    border-width: 0px 3px 3px 0px;
-    display: inline-block;
-    position: relative;
-    padding: 4px;
-    right: 153px;
-  }
-  
-  .right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-  }
+  /* margin-left: 20px */
+}
+.triangle-right {
+	width: 0;
+	height: 0;
+	border-top: 8px solid transparent;
+	border-left: 8px solid white;
+  border-bottom: 8px solid transparent;
+  display: inline-block;
+  position: relative;
+  left: 10px;
+  top: 2px;
+}
 
-  .arrow_pharm {
-    border: solid white;
-    border-width: 0px 3px 3px 0px;
-    display: inline-block;
-    position: relative;
-    padding: 4px;
-    right: 175px;
-    /* margin-left: 20px */
-  }
-  
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-  }
+.triangle-down {
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+  border-top: 8px solid white;
+  display: inline-block;
+  position: relative;
+  left: 10px;
+  top: 5px;
+}
 
-  .logoHover {
-    opacity: 1.00;
-    transition: 0.5s ease-in-out;
-    padding-top: 15px;
+
+.logoHover {
+  opacity: 1.00;
+  transition: 0.5s ease-in-out;
+  padding-top: 15px;
 }
 
  .sidenav-header {
@@ -474,10 +514,38 @@ h3 {
   text-align: center;
 }
 
-#gnomad th {
+#newtable th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: center;
+  padding-left: 5px;
+  text-align: left;
+  background-color: rgb(73 134 189);
+  color: white;
+  height: 10px;
+  position: sticky;
+  top: 0;
+}
+
+#newtable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#newtable td {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+#newtable tr:nth-child(odd){background-color: #f2f2f2;}
+
+#newtable tr:hover {background-color: #ddd;}
+
+#pred th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 5px;
+  text-align: left;
   background-color: rgb(73 134 189);;
   color: white;
   height: 10px;
@@ -485,35 +553,156 @@ h3 {
   top: 0;
 }
 
-#gnomad {
+#pred {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  /* border-style: solid; */
   width: 100%;
+  text-align: center;
+  background-color: white;
+  border-radius: 9px;
 }
-
-#gnomad td {
+#segway {
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid gray;
+    Width: 100%;
+    padding: 10px;
+}
+.pred_class {
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  top: 35px;
+  color: black;
+  font-size: 1.250rem;
+}
+.pred_damaging {
+  color: rgba(153, 27, 27, 1);
+  position: relative;
+  top: 25px;
+}
+.pred_tol {
+  color: rgba(6, 95, 70, 1);
+  position: relative;
+  top: 25px;
+}
+.pred_noanno {
+  color: darkgrey;
+  position: relative;
+  top: 25px;
+  font-size: 0.5rem;
+}
+.pred_score {
+  background-color: white;
+  color: black;
+  position: relative;
+  top: 25px;
+}
+#pred td {
+  padding: 15px;
+  vertical-align: top;
+  height: 126px;
+}
+#pred tr {
   border: 1px solid #ddd;
-  padding: 5px;
+  padding: 15px;
 }
-
-#gnomad tr:nth-child(even){background-color: #f2f2f2;}
-
-#gnomad tr:hover {background-color: #ddd;}
-
-.logos {
-  /* width: 10%; */
-  /* display: block; */
+#phylop {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid gray;
+  Width: 100%;
+}
+.logos_short {
   vertical-align: middle;
   margin-left: -14px;
   width: 12%;
-  height: 28px;
+  height: 25px;
   filter: brightness(0) invert(1);
   padding-bottom: 0px;
 }
 
-.sidenav a:hover .logos{
+.logos_tall {
+  vertical-align: middle;
+  margin-left: -14px;
+  width: 10%;
+  height: 28px;
+  filter: brightness(0) invert(1);
+  padding-bottom: 0px;
+}
+.sidenav a:hover .logos_short{
   color: rgb(32,32,32);
   background-color: whitesmoke;
   filter: brightness(1);
   
+}
+.sidenav a:hover .logos_tall{
+  color: rgb(32,32,32);
+  background-color: whitesmoke;
+  filter: brightness(1);
+}
+.linkclass{
+  text-decoration: none;
+  color: rgb(73 134 189);
+  font-family: "Cabin","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.linkclass:hover{
+  text-decoration: underline;
+  color: rgb(73 134 189);
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted #395388;
+  color: #395388; */
+  /* font-family: "Cabin","Helvetica Neue",Helvetica,Arial,sans-serif; */
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: white;
+  color:black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  border:1px solid rgb(73 134 189);
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.infoimg{
+  /* padding-left: 5px; */
+  position: relative;
+  top: 3px;
+  width: 16px;
+}
+
+.clinbutton{
+  background-color:rgb(73 134 189);
+  color: white;
+  width: 220px;
+  font-size: 17px;
+  border-radius: 9999px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.ndexbutton{
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 2px;
+  font-family: 'roboto-medium';
+  color: #ffffff;
+  background: #c5af8d;
+  text-decoration: none;
+  border-style: none;
+  margin-left: 1px;
+  margin-right: 1px;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 10px;
+  height: 50px;
 }

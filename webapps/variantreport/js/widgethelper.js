@@ -73,6 +73,42 @@ function getWidgetTableTr (values,linkNames) {
 	}
 	return tr;
 }
+function getWidgetTableTr2 (values,linkNames) {
+	var numBorder = values.length - 1;
+	var linkNameItr = 0;
+	var tr = getEl('tr');
+	//tr.style.borderBottom = '1px solid #cccccc';
+	for (var i = 0; i < values.length; i++) {
+		var td = getEl('td');
+		var p = getEl('p');
+        p.style.wordBreak = 'break-word';
+		if (i < numBorder) {
+			td.style.borderRight = widgetTableBorderStyle;
+		}
+		var value = values[i];
+		if (value == null) {
+			value = '';
+		}
+		if(typeof value == 'string' && value.startsWith('http')){
+			spanText = document.createElement('a');
+			spanText.href = value;
+			spanText.target = '_blank';
+			spanText.classList.add('linkclass')
+			if(linkNames != undefined){
+				addEl(td, addEl(spanText, getTn(linkNames[linkNameItr])));
+				linkNameItr += 1;
+			}
+			else{
+				addEl(td, addEl(spanText, getTn('View')));
+			}
+		}
+		else{
+			addEl(td, addEl(p, getTn(value)));
+		}
+		addEl(tr, td);
+	}
+	return tr;
+}
 
 function addInfoLine (div, row, header, col, tabName, headerMinWidth, highlightIfValue) {
     var text = null;

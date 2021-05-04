@@ -18,12 +18,17 @@ live_modules:
 - clinvar_acmg
 - cosmic
 - cvdkp
+- dann_coding
 - dbsnp
 - denovo
 - dgi
 - encode_tfbs
 - ensembl_regulatory_build
 - ess_gene
+- fathmm
+- fathmm_mkl
+- fathmm_xf_coding
+- fitcons
 - genehancer
 - gerp
 - geuvadis
@@ -31,6 +36,7 @@ live_modules:
 - gnomad
 - gnomad3
 - gnomad_gene
+- go
 - grasp
 - gtex
 - gwas_catalog
@@ -39,8 +45,14 @@ live_modules:
 - linsight
 - litvar
 - loftool
+- lrt
 - mavedb
+- metalr
+- metasvm
 - mirbase
+- mutation_assessor
+- mutationtaster
+- mutpred1
 - ncbigene
 - ndex
 - ndex_chd
@@ -51,10 +63,13 @@ live_modules:
 - phastcons
 - phi
 - phylop
+- polyphen2
 - prec
+- provean
 - revel
 - rvis
 - segway
+- sift
 - siphy
 - swissprot_binding
 - swissprot_domains
@@ -82,12 +97,17 @@ requires:
 - clinvar_acmg
 - cosmic
 - cvdkp
+- dann_coding
 - dbsnp
 - denovo
 - dgi
 - encode_tfbs
 - ensembl_regulatory_build
 - ess_gene
+- fathmm
+- fathmm_mkl
+- fathmm_xf_coding
+- fitcons
 - genehancer
 - gerp
 - geuvadis
@@ -95,6 +115,7 @@ requires:
 - gnomad
 - gnomad3
 - gnomad_gene
+- go
 - grasp
 - gtex
 - gwas_catalog
@@ -103,8 +124,14 @@ requires:
 - linsight
 - litvar
 - loftool
+- lrt
 - mavedb
+- metalr
+- metasvm
 - mirbase
+- mutation_assessor
+- mutationtaster
+- mutpred1
 - ncbigene
 - ndex
 - ndex_chd
@@ -115,10 +142,13 @@ requires:
 - phastcons
 - phi
 - phylop
+- polyphen2
 - prec
+- provean
 - revel
 - rvis
 - segway
+- sift
 - siphy
 - swissprot_binding
 - swissprot_domains
@@ -140,6 +170,7 @@ requires:
 - wgpharmgkb
 - wgtarget
 - wgdgi
+- wgndex_chdsummary
 - wgthousandgenomes
 description: Molecular Tumor Board Variant Report Webapp
 developer:
