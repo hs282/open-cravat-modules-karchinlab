@@ -67,11 +67,19 @@ class Reporter(CravatReport):
             dfhdata = self.data[self.level][-1][colno]
             if dfhdata is not None and len(dfhdata) > 0:
                 dfhdata = json.loads(dfhdata)
+                colname = self.colnames_to_display[self.level][colno]
+                if type(dfhdata[0]) == list:
+                    headers = self.dataframe_headers[self.level][colname]
+                    new_dfhdata = []
+                    for j in range(len(dfhdata)):
+                        new_dfhdata_row = {}
+                        for i in range(len(headers)):
+                            new_dfhdata_row[headers[i]] = dfhdata[j][i]
+                        new_dfhdata.append(new_dfhdata_row)
+                    dfhdata = new_dfhdata
             else:
                 dfhdata = []
-            #colname = self.colno_to_colname[self.level][colno]
-            colname = self.colnames_to_display[self.level][colno]
-            self.data[self.level][-1][colno] = pd.DataFrame(dfhdata, columns=self.dataframe_headers[self.level][colname])
+            self.data[self.level][-1][colno] = json.dumps(dfhdata)
 
     def end (self):
         self.dfs = {}
