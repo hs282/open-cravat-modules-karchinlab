@@ -1,0 +1,7 @@
+# CCR: Constrained Coding regions Model
+
+The constrained coding regions model (CCR) uses the Genome Aggregation Database (gnomAD, version 2.0.1 in the paper) to reveal regions of protein coding genes that are likely to be under potentially purifiying selection. We used protein-altering variation from across 123,136 ostensibly healthy individuals' exomes to reveal coding regions that are completely devoid of any protein-coding variation. We infer such coding regions to be constrained; the higher the constraint percentile, the more constrained we predict the region to be.
+
+The most constrained regions (≥90th percentile, and especially at or above the ≥99th percentile) have been shown to be extremely enriched for pathogenic variation in ClinVar, de novo dominant mutations in patients with severe developmental disorders, and critical Pfam domains exome-wide. Even more exciting, 72% of genes harboring a CCR in the 99th percentile or higher have no known pathogenic variants. There is great opportunity for discovery of function in these understudied genes as well as their role in disease phenotypes or potentially in embryonic lethality when altered.
+
+Information from https://github.com/quinlan-lab/ccr
