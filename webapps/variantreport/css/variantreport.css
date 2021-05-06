@@ -64,7 +64,6 @@
     font-size: 30px;
     font-weight: 800;
     padding-left: 5px;
-    padding-top: 20px;
     /*padding: 6px;*/
     background-color: whitesmoke;
     color: black;
@@ -109,12 +108,13 @@
 
 #logodiv {
     background-color: whitesmoke;
-    height: 10vh;
+    height: 6vw;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     margin: 0;
     background-image: url("banner.png");
     background-size: 100% 100%;
+    width: 100%;
   }
 
 #logodiv > div {
@@ -146,14 +146,16 @@
     font-family: 'source-sans-pro-bold';
     border-radius: 10px;
     text-shadow: 0 0 6px #000;
+    position: absolute;
+    
 }
 
 #search_btn {
-    width: 3vw;
-    height: 5vh;
-    position: relative;
-    left: 0px;
-    top: 25px;
+    width: 4.5vw;
+    /* height: 5vh; */
+    position: absolute;
+    left: 17vw;
+    top: 1vw;
 }
 
 #inputdiv {
@@ -333,6 +335,33 @@ dd {
 .preddiv > div > div:nth-child(2) {
   font-size: 1.250rem;
 }
+
+.basediv > div {
+  display: flex;
+  flex-direction: column;
+  padding-right:10px;
+  padding-left: 10px;
+  box-sizing: border-box;
+  /* padding-top: 1rem; */
+}
+
+.basediv > div > div:first-child {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 700;
+  /* cominor: #395388; */
+  /* color: white; */
+}
+
+.basediv > div > div:nth-child(2) {
+  font-size: 1.250rem;
+  text-align: center;
+  word-break: break-word;
+  width: 235px
+}
+#basetable{
+  border: none;
+}
 .clinvar_traitname {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
@@ -387,11 +416,12 @@ dd {
   display: flex;
   flex-direction: column;
   height: 80vh;
-  width: 12vw; 
-  margin-top: 40px;
+  width: 11vw; 
+  margin-top: 20px;
   margin-left: 10px;
   margin-right: 20px;
   overflow-y: scroll;
+  min-width: 15rem;
   /* padding-right: 10px; */
 }
 
@@ -410,11 +440,6 @@ dd {
   text-align: left;
   vertical-align: middle;
 }
-.sidenav a:active{
-  background: #29abe2;
-  color: #fff;
-  border-radius: 5px; 
-}
 
 .sidenav a:hover {
     color: rgb(32,32,32);
@@ -427,10 +452,10 @@ dd {
   padding: 0;
 }
 
-@media screen and (max-height: 450px) {
+/* @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
-}
+} */
 
 #material-icons {
   width: 150px;
@@ -496,7 +521,10 @@ dd {
 #logo {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 15px;
+  /* margin-top: 15px; */
+  /* margin: 20px; */
+  padding-bottom: 40px;
+  padding-top: 35px;
   display: block;
 }
 h3 {
