@@ -6,20 +6,14 @@
 }
 
 .singlevariantpage .detailcontainerwrapdiv {
-    padding-bottom: 10px;
+    padding-bottom: 10px;    
 }
 
 .singlevariantpage .detailcontentdiv {
-    /* overflow: auto; */
     background-color:#e8e8e8;
     border-radius: 10px;
     padding-left: 5px;
-    /* display: flex;
-    flex-direction: column; */
-    /* max-width: 90%;
-    overflow-x: hidden; */ 
-    /* flex: 1; */
-    /* overflow-y: scroll; */
+    overflow: auto;
 }
 
 /*
@@ -30,6 +24,8 @@
 
 .singlevariantpage .detailcontentdiv td {
     vertical-align: top;
+  
+
     /* padding-right: 690px; */
 }
 
@@ -325,6 +321,8 @@ dd {
   display: flex;
   flex-direction: column;
   padding:10px;
+  position: relative;
+  bottom: 15px;
   /* padding-top: 1rem; */
 }
 
@@ -445,6 +443,11 @@ dd {
     color: rgb(32,32,32);
     background-color: whitesmoke;
 }
+
+.activeclass {
+  background-color: thistle;
+}
+
 .main {
   overflow: auto;
   height: 95vh;
@@ -452,10 +455,10 @@ dd {
   padding: 0;
 }
 
-/* @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-} */
+@media screen and (max-width: 768px) {
+  .sidenav {display: none;}
+  #bottom-div {grid-template-columns: unset;}
+}
 
 #material-icons {
   width: 150px;
@@ -549,7 +552,7 @@ h3 {
   text-align: left;
   background-color: rgb(73 134 189);
   color: white;
-  height: 10px;
+  height: 2vw;
   position: sticky;
   top: 0;
 }

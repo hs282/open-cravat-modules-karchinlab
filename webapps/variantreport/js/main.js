@@ -195,6 +195,7 @@ function showAnnotation (response) {
     var parentDiv = document.querySelector('#contdiv_vinfo');
     var retDivs = showWidget('basepanel', ['base'], 'variant', parentDiv);
     var parentDiv = document.querySelector('#contdiv_gene');
+    console.log(parentDiv)
     showWidget('genepanel', ['base', 'ncbigene', 'ess_gene', 'gnomad_gene', 'go', 'loftool', 'prec', 'phi', 'interpro', 'pangalodb'],
          'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_clin');
@@ -651,6 +652,8 @@ widgetInfo['base2'] = {
         sdiv.style.width = '95rem'
         sdiv.style.maxHeight = '100%'
         sdiv.style.overflow = 'auto'
+        sdiv.style.display = 'flex'
+        sdiv.style.flexWrap = 'wrap'
         var tr = document.createElement('tr');
         var variantinfo = baseWidget('Variant Type', variant_type + ' (' + ref_base + '>' + alt_base + ')')
         // addDlRow(dl, '', variantinfo)
@@ -1037,6 +1040,10 @@ widgetGenerators['clinvar_acmg'] = {
     var dl = getEl('dl')
     addEl(div, dl)
     if (ps1 != null) {
+        var link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + ps1;
+        var a = makeA(ps1, link)
+        a.classList.add('linkclass')
+        addDlRow(dl, 'ClinVar ACMG PS1 ID', a)
         var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + ps1 + '&retmode=json'
         fetch(url).then(response => {
         return response.json()
@@ -1065,6 +1072,10 @@ widgetGenerators['clinvar_acmg'] = {
         addDlRow(dl, 'ClinVar ACMG PS1 Conditions', sdiv)
     });
     }else if (pm5 != null){
+            var link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + pm5;
+            var a = makeA(pm5, link)
+            a.classList.add('linkclass')
+            addDlRow(dl, 'ClinVar ACMG PM5 ID', a)
             var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + pm5 + '&retmode=json'
             fetch(url).then(response => {
             return response.json()
@@ -1619,8 +1630,8 @@ widgetGenerators['gnomad_gene2'] = {
                 var tbody = getEl('tbody');
                 addEl(table, tbody);
                 var sdiv = getEl('div')
-                sdiv.style.width = '90rem'
-                sdiv.style.maxHeight = '250px'
+                sdiv.style.width = '72vw'
+                sdiv.style.maxHeight = '15vw'
                 sdiv.style.overflow = 'auto'
                 sdiv.style.marginRight = '5rem'
                 for (var i=0; i < results.length; i++) {
@@ -1703,8 +1714,8 @@ widgetGenerators['go2'] = {
 			var tbody = getEl('tbody');
             addEl(table, tbody);
             var sdiv = getEl('div')
-            sdiv.style.width = '90rem'
-            sdiv.style.maxHeight = '400px'
+            sdiv.style.width = '72vw'
+            sdiv.style.maxHeight = '25vw'
             sdiv.style.overflow = 'auto'
             sdiv.style.marginRight = '5rem'
 			if (ccols.length > bpols.length){
@@ -1926,10 +1937,13 @@ widgetInfo['litvar'] = {
                 } else if (n == 1) {
                   var a = makeA(
                     n + ' publication for the variant (' + rsid + ')', link)
+                    a.classList.add('linkclass')
                 } else {
                   var a = makeA(
                     n + ' publications for the variant (' + rsid + ')', link)
+                    a.classList.add('linkclass')
                 }
+                
                 addDlRow(dl, 'Publication(s) for this mutation (LitVar)', a)
               }
             }
@@ -1939,31 +1953,7 @@ widgetInfo['litvar'] = {
       }
     }
   }
-// widgetInfo['revel2'] = {
-//     'title': ''
-//     };
-// widgetGenerators['revel2'] = {
-//     'variant': {
-//         'width': 480, 
-//         'height': 120, 
-//         'default_hidden': true,
-//         'function': function (div, row, tabName) {
-//             var trans = getWidgetData(tabName, 'revel', row, 'transcript');
-//             var score = getWidgetData(tabName, 'revel', row, 'score');
-//             console.log(score)
-//             var rankscore = getWidgetData(tabName, 'revel', row, 'rankscore');
-//             // if (score != null || score != undefined){
-//                 var table = getWidgetTableFrame();
-//                 var thead = getWidgetTableHead(['Transcript', 'Score', 'Rank score']);
-//                 addEl(table, thead);
-//                 var tbody = getEl('tbody');
-//                 var tr = getWidgetTableTr([trans, score, rankscore]);
-//                 addEl(tbody, tr);
-//                 // }
-//                 addEl(div, addEl(table, tbody));
-//             }
-//         }
-//     }
+
 widgetInfo['basepanel'] = {'title': ''};
 widgetGenerators['basepanel'] = {
     'variant': {
@@ -2258,14 +2248,14 @@ widgetGenerators['ess_gene2'] = {
             var wdiv = getEl('div')
             wdiv.style.display = 'flex'
             wdiv.style.flexWrap = 'wrap'
-            var divHeight = '400px';
             var table = getWidgetTableFrame();
             table.setAttribute("id", "newtable");
             var thead = getWidgetTableHead(['Essential', 'CRISPR', 'CRISPR2', 'Gene Trap', 'Indespensibility Score', 'Indespensibility Prediction']);
             addEl(table, thead);
             var tbody = getEl('tbody');
             var sdiv = getEl('div')
-            sdiv.style.width = '90rem'
+            sdiv.style.width = '72vw'
+            sdiv.style.maxHeight = '15vw'
             sdiv.style.display = 'flex'
             sdiv.style.flexWrap = 'wrap'
             var ess = getWidgetData(tabName, 'ess_gene', row, 'ess_gene');
@@ -2515,8 +2505,8 @@ widgetGenerators['basepanel'] = {
 widgetInfo['genepanel'] = {'title': ''};
 widgetGenerators['genepanel'] = {
     'variant': {
-        'width': undefined,
-        'height': undefined,
+        'width': 'unset',
+        'height': 'unset',
         'function': function (div, row, tabName) {
             var dl = getEl('dl')
             dl.style.width = 'calc(100% - 1rem)'
@@ -2562,9 +2552,9 @@ widgetGenerators['genepanel'] = {
             var stat = getWidgetData(tabName, 'prec', row, 'stat')
             if (stat != null || stat != undefined){
                 // addDlRow(dl, 'P(rec) Known Status', stat)
-                var stats = predWidget('Known Status', stat)
+                var stats = baseWidget('Known Status', stat)
             }else{
-                var stats = predWidget('Known Status', getNoAnnotMsgVariantLevel())
+                var stats = baseWidget('Known Status', getNoAnnotMsgVariantLevel())
             }
             var td = document.createElement('td');
             addEl(tr, td);
@@ -2648,9 +2638,9 @@ widgetGenerators['evolutionpanel'] = {
             }
             var nr = getWidgetData(tabName, 'gerp', row, 'gerp_nr');
             if (nr != null || nr != undefined){
-                var gerp = predWidget('GERP++ Neutral Rate', nr)
+                var gerp = baseWidget('GERP++ Neutral Rate', nr)
             }else{
-                var gerp = predWidget('GERP++ Neutral Rate', getNoAnnotMsgVariantLevel())
+                var gerp = baseWidget('GERP++ Neutral Rate', getNoAnnotMsgVariantLevel())
             }
             var td = document.createElement('td');
             addEl(tr, td);
@@ -3508,17 +3498,18 @@ widgetGenerators['clinpanel'] = {
             var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
             var ps1 = getWidgetData(tabName, 'clinvar_acmg', row, 'ps1_id');
             var pm5 = getWidgetData(tabName, 'clinvar_acmg', row, 'pm5_id');
-            if (sig == 'Uncertain significance' || sig == 'not provided' && ps1 != undefined || pm5 != undefined){
-                console.log(ps1, sig)
+            console.log(id, sig, ps1, pm5)
+            if (id != undefined && sig != 'Uncertain significance' || sig != undefined){
+                var divs = showWidget('clinvar2', ['clinvar'], 'variant', div, null, null, false);
+            }else if (ps1 != undefined || pm5 != undefined && sig == undefined){
+                var divs = showWidget('clinvar_acmg', ['clinvar_acmg'], 'variant', div, null, null, false);
+            } 
+            else if (sig == 'Uncertain significance' && ps1 != undefined || pm5 != undefined){
                 var divs = showWidget('clinvar2', ['clinvar'], 'variant', div, null, null, false);
                 var divs = showWidget('clinvar_acmg', ['clinvar_acmg'], 'variant', div, null, null, false);
             }
-            else if (id != null || id != undefined && sig != null || sig != undefined){
-            var divs = showWidget('clinvar2', ['clinvar'], 'variant', div, null, null, false);
-            // console.log(sig)
-            }else if (ps1 != undefined && pm5 != undefined){
-                var divs = showWidget('clinvar_acmg', ['clinvar_acmg'], 'variant', div, null, null, false);
-            }else{
+            
+            else{
                 addDlRow(dl, 'ClinVar', getNoAnnotMsgVariantLevel())
             }
             var dl = getEl('dl')
@@ -3576,6 +3567,7 @@ widgetGenerators['clinpanel'] = {
             var button = document.createElement('button');
             button.onclick = function(){cardio()};  
             button.innerHTML = 'Cardiovascular';
+            button.style.marginRight = '50px'
             var img = document.createElement("img");
             img.classList.add('triangle-right')
             addEl(button, img)
@@ -3587,7 +3579,6 @@ widgetGenerators['clinpanel'] = {
             button2.onclick = function(){pharm()};  
             button2.innerHTML = 'Pharmacogenomics';
             button2.style.position = 'relative'
-            button2.style.left = '50px';
             var img2 = document.createElement("img");
             img2.classList.add('triangle-right')
             addEl(button2, img2)
