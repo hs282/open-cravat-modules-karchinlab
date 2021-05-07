@@ -334,11 +334,27 @@ dd {
   font-size: 1.250rem;
 }
 
+.contentdiv > div {
+  display: flex;
+  flex-direction: column;
+  padding:10px;
+  /* padding-top: 1rem; */
+}
+
+.contentdiv > div > div:first-child {
+  font-size: 0.750rem;
+}
+
+.contentdiv > div > div:nth-child(2) {
+  font-size: 1.250rem;
+}
+
 .basediv > div {
   display: flex;
   flex-direction: column;
   padding-right:10px;
   padding-left: 10px;
+  padding-bottom: 10px;
   box-sizing: border-box;
   /* padding-top: 1rem; */
 }

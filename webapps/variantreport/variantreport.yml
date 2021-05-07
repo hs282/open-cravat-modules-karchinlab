@@ -42,6 +42,7 @@ live_modules:
 - gwas_catalog
 - intact
 - interpro
+- javierre_promoters
 - linsight
 - litvar
 - loftool
@@ -121,6 +122,7 @@ requires:
 - gwas_catalog
 - intact
 - interpro
+- javierre_promoters
 - linsight
 - litvar
 - loftool
