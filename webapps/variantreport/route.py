@@ -375,6 +375,18 @@ async def save_oncokb_token (request):
     response.cookies['oncokb_token'] = token
     return response
 
+async def get_module_info(request):
+    queries = request.rel_url.query
+    module_name = queries['module']
+    if module_name not in au.mic.local:
+        desc = ""
+        url = ""
+    else:
+        conf = au.mic.local[module_name].conf
+        desc = conf.get("description", "")
+        url = conf.get("developer", {}).get("website", "")
+    return web.json_response({"desc": desc, "url": url})
+
 oncokb_conf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'oncokb_conf.yml')
 
 if os.path.exists(oncokb_conf_path):
@@ -393,6 +405,7 @@ routes = [
    ['GET', 'saveoncokbtoken', save_oncokb_token],
    ['GET', 'hallmarks', get_hallmarks],
    ['GET', 'litvar', get_litvar],
+   ['GET', 'moduleinfo', get_module_info],
 ]
 
 canonicals = None
