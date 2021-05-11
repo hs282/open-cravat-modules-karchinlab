@@ -10,7 +10,7 @@
 }
 
 .singlevariantpage .detailcontentdiv {
-    background-color:#e8e8e8;
+    background-color:#f0f0f0;
     border-radius: 10px;
     padding-left: 5px;
     overflow: auto;
@@ -61,7 +61,7 @@
     font-weight: 800;
     padding-left: 5px;
     /*padding: 6px;*/
-    background-color: whitesmoke;
+    background-color: white;
     color: black;
     /*box-shadow: inset 0 0 0 1000px #4a87bd;*/
     /*width: 1188px;*/
@@ -99,11 +99,11 @@
   grid-template-columns: minmax(0, 17rem) 1fr;
   margin: 0;
   padding: 0;
-  background-color: whitesmoke;
+  background-color: white;
 }
 
 #logodiv {
-    background-color: whitesmoke;
+    background-color: white;
     height: 6vw;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
@@ -118,7 +118,7 @@
 }
 
 #detaildiv_variant {
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 #spinnerdiv {
@@ -138,7 +138,7 @@
     font-size: 4vw;
     text-align: center;
     margin: 0px;
-    color: whitesmoke;
+    color: white;
     font-family: 'source-sans-pro-bold';
     border-radius: 10px;
     text-shadow: 0 0 6px #000;
@@ -320,9 +320,11 @@ dd {
 .preddiv > div {
   display: flex;
   flex-direction: column;
-  padding:10px;
+  padding-bottom:10px;
+  padding-top:10px;
   position: relative;
   bottom: 15px;
+  text-align: center;
   /* padding-top: 1rem; */
 }
 
@@ -354,7 +356,7 @@ dd {
   flex-direction: column;
   padding-right:10px;
   padding-left: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   box-sizing: border-box;
   /* padding-top: 1rem; */
 }
@@ -385,7 +387,7 @@ dd {
   border: 1px solid #bbbbbb;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
-  background-color: whitesmoke;
+  background-color: white;
 }
 .omim {
   padding-right: 0.5rem;
@@ -407,7 +409,7 @@ dd {
     border: 1px solid #bbbbbb;
     /* margin-right: 0.5rem; */
     margin-bottom: 0.5rem;
-    background-color: #e8e8e8;
+    background-color: white;
 
   }
   .cardio {
@@ -444,9 +446,9 @@ dd {
   padding: 10px 8px 6px 16px;
   font-size: 17px;
   font-family: 'open-sans-300';
-  color: whitesmoke;
+  color: white;
   display: block;
-  border-bottom: .5px solid whitesmoke;
+  border-bottom: .5px solid white;
   display:inline-block; 
   text-decoration:none;
   height: 13%;
@@ -457,7 +459,7 @@ dd {
 
 .sidenav a:hover {
     color: rgb(32,32,32);
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 .activeclass {
@@ -530,7 +532,7 @@ dd {
 
  .sidenav-header {
   /* padding-bottom: 20px; */
-  background: #e8e8e8;
+  background: #f0f0f0;
   margin-top: 0px;
   border-top-left-radius:10px ;
   border-top-right-radius: 10px;
@@ -584,7 +586,7 @@ h3 {
   padding: 5px;
 }
 
-#newtable tr:nth-child(odd){background-color: #f2f2f2;}
+#newtable tr:nth-child(odd){background-color: white;}
 
 #newtable tr:hover {background-color: #ddd;}
 
@@ -605,7 +607,7 @@ h3 {
   border-collapse: collapse;
   /* border-style: solid; */
   width: 100%;
-  text-align: center;
+  
   background-color: white;
   border-radius: 9px;
 }
@@ -635,8 +637,9 @@ h3 {
 .pred_noanno {
   color: darkgrey;
   position: relative;
-  top: 25px;
-  font-size: 0.5rem;
+  top: 30px;
+  font-size: 1rem;
+  text-align: center;
 }
 .pred_score {
   background-color: white;
@@ -645,7 +648,8 @@ h3 {
   top: 25px;
 }
 #pred td {
-  padding: 15px;
+  padding-bottom: 15px;
+  padding-top: 15px;
   vertical-align: top;
   height: 126px;
 }
@@ -661,8 +665,8 @@ h3 {
 .logos_short {
   vertical-align: middle;
   margin-left: -14px;
-  width: 12%;
-  height: 25px;
+  width: 13%;
+  height: 30px;
   filter: brightness(0) invert(1);
   padding-bottom: 0px;
 }
@@ -671,19 +675,19 @@ h3 {
   vertical-align: middle;
   margin-left: -14px;
   width: 10%;
-  height: 28px;
+  height: 30px;
   filter: brightness(0) invert(1);
   padding-bottom: 0px;
 }
 .sidenav a:hover .logos_short{
   color: rgb(32,32,32);
-  background-color: whitesmoke;
+  background-color: white;
   filter: brightness(1);
   
 }
 .sidenav a:hover .logos_tall{
   color: rgb(32,32,32);
-  background-color: whitesmoke;
+  background-color: white;
   filter: brightness(1);
 }
 .linkclass{
