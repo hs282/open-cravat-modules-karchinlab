@@ -377,15 +377,20 @@ async def save_oncokb_token (request):
 
 async def get_module_info(request):
     queries = request.rel_url.query
-    module_name = queries['module']
-    if module_name not in au.mic.local:
-        desc = ""
-        url = ""
-    else:
-        conf = au.mic.local[module_name].conf
-        desc = conf.get("description", "")
-        url = conf.get("developer", {}).get("website", "")
-    return web.json_response({"desc": desc, "url": url})
+    module_names = queries['modules'].split(",")
+    response = []
+    for module_name in module_names:
+        if module_name not in au.mic.local:
+            title = ""
+            desc = ""
+            url = ""
+        else:
+            conf = au.mic.local[module_name].conf
+            title = conf.get("title", "")
+            desc = conf.get("description", "")
+            url = conf.get("developer", {}).get("website", "")
+        response.append({"title": title, "desc": desc, "url": url})
+    return web.json_response(response)
 
 oncokb_conf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'oncokb_conf.yml')
 

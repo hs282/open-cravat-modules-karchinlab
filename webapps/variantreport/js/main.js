@@ -3,6 +3,51 @@ var annotData = null;
 var mqMaxMatch = window.matchMedia('(max-width: 1024px)');
 var mqMinMatch = window.matchMedia('(min-width: 1024px)');
 
+function makeModuleDescUrlTitle(moduleName, text) {
+    var div = getEl('div')
+    var el = getEl('span')
+    if (text != undefined) {
+        el.textContent = text
+    } else {
+        el.textContent = widgetInfo[moduleName]["title"]
+    }
+    addEl(div, el)
+    var el = getEl('img')
+    el.src = "desc.png";
+    el.classList.add('infoimg')
+    addEl(div, el)
+    var annotators = widgetGenerators[moduleName]['annotators']
+    if (annotators == undefined) {
+        annotators = moduleName
+    }
+    el.addEventListener('click', function(evt) {
+        fetch("moduleinfo?modules=" + annotators)
+        .then(response => {
+            return response.json()
+        }).then(moduleInfos => {
+            var tdiv = document.querySelector("#tooltipdiv")
+            tdiv.innerHTML = ""
+            moduleInfos.forEach(function(moduleInfo) {
+                var tsdiv = getEl('div')
+                var tspan = getEl('a')
+                tspan.textContent = moduleInfo.title
+                tspan.setAttribute("href", moduleInfo.url)
+                tspan.setAttribute("target", "_blank")
+                addEl(tsdiv, tspan)
+                tspan = getEl('div')
+                tspan.textContent = moduleInfo.desc
+                addEl(tsdiv, tspan)
+                addEl(tdiv, tsdiv)
+            })
+            tdiv.style.left = evt.target.offsetLeft + 15
+            tdiv.style.top = evt.target.offsetTop
+            addEl(evt.target.parentElement, tdiv)
+            tdiv.classList.add("show")
+        })
+    })
+    return div
+}
+
 function mqMaxMatchHandler (e) {
     if (e.matches) {
         var iframe = document.querySelector('#mupitiframe');
@@ -23,7 +68,6 @@ function mqMinMatchHandler (e) {
 
 function getInputDataFromUrl () {
     var urlParams = new URLSearchParams(window.location.search);
-    console.log('@ urlparams=', urlParams)
     var inputChrom = urlParams.get('chrom');
     var inputPos = urlParams.get('pos');
     var inputRef = urlParams.get('ref_base');
@@ -32,9 +76,7 @@ function getInputDataFromUrl () {
     if (assembly == undefined) {
         assembly = 'hg38'
     }
-    console.log('@ chrom=', inputChrom, 'assembly=', assembly)
     var inputData = cleanInputData(inputChrom, inputPos, inputRef, inputAlt, assembly);
-    console.log('@ inputdata=', inputData)
     return inputData;
 }
 
@@ -165,7 +207,8 @@ function showWidget (widgetName, moduleNames, level, parentDiv, maxWidth, maxHei
         var dl = getEl('dl')
         divs[0].style.height = 'unset'
         addEl(divs[0], dl)
-        addDlRow(dl,widgetInfo[widgetName]['title'], getNoAnnotMsgVariantLevel());
+        var titleEl = makeModuleDescUrlTitle(widgetName)
+        addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
         // var span = getEl('span');
         // span.textContent = 'No annotation available for ' + widgetInfo[widgetName]['title'];
         // addEl(divs[1], span);
@@ -1002,6 +1045,7 @@ widgetInfo['clinvar2'] = {
         addEl(dd, span)
         addEl(dd, getTn('\xa0'));
         var sigLower = sig == undefined ? '' : sig.toLowerCase()
+        var titleEl = makeModuleDescUrlTitle("clinvar")
         if (id != null && sigLower != 'not provided' 
             && sigLower != '' && sigLower != 'association not found') {
           link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + id;
@@ -1039,7 +1083,7 @@ widgetInfo['clinvar2'] = {
             addDlRow(dl, 'ClinVar Conditions', sdiv)
         });
         }else {
-          addDlRow(dl, 'ClinVar', getNoAnnotMsgVariantLevel())
+          addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
         }
       }
     }
@@ -1294,6 +1338,7 @@ widgetGenerators['target2'] = {
 }
 widgetInfo['clingen2'] = {'title': 'ClinGen Gene'};
 widgetGenerators['clingen2'] = {
+    'annotators': 'clingen',
     'gene': {
         'width': undefined,
         'height': undefined,
@@ -1306,9 +1351,10 @@ widgetGenerators['clingen2'] = {
             // wdiv.style.display = 'flex'
             // wdiv.style.flexWrap = 'wrap'
             // var divHeight = '400px';
+            var titleEl = makeModuleDescUrlTitle("clingen")
             var disease = getWidgetData(tabName, 'clingen', row, 'disease');
             if (disease == null) {
-                addDlRow(dl, 'ClinGen Gene', 'No annotation available');
+                addDlRow(dl, titleEl, 'No annotation available');
             }
             if (disease != undefined && disease != null) {
                 var diseases = getWidgetData(tabName, 'clingen', row, 'disease').split(';');
@@ -1339,7 +1385,7 @@ widgetGenerators['clingen2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
             
         }
@@ -1459,6 +1505,7 @@ widgetGenerators['dgi2'] = {
 }
 widgetInfo['gwas_catalog2'] = {'title': 'GWAS Catalog'};
 widgetGenerators['gwas_catalog2'] = {
+    'annotators': 'gwas_catalog',
     'variant': {
         'width': undefined, 
         'height': undefined, 
@@ -1538,6 +1585,7 @@ widgetGenerators['grasp2'] = {
 }
 widgetInfo['gtex2'] = {'title': 'GTEX'};
 widgetGenerators['gtex2'] = {
+    'annotators': 'gtex',
     'variant': {
         'width': undefined, 
         'height': undefined, 
@@ -2170,6 +2218,7 @@ widgetGenerators['encode_tfbs2'] = {
 }
 widgetInfo['genehancer2'] = {'title': 'GeneHancer'};
 widgetGenerators['genehancer2'] = {
+    'annotators': 'genehancer',
 	'variant': {
 		'width': undefined, 
 		'height': undefined, 
@@ -3458,7 +3507,6 @@ widgetGenerators['predictionpanel'] = {
             // chartDiv.height = '400';
             addEl(sdiv, chartDiv);
             // addEl(wdiv, sdiv);
-            console.log('@ wdiv=', wdiv)
             var chart = new Chart(chartDiv, {
             type: 'doughnut',
             data: {
@@ -3567,6 +3615,7 @@ widgetGenerators['clinpanel'] = {
             var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
             var ps1 = getWidgetData(tabName, 'clinvar_acmg', row, 'ps1_id');
             var pm5 = getWidgetData(tabName, 'clinvar_acmg', row, 'pm5_id');
+            var titleEl = makeModuleDescUrlTitle("clinpanel", "ClinVar")
             if (id != undefined && sig != 'Uncertain significance' || sig != undefined){
                 var divs = showWidget('clinvar2', ['clinvar'], 'variant', div, null, null, false);
             }else if (ps1 != undefined || pm5 != undefined && sig == undefined){
@@ -3578,7 +3627,7 @@ widgetGenerators['clinpanel'] = {
             }
             
             else{
-                addDlRow(dl, 'ClinVar', getNoAnnotMsgVariantLevel())
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
             }
             var dl = getEl('dl')
             addEl(div, dl)
@@ -4143,6 +4192,12 @@ function setupEvents () {
             document.querySelector('#input_submit').click();
         }
     });
+    document.querySelector("body").addEventListener("click", function(evt) {
+        var tooltipdiv = document.querySelector("#tooltipdiv")
+        if (tooltipdiv.classList.contains("show")) {
+            tooltipdiv.classList.remove("show")
+        }
+    })
 }
 
 function showSearch () {
