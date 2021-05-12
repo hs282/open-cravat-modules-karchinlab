@@ -11,9 +11,6 @@ function makeModuleDescUrlTitle(moduleName, text) {
     } else {
         el.textContent = widgetInfo[moduleName]["title"]
     }
-    addEl(div, el)
-    var el = getEl('img')
-    el.src = "desc.png";
     el.classList.add('infoimg')
     addEl(div, el)
     var annotators = widgetGenerators[moduleName]['annotators']
@@ -877,11 +874,13 @@ widgetInfo['ncbi'] = {
     'title': ''
 };
 widgetGenerators['ncbi'] = {
+    'annotators': 'ncbigene',
     'gene': {
         'width': '100%',
         'height': undefined,
         'word-break': 'break-word',
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("ncbigene")
             var hugo = getWidgetData(tabName, 'base', row, 'hugo');
             var dl = getEl('dl')
             addEl(div, dl)
@@ -890,9 +889,9 @@ widgetGenerators['ncbi'] = {
                 desc = desc.split(/\[.*\]$/)[0]
             }
             if (desc == null) {
-                addDlRow(dl, 'NCBI Gene Summary', getNoAnnotMsgGeneLevel())
+                addDlRow(dl, titleEl, getNoAnnotMsgGeneLevel())
             } else {
-                addDlRow(dl, 'NCBI Gene Summary', desc)
+                addDlRow(dl, titleEl, desc)
             }
         }
     }
@@ -963,11 +962,13 @@ widgetInfo['siphy2'] = {
     'title': 'SiPhy'
 };
 widgetGenerators['siphy2'] = {
+    'annotators': 'siphy',
     'variant': {
         'width': undefined,
         'height': undefined,
         'word-break': 'normal',
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("siphy")
             var title = 'SiPhy'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -982,7 +983,7 @@ widgetGenerators['siphy2'] = {
             } else {
                 var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
             }
-            addDlRow(dl, 'SiPhy', sdiv);
+            addDlRow(dl, titleEl, sdiv);
             // addGradientBarComponent(div, row, 'Rank Score', 'siphy__logodds_rank', tabName);
             var pis = getWidgetData(tabName, 'siphy', row, 'pi');
             var pils = pis != null ? pis.split(';') : [];
@@ -1015,27 +1016,16 @@ widgetInfo['aloft2'] = {
     'title': 'Aloft'
 };
 widgetGenerators['aloft2'] = {
+    'annotators': 'aloft',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("aloft")
             var title = 'Aloft'
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
-            // wdiv.style.display = 'flex'
-            // wdiv.style.flexWrap = 'wrap'
-            // var divHeight = '250px';
-            var title = getEl('div')
-            title.textContent = 'ALoFT'
-            title.classList.add('tooltip')
-            var img = document.createElement("img");
-            img.src = "desc.png";
-            img.classList.add('infoimg')
-            title.appendChild(img);
-            var spans = getEl('span')
-            spans.textContent = 'ALoFT provides extensive annotations to putative loss-of-function variants (LoF) in protein-coding genes including functional, evolutionary and network features.'
-            spans.classList.add('tooltiptext')
             var allMappings = getWidgetData(tabName, 'aloft', row, 'all');
             if (allMappings != undefined && allMappings != null) {
                 var sdiv = getEl('div')
@@ -1043,7 +1033,6 @@ widgetGenerators['aloft2'] = {
                 sdiv.style.minWidth = '60rem'
                 sdiv.style.maxHeight = '250px'
                 sdiv.style.minHeight = '120px'
-                // sdiv.style.overflow = 'auto'
                 sdiv.style.marginRight = '5rem'
                 var table = getWidgetTableFrame();
                 table.setAttribute("id", "newtable");
@@ -1063,9 +1052,9 @@ widgetGenerators['aloft2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, addEl(title, spans), wdiv)
+                addDlRow(dl, titleEl, wdiv)
             } else {
-                addDlRow(dl, addEl(title, spans), getNoAnnotMsgVariantLevel())
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
             }
 
         }
@@ -1076,10 +1065,12 @@ widgetInfo['clinvar2'] = {
     'title': 'ClinVar'
 };
 widgetGenerators['clinvar2'] = {
+    'annotators': 'clinvar',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("clinvar", "ClinVar Significance")
             div.parentElement.style.paddingBottom = '0'
             var id = getWidgetData(tabName, 'clinvar', row, 'id');
             var sig = getWidgetData(tabName, 'clinvar', row, 'sig');
@@ -1091,16 +1082,16 @@ widgetGenerators['clinvar2'] = {
             addEl(dd, span)
             addEl(dd, getTn('\xa0'));
             var sigLower = sig == undefined ? '' : sig.toLowerCase()
-            var titleEl = makeModuleDescUrlTitle("clinvar")
             if (id != null && sigLower != 'not provided' &&
                 sigLower != '' && sigLower != 'association not found') {
+                var titleEl2 = makeModuleDescUrlTitle("clinvar", "ClinVar Conditions")
                 link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + id;
                 var a = makeA(id, link)
                 a.classList.add('linkclass');
                 addEl(dd, getTn('(ID: '));
                 addEl(dd, a);
                 addEl(dd, getTn(')'));
-                addDlRow(dl, 'ClinVar Significance', dd)
+                addDlRow(dl, titleEl, dd)
                 var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + id + '&retmode=json'
                 fetch(url).then(response => {
                     return response.json()
@@ -1126,7 +1117,7 @@ widgetGenerators['clinvar2'] = {
                         span.textContent = traitNames[i]
                         addEl(sdiv, span)
                     }
-                    addDlRow(dl, 'ClinVar Conditions', sdiv)
+                    addDlRow(dl, titleEl2, sdiv)
                 });
             } else {
                 addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
@@ -1444,6 +1435,7 @@ widgetInfo['pharmgkb2'] = {
     'title': 'PharmGKB'
 };
 widgetGenerators['pharmgkb2'] = {
+    'annotators': 'pharmgkb',
     'variant': {
         'width': undefined,
         'height': undefined,
@@ -1456,9 +1448,11 @@ widgetGenerators['pharmgkb2'] = {
             wdiv.style.display = 'flex'
             wdiv.style.flexWrap = 'wrap'
             var divHeight = '400px';
+            var titleEl = makeModuleDescUrlTitle("pharmgkb")
             var chemical = getWidgetData(tabName, 'pharmgkb', row, 'chemicals');
             var assocs = getWidgetData(tabName, 'pharmgkb', row, 'drug_assoc');
             if (assocs != undefined && assocs != null) {
+
                 var pharmId = getWidgetData(tabName, 'pharmgkb', row, 'id');
                 link = 'https://pharmgkb.org/variant/' + pharmId;
                 var a = makeA(pharmId, link)
@@ -1496,7 +1490,7 @@ widgetGenerators['pharmgkb2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -1505,11 +1499,12 @@ widgetInfo['dgi2'] = {
     'title': 'DGIdb: The Drug Interaction Database'
 };
 widgetGenerators['dgi2'] = {
+    'annotators': 'dgi',
     'gene': {
         'width': undefined,
-        'word-break': 'normal',
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("dgi")
             var title = 'DGIdb: The Drug Interaction Database'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1551,7 +1546,7 @@ widgetGenerators['dgi2'] = {
                         addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                     }
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -1565,6 +1560,7 @@ widgetGenerators['gwas_catalog2'] = {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("gwas_catalog")
             var title = 'GWAS Catalog'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1591,7 +1587,7 @@ widgetGenerators['gwas_catalog2'] = {
             addEl(tbody, tr);
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
 
-            addDlRow(dl, title, wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -1599,10 +1595,12 @@ widgetInfo['grasp2'] = {
     'title': 'GRASP'
 };
 widgetGenerators['grasp2'] = {
+    'annotators': 'grasp',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("grasp")
             var title = 'GRASP'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1635,7 +1633,7 @@ widgetGenerators['grasp2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -1649,6 +1647,7 @@ widgetGenerators['gtex2'] = {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("gtex")
             var title = 'GTEX'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1679,7 +1678,7 @@ widgetGenerators['gtex2'] = {
                 addEl(tbody, tr);
                 addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
             }
-            addDlRow(dl, title, wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -1688,10 +1687,12 @@ widgetInfo['rvis2'] = {
     'title': 'RVIS'
 };
 widgetGenerators['rvis2'] = {
+    'annotators': 'rvis',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle('rvis')
             var title = 'RVIS'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1732,7 +1733,7 @@ widgetGenerators['rvis2'] = {
             var tr = getWidgetTableTr2([evs, exac, perc_evs, perc_exac, pvalue]);
             addEl(tbody, tr);
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-            addDlRow(dl, title, wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -1741,6 +1742,7 @@ widgetInfo['gnomad_gene2'] = {
     'title': 'gnomAD Gene'
 };
 widgetGenerators['gnomad_gene2'] = {
+    'annotators': 'gnomad_gene',
     'gene': {
         'width': undefined,
         'height': undefined,
@@ -1753,6 +1755,7 @@ widgetGenerators['gnomad_gene2'] = {
             wdiv.style.display = 'flex'
             wdiv.style.flexWrap = 'wrap'
             var divHeight = '250px';
+            var titleEl = makeModuleDescUrlTitle("gnomad_gene")
             var results = getWidgetData(tabName, 'gnomad_gene', row, 'all');
             if (results != undefined && results != null && typeof(results) == 'object') {
                 var table = getWidgetTableFrame();
@@ -1774,7 +1777,7 @@ widgetGenerators['gnomad_gene2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
             } else {
                 var trx = getWidgetData(tabName, 'gnomad_gene', row, 'transcript');
                 var trxls = trx != null ? trx.split(';') : [];
@@ -1812,7 +1815,7 @@ widgetGenerators['gnomad_gene2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -1821,11 +1824,13 @@ widgetInfo['go2'] = {
     'title': 'Gene Ontology'
 };
 widgetGenerators['go2'] = {
+    'annotators': 'go',
     'gene': {
         'width': undefined,
         'height': undefined,
         'word-break': 'normal',
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("go")
             var title = 'Gene Ontology'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1901,7 +1906,7 @@ widgetGenerators['go2'] = {
                 addEl(tbody, tr);
                 addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
             }
-            addDlRow(dl, title, wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -1909,10 +1914,12 @@ widgetInfo['interpro2'] = {
     'title': 'Interpro'
 }
 widgetGenerators['interpro2'] = {
+    'annotators': 'interpro',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("interpro2")
             var title = 'InterPro'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1937,7 +1944,7 @@ widgetGenerators['interpro2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -1946,10 +1953,13 @@ widgetInfo['biogrid2'] = {
     'title': 'BioGRID'
 }
 widgetGenerators['biogrid2'] = {
+    'annotators': 'biogrid',
     'gene': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("biogrid", "BioGRID ID")
+            var titleEll = makeModuleDescUrlTitle("biogrid")
             var title = 'BioGRID Interactors'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -1968,9 +1978,9 @@ widgetGenerators['biogrid2'] = {
                 link = 'https://thebiogrid.org/' + id;
                 var a = makeA(id, link);
                 a.classList.add('linkclass')
-                addDlRow(dl, 'BioGRID ID', a)
+                addDlRow(dl, titleEl, a)
             } else {
-                addDlRow(dl, 'BioGRID ID', getNoAnnotMsgGeneLevel())
+                addDlRow(dl, titleEl, getNoAnnotMsgGeneLevel())
             }
 
             var actsls = acts != null ? acts.split(';') : [];
@@ -1984,7 +1994,7 @@ widgetGenerators['biogrid2'] = {
                     span.textContent = actsls[j]
                     addEl(sdiv, span);
                 }
-                addDlRow(dl, title, sdiv)
+                addDlRow(dl, titleEll, sdiv)
             }
         }
     }
@@ -1993,10 +2003,12 @@ widgetInfo['intact2'] = {
     'title': 'IntAct'
 }
 widgetGenerators['intact2'] = {
+    'annotators': 'intact',
     'gene': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("intact")
             var title = 'IntAct Interactors'
             var dl = getEl('dl')
             addEl(div, dl)
@@ -2018,7 +2030,7 @@ widgetGenerators['intact2'] = {
                 span.textContent = actsls[j]
                 addEl(sdiv, span);
             }
-            addDlRow(dl, a, sdiv)
+            addDlRow(dl, titleEl, sdiv)
         }
     }
 }
@@ -2026,6 +2038,7 @@ widgetInfo['litvar'] = {
     'title': 'LitVar'
 };
 widgetGenerators['litvar'] = {
+    'annotators': 'litvar',
     'variant': {
         'width': undefined,
         'height': undefined,
@@ -2034,6 +2047,7 @@ widgetGenerators['litvar'] = {
         },
         'word-break': 'break-word',
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("litvar", 'Publication(s) for this mutation (LitVar)')
             var dl = getEl('dl')
             addEl(div, dl)
             var title = 'Publications for this mutation (LitVar)'
@@ -2080,7 +2094,7 @@ widgetGenerators['litvar'] = {
                                 a.classList.add('linkclass')
                             }
 
-                            addDlRow(dl, 'Publication(s) for this mutation (LitVar)', a)
+                            addDlRow(dl, titleEl, a)
                         }
                     }
                 }
@@ -2108,11 +2122,12 @@ widgetInfo['phastcons3'] = {
     'title': 'Phast Cons'
 };
 widgetGenerators['phastcons3'] = {
+    'annotators': 'phastcons',
     'variant': {
         'width': undefined,
         'height': undefined,
-        'word-break': 'break-word',
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("phastcons")
             var dl = getEl('dl')
             addEl(div, dl)
             var sdiv = getEl('div')
@@ -2142,7 +2157,7 @@ widgetGenerators['phastcons3'] = {
             sdiv.style.maxWidth = '32rem'
             addEl(sdiv, v)
             addEl(sdiv, m)
-            addDlRow(dl, 'Phast Cons', sdiv)
+            addDlRow(dl, titleEl, sdiv)
         }
     }
 }
@@ -2150,6 +2165,7 @@ widgetInfo['phylop2'] = {
     'title': 'PhyloP'
 };
 widgetGenerators['phylop2'] = {
+    'annotators': 'phylop',
     'variant': {
         'width': undefined,
         'height': undefined,
@@ -2160,6 +2176,7 @@ widgetGenerators['phylop2'] = {
             var sdiv = getEl('div')
             sdiv.style.display = 'flex'
             sdiv.style.flexWrap = 'wrap'
+            var titleEl = makeModuleDescUrlTitle("phylop")
             var vert_r = getWidgetData(tabName, 'phylop', row, 'phylop100_vert_r');
             var vert = getWidgetData(tabName, 'phylop', row, 'phylop100_vert');
             if (vert_r != null || vert_r != undefined) {
@@ -2194,7 +2211,7 @@ widgetGenerators['phylop2'] = {
             addEl(sdiv, v)
             addEl(sdiv, m)
             addEl(sdiv, p)
-            addDlRow(dl, 'PhyloP', sdiv)
+            addDlRow(dl, titleEl, sdiv)
         }
     }
 }
@@ -2202,10 +2219,12 @@ widgetInfo['ccre_screen2'] = {
     'title': 'Candidate cis_Regulatory Elements by ENCODE (SCREEN)'
 };
 widgetGenerators['ccre_screen2'] = {
+    'annotators': 'ccre_screen',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("ccre_screen")
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2231,7 +2250,7 @@ widgetGenerators['ccre_screen2'] = {
             var tr = getWidgetTableTr2([group, bound, link], [e_id]);
             addEl(tbody, tr);
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-            addDlRow(dl, "Candidate cis_Regulatory Elements by ENCODE (SCREEN)", wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2240,16 +2259,17 @@ widgetInfo['encode_tfbs2'] = {
     'title': 'ENCODE TFBS'
 };
 widgetGenerators['encode_tfbs2'] = {
+    'annotators': 'encode_tfbs',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
             var dl = getEl('dl')
             addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("encode_tfbs")
             var title = 'ENCODE TFBS';
             var wdiv = getEl('div')
             var allMappings = getWidgetData(tabName, 'encode_tfbs', row, 'factor');
-            console.log(allMappings)
             if (allMappings != undefined && allMappings != null) {
                 var table = getWidgetTableFrame();
                 var thead = getWidgetTableHead(['Factor', 'Cell', 'Quality', 'Antibody', 'Study'], ['20%', '20%', '15%', '20%', '25%']);
@@ -2268,7 +2288,7 @@ widgetGenerators['encode_tfbs2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, title, wdiv)
+                addDlRow(dl, titleEl, wdiv)
                 addEl(div, addEl(table, tbody));
             }
         }
@@ -2283,6 +2303,8 @@ widgetGenerators['genehancer2'] = {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("genehancer", "GeneHancer Type")
+            var titleEll = makeModuleDescUrlTitle("genehancer")
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2292,7 +2314,7 @@ widgetGenerators['genehancer2'] = {
             var featureName = getWidgetData(tabName, 'genehancer', row, 'feature_name');
             var targetsStr = getWidgetData(tabName, 'genehancer', row, 'target_genes');
             if (!targetsStr) return
-            addDlRow(dl, 'GeneHancer Type', featureName);
+            addDlRow(dl, titleEl, featureName);
             var targets = targetsStr.split(',')
                 .map(tmp => tmp.split(': '))
                 .sort((a, b) => {
@@ -2315,7 +2337,7 @@ widgetGenerators['genehancer2'] = {
                 addEl(tbody, tr);
                 addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
             }
-            addDlRow(dl, "GeneHancer", wdiv)
+            addDlRow(dl, titleEll, wdiv)
         }
     }
 }
@@ -2323,12 +2345,14 @@ widgetInfo['swissprot_binding2'] = {
     'title': 'Swiss-Prot Binding'
 };
 widgetGenerators['swissprot_binding2'] = {
+    'annotators': 'swissprot_binding',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
             var dl = getEl('dl')
             addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("swissprot_binding")
             var wdiv = getEl('div')
             wdiv.style.display = 'flex'
             wdiv.style.flexWrap = 'wrap'
@@ -2360,7 +2384,7 @@ widgetGenerators['swissprot_binding2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, 'Swiss-Prot Binding', wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -2371,10 +2395,12 @@ widgetInfo['ess_gene2'] = {
     'title': 'Essential Genes'
 };
 widgetGenerators['ess_gene2'] = {
+    'annotators': 'ess_gene',
     'gene': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("ess_gene2")
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2435,7 +2461,7 @@ widgetGenerators['ess_gene2'] = {
                 addEl(tbody, tr);
             }
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-            addDlRow(dl, 'Essential Genes', wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2444,6 +2470,7 @@ widgetInfo['swissprot_domains2'] = {
     'title': 'Swiss-Prot Domains'
 };
 widgetGenerators['swissprot_domains2'] = {
+    'annotators': 'swissprot_domains',
     'variant': {
         'width': undefined,
         'height': undefined,
@@ -2451,9 +2478,9 @@ widgetGenerators['swissprot_domains2'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
+            var titleEl = makeModuleDescUrlTitle("swissprot_domains")
             var allMappings = getWidgetData(tabName, 'swissprot_domains', row, 'all');
             if (allMappings != undefined && allMappings != null) {
-                // var results = JSON.parse(allMappings);
                 var table = getWidgetTableFrame();
                 table.setAttribute("id", "newtable");
                 var thead = getWidgetTableHead(['UniprotKB ID', 'Pubmed']);
@@ -2473,7 +2500,7 @@ widgetGenerators['swissprot_domains2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, 'Swiss-Prot Domains', wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -2613,6 +2640,7 @@ widgetInfo['swissprot_ptm2'] = {
     'title': 'Swiss-Prot PTM'
 };
 widgetGenerators['swissprot_ptm2'] = {
+    'annotators': 'swissprot_ptm',
     'variant': {
         'width': undefined,
         'height': undefined,
@@ -2620,8 +2648,8 @@ widgetGenerators['swissprot_ptm2'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
+            var titleEl = makeModuleDescUrlTitle("swissprot_ptm")
             var allMappings = getWidgetData(tabName, 'swissprot_ptm', row, 'all');
-            console.log(allMappings)
             if (allMappings != undefined && allMappings != null) {
                 var table = getWidgetTableFrame();
                 table.setAttribute("id", "newtable");
@@ -2651,7 +2679,7 @@ widgetGenerators['swissprot_ptm2'] = {
                     addEl(tbody, tr);
                     addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                addDlRow(dl, 'Swiss-Prot PTM', wdiv)
+                addDlRow(dl, titleEl, wdiv)
             }
         }
     }
@@ -2661,10 +2689,12 @@ widgetInfo['gerp2'] = {
     'title': 'GERP++'
 };
 widgetGenerators['gerp2'] = {
+    'annotators': 'gerp',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("gerp")
             var dl = getEl('dl')
             addEl(div, dl)
             var sdiv = getEl('div')
@@ -2692,7 +2722,7 @@ widgetGenerators['gerp2'] = {
             sdiv.style.maxWidth = '30rem'
             addEl(sdiv, ssdiv)
             addEl(sdiv, gerp)
-            addDlRow(dl, 'GERP++', sdiv)
+            addDlRow(dl, titleEl, sdiv)
         }
     }
 }
@@ -2700,6 +2730,7 @@ widgetInfo['prec2'] = {
     'title': 'P(rec)'
 };
 widgetGenerators['prec2'] = {
+    'annotators': 'prec',
     'variant': {
         'width': undefined,
         'height': undefined,
@@ -2709,6 +2740,7 @@ widgetGenerators['prec2'] = {
             var sdiv = getEl('div');
             sdiv.style.display = 'flex'
             sdiv.style.flexWrap = 'wrap'
+            var titleEl = makeModuleDescUrlTitle('prec')
             var prec = getWidgetData(tabName, 'prec', row, 'prec');
             if (prec != null || prec != undefined) {
                 var ssdiv = getDialWidget('Score', annotData['prec']['prec'], .80)
@@ -2730,11 +2762,430 @@ widgetGenerators['prec2'] = {
             sdiv.style.maxWidth = '25rem'
             addEl(sdiv, ssdiv)
             addEl(sdiv, stats)
-            addDlRow(dl, 'P(rec)', sdiv)
+            addDlRow(dl, titleEl, sdiv)
+        }
+    }
+}
+widgetInfo['denovo'] = {
+    'title': 'Denovo-DB'
+};
+widgetGenerators['denovo'] = {
+    'annotators': 'denovo',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("denovo", "Denovo-DB Phenotype")
+            var phenotype = getWidgetData(tabName, 'denovo', row, 'PrimaryPhenotype');
+            if (phenotype != null) {
+                addDlRow(dl, titleEl, phenotype);
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
+            }
         }
     }
 }
 
+widgetInfo['geuvadis'] = {
+    'title': 'Geuvadis eQTLs'
+};
+widgetGenerators['geuvadis'] = {
+    'annotators': 'geuvadis',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("geuvadis", "Geuvadis eQTLs Target Gene")
+            var risk = getWidgetData(tabName, 'geuvadis', row, 'gene');
+            if (risk != null || risk != undefined) {
+                var sdiv = getEl('div')
+                sdiv.style.display = 'flex'
+                sdiv.style.flexWrap = 'wrap'
+                var span = getEl('div');
+                span.classList.add('clinvar_traitname');
+                span.textContent = risk
+                // addEl(span, risk)
+                addEl(sdiv, span)
+                addDlRow(dl, titleEl, sdiv);
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
+            }
+        }
+    }
+}
+widgetInfo['linsight'] = {
+    'title': 'LINSIGHT'
+};
+widgetGenerators['linsight'] = {
+    'annotators': 'linsight',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("linsight")
+            var value = getWidgetData(tabName, 'linsight', row, 'value');
+            if (value != null || value != undefined) {
+                var sdiv = getDialWidget('LINSIGHT Score', annotData['linsight']['value'], .80)
+            } else {
+                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+            }
+            addDlRow(dl, titleEl, sdiv);
+        }
+    }
+}
+
+widgetInfo['mavedb2'] = {
+    'title': 'MaveDB'
+};
+widgetGenerators['mavedb2'] = {
+    'annotators': 'mavedb',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("mavedb", "MaveDB Score and Set")
+            var score = getWidgetData(tabName, 'mavedb', row, 'score')
+            if (score != null || score != undefined) {
+                score = prettyVal(score)
+            }
+            var acc = getWidgetData(tabName, 'mavedb', row, 'accession')
+            if (acc != null || acc != undefined) {
+                var link = 'https://www.mavedb.org/scoreset/' + acc;
+                var a = makeA(acc, link);
+                a.classList.add('linkclass');
+                var sdiv = getEl('div')
+                sdiv.style.display = 'flex'
+                sdiv.style.flexWrap = 'wrap'
+                var span = getEl('div')
+                span.classList.add('clinvar_traitname')
+                span.textContent = score
+                addEl(sdiv, span)
+                var span = getEl('div')
+                span.classList.add('clinvar_traitname')
+                addEl(span, a)
+                addEl(sdiv, span)
+                addDlRow(dl, titleEl, sdiv);
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
+            }
+        }
+    }
+}
+
+widgetInfo['loftool'] = {
+    'title': 'LoFtool'
+};
+widgetGenerators['loftool'] = {
+    'annotators': 'loftool',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle('loftool')
+            var score = getWidgetData(tabName, 'loftool', row, 'loftool_score');
+            if (score != null || score != undefined) {
+                var sdiv = getDialWidget('Score', annotData['loftool']['loftool_score'], .80)
+            } else {
+                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
+            }
+            addDlRow(dl, titleEl, sdiv);
+        }
+    }
+}
+widgetInfo['javierre_promoters'] = {
+    'title': 'Promoter IR Regions'
+};
+widgetGenerators['javierre_promoters'] = {
+    'annotators': 'javierre_promoters',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("javierre_promoters", "Promoter IR Regions")
+            var regions = getWidgetData(tabName, 'javierre_promoters', row, 'regions')
+            if (regions != null || regions != undefined) {
+                addDlRow(dl, titleEl, regions)
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
+            }
+
+        }
+    }
+}
+widgetInfo['vista_enhancer'] = {
+    'title': 'VISTA Enhancer Browser'
+};
+widgetGenerators['vista_enhancer'] = {
+    'annotators': 'vista_enhancer',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var sdiv = getEl('div')
+            sdiv.style.display = 'flex'
+            sdiv.style.flexWrap = 'wrap'
+            var titleEl = makeModuleDescUrlTitle("vista_enhancer", "VISTA Enhancer Browser Element")
+            var element = getWidgetData(tabName, 'vista_enhancer', row, 'element');
+            if (element != null || element != undefined) {
+                element = element.replace('element ', '')
+                var link = 'https://enhancer.lbl.gov/cgi-bin/imagedb3.pl?form=presentation&show=1&experiment_id=' + element + '&organism_id=1';
+                var a = makeA('element ' + element, link);
+                a.classList.add('linkclass');
+                var features = getWidgetData(tabName, 'vista_enhancer', row, 'features');
+                var span = getEl('div')
+                span.classList.add('clinvar_traitname')
+                span.textContent = features
+                addEl(sdiv, span)
+                var span = getEl('div')
+                span.classList.add('clinvar_traitname')
+                addEl(span, a)
+                addEl(sdiv, span)
+                addDlRow(dl, titleEl, sdiv)
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
+            }
+            var dl = getEl('dl')
+            addEl(div, dl)
+        }
+    }
+}
+widgetInfo['ensembl_regulatory_build'] = {
+    'title': 'VEnsembl Regulatory Build'
+};
+widgetGenerators['ensembl_regulatory_build'] = {
+    'annotators': 'ensembl_regulatory_build',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("ensembl_regulatory_build")
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var id = getWidgetData(tabName, 'ensembl_regulatory_build', row, 'ensr');
+            var region = getWidgetData(tabName, 'ensembl_regulatory_build', row, 'region');
+            var sdiv = getEl('div')
+            // sdiv.style.display = 'flex'
+            // sdiv.style.flexWrap = 'wrap'
+            var link = '';
+            if (id != null) {
+                link = 'http://www.ensembl.org/Homo_sapiens/Regulation/Context?db=core;fdb=funcgen;rf=' + id;
+                var a = makeA(id, link);
+                a.classList.add('linkclass');
+            }
+            if (region != null || region != undefined) {
+                var span = getEl('div')
+                span.classList.add('clinvar_traitname')
+                span.textContent = region
+                addEl(sdiv, span)
+                var span = getEl('div')
+                span.classList.add('clinvar_traitname')
+                addEl(span, a)
+                addEl(sdiv, span)
+                addDlRow(dl, titleEl, sdiv)
+            }
+        }
+    }
+}
+widgetInfo['trinity'] = {
+    'title': 'Trinity CTAT RNA Editing Database'
+};
+widgetGenerators['trinity'] = {
+    'annotators': 'trinity',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("trinity")
+            var rnaedit = getWidgetData(tabName, 'trinity', row, 'Rnaedit');
+            if (rnaedit != null || rnaedit != undefined) {
+                addDlRow(dl, titleEl, rnaedit);
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
+            }
+
+        }
+    }
+}
+widgetInfo['segway'] = {
+    'title': 'Segway'
+};
+widgetGenerators['segway'] = {
+    'annotators': 'segway',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var sdiv = getEl('div');
+            sdiv.style.display = 'flex'
+            sdiv.style.flexWrap = 'wrap'
+            var tr = document.createElement('tr');
+            var sum = getWidgetData(tabName, 'segway', row, 'sum_score');
+            var mean = getWidgetData(tabName, 'segway', row, 'mean_score');
+            if (sum != null || mean != null) {
+                var sums = contentWidget('Sum Score', sum)
+                var means = contentWidget('Mean Score', mean)
+                sums.style.paddingRight = '40px';
+                sums.style.paddingBottom = '20px';
+                sdiv.style.border = 'solid gray 1px';
+                sdiv.style.maxWidth = '20rem'
+                addEl(sdiv, sums)
+                addEl(sdiv, means)
+                addDlRow(dl, titleEl, sdiv)
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
+            }
+        }
+    }
+}
+widgetInfo['mirbase'] = {
+    'title': 'mirbase'
+};
+widgetGenerators['mirbase'] = {
+    'annotators': 'mirbase',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("mirbase")
+            var id = getWidgetData(tabName, 'mirbase', row, 'id');
+            var name = getWidgetData(tabName, 'mirbase', row, 'name');
+            var trans = getWidgetData(tabName, 'mirbase', row, 'transcript');
+            var derive = getWidgetData(tabName, 'mirbase', row, 'derives_from');
+            var sdiv = getEl('div')
+            sdiv.style.maxWidth = '60rem'
+            sdiv.style.minWidth = '40rem'
+            sdiv.style.display = 'flex'
+            sdiv.style.flexWrap = 'wrap'
+            if (id != null) {
+                var table = getWidgetTableFrame();
+                table.setAttribute("id", "newtable");
+                var thead = getWidgetTableHead(['ID', 'Name', 'Transcript', 'Derives From']);
+                addEl(table, thead);
+                var tbody = getEl('tbody');
+
+                link = 'http://www.mirbase.org/cgi-bin/mirna_entry.pl?acc=' + id;
+                var tr = getWidgetTableTr([link, name, trans, derive], [id]);
+                addEl(tbody, tr);
+                addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
+                addDlRow(dl, titleEl, wdiv)
+
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
+            }
+        }
+    }
+}
+
+widgetInfo['dann_coding'] = {
+    'title': 'DANN'
+};
+widgetGenerators['dann_coding'] = {
+    'annotators': 'dann_coding',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['fathmm_mkl'] = {
+    'title': 'FATHMM MKL'
+};
+widgetGenerators['fathmm_mkl'] = {
+    'annotators': 'fathmm_mkl',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['fathmm_xf_coding'] = {
+    'title': 'FATHMM XF'
+};
+widgetGenerators['fathmm_xf_coding'] = {
+    'annotators': 'fathmm_xf_coding',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['lrt'] = {
+    'title': 'LRT'
+};
+widgetGenerators['lrt'] = {
+    'annotators': 'lrt',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['metalr'] = {
+    'title': 'MetaLR'
+};
+widgetGenerators['metalr'] = {
+    'annotators': 'metalr',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['metasvm'] = {
+    'title': 'MetaSVM'
+};
+widgetGenerators['metasvm'] = {
+    'annotators': 'metasvm',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['mutation_assessor'] = {
+    'title': 'Mutation Assessor'
+};
+widgetGenerators['mutation_assessor'] = {
+    'annotators': 'mutation_assessor',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+widgetInfo['mutpred1'] = {
+    'title': 'Mutation Assessor'
+};
+widgetGenerators['mutation_assessor'] = {
+    'annotators': 'mutation_assessor',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
 widgetInfo['basepanel'] = {
     'title': ''
 };
@@ -2773,13 +3224,7 @@ widgetGenerators['genepanel'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'))
-            var score = getWidgetData(tabName, 'loftool', row, 'loftool_score');
-            if (score != null || score != undefined) {
-                var sdiv = getDialWidget('Score', annotData['loftool']['loftool_score'], .80)
-            } else {
-                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            }
-            addDlRow(dl, 'LoFtool', sdiv);
+            var divs = showWidget('loftool', ['loftool'], 'variant', div, null, null, false);
             addEl(div, getEl('br'))
             var divs = showWidget('prec2', ['prec'], 'variant', div, null, null, false);
 
@@ -2802,24 +3247,9 @@ widgetGenerators['assocpanel'] = {
             addEl(div, dl)
             div.style.marginTop = '2vh';
             addEl(div, getEl('br'));
-            var risk = getWidgetData(tabName, 'geuvadis', row, 'gene');
-            if (risk != null || risk != undefined) {
-                var sdiv = getEl('div')
-                sdiv.style.display = 'flex'
-                sdiv.style.flexWrap = 'wrap'
-                var span = getEl('div');
-                span.classList.add('clinvar_traitname');
-                span.textContent = risk
-                // addEl(span, risk)
-                addEl(sdiv, span)
-                addDlRow(dl, 'Geuvadis eQTLs Target Gene', sdiv);
-            } else {
-                addDlRow(dl, 'Geuvadis eQTLs Target Gene', getNoAnnotMsgVariantLevel())
-            }
+            var divs = showWidget('geuvadis', ['geuvadis'], 'variant', div, null, null, false);
             var dl = getEl('dl')
             addEl(div, dl)
-
-
             addEl(div, getEl('br'));
             var divs = showWidget('gwas_catalog2', ['gwas_catalog'], 'variant', div, null, null, false);
             var divs = showWidget('grasp2', ['grasp'], 'variant', div, null, null, false);
@@ -2844,26 +3274,19 @@ widgetGenerators['evolutionpanel'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             var divs = showWidget('rvis2', ['rvis'], 'variant', div, null, null, false);
+            var titleEl = makeModuleDescUrlTitle("ghis")
             if (annotData['ghis'] != null) {
                 var sdiv = getDialWidget('GHIS Score', annotData['ghis']['ghis'], .80)
             } else {
                 var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
             }
-            addDlRow(dl, 'GHIS Score', sdiv)
+            addDlRow(dl, titleEl, sdiv)
             var divs = showWidget('aloft2', ['aloft'], 'variant', div, null, null, false);
-
             addEl(div, getEl('br'))
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'))
-            var value = getWidgetData(tabName, 'linsight', row, 'value');
-            if (value != null || value != undefined) {
-                var sdiv = getDialWidget('LINSIGHT Score', annotData['linsight']['value'], .80)
-            } else {
-                var sdiv = `No annotation is available for ${annotData["base"]["hugo"]} ${annotData["base"]["achange"]}`
-            }
-            addDlRow(dl, 'LINSIGHT', sdiv);
-
+            var divs = showWidget('linsight', ['linsight'], 'variant', div, null, null, false);
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'))
@@ -2891,33 +3314,7 @@ widgetGenerators['studiespanel'] = {
             dl.style.width = 'calc(100% - 1rem)'
             addEl(div, dl)
             div.style.marginTop = '2vh';
-
-
-            var score = getWidgetData(tabName, 'mavedb', row, 'score')
-            if (score != null || score != undefined) {
-                score = prettyVal(score)
-            }
-            var acc = getWidgetData(tabName, 'mavedb', row, 'accession')
-            if (acc != null || acc != undefined) {
-                var link = 'https://www.mavedb.org/scoreset/' + acc;
-                var a = makeA(acc, link);
-                a.classList.add('linkclass');
-                var sdiv = getEl('div')
-                sdiv.style.display = 'flex'
-                sdiv.style.flexWrap = 'wrap'
-                var span = getEl('div')
-                span.classList.add('clinvar_traitname')
-                span.textContent = score
-                addEl(sdiv, span)
-                var span = getEl('div')
-                span.classList.add('clinvar_traitname')
-                addEl(span, a)
-                addEl(sdiv, span)
-                addDlRow(dl, 'MaveDB Score and Set', sdiv);
-            } else {
-                addDlRow(dl, 'MaveDB Score and Set', getNoAnnotMsgVariantLevel())
-            }
-
+            var divs = showWidget('mavedb2', ['mavedb'], 'variant', div, null, null, false);
             addEl(div, getEl('br'))
         }
     }
@@ -2942,7 +3339,6 @@ widgetGenerators['interactionspanel'] = {
             var wdiv = getEl('div')
             sdiv.style.display = 'flex'
             sdiv.style.flexWrap = 'wrap'
-            // console.log(window.innerWidth)
             var button = document.createElement('button');
             button.onclick = function() {
                 ndex()
@@ -3053,125 +3449,29 @@ widgetGenerators['noncodingpanel'] = {
             addEl(div, br);
             var divs = showWidget('encode_tfbs2', ['encode_tfbs'], 'variant', div, null, null, false);
             var divs = showWidget('genehancer2', ['genehancer'], 'variant', div, null, null, false);
-            var regions = getWidgetData(tabName, 'javierre_promoters', row, 'regions')
-            if (regions != null || regions != undefined) {
-                addDlRow(dl, 'Promoter IR Regions', regions)
-            } else {
-                addDlRow(dl, 'Promoter IR Regions', getNoAnnotMsgVariantLevel())
-            }
             var dl = getEl('dl')
             addEl(div, dl)
             var br = getEl("br");
             addEl(div, br);
-            var sdiv = getEl('div')
-            sdiv.style.display = 'flex'
-            sdiv.style.flexWrap = 'wrap'
-            var element = getWidgetData(tabName, 'vista_enhancer', row, 'element');
-            if (element != null || element != undefined) {
-                element = element.replace('element ', '')
-                var link = 'https://enhancer.lbl.gov/cgi-bin/imagedb3.pl?form=presentation&show=1&experiment_id=' + element + '&organism_id=1';
-                var a = makeA('element ' + element, link);
-                a.classList.add('linkclass');
-                var features = getWidgetData(tabName, 'vista_enhancer', row, 'features');
-                var span = getEl('div')
-                span.classList.add('clinvar_traitname')
-                span.textContent = features
-                addEl(sdiv, span)
-                var span = getEl('div')
-                span.classList.add('clinvar_traitname')
-                addEl(span, a)
-                addEl(sdiv, span)
-                addDlRow(dl, 'VISTA Enhancer Browser Element', sdiv)
-            } else {
-                addDlRow(dl, 'VISTA Enhancer Browser Element', getNoAnnotMsgVariantLevel());
-            }
+            var divs = showWidget('javierre_promoters', ['javierre_promoters'], 'variant', div, null, null, false);
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'));
-            var id = getWidgetData(tabName, 'ensembl_regulatory_build', row, 'ensr');
-            var region = getWidgetData(tabName, 'ensembl_regulatory_build', row, 'region');
-            var sdiv = getEl('div')
-            sdiv.style.display = 'flex'
-            sdiv.style.flexWrap = 'wrap'
-            var link = '';
-            if (id != null) {
-                link = 'http://www.ensembl.org/Homo_sapiens/Regulation/Context?db=core;fdb=funcgen;rf=' + id;
-                var a = makeA(id, link);
-                a.classList.add('linkclass');
-            }
-            if (region != null || region != undefined) {
-                var span = getEl('div')
-                span.classList.add('clinvar_traitname')
-                span.textContent = region
-                addEl(sdiv, span)
-                var span = getEl('div')
-                span.classList.add('clinvar_traitname')
-                addEl(span, a)
-                addEl(sdiv, span)
-                addDlRow(dl, 'Ensembl Regulatory Build', sdiv)
-            } else {
-                addDlRow(dl, 'Ensembl Regulatory Build', getNoAnnotMsgVariantLevel())
-            }
-            var dl = getEl('dl')
-            addEl(div, dl)
+            var divs = showWidget('vista_enhancer', ['vista_enhancer'], 'variant', div, null, null, false);
+
             addEl(div, getEl('br'));
-            var rnaedit = getWidgetData(tabName, 'trinity', row, 'Rnaedit');
-            if (rnaedit != null || rnaedit != undefined) {
-                addDlRow(dl, 'Trinity CTAT RNA Editing Database', rnaedit);
-            } else {
-                addDlRow(dl, 'Trinity CTAT RNA Editing Database', getNoAnnotMsgVariantLevel())
-            }
-            var dl = getEl('dl')
-            addEl(div, dl)
+            var divs = showWidget('ensembl_regulatory_build', ['ensembl_regulatory_build'], 'variant', div, 600, 600, false);
+
             addEl(div, getEl('br'));
-            var sdiv = getEl('div');
-            sdiv.style.display = 'flex'
-            sdiv.style.flexWrap = 'wrap'
-            var tr = document.createElement('tr');
-            var sum = getWidgetData(tabName, 'segway', row, 'sum_score');
-            var mean = getWidgetData(tabName, 'segway', row, 'mean_score');
-            if (sum != null || mean != null) {
-                var sums = contentWidget('Sum Score', sum)
-                var means = contentWidget('Mean Score', mean)
-                sums.style.paddingRight = '40px';
-                sums.style.paddingBottom = '20px';
-                sdiv.style.border = 'solid gray 1px';
-                sdiv.style.maxWidth = '20rem'
-                addEl(sdiv, sums)
-                addEl(sdiv, means)
-                addDlRow(dl, 'Segway', sdiv)
-            } else {
-                addDlRow(dl, 'Segway', getNoAnnotMsgVariantLevel());
-            }
+            var divs = showWidget('trinity', ['trinity'], 'variant', div, null, null, false);
 
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'));
-            var id = getWidgetData(tabName, 'mirbase', row, 'id');
-            var name = getWidgetData(tabName, 'mirbase', row, 'name');
-            var trans = getWidgetData(tabName, 'mirbase', row, 'transcript');
-            var derive = getWidgetData(tabName, 'mirbase', row, 'derives_from');
+            var divs = showWidget('segway', ['segway'], 'variant', div, null, null, false);
+            addEl(div, getEl('br'));
+            var divs = showWidget('mirbase', ['mirbase'], 'variant', div, 600, 600, false);
 
-            if (id != null) {
-                var table = getWidgetTableFrame();
-                table.setAttribute("id", "newtable");
-                var thead = getWidgetTableHead(['ID', 'Name', 'Transcript', 'Derives From']);
-                addEl(table, thead);
-                var tbody = getEl('tbody');
-                var sdiv = getEl('div')
-                sdiv.style.maxWidth = '60rem'
-                sdiv.style.minWidth = '40rem'
-                sdiv.style.display = 'flex'
-                sdiv.style.flexWrap = 'wrap'
-                link = 'http://www.mirbase.org/cgi-bin/mirna_entry.pl?acc=' + id;
-                var tr = getWidgetTableTr([link, name, trans, derive], [id]);
-                addEl(tbody, tr);
-                addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-                addDlRow(dl, 'miRBase', wdiv)
-
-            } else {
-                addDlRow(dl, 'miRBase', getNoAnnotMsgVariantLevel())
-            }
         }
     }
 }
@@ -3199,7 +3499,7 @@ widgetGenerators['predictionpanel'] = {
             var rankscores = [];
             var preds = [];
             var predictions = [];
-            var names = ['DANN', 'FATHMM', 'FATHMM MKL', 'FATHMM XF', 'LRT', 'MetaLR', 'MetaSVM', 'Mutation Assessor', 'MutPred', 'MutationTaster', 'PolyPhen-2 HDIV', 'PolyPhen-2 HVAR', 'PROVEAN', 'REVEL', 'SIFT'];
+            var names = ['dann_coding', 'fathmm', 'fathmm_mkl', 'fathmm_xf_coding', 'lrt', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster', 'polyphen2', 'polyphen2', 'provean', 'revel', 'sift'];
             var dann_score = getWidgetData(tabName, 'dann_coding', row, 'dann_coding_score');
             if (dann_score != undefined || dann_score != null) {
                 var dann = predWidget('coding score', dann_score);
@@ -3564,19 +3864,25 @@ widgetGenerators['predictionpanel'] = {
             var tol_count = 0;
             for (var i = 0; i < names.length; i++) {
                 var name = names[i];
+                var titleEl = makeModuleDescUrlTitle(name)
                 var p = predictions[i];
-                var a = getEl('a')
-                a.classList.add('pred_class');
-                var tn = document.createTextNode(name)
+                // var a = getEl('a')
+                // a.classList.add('pred_class');
+                // var tn = document.createTextNode(titleEl)
                 var tr = document.createElement('tr');
                 var td = document.createElement('td');
                 td.style.textAlign = 'center';
+                td.style.verticalAlign = 'middle';
+                addEl(tr, td);
+                addEl(td, titleEl)
+
+
                 var pred = preds[i];
                 var score = scores[i];
                 if (score != null) {
                     score.classList.add('pred_score');
                 }
-                addEl(tr, addEl(td, addEl(a, tn)))
+                // addEl(tr, addEl(td, addEl(a, tn)))
                 var td = document.createElement('td');
                 if (p != null && p.includes('Damaging') || p == 'Medium' || p == 'Disease Causing') {
                     dam_count = dam_count + 1;
@@ -3590,7 +3896,6 @@ widgetGenerators['predictionpanel'] = {
                 addEl(tr, td);
                 addEl(td, pred)
                 var td = document.createElement('td');
-                // td.style.width = '18%';
                 addEl(td, score)
                 addEl(tr, td);
                 var rank = rankscores[i];
@@ -3714,6 +4019,7 @@ widgetInfo['clinpanel'] = {
     'title': ''
 };
 widgetGenerators['clinpanel'] = {
+    'annotators': 'clinvar',
     'variant': {
         'width': null,
         'height': null,
@@ -3743,30 +4049,10 @@ widgetGenerators['clinpanel'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'));
-            var phenotype = getWidgetData(tabName, 'denovo', row, 'PrimaryPhenotype');
-            // var validation = getWidgetData(tabName, 'denovo', row, 'Validation');
-            if (phenotype != null) {
-                addDlRow(dl, 'Denovo-DB Phenotype', phenotype);
-            } else {
-                addDlRow(dl, 'Denovo-DB Phenotype', getNoAnnotMsgVariantLevel());
-            }
-            // if (validation != null){
-            // addDlRow(dl, 'Denovo-DB Validation', validation);
-            // }else{
-            //     addDlRow(dl, 'Denovo-DB Validation', getNoAnnotMsgVariantLevel());
-            // }
+            var divs = showWidget('denovo', ['denovo'], 'variant', div, null, null, false);
             var dl = getEl('dl')
             addEl(div, dl)
-            var title = getEl('div')
-            title.textContent = 'OMIM ID'
-            title.classList.add('tooltip')
-            var img = document.createElement("img");
-            img.src = "desc.png";
-            img.classList.add('infoimg')
-            title.appendChild(img);
-            var spans = getEl('span')
-            spans.textContent = 'Online Mendelian Inheritance in Man. Catalog of human genes and genetic disorders and traits'
-            spans.classList.add('tooltiptext')
+            var titleEl = makeModuleDescUrlTitle("omim")
             let ids = getWidgetData(tabName, 'omim', row, 'omim_id');
             if (ids != null || ids != undefined) {
                 ids = ids !== null ? ids.split('; ') : [];
@@ -3782,9 +4068,9 @@ widgetGenerators['clinpanel'] = {
                     addEl(span, a)
                     addEl(sdiv, span)
                 }
-                addDlRow(dl, addEl(title, spans), sdiv);
+                addDlRow(dl, titleEl, sdiv);
             } else {
-                addDlRow(dl, addEl(title, spans), getNoAnnotMsgVariantLevel());
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
             }
             addEl(div, getEl('br'));
             var generator = widgetGenerators['clingen2']['gene'];
@@ -3940,9 +4226,10 @@ widgetGenerators['allelefreqpanel'] = {
                 addBarComponent(td, row, 'Other', 'gnomad3__af_oth', tabName);
                 addBarComponent(td, row, 'South Asian', 'gnomad3__af_sas', tabName);
             }*/
+            var titleEl = makeModuleDescUrlTitle("gnomad3", "gnomADv3 Allele Frequency")
             if (annotData['gnomad3'] == null) {
                 var td = getNoAnnotMsgVariantLevel()
-                addDlRow(dl, 'gnomADv3 allele frequency', td)
+                addDlRow(dl, titleEl, td)
             } else {
                 let af = annotData['gnomad3']['af']
                 let afr = annotData['gnomad3']['af_afr']
@@ -3986,7 +4273,7 @@ widgetGenerators['allelefreqpanel'] = {
                 td.style.height = '24rem'
                 td.style.backgroundColor = 'white'
                 td.style.borderRadius = '9px'
-                addDlRow(dl, 'gnomADv3 allele frequency', td)
+                addDlRow(dl, titleEl, td)
                 var chart = new Chart(td, {
                     type: 'horizontalBar',
                     data: {
@@ -4045,9 +4332,10 @@ widgetGenerators['allelefreqpanel'] = {
                     },
                 })
             }
+            var titleEl = makeModuleDescUrlTitle("thousandgenomes", "1000 Genomes Allele Frequency")
             if (annotData['thousandgenomes'] == null) {
                 var td = getNoAnnotMsgVariantLevel()
-                addDlRow(dl, '1000 Genomes Allele Frequency', td)
+                addDlRow(dl, titleEl, td)
             } else {
                 let af = annotData['thousandgenomes']['af']
                 let amr = annotData['thousandgenomes']['amr_af']
@@ -4082,7 +4370,7 @@ widgetGenerators['allelefreqpanel'] = {
                 td.style.height = '17rem'
                 td.style.backgroundColor = 'white'
                 td.style.borderRadius = '9px'
-                addDlRow(dl, '1000 Genomes Allele Frequency', td)
+                addDlRow(dl, titleEl, td)
                 var chart = new Chart(td, {
                     type: 'horizontalBar',
                     data: {
