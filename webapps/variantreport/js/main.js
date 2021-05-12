@@ -1135,6 +1135,9 @@ widgetGenerators['clinvar_acmg'] = {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEll = makeModuleDescUrlTitle("clinvar_acmg", "ClinVar ACMG PM5 Conditions")
+            var titleEl = makeModuleDescUrlTitle("clinvar_acmg", "ClinVar ACMG PS1 Conditions")
+            var titleElps1 = makeModuleDescUrlTitle("clinvar_acmg", "ClinVar ACMG PM5 ID")
             div.parentElement.style.paddingBottom = '0'
             var ps1 = getWidgetData(tabName, 'clinvar_acmg', row, 'ps1_id');
             var pm5 = getWidgetData(tabName, 'clinvar_acmg', row, 'pm5_id');
@@ -1144,7 +1147,7 @@ widgetGenerators['clinvar_acmg'] = {
                 var link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + ps1;
                 var a = makeA(ps1, link)
                 a.classList.add('linkclass')
-                addDlRow(dl, 'ClinVar ACMG PS1 ID', a)
+                addDlRow(dl, titleElps1, a)
                 var url = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=clinvar&id=' + ps1 + '&retmode=json'
                 fetch(url).then(response => {
                     return response.json()
@@ -1170,7 +1173,7 @@ widgetGenerators['clinvar_acmg'] = {
                         span.textContent = traitNames[i]
                         addEl(sdiv, span)
                     }
-                    addDlRow(dl, 'ClinVar ACMG PS1 Conditions', sdiv)
+                    addDlRow(dl, titleEl, sdiv)
                 });
             } else if (pm5 != null) {
                 var link = 'https://www.ncbi.nlm.nih.gov/clinvar/variation/' + pm5;
@@ -1202,7 +1205,7 @@ widgetGenerators['clinvar_acmg'] = {
                         span.textContent = traitNames[i]
                         addEl(sdiv, span)
                     }
-                    addDlRow(dl, 'ClinVar ACMG PM5 Conditions', sdiv)
+                    addDlRow(dl, titleEll, sdiv)
                 });
             } else {
                 addDlRow(dl, 'ClinVar', getNoAnnotMsgVariantLevel())
