@@ -2947,6 +2947,8 @@ widgetGenerators['vista_enhancer'] = {
             var sdiv = getEl('div')
             sdiv.style.display = 'flex'
             sdiv.style.flexWrap = 'wrap'
+            var dl = getEl('dl')
+            addEl(div, dl)
             var titleEl = makeModuleDescUrlTitle("vista_enhancer", "VISTA Enhancer Browser Element")
             var element = getWidgetData(tabName, 'vista_enhancer', row, 'element');
             if (element != null || element != undefined) {
@@ -2964,18 +2966,14 @@ widgetGenerators['vista_enhancer'] = {
                 addEl(span, a)
                 addEl(sdiv, span)
                 addDlRow(dl, titleEl, sdiv)
-            } else {
-                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
             }
-            var dl = getEl('dl')
-            addEl(div, dl)
         }
     }
 }
-widgetInfo['ensembl_regulatory_build'] = {
+widgetInfo['ensembl_regulatory_build2'] = {
     'title': 'VEnsembl Regulatory Build'
 };
-widgetGenerators['ensembl_regulatory_build'] = {
+widgetGenerators['ensembl_regulatory_build2'] = {
     'annotators': 'ensembl_regulatory_build',
     'variant': {
         'width': undefined,
@@ -3004,6 +3002,7 @@ widgetGenerators['ensembl_regulatory_build'] = {
                 span.classList.add('clinvar_traitname')
                 addEl(span, a)
                 addEl(sdiv, span)
+                sdiv.style.maxWidth = '20rem'
                 addDlRow(dl, titleEl, sdiv)
             }
         }
@@ -3065,10 +3064,10 @@ widgetGenerators['segway'] = {
         }
     }
 }
-widgetInfo['mirbase'] = {
-    'title': 'mirbase'
+widgetInfo['mirbase2'] = {
+    'title': 'miRBase'
 };
-widgetGenerators['mirbase'] = {
+widgetGenerators['mirbase2'] = {
     'annotators': 'mirbase',
     'variant': {
         'width': undefined,
@@ -3473,18 +3472,18 @@ widgetGenerators['noncodingpanel'] = {
             addEl(div, getEl('br'));
             var divs = showWidget('vista_enhancer', ['vista_enhancer'], 'variant', div, null, null, false);
 
-            addEl(div, getEl('br'));
-            var divs = showWidget('ensembl_regulatory_build', ['ensembl_regulatory_build'], 'variant', div, 600, 600, false);
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('ensembl_regulatory_build2', ['ensembl_regulatory_build'], 'variant', div, null, null, false);
 
-            addEl(div, getEl('br'));
-            var divs = showWidget('trinity', ['trinity'], 'variant', div, null, null, false);
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('trinity', ['trinity'], 'variant', div, null, null, false);
 
-            var dl = getEl('dl')
-            addEl(div, dl)
-            addEl(div, getEl('br'));
-            var divs = showWidget('segway', ['segway'], 'variant', div, null, null, false);
-            addEl(div, getEl('br'));
-            var divs = showWidget('mirbase', ['mirbase'], 'variant', div, 600, 600, false);
+            // var dl = getEl('dl')
+            // addEl(div, dl)
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('segway', ['segway'], 'variant', div, null, null, false);
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('mirbase2', ['mirbase'], 'variant', div, null, null, false);
 
         }
     }
@@ -3526,6 +3525,7 @@ widgetGenerators['predictionpanel'] = {
                 scores.push(dann);
                 var ssdiv = getEl('div')
                 ssdiv.textContent = getNoAnnotMsgVariantLevel()
+                ssdiv.classList.add('pred_noanno')
                 preds.push(ssdiv)
             }
             var dann_rankscore = getWidgetData(tabName, 'dann_coding', row, 'dann_rankscore');
