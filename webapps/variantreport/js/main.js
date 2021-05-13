@@ -2518,10 +2518,12 @@ widgetInfo['arrvars'] = {
     'title': 'Arrythmia Channelopathy Variants'
 };
 widgetGenerators['arrvars'] = {
+    'annotators': 'arrvars',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle('arrvars')
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2550,7 +2552,7 @@ widgetGenerators['arrvars'] = {
                 addEl(tbody, tr);
                 addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
             }
-            addDlRow(dl, 'Arrythmia Channelopathy Variants', wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2558,10 +2560,12 @@ widgetInfo['cvdkp'] = {
     'title': 'Cardiovascular Disease Knowledge Portal'
 };
 widgetGenerators['cvdkp'] = {
+    'annotators': 'cvdkp',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("cvdkp")
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2598,7 +2602,7 @@ widgetGenerators['cvdkp'] = {
             var tr = getWidgetTableTr([ibs, cad, bmi, afib, diabetes]);
             addEl(tbody, tr);
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-            addDlRow(dl, 'Cardiovascular Disease Knowledge Portal', wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2607,10 +2611,12 @@ widgetInfo['cardioboost'] = {
     'title': 'CardioBoost'
 };
 widgetGenerators['cardioboost'] = {
+    'annotators': 'cardioboost',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle('cardioboost')
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2638,7 +2644,7 @@ widgetGenerators['cardioboost'] = {
             var tr = getWidgetTableTr([card, card2, arr2, arr]);
             addEl(tbody, tr);
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-            addDlRow(dl, 'CardioBoost', wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -3034,6 +3040,7 @@ widgetGenerators['segway'] = {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle('segway')
             var dl = getEl('dl')
             addEl(div, dl)
             var sdiv = getEl('div');
