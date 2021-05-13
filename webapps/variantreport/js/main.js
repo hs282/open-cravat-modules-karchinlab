@@ -23,6 +23,10 @@ function makeModuleDescUrlTitle(moduleName, text) {
                 return response.json()
             }).then(moduleInfos => {
                 var tdiv = document.querySelector("#tooltipdiv")
+                if (tdiv == null) {
+                    tdiv = getEl('div')
+                    tdiv.id = 'tooltipdiv'
+                }
                 tdiv.innerHTML = ""
                 moduleInfos.forEach(function(moduleInfo) {
                     var tsdiv = getEl('div')
