@@ -55,8 +55,15 @@ class CravatConverter(BaseConverter):
         else:
             self.include_info = set()
         reader = vcf.Reader(f, compressed=False)
+        self.fix_formats(reader)
         self.open_extra_info(reader)
     
+    def fix_formats(self, reader):
+        return
+        # A user had AD number=1
+        if 'AD' in reader.formats:
+            reader.formats['AD']._replace(num = -3)
+
     def open_extra_info(self, reader):
         if not reader.infos:
             return
@@ -144,6 +151,7 @@ class CravatConverter(BaseConverter):
             else:
                 alt_base = alt.sequence
             new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt_base)
+            #new_pos, new_ref, new_alt = variant.POS, variant.REF, alt_base
             if variant.FILTER is None:
                 filter_val = None
             elif len(variant.FILTER) == 0:
@@ -214,21 +222,21 @@ class CravatConverter(BaseConverter):
         if hasattr(call.data,'AD'):
             # tot_reads
             if hasattr(call.data.AD, '__iter__'):
-                tot_reads = sum([0 if x is None else x for x in call.data.AD])
+                tot_reads = sum([0 if x is None else int(x) for x in call.data.AD])
             elif call.data.AD is None:
                 tot_reads = 0
             else:
-                tot_reads = call.data.AD
+                tot_reads = int(call.data.AD)
             # alt_reads
             try:
-                alt_reads = call.data.AD[gt]
+                alt_reads = int(call.data.AD[gt])
             except IndexError: # Wrong length
                 alt_reads = None
             except TypeError: # Not indexable
-                alt_reads = call.data.AD
+                alt_reads = int(call.data.AD)
         # DP is total depth
         elif hasattr(call.data,'DP'):
-            tot_reads = call.data.DP
+            tot_reads = int(call.data.DP)
             alt_reads = None
         else:
             tot_reads = None
