@@ -2891,10 +2891,10 @@ widgetGenerators['mavedb2'] = {
     }
 }
 
-widgetInfo['loftool'] = {
+widgetInfo['loftool2'] = {
     'title': 'LoFtool'
 };
-widgetGenerators['loftool'] = {
+widgetGenerators['loftool2'] = {
     'annotators': 'loftool',
     'variant': {
         'width': undefined,
@@ -3105,6 +3105,41 @@ widgetGenerators['mirbase2'] = {
     }
 }
 
+widgetInfo['omim2'] = {
+    'title': 'OMIM'
+};
+widgetGenerators['omim2'] = {
+    'annotators': 'omim',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("omim")
+            let ids = getWidgetData(tabName, 'omim', row, 'omim_id');
+            if (ids != null || ids != undefined) {
+                ids = ids !== null ? ids.split('; ') : [];
+                var sdiv = getEl('div')
+                sdiv.style.display = 'flex'
+                sdiv.style.flexWrap = 'wrap'
+                for (let i = 0; i < ids.length; i++) {
+                    let link = 'https://omim.org/entry/' + ids[i];
+                    var a = makeA(ids[i], link);
+                    var span = getEl('div');
+                    span.classList.add('clinvar_traitname');
+                    a.classList.add('linkclass')
+                    addEl(span, a)
+                    addEl(sdiv, span)
+                }
+                addDlRow(dl, titleEl, sdiv);
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
+            }
+        }
+    }
+}
+
 widgetInfo['dann_coding'] = {
     'title': 'DANN'
 };
@@ -3199,6 +3234,76 @@ widgetGenerators['mutation_assessor'] = {
         'function': function(div, row, tabName) {}
     }
 }
+
+widgetInfo['mutationtaster2'] = {
+    'title': 'Mutation Taster'
+};
+widgetGenerators['mutationtaster2'] = {
+    'annotators': 'mutationtaster',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+widgetInfo['polyphen2hdiv'] = {
+    'title': 'PolyPhen2 HDIV'
+};
+widgetGenerators['polyphen2hdiv'] = {
+    'annotators': 'polyphen2',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['polyphen2hvar'] = {
+    'title': 'PolyPhen2 HVAR'
+};
+widgetGenerators['polyphen2hvar'] = {
+    'annotators': 'polyphen2',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['provean2'] = {
+    'title': 'PROVEAN'
+};
+widgetGenerators['provean2'] = {
+    'annotators': 'provean',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+widgetInfo['revel2'] = {
+    'title': 'REVEL'
+};
+widgetGenerators['revel2'] = {
+    'annotators': 'revel',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['sift2'] = {
+    'title': 'SIFT'
+};
+widgetGenerators['sift2'] = {
+    'annotators': 'sift',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
 widgetInfo['basepanel'] = {
     'title': ''
 };
@@ -3237,7 +3342,7 @@ widgetGenerators['genepanel'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'))
-            var divs = showWidget('loftool', ['loftool'], 'variant', div, null, null, false);
+            var divs = showWidget('loftool2', ['loftool'], 'variant', div, null, null, false);
             addEl(div, getEl('br'))
             var divs = showWidget('prec2', ['prec'], 'variant', div, null, null, false);
 
@@ -3512,7 +3617,7 @@ widgetGenerators['predictionpanel'] = {
             var rankscores = [];
             var preds = [];
             var predictions = [];
-            var names = ['dann_coding', 'fathmm', 'fathmm_mkl', 'fathmm_xf_coding', 'lrt', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster', 'polyphen2', 'polyphen2', 'provean', 'revel', 'sift'];
+            var names = ['dann_coding', 'fathmm', 'fathmm_mkl', 'fathmm_xf_coding', 'lrt', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster2', 'polyphen2hdiv', 'polyphen2hvar', 'provean2', 'revel2', 'sift2'];
             var dann_score = getWidgetData(tabName, 'dann_coding', row, 'dann_coding_score');
             if (dann_score != undefined || dann_score != null) {
                 var dann = predWidget('coding score', dann_score);
@@ -4066,26 +4171,7 @@ widgetGenerators['clinpanel'] = {
             var divs = showWidget('denovo', ['denovo'], 'variant', div, null, null, false);
             var dl = getEl('dl')
             addEl(div, dl)
-            var titleEl = makeModuleDescUrlTitle("omim")
-            let ids = getWidgetData(tabName, 'omim', row, 'omim_id');
-            if (ids != null || ids != undefined) {
-                ids = ids !== null ? ids.split('; ') : [];
-                var sdiv = getEl('div')
-                sdiv.style.display = 'flex'
-                sdiv.style.flexWrap = 'wrap'
-                for (let i = 0; i < ids.length; i++) {
-                    let link = 'https://omim.org/entry/' + ids[i];
-                    var a = makeA(ids[i], link);
-                    var span = getEl('div');
-                    span.classList.add('clinvar_traitname');
-                    a.classList.add('linkclass')
-                    addEl(span, a)
-                    addEl(sdiv, span)
-                }
-                addDlRow(dl, titleEl, sdiv);
-            } else {
-                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
-            }
+            var divs = showWidget('omim2', ['omim'], 'variant', div, null, null, false)
             addEl(div, getEl('br'));
             var generator = widgetGenerators['clingen2']['gene'];
             var divs = showWidget('clingen2', ['clingen'], 'gene', div, null, null, false);
