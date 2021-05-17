@@ -1,5 +1,5 @@
 title: Rank Score
-version: 1.0.0
+version: 1.0.1
 type: webviewerwidget
 required_annotator: base
 description: Rank Score webviewer widget
@@ -13,4 +13,5 @@ developer:
 tags:
 - visualization widgets
 release_note:
+  1.0.1: width of widget is dynamic
   1.0.0: Initial release
