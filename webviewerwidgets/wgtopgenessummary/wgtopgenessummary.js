@@ -43,7 +43,7 @@ widgetGenerators['topgenessummary'] = {
 							borderColor: '#000000',
 							borderWidth: 0.7,
 							hoverBorderColor: '#aaaaaa',
-							backgroundColor: '#f49e42'
+							backgroundColor: '#D6604D'
 						}
 					]
 				},

@@ -1835,7 +1835,6 @@ widgetGenerators['go2'] = {
     'gene': {
         'width': undefined,
         'height': undefined,
-        'word-break': 'normal',
         'function': function(div, row, tabName) {
             var titleEl = makeModuleDescUrlTitle("go")
             var title = 'Gene Ontology'
@@ -1854,66 +1853,74 @@ widgetGenerators['go2'] = {
             var mfols = mfo != null ? mfo.split(';') : [];
             var mname = getWidgetData(tabName, 'go', row, 'mfo_name')
             var mnames = mname != null ? mname.split(';') : [];
-            var table = getWidgetTableFrame();
-            table.setAttribute("id", "newtable");
-            addEl(div, table);
-            var thead = getWidgetTableHead(['Biological Process', 'Cellular Component', 'Molecular Function']);
-            addEl(table, thead);
-            var tbody = getEl('tbody');
-            addEl(table, tbody);
-            var sdiv = getEl('div')
-            sdiv.style.maxWidth = '72rem'
-            sdiv.style.minWidth = '52rem'
-            sdiv.style.maxHeight = '250px'
-            sdiv.style.overflow = 'auto'
-            sdiv.style.marginRight = '5rem'
-            if (ccols.length > bpols.length) {
-                var max = ccols.length
-            } else if (bpols.length > ccols.length) {
-                max = bpols.length
-            } else if (mfols.length > bpols.length) {
-                max = mfols.length
-            } else if (mfols.length > ccols.length) {
-                max = mfols.length
-            } else if (ccols.length > mfols.length) {
-                max = ccols.length
-            } else if (bpols.length > mfols.length) {
-                max = bpols.length
-            }
-            for (let i = 0; i < max; i++) {
-                var link = `http://amigo.geneontology.org/amigo/term/${ccols[i]}`;
-                if (ccols[i] == undefined) {
-                    link = 'http://amigo.geneontology.org/amigo/term/'
-                    var ccols_val = ''
-                    var cname_val = ''
-                } else {
-                    ccols_val = ccols[i]
-                    cname_val = cnames[i]
-                }
+            if (cco != null && bpo != null && mfo != null){
+                var table = getWidgetTableFrame();
+                table.setAttribute("id", "newtable");
+                addEl(div, table);
+                var thead = getWidgetTableHead(['Biological Process', 'Cellular Component', 'Molecular Function']);
+                addEl(table, thead);
+                var tbody = getEl('tbody');
+                addEl(table, tbody);
+                var sdiv = getEl('div')
+                sdiv.style.maxWidth = '72rem'
+                sdiv.style.minWidth = '52rem'
+                sdiv.style.maxHeight = '250px'
+                sdiv.style.overflow = 'auto'
+                sdiv.style.marginRight = '5rem'
 
-                var link2 = `http://amigo.geneontology.org/amigo/term/${bpols[i]}`;
-                if (bpols[i] == undefined) {
-                    link2 = 'http://amigo.geneontology.org/amigo/term/'
-                    var bpols_val = ''
-                    var bname_val = ''
-                } else {
-                    bpols_val = bpols[i]
-                    bname_val = bnames[i]
+                if (ccols.length > bpols.length) {
+                    var max = ccols.length
+                } else if (bpols.length > ccols.length) {
+                    max = bpols.length
+                } else if (mfols.length > bpols.length) {
+                    max = mfols.length
+                } else if (mfols.length > ccols.length) {
+                    max = mfols.length
+                } else if (ccols.length > mfols.length) {
+                    max = ccols.length
+                } else if (bpols.length > mfols.length) {
+                    max = bpols.length
+                }else {
+                    max = bpols.length
                 }
-                var link3 = `http://amigo.geneontology.org/amigo/term/${mfols[i]}`;
-                if (mfols[i] == undefined) {
-                    link3 = 'http://amigo.geneontology.org/amigo/term/'
-                    var mfols_val = ''
-                    var mname_val = ''
-                } else {
-                    mfols_val = mfols[i]
-                    mname_val = mnames[i]
+                for (let i = 0; i < max; i++) {
+                    var link = `http://amigo.geneontology.org/amigo/term/${ccols[i]}`;
+                    if (ccols[i] == undefined) {
+                        link = 'http://amigo.geneontology.org/amigo/term/'
+                        var ccols_val = ''
+                        var cname_val = ''
+                    } else {
+                        ccols_val = ccols[i]
+                        cname_val = cnames[i]
+                    }
+
+                    var link2 = `http://amigo.geneontology.org/amigo/term/${bpols[i]}`;
+                    if (bpols[i] == undefined) {
+                        link2 = 'http://amigo.geneontology.org/amigo/term/'
+                        var bpols_val = ''
+                        var bname_val = ''
+                    } else {
+                        bpols_val = bpols[i]
+                        bname_val = bnames[i]
+                    }
+                    var link3 = `http://amigo.geneontology.org/amigo/term/${mfols[i]}`;
+                    if (mfols[i] == undefined) {
+                        link3 = 'http://amigo.geneontology.org/amigo/term/'
+                        var mfols_val = ''
+                        var mname_val = ''
+                    } else {
+                        mfols_val = mfols[i]
+                        mname_val = mnames[i]
+                    }
+                    var tr = getWidgetTableTr2([link2, link, link3], [bname_val, cname_val, mname_val]);
+                    addEl(tbody, tr);
+                    addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                var tr = getWidgetTableTr2([link2, link, link3], [bname_val, cname_val, mname_val]);
-                addEl(tbody, tr);
-                addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
+                addDlRow(dl, titleEl, wdiv)
+            }else{
+                
+                addDlRow(dl, titleEl, getNoAnnotMsgGeneLevel())
             }
-            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2895,14 +2902,14 @@ widgetInfo['loftool2'] = {
     'title': 'LoFtool'
 };
 widgetGenerators['loftool2'] = {
-    'annotators': 'loftool',
+    'annotators': 'loftool2',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
             var dl = getEl('dl')
             addEl(div, dl)
-            var titleEl = makeModuleDescUrlTitle('loftool')
+            var titleEl = makeModuleDescUrlTitle('loftool2')
             var score = getWidgetData(tabName, 'loftool', row, 'loftool_score');
             if (score != null || score != undefined) {
                 var sdiv = getDialWidget('Score', annotData['loftool']['loftool_score'], .80)
@@ -3109,7 +3116,7 @@ widgetInfo['omim2'] = {
     'title': 'OMIM'
 };
 widgetGenerators['omim2'] = {
-    'annotators': 'omim',
+    'annotators': 'omim2',
     'variant': {
         'width': undefined,
         'height': undefined,

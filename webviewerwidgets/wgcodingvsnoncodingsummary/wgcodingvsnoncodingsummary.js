@@ -44,8 +44,8 @@ widgetGenerators[widgetName] = {
 							noNoncoding
 						],
 						backgroundColor: [
-							'#f7c654',
-							'#69a3ef',
+							'#F4A582',
+							'#92C5DE',
 							],
 					}],
 					labels: [

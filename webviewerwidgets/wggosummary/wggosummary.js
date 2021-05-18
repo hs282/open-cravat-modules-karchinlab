@@ -23,28 +23,24 @@ widgetGenerators[widgetName] = {
 				return;
 			}
 			var colorPalette = [
-				'#ff0000', // red
-				'#dc143c', // crimson
-				'#ff4500', // orange red
-				'#ffa500', // orange
-				'#ffd700', // gold
-				'#d2691e', // chocolate
-				'#8b4513', // saddle brown
-				'#adff2f', // green yellow
-				'#7fffd4', // aqua marine
-				'#00ced1', // dark turquoise
-				'#00bfff', // deep sky blue
-				'#ffff00', // yellow
-				'#0000ff', // blue
-				'#00ff00', // lime
-				'#00ffff', // aqua
-				'#000080', // navy
-				'#800080', // purple
-				'#800000', // maroon
-				'#808000', // olive
-				'#008080', // teal
-				'#008000', // green
-				'#ff00ff', // fuchsia
+				'#2166AC', 
+				'#4393C3',
+				'#92C5DE',
+				'#D1E5F0',
+				'#F7F7F7',
+				'#FDDBC7',
+				'#F4A582',
+				'#D6604D',
+				'#B2182B',
+				'#762A83',
+				'#9970AB',
+				'#C2A5CF',
+				'#E7D4E8',
+				'#D9F0D3',
+				'#ACD39E',
+				'#5AAE61',
+				'#1B7837',
+				'#FFEE99',
 			];
 			div.style.width = 'calc(100% - 37px)';
 			var chartDiv = getEl('canvas');

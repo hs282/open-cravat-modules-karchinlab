@@ -1,5 +1,5 @@
 title: OpenCRAVAT Variant Report
-version: 1.0.4
+version: 1.0.5
 type: webapp
 live_modules:
 - aloft
@@ -182,7 +182,7 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 release_note:
-  1.0.4: Bug fix
+  1.0.5: Bug fix
   1.0.0: Initial release
 tags:
 - webapp

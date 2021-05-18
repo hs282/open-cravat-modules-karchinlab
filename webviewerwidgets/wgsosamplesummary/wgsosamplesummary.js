@@ -32,39 +32,39 @@ widgetGenerators['sosamplesummary'] = {
         },
 		'function': function (div, data) {
 			var colorPalette = {
-				'Frameshift insertion':'#ff0000', // red
-				'Frameshift deletion':'#dc143c', // crimson
-				'Stopgain':'#ff4500', // orange red
-				'Stoploss':'#ffa500', // orange
-				'Missense':'#ffd700', // gold
-				'Inframe insertion':'#d2691e', // chocolate
-				'Inframe deletion':'#8b4513', // saddle brown
-				'Splice site':'#adff2f', // green yellow
-				'2k upstream':'#7fffd4', // aqua marine
-				'2k downstream':'#00ced1', // dark turquoise
-				'3\' UTR':'#00bfff', // deep sky blue
-				'5\' UTR':'#ffff00', // yellow
-				'Complex substitution':'#0000ff', // blue
-				'Synonymous':'#00ff00', // lime
-				'Intron':'#00ffff', // aqua
-				'Unknown':'#000080', // navy
-				'Intergenic':'#008080', // teal
-				'frameshift_elongation':'#ff0000', // red
-				'frameshift_truncation':'#dc143c', // crimson
-				'stop_gained':'#ff4500', // orange red
-				'stop_lost':'#ffa500', // orange
-				'missense_variant':'#ffd700', // gold
-				'inframe_insertion':'#d2691e', // chocolate
-				'inframe_deletion':'#8b4513', // saddle brown
-				'splice_site_variant':'#adff2f', // green yellow
-				'2kb_upstream_variant':'#7fffd4', // aqua marine
-				'2kb_downstream_variant':'#00ced1', // dark turquoise
-				'3_prime_UTR_variant':'#00bfff', // deep sky blue
-				'5_prime_UTR_variant':'#ffff00', // yellow
-				'complex_substitution':'#0000ff', // blue
-				'synonymous_variant':'#00ff00', // lime
-				'intron_variant':'#00ffff', // aqua
-				'Unknown':'#000080', // navy
+				'Frameshift insertion':'#2166AC',
+				'Frameshift deletion':'#4393C3',
+				'Stopgain':'#92C5DE',
+				'Stoploss':'#D1E5F0',
+				'Missense':'#1B7837',
+				'Inframe insertion':'#FDDBC7',
+				'Inframe deletion':'#F4A582',
+				'Splice site':'#5AAE61',
+				'2k upstream':'#D6604D',
+				'2k downstream':'#B2182B',
+				'3\' UTR':'#762A83',
+				'5\' UTR':'#9970AB',
+				'Complex substitution':'#C2A5CF',
+				'Synonymous':'#E7D4E8',
+				'Intron':'#D9F0D3',
+				'Unknown':'#ACD39E',
+				'Intergenic':'#ACD39E',
+				'frameshift_elongation':'#2166AC',
+				'frameshift_truncation':'#4393C3',
+				'stop_gained':'#92C5DE',
+				'stop_lost':'#D1E5F0',
+				'missense_variant':'#1B7837',
+				'inframe_insertion':'#FDDBC7',
+				'inframe_deletion':'#F4A582',
+				'splice_site_variant':'#5AAE61',
+				'2kb_upstream_variant':'#D6604D',
+				'2kb_downstream_variant':'#B2182B',
+				'3_prime_UTR_variant':'#762A83',
+				'5_prime_UTR_variant':'#9970AB',
+				'complex_substitution':'#C2A5CF',
+				'synonymous_variant':'#E7D4E8',
+				'intron_variant':'#D9F0D3',
+				'Unknown':'#ACD39E',
 	        };
 			if (div != null) {
 				emptyElement(div);
