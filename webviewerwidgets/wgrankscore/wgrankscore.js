@@ -1,9 +1,10 @@
 widgetGenerators['rankscore'] = {
 	'gene': {
-        'width': 680,
+        'width': undefined,
         'height': 180, 
-		'function': function (div, row, tabName) {
-            var hugo = getWidgetData(tabName, 'base', row, 'hugo');
+        'variables': {},
+        'init': function () {
+            var v = this['variables'];
             var columnnames_to_show = {} ;
             for (var i = 0; i < infomgr.colModels.variant.length; i++) {
                 var cols = infomgr.colModels.variant[i].colModel;
@@ -17,21 +18,44 @@ widgetGenerators['rankscore'] = {
                     var module_name = col.colgroupkey;
                     column = column.replace(module_name + '__', '');
                     columnnames_to_show[module_name] = column;
+                    v['columnnames'] = columnnames_to_show
                 }
             }
-            if (Object.keys(columnnames_to_show).length == 0){
-                var span = getEl('span');
-                span.classList.add('nodata');
-                addEl(div, addEl(span, getTn('No data')));
-                return;
-            }
+            widgetGenerators['rankscore']['gene']['width'] = (Object.keys(columnnames_to_show).length + 1)  * 100;
+        },
+		'function': function (div, row, tabName) {
+            var v = this['variables'];
+            var columnnames_to_show = v['columnnames'];
+            var hugo = getWidgetData(tabName, 'base', row, 'hugo');
+            if (columnnames_to_show != undefined){
+                if (Object.keys(columnnames_to_show).length == 0){
+                    var span = getEl('span');
+                    span.classList.add('nodata');
+                    addEl(div, addEl(span, getTn('No data')));
+                    return;
+                }
+            
+            titlelength = [];
+            var equallen = 100/(Object.keys(columnnames_to_show).length + 2);
+            var extendlen = equallen + 5;
             var module_names = Object.keys(columnnames_to_show);
+            titlelength.push(equallen+ '%');
+            titlelength.push(equallen+ '%');
+            for (var i = 0; i < module_names.length; i++) {
+                var modname = module_names[i]
+                if (modname.length > 12){
+                    titlelength.push(extendlen + '%')
+                }else{
+                    titlelength.push(equallen+ '%')
+
+                }
+            }
             module_names.unshift('Protein variant');
             module_names.unshift('cDNA variant');
             var column_names = Object.values(columnnames_to_show);
             var table = getWidgetTableFrame();
             addEl(div, table);
-            var thead = getWidgetTableHead(module_names);
+            var thead = getWidgetTableHead(module_names, titlelength);
             module_names.shift();
             module_names.shift();
             addEl(table, thead);
@@ -111,6 +135,7 @@ widgetGenerators['rankscore'] = {
                         $(tr).children().eq(k).css("background-color",color);
                             addEl(tbody, tr);
                         addEl(div, addEl(table, tbody));
+                        }
                     }
                 }
             }

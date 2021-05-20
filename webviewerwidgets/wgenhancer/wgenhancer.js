@@ -49,7 +49,7 @@ widgetGenerators['enhancer'] = {
 							borderColor: '#000000',
 							borderWidth: 0.7,
 							hoverBorderColor: '#aaaaaa',
-							backgroundColor: '#69a3ef'
+							backgroundColor: '#4393C3'
 						}
 					]
 				},

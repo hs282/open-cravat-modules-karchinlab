@@ -120,7 +120,7 @@ widgetGenerators[widgetName] = {
             for (var i = 0; i < labels.length; i++) {
                 if (labels[i] < -6){
                     var name = 'deletion';
-                    var color = "#DC143C";
+                    var color = "#F4A582";
                     sums = sums + freq2[i];
                 }
             }
@@ -132,13 +132,13 @@ widgetGenerators[widgetName] = {
                 if (labels[i] >= -6 && labels[i] <= 0){
                     datas = [(freq2[i]/totals) * 100];
                     label = 'deletion';
-                    var color = "#DC143C";
+                    var color = "#F4A582";
                     t.push(datas);
                     labs.push(color);
                 }else if (labels[i] >= 1 && labels[i] <= 6){
                     datas = [(freq2[i]/totals) * 100];
                     label = "insertion";
-                    color = "#006666";
+                    color = "#92C5DE";
                     t.push(datas);
                     labs.push(color);
                 } else {
@@ -149,7 +149,7 @@ widgetGenerators[widgetName] = {
             for (var i = 0; i < labels.length; i++) {
                 if (labels[i] > 6){
                     var name = 'insertion';
-                    var color = "#006666";
+                    var color = "#92C5DE";
                     s = s + freq2[i];
                 }
             }
@@ -186,7 +186,7 @@ widgetGenerators[widgetName] = {
                         labels: {
                             generateLabels: function(chart) {
                                var labels = ["Deletion", "Insertion"];
-                               var colors = ["#DC143C", "#006666"]
+                               var colors = ["#F4A582", "#92C5DE"]
                                var dataset = chart.data.datasets[0];
                                var legend = labels.map(function(label, index) {
                                   return {

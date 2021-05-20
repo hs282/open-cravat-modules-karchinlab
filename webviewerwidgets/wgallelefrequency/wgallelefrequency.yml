@@ -1,5 +1,5 @@
 title: Allele Frequency Spectrum
-version: 1.0.0
+version: 1.1.0
 type: webviewerwidget
 required_annotator: gnomad
 description: Allele Frequency Spectrum webviewer widget
@@ -14,4 +14,5 @@ developer:
 tags:
 - visualization widgets
 release_note:
+  1.1.0: New color scheme 
   1.0.0: Initial release

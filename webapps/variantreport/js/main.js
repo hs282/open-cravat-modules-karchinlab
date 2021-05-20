@@ -2208,7 +2208,6 @@ widgetGenerators['go2'] = {
     'gene': {
         'width': undefined,
         'height': undefined,
-        'word-break': 'normal',
         'function': function(div, row, tabName) {
             var titleEl = makeModuleDescUrlTitle("go")
             var title = 'Gene Ontology'
@@ -2227,66 +2226,74 @@ widgetGenerators['go2'] = {
             var mfols = mfo != null ? mfo.split(';') : [];
             var mname = getWidgetData(tabName, 'go', row, 'mfo_name')
             var mnames = mname != null ? mname.split(';') : [];
-            var table = getWidgetTableFrame();
-            table.setAttribute("id", "newtable");
-            addEl(div, table);
-            var thead = getWidgetTableHead(['Biological Process', 'Cellular Component', 'Molecular Function']);
-            addEl(table, thead);
-            var tbody = getEl('tbody');
-            addEl(table, tbody);
-            var sdiv = getEl('div')
-            sdiv.style.maxWidth = '72rem'
-            sdiv.style.minWidth = '52rem'
-            sdiv.style.maxHeight = '250px'
-            sdiv.style.overflow = 'auto'
-            sdiv.style.marginRight = '5rem'
-            if (ccols.length > bpols.length) {
-                var max = ccols.length
-            } else if (bpols.length > ccols.length) {
-                max = bpols.length
-            } else if (mfols.length > bpols.length) {
-                max = mfols.length
-            } else if (mfols.length > ccols.length) {
-                max = mfols.length
-            } else if (ccols.length > mfols.length) {
-                max = ccols.length
-            } else if (bpols.length > mfols.length) {
-                max = bpols.length
-            }
-            for (let i = 0; i < max; i++) {
-                var link = `http://amigo.geneontology.org/amigo/term/${ccols[i]}`;
-                if (ccols[i] == undefined) {
-                    link = 'http://amigo.geneontology.org/amigo/term/'
-                    var ccols_val = ''
-                    var cname_val = ''
-                } else {
-                    ccols_val = ccols[i]
-                    cname_val = cnames[i]
-                }
+            if (cco != null && bpo != null && mfo != null){
+                var table = getWidgetTableFrame();
+                table.setAttribute("id", "newtable");
+                addEl(div, table);
+                var thead = getWidgetTableHead(['Biological Process', 'Cellular Component', 'Molecular Function']);
+                addEl(table, thead);
+                var tbody = getEl('tbody');
+                addEl(table, tbody);
+                var sdiv = getEl('div')
+                sdiv.style.maxWidth = '72rem'
+                sdiv.style.minWidth = '52rem'
+                sdiv.style.maxHeight = '250px'
+                sdiv.style.overflow = 'auto'
+                sdiv.style.marginRight = '5rem'
 
-                var link2 = `http://amigo.geneontology.org/amigo/term/${bpols[i]}`;
-                if (bpols[i] == undefined) {
-                    link2 = 'http://amigo.geneontology.org/amigo/term/'
-                    var bpols_val = ''
-                    var bname_val = ''
-                } else {
-                    bpols_val = bpols[i]
-                    bname_val = bnames[i]
+                if (ccols.length > bpols.length) {
+                    var max = ccols.length
+                } else if (bpols.length > ccols.length) {
+                    max = bpols.length
+                } else if (mfols.length > bpols.length) {
+                    max = mfols.length
+                } else if (mfols.length > ccols.length) {
+                    max = mfols.length
+                } else if (ccols.length > mfols.length) {
+                    max = ccols.length
+                } else if (bpols.length > mfols.length) {
+                    max = bpols.length
+                }else {
+                    max = bpols.length
                 }
-                var link3 = `http://amigo.geneontology.org/amigo/term/${mfols[i]}`;
-                if (mfols[i] == undefined) {
-                    link3 = 'http://amigo.geneontology.org/amigo/term/'
-                    var mfols_val = ''
-                    var mname_val = ''
-                } else {
-                    mfols_val = mfols[i]
-                    mname_val = mnames[i]
+                for (let i = 0; i < max; i++) {
+                    var link = `http://amigo.geneontology.org/amigo/term/${ccols[i]}`;
+                    if (ccols[i] == undefined) {
+                        link = 'http://amigo.geneontology.org/amigo/term/'
+                        var ccols_val = ''
+                        var cname_val = ''
+                    } else {
+                        ccols_val = ccols[i]
+                        cname_val = cnames[i]
+                    }
+
+                    var link2 = `http://amigo.geneontology.org/amigo/term/${bpols[i]}`;
+                    if (bpols[i] == undefined) {
+                        link2 = 'http://amigo.geneontology.org/amigo/term/'
+                        var bpols_val = ''
+                        var bname_val = ''
+                    } else {
+                        bpols_val = bpols[i]
+                        bname_val = bnames[i]
+                    }
+                    var link3 = `http://amigo.geneontology.org/amigo/term/${mfols[i]}`;
+                    if (mfols[i] == undefined) {
+                        link3 = 'http://amigo.geneontology.org/amigo/term/'
+                        var mfols_val = ''
+                        var mname_val = ''
+                    } else {
+                        mfols_val = mfols[i]
+                        mname_val = mnames[i]
+                    }
+                    var tr = getWidgetTableTr2([link2, link, link3], [bname_val, cname_val, mname_val]);
+                    addEl(tbody, tr);
+                    addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
                 }
-                var tr = getWidgetTableTr2([link2, link, link3], [bname_val, cname_val, mname_val]);
-                addEl(tbody, tr);
-                addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
+                addDlRow(dl, titleEl, wdiv)
+            }else{
+                
+                addDlRow(dl, titleEl, getNoAnnotMsgGeneLevel())
             }
-            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2891,10 +2898,12 @@ widgetInfo['arrvars'] = {
     'title': 'Arrythmia Channelopathy Variants'
 };
 widgetGenerators['arrvars'] = {
+    'annotators': 'arrvars',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle('arrvars')
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2923,7 +2932,7 @@ widgetGenerators['arrvars'] = {
                 addEl(tbody, tr);
                 addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
             }
-            addDlRow(dl, 'Arrythmia Channelopathy Variants', wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2931,10 +2940,12 @@ widgetInfo['cvdkp'] = {
     'title': 'Cardiovascular Disease Knowledge Portal'
 };
 widgetGenerators['cvdkp'] = {
+    'annotators': 'cvdkp',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle("cvdkp")
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -2971,7 +2982,7 @@ widgetGenerators['cvdkp'] = {
             var tr = getWidgetTableTr([ibs, cad, bmi, afib, diabetes]);
             addEl(tbody, tr);
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-            addDlRow(dl, 'Cardiovascular Disease Knowledge Portal', wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -2980,10 +2991,12 @@ widgetInfo['cardioboost'] = {
     'title': 'CardioBoost'
 };
 widgetGenerators['cardioboost'] = {
+    'annotators': 'cardioboost',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle('cardioboost')
             var dl = getEl('dl')
             addEl(div, dl)
             var wdiv = getEl('div')
@@ -3011,7 +3024,7 @@ widgetGenerators['cardioboost'] = {
             var tr = getWidgetTableTr([card, card2, arr2, arr]);
             addEl(tbody, tr);
             addEl(wdiv, addEl(sdiv, addEl(table, tbody)));
-            addDlRow(dl, 'CardioBoost', wdiv)
+            addDlRow(dl, titleEl, wdiv)
         }
     }
 }
@@ -3258,18 +3271,18 @@ widgetGenerators['mavedb2'] = {
     }
 }
 
-widgetInfo['loftool'] = {
+widgetInfo['loftool2'] = {
     'title': 'LoFtool'
 };
-widgetGenerators['loftool'] = {
-    'annotators': 'loftool',
+widgetGenerators['loftool2'] = {
+    'annotators': 'loftool2',
     'variant': {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
             var dl = getEl('dl')
             addEl(div, dl)
-            var titleEl = makeModuleDescUrlTitle('loftool')
+            var titleEl = makeModuleDescUrlTitle('loftool2')
             var score = getWidgetData(tabName, 'loftool', row, 'loftool_score');
             if (score != null || score != undefined) {
                 var sdiv = getDialWidget('Score', annotData['loftool']['loftool_score'], .80)
@@ -3314,6 +3327,8 @@ widgetGenerators['vista_enhancer'] = {
             var sdiv = getEl('div')
             sdiv.style.display = 'flex'
             sdiv.style.flexWrap = 'wrap'
+            var dl = getEl('dl')
+            addEl(div, dl)
             var titleEl = makeModuleDescUrlTitle("vista_enhancer", "VISTA Enhancer Browser Element")
             var element = getWidgetData(tabName, 'vista_enhancer', row, 'element');
             if (element != null || element != undefined) {
@@ -3331,18 +3346,14 @@ widgetGenerators['vista_enhancer'] = {
                 addEl(span, a)
                 addEl(sdiv, span)
                 addDlRow(dl, titleEl, sdiv)
-            } else {
-                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
             }
-            var dl = getEl('dl')
-            addEl(div, dl)
         }
     }
 }
-widgetInfo['ensembl_regulatory_build'] = {
+widgetInfo['ensembl_regulatory_build2'] = {
     'title': 'VEnsembl Regulatory Build'
 };
-widgetGenerators['ensembl_regulatory_build'] = {
+widgetGenerators['ensembl_regulatory_build2'] = {
     'annotators': 'ensembl_regulatory_build',
     'variant': {
         'width': undefined,
@@ -3371,6 +3382,7 @@ widgetGenerators['ensembl_regulatory_build'] = {
                 span.classList.add('clinvar_traitname')
                 addEl(span, a)
                 addEl(sdiv, span)
+                sdiv.style.maxWidth = '20rem'
                 addDlRow(dl, titleEl, sdiv)
             }
         }
@@ -3407,6 +3419,7 @@ widgetGenerators['segway'] = {
         'width': undefined,
         'height': undefined,
         'function': function(div, row, tabName) {
+            var titleEl = makeModuleDescUrlTitle('segway')
             var dl = getEl('dl')
             addEl(div, dl)
             var sdiv = getEl('div');
@@ -3431,10 +3444,10 @@ widgetGenerators['segway'] = {
         }
     }
 }
-widgetInfo['mirbase'] = {
-    'title': 'mirbase'
+widgetInfo['mirbase2'] = {
+    'title': 'miRBase'
 };
-widgetGenerators['mirbase'] = {
+widgetGenerators['mirbase2'] = {
     'annotators': 'mirbase',
     'variant': {
         'width': undefined,
@@ -3467,6 +3480,41 @@ widgetGenerators['mirbase'] = {
 
             } else {
                 addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel())
+            }
+        }
+    }
+}
+
+widgetInfo['omim2'] = {
+    'title': 'OMIM'
+};
+widgetGenerators['omim2'] = {
+    'annotators': 'omim2',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {
+            var dl = getEl('dl')
+            addEl(div, dl)
+            var titleEl = makeModuleDescUrlTitle("omim")
+            let ids = getWidgetData(tabName, 'omim', row, 'omim_id');
+            if (ids != null || ids != undefined) {
+                ids = ids !== null ? ids.split('; ') : [];
+                var sdiv = getEl('div')
+                sdiv.style.display = 'flex'
+                sdiv.style.flexWrap = 'wrap'
+                for (let i = 0; i < ids.length; i++) {
+                    let link = 'https://omim.org/entry/' + ids[i];
+                    var a = makeA(ids[i], link);
+                    var span = getEl('div');
+                    span.classList.add('clinvar_traitname');
+                    a.classList.add('linkclass')
+                    addEl(span, a)
+                    addEl(sdiv, span)
+                }
+                addDlRow(dl, titleEl, sdiv);
+            } else {
+                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
             }
         }
     }
@@ -3566,6 +3614,76 @@ widgetGenerators['mutation_assessor'] = {
         'function': function(div, row, tabName) {}
     }
 }
+
+widgetInfo['mutationtaster2'] = {
+    'title': 'Mutation Taster'
+};
+widgetGenerators['mutationtaster2'] = {
+    'annotators': 'mutationtaster',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+widgetInfo['polyphen2hdiv'] = {
+    'title': 'PolyPhen2 HDIV'
+};
+widgetGenerators['polyphen2hdiv'] = {
+    'annotators': 'polyphen2',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['polyphen2hvar'] = {
+    'title': 'PolyPhen2 HVAR'
+};
+widgetGenerators['polyphen2hvar'] = {
+    'annotators': 'polyphen2',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['provean2'] = {
+    'title': 'PROVEAN'
+};
+widgetGenerators['provean2'] = {
+    'annotators': 'provean',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+widgetInfo['revel2'] = {
+    'title': 'REVEL'
+};
+widgetGenerators['revel2'] = {
+    'annotators': 'revel',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['sift2'] = {
+    'title': 'SIFT'
+};
+widgetGenerators['sift2'] = {
+    'annotators': 'sift',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
 widgetInfo['basepanel'] = {
     'title': ''
 };
@@ -3604,7 +3722,7 @@ widgetGenerators['genepanel'] = {
             var dl = getEl('dl')
             addEl(div, dl)
             addEl(div, getEl('br'))
-            var divs = showWidget('loftool', ['loftool'], 'variant', div, null, null, false);
+            var divs = showWidget('loftool2', ['loftool'], 'variant', div, null, null, false);
             addEl(div, getEl('br'))
             var divs = showWidget('prec2', ['prec'], 'variant', div, null, null, false);
 
@@ -3839,18 +3957,18 @@ widgetGenerators['noncodingpanel'] = {
             addEl(div, getEl('br'));
             var divs = showWidget('vista_enhancer', ['vista_enhancer'], 'variant', div, null, null, false);
 
-            addEl(div, getEl('br'));
-            var divs = showWidget('ensembl_regulatory_build', ['ensembl_regulatory_build'], 'variant', div, 600, 600, false);
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('ensembl_regulatory_build2', ['ensembl_regulatory_build'], 'variant', div, null, null, false);
 
-            addEl(div, getEl('br'));
-            var divs = showWidget('trinity', ['trinity'], 'variant', div, null, null, false);
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('trinity', ['trinity'], 'variant', div, null, null, false);
 
-            var dl = getEl('dl')
-            addEl(div, dl)
-            addEl(div, getEl('br'));
-            var divs = showWidget('segway', ['segway'], 'variant', div, null, null, false);
-            addEl(div, getEl('br'));
-            var divs = showWidget('mirbase', ['mirbase'], 'variant', div, 600, 600, false);
+            // var dl = getEl('dl')
+            // addEl(div, dl)
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('segway', ['segway'], 'variant', div, null, null, false);
+            // addEl(div, getEl('br'));
+            // var divs = showWidget('mirbase2', ['mirbase'], 'variant', div, null, null, false);
 
         }
     }
@@ -3879,7 +3997,7 @@ widgetGenerators['predictionpanel'] = {
             var rankscores = [];
             var preds = [];
             var predictions = [];
-            var names = ['dann_coding', 'fathmm', 'fathmm_mkl', 'fathmm_xf_coding', 'lrt', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster', 'polyphen2', 'polyphen2', 'provean', 'revel', 'sift'];
+            var names = ['dann_coding', 'fathmm', 'fathmm_mkl', 'fathmm_xf_coding', 'lrt', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster2', 'polyphen2hdiv', 'polyphen2hvar', 'provean2', 'revel2', 'sift2'];
             var dann_score = getWidgetData(tabName, 'dann_coding', row, 'dann_coding_score');
             if (dann_score != undefined || dann_score != null) {
                 var dann = predWidget('coding score', dann_score);
@@ -3892,6 +4010,7 @@ widgetGenerators['predictionpanel'] = {
                 scores.push(dann);
                 var ssdiv = getEl('div')
                 ssdiv.textContent = getNoAnnotMsgVariantLevel()
+                ssdiv.classList.add('pred_noanno')
                 preds.push(ssdiv)
             }
             var dann_rankscore = getWidgetData(tabName, 'dann_coding', row, 'dann_rankscore');
@@ -4431,26 +4550,7 @@ widgetGenerators['clinpanel'] = {
             var divs = showWidget('denovo', ['denovo'], 'variant', div, null, null, false);
             var dl = getEl('dl')
             addEl(div, dl)
-            var titleEl = makeModuleDescUrlTitle("omim")
-            let ids = getWidgetData(tabName, 'omim', row, 'omim_id');
-            if (ids != null || ids != undefined) {
-                ids = ids !== null ? ids.split('; ') : [];
-                var sdiv = getEl('div')
-                sdiv.style.display = 'flex'
-                sdiv.style.flexWrap = 'wrap'
-                for (let i = 0; i < ids.length; i++) {
-                    let link = 'https://omim.org/entry/' + ids[i];
-                    var a = makeA(ids[i], link);
-                    var span = getEl('div');
-                    span.classList.add('clinvar_traitname');
-                    a.classList.add('linkclass')
-                    addEl(span, a)
-                    addEl(sdiv, span)
-                }
-                addDlRow(dl, titleEl, sdiv);
-            } else {
-                addDlRow(dl, titleEl, getNoAnnotMsgVariantLevel());
-            }
+            var divs = showWidget('omim2', ['omim'], 'variant', div, null, null, false)
             addEl(div, getEl('br'));
             var generator = widgetGenerators['clingen2']['gene'];
             var divs = showWidget('clingen2', ['clingen'], 'gene', div, null, null, false);

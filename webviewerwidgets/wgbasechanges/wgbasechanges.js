@@ -75,28 +75,28 @@ widgetGenerators[widgetName] = {
                     datasets: [
                         {  
                             backgroundColor: [
-                                '#DC143C',
-                                '#006666',
-                                '#006666',
-                                '#006666'
+                                '#FDDBC7',
+                                '#D1E5F0',
+                                '#D1E5F0',
+                                '#D1E5F0'
                             ],
                             data: one,
                         },
                         {
                             backgroundColor: [
-                                '#00ff00',
-                                '#00ff00',
-                                '#DC143C',
-                                '#DC143C'
+                                '#4393C3',
+                                '#4393C3',
+                                '#FDDBC7',
+                                '#FDDBC7'
                             ],
                             data: two,
                         },
                         {
                             backgroundColor: [
-                                '#ffd700',
-                                '#ffd700',
-                                '#ffd700',
-                                '#00ff00'
+                                '#D6604D',
+                                '#D6604D',
+                                '#D6604D',
+                                '#4393C3'
                             ],
                             data: three,
                         },
@@ -108,7 +108,7 @@ widgetGenerators[widgetName] = {
                                 generateLabels: function(chart) {
                                    var labels = chart.data.labels;
                                    var dataset = chart.data.datasets[0];
-                                   var colors = ["#006666", "#DC143C", '#00ff00', "#ffd700"];
+                                   var colors = ["#D1E5F0", "#FDDBC7", '#4393C3', "#D6604D"];
                                    var legend = labels.map(function(label, index) {
                                       return {
                                          datasetIndex: 0,

@@ -388,48 +388,48 @@ widgetGenerators[widgetName] = {
                         datasets: [
                             {
                                 data: datas,
-                                backgroundColor: "#40E0D0",
+                                backgroundColor: "#2166AC",
                                 label: "Global"
                             },
                             {
                                 data: afrdatas,
-                                backgroundColor: "#708090",
+                                backgroundColor: "#4393C3",
                                 label: "African"
                             },
                             {
                                 data: amrdatas,
-                                backgroundColor: "blue",
+                                backgroundColor: "#92C5DE",
                                 label: "American"
 
                             },
                             {
                                 data: asjdatas,
-                                backgroundColor: "#DDA0DD",
+                                backgroundColor: "#D1E5F0",
                                 label: "Ashkenazi Jewish"
                             },
                             {
                                 data: easdatas,
-                                backgroundColor: '#FFE4B5',
+                                backgroundColor: '#FFEE99',
                                 label: 'East Asian'
                             },
                             {
                                 data: findatas,
-                                backgroundColor: '#008080',
+                                backgroundColor: '#FDDBC7',
                                 label: 'Finish'
                             },
                             {
                                 data: nfedatas,
-                                backgroundColor: '#87CEFA',
+                                backgroundColor: '#F4A582',
                                 label: 'Non-Fin Eur'
                             },
                             {
                                 data: othdatas,
-                                backgroundColor: '#FFC0CB',
+                                backgroundColor: '#D6604D',
                                 label: "Other"
                             },
                             {
                                 data: sasdatas,
-                                backgroundColor: '#4B0082',
+                                backgroundColor: '#B2182B',
                                 label: "South Asian"
                             }
                         ]

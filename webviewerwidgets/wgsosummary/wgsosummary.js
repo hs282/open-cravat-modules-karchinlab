@@ -56,23 +56,23 @@ widgetGenerators[widgetName] = {
 				'UNK':'unknown'
 		    };
 			var colors = [
-				'#008080', // teal
-				'#ffd700', // gold
-				'#00ff00', // lime
-				'#ff0000', // red
-				'#dc143c', // crimson
-				'#d2691e', // chocolate
-				'#8b4513', // saddle brown
-				'#0000ff', // blue
-				'#ff4500', // orange red
-				'#ffa500', // orange
-				'#adff2f', // green yellow
-				'#7fffd4', // aqua marine
-				'#00ced1', // dark turquoise
-				'#00bfff', // deep sky blue
-				'#ffff00', // yellow
-				'#00ffff', // aqua
-				'#000080', // navy
+				'#2166AC',
+				'#4393C3',
+				'#92C5DE',
+				'#D1E5F0',
+				'#F7F7F7',
+				'#FDDBC7',
+				'#F4A582',
+				'#D6604D',
+				'#B2182B',
+				'#762A83',
+				'#9970AB',
+				'#C2A5CF',
+				'#E7D4E8',
+				'#D9F0D3',
+				'#ACD39E',
+				'#5AAE61',
+				'#1B7837',
 			];
 			var counts = {};
 			var d = infomgr.getData('variant'); 
