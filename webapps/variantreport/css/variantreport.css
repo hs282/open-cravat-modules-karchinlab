@@ -200,19 +200,6 @@
     border: 1px black solid;
 }
 
-/*#widgetcontentdiv_cosmic2_variant div:first-child {
-    width: 400px;
-}*/
-
-/*@media only screen and (max-width: 1080px) {
-    #widgetcontentdiv_cosmic2_variant div:first-child {
-        width: 92vw;
-    }
-    #widgetcontentdiv_cancer_hotspots_variant {
-        width: 92vw;
-    }
-}*/
-
 .detailcontentdiv th {
     font-size: 18px;
 }
@@ -788,3 +775,45 @@ h3 {
 .showflex {
   display: flex;
 }
+
+.moduledetaildiv {
+    position: fixed;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    z-index: 300;
+    background-color: white;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 6px;
+    padding: 10px;
+    padding-bottom: 23px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 20px;
+    display: none;
+}
+
+.moduledetaildiv.show {
+    display: block;
+}
+
+.moduledetail-output-table {
+    border-spacing: 12px;
+}
+
+.moduledetail-output-table thead td {
+    border-bottom: 1px dotted #aaaaaa;
+}
+
+#moduledetaildiv-infodiv {
+    height: 100%;
+    overflow: auto;
+    line-height: 18px;
+}
+
+#moduledetaildiv-infodiv>div {
+    margin-top: 12px;
+}
+

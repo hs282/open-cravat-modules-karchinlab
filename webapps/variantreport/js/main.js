@@ -2,6 +2,375 @@ var CLOSURE_NO_DEPS = true;
 var annotData = null;
 var mqMaxMatch = window.matchMedia('(max-width: 1024px)');
 var mqMinMatch = window.matchMedia('(min-width: 1024px)');
+var localModuleInfo = {}
+var storeLogos = {}
+var storeUrl = null;
+var storeurl = $.get('/store/getstoreurl').done(function(response) {
+    storeUrl = response;
+});
+
+function emptyElement (elem) {
+	var last = null;
+    while (last = elem.lastChild) {
+    	elem.removeChild(last);
+    }
+}
+
+function makeModuleDetailDialog (moduleName, evt) {
+    var mInfo = null;
+    mInfo = localModuleInfo[moduleName];
+    var divId = 'moduledetaildiv'
+    var div = document.getElementById(divId)
+    if (div) {
+        emptyElement(div);
+    } else {
+        div = getEl('div');
+        div.id = divId
+        div.className = divId
+    }
+    div.classList.add("show")
+    currentDetailModule = moduleName;
+    var table = getEl('table');
+    table.style.height = '100px';
+    table.style.border = '0px';
+    table.style.width = 'calc(100% - 20px)';
+    var tr = getEl('tr');
+    tr.style.border = '0px';
+    var td = getEl('td');
+    td.style.border = '0px';
+    var sdiv = getEl('div');
+    sdiv.className = 'moduletile-logodiv';
+    sdiv.style.width = '180px';
+    sdiv.style.height = '85px';
+    var img = addLogo(moduleName, sdiv);
+    if (img != null) {
+        img.style.maxHeight = '84px';
+    } else {
+        sdiv.style.position = 'relative';
+        sdiv.children[0].style.display = 'none';
+    }
+    addEl(td, sdiv);
+    addEl(tr, td);
+    td = getEl('td');
+    td.style.border = '0px';
+    var span = getEl('div');
+    span.style.fontSize = '30px';
+    span.textContent = mInfo.title;
+    addEl(td, span);
+    addEl(td, getEl('br'));
+    span = getEl('span');
+    span.style.fontSize = '12px';
+    span.style.color = 'green';
+    span.textContent = mInfo.type;
+    addEl(td, span);
+    span = getEl('span');
+    span.style.fontSize = '12px';
+    span.style.color = 'green';
+    span.textContent = ' | ' + mInfo.developer.organization;
+    addEl(td, span);
+    addEl(tr, td);
+    td = getEl('td');
+    td.style.border = '0px';
+    td.style.verticalAlign = 'top';
+    td.style.textAlign = 'right';
+    var sdiv = getEl('div');
+    var buttonDiv = getEl('div');
+    var sdiv = getEl('div');
+    sdiv.id = 'installstatdiv_' + moduleName;
+    sdiv.style.marginTop = '10px';
+    sdiv.style.fontSize = '12px';
+    addEl(td, sdiv);
+    addEl(tr, td);
+    addEl(table, tr);
+    addEl(div, table);
+    addEl(div, getEl('hr'));
+    // MD and maintainer
+    table = getEl('table');
+    table.style.height = 'calc(100% - 100px)';
+    table.style.border = '0px';
+    tr = getEl('tr');
+    var tdHeight = (window.innerHeight * 0.8 - 150) + 'px';
+    tr.style.border = '0px';
+    td = getEl('td');
+    td.style.border = '0px';
+    td.style.width = '70%';
+    td.style.verticalAlign = 'top';
+    td.style.height = tdHeight;
+    var mdDiv = getEl('div');
+    mdDiv.style.height = '100%';
+    mdDiv.style.overflow = 'auto';
+    var wiw = window.innerWidth;
+    mdDiv.style.maxWidth = (wiw * 0.8 * 0.68) + 'px';
+    addEl(td, mdDiv);
+    addEl(tr, td);
+	$.get('/store/modules/'+moduleName+'/'+'latest'+'/readme').done(function(data){
+        var protocol = window.location.protocol;
+        var converter = new showdown.Converter({tables:true,openLinksInNewWindow:true});
+        var mdhtml = converter.makeHtml(data);
+        if (protocol == 'https:') {
+            mdhtml = mdhtml.replace(/http:/g, 'https:');
+        }
+        var $mdhtml = $(mdhtml);
+        var localRoot = window.location.origin + window.location.pathname.split('/').slice(0,-1).join('/');
+        for (let img of $mdhtml.children('img')) {
+            var storeRoot = `/modules/annotators/${moduleName}`
+            img.src = img.src.replace(localRoot, storeRoot);
+            img.style.display = 'block';
+            img.style.margin = 'auto';
+            img.style['max-width'] = '100%';
+        }
+        $(mdDiv).append($mdhtml);
+        // output column description
+        var d = getEl('div');
+        d.id = 'moduledetail-output-column-div'
+        d.style.display = 'none';
+        var h2 = getEl('h2');
+        h2.textContent = 'Output Columns';
+        addEl(d, h2);
+        var otable = getEl('table');
+        otable.className = 'moduledetail-output-table';
+        var othead = getEl('thead');
+        var otr = getEl('tr');
+        var oth = getEl('td');
+        oth.textContent = 'Name';
+        addEl(otr, oth);
+        var oth = getEl('td');
+        oth.textContent = 'Description';
+        addEl(otr, oth);
+        addEl(othead, otr);
+        addEl(otable, othead);
+        var otbody = getEl('tbody');
+        otbody.id = 'moduledetail-output-tbody';
+        addEl(otable, otbody);
+        addEl(d, otable);
+        addEl(mdDiv, d);
+        addClassRecursive(mdDiv, 'moduledetaildiv-elem');
+        var data = mInfo;
+        var outputColumnDiv = d
+        var outputs = data['output_columns'];
+        if (outputs != undefined) {
+            var descs = [];
+            for (var i1 = 0; i1 < outputs.length; i1++) {
+                var o = outputs[i1];
+                var desc = '';
+                if (o['desc'] != undefined) {
+                    desc = o['desc'];
+                }
+                descs.push([o['title'], desc]);
+            }
+            if (descs.length > 0) {
+                outputColumnDiv.style.display = 'block';
+                for (var i1 = 0; i1 < descs.length; i1++) {
+                    var title = descs[i1][0];
+                    var desc = descs[i1][1];
+                    var otr = getEl('tr');
+                    var otd = getEl('td');
+                    var ospan = getEl('span');
+                    ospan.textContent = title;
+                    addEl(otd, ospan);
+                    addEl(otr, otd);
+                    var otd = getEl('td');
+                    var ospan = getEl('span');
+                    ospan.textContent = desc;
+                    addEl(otd, ospan);
+                    addEl(otr, otd);
+                    addEl(otbody, otr);
+                }
+            }
+        }
+	});
+    // Information div
+    td = getEl('td');
+    td.style.width = '30%';
+    td.style.border = '0px';
+    td.style.verticalAlign = 'top';
+    td.style.height = tdHeight;
+    var infodiv = getEl('div');
+    infodiv.id = 'moduledetaildiv-infodiv';
+    infodiv.style.maxWidth = (wiw * 0.8 * 0.3) + 'px';
+    var d = getEl('div');
+    span = getEl('span');
+    if (mInfo.commercial_warning) {
+        span.textContent = mInfo.commercial_warning;
+        span.style.color = 'red';
+        span.style['font-weight'] = 'bold';
+    }
+    addEl(d,span);
+    addEl(infodiv,d);
+    var d = getEl('div');
+    span = getEl('span');
+    span.textContent = mInfo.description;
+    addEl(d, span);
+    addEl(infodiv, d);
+    d = getEl('div');
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'Module version: ';
+    addEl(d, span);
+    span = getEl('span');
+    span.textContent = mInfo.version
+    addEl(d, span);
+    addEl(infodiv, d);
+    d = getEl('div');
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'Maintainer: ';
+    addEl(d, span);
+    span = getEl('span');
+    span.textContent = mInfo['developer']['name'];
+    addEl(d, span);
+    addEl(d, getEl('br'));
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'e-mail: ';
+    addEl(d, span);
+    span = getEl('span');
+    span.textContent = mInfo['developer']['email'];
+    addEl(d, span);
+    addEl(d, getEl('br'));
+    addEl(infodiv, d);
+    d = getEl('div');
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'Citation: ';
+    addEl(d, span);
+    span = getEl('span');
+    span.style.width = 'calc(100% - 120px)';
+    span.style.wordWrap = 'break-word';
+    span.style.verticalAlign = 'text-top';
+    var citation = mInfo['developer']['citation'];
+    if (citation != undefined && citation.startsWith('http')) {
+        var a = getEl('a');
+        a.href = citation;
+        a.target = '_blank';
+        a.textContent = citation;
+        addEl(span, a);
+    } else {
+        span.textContent = citation;
+    }
+    addEl(d, span);
+    addEl(infodiv, d);
+    d = getEl('div');
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'Organization: ';
+    addEl(d, span);
+    span = getEl('span');
+    span.textContent = mInfo['developer']['organization'];
+    addEl(d, span);
+    addEl(infodiv, d);
+    d = getEl('div');
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'Website: ';
+    addEl(d, span);
+    span = getEl('a');
+    span.textContent = mInfo['developer']['website'];
+    span.href = mInfo['developer']['website'];
+    span.target = '_blank';
+    span.style.wordBreak = 'break-all';
+    addEl(d, span);
+    addEl(infodiv, d);
+    d = getEl('div');
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'Type: ';
+    addEl(d, span);
+    span = getEl('span');
+    span.textContent = mInfo['type'];
+    addEl(d, span);
+    addEl(infodiv, d);
+    d = getEl('div');
+    span = getEl('span');
+    span.style.fontWeight = 'bold';
+    span.textContent = 'Required modules: ';
+    addEl(d, span);
+    span = getEl('span');
+    if (mInfo['requires'] != null) {
+        span.textContent = mInfo['requires'];
+    } else {
+        span.textContent = 'None';
+    }
+    span.style.wordBreak = 'break-all';
+    addEl(d, span);
+    addEl(infodiv, d);
+    addEl(td, infodiv);
+    addEl(tr, td);
+    addEl(table, tr);
+    addEl(div, table);
+    var el = getEl('div');
+    el.style.position = 'absolute';
+    el.style.top = '0px';
+    el.style.right = '0px';
+    el.style.fontSize = '20px';
+    el.style.padding = '10px';
+    el.style.cursor = 'pointer';
+    el.textContent = 'X';
+    el.addEventListener('click', function (evt) {
+        var pel = evt.target.parentElement;
+        pel.parentElement.removeChild(pel);
+    });
+    addEl(div, el);
+    addClassRecursive(div, 'moduledetaildiv-elem');
+    storeModuleDivClicked = true;
+    return div;
+}
+
+function addClassRecursive (elem, className) {
+    elem.classList.add(className);
+    $(elem).children().each(
+        function () {
+            $(this).addClass(className);
+            addClassRecursive(this, className);
+        }
+    );
+}
+
+function addLogo (moduleName, sdiv) {
+    if (storeLogos[moduleName] != undefined) {
+        var img = storeLogos[moduleName].cloneNode(true);
+        addEl(sdiv, img);
+        return img;
+    }
+    var moduleInfo = localModuleInfo[moduleName];
+    var img = null;
+    if (moduleInfo.has_logo == true) {
+        img = getEl('img');
+        img.className = 'moduletile-logo';
+        img.src = '/store/locallogo?module=' + moduleName;
+        addEl(sdiv, img);
+        storeLogos[moduleName] = img;
+    } else {
+        sdiv.classList.add('moduletile-nologo');
+        var span = getEl('div');
+        span.className = 'moduletile-title';
+        var title = moduleInfo.title;
+        span.textContent = title
+        if (title.length > 26) {
+            span.style.fontSize = '30px';
+        }
+        addEl(sdiv, span);
+    }
+    return img;
+}
+
+function showModuleDetail(moduleName, evt) {
+    if (moduleName in localModuleInfo) {
+        var div = makeModuleDetailDialog(moduleName, evt)
+        addEl(document.body, div)
+        div.classList.add("show")
+    } else {
+        fetch("moduleinfo?module=" + moduleName)
+            .then(response => {
+                return response.json()
+            }).then(response => {
+                localModuleInfo[moduleName] = response
+                var div = makeModuleDetailDialog(moduleName, evt)
+                addEl(document.body, div)
+                div.classList.add("show")
+            })
+    }
+}
 
 function makeModuleDescUrlTitle(moduleName, text) {
     var div = getEl('div')
@@ -18,32 +387,36 @@ function makeModuleDescUrlTitle(moduleName, text) {
         annotators = moduleName
     }
     el.addEventListener('click', function(evt) {
-        fetch("moduleinfo?modules=" + annotators)
+        fetch("modulesinfo?modules=" + annotators)
             .then(response => {
                 return response.json()
             }).then(moduleInfos => {
-                var tdiv = document.querySelector("#tooltipdiv")
-                if (tdiv == null) {
-                    tdiv = getEl('div')
-                    tdiv.id = 'tooltipdiv'
+                if (moduleInfos.length == 1) {
+                    showModuleDetail(moduleInfos[0].name, evt)
+                } else {
+                    var tdiv = document.querySelector("#tooltipdiv")
+                    if (tdiv == null) {
+                        tdiv = getEl('div')
+                        tdiv.id = 'tooltipdiv'
+                    }
+                    tdiv.innerHTML = ""
+                    moduleInfos.forEach(function(moduleInfo) {
+                        var tsdiv = getEl('div')
+                        var tspan = getEl('a')
+                        tspan.textContent = moduleInfo.title
+                        tspan.setAttribute("href", moduleInfo.url)
+                        tspan.setAttribute("target", "_blank")
+                        addEl(tsdiv, tspan)
+                        tspan = getEl('div')
+                        tspan.textContent = moduleInfo.desc
+                        addEl(tsdiv, tspan)
+                        addEl(tdiv, tsdiv)
+                    })
+                    tdiv.style.left = evt.target.offsetLeft + 15
+                    tdiv.style.top = evt.target.offsetTop
+                    addEl(evt.target.parentElement, tdiv)
+                    tdiv.classList.add("show")
                 }
-                tdiv.innerHTML = ""
-                moduleInfos.forEach(function(moduleInfo) {
-                    var tsdiv = getEl('div')
-                    var tspan = getEl('a')
-                    tspan.textContent = moduleInfo.title
-                    tspan.setAttribute("href", moduleInfo.url)
-                    tspan.setAttribute("target", "_blank")
-                    addEl(tsdiv, tspan)
-                    tspan = getEl('div')
-                    tspan.textContent = moduleInfo.desc
-                    addEl(tsdiv, tspan)
-                    addEl(tdiv, tsdiv)
-                })
-                tdiv.style.left = evt.target.offsetLeft + 15
-                tdiv.style.top = evt.target.offsetTop
-                addEl(evt.target.parentElement, tdiv)
-                tdiv.classList.add("show")
             })
     })
     return div
@@ -3921,7 +4294,6 @@ widgetGenerators['predictionpanel'] = {
             sdiv.style.paddingRight = '1rem'
             var chartDiv = getEl('canvas');
             addEl(sdiv, chartDiv);
-            console.log('@ wdiv=', wdiv)
             var chart = new Chart(chartDiv, {
                 type: 'doughnut',
                 data: {
@@ -4609,8 +4981,14 @@ function setupEvents() {
     });
     document.querySelector("body").addEventListener("click", function(evt) {
         var tooltipdiv = document.querySelector("#tooltipdiv")
-        if (tooltipdiv.classList.contains("show")) {
-            tooltipdiv.classList.remove("show")
+        if (tooltipdiv != null) {
+            if (tooltipdiv.classList.contains("show")) {
+                tooltipdiv.classList.remove("show")
+            }
+        }
+        var moduledetaildiv = document.querySelector("#moduledetaildiv")
+        if (moduledetaildiv != null) {
+            moduledetaildiv.classList.remove("show")
         }
     })
 }
