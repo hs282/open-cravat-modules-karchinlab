@@ -27,12 +27,14 @@ widgetGenerators['rankscore'] = {
             var v = this['variables'];
             var columnnames_to_show = v['columnnames'];
             var hugo = getWidgetData(tabName, 'base', row, 'hugo');
-            if (Object.keys(columnnames_to_show).length == 0){
-                var span = getEl('span');
-                span.classList.add('nodata');
-                addEl(div, addEl(span, getTn('No data')));
-                return;
-            }
+            if (columnnames_to_show != undefined){
+                if (Object.keys(columnnames_to_show).length == 0){
+                    var span = getEl('span');
+                    span.classList.add('nodata');
+                    addEl(div, addEl(span, getTn('No data')));
+                    return;
+                }
+            
             titlelength = [];
             var equallen = 100/(Object.keys(columnnames_to_show).length + 2);
             var extendlen = equallen + 5;
@@ -133,6 +135,7 @@ widgetGenerators['rankscore'] = {
                         $(tr).children().eq(k).css("background-color",color);
                             addEl(tbody, tr);
                         addEl(div, addEl(table, tbody));
+                        }
                     }
                 }
             }
