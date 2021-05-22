@@ -12,7 +12,6 @@ developer:
 tags:
 - visualization
 hidden: true
-private: true
 requires_opencravat: '>=2.1.0'
 release_note:
   1.0.0: Initial release
