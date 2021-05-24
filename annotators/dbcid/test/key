@@ -1,16 +1,16 @@
 #CRAVAT Report
-#Created at Monday 04/26/2021 10:59:52
+#Created at Monday 05/24/2021 13:48:57
 #Report level: variant
 #
-Variant Annotation																dbCID: Database of Cancer Driver InDels
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Levels of Evidence
-1	chr9	130872186	AAA	AGAGGAGGA		Yes	ABL1	ENST00000318560.6	inframe_insertion	c.880_882delinsAGAGGAGGA	p.Lys294delinsArgGlyGly	ENST00000318560.6:ABL1:P00519:complex_substitution,inframe_insertion:p.Lys294delinsArgGlyGly:c.880_882delinsAGAGGAGGA; ENST00000372348.7:ABL1:P00519:complex_substitution,inframe_insertion:p.Lys313delinsArgGlyGly:c.937_939delinsAGAGGAGGA	1	s0		
-2	chr1	193122212	TTAAGCGTATTAAGACAA	-		Yes	CDC73	ENST00000367435.4	inframe_deletion	c.13_30del	p.Leu5_Gln10del	ENST00000367435.4:CDC73:Q6P1J9:inframe_deletion:p.Leu5_Gln10del:c.13_30del; ENST00000482484.1:CDC73::2kb_upstream_variant,processed_transcript::; ENST00000635846.1:CDC73::inframe_deletion:p.Leu5_Gln10del:c.13_30del; ENST00000643006.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del; ENST00000643784.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del; ENST00000647662.1:CDC73::2kb_upstream_variant,processed_transcript::; ENST00000648071.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del; ENST00000649606.1:CDC73::processed_transcript::; ENST00000649706.1:CDC73::2kb_upstream_variant,processed_transcript::; ENST00000649895.1:CDC73::processed_transcript::; ENST00000650197.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del	1	s1		
-3	chr7	55174776	TTAAGAGAAGCAACATCT	-		Yes	EGFR	ENST00000275493.7	inframe_deletion	c.2239_2256del	p.Leu747_Ser752del	ENST00000275493.7:EGFR:P00533:inframe_deletion:p.Leu747_Ser752del:c.2239_2256del; ENST00000454757.6:EGFR::inframe_deletion:p.Leu702_Ser707del:c.2104_2121del; ENST00000455089.5:EGFR::inframe_deletion:p.Leu702_Ser707del:c.2104_2121del	1	s2		
-4	chr5	112839985	AGAG	-		Yes	APC	ENST00000257430.9	frameshift_truncation	c.4391_4394del	p.Glu1464ValfsTer8	ENST00000257430.9:APC:P25054:frameshift_truncation:p.Glu1464ValfsTer8:c.4391_4394del; ENST00000508376.6:APC:P25054:frameshift_truncation:p.Glu1464ValfsTer8:c.4391_4394del; ENST00000508624.5:APC::NMD_transcript_variant,3_prime_UTR_variant::c.*3713_*3716del	1	s2		
-5	chr13	32340077	CT	-		Yes	BRCA2	ENST00000380152.7	frameshift_truncation	c.5722_5723del	p.Leu1908ArgfsTer2	ENST00000380152.7:BRCA2:P51587:frameshift_truncation:p.Leu1908ArgfsTer2:c.5722_5723del; ENST00000544455.5:BRCA2:P51587:frameshift_truncation:p.Leu1908ArgfsTer2:c.5722_5723del; ENST00000614259.1:BRCA2::processed_transcript::	1	s2		
+Variant Annotation																Original Input				dbCID: Database of Cancer Driver InDels
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Chrom	Pos	Reference allele	Alternate allele	Levels of Evidence
+1	chr9	130872187	A	GAGGAGG		Yes	ABL1	ENST00000318560.6	inframe_insertion	c.881delinsGAGGAGG	p.Lys294delinsArgGlyGly	ENST00000318560.6:ABL1:P00519:complex_substitution,inframe_insertion:p.Lys294delinsArgGlyGly:c.881delinsGAGGAGG; ENST00000372348.7:ABL1:P00519:complex_substitution,inframe_insertion:p.Lys313delinsArgGlyGly:c.938delinsGAGGAGG	1	s0		chr9	130872186	AAA	AGAGGAGGA	in vivo
+2	chr1	193122212	TTAAGCGTATTAAGACAA	-		Yes	CDC73	ENST00000367435.4	inframe_deletion	c.13_30del	p.Leu5_Gln10del	ENST00000367435.4:CDC73:Q6P1J9:inframe_deletion:p.Leu5_Gln10del:c.13_30del; ENST00000482484.1:CDC73::2kb_upstream_variant,processed_transcript::; ENST00000635846.1:CDC73::inframe_deletion:p.Leu5_Gln10del:c.13_30del; ENST00000643006.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del; ENST00000643784.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del; ENST00000647662.1:CDC73::2kb_upstream_variant,processed_transcript::; ENST00000648071.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del; ENST00000649606.1:CDC73::processed_transcript::; ENST00000649706.1:CDC73::2kb_upstream_variant,processed_transcript::; ENST00000649895.1:CDC73::processed_transcript::; ENST00000650197.1:CDC73::inframe_deletion,NMD_transcript_variant:p.Leu5_Gln10del:c.13_30del	1	s1		chr1	193122212	TTAAGCGTATTAAGACAA	-	putative
+3	chr7	55174776	TTAAGAGAAGCAACATCT	-		Yes	EGFR	ENST00000275493.7	inframe_deletion	c.2239_2256del	p.Leu747_Ser752del	ENST00000275493.7:EGFR:P00533:inframe_deletion:p.Leu747_Ser752del:c.2239_2256del; ENST00000454757.6:EGFR::inframe_deletion:p.Leu702_Ser707del:c.2104_2121del; ENST00000455089.5:EGFR::inframe_deletion:p.Leu702_Ser707del:c.2104_2121del	1	s2		chr7	55174776	TTAAGAGAAGCAACATCT	-	in vivo
+4	chr5	112839985	AGAG	-		Yes	APC	ENST00000257430.9	frameshift_truncation	c.4391_4394del	p.Glu1464ValfsTer8	ENST00000257430.9:APC:P25054:frameshift_truncation:p.Glu1464ValfsTer8:c.4391_4394del; ENST00000508376.6:APC:P25054:frameshift_truncation:p.Glu1464ValfsTer8:c.4391_4394del; ENST00000508624.5:APC::NMD_transcript_variant,3_prime_UTR_variant::c.*3713_*3716del	1	s2		chr5	112839985	AGAG	-	in vivo
+5	chr13	32340077	CT	-		Yes	BRCA2	ENST00000380152.7	frameshift_truncation	c.5722_5723del	p.Leu1908ArgfsTer2	ENST00000380152.7:BRCA2:P51587:frameshift_truncation:p.Leu1908ArgfsTer2:c.5722_5723del; ENST00000544455.5:BRCA2:P51587:frameshift_truncation:p.Leu1908ArgfsTer2:c.5722_5723del; ENST00000614259.1:BRCA2::processed_transcript::	1	s2		chr13	32340077	CT	-	in vitro
 #CRAVAT Report
-#Created at Monday 04/26/2021 10:59:52
+#Created at Monday 05/24/2021 13:48:57
 #Report level: gene
 #
 Variant Annotation					
@@ -21,7 +21,7 @@ EGFR		1	0	inframe_deletion	inframe_deletion(1)
 APC		1	0	frameshift_truncation	frameshift_truncation(1),NMD_transcript_variant(1),3_prime_UTR_variant(1)
 BRCA2		1	0	frameshift_truncation	frameshift_truncation(1),processed_transcript(1)
 #CRAVAT Report
-#Created at Monday 04/26/2021 10:59:52
+#Created at Monday 05/24/2021 13:48:57
 #Report level: sample
 #
 Variant Annotation	
@@ -32,7 +32,7 @@ UID	Sample
 4	s2
 5	s2
 #CRAVAT Report
-#Created at Monday 04/26/2021 10:59:52
+#Created at Monday 05/24/2021 13:48:57
 #Report level: mapping
 #
 Variant Annotation			

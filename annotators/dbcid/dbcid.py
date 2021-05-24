@@ -23,7 +23,7 @@ class CravatAnnotator(BaseAnnotator):
         row = self.cursor.fetchone()
         if row:
             evidence = row[0]
-            out = {'effect': effect, 'evidence': evidence}
+            out = {'evidence': evidence}
             return out
 
     
