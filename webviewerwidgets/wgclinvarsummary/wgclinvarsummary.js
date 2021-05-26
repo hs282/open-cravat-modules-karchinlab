@@ -2,8 +2,10 @@ widgetGenerators['clinvarsummary'] = {
 	'info': {
         'name': 'ClinVar Summary',
 		'width': 450, 
-		'height': 450, 
-		'function': function (div, row, tabName) {
+        'height': 450, 
+        'variables': {},
+        'init': function(data) {
+            var v = this['variables'];
             var d = infomgr.getData('variant'); 
             var counts = {}
             for (var i = 0; i < d.length; i++) {
@@ -18,6 +20,21 @@ widgetGenerators['clinvarsummary'] = {
                     }
                 }
             }
+            v['counts'] = counts
+        },
+        'shoulddraw': function () {
+            var v = this['variables'];
+            var counts = v['counts']
+            var data = Object.values(counts)
+            if (data.length == 0){
+                return false
+            }else{
+                return true
+            }
+        },
+		'function': function (div, row, tabName) {
+            var v = this['variables'];
+            var counts = v['counts']
             var data = Object.values(counts)
             var labels = Object.keys(counts)
             div.style.width = 'calc(100% - 37px)';

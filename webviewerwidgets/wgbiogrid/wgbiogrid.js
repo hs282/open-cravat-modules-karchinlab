@@ -1,7 +1,7 @@
 widgetGenerators['biogrid'] = {
 	'gene': {
-		'width': 192, 
-		'height': 250, 
+		'width': 480, 
+		'height': 180, 
 		'function': function (div, row, tabName) {
 			var value = getWidgetData(tabName, 'biogrid', row, 'id');
 			if (value == null) {
@@ -23,22 +23,31 @@ widgetGenerators['biogrid'] = {
 			}
 			else {
 				id = '';
-			}
-			addInfoLineLink(div, head, id, link);
-			var actsls = acts != null ? acts.split(';') : [];
-            if (actsls.length > 0) {
+            }
+            addInfoLineLink(div, head, id, link);
+			var allMappings = getWidgetData(tabName, 'biogrid', row, 'all');
+            if (allMappings != undefined && allMappings != null) {
+                var results = JSON.parse(allMappings);
                 var table = getWidgetTableFrame();
                 addEl(div, table);
-                var thead = getWidgetTableHead(['Interactors']);
+                var thead = getWidgetTableHead(['Interactors', 'Interaction Detection Method', 'Interaction Type', 'PubMed', 'Interaction ID'], ['18%', '25%']);
                 addEl(table, thead);
                 var tbody = getEl('tbody');
                 addEl(table, tbody);
-                for (var j=0;j<actsls.length;j++){
-                    var tr = getWidgetTableTr([actsls[j]]);
+                for (var i=0;i<results.length;i++){
+                    var row = results[i];
+                    var act = row[0];
+                    var method = row[1];
+                    var pub = row[2]
+                    var publink = 'https://pubmed.ncbi.nlm.nih.gov/' + pub;
+                    var types = row[3];
+                    var interactid = row[4];
+                    var interlink = 'https://thebiogrid.org/interaction/' + interactid;
+                    var tr = getWidgetTableTr([act, method, types, publink, interlink], [pub, interactid]);
                     addEl(tbody, tr);
+                    }
                 }
                 addEl(div, addEl(table, tbody));
             }
 		}
 	}
-}

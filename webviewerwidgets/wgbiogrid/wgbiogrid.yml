@@ -1,5 +1,5 @@
 title: BioGRID
-version: 1.1.0
+version: 1.2.0
 type: webviewerwidget
 required_annotator: biogrid
 description: BioGRID webviewer widget
@@ -14,4 +14,5 @@ tags:
 - visualization
 hidden: true
 release_note:
+  1.2.0: New data in widget
   1.1.0: works with single variant page in oc 1.7.0.

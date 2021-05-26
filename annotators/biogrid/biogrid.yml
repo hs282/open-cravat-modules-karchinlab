@@ -1,4 +1,4 @@
-datasource: v3.5.167
+datasource: v4.4.197
 description: Comprehensive interaction repository
 developer:
   citation: 'Oughtred R, Stark C, Breitkreutz BJ, et al. (2018). The BioGRID interaction
@@ -9,12 +9,6 @@ developer:
   website: https://thebiogrid.org/
 level: gene
 output_columns:
-- hidden: true
-  name: biogrid
-  title: Raw Data
-  type: string
-  width: 70
-  filterable: false
 - desc: Interaction partners
   name: acts
   title: Interactors
@@ -25,18 +19,34 @@ output_columns:
   title: ID
   type: string
   width: 58
+  link_format: https://thebiogrid.org/${.*}
   filterable: false
   desc: BioGRID ID
   hidden: true
+- hidden: true
+  name: all
+  title: All Annotations
+  type: string
+  width: 75
+  filterable: false
+  table: true
+  table_headers:
+  - name: acts
+    title:  Interaction partners
+    type: string
+  - name: id
+    title: ID
+    type: string
 tags:
 - genes
 - interactions
 title: BioGRID
 type: annotator
-version: 3.6.0
+version: 3.7.0
 requires:
 - wgbiogrid
 release-note:
+  3.7.0: data no longer from dbnsfp, updated data for widget
   3.6.0: updated gene names according to https://www.genenames.org/download/custom/
 requires_opencravat: '>=2.0.2'
 smartfilters:
