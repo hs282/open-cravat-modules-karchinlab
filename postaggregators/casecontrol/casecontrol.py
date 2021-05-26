@@ -38,7 +38,12 @@ class CravatPostAggregator (BasePostAggregator):
         self.has_zygosity = 'base__zygosity' in samp_cols
         self.qt_samples_plain = 'select base__sample_id from sample where base__uid=?'
         self.qt_samples_zyg = 'select base__sample_id, base__zygosity from sample where base__uid=?'
-        
+
+        # Flag multi-allelic sites
+        self.multiallelic_uids = set()
+        q = 'select group_concat(base__uid) as uids, count(base__uid) as uid_count from mapping group by base__original_line having uid_count > 1;'
+        for row in self.dbconn.execute(q):
+            self.multiallelic_uids.update((int(x) for x in row[0].split(',')))
     
     def cleanup (self):
         pass
@@ -79,6 +84,7 @@ class CravatPostAggregator (BasePostAggregator):
             [2*hom_cont + het_cont, 2*ref_cont + het_cont]
         ]
         all_pvalue = self.fisher_exact(all_table,'greater')[1]
+        multiallelic = 'Y' if uid in self.multiallelic_uids else None
         return {
             'dom_pvalue': dom_pvalue,
             'rec_pvalue': rec_pvalue,
@@ -89,6 +95,7 @@ class CravatPostAggregator (BasePostAggregator):
             'hom_cont': hom_cont,
             'het_cont': het_cont,
             'ref_cont': ref_cont,
+            'multiallelic': multiallelic,
         }
 
 if __name__ == '__main__':

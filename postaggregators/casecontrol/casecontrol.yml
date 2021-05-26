@@ -3,6 +3,14 @@ version: 1.0.0
 type: postaggregator
 level: variant
 output_columns:
+- name: multiallelic
+  title: Multi-allelic
+  type: string
+  width: 55
+  desc: True if location has multiple alternate alleles across all samples
+  category: single
+  categories:
+  - 'Y'
 - name: dom_pvalue
   title: Dominant p-value
   type: float
