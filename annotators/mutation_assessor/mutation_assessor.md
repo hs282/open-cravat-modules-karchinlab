@@ -1,8 +1,6 @@
 # Mutation Assessor: database providing prediction of the functional impact of amino-acid substitutions in proteins
 Functional impact is calculated based on evolutionary conservation of the affected amino acid in protein homologs. The method has been validated on a large set (60k) of disease associated (OMIM) and polymorphic variants.
 
-NOTE: Data provided by [dbNSFP](https://sites.google.com/site/jpopgen/dbNSFP) version 3.5a
-
 1. Variant: Amino acid variant
 2. Score: Mutation Assessor functional impact combined score (MAori). The score ranges from -5.135 to 6.49
 3. Ranked Score: MAori scores were ranked among all MAori scores in the database. The rankscore is the ratio of the rank of the score over the total number of MAori scores in the database. The scores range from 0 to 1.

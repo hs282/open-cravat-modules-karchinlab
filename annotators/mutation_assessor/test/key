@@ -1,31 +1,48 @@
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:31:00
+#Created at Thursday 05/27/2021 17:22:34
 #Report level: variant
 #
-Variant Annotation																Mutation Assessor			
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Variant	Score	Rank score	Functional Impact
-1	chr1	69094	G	A		Yes	OR4F5	ENST00000641515.2	missense_variant	c.67G>A	p.Val23Met	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Val2Met:c.4G>A; ENST00000641515.2:OR4F5::missense_variant:p.Val23Met:c.67G>A	0			V2M	2.86	0.83291	Medium
-2	chr1	69105	C	A		Yes	OR4F5	ENST00000641515.2	missense_variant	c.78C>A	p.Phe26Leu	ENST00000335137.4:OR4F5:Q8NH21:missense_variant:p.Phe5Leu:c.15C>A; ENST00000641515.2:OR4F5::missense_variant:p.Phe26Leu:c.78C>A	0			F5L	2.615	0.76725	Medium
+Variant Annotation																Mutation Assessor					Original Input			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Transcript ID	Score	Rank score	Functional Impact	All Annotations	Chrom	Pos	Reference allele	Alternate allele
+1	chr12	25209871	C	T			KRAS	ENST00000256078.9	3_prime_UTR_variant	c.*45G>A		ENST00000256078.9:KRAS:P01116:3_prime_UTR_variant::c.*45G>A; ENST00000311936.8:KRAS:P01116:missense_variant:p.Arg164Gln:c.491G>A; ENST00000553788.6:ETFRF1::2kb_downstream_variant::c.*608C>T; ENST00000557334.5:KRAS::missense_variant:p.Arg51Gln:c.152G>A; ENST00000612734.1:AC092794.1::2kb_upstream_variant,lnc_RNA::	1	no-sample		ENST00000311936.8	1.8	0.47472	low	[["ENST00000311936.8", "low", "1.8", "0.47472"]]	chr12	25209871	C	T
+2	chr18	45666191	G	A		Yes	SLC14A2	ENST00000255226.11	missense_variant	c.1529G>A	p.Arg510Gln	ENST00000255226.11:SLC14A2:Q15849:missense_variant:p.Arg510Gln:c.1529G>A; ENST00000586448.5:SLC14A2:Q15849:missense_variant:p.Arg510Gln:c.1529G>A	1	s2		ENST00000255226.11;ENST00000586448.5	-1.94	0.0022	neutral	[["ENST00000255226.11", "neutral", "-1.94", "0.00220"], ["ENST00000586448.5", "neutral", "-1.94", "0.00220"]]	chr18	45666191	G	A
+3	chrX	71120077	A	T		Yes	MED12	ENST00000374080.8	missense_variant	c.460A>T	p.Met154Leu	ENST00000333646.10:MED12::missense_variant,start_lost:p.Met1?:c.1A>T; ENST00000374080.8:MED12:Q93074:missense_variant:p.Met154Leu:c.460A>T; ENST00000374102.5:MED12:Q93074:missense_variant:p.Met154Leu:c.460A>T	1	s0		ENST00000374080.8;ENST00000374102.5	-1.04	0.01097	neutral	[["ENST00000374080.8", "neutral", "-1.04", "0.01097"], ["ENST00000374102.5", "neutral", "-1.04", "0.01097"]]	chrX	71120077	A	T
+4	chrX	40064468	T	A		Yes	BCOR	ENST00000378444.9	missense_variant	c.3370A>T	p.Met1124Leu	ENST00000342274.8:BCOR:Q6W2J9:missense_variant:p.Met1124Leu:c.3370A>T; ENST00000378444.9:BCOR:Q6W2J9:missense_variant:p.Met1124Leu:c.3370A>T; ENST00000378455.8:BCOR:Q6W2J9:missense_variant:p.Met1106Leu:c.3316A>T; ENST00000378463.5:BCOR::processed_transcript::; ENST00000397354.7:BCOR:Q6W2J9:missense_variant:p.Met1124Leu:c.3370A>T; ENST00000673391.1:BCOR::missense_variant:p.Met1124Leu:c.3370A>T	1	s4		ENST00000342274.8;ENST00000378444.9;ENST00000397354.7;ENST00000673391.1	1.04	0.26193	low	[["ENST00000342274.8", "low", "1.04", "0.26193"], ["ENST00000378444.9", "low", "1.04", "0.26193"], ["ENST00000397354.7", "low", "1.04", "0.26193"], ["ENST00000673391.1", "low", "1.04", "0.26193"]]	chrX	40064468	T	A
+5	chr12	8852253	C	T		Yes	A2ML1	ENST00000299698.12	missense_variant	c.2507C>T	p.Ser836Leu	ENST00000299698.12:A2ML1:A8K2U0:missense_variant:p.Ser836Leu:c.2507C>T; ENST00000539547.5:A2ML1:A8K2U0:missense_variant:p.Ser345Leu:c.1034C>T	1	s1		ENST00000299698.12	0.81	0.20779	low	[["ENST00000299698.12", "low", "0.81", "0.20779"]]	chr12	8852253	C	T
+6	chr7	140753351	A	G		Yes	BRAF	ENST00000644969.1	missense_variant	c.1904T>C	p.Phe635Ser	ENST00000288602.11:BRAF::missense_variant:p.Phe635Ser:c.1904T>C; ENST00000496384.7:BRAF::missense_variant:p.Phe595Ser:c.1784T>C; ENST00000497784.2:BRAF::NMD_transcript_variant,3_prime_UTR_variant::c.*1234T>C; ENST00000642228.1:BRAF::NMD_transcript_variant,3_prime_UTR_variant::c.*862T>C; ENST00000644120.1:BRAF::processed_transcript::; ENST00000644969.1:BRAF::missense_variant:p.Phe635Ser:c.1904T>C; ENST00000646730.1:BRAF::NMD_transcript_variant,3_prime_UTR_variant::c.*360T>C; ENST00000646891.1:BRAF:P15056:missense_variant:p.Phe595Ser:c.1784T>C	1	no-sample		ENST00000496384.7;ENST00000646891.1	3.75	0.95014	high	[["ENST00000288602.11", "neutral", "0.2", "0.09183"], ["ENST00000496384.7", "high", "3.75", "0.95014"], ["ENST00000644969.1", "neutral", "0.2", "0.09183"], ["ENST00000646891.1", "high", "3.75", "0.95014"]]	chr7	140753351	A	G
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:31:00
+#Created at Thursday 05/27/2021 17:22:34
 #Report level: gene
 #
 Variant Annotation					
 Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
-OR4F5		2	0	missense_variant	missense_variant(0)
+KRAS		0	1	3_prime_UTR_variant	missense_variant(1),3_prime_UTR_variant(1)
+SLC14A2		1	0	missense_variant	missense_variant(1)
+MED12		1	0	missense_variant	missense_variant(1),start_lost(1)
+BCOR		1	0	missense_variant	missense_variant(1),processed_transcript(1)
+A2ML1		1	0	missense_variant	missense_variant(1)
+BRAF		1	0	missense_variant	missense_variant(1),NMD_transcript_variant(1),processed_transcript(1),3_prime_UTR_variant(1)
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:31:00
+#Created at Thursday 05/27/2021 17:22:34
 #Report level: sample
 #
 Variant Annotation	
 UID	Sample
-1	
-2	
+1	no-sample
+2	s2
+3	s0
+4	s4
+5	s1
+6	no-sample
 #CRAVAT Report
-#Created at Monday 09/14/2020 10:31:00
+#Created at Thursday 05/27/2021 17:22:34
 #Report level: mapping
 #
 Variant Annotation			
 Original Line	User Tags	UID	Input File Number
 2		1	0
 3		2	0
+4		3	0
+5		4	0
+6		5	0
+7		6	0

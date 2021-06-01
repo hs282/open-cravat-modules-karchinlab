@@ -1,20 +1,26 @@
 widgetGenerators['mutation_assessor'] = {
 	'variant': {
-		'width': 280, 
-		'height': 80, 
-        'default_hidden': true,
+		'width': 480, 
+		'height': 120, 
 		'function': function (div, row, tabName) {
-			var value = getWidgetData(tabName, 'mutation_assessor', row, 'mut_var');
-			if (value == null) {
-                var span = getEl('span');
-                span.classList.add('nodata');
-				addEl(div, addEl(span, getTn('No data')));
-                return;
+			var allMappings = getWidgetData(tabName, 'mutation_assessor', row, 'all');
+			if (allMappings != undefined && allMappings != null) {
+                var results = JSON.parse(allMappings);
+				var table = getWidgetTableFrame();
+				var thead = getWidgetTableHead(['Transcript', 'Score', 'Rank Score', 'Functional Impact'], ["25%"]);
+				addEl(table, thead);
+				var tbody = getEl('tbody');
+                for (var i = 0; i < results.length; i++) {
+					var row = results[i];
+                    var transcript = row[0];
+					var score = row[2];
+                    var rank = row[3];
+                    var pred = row[1]
+					var tr = getWidgetTableTr([transcript, score, rank, pred]);
+					addEl(tbody, tr);
+				}
+				addEl(div, addEl(table, tbody));
 			}
-			addInfoLine(div, 'Mutation Variant', getWidgetData(tabName, 'mutation_assessor', row, 'mut_var'), tabName);
-			addInfoLine(div, 'Mutation Score', getWidgetData(tabName, 'mutation_assessor', row, 'mut_score'), tabName);
-			addInfoLine(div, 'Mutation Rank Score', getWidgetData(tabName, 'mutation_assessor', row, 'mut_rscore'), tabName);
-			addInfoLine(div, 'Mutation Functional Impact', getWidgetData(tabName, 'mutation_assessor', row, 'mut_pred'), tabName);
 		}
 	}
 }

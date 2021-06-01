@@ -8,38 +8,59 @@ developer:
   name: Chris Sander
   organization: Memorial Sloan-Kettering Cancer Center
   website: http://mutationassessor.org/r3/about.php
-input_format: crv
+input_format: crx
 level: variant
 output_columns:
-- hidden: true
-  name: mut_var
-  title: Variant
+- name: transcript
+  title: Transcript ID
   type: string
-  filterable: false
+  hidden: true
+  width: 70
+  desc: Ensembl transcript ids
 - filterable: false
-  name: mut_score
+  name: score
   title: Score
   type: float
   desc: Functional impact combined score
   hidden: true
-- name: mut_rscore
+- name: rankscore
   title: Rank score
   type: float
   width: 54
   filterable: false
   desc: Rank of the score in dbNSFP divided by the total number of scores in dbNSFP
   hidden: false
-- name: mut_pred
+- name: impact
   title: Functional Impact
   type: string
   width: 68
   filterable: false
   desc: 'Functional impact: high (H), medium (M), low (L) or neutral (N)'
   hidden: false
+- hidden: true
+  name: all
+  title: All Annotations
+  type: string
+  width: 75
+  filterable: false
+  table: true
+  table_headers:
+  - name: transcript
+    title: Transcript
+    type: string
+  - name: score
+    title: Score
+    type: float
+  - name: rankscore
+    title: rankscore
+    type: float
+
 tags:
 - variant effect prediction
 title: Mutation Assessor
 type: annotator
-version: 3.0.6
+version: 3.1.0
+release_note:
+  3.1.0: query now uses gene and protein level annotation.  
 requires:
 - wgmutation_assessor
