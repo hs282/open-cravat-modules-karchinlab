@@ -1,0 +1,51 @@
+#CRAVAT Report
+#Created at Wednesday 06/02/2021 10:46:21
+#Report level: variant
+#
+Variant Annotation																MitoMap					Original Input			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Disease	MitoTip Score	Quartile	Status	PubMed ID	Chrom	Pos	Reference allele	Alternate allele
+1	chrM	2639	C	A			MT-TL1	ENST00000386347.1	Mt_tRNA			ENST00000386347.1:MT-TL1::2kb_upstream_variant,Mt_tRNA::; ENST00000387314.1:MT-TF::2kb_downstream_variant,Mt_tRNA::; ENST00000387342.1:MT-TV::2kb_downstream_variant,Mt_tRNA::; ENST00000387347.2:MT-RNR2::Mt_rRNA::; ENST00000387365.1:MT-TI::2kb_upstream_variant,Mt_tRNA::; ENST00000387372.1:MT-TQ::2kb_downstream_variant,Mt_tRNA::; ENST00000387377.1:MT-TM::2kb_upstream_variant,Mt_tRNA::; ENST00000389680.2:MT-RNR1::2kb_downstream_variant,Mt_rRNA::	0			Rare mutation in a single POAG patient			Reported	27217714	chrM	2639	C	A
+2	chrM	4467	C	A			MT-TQ	ENST00000387372.1	Mt_tRNA			ENST00000386347.1:MT-TL1::2kb_downstream_variant,Mt_tRNA::; ENST00000387347.2:MT-RNR2::2kb_downstream_variant,Mt_rRNA::; ENST00000387365.1:MT-TI::2kb_downstream_variant,Mt_tRNA::; ENST00000387372.1:MT-TQ::2kb_upstream_variant,Mt_tRNA::; ENST00000387377.1:MT-TM::Mt_tRNA::; ENST00000387382.1:MT-TW::2kb_upstream_variant,Mt_tRNA::; ENST00000387392.1:MT-TA::2kb_downstream_variant,Mt_tRNA::; ENST00000387400.1:MT-TN::2kb_downstream_variant,Mt_tRNA::; ENST00000387405.1:MT-TC::2kb_downstream_variant,Mt_tRNA::; ENST00000387409.1:MT-TY::2kb_downstream_variant,Mt_tRNA::	0			Maternally inherited hypertension	16.297	Q1	Reported	28596595	chrM	4467	C	A
+3	chrM	8332	A	G			MT-ATP6	ENST00000361899.2	2kb_upstream_variant	c.-195A>G		ENST00000361739.1:MT-CO2:P00403:2kb_downstream_variant::c.*63A>G; ENST00000361851.1:MT-ATP8:P03928:2kb_upstream_variant::c.-34A>G; ENST00000361899.2:MT-ATP6:P00846:2kb_upstream_variant::c.-195A>G; ENST00000387416.2:MT-TS1::2kb_upstream_variant,Mt_tRNA::; ENST00000387419.1:MT-TD::2kb_downstream_variant,Mt_tRNA::; ENST00000387421.1:MT-TK::Mt_tRNA::; ENST00000387429.1:MT-TG::2kb_upstream_variant,Mt_tRNA::	0			Dystonia and stroke-like episodes	14.1655	Q2	Reported	19930207	chrM	8332	A	G
+4	chrM	4298	G	A			MT-TM	ENST00000387377.1	Mt_tRNA			ENST00000386347.1:MT-TL1::2kb_downstream_variant,Mt_tRNA::; ENST00000387347.2:MT-RNR2::2kb_downstream_variant,Mt_rRNA::; ENST00000387365.1:MT-TI::Mt_tRNA::; ENST00000387372.1:MT-TQ::2kb_downstream_variant,Mt_tRNA::; ENST00000387377.1:MT-TM::2kb_upstream_variant,Mt_tRNA::; ENST00000387382.1:MT-TW::2kb_upstream_variant,Mt_tRNA::; ENST00000387392.1:MT-TA::2kb_downstream_variant,Mt_tRNA::; ENST00000387400.1:MT-TN::2kb_downstream_variant,Mt_tRNA::; ENST00000387405.1:MT-TC::2kb_downstream_variant,Mt_tRNA::; ENST00000387409.1:MT-TY::2kb_downstream_variant,Mt_tRNA::	0			CPEO / MS	17.4804	Q1	Cfrm	9473477, 17886296, 31965079, 12655007, 16120360, 15477393, 10611123, 20064630, 19718780, 20164463	chrM	4298	G	A
+5	chrM	150	C	T			MT-TF	ENST00000387314.1	Mt_tRNA			ENST00000387314.1:MT-TF::2kb_upstream_variant,Mt_tRNA::; ENST00000387342.1:MT-TV::2kb_upstream_variant,Mt_tRNA::; ENST00000387347.2:MT-RNR2::2kb_upstream_variant,Mt_rRNA::; ENST00000389680.2:MT-RNR1::2kb_upstream_variant,Mt_rRNA::	0			Longevity / Cervical Carcinoma / HPV infection risk			Conflicting reports	12538859, 11404057, 12606714, 15483642, 21262335, 16857160, 21319252, 21385627	chrM	150	C	T
+6	chrM	3010	G	A			MT-TL1	ENST00000386347.1	Mt_tRNA			ENST00000386347.1:MT-TL1::2kb_upstream_variant,Mt_tRNA::; ENST00000387342.1:MT-TV::2kb_downstream_variant,Mt_tRNA::; ENST00000387347.2:MT-RNR2::Mt_rRNA::; ENST00000387365.1:MT-TI::2kb_upstream_variant,Mt_tRNA::; ENST00000387372.1:MT-TQ::2kb_downstream_variant,Mt_tRNA::; ENST00000387377.1:MT-TM::2kb_upstream_variant,Mt_tRNA::; ENST00000389680.2:MT-RNR1::2kb_downstream_variant,Mt_rRNA::	0			Cyclic Vomiting Syndrome with Migraine / high altitude adaptation			Reported	16947981, 16773565, 19368653, 23096691, 25332060, 33420243, 19220304, 27217714, 32991883	chrM	3010	G	A
+7	chrM	3253	T	C			MT-TI	ENST00000387365.1	Mt_tRNA			ENST00000386347.1:MT-TL1::Mt_tRNA::; ENST00000387342.1:MT-TV::2kb_downstream_variant,Mt_tRNA::; ENST00000387347.2:MT-RNR2::2kb_downstream_variant,Mt_rRNA::; ENST00000387365.1:MT-TI::2kb_upstream_variant,Mt_tRNA::; ENST00000387372.1:MT-TQ::2kb_downstream_variant,Mt_tRNA::; ENST00000387377.1:MT-TM::2kb_upstream_variant,Mt_tRNA::; ENST00000389680.2:MT-RNR1::2kb_downstream_variant,Mt_rRNA::	0			Maternally inherited hypertension	0.499522	Q4	Reported	28679533, 29161289, 27544295	chrM	3253	T	C
+#CRAVAT Report
+#Created at Wednesday 06/02/2021 10:46:21
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+MT-TL1		0	2	Mt_tRNA	Mt_tRNA(0)
+MT-TQ		0	1	Mt_tRNA	Mt_tRNA(0)
+MT-ATP6		0	1	2kb_upstream_variant	
+MT-TM		0	1	Mt_tRNA	Mt_tRNA(0)
+MT-TF		0	1	Mt_tRNA	Mt_tRNA(0)
+MT-TI		0	1	Mt_tRNA	Mt_tRNA(0)
+#CRAVAT Report
+#Created at Wednesday 06/02/2021 10:46:21
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	
+2	
+3	
+4	
+5	
+6	
+7	
+#CRAVAT Report
+#Created at Wednesday 06/02/2021 10:46:21
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+1		1	0
+2		2	0
+3		3	0
+4		4	0
+6		5	0
+7		6	0
+8		7	0

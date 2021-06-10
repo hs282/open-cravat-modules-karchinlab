@@ -1,0 +1,89 @@
+datasource: 2021.02.09
+description: A manually curated database of conditions with known genetic causes, focusing on medically significant genetic data with available interventions.
+developer:
+  name: 'NIH'
+  organization: 'NIH'
+  email: 'support@cravat.us'
+  website: 'https://research.nhgri.nih.gov/CGD/'
+  citation: 'Solomon BD, Nguyen AD, Bear KA, Wolfsberg TG. Clinical Genomic Database. Proc Natl Acad Sci U S A. 2013 May 21. [Epub ahead of print] [PubMed].'
+
+level: gene
+output_columns:
+- name: condition
+  title: Condition
+  type: string
+  width: 85
+  hidden: false
+- name: inheritance
+  title: Inheritance
+  type: string
+  width: 85
+  hidden: true
+  desc: AD = Autosomal Dominant, AR = Autosomal Recessive, BG = Blood Group, Digenic = A condition resulting from simultaneous mutations in different genes,
+        Maternal = Refers to maternal mitochondrial inheritance, XL = X-Linked
+- name: age_group
+  title: Age Group
+  type: string
+  width: 80
+  hidden: true
+  desc: Pedatric = Less than 18 years of age, Adult = At least 18 years of age
+- name: allelic_conditions
+  title: Allelic Conditions
+  type: string
+  width: 85
+  hidden: true
+  desc: Conditions also resulting from mutations in the same gene, but which would otherwise be categorized in the "General" category for intervention categories. 
+- name: manifestation
+  title: Manifestation
+  type: string
+  width: 85
+  desc: Organ Systems affected by mutations in affected genes.
+  hidden: false
+- name: intervention
+  title: Intervention
+  type: string
+  width: 85
+  desc: Organ Systems for which specific additional interventions may be beneficial. 
+  hidden: true
+- name: link
+  title: More Information
+  type: string
+  width: 75
+  hidden: true
+- hidden: true
+  name: all
+  title: All Annotations
+  type: string
+  width: 75
+  filterable: false
+  table: true
+  table_headers:
+  - name: condition
+    title: Condition
+    type: string
+  - name: inheritance
+    title: Inheritance
+    type: string
+  - name: age_group
+    title: Age Group
+    type: string
+  - name: allelic_conditions
+    title: Allelic Conditions
+    type: string
+  - name: manifestation
+    title: Manifestation
+    type: string
+  - name: intervention
+    title: Intervention
+    type: string
+  - name: link
+    title: More Information
+    type: string
+tags:
+- genes
+requires:
+- wgcgd
+title: 'CGD: Clinical Genomic Database'
+version: 1.0.0
+type: annotator
+
