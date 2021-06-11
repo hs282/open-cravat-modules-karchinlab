@@ -1,5 +1,5 @@
 title: Case-Control
-version: 1.0.0
+version: 1.2.0
 type: postaggregator
 level: variant
 output_columns:
@@ -72,4 +72,9 @@ developer:
   citation: ''
 release_note:
   1.0.0: initial release
+  1.1.0: added new widgets to requires
+  1.2.0: add multiallelic flag
 requires_opencravat: '>=2.2.0'
+requires:
+- wgcasecontrolsummary
+- wgcasecontrols
