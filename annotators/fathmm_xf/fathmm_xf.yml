@@ -1,0 +1,24 @@
+title: FATHMM XF
+version: 1.0.0
+type: annotator
+level: variant
+
+output_columns:
+- name: score 
+  title: Score 
+  type: float
+  desc: Scores are p-values and range from 0 to 1. SNVs with scores >0.5 are predicted to be deleterious, and those <0.5 are predicted to be neutral or benign.
+  width: 75
+tags:
+- variant effect prediction
+- non coding
+requires:
+- pytabix
+description: Enhanced Accuracy in Predicting the Functional Consequences of Coding Single Nucleotide Variants (SNVs).
+developer:
+  name: Chris Campbell
+  organization: University of Bristol Integrative Epidemiology Unit
+  email: 'support@cravat.us'
+  website: 'http://fathmm.biocompute.org.uk/fathmm-xf/index.html'
+  citation: 'Rogers, Mark F., et al. "Supplementary information for FATHMM-XF: accurate prediction of pathogenic point mutations via extended features." (2015).'
+
