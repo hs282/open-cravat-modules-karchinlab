@@ -1,0 +1,181 @@
+datasource: v3.1
+description: Genome Aggregation Database (gnomAD) is a resource developed by an international
+  coalition of investigators, with the goal of aggregating and harmonizing both exome
+  and genome sequencing data from a wide variety of large-scale sequencing projects
+developer:
+  citation: Karczewski, Konrad J., et al. "The Mutational Constraint Spectrum Quantified
+    from Variation in 141,456 Humans." BioRxiv, Apr. 2020, p. 531210. www.biorxiv.org,
+    doi:10.1101/531210.
+  email: ''
+  name: Broad Institute
+  organization: Broad Institute
+  website: http://gnomad.broadinstitute.org/
+output_columns:
+- name: nhomalt
+  title: Global Homozygous AC
+  type: int
+  width: 85
+- name: xx
+  title: Global Homozygous Female AC
+  type: int
+  hidden: true
+  width: 85
+- name: xy
+  title: Global Homozygous Male AC
+  type: int
+  hidden: true
+  width: 85
+- name: afr
+  title: African Homozygous AC
+  type: int
+  width: 85
+- name: afr_xx
+  title: African Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: afr_xy
+  title: African Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+- name: ami
+  title: Amish Homozygous AC
+  type: int
+  width: 85
+- name: ami_xx
+  title: Amish Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: ami_xy
+  title: Amish Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+- name: amr
+  title: Latino/Admixed American Homozygous AC
+  type: int
+  width: 85
+- name: amr_xx
+  title: Latino/Admixed American Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: amr_xy
+  title: Latino/Admixed American Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+- name: asj
+  title: Ashkenazi Jewish Homozygous AC
+  type: int
+  width: 85
+- name: asj_xx
+  title: Ashkenazi Jewish Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: asj_xy
+  title: Ashkenazi Jewish Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+- name: eas
+  title: East Asian Homozygous AC
+  type: int
+  width: 85
+  desc: East Asian populations include Japanese, Korean, and Other East Asian.
+- name: eas_xx
+  title: East Asian Homozygous Female AC
+  type: int
+  width: 85
+  desc: East Asian populations include Japanese, Korean, and Other East Asian.
+  hidden: true
+- name: eas_xy
+  title: East Asian Homozygous Male AC
+  type: int
+  width: 85
+  desc: East Asian populations include Japanese, Korean, and Other East Asian.
+  hidden: true
+- name: fin
+  title: Finnish Homozygous AC
+  type: int
+  width: 85
+- name: fin_xx
+  title: Finnish Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: fin_xy
+  title: Finnish Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+- name: mid
+  title: Middle Eastern Homozygous AC
+  type: int
+  width: 85
+- name: mid_xx
+  title: Middle Eastern Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: mid_xy
+  title: Middle Eastern Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+- name: nfe
+  title: non-Finnish European Homozygous AC
+  type: int
+  width: 85
+  desc: non-Finnish European populations include Bulgarian, Estonian, North-western European, Other non-Finnish European, South European, and Swedish.
+- name: nfe_xx
+  title: non-Finnish European Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+  desc: non-Finnish European populations include Bulgarian, Estonian, North-western European, Other non-Finnish European, South European, and Swedish.
+- name: nfe_xy
+  title: non-Finnish European Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+  desc: non-Finnish European populations include Bulgarian, Estonian, North-western European, Other non-Finnish European, South European, and Swedish.
+- name: oth
+  title: Other Homozygous AC
+  type: int
+  width: 85
+- name: oth_xx
+  title: Other Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: oth_xy
+  title: Other Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+- name: sas
+  title: South Asian Homozygous AC
+  type: int
+  width: 85
+- name: sas_xx
+  title: South Asian Homozygous Female AC
+  type: int
+  width: 85
+  hidden: true
+- name: sas_xy
+  title: South Asian Homozygous Male AC
+  type: int
+  width: 85
+  hidden: true
+
+tags:
+- allele frequency
+
+title: gnomAD3 Counts
+version: 1.0.0
+type: annotator
+level: variant
