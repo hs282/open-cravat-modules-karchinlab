@@ -23,7 +23,6 @@ output_columns:
   width: 80
 tags:
 - genes
-- interactions
 title: IntAct
 type: annotator
 version: 2019.08.23

@@ -33,7 +33,6 @@ tags:
 - variants
 - genes
 - cancer
-- interactions
 title: NDEx SIGNOR
 type: annotator
 version: 1.0.2

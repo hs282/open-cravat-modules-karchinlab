@@ -6,7 +6,7 @@ developer:
   email: rkim@mail.insilico.us.com
   organization: In Silico Solutions
 tags:
-- visualization widgets
+- visualization
 hidden: true
 required_annotator: go
 requires_opencravat: '>=1.7.0'

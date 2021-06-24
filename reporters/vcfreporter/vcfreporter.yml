@@ -35,4 +35,4 @@ release_note:
   1.0.4: async write_table_row
   1.0.0: initial release
 tags:
-- reporters
+- input/output

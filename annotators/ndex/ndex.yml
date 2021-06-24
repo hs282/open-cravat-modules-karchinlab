@@ -31,7 +31,6 @@ output_columns:
   hidden: false
 tags:
 - genes
-- interactions
 - visualization
 title: NDEx NCI Cancer Pathways
 type: annotator

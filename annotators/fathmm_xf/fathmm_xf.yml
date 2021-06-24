@@ -1,5 +1,5 @@
 title: FATHMM XF
-version: 1.0.0
+version: 1.0.1
 type: annotator
 level: variant
 
@@ -12,8 +12,9 @@ output_columns:
 tags:
 - variant effect prediction
 - non coding
-requires:
+pypi_dependency:
 - pytabix
+requires_opencravat: '>=2.2.6'
 description: Enhanced Accuracy in Predicting the Functional Consequences of Coding Single Nucleotide Variants (SNVs).
 developer:
   name: Chris Campbell

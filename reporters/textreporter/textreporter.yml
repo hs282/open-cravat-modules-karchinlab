@@ -20,4 +20,4 @@ release_note:
   1.0.4: no async write_table_row
   1.0.2: regex substitution
 tags:
-- reporters
+- input/output

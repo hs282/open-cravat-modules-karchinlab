@@ -10,6 +10,6 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 tags:
-- visualization widgets
+- visualization
 release_note:
   1.0.0: Initial release

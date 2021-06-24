@@ -12,7 +12,7 @@ developer:
   citation: ''
 requires_opencravat: '>=1.8.0'
 tags:
-- converters
+- input/output
 release_note:
   1.5.0: skip duplicate variants
   1.4.0: handle ref base without pseudoerror

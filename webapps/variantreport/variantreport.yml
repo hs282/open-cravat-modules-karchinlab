@@ -185,6 +185,6 @@ release_note:
   1.0.5: Bug fix
   1.0.0: Initial release
 tags:
-- webapp
+- visualization
 hidden: false
 requires_opencravat: '>=2.1.3'

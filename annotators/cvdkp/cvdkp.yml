@@ -38,7 +38,6 @@ output_columns:
 tags:
 - variants
 - clinical relevance
-- cardiovascular
 title: Cardiovascular Disease Knowledge Portal
 version: 1.0.0
 type: annotator

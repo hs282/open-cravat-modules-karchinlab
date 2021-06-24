@@ -16,10 +16,11 @@ output_columns:
 
 tags: 
 - variant effect prediction
-requires:
+pypi_dependency:
 - pytabix
+requires_opencravat: '>=2.2.6'
 title: DANN
-version: 1.0.1
+version: 1.0.2
 release_note:
   1.0.1: Bug fix
 type: annotator

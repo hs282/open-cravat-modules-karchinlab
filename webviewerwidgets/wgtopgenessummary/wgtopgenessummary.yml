@@ -16,4 +16,4 @@ release_note:
   2.0.2: aiosqlite instead of aiosqlite3
   1.2.0: works with oc 1.8.1.
 tags:
-- visualization widgets
+- visualization

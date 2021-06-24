@@ -16,7 +16,7 @@ uselocalonstore: true
 release_note:
   0.0.1: initial release
 tags:
-- reporters
+- input/output
 pages:
 - variant
 pypi_dependency:

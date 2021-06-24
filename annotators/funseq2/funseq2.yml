@@ -49,12 +49,14 @@ output_columns:
 
 requires:
 - wgfunseq2
-requires_opencravat: '>=2.2.1'
+pypi_dependency:
+- pytabix
+requires_opencravat: '>=2.2.6'
 tags:
 - cancer
 - variants
 - non coding
 title: FunSeq2
-version: 1.0.0
+version: 1.0.1
 type: annotator
 

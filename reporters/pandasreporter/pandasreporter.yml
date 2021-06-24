@@ -14,4 +14,4 @@ release_note:
   1.1.0: works with --concise-reporter option.
   1.0.0: Initial release
 tags:
-- reporters
+- input/output

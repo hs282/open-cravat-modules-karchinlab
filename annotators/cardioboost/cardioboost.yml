@@ -38,7 +38,6 @@ output_columns:
   category: single
 tags:
 - clinical relevance
-- cardiovascular
 - variant effect prediction
 title: CardioBoost
 version: 1.0.0

@@ -1,5 +1,5 @@
 title: CADD
-version: 1.0.0
+version: 1.0.1
 datasource: v1.6
 type: annotator
 level: variant
@@ -22,6 +22,7 @@ developer:
 commercial_warning: CADD scores are freely available for all non-commercial applications.If you are planning on using them in a commercial application, please obtain a license.
 tags:
 - variant effect prediction
-requires:
+pypi_dependency:
 - pytabix
+requires_opencravat: '>=2.2.6'
 

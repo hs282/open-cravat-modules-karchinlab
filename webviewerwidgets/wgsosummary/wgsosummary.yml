@@ -6,7 +6,7 @@ type: webviewerwidget
 description: Sequence Ontology Summary result viewer widget
 developer: {name: Rick Kim, organization: In Silico Solutions, email: rkim@insilico.us.com,
   website: 'http://www.insilico.us.com', citation: ''}
-tags: [visualization widgets]
+tags: [visualization]
 release_note:
   1.5.0: New color scheme
   1.4.0: greyed out variants grouped to other

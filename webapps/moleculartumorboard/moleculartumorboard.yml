@@ -65,7 +65,7 @@ release_note:
   1.0.0: release
   0.0.1: initial release
 tags:
-- webapp
+- visualization
 hidden: false
 requires_opencravat: '>=2.1.3'
 private: true

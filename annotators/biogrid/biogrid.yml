@@ -39,7 +39,6 @@ output_columns:
     type: string
 tags:
 - genes
-- interactions
 title: BioGRID
 type: annotator
 version: 3.7.0

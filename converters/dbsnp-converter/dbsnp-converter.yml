@@ -13,7 +13,7 @@ developer:
     ID: 151).'
 requires_opencravat: '>=1.7.0'
 tags:
-- converters
+- input/output
 release_note:
   1.2.0: data update to build 154
   1.1.1: comment lines return IGNORE.
