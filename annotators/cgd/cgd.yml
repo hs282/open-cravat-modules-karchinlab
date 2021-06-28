@@ -84,6 +84,8 @@ tags:
 requires:
 - wgcgd
 title: 'CGD: Clinical Genomic Database'
-version: 1.0.0
+version: 1.0.1
+release_note:
+  1.0.1: Bug fix
 type: annotator
 

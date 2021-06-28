@@ -18,6 +18,7 @@ class CravatAnnotator(BaseAnnotator):
         pos = input_data['pos']
         ref = input_data['ref_base'].replace('-','')
         alt = input_data['alt_base'].replace('-','')
+        records = ''
         if len(ref) != 1 or len(alt) != 1:
             return
         try:

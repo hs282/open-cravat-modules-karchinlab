@@ -1,5 +1,5 @@
 title: FATHMM XF
-version: 1.0.1
+version: 1.0.2
 type: annotator
 level: variant
 
@@ -9,6 +9,8 @@ output_columns:
   type: float
   desc: Scores are p-values and range from 0 to 1. SNVs with scores >0.5 are predicted to be deleterious, and those <0.5 are predicted to be neutral or benign.
   width: 75
+release_note:
+  1.0.2: Bug fix
 tags:
 - variant effect prediction
 - non coding
