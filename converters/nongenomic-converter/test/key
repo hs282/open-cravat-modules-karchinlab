@@ -1,0 +1,48 @@
+#CRAVAT Report
+#Created at Wednesday 05/05/2021 10:54:43
+#Report level: variant
+#
+Variant Annotation																Hg19	
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	Chrom	Position
+1	chr3	179218303	G	A		Yes	PIK3CA	ENST00000263967.4	missense_variant	c.1633G>A	p.Glu545Lys	ENST00000263967.4:PIK3CA:P42336:missense_variant:p.Glu545Lys:c.1633G>A; ENST00000643187.1:PIK3CA::missense_variant:p.Glu545Lys:c.1633G>A	1	s0		chr3	178936091
+2	chr17	50667893	TACGT	AGGAGGAGG		Yes	ABCC3	ENST00000285238.13	frameshift_elongation	c.1666_1670delinsAGGAGGAGG	p.Tyr556ArgfsTer22	ENST00000285238.13:ABCC3:O15438:complex_substitution,frameshift_elongation:p.Tyr556ArgfsTer22:c.1666_1670delinsAGGAGGAGG; ENST00000427699.5:ABCC3:O15438:3_prime_UTR_variant::c.*52_*56delinsAGGAGGAGG; ENST00000502426.5:ABCC3:O15438:NMD_transcript_variant,3_prime_UTR_variant::c.*188_*192delinsAGGAGGAGG; ENST00000503304.1:ABCC3::2kb_upstream_variant,processed_transcript::; ENST00000505699.5:ABCC3:O15438:complex_substitution,frameshift_elongation,NMD_transcript_variant:p.Tyr556ArgfsTer22:c.1666_1670delinsAGGAGGAGG; ENST00000513589.1:ABCC3::2kb_downstream_variant,processed_transcript::	1	s1		chr17	48745254
+3	chr17	81119470	C	AGGTGT		Yes	AATK	ENST00000326724.9	frameshift_elongation	c.3994delinsACACCT	p.Ala1332ThrfsTer100	ENST00000326724.9:AATK:Q6ZMQ8:complex_substitution,frameshift_elongation:p.Ala1332ThrfsTer100:c.3994delinsACACCT; ENST00000374792.6:AATK:Q6ZMQ8:NMD_transcript_variant,3_prime_UTR_variant::c.*983delinsACACCT; ENST00000417379.6:AATK::complex_substitution,frameshift_elongation:p.Ala1229ThrfsTer100:c.3685delinsACACCT; ENST00000573469.1:AATK::intron_variant,processed_transcript::	1	s1		chr17	79093270
+4	chr1	12666299	GGCGTGACGCCATC	-		Yes	AADACL4	ENST00000376221.1	frameshift_truncation	c.788_801del	p.Trp263PhefsTer21	ENST00000376221.1:AADACL4:Q5VUY2:frameshift_truncation:p.Trp263PhefsTer21:c.788_801del	1	s2		chr1	12726310
+5	chr19	58352502	C	-		Yes	A1BG	ENST00000263100.8	frameshift_truncation	c.395del	p.Gly132AlafsTer2	ENST00000263100.8:A1BG:P04217:frameshift_truncation:p.Gly132AlafsTer2:c.395del; ENST00000311044.8:ZNF497:Q6ZNH5:2kb_downstream_variant::c.*3638del; ENST00000593374.5:A1BG-AS1::intron_variant,lnc_RNA::; ENST00000593960.5:A1BG-AS1::intron_variant,lnc_RNA::; ENST00000594950.5:A1BG-AS1::intron_variant,lnc_RNA::; ENST00000595302.1:A1BG-AS1::lnc_RNA::; ENST00000596636.1:AC012313.3::2kb_downstream_variant,lnc_RNA::; ENST00000599109.5:AC012313.3::lnc_RNA::; ENST00000599728.5:A1BG-AS1::intron_variant,lnc_RNA::; ENST00000600123.5:AC012313.3::lnc_RNA::; ENST00000600379.5:A1BG-AS1::intron_variant,lnc_RNA::; ENST00000600686.1:A1BG-AS1::intron_variant,lnc_RNA::; ENST00000670199.1:A1BG-AS1::lnc_RNA::; ENST00000670460.1:A1BG-AS1::intron_variant,lnc_RNA::	1	s1		chr19	58863868
+6	chr16	72017043	G	A		Yes	DHODH	ENST00000219240.9	missense_variant	c.454G>A	p.Gly152Arg	ENST00000219240.9:DHODH:Q02127:missense_variant:p.Gly152Arg:c.454G>A; ENST00000572887.5:DHODH::missense_variant:p.Gly152Arg:c.454G>A; ENST00000573922.5:DHODH::processed_transcript::	1	s2		chr16	72050942
+#CRAVAT Report
+#Created at Wednesday 05/05/2021 10:54:43
+#Report level: gene
+#
+Variant Annotation					
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+PIK3CA		1	0	missense_variant	missense_variant(1)
+ABCC3		1	0	frameshift_elongation	complex_substitution(1),frameshift_elongation(1),NMD_transcript_variant(1),processed_transcript(1),3_prime_UTR_variant(1)
+AATK		1	0	frameshift_elongation	complex_substitution(1),frameshift_elongation(1),intron_variant(1),NMD_transcript_variant(1),processed_transcript(1),3_prime_UTR_variant(1)
+AADACL4		1	0	frameshift_truncation	frameshift_truncation(1)
+A1BG		1	0	frameshift_truncation	frameshift_truncation(1)
+DHODH		1	0	missense_variant	missense_variant(1),processed_transcript(1)
+#CRAVAT Report
+#Created at Wednesday 05/05/2021 10:54:43
+#Report level: sample
+#
+Variant Annotation	
+UID	Sample
+1	s0
+2	s1
+3	s1
+4	s2
+5	s1
+6	s2
+#CRAVAT Report
+#Created at Wednesday 05/05/2021 10:54:43
+#Report level: mapping
+#
+Variant Annotation			
+Original Line	User Tags	UID	Input File Number
+2		1	0
+3		2	0
+4		3	0
+5		4	0
+6		5	0
+7		6	0
