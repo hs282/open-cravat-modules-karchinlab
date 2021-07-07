@@ -1,35 +1,35 @@
 #CRAVAT Report
-#Created at Monday 08/19/2019 23:36:48
+#Created at Wednesday 07/07/2021 12:49:18
 #Report level: variant
 #
-Variant Annotation															ESP6500	
-UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Hugo	Transcript	Sequence Ontology	Protein Change	All Mappings	Sample Count	Samples	Tags	European American AF	African American AF
-1	chr12	123619507	A	G		Yes	DDX55	ENST00000238146.8	missense	Q470R	ENST00000238146.8:DDX55:Q8NHQ9:missense:Q470R:A1409G; ENST00000421670.3:DDX55:(na):missense:Q77R:A230G; ENST00000424014.6:EIF2B1:Q14232:2kb downstream:(na):(na); ENST00000538744.5:DDX55:F5H5U2:missense:Q439R:A1316G	0		plus_SBS_DDX55		
-2	chr1	7970884	-	T			PARK7	ENST00000377488.5	intron		ENST00000338639.9:PARK7:Q99497:intron:(na):(na); ENST00000377488.5:PARK7:Q99497:intron:(na):(na); ENST00000377491.5:PARK7:Q99497:intron:(na):(na); ENST00000377493.9:PARK7:K7ELW0:intron:(na):(na); ENST00000493678.5:PARK7:Q99497:intron:(na):(na)	0		plus_ins_PARK7		
-3	chr3	179210602	-	CC			PIK3CA	ENST00000263967.3	intron		ENST00000263967.3:PIK3CA:P42336:intron:(na):(na)	0		plus_ins_PIK3CA		
-4	chr12	123619689	A	-		Yes	DDX55	ENST00000238146.8	frameshift deletion	_531_	ENST00000238146.8:DDX55:Q8NHQ9:frameshift deletion:_531_:A1591-; ENST00000421670.3:DDX55:(na):frameshift deletion:_138_:A412-; ENST00000424014.6:EIF2B1:Q14232:2kb downstream:(na):(na); ENST00000538744.5:DDX55:F5H5U2:frameshift deletion:_500_:A1498-	0		plus_del_DDX55		
-5	chr1	7984955	GCC	-		Yes	PARK7	ENST00000338639.9	inframe deletion	_157_	ENST00000338639.9:PARK7:Q99497:inframe deletion:_157_:GCC471-; ENST00000377488.5:PARK7:Q99497:inframe deletion:_157_:GCC471-; ENST00000377491.5:PARK7:Q99497:inframe deletion:_157_:GCC471-; ENST00000377493.9:PARK7:K7ELW0:inframe deletion:_137_:GCC411-; ENST00000493678.5:PARK7:Q99497:inframe deletion:_157_:GCC471-	0		plus_del_PARK7		
-6	chr15	45376607	C	T		Yes	GATM	ENST00000396659.7	synonymous	E94E	ENST00000396659.7:GATM:P50440:synonymous:E94E:G282A; ENST00000558336.5:GATM:(na):synonymous:E94E:G282A	0		minus_SBS_GATM		
-7	chr15	45364871	-	A			GATM	ENST00000396659.7	intron		ENST00000396659.7:GATM:P50440:intron:(na):(na); ENST00000558336.5:GATM:(na):intron:(na):(na)	0		minus_ins_GATM		
-8	chr14	104775212	-	GG			AKT1	ENST00000555528.5	intron		ENST00000349310.7:AKT1:P31749:intron:(na):(na); ENST00000402615.6:AKT1:P31749:intron:(na):(na); ENST00000407796.6:AKT1:P31749:intron:(na):(na); ENST00000554581.5:AKT1:P31749:intron:(na):(na); ENST00000554848.5:AKT1:P31749:intron:(na):(na); ENST00000555528.5:AKT1:P31749:intron:(na):(na)	0		minus_ins_AKT1		
-9	chr7	140807936	A	-			BRAF	ENST00000288602.10	intron		ENST00000288602.10:BRAF:P15056:intron:(na):(na)	0		minus_del_BRAF		
-10	chr15	45364907	TAT	-			GATM	ENST00000396659.7	intron		ENST00000396659.7:GATM:P50440:intron:(na):(na); ENST00000558336.5:GATM:(na):intron:(na):(na)	0		minus_del_GATM		
-11	chr1	7970884	-	C			PARK7	ENST00000377488.5	intron		ENST00000338639.9:PARK7:Q99497:intron:(na):(na); ENST00000377488.5:PARK7:Q99497:intron:(na):(na); ENST00000377491.5:PARK7:Q99497:intron:(na):(na); ENST00000377493.9:PARK7:K7ELW0:intron:(na):(na); ENST00000493678.5:PARK7:Q99497:intron:(na):(na)	0		fuzzy_ins_PARK7		
-12	chr15	45364907	TA	-			GATM	ENST00000396659.7	intron		ENST00000396659.7:GATM:P50440:intron:(na):(na); ENST00000558336.5:GATM:(na):intron:(na):(na)	0		fuzzy_del_GATM		
+Variant Annotation																ESP6500		Original Input			
+UID	Chrom	Position	Ref Base	Alt Base	Note	Coding	Gene	Transcript	Sequence Ontology	cDNA change	Protein Change	All Mappings	Sample Count	Samples	Tags	European American AF	African American AF	Chrom	Pos	Reference allele	Alternate allele
+1	chr12	123619507	A	G		Yes	DDX55	ENST00000238146.9	missense_variant	c.1409A>G	p.Gln470Arg	ENST00000238146.9:DDX55:Q8NHQ9:missense_variant:p.Gln470Arg:c.1409A>G; ENST00000421670.3:DDX55:Q8NHQ9:missense_variant:p.Gln77Arg:c.230A>G; ENST00000424014.7:EIF2B1:Q14232:2kb_downstream_variant::c.*2249T>C; ENST00000538744.5:DDX55::missense_variant:p.Gln439Arg:c.1316A>G; ENST00000541259.1:DDX55::processed_transcript::; ENST00000544738.5:DDX55::2kb_downstream_variant,NMD_transcript_variant::c.*2416A>G	0		plus_SBS_DDX55	0.0	0.000226963	chr12	123619507	A	G
+2	chr1	7970884	-	T			PARK7	ENST00000338639.10	intron_variant	c.253-7dup		ENST00000338639.10:PARK7:Q99497:intron_variant::c.253-7dup; ENST00000377488.5:PARK7:Q99497:intron_variant::c.253-7dup; ENST00000377491.5:PARK7:Q99497:intron_variant::c.253-7dup; ENST00000377493.9:PARK7::intron_variant::c.193-7dup; ENST00000493678.5:PARK7:Q99497:intron_variant::c.253-7dup; ENST00000497113.1:PARK7::intron_variant,processed_transcript::	0		plus_ins_PARK7	0.000121153	0.0	chr1	7970884	-	T
+3	chr3	179210602	-	CC			PIK3CA	ENST00000263967.4	intron_variant	c.1539+36_1539+37insCC		ENST00000263967.4:PIK3CA:P42336:intron_variant::c.1539+36_1539+37insCC; ENST00000643187.1:PIK3CA::intron_variant::c.1539+36_1539+37insCC	0		plus_ins_PIK3CA	0.000127486	0.0	chr3	179210602	-	CC
+4	chr12	123619689	A	-		Yes	DDX55	ENST00000238146.9	frameshift_truncation	c.1592del	p.Lys531ArgfsTer4	ENST00000238146.9:DDX55:Q8NHQ9:frameshift_truncation:p.Lys531ArgfsTer4:c.1592del; ENST00000421670.3:DDX55:Q8NHQ9:frameshift_truncation:p.Lys138ArgfsTer4:c.413del; ENST00000424014.7:EIF2B1:Q14232:2kb_downstream_variant::c.*2067del; ENST00000538744.5:DDX55::frameshift_truncation:p.Lys500ArgfsTer4:c.1499del; ENST00000541259.1:DDX55::2kb_downstream_variant,processed_transcript::; ENST00000544738.5:DDX55::2kb_downstream_variant,NMD_transcript_variant::c.*2599del	0		plus_del_DDX55	0.000863132	0.00123762	chr12	123619689	A	-
+5	chr1	7984955	GCC	-		Yes	PARK7	ENST00000338639.10	inframe_deletion	c.471_473del	p.Pro158del	ENST00000338639.10:PARK7:Q99497:inframe_deletion:p.Pro158del:c.471_473del; ENST00000363474.1:AL034417.1::2kb_upstream_variant,misc_RNA::; ENST00000377488.5:PARK7:Q99497:inframe_deletion:p.Pro158del:c.471_473del; ENST00000377491.5:PARK7:Q99497:inframe_deletion:p.Pro158del:c.471_473del; ENST00000377493.9:PARK7::inframe_deletion:p.Pro138del:c.411_413del; ENST00000493678.5:PARK7:Q99497:inframe_deletion:p.Pro158del:c.471_473del	0		plus_del_PARK7	0.021323	0.0220347	chr1	7984955	GCC	-
+6	chr15	45376607	C	T		Yes	GATM	ENST00000396659.8	synonymous_variant	c.282G>A	p.Glu94=	ENST00000396659.8:GATM:P50440:synonymous_variant:p.Glu94=:c.282G>A; ENST00000558118.1:GATM::NMD_transcript_variant,synonymous_variant:p.Glu94=:c.282G>A; ENST00000558336.5:GATM:P50440:synonymous_variant:p.Glu94=:c.282G>A; ENST00000560538.1:GATM::2kb_downstream_variant,processed_transcript::	0		minus_SBS_GATM	0.000116333	0.00022748	chr15	45376607	C	T
+7	chr15	45364871	-	A			GATM	ENST00000396659.8	intron_variant	c.979-11dup		ENST00000396659.8:GATM:P50440:intron_variant::c.979-11dup; ENST00000558336.5:GATM:P50440:intron_variant::c.979-11dup	0		minus_ins_GATM	0.000121153	0.000703565	chr15	45364871	-	A
+8	chr14	104775212	-	GG			AKT1	ENST00000349310.7	intron_variant	c.436-6_436-5dup		ENST00000349310.7:AKT1:P31749:intron_variant::c.436-6_436-5dup; ENST00000402615.6:AKT1:P31749:intron_variant::c.436-6_436-5dup; ENST00000407796.6:AKT1:P31749:intron_variant::c.436-6_436-5dup; ENST00000544168.5:AKT1::intron_variant,processed_transcript::; ENST00000554581.5:AKT1:P31749:intron_variant::c.436-6_436-5dup; ENST00000554848.5:AKT1:P31749:intron_variant::c.436-6_436-5dup; ENST00000555380.1:AKT1::intron_variant,processed_transcript::; ENST00000555528.5:AKT1:P31749:intron_variant::c.436-6_436-5dup; ENST00000649815.1:AKT1:P31749:intron_variant::c.436-6_436-5dup	0		minus_ins_AKT1	0.0	0.000234522	chr14	104775212	-	GG
+9	chr7	140807936	A	-			BRAF	ENST00000644969.1	intron_variant	c.711+24del		ENST00000288602.11:BRAF::intron_variant::c.711+24del; ENST00000496384.7:BRAF::intron_variant::c.711+24del; ENST00000497784.2:BRAF::NMD_transcript_variant,3_prime_UTR_variant::c.*161+24del; ENST00000642228.1:BRAF::intron_variant,NMD_transcript_variant::c.711+24del; ENST00000642808.1:BRAF::2kb_downstream_variant,processed_transcript::; ENST00000644120.1:BRAF::intron_variant,processed_transcript::; ENST00000644969.1:BRAF::intron_variant::c.711+24del; ENST00000646730.1:BRAF::intron_variant,NMD_transcript_variant::c.711+24del; ENST00000646891.1:BRAF:P15056:intron_variant::c.711+24del	0		minus_del_BRAF	0.00327193	0.00375411	chr7	140807936	A	-
+10	chr15	45364907	TAT	-			GATM	ENST00000396659.8	intron_variant	c.979-49_979-47del		ENST00000396659.8:GATM:P50440:intron_variant::c.979-49_979-47del; ENST00000558336.5:GATM:P50440:intron_variant::c.979-49_979-47del	0		minus_del_GATM	0.00703883	0.0266509	chr15	45364907	TAT	-
+11	chr1	7970884	-	C			PARK7	ENST00000338639.10	intron_variant	c.253-11dup		ENST00000338639.10:PARK7:Q99497:intron_variant::c.253-11dup; ENST00000377488.5:PARK7:Q99497:intron_variant::c.253-11dup; ENST00000377491.5:PARK7:Q99497:intron_variant::c.253-11dup; ENST00000377493.9:PARK7::intron_variant::c.193-11dup; ENST00000493678.5:PARK7:Q99497:intron_variant::c.253-11dup; ENST00000497113.1:PARK7::intron_variant,processed_transcript::	0		fuzzy_ins_PARK7			chr1	7970884	-	C
+12	chr15	45364907	TA	-			GATM	ENST00000396659.8	intron_variant	c.979-48_979-47del		ENST00000396659.8:GATM:P50440:intron_variant::c.979-48_979-47del; ENST00000558336.5:GATM:P50440:intron_variant::c.979-48_979-47del	0		fuzzy_del_GATM			chr15	45364907	TA	-
 #CRAVAT Report
-#Created at Monday 08/19/2019 23:36:48
+#Created at Wednesday 07/07/2021 12:49:18
 #Report level: gene
 #
 Variant Annotation					
-Hugo	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
-DDX55		2	0	frameshift deletion	frameshift deletion(0),missense(0)
-PARK7		1	2	inframe deletion	inframe deletion(0),intron(0)
-PIK3CA		0	1	intron	intron(0)
-GATM		1	3	synonymous	intron(0),synonymous(0)
-AKT1		0	1	intron	intron(0)
-BRAF		0	1	intron	intron(0)
+Gene	Note	Number of Coding Variants	Number of Noncoding Variants	Sequence Ontology	All Sequence Ontologies
+DDX55		2	0	frameshift_truncation	frameshift_truncation(0),missense_variant(0),NMD_transcript_variant(0),processed_transcript(0)
+PARK7		1	2	inframe_deletion	inframe_deletion(0),intron_variant(0),processed_transcript(0)
+PIK3CA		0	1	intron_variant	intron_variant(0)
+GATM		1	3	synonymous_variant	intron_variant(0),NMD_transcript_variant(0),processed_transcript(0),synonymous_variant(0)
+AKT1		0	1	intron_variant	intron_variant(0),processed_transcript(0)
+BRAF		0	1	intron_variant	intron_variant(0),NMD_transcript_variant(0),processed_transcript(0),3_prime_UTR_variant(0)
 #CRAVAT Report
-#Created at Monday 08/19/2019 23:36:48
+#Created at Wednesday 07/07/2021 12:49:18
 #Report level: sample
 #
 Variant Annotation	
@@ -47,7 +47,7 @@ UID	Sample
 11	
 12	
 #CRAVAT Report
-#Created at Monday 08/19/2019 23:36:48
+#Created at Wednesday 07/07/2021 12:49:18
 #Report level: mapping
 #
 Variant Annotation			
