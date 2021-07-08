@@ -15,6 +15,8 @@ class CravatAnnotator(BaseAnnotator):
             self.supported_chroms = {r[0] for r in self.cursor}
 
     def annotate(self, input_data, secondary_data=None):
+        if input_data['chrom'] != 'chrM':
+            return {}
         q = 'select disease, status, pubmed, score, quartile from {chrom} where pos = {pos} and ref = "{ref}" and alt = "{alt}"'.format(
             chrom = input_data["chrom"], pos = int(input_data["pos"]), ref = input_data["ref_base"], alt = input_data["alt_base"])
         self.cursor.execute(q)

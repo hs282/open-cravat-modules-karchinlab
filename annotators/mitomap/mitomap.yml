@@ -45,6 +45,8 @@ tags:
 requires:
 - wgmitomap
 title: MITOMAP
-version: 1.0.0
+version: 1.1.0
 type: annotator
 input_format: crv
+release_note:
+  1.1.0: Non-chrM will not produce an exception.
