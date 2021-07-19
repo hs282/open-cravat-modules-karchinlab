@@ -37,8 +37,10 @@ tags:
 - variant effect prediction
 
 title: MutPred-Indel
-version: 1.0.0
+version: 1.1.0
 type: annotator
+release_note:
+  1.1.0: Updated data to include insertions
 
 
 
