@@ -171,7 +171,6 @@ class CravatConverter(BaseConverter):
             }
         wdicts = []
         self.gt_occur = []
-        print(f"@ samples={variant.samples}")
         if len(variant.samples) > 0:
             all_gt_zero = True
             for call in variant.samples:
@@ -207,7 +206,6 @@ class CravatConverter(BaseConverter):
                         continue
                 wdicts.append(wdict)
                 self.gt_occur.append(gt)
-        print(f"@ wdicts={wdicts}")
         self.curvar = variant
         self.cur_csq = {}
         if self.csq_fields and 'CSQ' in variant.INFO:

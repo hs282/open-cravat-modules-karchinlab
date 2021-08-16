@@ -8,7 +8,7 @@ developer:
   email: 'support@cravat.us'
   website: 'http://www.insilico.us.com'
   citation: ''
-requires_opencravat: '>=2.2.0'
+requires_opencravat: '>=2.2.6'
 release_note:
   2.1.0: supports GVCF format NON_REF.
   2.0.3: fix for alt and total reads
