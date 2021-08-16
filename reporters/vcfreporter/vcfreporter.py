@@ -283,7 +283,7 @@ class Reporter(CravatReport):
                         if lineno not in self.output_candidate[pathno]:
                             alts = vcfline.split('\t')[4].split(',')
                             noalts = len(alts)
-                            noalts_starless = len([alt for alt in alts if alt!='*'])
+                            noalts_starless = len([alt for alt in alts if alt!='*' and alt != '<NON_REF>'])
                             self.output_candidate[pathno][lineno] = {'noalts': noalts, 'noalts_starless':noalts_starless, 'alts':alts, 'line': vcfline, 'annots': []}
                 continue
             elif col_name == 'base__all_mappings':
@@ -355,7 +355,10 @@ class Reporter(CravatReport):
             for fieldno in range(len(annots[0])):
                 star_offset = 0
                 for altno in range(noalts):
-                    if alts[altno] == '*':
+                    alt = alts[altno]
+                    if alt == '*':
+                        star_offset += 1
+                    elif alt == "<NON_REF>":
                         star_offset += 1
                     else:
                         combined_annots[fieldno][altno] = annots[altno-star_offset][fieldno]
