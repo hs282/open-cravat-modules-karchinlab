@@ -1,5 +1,5 @@
 title: VCF Converter
-version: 2.0.3
+version: 2.1.0
 type: converter
 description: Converter for VCF format input
 developer:
@@ -10,6 +10,7 @@ developer:
   citation: ''
 requires_opencravat: '>=2.2.0'
 release_note:
+  2.1.0: supports GVCF format NON_REF.
   2.0.3: fix for alt and total reads
   2.0.2: handle AD with .
   2.0.1: better extraction of AD in multiallelic sites

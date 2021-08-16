@@ -148,6 +148,8 @@ class CravatConverter(BaseConverter):
         for alt_index, alt in enumerate(variant.ALT):
             if alt is None:
                 alt_base = variant.REF
+            elif alt.type == 'NON_REF':
+                alt_base = None
             else:
                 alt_base = alt.sequence
             new_pos, new_ref, new_alt = self.trim_variant(variant.POS, variant.REF, alt_base)
@@ -169,6 +171,7 @@ class CravatConverter(BaseConverter):
             }
         wdicts = []
         self.gt_occur = []
+        print(f"@ samples={variant.samples}")
         if len(variant.samples) > 0:
             all_gt_zero = True
             for call in variant.samples:
@@ -204,6 +207,7 @@ class CravatConverter(BaseConverter):
                         continue
                 wdicts.append(wdict)
                 self.gt_occur.append(gt)
+        print(f"@ wdicts={wdicts}")
         self.curvar = variant
         self.cur_csq = {}
         if self.csq_fields and 'CSQ' in variant.INFO:
@@ -261,6 +265,8 @@ class CravatConverter(BaseConverter):
             return ';'.join(l)
 
     def trim_variant(self, pos, ref, alt):
+        if alt is None:
+            return pos, ref, alt
         if len(ref) == 1 and len(alt) == 1:
             return pos, ref, alt
         ref = list(ref)
