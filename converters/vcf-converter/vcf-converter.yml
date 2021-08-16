@@ -1,5 +1,5 @@
 title: VCF Converter
-version: 2.1.0
+version: 2.0.4
 type: converter
 description: Converter for VCF format input
 developer:
@@ -8,9 +8,10 @@ developer:
   email: 'support@cravat.us'
   website: 'http://www.insilico.us.com'
   citation: ''
-requires_opencravat: '>=2.2.6'
+requires_opencravat: '>=2.2.5'
 release_note:
   2.1.0: supports GVCF format NON_REF.
+  2.0.4: VAF is AD/DP.
   2.0.3: fix for alt and total reads
   2.0.2: handle AD with .
   2.0.1: better extraction of AD in multiallelic sites

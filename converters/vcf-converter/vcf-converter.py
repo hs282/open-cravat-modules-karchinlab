@@ -220,6 +220,8 @@ class CravatConverter(BaseConverter):
 
     @staticmethod
     def extract_read_info(call, gt):
+        tot_reads = None
+        alt_reads = None
         # AD is depth for each allele
         if hasattr(call.data,'AD'):
             # tot_reads
@@ -237,12 +239,8 @@ class CravatConverter(BaseConverter):
             except TypeError: # Not indexable
                 alt_reads = int(call.data.AD)
         # DP is total depth
-        elif hasattr(call.data,'DP'):
+        if hasattr(call.data,'DP'):
             tot_reads = int(call.data.DP)
-            alt_reads = None
-        else:
-            tot_reads = None
-            alt_reads = None
         if tot_reads is not None and alt_reads is not None:
             try:
                 alt_freq = alt_reads/tot_reads
