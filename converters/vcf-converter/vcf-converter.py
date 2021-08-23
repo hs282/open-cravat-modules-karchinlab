@@ -198,7 +198,7 @@ class CravatConverter(BaseConverter):
                     wdicts.append(wdict)
                     self.gt_occur.append(gt)
             if all_gt_zero:
-                raise BadFormatError('All sample GT are zero')
+                raise BadFormatError('All samples have the reference genotype.')
         else:
             for gt in wdict_blanks:
                 wdict = copy.copy(wdict_blanks[gt])
