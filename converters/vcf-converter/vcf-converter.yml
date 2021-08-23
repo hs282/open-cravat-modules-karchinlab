@@ -10,6 +10,7 @@ developer:
   citation: ''
 requires_opencravat: '>=2.2.6'
 release_note:
+  2.1.1: better message for 0/0 in all samples
   2.1.0: supports GVCF format NON_REF.
   2.0.4: VAF is AD/DP.
   2.0.3: fix for alt and total reads
