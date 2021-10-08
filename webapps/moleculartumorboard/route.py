@@ -91,7 +91,7 @@ def clean_annot_dict (d):
             d = None
     return d
 
-def liftover(input_data, lifter):
+def liftover(input_data, lifter, orig_assembly):
     global wgsreader
     chrom = input_data['chrom']
     pos = input_data['pos']
@@ -155,11 +155,15 @@ def liftover(input_data, lifter):
         newpos2 = el2[1] + 1
         newchrom = newchrom1
         newpos = min(newpos1, newpos2)
-    hg38_ref = wgsreader.get_bases(newchrom, newpos)
-    if hg38_ref == cravat.util.reverse_complement(ref):
-        newref = hg38_ref
-        newalt = cravat.util.reverse_complement(alt)
-    else:
+    if orig_assembly == 'hg19':
+        hg38_ref = wgsreader.get_bases(newchrom, newpos)
+        if hg38_ref == cravat.util.reverse_complement(ref):
+            newref = hg38_ref
+            newalt = cravat.util.reverse_complement(alt)
+        else:
+            newref = ref
+            newalt = alt
+    elif orig_assembly == 'hg38':
         newref = ref
         newalt = alt
     return [newchrom, newpos, newref, newalt]
@@ -181,14 +185,14 @@ async def live_annotate (input_data, annotators):
         alt_hg38 = input_data['alt_base']
         lifter = LiftOver(os.path.join(
             os.path.dirname(os.path.abspath(__file__)), 'hg38ToHg19.over.chain'))
-        [chrom_hg19, pos_hg19, ref_hg19, alt_hg19] = liftover(input_data, lifter)
+        [chrom_hg19, pos_hg19, ref_hg19, alt_hg19] = liftover(input_data, lifter, 'hg38')
     elif assembly == 'hg19':
         chrom_hg19 = input_data['chrom']
         pos_hg19 = input_data['pos']
         ref_hg19 = input_data['ref_base']
         alt_hg19 = input_data['alt_base']
         lifter = LiftOver(cravat.constants.liftover_chain_paths[assembly])
-        [chrom_hg38, pos_38, ref_38, alt_38] = liftover(input_data, lifter)
+        [chrom_hg38, pos_38, ref_38, alt_38] = liftover(input_data, lifter, 'hg19')
         input_data['chrom'] = chrom_hg38
         input_data['pos'] = pos_hg38
         input_data['ref_base'] = ref_hg38
