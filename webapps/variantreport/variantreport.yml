@@ -1,5 +1,5 @@
 title: OpenCRAVAT Variant Report
-version: 1.0.6
+version: 1.0.7
 type: webapp
 live_modules:
 - aloft
@@ -182,6 +182,7 @@ developer:
   website: http://www.insilico.us.com
   citation: ''
 release_note:
+  1.0.7: fix for omim2
   1.0.6: header height fix
   1.0.5: Bug fix
   1.0.0: Initial release
