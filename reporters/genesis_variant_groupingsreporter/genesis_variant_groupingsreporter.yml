@@ -1,20 +1,19 @@
 title: RData Format Reporter for Genesis
-version: 0.2.0
+version: 1.0.0
 type: reporter
 description: RData format file is generated from a result database. For use with Genesis.
 requires_opencravat: '>=2.1.0'
 output_filename_schema:
-- '{run_name}.cfgenesis.variant.RData'
+- '{run_name}.genesis_variant_groupings.variant.RData'
 developer:
   name: Rick Kim
-  organization: In Silico Solutions
-  email: rkim@insilico.us.com
-  website: http://www.insilico.us.com
+  organization: Oak Bioinformatics LLC
+  email: rkim@oakbioinformatics.com
+  website: http://www.oakbioinformatics.com
   citation: ''
 hidden: false
-uselocalonstore: true
 release_note:
-  0.0.1: initial release
+  1.0.0: initial release
 tags:
 - input/output
 pages:
@@ -22,4 +21,3 @@ pages:
 pypi_dependency:
 - pandas
 - pyreadr
-private: true
