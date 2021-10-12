@@ -3496,7 +3496,7 @@ widgetGenerators['omim2'] = {
         'function': function(div, row, tabName) {
             var dl = getEl('dl')
             addEl(div, dl)
-            var titleEl = makeModuleDescUrlTitle("omim")
+            var titleEl = makeModuleDescUrlTitle("omim2")
             let ids = getWidgetData(tabName, 'omim', row, 'omim_id');
             if (ids != null || ids != undefined) {
                 ids = ids !== null ? ids.split('; ') : [];
