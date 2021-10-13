@@ -92,9 +92,10 @@ tags:
 - variant effect prediction
 title: VEST4
 type: annotator
-version: 4.3.3
+version: 4.4.0
 requires_opencravat: '>=2.2.1'
 release_note:
+  4.4.0: works with variantreport.
   4.3.3: fixed transcript version mismatch with new gene mapper
   4.3.2: table data enabled
   4.3.1: bugfix for non-SNV variants at a position with VEST annotation

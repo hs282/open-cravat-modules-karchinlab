@@ -4,7 +4,6 @@ from cravat import BaseAnnotator
 from cravat import InvalidData
 import sqlite3
 import re
-from cravat.inout import AllMappingsParser
 import stouffer
 
 class CravatAnnotator(BaseAnnotator):
@@ -42,7 +41,7 @@ class CravatAnnotator(BaseAnnotator):
         for mapping in p.mappings:
             sos = mapping.so.split(',')
             for so in sos:
-                if so in ['MIS','STG','STL']:
+                if so in ['MIS','STG','STL', 'missense_variant', 'stop_gained', 'stop_lost']:
                     transc_ontologies[mapping.transcript.split('.')[0]] = so
         if transc_ontologies == {}:
             return
