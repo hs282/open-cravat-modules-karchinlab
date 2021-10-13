@@ -160,7 +160,13 @@ class Reporter(CravatReport):
             'frameshift_variant': 'frameshift_elongation,frameshift_truncation'
         }
         self.no_mane_hugos = {}
-        self.filter_name = os.path.basename(self.filterpath)
+        if self.filterpath is None:
+            self.filter_name = None
+        else:
+            self.filter_name = os.path.basename(self.filterpath)
+        if self.filter_name not in ['coding1.json', 'coding2.json', 'coding3.json', 'coding_noncoding_1.json', 'conding_noncoding_2.json']:
+            print('\nfilter filename should be one of coding1.json, coding2.json, coding3.json, coding_noncoding_1.json, and coding_noncoding_2.json. Exiting.')
+            return False
 
     def get_standardized_module_option(self, v):
         tv = type(v)

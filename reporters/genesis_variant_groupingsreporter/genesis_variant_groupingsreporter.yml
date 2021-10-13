@@ -1,5 +1,5 @@
 title: RData Format Reporter for Genesis
-version: 1.0.0
+version: 1.0.1
 type: reporter
 description: RData format file is generated from a result database. For use with Genesis.
 requires_opencravat: '>=2.1.0'
@@ -13,6 +13,7 @@ developer:
   citation: ''
 hidden: false
 release_note:
+  1.0.1: added filter name check.
   1.0.0: initial release
 tags:
 - input/output
@@ -21,3 +22,4 @@ pages:
 pypi_dependency:
 - pandas
 - pyreadr
+private: true
