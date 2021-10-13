@@ -648,7 +648,7 @@ function showAnnotation(response) {
     showWidget('noncodingpanel', ['base', 'ccre_screen', 'encode_tfbs', 'genehancer', 'vista_enhancer', 'ensembl_regulatory_build', 'trinity', 'segway', 'javierre_promoters'],
         'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_prediction');
-    showWidget('predictionpanel', ['base', 'dann_coding', 'fathmm_xf_coding', 'revel', 'lrt', 'fathmm_mkl', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster', 'polyphen2', 'provean', 'sift'],
+    showWidget('predictionpanel', ['base', 'dann_coding', 'fathmm_xf_coding', 'revel', 'lrt', 'fathmm_mkl', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster', 'polyphen2', 'provean', 'sift', 'vest'],
         'variant', parentDiv, null, null, false);
     var parentDiv = document.querySelector('#contdiv_functional');
     showWidget('functionalpanel', ['base', 'swissprot_binding', 'swissprot_domains', 'swissprot_ptm'],
@@ -3661,11 +3661,24 @@ widgetGenerators['provean2'] = {
         'function': function(div, row, tabName) {}
     }
 }
+
 widgetInfo['revel2'] = {
     'title': 'REVEL'
 };
 widgetGenerators['revel2'] = {
     'annotators': 'revel',
+    'variant': {
+        'width': undefined,
+        'height': undefined,
+        'function': function(div, row, tabName) {}
+    }
+}
+
+widgetInfo['vest2'] = {
+    'title': 'VEST 4.0'
+};
+widgetGenerators['vest2'] = {
+    'annotators': 'vest',
     'variant': {
         'width': undefined,
         'height': undefined,
@@ -3684,6 +3697,7 @@ widgetGenerators['sift2'] = {
         'function': function(div, row, tabName) {}
     }
 }
+
 widgetInfo['basepanel'] = {
     'title': ''
 };
@@ -3997,7 +4011,7 @@ widgetGenerators['predictionpanel'] = {
             var rankscores = [];
             var preds = [];
             var predictions = [];
-            var names = ['dann_coding', 'fathmm', 'fathmm_mkl', 'fathmm_xf_coding', 'lrt', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster2', 'polyphen2hdiv', 'polyphen2hvar', 'provean2', 'revel2', 'sift2'];
+            var names = ['dann_coding', 'fathmm', 'fathmm_mkl', 'fathmm_xf_coding', 'lrt', 'metalr', 'metasvm', 'mutation_assessor', 'mutpred1', 'mutationtaster2', 'polyphen2hdiv', 'polyphen2hvar', 'provean2', 'revel2', 'sift2', 'vest2'];
             var dann_score = getWidgetData(tabName, 'dann_coding', row, 'dann_coding_score');
             if (dann_score != undefined || dann_score != null) {
                 var dann = predWidget('coding score', dann_score);
@@ -4349,6 +4363,25 @@ widgetGenerators['predictionpanel'] = {
             } else {
                 rankscores.push(predWidget(null, null));
             }
+            var vest_score = getWidgetData(tabName, 'vest', row, 'score');
+            var vest_pval = getWidgetData(tabName, 'vest', row, 'pval');
+            if (vest_score != undefined || vest_score != null) {
+                scores.push(predWidget('p-value', vest_pval));
+                predictions.push(null);
+                preds.push(predWidget(null, null));
+            } else {
+                scores.push(predWidget(null, null));
+                var ssdiv = getEl('div')
+                ssdiv.textContent = getNoAnnotMsgVariantLevel()
+                ssdiv.classList.add('pred_noanno')
+                preds.push(ssdiv)
+                predictions.push(null);
+            }
+            if (vest_score != undefined || vest_score != null) {
+                rankscores.push(getDialWidget('score', vest_score, 0.80));
+            } else {
+                rankscores.push(predWidget(null, null));
+            }
             var table = getWidgetTableFrame();
             table.setAttribute("id", "pred");
             var tbody = getEl('tbody');
@@ -4365,17 +4398,12 @@ widgetGenerators['predictionpanel'] = {
                 var name = names[i];
                 var titleEl = makeModuleDescUrlTitle(name)
                 var p = predictions[i];
-                // var a = getEl('a')
-                // a.classList.add('pred_class');
-                // var tn = document.createTextNode(titleEl)
                 var tr = document.createElement('tr');
                 var td = document.createElement('td');
                 td.style.textAlign = 'center';
                 td.style.verticalAlign = 'middle';
                 addEl(tr, td);
                 addEl(td, titleEl)
-
-
                 var pred = preds[i];
                 var score = scores[i];
                 if (score != null) {

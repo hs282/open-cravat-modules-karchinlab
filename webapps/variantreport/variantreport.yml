@@ -79,6 +79,7 @@ live_modules:
 - trinity
 - thousandgenomes
 - uniprot
+- vest
 - vista_enhancer
 requires:
 - hg38
@@ -159,6 +160,7 @@ requires:
 - trinity
 - thousandgenomes
 - uniprot
+- vest
 - vista_enhancer
 - wgbase
 - wgchasmplus
