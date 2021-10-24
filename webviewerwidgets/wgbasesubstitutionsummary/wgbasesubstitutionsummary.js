@@ -31,9 +31,17 @@ widgetGenerators[widgetName] = {
             
             // "invisible" bars separating regular bars from bars representing base change category
             var blankSpace = [];
+            blankSpace.length = 96;
+            blankSpace.fill(-2.6);
             
             // bars representing base change category
             var baseChangeCategory = [];
+            baseChangeCategory.length = 96;
+            baseChangeCategory.fill(-0.4);
+
+            var lineHorizontalZero = [];
+            lineHorizontalZero.length = 96;
+            lineHorizontalZero.fill(0);
 
             let substitutionData = data[0];
             let numSubstitutions = data[1];
@@ -45,8 +53,6 @@ widgetGenerators[widgetName] = {
                 for (triplet in substitutionData[baseChange]) {
                     x.push(triplet);
                     y.push(substitutionData[baseChange][triplet] / numSubstitutions * 100);
-                    blankSpace.push(-2);
-                    baseChangeCategory.push(-0.5);
                     colors.push(colorPalette[i % colorPalette.length]);
                 }
                 i++;
@@ -72,9 +78,9 @@ widgetGenerators[widgetName] = {
                         {
                             data: blankSpace,
                             fill: false,
-                            backgroundColor: 'rgba(255,10,13, 0)',
-                            borderColor: 'rgba(255,10,13, 0)',
-                            borderWidth: 0.7,
+                            backgroundColor: 'rgba(255,10,13,0)',
+                            borderColor: 'rgba(255,10,13,0)',
+                            borderWidth: 0,
                             hoverBorderColor: '#aaaaaa',
                             xAxisID: 'triplets'
                         },
@@ -85,97 +91,97 @@ widgetGenerators[widgetName] = {
                             borderWidth: 0.7,
                             hoverBorderColor: '#aaaaaa',
                             xAxisID: 'triplets'
-                        }
+                        },
+                        {
+                            data: lineHorizontalZero,
+                            type: 'line',
+                            backgroundColor: 'black',
+                            borderColor: 'black',
+                            borderWidth: 1,
+                            pointRadius: 0,
+                            pointHoverRadius: 0
+                        }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    legend: {display: false},
+                    legend: { display: false },
                     scales: {
-                        xAxes: [{
-                            position: {
-                                y: 10
+                        xAxes: [
+                            {
+                                stacked: true,
+                                id: 'triplets',
+                                scaleLabel: { display: true },
+                                ticks: {
+                                    beginAtZero: true,
+                                    stepSize: 1.0,
+                                    maxRotation: 90,
+                                    minRotation: 90,
+                                    fontSize: 6,
+                                    fontColor: 'black',
+                                    padding: -25,
+                                },
+                                gridLines: {
+                                    drawBorder: false,
+                                    drawOnChartArea: false,
+                                    tickMarkLength: 0,
+                                }
                             },
-                            stacked: true,
-                            id: 'triplets',
-                            scaleLabel: {
-                                display: true,
-                            },
-                            ticks: {
-                                beginAtZero: true,
-                                stepSize: 1.0,
-                                max: 20,
-                                maxRotation: 90,
-                                minRotation: 90,
-                                fontSize: 6,
-                                fontColor: 'black',
-                                padding: -25
-                            },
-                            gridLines: {
-                                drawBorder: false,
-                                zeroLineWidth: 3,
-                                zeroLineColor: "#2C292E",
-                                drawOnChartArea: false,
-                                color: 'black',
-                                tickMarkLength: 0
+                            {
+                                stacked: true,
+                                id: 'baseChanges',
+                                scaleLabel: { display: true },
+                                ticks: {
+                                    callback:function() {
+                                        tripletLabelIndex++;
+
+                                        if ((tripletLabelIndex % 16 == 8) && tripletLabelIndex > 96) {
+                                            return secondaryXAxisLabels.pop();
+                                        }
+                                        
+                                    },
+                                    beginAtZero: true,
+                                    stepSize: 1.0,
+                                    autoSkip: false,
+                                    maxRotation: 0,
+                                    minRotation: 0,
+                                    fontSize: 16,
+                                    fontColor: 'black',
+                                    padding: -19, 
+                                },
+                                gridLines: {
+                                    drawBorder: false,
+                                    drawOnChartArea: false,
+                                    tickMarkLength: 0,
+                                }
                             }
-                        },
-                        {
-                            stacked: true,
-                            id: 'baseChanges',
-                            scaleLabel: {
-                                display: true,
+                        ],
+                        yAxes: [
+                            {
+                                stacked: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Percentage of Mutations',
+                                    fontSize: 16,
+                                    fontColor: 'black'
+                                },
+                                ticks: {
+                                    fontSize: 16,
+                                    fontColor: 'black',
+                                    beginAtZero: true,
+                                    min: -3,
+                                },
+                                afterBuildTicks: function(chart) {    
+                                    chart.ticks.pop(); 
+                                },
+                                gridLines: {
+                                    drawOnChartArea: false,
+                                    zeroLineColor: 'black',
+                                    color: 'black'
+                                },
                             },
-                            ticks: {
-                                callback:function(label) {
-                                    tripletLabelIndex++;
-                                    console.log(label, tripletLabelIndex);
-                                    
-                                    if ((tripletLabelIndex % 16 == 8) && tripletLabelIndex > 96) {
-                                        return secondaryXAxisLabels.pop();
-                                    }
-                                    
-                                  },
-                                beginAtZero: true,
-                                stepSize: 1.0,
-                                max: 20,
-                                autoSkip: false,
-                                maxRotation: 0,
-                                minRotation: 0,
-                                fontSize: 16,
-                                fontColor: 'black',
-                                padding: -20
-                            },
-                            gridLines: {
-                                drawBorder: false,
-                                drawOnChartArea: false,
-                                tickMarkLength: 0,
-                                color: 'black',
-                            }
-                          }
-                    ],
-                        yAxes: [{
-                            stacked: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Percentage of Mutations',
-                                fontSize: 16,
-                                fontColor: 'black'
-                            },
-                            ticks: {
-                                fontSize: 16,
-                                fontColor: 'black',
-                                beginAtZero: true,
-                                min: -3
-                            },
-                            gridLines: {
-                                display: false,
-                                drawOnChartArea: false,
-                                color: 'black'
-                            },
-                        },
-                    ],
+                        ],
                     },
                     tooltips: {
                         backgroundColor: '#ffffff',
@@ -185,7 +191,10 @@ widgetGenerators[widgetName] = {
                         bodyFontColor: '#000000',
                         borderColor: '#333333',
                         borderWidth: 1,
-                    }
+                        filter: function (tooltipItem) {
+                            return (tooltipItem.datasetIndex == 0);
+                        }
+                    },
                 }
             });
         }
