@@ -51,14 +51,14 @@ async def get_data (queries):
 
     for row in await cursor.fetchall():
         (chrom, pos, ref_base, alt_base) = row
-
+        
         bases = ['A', 'T', 'G', 'C']
 
         # only consider substitutions (single base changes only - disregard insertions and deletions)
         if ref_base in bases and alt_base in bases:
             # get the base before and after this position
-            base_1 = wgr[chrom][pos - 1]
-            base_3 = wgr[chrom][pos + 1]
+            base_1 = (wgr[chrom][pos - 1]).upper()
+            base_3 = (wgr[chrom][pos + 1]).upper()
 
             baseChange = ''
 
