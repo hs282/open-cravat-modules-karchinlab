@@ -1,1 +1,3 @@
-Modules for open-cravat created by the KarchinLab team
+# OpenCRAVAT
+
+An open source system - developed by the Karchin Lab at JHU in collaboration with In Silico Solutions - providing genomic variant interpretation of input variant files through variant impact analysis, annotation, and scoring. Under the mentorship of one of the lead architects (Rick Kim) as part of a semester long project for the Open Source Software Engineering course at JHU, I wrote SQL queries to fetch gene data from a SQLite database in order to identify mutations in the given input file using Python. I created a graph using SVG and the Chart.js library to show the distribution of mutations across codons.
